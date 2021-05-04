@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+.bg-sique-white {
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(236,239,246,1) 100%);
+}
+
+@import "node_modules/bootstrap-icons/font/bootstrap-icons";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
