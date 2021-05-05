@@ -1,28 +1,43 @@
+// Configurações gerais
+a {
+  cursor: pointer;
+  text-decoration: none;
+  &.col &.col-1, &.col-2, &.col-3, &.col-4, &.col-5, &.col-6, &.col-7, &.col-8, &.col-9, &.col-10, &.col-11, &.col-12, &.col-auto {
+    &:hover {
+      filter: brightness(.98);
+    }
+  }
+}
+
+.rounded {
+  &-15 {
+  border-radius: 15px;
+  }
+  &-25 {
+    border-radius: 25px;
+  }
+}
+
 // Paleta de cores
 $custom-primary: hsl(357, 85%, 51%);
 $custom-primary-dark: hsl(357, 65%, 40%);
 $custom-light: hsl(222, 36%, 95%);
 $custom-dark: hsl(300, 1%, 36%);
 
-$primary: $custom-primary;
-
-.text-custom-dark {
-  color: $custom-dark;
-}
-a {
-  cursor: pointer;
-}
-a.text-custom-dark {
-  &:hover {
-    color: $custom-primary-dark;
-  }
-}
-/* You can add global styles to this file, and also import other style files */
 .bg-custom {
   &-white {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(236, 239, 246, 1) 75%);
   }
   &-light {
     background-color: $custom-light;
+  }
+}
+
+.text-custom-dark {
+  color: $custom-dark;
+}
+a.text-custom-dark {
+  &:hover {
+    color: $custom-primary-dark;
   }
 }

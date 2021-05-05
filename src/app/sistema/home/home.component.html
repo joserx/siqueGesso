@@ -5,7 +5,18 @@
     <app-sidemenu></app-sidemenu>
   </div>
   <div class="col m-0 bg-custom-white">
-    <h1>teste</h1>
-  </div>
+    <!-- Página home -->
+    <div class="container">
 
+      <!-- Cards -->
+      <div class="row m-0 my-5 p-0 justify-content-center align-items-center">
+        <a class="col-3 mx-3 my-3 p-4 text-center rounded-15 bg-white shadow" *ngFor="let card of cards;">
+          <i class="{{card.icon}} text-custom-dark" style="font-size: 4rem;"></i>
+          <h4 class="text-custom-dark fw-normal">{{card.nome}}</h4>
+        </a>
+      </div>
+      
+    </div>
+    <!-- /Página home -->
+  </div>
 </div>
