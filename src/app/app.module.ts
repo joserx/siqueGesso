@@ -9,13 +9,15 @@ import { SidemenuComponent } from './views/sidemenu/sidemenu.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
     SidemenuComponent,
-    ListarUsuariosSistemaComponent
+    ListarUsuariosSistemaComponent,
+    EditarUsuarioSistemaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 bg-custom-white">
+    <!-- Lista de Usuários do Sistema -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/usuarios-sistema/lista">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <!-- Formulário -->
+      <div class="row m-0 mt-4 justify-content-center">
+
+        <div class="col-6 pb-4 d-flex align-items-center border-bottom">
+          <img class="avatar shadow-sm rounded-circle img-fluid" src="https://media-exp1.licdn.com/dms/image/C4D03AQHQ3svXJWM5xA/profile-displayphoto-shrink_800_800/0/1591462669794?e=1625702400&v=beta&t=N88eC5LZeyx9_K4vwAxiORXadkmdDoaPAVW2lr6iZRw" alt="Ricardo Botega">
+          <a class="fw-bold text-custom-dark fs-5 px-5">Trocar foto de perfil</a>
+        </div>
+        <div class="col-6 pb-4 d-flex border-bottom align-items-end justify-content-end">
+          <label class="form-check-label me-3 fs-5" for="desativado">Desativado</label>
+          <div class="form-check form-switch text-custom-dark">
+            <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado" checked>
+          </div>
+        </div>
+
+        <!-- Nome -->
+        <div class="col-4 px-2 pt-4 p-0 m-0">
+          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome">
+        </div>
+
+        <!-- Sobrenome -->
+        <div class="col-4 px-2 pt-4 p-0 m-0">
+          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Sobrenome">
+        </div>
+
+        <!-- Email -->
+        <div class="col-4 px-2 pt-4 p-0 m-0">
+          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Sobrenome">
+        </div>
+
+        <!-- Senha -->
+        <div class="col-4 px-2 pt-4 p-0 m-0">
+          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="password" placeholder="Senha">
+        </div>
+
+        <!-- Repetir senha -->
+        <div class="col-4 px-2 pt-4 p-0 m-0">
+          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="password" placeholder="Repetir senha">
+        </div>
+
+        <!-- Permissão -->
+        <div class="col-4 px-2 pt-4 p-0 m-0">
+          <select class="form-select form-select-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Permissão">
+            <option value="" disabled selected>Permissão</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Funcionário">Funcionário</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row m-0 mt-4 justify-content-end">
+
+        <!-- Botão Salvar -->
+        <div class="col-4 d-grid px-2 p-0 m-0">
+          <button type="button" class="btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Salvar</h5>
+          </button>
+        </div>
+
+      </div>
+      <!-- /Lista de Usuários do Sistema -->
+    </div>
+  </div>

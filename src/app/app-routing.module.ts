@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './sistema/home/home.component';
+import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
           {
             path: 'lista',
             component: ListarUsuariosSistemaComponent
+          },
+          {
+            path: 'editar/:id',
+            component: EditarUsuarioSistemaComponent
           }
         ]
       }
