@@ -12,23 +12,23 @@ export class SidemenuComponent implements OnInit {
   public menuActive = '';
 
   public navItems = [
-    { nome: "home", icon: "bi-house-door", href: "/sistema/home", subMenus: [] },
-    {
-      nome: "configuracoes", icon: "bi-gear", href: null, subMenus: [
-        {
-          titulo: "Usuário", descricao: "Liste, crie, edite ou remova os usuários do sistema.", paginas: [
-            { nome: 'Usuários do sistema', href: "/sistema/config/usuarios-sistema" },
-            { nome: 'Permissões', href: "/sistema/config/permissoes" },
+    { nome: 'home', icon: 'bi-house-door', href: '/sistema/home', subMenus: [] },
+    { nome: 'configuracoes', icon: 'bi-gear', href: null, subMenus: [
+        { titulo: 'Usuário', descricao: 'Liste, crie, edite ou remova os usuários do sistema.', paginas: [
+            { nome: 'Usuários do sistema', href: '/sistema/usuarios-sistema' },
+            { nome: 'Permissões', href: '/sistema/usuarios-sistema/permissoes' },
           ]
         },
-        {
-          titulo: "Notificações", descricao: "Configure as notificações do sistema.", paginas: [
-            { nome: 'Definir notificações', href: "/sistema/config/notificacoes" }
+        { titulo: 'Notificações', descricao: 'Configure as notificações do sistema.', paginas: [
+            { nome: 'Definir notificações', href: '/sistema/notificacoes' }
           ]
         },
+        { titulo: '', descricao: '', paginas: [
+          { nome: 'Configurações', href: '/sistema/config'}
+        ]}
       ]
     },
-    { nome: "info", icon: "bi-info-circle", href: "/sistema/info", subMenus: [] }
+    { nome: 'info', icon: 'bi-info-circle', href: '/sistema/info', subMenus: [] }
   ]
 
   constructor(
