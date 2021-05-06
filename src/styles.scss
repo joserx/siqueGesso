@@ -10,40 +10,20 @@ $primary: $custom-primary;
 
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 
-/* width */
+// Barra de scroll
 ::-webkit-scrollbar {
   width: 15px;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: $custom-dark;
 }
-
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: $dark;
 }
 
-a {
-  cursor: pointer;
-  text-decoration: none !important;
-  &:hover {
-    filter: brightness(0.98) !important;
-    color: $custom-dark;
-  }
-  &.text-custom-dark {
-    &:hover {
-      color: $custom-dark;
-      filter: brightness(0.75) !important;
-    }
-  }
-}
 [cursor="pointer"] {
   cursor: pointer;
 }
@@ -69,10 +49,26 @@ a {
   }
 }
 
+a {
+  cursor: pointer;
+  text-decoration: none !important;
+  &:hover {
+    filter: brightness(0.98) !important;
+    color: $custom-dark;
+  }
+  &.text-custom-dark {
+    &:hover {
+      color: $custom-dark;
+      filter: brightness(0.75) !important;
+    }
+  }
+}
+
 .text-custom-dark {
   color: $custom-dark;
 }
 
+// Ícones de visualizar, editar e deletar
 .icon {
   &-view {
     &:hover {
