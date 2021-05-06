@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 bg-custom-white">
+    <!-- Lista de Usuários do Sistema -->
+    <div class="container">
+
+      <!-- Adicionar, Pesquisar e Filtro -->
+      <div class="row m-0 mt-5 justify-content-center">
+
+        <!-- Botão Adicionar -->
+        <div class="col-4 px-2 p-0 m-0">
+          <a class="rounded-15 py-1 px-4 text-custom-dark bg-custom-success h-100 d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate">Adicionar</h5>
+            <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold"></i>
+          </a>
+        </div>
+
+        <!-- Pesquisar -->
+        <div class="col-4 px-2 p-0 m-0 position-relative">
+          <input class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+          <a>
+            <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+          </a>
+        </div>
+        
+        <!-- Botão Filtro -->
+        <div class="col-4 px-2 p-0 m-0">
+          <a class="rounded-15 py-2 px-4 text-custom-dark bg-white h-100 d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate">Filtro</h5>
+            <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Títulos da Tabela -->
+      <div class="row m-0 my-5 text-custom-dark justify-content-center">
+        <div class="col-3">
+          <h5 class="fw-bold">Usuário</h5>
+        </div>
+        <div class="col-4">
+          <h5 class="fw-bold">E-mail</h5>
+        </div>
+        <div class="col-3">
+          <h5 class="fw-bold">Permissão</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold d-none">Ações</h5>
+        </div>
+      </div>
+
+      <!-- Tabela -->
+      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let usuario of usuarios">
+        <div class="col-3">
+          <p>{{ usuario.nome }} {{ usuario.sobrenome }}</p>
+        </div>
+        <div class="col-4">
+          <p>{{ usuario.email }}</p>
+        </div>
+        <div class="col-3">
+          <p>{{ usuario.permissao }}</p>
+        </div>
+        <div class="col-2 text-end">
+          <i class="fs-5 bi-eye-fill icon-view p-2"></i>
+          <i class="fs-5 bi-pen-fill icon-edit p-2"></i>
+          <i class="fs-5 bi-trash-fill icon-delete p-2"></i>
+        </div>
+      </div>
+
+    </div>
+    <!-- /Lista de Usuários do Sistema -->
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './sistema/home/home.component';
+import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,20 @@ const routes: Routes = [
         path: 'home',
         redirectTo: '',
         pathMatch: 'full'
+      },
+      {
+        path: 'usuarios-sistema',
+        children: [
+          {
+            path: '',
+            redirectTo: 'lista',
+            pathMatch: 'full'
+          },
+          {
+            path: 'lista',
+            component: ListarUsuariosSistemaComponent
+          }
+        ]
       }
     ]
   }

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './sistema/home/home.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { SidemenuComponent } from './views/sidemenu/sidemenu.component';
+import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -13,7 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    ListarUsuariosSistemaComponent
   ],
   imports: [
     BrowserModule,

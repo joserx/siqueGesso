@@ -1,28 +1,57 @@
 // Configurações gerais
-a {
-  cursor: pointer;
-  text-decoration: none;
-  &.col &.col-1, &.col-2, &.col-3, &.col-4, &.col-5, &.col-6, &.col-7, &.col-8, &.col-9, &.col-10, &.col-11, &.col-12, &.col-auto {
-    &:hover {
-      filter: brightness(.98);
-    }
-  }
-}
-
-.rounded {
-  &-15 {
-  border-radius: 15px;
-  }
-  &-25 {
-    border-radius: 25px;
-  }
-}
 
 // Paleta de cores
 $custom-primary: hsl(357, 85%, 51%);
 $custom-primary-dark: hsl(357, 65%, 40%);
 $custom-light: hsl(222, 36%, 95%);
 $custom-dark: hsl(300, 1%, 36%);
+
+$primary: $custom-primary;
+
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $custom-dark;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $dark;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none !important;
+  &.col, &.col-1, &.col-2, &.col-3, &.col-4, &.col-5, &.col-6, &.col-7, &.col-8, &.col-9, &.col-10, &.col-11, &.col-12, &.col-auto {
+    &:hover {
+      filter: brightness(.98);
+    }
+  }
+}
+[cursor="pointer"]{
+  cursor: pointer;
+}
+
+.rounded {
+  &-15 {
+  border-radius: 15px !important;
+  }
+  &-25 {
+    border-radius: 25px !important;
+  }
+}
+
 
 .bg-custom {
   &-white {
@@ -31,6 +60,9 @@ $custom-dark: hsl(300, 1%, 36%);
   &-light {
     background-color: $custom-light;
   }
+  &-success {
+    background-color: #93f89e;
+  }
 }
 
 .text-custom-dark {
@@ -38,6 +70,25 @@ $custom-dark: hsl(300, 1%, 36%);
 }
 a.text-custom-dark {
   &:hover {
-    color: $custom-primary-dark;
+    color: $custom-dark;
+    filter: brightness(.98);
+  }
+}
+
+.icon {
+  &-view {
+    &:hover {
+      color: $blue;
+    }
+  }
+  &-edit {
+    &:hover {
+      color: $warning;
+    }
+  }
+  &-delete {
+    &:hover {
+      color: $primary;
+    }
   }
 }
