@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 bg-custom-white">
+    <!-- Página home -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <!-- Adicionar, Pedidos gerados e em digitação -->
+      <div class="row m-0 mt-4 justify-content-center">
+
+        <!-- Botão Adicionar -->
+        <div class="col-4 px-2 p-0 m-0">
+          <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</h5>
+            <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
+          </a>
+        </div>
+
+        <!-- Pedidos gerados -->
+        <div class="col-4 px-2 p-0 m-0 form-floating">
+          <input [value]="dados.gerados.valor | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <label class="ms-2 small text-truncate" for="gerados">{{dados.gerados.qtd}} pedidos gerados</label>
+        </div>
+
+        <!-- Pedidos em digitação -->
+        <div class="col-4 px-2 p-0 m-0 form-floating">
+          <input [value]="dados.digitacao.valor | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <label class="ms-2 small text-truncate" for="gerados">{{dados.digitacao.qtd}} pedidos em digitação</label>
+        </div>
+      </div>
+
+      <!-- Títulos da Tabela -->
+      <div class="row m-0 my-5 text-custom-dark justify-content-center">
+        <div class="col-1">
+          <h5 class="fw-bold text-truncate">ID</h5>
+        </div>
+        <div class="col-1">
+          <h5 class="fw-bold text-truncate">Data</h5>
+        </div>
+        <div class="col-1">
+          <h5 class="fw-bold text-truncate">Loja</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Vendedor</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Cliente</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Valor</h5>
+        </div>
+        <div class="col-1">
+          <h5 class="fw-bold text-truncate">Status</h5>
+        </div>
+        <div class="col text-end">
+          <h5 class="fw-bold text-truncate d-none">Ações</h5>
+          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
+          <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
+        </div>
+      </div>
+
+      <!-- Tabela -->
+      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let pedido of pedidos">
+        <div class="col-1">
+          <p>{{ pedido.id }}</p>
+        </div>
+        <div class="col-1">
+          <p>{{ pedido.data }}</p>
+        </div>
+        <div class="col-1">
+          <p>{{ pedido.loja }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ pedido.vendedor }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ pedido.cliente }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ pedido.valor | currency:'BRL' }}</p>
+        </div>
+        <div class="col-1">
+          <p>{{ pedido.status }}</p>
+        </div>
+        <div class="col text-end">
+          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
+          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/editar/{{pedido.id}}" cursor="pointer"></i>
+          <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+        </div>
+      </div>
+
+    </div>
+    <!-- /Página home -->
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { HomeComponent } from './sistema/home/home.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
+import { ListarVendasComponent } from './sistema/vendas/listar-vendas/listar-vendas.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,20 @@ const routes: Routes = [
           {
             path: 'listar',
             component: ListarColaboradoresComponent
+          }
+        ]
+      },
+      {
+        path: 'vendas',
+        children: [
+          {
+            path: '',
+            redirectTo: 'listar',
+            pathMatch: 'full'
+          },
+          {
+            path: 'listar',
+            component: ListarVendasComponent
           }
         ]
       },

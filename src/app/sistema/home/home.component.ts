@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   public cards = [
-    { nome: "Vendas", icon: "bi-shop", href: "" },
+    { nome: "Vendas", icon: "bi-shop", href: "/sistema/vendas" },
     { nome: "Compras", icon: "bi-cart4", href: "" },
     { nome: "Estoque", icon: "bi-box-seam", href: "" },
     { nome: "Financeiro", icon: "bi-file-earmark-bar-graph", href: "" },

@@ -14,6 +14,15 @@ $danger: $custom-danger;
 
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 
+@font-face {
+  font-family: montserrat;
+  src: url("https://use.typekit.net/znc7gye.css");;
+}
+
+[font="montserrat"] {
+  font-family: montserrat;
+}
+
 // Barra de scroll
 ::-webkit-scrollbar {
   width: 15px;
@@ -37,6 +46,9 @@ $danger: $custom-danger;
 }
 
 .rounded {
+  &-5 {
+    border-radius: 5px !important;
+  }
   &-15 {
     border-radius: 15px !important;
   }
@@ -91,6 +103,11 @@ a, button {
   &-delete {
     &:hover {
       color: $primary;
+    }
+  }
+  &-search, &-filter {
+    &:hover {
+      color: $dark;
     }
   }
 }

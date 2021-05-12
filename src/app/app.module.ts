@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import locatePt from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,8 @@ import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/lista
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
+import { ListarVendasComponent } from './sistema/vendas/listar-vendas/listar-vendas.component';
+import { registerLocaleData } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,14 +22,17 @@ import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/
     SidemenuComponent,
     ListarUsuariosSistemaComponent,
     EditarUsuarioSistemaComponent,
-    ListarColaboradoresComponent
+    ListarColaboradoresComponent,
+    ListarVendasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+registerLocaleData(locatePt)
