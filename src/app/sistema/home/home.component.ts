@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     { nome: "Estoque", icon: "bi-box-seam", href: "" },
     { nome: "Financeiro", icon: "bi-file-earmark-bar-graph", href: "" },
     { nome: "Expedição", icon: "bi-truck", href: "" },
-    { nome: "RH", icon: "bi-person-lines-fill", href: "" },
+    { nome: "RH", icon: "bi-person-lines-fill", href: "/sistema/rh" },
   ]
 
   constructor() { }

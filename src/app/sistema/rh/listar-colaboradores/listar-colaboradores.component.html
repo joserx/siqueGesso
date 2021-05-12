@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 bg-custom-white">
+    <!-- Página home -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <!-- Adicionar, Pesquisar e Filtro -->
+      <div class="row m-0 mt-4 justify-content-center">
+
+        <!-- Botão Adicionar -->
+        <div class="col-4 px-2 p-0 m-0">
+          <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</h5>
+            <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
+          </a>
+        </div>
+
+        <!-- Ativos -->
+        <div class="col-4 px-2 p-0 m-0">
+          <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-success"></i>
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">{{ dados.ativos }} ativos</h5>
+          </div>
+        </div>
+
+        <!-- Inativos -->
+        <div class="col-4 px-2 p-0 m-0">
+          <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-danger"></i>
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">{{ dados.inativos }} inativos</h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- Títulos da Tabela -->
+      <div class="row m-0 my-5 text-custom-dark justify-content-center">
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Nome</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Cargo</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Departamento</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Admissão</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate">Loja</h5>
+        </div>
+        <div class="col-2">
+          <h5 class="fw-bold text-truncate d-none">Ações</h5>
+        </div>
+      </div>
+
+      <!-- Tabela -->
+      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let colaborador of colaboradores">
+        <div class="col-2">
+          <p>{{ colaborador.nome }} {{ colaborador.sobrenome }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ colaborador.cargo }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ colaborador.departamento }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ colaborador.admissao }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ colaborador.loja }}</p>
+        </div>
+        <div class="col-2 text-end">
+          <i class="fs-5 bi-circle-fill p-3" [class]="colaborador.status == 1 ? 'text-success' : 'text-danger'" cursor="pointer"></i>
+          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/rh/editar/{{colaborador.id}}" cursor="pointer"></i>
+          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+        </div>
+      </div>
+
+    </div>
+    <!-- /Página home -->
+  </div>
+</div>

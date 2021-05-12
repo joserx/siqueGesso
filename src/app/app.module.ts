@@ -10,6 +10,7 @@ import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/lista
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
+import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar
     NavbarComponent,
     SidemenuComponent,
     ListarUsuariosSistemaComponent,
-    EditarUsuarioSistemaComponent
+    EditarUsuarioSistemaComponent,
+    ListarColaboradoresComponent
   ],
   imports: [
     BrowserModule,

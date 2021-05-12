@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './sistema/home/home.component';
+import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
 
@@ -21,6 +22,20 @@ const routes: Routes = [
         path: 'home',
         redirectTo: '',
         pathMatch: 'full'
+      },
+      {
+        path: 'rh',
+        children: [
+          {
+            path: '',
+            redirectTo: 'listar',
+            pathMatch: 'full'
+          },
+          {
+            path: 'listar',
+            component: ListarColaboradoresComponent
+          }
+        ]
       },
       {
         path: 'usuarios-sistema',
