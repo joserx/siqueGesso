@@ -5,8 +5,12 @@ $custom-primary: hsl(357, 85%, 51%);
 $custom-primary-dark: hsl(357, 65%, 40%);
 $custom-light: hsl(222, 36%, 95%);
 $custom-dark: hsl(300, 1%, 36%);
+$custom-success: #93f89e;
+$custom-danger: #f89393;
 
 $primary: $custom-primary;
+$success: $custom-success;
+$danger: $custom-danger;
 
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -49,7 +53,7 @@ $primary: $custom-primary;
     background-color: $custom-light;
   }
   &-success {
-    background-color: #93f89e;
+    background-color: $custom-success;
   }
 }
 
