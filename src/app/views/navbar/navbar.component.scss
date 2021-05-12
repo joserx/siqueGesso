@@ -1,3 +1,13 @@
 .dropdown-toggle::after {
   display:none;
 }
+
+li.li-350 {
+  width: 350px;
+}
+
+@media screen and (max-width: 768px) {
+  li.li-350 {
+    width: auto;
+  }
+}

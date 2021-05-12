@@ -19,20 +19,21 @@
         <!-- DropdownMenu -->
         <ul ngbDropdownMenu class="dropdown-menu rounded-15" aria-labelledby="btnNotificacoes">
           <!-- Título Notificações -->
-          <li class="fw-bold px-3 pb-2 text-custom-dark">Notificações</li>
-          <li>
-            <hr class="dropdown-divider m-0">
+          <li class="fw-bold px-3 pb-2 text-custom-dark d-flex justify-content-between">
+            <span>Notificações</span>
+            <i class="bi-gear" cursor="pointer" routerLink="/sistema/notificacoes"></i>
           </li>
+          <li><hr class="dropdown-divider m-0"></li>
 
           <!-- Se não houver notificações -->
-          <li *ngIf="notificacoes.length === 0" style="width: 350px;">
+          <li *ngIf="notificacoes.length === 0" class="li-350">
             <p class="text-center mt-3 text-wrap text-custom-dark small">
               Não há novas notificações.
             </p>
           </li>
 
           <!-- Notificações -->
-          <li class="border-bottom d-flex" style="width: 350px;" *ngFor="let notificacao of notificacoes;">
+          <li class="border-bottom d-flex li-350"  *ngFor="let notificacao of notificacoes;">
             <a class="dropdown-item py-2 px-3 text-wrap small" href="#">
               <!-- <p class="fw-bold m-0">Exemplo de título</p> -->
               {{ notificacao.texto }}
@@ -50,8 +51,11 @@
       </div>
 
       <!-- Textos e perfil -->
-      <span class="fw-bold">Ricardo Botega,</span> seja bem vindo!
-      <img class="rounded-circle ms-3" height="40" src="https://media-exp1.licdn.com/dms/image/C4D03AQHQ3svXJWM5xA/profile-displayphoto-shrink_800_800/0/1591462669794?e=1625702400&v=beta&t=N88eC5LZeyx9_K4vwAxiORXadkmdDoaPAVW2lr6iZRw" alt="Perfil">
+      <div class="d-none d-md-inline">
+        <span class="fw-bold">Ricardo Botega,</span> seja bem vindo!
+        <img class="rounded-circle ms-3 border border-primary" height="40" src="https://media-exp1.licdn.com/dms/image/C4D03AQHQ3svXJWM5xA/profile-displayphoto-shrink_800_800/0/1591462669794?e=1625702400&v=beta&t=N88eC5LZeyx9_K4vwAxiORXadkmdDoaPAVW2lr6iZRw" alt="Perfil">
+      </div>
+
     </div>
   </div>
 </nav>
