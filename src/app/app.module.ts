@@ -9,11 +9,11 @@ import { NavbarComponent } from './views/navbar/navbar.component';
 import { SidemenuComponent } from './views/sidemenu/sidemenu.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { ListarVendasComponent } from './sistema/vendas/listar-vendas/listar-vendas.component';
 import { registerLocaleData } from '@angular/common';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +28,8 @@ import { registerLocaleData } from '@angular/common';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    NgbDropdownModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent]

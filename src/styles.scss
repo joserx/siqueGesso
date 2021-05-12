@@ -12,7 +12,8 @@ $primary: $custom-primary;
 $success: $custom-success;
 $danger: $custom-danger;
 
-@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+@import '~bootstrap/scss/bootstrap';
 
 @font-face {
   font-family: montserrat;
