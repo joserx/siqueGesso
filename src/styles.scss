@@ -3,25 +3,48 @@
 // Paleta de cores
 $custom-primary: hsl(357, 85%, 51%);
 $custom-primary-dark: hsl(357, 65%, 40%);
-$custom-light: hsl(222, 36%, 95%);
-$custom-dark: hsl(300, 1%, 36%);
 $custom-success: #93f89e;
 $custom-danger: #f89393;
+$custom-light: hsl(222, 36%, 95%);
+$custom-dark: hsl(300, 1%, 36%);
 
+$custom-primary-alpha: rgba(
+  $color: $custom-primary,
+  $alpha: 0.3,
+);
+
+// Sobrepondo as cores do bootstrap pelas customizadas
 $primary: $custom-primary;
 $success: $custom-success;
 $danger: $custom-danger;
 
+// Corrigindo automaticamente variáveis do bootstrap
+$form-check-input-focus-border: $custom-primary-alpha;
+$form-switch-focus-color: $custom-primary-alpha;
 
-@import '~bootstrap/scss/bootstrap';
+// Setando cor padrão dos inputs em foco do bootstrap
+$default-primary: #0d6efd;
+
+// Setando automaticamente a cor padrão do bootstrap nos inputs de formulário
+$input-focus-border-color: rgba($color: $default-primary, $alpha: 0.25);
+$form-check-input-checked-bg-color: $default-primary;
+$form-check-input-indeterminate-bg-color: $default-primary;
+$form-range-thumb-bg: $default-primary;
+$form-range-thumb-active-bg: rgba($color: $default-primary, $alpha: 0.25);
+
+@import "~bootstrap/scss/bootstrap";
 
 @font-face {
   font-family: montserrat;
-  src: url("https://use.typekit.net/znc7gye.css");;
+  src: url("https://use.typekit.net/znc7gye.css");
 }
 
 [font="montserrat"] {
   font-family: montserrat;
+}
+
+[cursor="pointer"] {
+  cursor: pointer;
 }
 
 // Barra de scroll
@@ -36,14 +59,6 @@ $danger: $custom-danger;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: $dark;
-}
-
-[cursor="pointer"] {
-  cursor: pointer;
-}
-
-.avatar {
-  max-height: 150px;
 }
 
 .rounded {
@@ -70,7 +85,13 @@ $danger: $custom-danger;
   }
 }
 
-a, button {
+// Páginas de editar/cadastrar usuário
+.avatar {
+  max-height: 150px;
+}
+
+a,
+button {
   cursor: pointer;
   text-decoration: none !important;
   &:hover {
@@ -82,6 +103,16 @@ a, button {
       color: $custom-dark;
       filter: brightness(0.75) !important;
     }
+  }
+}
+
+.form-check-input {
+  &:checked:focus {
+    box-shadow: 0 0 0 0.25rem rgba($color: $success, $alpha: 0.5);
+  }
+  &:checked {
+    background-color: $success;
+    border-color: $success;
   }
 }
 
@@ -106,7 +137,8 @@ a, button {
       color: $primary;
     }
   }
-  &-search, &-filter {
+  &-search,
+  &-filter {
     &:hover {
       color: $dark;
     }
