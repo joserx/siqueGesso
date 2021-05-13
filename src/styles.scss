@@ -22,11 +22,14 @@ $danger: $custom-danger;
 $form-check-input-focus-border: $custom-primary-alpha;
 $form-switch-focus-color: $custom-primary-alpha;
 
-// Setando cor padrão dos inputs em foco do bootstrap
+// Setando cor padrão dos inputs, selects, checkbox e ranges em foco do bootstrap
 $default-primary: #0d6efd;
 
 // Setando automaticamente a cor padrão do bootstrap nos inputs de formulário
+// $input-btn-focus-color: rgba($default-primary, .25) !default;
 $input-focus-border-color: rgba($color: $default-primary, $alpha: 0.25);
+$input-focus-box-shadow: 0 0 0 .25rem rgba($default-primary, .25);
+$form-select-focus-box-shadow: 0 0 0 .25rem rgba($default-primary, .25);
 $form-check-input-checked-bg-color: $default-primary;
 $form-check-input-indeterminate-bg-color: $default-primary;
 $form-range-thumb-bg: $default-primary;
