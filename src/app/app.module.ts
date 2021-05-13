@@ -14,6 +14,7 @@ import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/
 import { ListarVendasComponent } from './sistema/vendas/listar-vendas/listar-vendas.component';
 import { registerLocaleData } from '@angular/common';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ListarUsuariosSistemaComponent,
     EditarUsuarioSistemaComponent,
     ListarColaboradoresComponent,
-    ListarVendasComponent
+    ListarVendasComponent,
+    CadastrarColaboradorComponent
   ],
   imports: [
     BrowserModule,

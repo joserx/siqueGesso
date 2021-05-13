@@ -1,0 +1,320 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 pb-5 bg-custom-white">
+    <!-- Página -->
+    <div class="container">
+
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/rh/listar">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <!-- Formulário -->
+      <form>
+        <div class="row m-0 mt-4 justify-content-center">
+
+          <div class="col-6 pb-4 d-flex align-items-center border-bottom">
+            <img class="avatar shadow-sm rounded-circle img-fluid" [src]="avatar" alt="Ricardo Botega">
+            <a class="fw-bold text-custom-dark fs-5 px-5">Trocar foto de perfil</a>
+          </div>
+          <div class="col-6 pb-4 d-flex border-bottom align-items-end justify-content-end">
+            <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' : 'Desativado' }}</label>
+            <div class="form-check form-switch">
+              <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado" (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
+            </div>
+          </div>
+
+          <!-- Nome -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+          </div>
+
+          <!-- Sobrenome -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Sobrenome">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Sobrenome</label>
+          </div>
+
+          <!-- Data de nascimento -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate(18)">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+          </div>
+          
+          <!-- RG -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="RG">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
+          </div>
+          
+          <!-- Expedição -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Expedição">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Expedição</label>
+          </div>
+          
+          <!-- Órgão emissor -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Órgão emissor">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Órgão emissor</label>
+          </div>
+          
+          <!-- CPNJ -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CPNJ">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPNJ</label>
+          </div>
+          
+          <!-- Gênero -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Gênero">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Gênero</label>
+          </div>
+          
+          <!-- Gênero -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Gênero">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Gênero</label>
+          </div>
+          
+          <!-- Estado civil -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estado civil">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado civil</label>
+          </div>
+          
+          <!-- Escolaridade -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Escolaridade">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Escolaridade</label>
+          </div>
+          
+          <!-- PcD -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="PcD">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">PcD</label>
+          </div>
+          
+          <!-- Necessidade especial -->
+          <div class="col-4 px-2 pt-4 p-0 m-0">
+            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Necessidade especial">
+              <option value="" disabled selected>Necessidade especial</option>
+              <option value="Necessidade 1">Necessidade 1</option>
+              <option value="Necessidade 2">Necessidade 2</option>
+            </select>
+          </div>
+          
+          <!-- Nacionalidade -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nacionalidade">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nacionalidade</label>
+          </div>
+
+          <!-- Naturalidade -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Naturalidade">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Naturalidade</label>
+          </div>
+          
+          <!-- Nome da mãe -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome da mãe">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome da mãe</label>
+          </div>
+          
+          <!-- Nome do pai -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do pai">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do pai</label>
+          </div>
+          
+          <!-- CEP -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+          </div>
+          
+          <!-- Logradouro -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Logradouro">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
+          </div>
+          
+          <!-- Número -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Número">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+          </div>
+          
+          <!-- Complemento -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Complemento">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+          </div>
+          
+          <!-- Bairro -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Bairro">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
+          </div>
+
+          <!-- Cidade -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cidade">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+          </div>
+          
+          <!-- Estado -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estado">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado</label>
+          </div>
+          
+          <!-- Telefone -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+          </div>
+          
+          <!-- WhatsApp -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="WhatsApp">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">WhatsApp</label>
+          </div>
+          
+          <!-- Telefone Emergência -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone Emergência">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone Emergência</label>
+          </div>
+          
+          <!-- Email pessoal -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="email" placeholder="Email pessoal">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email pessoal</label>
+          </div>
+
+          <!-- Email corporativo -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="email" placeholder="Email corporativo">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email corporativo</label>
+          </div>
+
+          <div class="col-12 pt-4 p-0 m-0 border-bottom"></div>
+          
+          <!-- Departamento -->
+          <div class="col-6 px-2 pt-4 p-0 m-0">
+            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Departamento">
+              <option value="" disabled selected>Departamento</option>
+              <option value="Departamento 1">Departamento 1</option>
+              <option value="Departamento 2">Departamento 2</option>
+            </select>
+          </div>
+          
+          <!-- Cargo -->
+          <div class="col-6 px-2 pt-4 p-0 m-0">
+            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Cargo">
+              <option value="" disabled selected>Cargo</option>
+              <option value="Cargo 1">Cargo 1</option>
+              <option value="Cargo 2">Cargo 2</option>
+            </select>
+          </div>
+          
+          <!-- Tipo de contrato -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tipo de contrato">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de contrato</label>
+          </div>
+          
+          <!-- Turno -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Turno">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Turno</label>
+          </div>
+
+          <!-- Salário -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Salário">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Salário</label>
+          </div>
+
+          <!-- Data de admissão -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" [max]="getDate()" placeholder="Data de admissão">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de admissão</label>
+          </div>
+
+          <!-- Período de experiência -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Período de experiência">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Período de experiência</label>
+          </div>
+          
+          <!-- Data da demissão -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data da demissão">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da demissão</label>
+          </div>
+          
+          <!-- PIS -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="PIS">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">PIS</label>
+          </div>
+          
+          <!-- MEI -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="MEI">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">MEI</label>
+          </div>
+
+          <!-- Banco -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Banco">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Banco</label>
+          </div>
+          
+          <!-- Tipo de conta -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tipo de conta">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de conta</label>
+          </div>
+
+          <!-- Agência -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Agência">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Agência</label>
+          </div>
+
+          <!-- Conta -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Conta">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta</label>
+          </div>
+
+        </div>
+
+        <div class="row m-0 mt-4 justify-content-end">
+
+          <!-- Botão Salvar -->
+          <div class="col-4 d-grid px-2 p-0 m-0">
+            <button type="button" class="btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Salvar</h5>
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+    <!-- /Página -->
+  </div>
+</div>
