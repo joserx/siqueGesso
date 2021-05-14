@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-listar-vendas',
-  templateUrl: './listar-vendas.component.html',
-  styleUrls: ['./listar-vendas.component.scss']
+  selector: 'app-listar-pedidos',
+  templateUrl: './listar-pedidos.component.html',
+  styleUrls: ['./listar-pedidos.component.scss']
 })
-export class ListarVendasComponent implements OnInit {
+export class ListarPedidosComponent implements OnInit {
 
   public pedidos = [
     { id: 1, data: '18/02/2021', loja: 'Matriz', vendedor: 'Ricardo Botega', cliente: 'Empreiteira ABC', valor: 20000, status: 'Gerado' },

@@ -1,5 +1,7 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { registerLocaleData } from '@angular/common';
 import locatePt from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,13 +10,23 @@ import { HomeComponent } from './sistema/home/home.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { SidemenuComponent } from './views/sidemenu/sidemenu.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
-
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
-import { ListarVendasComponent } from './sistema/vendas/listar-vendas/listar-vendas.component';
-import { registerLocaleData } from '@angular/common';
-import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
+import { ListarPedidosComponent } from './sistema/vendas/listar-pedidos/listar-pedidos.component';
+import { CriarPedidoComponent } from './sistema/vendas/criar-pedido/criar-pedido.component';
+import { CurrencyMaskModule, CurrencyMaskConfig, CURRENCY_MASK_CONFIG, } from 'ng2-currency-mask';
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "",
+  allowNegative: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "R$ ",
+  suffix: "",
+  thousands: "."
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,16 +36,21 @@ import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborado
     ListarUsuariosSistemaComponent,
     EditarUsuarioSistemaComponent,
     ListarColaboradoresComponent,
-    ListarVendasComponent,
-    CadastrarColaboradorComponent
+    ListarPedidosComponent,
+    CadastrarColaboradorComponent,
+    CriarPedidoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    CurrencyMaskModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

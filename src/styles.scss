@@ -50,6 +50,10 @@ $form-range-thumb-active-bg: rgba($color: $default-primary, $alpha: 0.25);
   cursor: pointer;
 }
 
+[currencyMask] {
+  font-family: montserrat;
+}
+
 // Barra de scroll
 ::-webkit-scrollbar {
   width: 15px;
@@ -86,11 +90,19 @@ $form-range-thumb-active-bg: rgba($color: $default-primary, $alpha: 0.25);
   &-success {
     background-color: $custom-success;
   }
+  &-dark {
+    background-color: $custom-dark;
+  }
 }
 
 // Páginas de editar/cadastrar usuário
 .avatar {
   max-height: 150px;
+}
+
+.h-limited, input.form-control-lg, select.form-control-lg { 
+  min-height: 64px;
+  max-height: 64px;
 }
 
 a,

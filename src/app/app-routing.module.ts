@@ -5,7 +5,8 @@ import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborado
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
-import { ListarVendasComponent } from './sistema/vendas/listar-vendas/listar-vendas.component';
+import { CriarPedidoComponent } from './sistema/vendas/criar-pedido/criar-pedido.component';
+import { ListarPedidosComponent } from './sistema/vendas/listar-pedidos/listar-pedidos.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,11 @@ const routes: Routes = [
           },
           {
             path: 'listar',
-            component: ListarVendasComponent
+            component: ListarPedidosComponent
+          },
+          {
+            path: 'criar',
+            component: CriarPedidoComponent
           }
         ]
       },
