@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
+import { ClientesComponent } from './sistema/clientes/clientes.component';
 import { HomeComponent } from './sistema/home/home.component';
 import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
@@ -77,6 +79,19 @@ const routes: Routes = [
           {
             path: 'editar/:id',
             component: EditarUsuarioSistemaComponent
+          }
+        ]
+      },
+      {
+        path: 'clientes',
+        children: [
+          {
+            path: '',
+            component: ClientesComponent
+          },
+          {
+            path: 'cadastrar',
+            component: ClientesComponent
           }
         ]
       }

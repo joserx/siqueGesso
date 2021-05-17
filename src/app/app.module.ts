@@ -16,6 +16,10 @@ import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborado
 import { ListarPedidosComponent } from './sistema/vendas/listar-pedidos/listar-pedidos.component';
 import { CriarPedidoComponent } from './sistema/vendas/criar-pedido/criar-pedido.component';
 import { CurrencyMaskModule, CurrencyMaskConfig, CURRENCY_MASK_CONFIG, } from 'ng2-currency-mask';
+import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
+import { ClientesComponent } from './sistema/clientes/clientes.component';
+import { PessoaFisicaComponent } from './sistema/clientes/cadastrar-cliente/pessoa-fisica/pessoa-fisica.component';
+import { PessoaJuridicaComponent } from './sistema/clientes/cadastrar-cliente/pessoa-juridica/pessoa-juridica.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -38,7 +42,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ListarColaboradoresComponent,
     ListarPedidosComponent,
     CadastrarColaboradorComponent,
-    CriarPedidoComponent
+    CriarPedidoComponent,
+    CadastrarClienteComponent,
+    ClientesComponent,
+    PessoaFisicaComponent,
+    PessoaJuridicaComponent
   ],
   imports: [
     BrowserModule,

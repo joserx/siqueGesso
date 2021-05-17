@@ -15,9 +15,7 @@ export class CadastrarColaboradorComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.getDate);
-    
+  ngOnInit(): void {    
   }
 
   public toggleDesativadoCheckbox(): void {

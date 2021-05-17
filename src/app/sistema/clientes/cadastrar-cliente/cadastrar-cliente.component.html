@@ -1,0 +1,38 @@
+<!-- Pessoa Física, Jurídica -->
+<div class="row m-0 mt-4 justify-content-center">
+
+  <!-- Botão Pessoa Física -->
+  <div class="col-4 px-2 p-0 m-0">
+    <a [class.bg-custom-success]="tipoPessoa == 'fisica'" class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm" (click)="toggleTipoPessoa('fisica')">
+      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Física</h5>
+    </a>
+  </div>
+
+  <!-- Botão Pessoa Física -->
+  <div class="col-4 px-2 p-0 m-0">
+    <a [class.bg-custom-success]="tipoPessoa == 'juridica'" class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm" (click)="toggleTipoPessoa('juridica')">
+      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Jurídica</h5>
+    </a>
+  </div>
+
+  <div class="col-4"></div>
+
+  <div class="col-6 py-3 d-flex align-items-end border-bottom">
+    <span class="fs-5 m-0">Código: XXXXXX</span>
+  </div>
+
+  <div class="col-6 py-3 d-flex border-bottom align-items-end justify-content-end">
+    <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' : 'Desativado' }}</label>
+    <div class="form-check form-switch">
+      <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado" (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="tipoPessoa === 'fisica'">
+  <app-pessoa-fisica></app-pessoa-fisica>
+</div>
+<div *ngIf="tipoPessoa === 'juridica'">
+  <app-pessoa-juridica></app-pessoa-juridica>
+</div>
