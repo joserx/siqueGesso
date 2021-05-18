@@ -19,22 +19,28 @@
         <div class="col-12">
           <ul class="nav nav-tabs fs-5 fw-lighter">
             <li class="nav-item px-1">
-              <a class="nav-link px-4 active">Cadastro do cliente</a>
+              <a class="nav-link px-4" [class.active]="clienteSection == 'cadastro'" (click)="toggleClienteSection('cadastro')">Cadastro do cliente</a>
             </li>
             <li class="nav-item px-1">
-              <a class="nav-link px-4">Avaliação de crédito</a>
+              <a class="nav-link px-4" [class.active]="clienteSection == 'avaliacao'" (click)="toggleClienteSection('avaliacao')">Avaliação de crédito</a>
             </li>
             <li class="nav-item px-1">
-              <a class="nav-link px-4">Pedidos realizados</a>
+              <a class="nav-link px-4" [class.active]="clienteSection == 'pedidos'" (click)="toggleClienteSection('pedidos')">Pedidos realizados</a>
             </li>
             <li class="nav-item px-1">
-              <a class="nav-link px-4" >Resumo financeiro</a>
+              <a class="nav-link px-4" [class.active]="clienteSection == 'resumo'" (click)="toggleClienteSection('resumo')">Resumo financeiro</a>
             </li>
           </ul>
         </div>
       </div>
 
-      <app-cadastrar-cliente></app-cadastrar-cliente>
+      <div *ngIf="clienteSection == 'cadastro'">
+        <app-cadastrar-cliente></app-cadastrar-cliente>
+      </div>
+
+      <div *ngIf="clienteSection == 'avaliacao'">
+        <app-avaliacao-credito></app-avaliacao-credito>
+      </div>
 
     </div>
     <!-- /Página -->
