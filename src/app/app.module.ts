@@ -26,6 +26,7 @@ import { ResumoFinanceiroComponent } from './sistema/clientes/resumo-financeiro/
 import { NotificacoesComponent } from './sistema/notificacoes/notificacoes.component';
 import { EstoqueComponent } from './sistema/estoque/estoque.component';
 import { FornecedoresComponent } from './sistema/estoque/fornecedores/fornecedores.component';
+import { ProdutosComponent } from './sistema/estoque/produtos/produtos.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -58,7 +59,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ResumoFinanceiroComponent,
     NotificacoesComponent,
     EstoqueComponent,
-    FornecedoresComponent
+    FornecedoresComponent,
+    ProdutosComponent
   ],
   imports: [
     BrowserModule,
