@@ -22,6 +22,7 @@ import { PessoaFisicaComponent } from './sistema/clientes/cadastrar-cliente/pess
 import { PessoaJuridicaComponent } from './sistema/clientes/cadastrar-cliente/pessoa-juridica/pessoa-juridica.component';
 import { AvaliacaoCreditoComponent } from './sistema/clientes/avaliacao-credito/avaliacao-credito.component';
 import { PedidosRealizadosComponent } from './sistema/clientes/pedidos-realizados/pedidos-realizados.component';
+import { ResumoFinanceiroComponent } from './sistema/clientes/resumo-financeiro/resumo-financeiro.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -50,7 +51,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     PessoaFisicaComponent,
     PessoaJuridicaComponent,
     AvaliacaoCreditoComponent,
-    PedidosRealizadosComponent
+    PedidosRealizadosComponent,
+    ResumoFinanceiroComponent
   ],
   imports: [
     BrowserModule,
