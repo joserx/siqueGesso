@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { ClientesComponent } from './sistema/clientes/clientes.component';
 import { HomeComponent } from './sistema/home/home.component';
+import { NotificacoesComponent } from './sistema/notificacoes/notificacoes.component';
 import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'home',
         redirectTo: '',
         pathMatch: 'full'
+      },
+      {
+        path: 'notificacoes',
+        component: NotificacoesComponent
       },
       {
         path: 'rh',

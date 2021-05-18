@@ -33,3 +33,9 @@ $form-check-input-checked-bg-color: $default-primary;
 $form-check-input-indeterminate-bg-color: $default-primary;
 $form-range-thumb-bg: $default-primary;
 $form-range-thumb-active-bg: rgba($color: $default-primary, $alpha: 0.25);
+
+$accordion-button-active-bg: rgba($custom-light, 90%);
+$accordion-button-active-color: rgba($custom-dark, 10%);
+$accordion-button-focus-border-color: rgba($color: $custom-dark, $alpha: 0.25);
+$accordion-button-focus-box-shadow: 0 0 0 .25rem rgba($custom-dark, .25);
+

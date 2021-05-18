@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col pt-5 m-0 bg-custom-white">
+    <!-- Página home -->
+    <div class="container">
+
+      <div class="row mt-4 m-0 pb-4 border-bottom">
+        <div class="col-12">
+          <h5 class="fw-bold text-custom-dark">Notificações</h5>
+        </div>
+      </div>
+
+      <div class="row mt-4 m-0">
+        <div class="col-12">
+
+          <!-- Accordion -->
+          <div class="accordion" id="notificacaoAccordion">
+
+            <!-- Por email -->
+            <div class="accordion-item rounded-15">
+              <h2 class="accordion-header" id="porEmail">
+                <button class="accordion-button collapsed rounded-15" type="button" data-bs-toggle="collapse" data-bs-target="#porEmailCollapse" aria-expanded="false" aria-controls="porEmailCollapse">
+                  <p class="fw-bold text-custom-dark">Por e-mail</p>
+                </button>
+              </h2>
+              <div id="porEmailCollapse" class="accordion-collapse collapse" aria-labelledby="porEmail">
+                <div class="accordion-body">
+                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>
+
+            <!-- Na Sique Gesso -->
+            <div class="accordion-item mt-4 rounded-15">
+              <h2 class="accordion-header" id="naSique">
+                <button class="accordion-button collapsed rounded-15" type="button" data-bs-toggle="collapse" data-bs-target="#naSiqueCollapse" aria-expanded="false" aria-controls="naSiqueCollapse">
+                  <p class="fw-bold text-custom-dark">Na Sique Gesso</p>
+                </button>
+              </h2>
+              <div id="naSiqueCollapse" class="accordion-collapse collapse" aria-labelledby="naSique">
+                <div class="accordion-body">
+
+                  <div class="row py-3 m-0" *ngFor="let notificacao of notificacoes; let i = index">
+                    <div class="col-3 px-2">
+                      {{notificacao.nome}}
+                    </div>
+                    <div class="col-6 px-2 text-center">
+                      <div class="form-check form-check-inline px-3" *ngFor="let tipo of notificacao.tipos; let i2 = index">
+                        <input class="form-check-input" type="checkbox" id="tipo{{i}}-{{i2}}" value="tipo{{i}}-{{i2}}">
+                        <label class="form-check-label" for="tipo{{i}}-{{i2}}">{{tipo.nome}}</label>
+                      </div>
+                    </div>
+                    <div class="col-3 px-4 d-flex align-items-end justify-content-end">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" [value]="notificacao.value">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- / Accordion -->
+
+        </div>
+      </div>
+
+    </div>
+    <!-- /Página home -->
+  </div>
+</div>
