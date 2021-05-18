@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { ClientesComponent } from './sistema/clientes/clientes.component';
+import { EstoqueComponent } from './sistema/estoque/estoque.component';
 import { HomeComponent } from './sistema/home/home.component';
 import { NotificacoesComponent } from './sistema/notificacoes/notificacoes.component';
 import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
@@ -97,6 +98,15 @@ const routes: Routes = [
           {
             path: 'cadastrar',
             component: ClientesComponent
+          }
+        ]
+      },
+      {
+        path: 'estoque',
+        children: [
+          {
+            path: '',
+            component: EstoqueComponent
           }
         ]
       }

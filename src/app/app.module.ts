@@ -24,6 +24,8 @@ import { AvaliacaoCreditoComponent } from './sistema/clientes/avaliacao-credito/
 import { PedidosRealizadosComponent } from './sistema/clientes/pedidos-realizados/pedidos-realizados.component';
 import { ResumoFinanceiroComponent } from './sistema/clientes/resumo-financeiro/resumo-financeiro.component';
 import { NotificacoesComponent } from './sistema/notificacoes/notificacoes.component';
+import { EstoqueComponent } from './sistema/estoque/estoque.component';
+import { FornecedoresComponent } from './sistema/estoque/fornecedores/fornecedores.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -54,7 +56,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AvaliacaoCreditoComponent,
     PedidosRealizadosComponent,
     ResumoFinanceiroComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    EstoqueComponent,
+    FornecedoresComponent
   ],
   imports: [
     BrowserModule,

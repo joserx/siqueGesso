@@ -16,7 +16,6 @@ export class ClientesComponent implements OnInit {
 
   public toggleClienteSection(value: string): void {
     this.clienteSection = value;
-    
   }
 
 }
