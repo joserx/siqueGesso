@@ -1,0 +1,154 @@
+<!-- Botão para abrir o modal
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adicionarFornecedor">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="adicionarFornecedor" tabindex="-1" aria-labelledby="adicionarFornecedorLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <form>
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="adicionarFornecedorLabel">Adicionar fornecedor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+
+          <div class="row py-3 p-0 m-0">
+
+            <!-- Razão Social -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Razão Social">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão Social</label>
+            </div>
+
+            <!-- Nome fantasia -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome fantasia">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome fantasia</label>
+            </div>
+
+            <!-- Celular -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Celular">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+            </div>
+
+            <!-- Telefone -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+            </div>
+
+            <!-- Site -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Site">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Site</label>
+            </div>
+
+            <!-- CEP -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+            </div>
+
+            <!-- Endereço -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
+            </div>
+
+            <!-- Complemento -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Complemento">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+            </div>
+
+            <!-- Contato -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Contato">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Contato</label>
+            </div>
+
+          </div>
+
+          <div class="row pt-3 m-0">
+            <div class="col-12 px-3 p-0">
+              <h6 class="text-custom-dark">Condições de pagamento</h6>
+            </div>
+
+            <div class="col-12 px-4 p-0 m-0">
+              <div class="form-check form-check-inline px-3">
+                <input class="form-check-input shadow-sm" type="checkbox" id="condicao1" value="condicao1">
+                <label class="form-check-label" for="condicao1">Condição 1</label>
+              </div>
+              <div class="form-check form-check-inline px-3">
+                <input class="form-check-input shadow-sm" type="checkbox" id="condicao2" value="condicao2">
+                <label class="form-check-label" for="condicao2">Condição 2</label>
+              </div>
+              <div class="form-check form-check-inline px-3">
+                <input class="form-check-input shadow-sm" type="checkbox" id="condicao3" value="condicao3">
+                <label class="form-check-label" for="condicao3">Condição 3</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row p-0 m-0">
+            <!-- Outras -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Outras">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Outras</label>
+            </div>
+
+            <!-- Conta bancária/pix -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Conta bancária/pix">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta bancária/pix</label>
+            </div>
+
+            <!-- Observações -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+            </div>
+
+            <!-- Anexos -->
+            <div class="col-12 px-2 mt-4 p-0 m-0 d-grid">
+              <label for="anexos" class="h-limited-sm btn rounded-15 py-1 px-4 bg-white d-flex justify-content-between align-items-center shadow-sm">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Anexos</h5>
+                <i class="bi-paperclip fs-4 fw-bold text-custom-dark"></i>
+              </label>
+              <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+
+          <!-- Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+            </button>
+          </div>
+
+          <!-- Salvar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button type="submit" class="h-limited-sm btn rounded-15 py-1 px-4 bg-custom-success shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+            </button>
+          </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+    </form>
+
+  </div>
+</div>
