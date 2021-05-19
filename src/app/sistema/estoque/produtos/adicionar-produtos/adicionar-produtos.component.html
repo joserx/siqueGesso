@@ -1,0 +1,219 @@
+<!-- Botão para abrir o modal
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adicionarProdutos">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="adicionarProdutos" tabindex="-1" aria-labelledby="adicionarProdutosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <form>
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="adicionarProdutosLabel">Adicionar produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+
+          <div class="row pt-3 p-0 m-0">
+            <!-- Nome, código, categoria, adicionar -->
+            <div class="col-4 px-2 m-0 p-0">
+              <div class="row m-0 p-0">
+                <!-- Nome -->
+                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+                </div>
+                <!-- Código -->
+                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
+                </div>
+                <!-- Categoria -->
+                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Categoria">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria</label>
+                </div>
+                <!-- Botão Adicionar -->
+                <div class="col-12 px-2 pt-4 p-0 m-0">
+                  <a class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
+                    <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
+                    <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Adicionar foto perfil -->
+            <div class="col-8 pt-4 px-2 m-0 p-0 h-100 d-grid">
+              <label for="anexos" class="btn rounded-15 px-4 bg-white d-flex justify-content-center align-items-center shadow-sm" style="height: 270px;">
+                <div>
+                  <i class="bi-images rounded-circle fs-3 px-4 py-3 my-4 bg-custom-dark text-light"></i>
+                  <p class="fw-bold text-custom-dark mt-3">Adicionar foto de perfil</p>
+                </div>
+              </label>
+              <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
+            </div>
+
+            <!-- Descrição -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Descrição" style="height: 150px"></textarea>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label>
+            </div>
+          </div>
+
+          <div class="row m-0 p-0">
+
+            <!-- Destinação -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Destinação">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Destinação</label>
+            </div>
+
+            <!-- Adicionar -->
+            <div class="col-1 px-2 mt-4 p-0 m-0 form-floating">
+              <button type="button" class="border rounded-15 h-limited-sm btn bg-white text-custom-dark py-2 px-3 fs-5 bi-plus-square-fill"></button>
+            </div>
+
+            <!-- Disponivel para venda -->
+            <div class="col-4 px-4 mt-4 d-flex align-items-center p-0 m-0 ">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="disponivelVenda">
+                <label class="form-check-label" for="disponivelVenda">
+                  Disponível para venda
+                </label>
+              </div>
+            </div>
+
+            <!-- Ativado/desativado -->
+            <div class="col-3 px-2 mt-4 d-flex align-items-center p-0 m-0">
+              <div class="form-check form-switch">
+                <input class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm" type="checkbox">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row m-0 p-0">
+            <!-- Unidade de medida -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Unidade de medida">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Unidade de medida</label>
+            </div>
+
+            <!-- Quantidade -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Quantidade">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Quantidade</label>
+            </div>
+
+            <!-- Dimensões -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Dimensões">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dimensões</label>
+            </div>
+
+            <!-- Peso -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Peso">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Peso</label>
+            </div>
+
+            <!-- Fornecedor -->
+            <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Fornecedor">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
+            </div>
+
+            <!-- Botão Adicionar -->
+            <div class="col-3 px-2 pt-4 p-0 m-0">
+              <a class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
+                <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
+                <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="row mt-4 m-0 p-0 fw-lighter">
+            <!-- Preço de venda -->
+            <div class="col-3 px-2 m-0 ">
+              <div class="p-4 bg-custom-dark rounded-15 text-light ">
+                <p>Preço de venda</p>
+                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
+              </div>
+            </div>
+
+            <!-- Preço de custo -->
+            <div class="col-3 px-2 m-0">
+              <div class="p-4 bg-custom-dark rounded-15 text-light">
+                <p>Preço de custo</p>
+                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
+              </div>
+            </div>
+
+            <!-- Margem de lucro -->
+            <div class="col-3 px-2 m-0">
+              <div class="p-4 bg-custom-dark rounded-15 text-light">
+                <p>Margem de lucro</p>
+                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
+              </div>
+            </div>
+
+            <!-- Comissionamento -->
+            <div class="col-3 px-2 m-0">
+              <div class="p-4 bg-custom-dark rounded-15 text-light">
+                <p>Comissionamento</p>
+                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-2 m-0 p-0">
+            
+            <!-- Estoque disponível -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estoque disponível">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque disponível</label>
+            </div>
+            <!-- Estoque mínimo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estoque mínimo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque mínimo</label>
+            </div>
+            <!-- Estoque máximo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estoque máximo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque máximo</label>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+
+          <!-- Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+            </button>
+          </div>
+
+          <!-- Salvar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button type="submit" class="h-limited-sm btn rounded-15 py-1 px-4 bg-custom-success shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+            </button>
+          </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+    </form>
+
+  </div>
+</div>
