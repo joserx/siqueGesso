@@ -10,17 +10,18 @@
 
       <!-- Botão de voltar -->
       <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas">
           <i class="bi-arrow-left fs-3 text-secondary"></i>
         </a>
       </div>
+
 
       <!-- Adicionar, Pedidos gerados e em digitação -->
       <div class="row m-0 mt-4 justify-content-center">
 
         <!-- Botão Adicionar -->
         <div class="col-4 px-2 p-0 m-0">
-          <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/vendas/criar">
+          <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#adicionarPedido">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</h5>
             <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
           </a>
@@ -100,6 +101,7 @@
       </div>
 
     </div>
-    <!-- /Página home -->
   </div>
 </div>
+
+<app-criar-pedido></app-criar-pedido>

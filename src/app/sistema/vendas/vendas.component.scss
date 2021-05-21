@@ -1,0 +1,17 @@
+@import "../../../_variables.scss";
+
+.nav-link.active {
+  background: transparent;
+  font-weight: normal;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.nav-link {
+  background-color: $custom-dark;
+  color: $custom-light;
+  &:hover {
+    background-color: #464646;
+  }
+}

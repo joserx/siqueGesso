@@ -9,8 +9,10 @@ import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborado
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
-import { CriarPedidoComponent } from './sistema/vendas/criar-pedido/criar-pedido.component';
-import { ListarPedidosComponent } from './sistema/vendas/listar-pedidos/listar-pedidos.component';
+import { CriarPedidoComponent } from './sistema/pedidos/criar-pedido/criar-pedido.component';
+import { ListarPedidosComponent } from './sistema/pedidos/listar-pedidos/listar-pedidos.component';
+import { VendasComponent } from './sistema/vendas/vendas.component';
+import { ListarClientesComponent } from './sistema/clientes/listar-clientes/listar-clientes.component';
 
 const routes: Routes = [
   {
@@ -57,16 +59,29 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'listar',
-            pathMatch: 'full'
+            component: VendasComponent
           },
           {
-            path: 'listar',
+            path: 'clientes',
+            children: [
+              {
+                path: '',
+                redirectTo: 'listar',
+                pathMatch: 'full'
+              },
+              {
+                path: 'listar',
+                component: ListarClientesComponent
+              },
+              {
+                path: 'cadastro',
+                component: ClientesComponent
+              }
+            ]
+          },
+          {
+            path: 'pedidos',
             component: ListarPedidosComponent
-          },
-          {
-            path: 'criar',
-            component: CriarPedidoComponent
           }
         ]
       },
@@ -85,19 +100,6 @@ const routes: Routes = [
           {
             path: 'editar/:id',
             component: EditarUsuarioSistemaComponent
-          }
-        ]
-      },
-      {
-        path: 'clientes',
-        children: [
-          {
-            path: '',
-            component: ClientesComponent
-          },
-          {
-            path: 'cadastrar',
-            component: ClientesComponent
           }
         ]
       },

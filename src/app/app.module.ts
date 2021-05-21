@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import locatePt from '@angular/common/locales/pt';
+import { CurrencyMaskModule, CurrencyMaskConfig, CURRENCY_MASK_CONFIG, } from 'ng2-currency-mask';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,9 +14,8 @@ import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/lista
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
-import { ListarPedidosComponent } from './sistema/vendas/listar-pedidos/listar-pedidos.component';
-import { CriarPedidoComponent } from './sistema/vendas/criar-pedido/criar-pedido.component';
-import { CurrencyMaskModule, CurrencyMaskConfig, CURRENCY_MASK_CONFIG, } from 'ng2-currency-mask';
+import { ListarPedidosComponent } from './sistema/pedidos/listar-pedidos/listar-pedidos.component';
+import { CriarPedidoComponent } from './sistema/pedidos/criar-pedido/criar-pedido.component';
 import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { ClientesComponent } from './sistema/clientes/clientes.component';
 import { PessoaFisicaComponent } from './sistema/clientes/cadastrar-cliente/pessoa-fisica/pessoa-fisica.component';
@@ -31,6 +31,8 @@ import { SuprimentosComponent } from './sistema/estoque/suprimentos/suprimentos.
 import { EstoqueProdutosComponent } from './sistema/estoque/estoque-produtos/estoque-produtos.component';
 import { AdicionarFornecedoresComponent } from './sistema/estoque/fornecedores/adicionar-fornecedores/adicionar-fornecedores.component';
 import { AdicionarProdutosComponent } from './sistema/estoque/produtos/adicionar-produtos/adicionar-produtos.component';
+import { VendasComponent } from './sistema/vendas/vendas.component';
+import { ListarClientesComponent } from './sistema/clientes/listar-clientes/listar-clientes.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -68,7 +70,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     SuprimentosComponent,
     EstoqueProdutosComponent,
     AdicionarFornecedoresComponent,
-    AdicionarProdutosComponent
+    AdicionarProdutosComponent,
+    VendasComponent,
+    ListarClientesComponent
   ],
   imports: [
     BrowserModule,
