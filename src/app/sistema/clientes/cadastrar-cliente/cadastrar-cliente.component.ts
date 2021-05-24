@@ -10,9 +10,21 @@ export class CadastrarClienteComponent implements OnInit {
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
 
+  public enderecos: any = [{}];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public adicionarEndereco(): void {
+    this.enderecos.push({});
+  }
+
+  public removerEndereco(id: number): void {
+    (this.enderecos).pop(id)
+    console.log(this.enderecos);
+    
   }
 
   public toggleDesativadoCheckbox(): void {
