@@ -1,0 +1,57 @@
+<!-- Vendedor -->
+<div class="row m-0">
+
+  <div class="col-12 pt-3 text-custom-dark">
+    <h5 class="m-0">Vendedor</h5>
+  </div>
+
+  <!-- Código -->
+  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código">
+    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
+  </div>
+
+  <!-- Nome do vendedor -->
+  <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor">
+    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do vendedor</label>
+  </div>
+
+</div>
+
+<!-- Condições de pagamento -->
+<!-- Títulos da Tabela -->
+<div class="row m-0 my-4 text-custom-dark justify-content-between">
+  <div class="col-3">
+    <h5 class="fw-bold text-truncate">Condição</h5>
+  </div>
+  <div class="col-3">
+    <h5 class="fw-bold text-truncate">Status</h5>
+  </div>
+  <div class="col-2">
+    <h5 class="fw-bold text-truncate">Ação</h5>
+  </div>
+</div>
+
+<!-- Tabela Condições de pagamento -->
+<div class="row m-0 border-bottom align-items-center justify-content-between" *ngFor="let condicao of condicoes;">
+  <div class="col-3 py-2">
+    <p class="my-1 m-0">{{ condicao.nome }}</p>
+  </div>
+  <div class="col-3 py-2">
+    <select class="form-select" [attr.disabled]="tipoUsuario === 2">
+      <option value="liberado" [attr.selected]="condicao.status == 'liberado'">Liberado</option>
+      <option value="aguardando" [attr.selected]="condicao.status == 'aguardando'">Aguardando liberação</option>
+    </select>
+  </div>
+  <div class="col-2 py-2 d-grid gap-2">
+    <!-- Botão Solicitar -->
+    <button *ngIf="condicao.status == 'aguardando'" type="button" class="btn rounded-15 px-4 bg-warning shadow-sm">
+      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitar</h5>
+    </button>
+    <!-- Botão Selecionar -->
+    <button *ngIf="condicao.status == 'liberado'" type="button" class="btn rounded-15 px-4 bg-custom-success shadow-sm">
+      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar</h5>
+    </button>
+  </div>
+</div>
