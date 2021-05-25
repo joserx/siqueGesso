@@ -79,37 +79,62 @@
           </div>
 
           <!-- Condição de pagamento -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento">
-              <option value="" disabled selected>Selecione uma condição</option>
-              <option value="Loja 1">À vista</option>
-              <option value="Loja 2">Parcelado</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de pagamento</label>
+          <div class="col-4 p-0 m-0">
+
+            <div class="pt-4 px-2 form-floating">
+              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento">
+                <option value="" disabled selected>Selecione uma condição</option>
+                <option value="Loja 1">À vista</option>
+                <option value="Loja 2">Parcelado</option>
+                <option value="personalizado">Personalizado</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de pagamento</label>
+            </div>
+
+            <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
+            </div>
           </div>
 
           <!-- Tabela de preço -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas">
-              <option value="" disabled selected>Selecione uma tabela</option>
-              <option value="Tabela E">Tabela E</option>
-              <option value="Tabela C">Tabela C</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de preço aplicada</label>
+          <div class="col-4 p-0 m-0">
+            <div class="pt-4 px-2 form-floating">
+              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas">
+                <option value="" disabled selected>Selecione uma tabela</option>
+                <option value="Tabela A">Tabela A</option>
+                <option value="Tabela B">Tabela B</option>
+                <option value="Tabela C">Tabela C</option>
+                <option value="Tabela D">Tabela D</option>
+                <option value="Tabela E">Tabela E</option>
+                <option value="personalizado">Personalizado</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de preço aplicada</label>
+            </div>
+
+            <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
+            </div>
           </div>
 
           <!-- Desconto máximo -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto máximo">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máximo</label>
+          <div class="col-4 p-0 m-0">
+            <div class="form-floating pt-4 px-2">
+              <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto máximo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máximo</label>
+            </div>
+
+            <div class="d-grid pt-4 px-2">
+              <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Adicionar produto</h5>
+                <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Botão adicionar produto -->
           <div class="col-4 px-2 mt-4 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Adicionar produto</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-            </button>
           </div>
 
         </div>

@@ -12,8 +12,8 @@ export class CriarPedidoComponent implements OnInit {
   public desconto: number = 10;
 
   public itens: any = [
-    { codigo: 1, produto: 'Drywall', quantidade: 50, valor_unitario: 25.90, desconto_tab: 5, desconto_ad: 0, valor_venda: 20.90},
-    { codigo: 2, produto: 'Gesso', quantidade: 4, valor_unitario: 16.90, desconto_tab: 0, desconto_ad: 0, valor_venda: 16.90},
+    { codigo: 1, produto: 'Drywall', quantidade: 50, valor_unitario: 25.90, desconto_tab: 5, desconto_ad: 0, valor_venda: 20.90 },
+    { codigo: 2, produto: 'Gesso', quantidade: 4, valor_unitario: 16.90, desconto_tab: 0, desconto_ad: 0, valor_venda: 16.90 },
   ];
 
   public clientes: any = [
@@ -30,6 +30,10 @@ export class CriarPedidoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public log(x: any): void {
+    console.log(x);
   }
 
 }
