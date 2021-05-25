@@ -127,7 +127,7 @@
 
             <div class="d-grid pt-4 px-2">
               <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#selecionarProdutos">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Adicionar produto</h5>
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar produto(s)</h5>
                 <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
               </button>
             </div>
@@ -145,55 +145,57 @@
             <h4 class="m-0 text-custom-dark">Itens</h4>
           </div>
         </div>
-
-        <!-- Títulos da Tabela -->
-        <div class="row m-0 my-4 text-custom-dark justify-content-center">
-          <div class="col-1">
-            <h5 class="fw-bold text-truncate">Código</h5>
-          </div>
-          <div class="col-2">
-            <h5 class="fw-bold text-truncate">Produto</h5>
-          </div>
-          <div class="col-1">
-            <h5 class="fw-bold text-truncate">Qtd.</h5>
-          </div>
-          <div class="col-2">
-            <h5 class="fw-bold text-truncate">Valor unitário</h5>
-          </div>
-          <div class="col-2">
-            <h5 class="fw-bold text-truncate">Desconto tab.</h5>
-          </div>
-          <div class="col-2">
-            <h5 class="fw-bold text-truncate">Desconto ad.</h5>
-          </div>
-          <div class="col-1">
-            <h5 class="fw-bold text-truncate">Valor venda</h5>
-          </div>
-        </div>
-
-        <!-- Tabela -->
-        <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let item of itens">
-          <div class="col-1">
-            <p>{{ item.codigo }}</p>
-          </div>
-          <div class="col-2">
-            <p>{{ item.produto }}</p>
-          </div>
-          <div class="col-1">
-            <p>{{ item.quantidade }}</p>
-          </div>
-          <div class="col-2">
-            <p>{{ item.valor_unitario | currency:'BRL'}}</p>
-          </div>
-          <div class="col-2">
-            <p>{{ item.desconto_tab | currency:'BRL'}}</p>
-          </div>
-          <div class="col-2">
-            <p>{{ item.desconto_ad | currency:'BRL' }}</p>
-          </div>
-          <div class="col-1">
-            <p>{{ item.valor_venda | currency:'BRL' }}</p>
-          </div>
+        <div class="table-responsive">
+          <table class="table text-custom-dark">
+            <thead>
+              <tr>
+                <th scope="col">Cód.</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Qtd</th>
+                <th scope="col">Valor unitário</th>
+                <th scope="col">Desconto tabela</th>
+                <th scope="col">Desconto adicional</th>
+                <th scope="col">Valor venda</th>
+                <th scope="col">Tipo de retirada</th>
+                <th scope="col">Data prev. da retirada</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Valor Frete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of itens">
+                <th scope="row">{{ item.codigo }}</th>
+                <td>{{ item.produto }}</td>
+                <td>{{ item.quantidade }}</td>
+                <td>{{ item.valor_unitario | currency:'BRL'}}</td>
+                <td>{{ item.desconto_tab | currency:'BRL'}}</td>
+                <td>{{ item.desconto_ad | currency:'BRL' }}</td>
+                <td>{{ item.valor_venda | currency:'BRL' }}</td>
+                <td>
+                  <select class="form-select form-select-sm">
+                    <option value="" disabled selected>Selecionar...</option>
+                    <option value="tipo1">tipo 1</option>
+                    <option value="tipo2">tipo 2</option>
+                    <option value="tipo3">tipo 3</option>
+                  </select>
+                </td>
+                <td>
+                  <input class="form-control form-control-sm" type="date">
+                </td>
+                <td>
+                  <select class="form-select form-select-sm">
+                    <option value="" disabled selected>Selecionar...</option>
+                    <option value="endereco1">Endereço 1</option>
+                    <option value="endereco2">Endereço 2</option>
+                    <option value="endereco3">Endereço 3</option>
+                  </select>
+                </td>
+                <td>
+                  <input currencyMask class="form-control form-control-sm" type="text" value="" placeholder="R$">
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Aplicas desconto geral -->
