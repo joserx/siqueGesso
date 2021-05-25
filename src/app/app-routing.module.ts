@@ -81,7 +81,21 @@ const routes: Routes = [
           },
           {
             path: 'pedidos',
-            component: ListarPedidosComponent
+            children: [
+              {
+                path: '',
+                redirectTo: 'listar',
+                pathMatch: 'full'
+              },
+              {
+                path: 'listar',
+                component: ListarPedidosComponent
+              },
+              {
+                path: 'criar',
+                component: CriarPedidoComponent
+              }
+            ]
           }
         ]
       },

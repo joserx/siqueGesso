@@ -16,6 +16,15 @@ export class CriarPedidoComponent implements OnInit {
     { codigo: 2, produto: 'Gesso', quantidade: 4, valor_unitario: 16.90, desconto_tab: 0, desconto_ad: 0, valor_venda: 16.90},
   ];
 
+  public clientes: any = [
+    { nome: "Ricardo Botega" },
+    { nome: "Douglas Brito" },
+    { nome: "Deise Teixeira" },
+    { nome: "Thais Camila" },
+    { nome: "Michael B. Jordan" },
+    { nome: "Finger Digital" },
+  ]
+
   public resumo: any = { produtos: 2, unidades: 600, subtotal: 6000, descontos: 100, venda: 5900, frete: 300, total: 6200 };
 
   constructor() { }
