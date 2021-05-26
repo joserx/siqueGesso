@@ -151,7 +151,7 @@
               <tr>
                 <th scope="col">Cód.</th>
                 <th scope="col">Produto</th>
-                <th scope="col">Qtd</th>
+                <th scope="col">Quantidade</th>
                 <th scope="col">Valor unitário</th>
                 <th scope="col">Desconto tabela</th>
                 <th scope="col">Desconto adicional</th>
@@ -166,10 +166,14 @@
               <tr *ngFor="let item of itens">
                 <th scope="row">{{ item.codigo }}</th>
                 <td>{{ item.produto }}</td>
-                <td>{{ item.quantidade }}</td>
+                <td>
+                  <input class="form-control form-control-sm" type="number" placeholder="Quantidade">
+                </td>
                 <td>{{ item.valor_unitario | currency:'BRL'}}</td>
                 <td>{{ item.desconto_tab | currency:'BRL'}}</td>
-                <td>{{ item.desconto_ad | currency:'BRL' }}</td>
+                <td>
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$">
+                </td>
                 <td>{{ item.valor_venda | currency:'BRL' }}</td>
                 <td>
                   <select class="form-select form-select-sm">
@@ -327,7 +331,10 @@
 
           <!-- Status -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Status">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento">
+              <option value="aguardando" selected>Aguardando pagamento</option>
+              <option value="realizado">Realizado</option>
+            </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
           </div>
 
@@ -356,22 +363,25 @@
 
           <!-- Botão Cancelar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-light d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
+              <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
             </button>
           </div>
 
           <!-- Botão Gerar pedido -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-light d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Gerar pedido</h5>
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate">Gerar pedido</h5>
+              <i class="bi-file-text my-auto fs-4 p-0 m-0 fw-bold"></i>
             </button>
           </div>
 
           <!-- Botão Gerar PDF -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-light d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Gerar PDF</h5>
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate">Gerar PDF</h5>
+              <i class="bi-file-earmark-pdf my-auto fs-4 p-0 m-0 fw-bold"></i>
             </button>
           </div>
 
