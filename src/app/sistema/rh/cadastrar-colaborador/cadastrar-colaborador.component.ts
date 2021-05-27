@@ -22,4 +22,8 @@ export class CadastrarColaboradorComponent implements OnInit {
     this.desativadoCheckbox === true ? this.desativadoCheckbox = false : this.desativadoCheckbox = true;
   }
 
+  public log(e: any):void {
+    // console.log(e);    
+  }
+
 }
