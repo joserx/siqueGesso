@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientesComponent } from './sistema/clientes/clientes.component';
+import { ClientesComponent } from './sistema/vendas/clientes/clientes.component';
 import { EstoqueComponent } from './sistema/estoque/estoque.component';
 import { HomeComponent } from './sistema/home/home.component';
 import { NotificacoesComponent } from './sistema/notificacoes/notificacoes.component';
@@ -11,7 +11,7 @@ import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/lista
 import { CriarPedidoVendasComponent } from './sistema/vendas/pedidos-vendas/criar-pedido-vendas/criar-pedido-vendas.component';
 import { ListarPedidosVendasComponent } from './sistema/vendas/pedidos-vendas/listar-pedidos-vendas/listar-pedidos-vendas.component';
 import { VendasComponent } from './sistema/vendas/vendas.component';
-import { ListarClientesComponent } from './sistema/clientes/listar-clientes/listar-clientes.component';
+import { ListarClientesComponent } from './sistema/vendas/clientes/listar-clientes/listar-clientes.component';
 
 const routes: Routes = [
   {

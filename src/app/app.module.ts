@@ -16,13 +16,13 @@ import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/
 import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
 import { ListarPedidosVendasComponent } from './sistema/vendas/pedidos-vendas/listar-pedidos-vendas/listar-pedidos-vendas.component';
 import { CriarPedidoVendasComponent } from './sistema/vendas/pedidos-vendas/criar-pedido-vendas/criar-pedido-vendas.component';
-import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
-import { ClientesComponent } from './sistema/clientes/clientes.component';
-import { PessoaFisicaComponent } from './sistema/clientes/cadastrar-cliente/pessoa-fisica/pessoa-fisica.component';
-import { PessoaJuridicaComponent } from './sistema/clientes/cadastrar-cliente/pessoa-juridica/pessoa-juridica.component';
-import { AvaliacaoCreditoComponent } from './sistema/clientes/avaliacao-credito/avaliacao-credito.component';
-import { PedidosRealizadosComponent } from './sistema/clientes/pedidos-realizados/pedidos-realizados.component';
-import { ResumoFinanceiroComponent } from './sistema/clientes/resumo-financeiro/resumo-financeiro.component';
+import { CadastrarClienteComponent } from './sistema/vendas/clientes/cadastrar-cliente/cadastrar-cliente.component';
+import { ClientesComponent } from './sistema/vendas/clientes/clientes.component';
+import { PessoaFisicaComponent } from './sistema/vendas/clientes/cadastrar-cliente/pessoa-fisica/pessoa-fisica.component';
+import { PessoaJuridicaComponent } from './sistema/vendas/clientes/cadastrar-cliente/pessoa-juridica/pessoa-juridica.component';
+import { AvaliacaoCreditoComponent } from './sistema/vendas/clientes/avaliacao-credito/avaliacao-credito.component';
+import { PedidosRealizadosComponent } from './sistema/vendas/clientes/pedidos-realizados/pedidos-realizados.component';
+import { ResumoFinanceiroComponent } from './sistema/vendas/clientes/resumo-financeiro/resumo-financeiro.component';
 import { NotificacoesComponent } from './sistema/notificacoes/notificacoes.component';
 import { EstoqueComponent } from './sistema/estoque/estoque.component';
 import { FornecedoresComponent } from './sistema/estoque/fornecedores/fornecedores.component';
@@ -32,8 +32,8 @@ import { EstoqueProdutosComponent } from './sistema/estoque/estoque-produtos/est
 import { AdicionarFornecedoresComponent } from './sistema/estoque/fornecedores/adicionar-fornecedores/adicionar-fornecedores.component';
 import { AdicionarProdutosComponent } from './sistema/estoque/produtos/adicionar-produtos/adicionar-produtos.component';
 import { VendasComponent } from './sistema/vendas/vendas.component';
-import { ListarClientesComponent } from './sistema/clientes/listar-clientes/listar-clientes.component';
-import { DadosVendaComponent } from './sistema/clientes/dados-venda/dados-venda.component';
+import { ListarClientesComponent } from './sistema/vendas/clientes/listar-clientes/listar-clientes.component';
+import { DadosVendaComponent } from './sistema/vendas/clientes/dados-venda/dados-venda.component';
 import { SelecionarProdutosModalComponent } from './sistema/estoque/produtos/selecionar-produtos-modal/selecionar-produtos-modal.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {

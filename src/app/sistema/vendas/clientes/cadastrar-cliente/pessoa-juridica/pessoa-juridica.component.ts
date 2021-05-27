@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getDate } from '../../../../../environments/global';
+import { getDate } from '../../../../../../environments/global';
 
 @Component({
   selector: 'app-pessoa-juridica',
