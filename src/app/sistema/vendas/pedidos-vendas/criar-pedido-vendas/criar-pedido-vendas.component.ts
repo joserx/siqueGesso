@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { getDate } from '../../../../environments/global';
+import { getDate } from '../../../../../environments/global';
 
 @Component({
-  selector: 'app-criar-pedido',
-  templateUrl: './criar-pedido.component.html',
-  styleUrls: ['./criar-pedido.component.scss']
+  selector: 'app-criar-pedido-vendas',
+  templateUrl: './criar-pedido-vendas.component.html',
+  styleUrls: ['./criar-pedido-vendas.component.scss']
 })
-export class CriarPedidoComponent implements OnInit {
+export class CriarPedidoVendasComponent implements OnInit {
 
   public getDate: any = getDate;
   public desconto: number = 10;

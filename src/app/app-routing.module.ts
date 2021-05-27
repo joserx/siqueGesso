@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { ClientesComponent } from './sistema/clientes/clientes.component';
 import { EstoqueComponent } from './sistema/estoque/estoque.component';
 import { HomeComponent } from './sistema/home/home.component';
@@ -9,8 +8,8 @@ import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborado
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/listar-usuarios-sistema/listar-usuarios-sistema.component';
-import { CriarPedidoComponent } from './sistema/pedidos/criar-pedido/criar-pedido.component';
-import { ListarPedidosComponent } from './sistema/pedidos/listar-pedidos/listar-pedidos.component';
+import { CriarPedidoVendasComponent } from './sistema/vendas/pedidos-vendas/criar-pedido-vendas/criar-pedido-vendas.component';
+import { ListarPedidosVendasComponent } from './sistema/vendas/pedidos-vendas/listar-pedidos-vendas/listar-pedidos-vendas.component';
 import { VendasComponent } from './sistema/vendas/vendas.component';
 import { ListarClientesComponent } from './sistema/clientes/listar-clientes/listar-clientes.component';
 
@@ -89,11 +88,11 @@ const routes: Routes = [
               },
               {
                 path: 'listar',
-                component: ListarPedidosComponent
+                component: ListarPedidosVendasComponent
               },
               {
                 path: 'criar',
-                component: CriarPedidoComponent
+                component: CriarPedidoVendasComponent
               }
             ]
           }

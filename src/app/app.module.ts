@@ -14,8 +14,8 @@ import { ListarUsuariosSistemaComponent } from './sistema/usuarios-sistema/lista
 import { EditarUsuarioSistemaComponent } from './sistema/usuarios-sistema/editar-usuario-sistema/editar-usuario-sistema.component';
 import { ListarColaboradoresComponent } from './sistema/rh/listar-colaboradores/listar-colaboradores.component';
 import { CadastrarColaboradorComponent } from './sistema/rh/cadastrar-colaborador/cadastrar-colaborador.component';
-import { ListarPedidosComponent } from './sistema/pedidos/listar-pedidos/listar-pedidos.component';
-import { CriarPedidoComponent } from './sistema/pedidos/criar-pedido/criar-pedido.component';
+import { ListarPedidosVendasComponent } from './sistema/vendas/pedidos-vendas/listar-pedidos-vendas/listar-pedidos-vendas.component';
+import { CriarPedidoVendasComponent } from './sistema/vendas/pedidos-vendas/criar-pedido-vendas/criar-pedido-vendas.component';
 import { CadastrarClienteComponent } from './sistema/clientes/cadastrar-cliente/cadastrar-cliente.component';
 import { ClientesComponent } from './sistema/clientes/clientes.component';
 import { PessoaFisicaComponent } from './sistema/clientes/cadastrar-cliente/pessoa-fisica/pessoa-fisica.component';
@@ -55,9 +55,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ListarUsuariosSistemaComponent,
     EditarUsuarioSistemaComponent,
     ListarColaboradoresComponent,
-    ListarPedidosComponent,
+    ListarPedidosVendasComponent,
     CadastrarColaboradorComponent,
-    CriarPedidoComponent,
+    CriarPedidoVendasComponent,
     CadastrarClienteComponent,
     ClientesComponent,
     PessoaFisicaComponent,
