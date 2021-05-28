@@ -35,6 +35,7 @@ import { VendasComponent } from './sistema/vendas/vendas.component';
 import { ListarClientesComponent } from './sistema/vendas/clientes/listar-clientes/listar-clientes.component';
 import { DadosVendaComponent } from './sistema/vendas/clientes/dados-venda/dados-venda.component';
 import { SelecionarProdutosModalComponent } from './sistema/estoque/produtos/selecionar-produtos-modal/selecionar-produtos-modal.component';
+import { CriarPedidoComprasComponent } from './sistema/compras/pedidos-compras/criar-pedido-compras/criar-pedido-compras.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -76,6 +77,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     VendasComponent,
     ListarClientesComponent,
     DadosVendaComponent,
+    SelecionarProdutosModalComponent,
+    CriarPedidoComprasComponent,
     SelecionarProdutosModalComponent
   ],
   imports: [

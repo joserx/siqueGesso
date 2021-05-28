@@ -12,6 +12,7 @@ import { CriarPedidoVendasComponent } from './sistema/vendas/pedidos-vendas/cria
 import { ListarPedidosVendasComponent } from './sistema/vendas/pedidos-vendas/listar-pedidos-vendas/listar-pedidos-vendas.component';
 import { VendasComponent } from './sistema/vendas/vendas.component';
 import { ListarClientesComponent } from './sistema/vendas/clientes/listar-clientes/listar-clientes.component';
+import { CriarPedidoComprasComponent } from './sistema/compras/pedidos-compras/criar-pedido-compras/criar-pedido-compras.component';
 
 const routes: Routes = [
   {
@@ -94,6 +95,30 @@ const routes: Routes = [
                 path: 'criar',
                 component: CriarPedidoVendasComponent
               }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'compras',
+        children: [
+          {
+            path: '',
+            redirectTo: 'pedidos',
+            pathMatch: 'full'
+          },
+          {
+            path: 'pedidos',
+            children: [
+              {
+                path: '',
+                redirectTo: 'listar',
+                pathMatch: 'full'
+              },
+              {
+                path: 'criar',
+                component: CriarPedidoComprasComponent
+              },
             ]
           }
         ]
