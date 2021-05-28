@@ -5,7 +5,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="adicionarProdutos" tabindex="-1" aria-labelledby="adicionarProdutosLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <form>
       <!-- Modal content -->
       <div class="modal-content rounded-15 bg-custom-light">
@@ -15,178 +15,270 @@
         </div>
         <div class="modal-body px-4">
 
-          <div class="row pt-3 p-0 m-0">
-            <!-- Nome, código, categoria, adicionar -->
-            <div class="col-4 px-2 m-0 p-0">
-              <div class="row m-0 p-0">
-                <!-- Nome -->
-                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
-                </div>
-                <!-- Código -->
-                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
-                </div>
-                <!-- Categoria -->
-                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Categoria">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria</label>
-                </div>
-                <!-- Botão Adicionar -->
-                <div class="col-12 px-2 pt-4 p-0 m-0">
-                  <a class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
-                    <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
-                    <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
-                  </a>
-                </div>
-              </div>
+          <!-- Dados gerais -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Dados gerais</h5>
             </div>
 
-            <!-- Adicionar foto perfil -->
-            <div class="col-8 pt-4 px-2 m-0 p-0 h-100 d-grid">
-              <label for="anexos" class="btn rounded-15 px-4 bg-white d-flex justify-content-center align-items-center shadow-sm" style="height: 270px;">
-                <div>
-                  <i class="bi-images rounded-circle fs-3 px-4 py-3 my-4 bg-custom-dark text-light"></i>
-                  <p class="fw-bold text-custom-dark mt-3">Adicionar foto de perfil</p>
-                </div>
-              </label>
-              <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
+            <!-- Destinação do produto -->
+            <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm">
+                <option selected disabled>Selecione uma destinação</option>
+                <option value="vendas">Vendas</option>
+                <option value="suprimentos">Suprimentos</option>
+                <option value="risco">Estoque de risco</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Destinação do produto</label>
             </div>
 
-            <!-- Descrição -->
-            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Descrição" style="height: 150px"></textarea>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label>
-            </div>
-          </div>
-
-          <div class="row m-0 p-0">
-
-            <!-- Destinação -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Destinação">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Destinação</label>
-            </div>
-
-            <!-- Adicionar -->
-            <div class="col-1 px-2 mt-4 p-0 m-0 form-floating">
-              <button type="button" class="border rounded-15 h-limited-sm btn bg-white text-custom-dark py-2 px-3 fs-5 bi-plus-square-fill"></button>
-            </div>
-
-            <!-- Disponivel para venda -->
-            <div class="col-4 px-4 mt-4 d-flex align-items-center p-0 m-0 ">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="disponivelVenda">
-                <label class="form-check-label" for="disponivelVenda">
-                  Disponível para venda
-                </label>
-              </div>
+            <!-- Categoria do produto -->
+            <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm">
+                <option selected disabled>Selecione uma categoria</option>
+                <option value="drywall">Drywall</option>
+                <option value="parafusos">Parafusos</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria do produto</label>
             </div>
 
             <!-- Ativado/desativado -->
-            <div class="col-3 px-2 mt-4 d-flex align-items-center p-0 m-0">
-              <div class="form-check form-switch">
-                <input class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm" type="checkbox">
+            <div class="col-2 px-2 mt-4 d-flex align-items-center p-0 m-0">
+              <div class="form-check form-switch align-items-center d-flex">
+                <input class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm" type="checkbox" id="status">
+                <label class="form-check-label px-4" for="status">Status</label>
               </div>
+            </div>
+
+            <!-- Código (SKU) -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código (SKU)">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código (SKU)</label>
+            </div>
+
+            <!-- Nome do produto -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do produto">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do produto</label>
             </div>
           </div>
 
-
-          <div class="row m-0 p-0">
-            <!-- Unidade de medida -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Unidade de medida">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Unidade de medida</label>
+          <!-- Características -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Características</h5>
             </div>
 
-            <!-- Quantidade -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Quantidade">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Quantidade</label>
+            <!-- Descrição -->
+            <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Descrição">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label>
             </div>
 
-            <!-- Dimensões -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Dimensões">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dimensões</label>
+            <!-- Unidade -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm">
+                <option selected disabled>Selecione uma unidade</option>
+                <option value="un">UN</option>
+                <option value="pç">PÇ</option>
+                <option value="kg">KG</option>
+                <option value="CX">CX</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Unidade</label>
+            </div>
+
+            <!-- Largura -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Largura">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Largura</label>
+            </div>
+
+            <!-- Altura -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Altura">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Altura</label>
             </div>
 
             <!-- Peso -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
               <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Peso">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Peso</label>
             </div>
 
-            <!-- Fornecedor -->
-            <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Fornecedor">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
+            <!-- Itens por caixa -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Itens por caixa">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Itens por caixa</label>
             </div>
 
-            <!-- Botão Adicionar -->
-            <div class="col-3 px-2 pt-4 p-0 m-0">
-              <a class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
-                <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
-                <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
-              </a>
+            <!-- GTIN/EAN -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="GTIN/EAN">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">GTIN/EAN</label>
             </div>
 
+            <!-- GTIN/EAN Tributário -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="GTIN/EAN Tributário">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">GTIN/EAN Tributário</label>
+            </div>
           </div>
 
-          <div class="row mt-4 m-0 p-0 fw-lighter">
-            <!-- Preço de venda -->
-            <div class="col-3 px-2 m-0 ">
-              <div class="p-4 bg-custom-dark rounded-15 text-light ">
-                <p>Preço de venda</p>
-                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
-              </div>
+          <!-- Estoque -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Estoque</h5>
             </div>
 
-            <!-- Preço de custo -->
-            <div class="col-3 px-2 m-0">
-              <div class="p-4 bg-custom-dark rounded-15 text-light">
-                <p>Preço de custo</p>
-                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
-              </div>
+            <!-- Mínimo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Mínimo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Mínimo</label>
+            </div>
+
+            <!-- Máximo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Máximo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Máximo</label>
+            </div>
+
+            <!-- Atual -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Atual">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Atual</label>
+            </div>
+
+            <!-- Localização -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Localização">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Localização</label>
+            </div>
+          </div>
+
+          <!-- Precificação -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Precificação</h5>
+            </div>
+
+            <!-- Custo médio -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Custo médio">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Custo médio</label>
+            </div>
+
+            <!-- Preço médio de venda -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Preço médio de venda">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Preço médio de venda</label>
             </div>
 
             <!-- Margem de lucro -->
-            <div class="col-3 px-2 m-0">
-              <div class="p-4 bg-custom-dark rounded-15 text-light">
-                <p>Margem de lucro</p>
-                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
-              </div>
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="%">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Margem de lucro</label>
             </div>
 
-            <!-- Comissionamento -->
-            <div class="col-3 px-2 m-0">
-              <div class="p-4 bg-custom-dark rounded-15 text-light">
-                <p>Comissionamento</p>
-                <span font="montserrat" class="py-5">R$</span><span font="montserrat" class="fs-3 py-5">10,00</span>
-              </div>
+            <!-- Comissão -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="%">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Comissão</label>
+            </div>
+
+            <!-- Fornecedores padrão -->
+            <div *ngFor="let fornecedorPadrao of fornecedoresPadrao" class="col-11 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm">
+                <option selected disabled>Selecione um fornecedor</option>
+                <option value="fornecedor1">fornecedor1</option>
+                <option value="fornecedor2">fornecedor2</option>
+                <option value="fornecedor3">fornecedor3</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedores padrão</label>
+            </div>
+
+            <div class="col-1 px-2 pt-4 p-0 m-0">
+              <a class="px-2 py-2" (click)="adicionarFornecedorPadrao()">
+                <i class="bi-plus-square-fill icon-view my-auto fs-4 p-2 m-0 fw-bold text-custom-dark"></i>
+              </a>
             </div>
           </div>
 
-          <div class="row px-2 m-0 p-0">
+          <!-- Tributação -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Tributação</h5>
+            </div>
             
-            <!-- Estoque disponível -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estoque disponível">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque disponível</label>
+            <!-- Origem do produto conforme ICMS -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm">
+                <option selected disabled>Selecione uma origem</option>
+                <option value="origem1">origem1</option>
+                <option value="origem2">origem2</option>
+                <option value="origem3">origem3</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Origem do produto conforme ICMS</label>
             </div>
-            <!-- Estoque mínimo -->
+            
+            <!-- NCM -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estoque mínimo">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque mínimo</label>
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="NCM">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">NCM</label>
             </div>
-            <!-- Estoque máximo -->
+            
+            <!-- CEST -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estoque máximo">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque máximo</label>
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEST">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEST</label>
             </div>
-
+            
+            <!-- Tributos -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="%">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tributos</label>
+            </div>
+            
+            <!-- Valor base ICMS ST para retenção -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor base ICMS ST para retenção">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor base ICMS ST para retenção</label>
+            </div>
+            
+            <!-- Valor ICMS ST para retenção -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor ICMS ST para retenção">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor ICMS ST para retenção</label>
+            </div>
+            
+            <!-- Valor ICMS próprio do substituto -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor ICMS próprio do substituto">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor ICMS próprio do substituto</label>
+            </div>
+            
+            <!-- Código de exceção da TIPI -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código de exceção da TIPI">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código de exceção da TIPI</label>
+            </div>
+            
+            <!-- Valor PIS fixo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor PIS fixo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor PIS fixo</label>
+            </div>
+            
+            <!-- Valor COFINS fixo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor COFINS fixo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor COFINS fixo</label>
+            </div>
+            
+            <!-- Informações adicionais -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Informações adicionais" style="height: 150px"></textarea>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Informações adicionais</label>
+            </div>
           </div>
 
         </div>

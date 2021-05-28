@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdicionarProdutosComponent implements OnInit {
 
+  public fornecedoresPadrao: any = [{}];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public adicionarFornecedorPadrao(): any {
+    this.fornecedoresPadrao.push({});
   }
 
 }
