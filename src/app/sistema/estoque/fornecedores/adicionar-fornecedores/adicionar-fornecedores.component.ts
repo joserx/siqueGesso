@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdicionarFornecedoresComponent implements OnInit {
 
+  public contatos: any = [{}];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public adicionarContato(): void {
+    this.contatos.push({});
   }
 
 }

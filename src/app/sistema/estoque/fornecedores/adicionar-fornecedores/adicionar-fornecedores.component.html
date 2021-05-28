@@ -5,7 +5,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="adicionarFornecedor" tabindex="-1" aria-labelledby="adicionarFornecedorLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <form>
       <!-- Modal content -->
       <div class="modal-content rounded-15 bg-custom-light">
@@ -15,36 +15,99 @@
         </div>
         <div class="modal-body px-4">
 
+          <!-- Categoria do fornecedor -->
           <div class="row py-3 p-0 m-0">
 
-            <!-- Razão Social -->
-            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Razão Social">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão Social</label>
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Categoria do fornecedor</h5>
+            </div>
+
+            <div class="col-12 d-grid px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Categoria">
+                <option value="" disabled selected>Selecione uma Categoria</option>
+                <option value="categoria1">Categoria 1</option>
+                <option value="categoria2">Categoria 2</option>
+                <option value="categoria3">Categoria 3</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria</label>
+            </div>
+
+          </div>
+          <!-- /Categoria do fornecedor -->
+
+          <!-- Dados cadastrais -->
+          <div class="row py-3 p-0 m-0">
+
+            <!-- Título -->
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Dados cadastrais</h5>
+            </div>
+
+            <!-- CNPJ -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CNPJ">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
             </div>
 
             <!-- Nome fantasia -->
-            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome fantasia">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome fantasia</label>
             </div>
 
-            <!-- Celular -->
+            <!-- Razão Social -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Celular">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Razão Social">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão Social</label>
             </div>
 
-            <!-- Telefone -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+            <!-- Código do regime tributário -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm text-custom-dark" placeholder="Código do regime tributário">
+                <option value="simples-nacional">Simples nacional | Regime normal</option>
+                <option value="simples-nacional">Simples nacional | Regime normal</option>
+                <option value="simples-nacional ">Simples nacional | Regime normal</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código do regime tributário</label>
             </div>
 
-            <!-- Site -->
+            <!-- Contribuinte -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm text-custom-dark" placeholder="Contribuinte">
+                <option value="simples-nacional">Simples nacional | Regime normal</option>
+                <option value="simples-nacional">Simples nacional | Regime normal</option>
+                <option value="simples-nacional ">Simples nacional | Regime normal</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Contribuinte</label>
+            </div>
+
+            <!-- Inscrição estadual -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Site">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Site</label>
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Inscrição estadual">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição estadual</label>
+            </div>
+
+            <!-- Insento -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating d-flex align-items-center">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="insento" id="insento">
+                <label class="form-check-label" for="insento">Insento</label>
+              </div>
+            </div>
+
+            <!-- Inscrição municipal -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Inscrição municipal">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição municipal</label>
+            </div>
+          </div>
+
+          <!-- Endereço -->
+          <div class="row py-3 p-0 m-0">
+
+            <!-- Título -->
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Endereço</h5>
             </div>
 
             <!-- CEP -->
@@ -53,73 +116,189 @@
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
             </div>
 
-            <!-- Endereço -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
+            <!-- UF -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm text-custom-dark">
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">UF</label>
+            </div>
+
+            <!-- Cidade -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cidade">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+            </div>
+
+            <!-- Bairro -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Bairro">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
+            </div>
+
+            <!-- Logradouro -->
+            <div class="col-7 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Logradouro">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
+            </div>
+
+            <!-- Número -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Número">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
             </div>
 
             <!-- Complemento -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
               <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Complemento">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
             </div>
 
-            <!-- Contato -->
-            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Contato">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Contato</label>
+          </div>
+
+          <!-- Contato -->
+          <div class="row py-3 p-0 m-0 align-items-center">
+
+            <!-- Título -->
+            <div class="col-12 d-flex px-2 align-items-center m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Contato</h5>
+              <a class="px-2 py-2" (click)="adicionarContato()">
+                <i class="bi-plus-square-fill icon-view my-auto fs-4 p-2 m-0 fw-bold text-custom-dark"></i>
+              </a>
+            </div>
+
+            <div class="col-12 m-0 p-0">
+              <div class="row m-0 p-0 pb-4 border-bottom" *ngFor="let contato of contatos">
+
+                <!-- Nome do contato -->
+                <div class="col-11 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do contato">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do contato</label>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="WhatsApp">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">WhatsApp</label>
+                </div>
+
+                <!-- Telefone 1 -->
+                <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone 1">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone 1</label>
+                </div>
+
+                <!-- Ramal 1 -->
+                <div class="col-1 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Ramal 1">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ramal 1</label>
+                </div>
+
+                <!-- Telefone 2 -->
+                <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone 2">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone 2</label>
+                </div>
+
+                <!-- Ramal 2 -->
+                <div class="col-1 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Ramal 2">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ramal 2</label>
+                </div>
+
+                <!-- Email do contato -->
+                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Email do contato">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email do contato</label>
+                </div>
+
+                <!-- Email nota fiscal -->
+                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Email nota fiscal">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email nota fiscal</label>
+                </div>
+
+                <!-- Site -->
+                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Site">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Site</label>
+                </div>
+              </div>
             </div>
 
           </div>
 
           <div class="row pt-3 m-0">
-            <div class="col-12 px-3 p-0">
-              <h6 class="text-custom-dark">Condições de pagamento</h6>
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Informações adicionais</h5>
             </div>
 
-            <div class="col-12 px-4 p-0 m-0">
-              <div class="form-check form-check-inline px-3">
-                <input class="form-check-input shadow-sm" type="checkbox" id="condicao1" value="condicao1">
-                <label class="form-check-label" for="condicao1">Condição 1</label>
+            <div class="col-12 px-2 p-0 m-0">
+              <p>Selecione as condições de pagamento disponíveis</p>
+              <div class="form-check form-check-inline px-4">
+                <input class="form-check-input shadow-sm" type="checkbox" id="vista" value="vista">
+                <label class="form-check-label" for="vista">À vista</label>
               </div>
-              <div class="form-check form-check-inline px-3">
-                <input class="form-check-input shadow-sm" type="checkbox" id="condicao2" value="condicao2">
-                <label class="form-check-label" for="condicao2">Condição 2</label>
+              <div class="form-check form-check-inline px-4">
+                <input class="form-check-input shadow-sm" type="checkbox" id="ddl10" value="ddl10">
+                <label class="form-check-label" for="ddl10">DDL 10</label>
               </div>
-              <div class="form-check form-check-inline px-3">
-                <input class="form-check-input shadow-sm" type="checkbox" id="condicao3" value="condicao3">
-                <label class="form-check-label" for="condicao3">Condição 3</label>
+              <div class="form-check form-check-inline px-4">
+                <input class="form-check-input shadow-sm" type="checkbox" id="ddl30" value="ddl30">
+                <label class="form-check-label" for="ddl30">DDL 30</label>
+              </div>
+              <div class="form-check form-check-inline px-4">
+                <input class="form-check-input shadow-sm" type="checkbox" id="ddl304560" value="ddl304560">
+                <label class="form-check-label" for="ddl304560">DDL 30, 45, 60</label>
+              </div>
+              <div class="form-check form-check-inline px-4">
+                <input class="form-check-input shadow-sm" type="checkbox" id="ddl306090" value="ddl306090">
+                <label class="form-check-label" for="ddl306090">DDL 30, 60, 90</label>
               </div>
             </div>
-          </div>
 
-          <div class="row p-0 m-0">
-            <!-- Outras -->
-            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Outras">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Outras</label>
+            <!-- Data da primeira compra -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data da primeira compra">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da primeira compra</label>
             </div>
 
-            <!-- Conta bancária/pix -->
-            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Conta bancária/pix">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta bancária/pix</label>
+            <!-- Data da última compra -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data da última compra">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da última compra</label>
             </div>
 
             <!-- Observações -->
             <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
               <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
-            </div>
-
-            <!-- Anexos -->
-            <div class="col-12 px-2 mt-4 p-0 m-0 d-grid">
-              <label for="anexos" class="h-limited-sm btn rounded-15 py-1 px-4 bg-white d-flex justify-content-between align-items-center shadow-sm">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Anexos</h5>
-                <i class="bi-paperclip fs-4 fw-bold text-custom-dark"></i>
-              </label>
-              <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
             </div>
 
           </div>
