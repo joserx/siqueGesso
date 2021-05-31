@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstoqueProdutosComponent implements OnInit {
 
-  public produtos: any = [
-    { id: 1, nome: "Placa cimentícea", dados: [
-      { data: "18/05/2021", movimento: "Entrada", fornecedor: "Fornecedor 1", valor_unitario: 40, quantidade: 500, custo: 20000, disponivel: 500 },
-      { data: "18/05/2021", movimento: "Entrada", fornecedor: "Fornecedor 1", valor_unitario: 40, quantidade: 500, custo: 20000, disponivel: 500 },
-      ]
-    }
+  public estoque_produtos: any = [
+    { codigo: 1, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
+    { codigo: 2, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
+    { codigo: 3, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
+    { codigo: 4, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
+    { codigo: 5, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
   ]
 
   constructor() { }

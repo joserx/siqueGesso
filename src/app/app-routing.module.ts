@@ -13,6 +13,7 @@ import { ListarPedidosVendasComponent } from './sistema/vendas/pedidos-vendas/li
 import { VendasComponent } from './sistema/vendas/vendas.component';
 import { ListarClientesComponent } from './sistema/vendas/clientes/listar-clientes/listar-clientes.component';
 import { CriarPedidoComprasComponent } from './sistema/compras/pedidos-compras/criar-pedido-compras/criar-pedido-compras.component';
+import { DetalhesProdutoComponent } from './sistema/estoque/estoque-produtos/detalhes-produto/detalhes-produto.component';
 
 const routes: Routes = [
   {
@@ -147,6 +148,10 @@ const routes: Routes = [
           {
             path: '',
             component: EstoqueComponent
+          },
+          {
+            path: 'detalhe/:id',
+            component: DetalhesProdutoComponent
           }
         ]
       }

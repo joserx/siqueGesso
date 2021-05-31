@@ -1,0 +1,143 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col pb-4 m-0 bg-custom-white">
+    <!-- Página -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/estoque">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <div class="row mt-4 m-0 justify-content-center align-items-center">
+
+        <!-- Pesquisar -->
+        <div class="col-4 px-2 p-0 m-0 position-relative">
+          <input class="form-control form-control-lg border-0 h-limited py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+          <a>
+            <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+          </a>
+        </div>
+
+        <!-- Botão Filtro -->
+        <div class="col-4 px-2 p-0 m-0">
+          <a class="rounded-15 py-2 px-4 bg-white h-limited d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtro</h5>
+            <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark"></i>
+          </a>
+        </div>
+
+        <!-- Botão Filtro -->
+        <div class="col-3 px-2 p-0 m-0">
+          <a class="rounded-15 py-2 px-4 bg-white h-limited d-flex shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Mais opções</h5>
+          </a>
+        </div>
+
+        <div class="col-1 px-2 p-0 m-0 text-center">
+          <a class="px-2 py-2">
+            <i class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Produto -->
+      <div class="row m-0 mt-5" *ngFor="let produto of produtos">
+        <div class="col-12">
+          <h5 class="fw-bold text-custom-dark">{{produto.nome}}</h5>
+        </div>
+        <div class="col-12 m-0 p-0">
+
+          <!-- Títulos da Tabela -->
+          <div class="row m-0 my-4 text-custom-dark">
+            <div class="col-1">
+              <h5 class="fw-bold">Data</h5>
+            </div>
+            <div class="col-2">
+              <h5 class="fw-bold">Movimento</h5>
+            </div>
+            <div class="col-2">
+              <h5 class="fw-bold">Fornecedor</h5>
+            </div>
+            <div class="col-2">
+              <h5 class="fw-bold">Valor unit.</h5>
+            </div>
+            <div class="col-1">
+              <h5 class="fw-bold text-truncate">Qtd.</h5>
+            </div>
+            <div class="col-2">
+              <h5 class="fw-bold">Custo</h5>
+            </div>
+            <div class="col-1">
+              <h5 class="fw-bold">Disponível</h5>
+            </div>
+          </div>
+
+          <!-- Tabela -->
+          <div class="row m-0 mt-3 border-bottom text-custom-dark" *ngFor="let dados of produto.dados">
+            <div class="col-1">
+              <p>{{ dados.data }}</p>
+            </div>
+            <div class="col-2">
+              <p>{{ dados.movimento }}</p>
+            </div>
+            <div class="col-2">
+              <p>{{ dados.fornecedor }}</p>
+            </div>
+            <div class="col-2">
+              <p>{{ dados.valor_unitario | currency:'BRL'}}</p>
+            </div>
+            <div class="col-1">
+              <p>{{ dados.quantidade }}</p>
+            </div>
+            <div class="col-2">
+              <p>{{ dados.custo | currency:'BRL' }}</p>
+            </div>
+            <div class="col-1">
+              <p>{{ dados.disponivel }}</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Estoque disponível no fim -->
+        <div class="row m-0 mt-4 justify-content-end">
+          <div class="col-4 px-2 p-0 m-0">
+            <a class="rounded-15 py-2 px-4 bg-white h-limited d-flex justify-content-between shadow-sm">
+              <span class=" fw-bold my-auto text-truncate text-custom-dark">Estoque disponível no fim</span>
+              <span font="montserrat" class="fw-light my-auto text-truncate text-custom-dark">1000</span>
+            </a>
+          </div>
+        </div>
+        <!-- /Estoque disponível no fim -->
+
+        <!-- Exportar e nova movimentação -->
+        <div class="row m-0 justify-content-end">
+          <!-- Botão Exportar -->
+          <div class="col-3 px-2 mt-4 p-0 m-0 d-grid">
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-light d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Exportar</h5>
+            </button>
+          </div>
+
+          <!-- Botão Nova movimentação -->
+          <div class="col-3 px-2 mt-4 p-0 m-0 d-grid">
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Nova movimentação</h5>
+              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /Exportar e nova movimentação -->
+
+      </div>
+      <!-- /Produto -->
+    </div>
+  </div>
+</div>
