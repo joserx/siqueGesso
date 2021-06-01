@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col pb-4 m-0 bg-custom-white">
+    <!-- Página -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <div class="row m-0 my-4">
+        <div class="col-12">
+          <ul class="nav nav-tabs fs-5 fw-lighter">
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="activeSection == 'pagar'" (click)="toggleActiveSection('pagar')">Contas a pagar</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="activeSection == 'receber'" (click)="toggleActiveSection('receber')">Contas a receber</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="activeSection == 'fluxo'" (click)="toggleActiveSection('fluxo')">Fluxo de caixa</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="activeSection == 'pagar'">
+      </div>
+
+      <div *ngIf="activeSection == 'receber'">
+      </div>
+
+      <div *ngIf="activeSection == 'fluxo'">
+      </div>
+
+    </div>
+    <!-- /Página -->
+  </div>
+</div>

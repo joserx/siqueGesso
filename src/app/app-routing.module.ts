@@ -14,6 +14,7 @@ import { VendasComponent } from './sistema/vendas/vendas.component';
 import { ListarClientesComponent } from './sistema/vendas/clientes/listar-clientes/listar-clientes.component';
 import { CriarPedidoComprasComponent } from './sistema/compras/pedidos-compras/criar-pedido-compras/criar-pedido-compras.component';
 import { DetalhesProdutoComponent } from './sistema/estoque/estoque-produtos/detalhes-produto/detalhes-produto.component';
+import { FinanceiroComponent } from './sistema/financeiro/financeiro.component';
 
 const routes: Routes = [
   {
@@ -152,6 +153,15 @@ const routes: Routes = [
           {
             path: 'detalhe/:id',
             component: DetalhesProdutoComponent
+          }
+        ]
+      },
+      {
+        path: 'financeiro',
+        children: [
+          {
+            path: '',
+            component: FinanceiroComponent
           }
         ]
       }
