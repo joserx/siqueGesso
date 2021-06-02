@@ -39,6 +39,7 @@ import { CriarPedidoComprasComponent } from './sistema/compras/pedidos-compras/c
 import { AdicionarSuprimentosComponent } from './sistema/estoque/suprimentos/adicionar-suprimentos/adicionar-suprimentos.component';
 import { DetalhesProdutoComponent } from './sistema/estoque/estoque-produtos/detalhes-produto/detalhes-produto.component';
 import { FinanceiroComponent } from './sistema/financeiro/financeiro.component';
+import { ContasAPagarComponent } from './sistema/financeiro/contas-a-pagar/contas-a-pagar.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -84,7 +85,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CriarPedidoComprasComponent,
     AdicionarSuprimentosComponent,
     DetalhesProdutoComponent,
-    FinanceiroComponent
+    FinanceiroComponent,
+    ContasAPagarComponent
   ],
   imports: [
     BrowserModule,
