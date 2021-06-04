@@ -15,6 +15,7 @@ import { ListarClientesComponent } from './sistema/vendas/clientes/listar-client
 import { CriarPedidoComprasComponent } from './sistema/compras/pedidos-compras/criar-pedido-compras/criar-pedido-compras.component';
 import { DetalhesProdutoComponent } from './sistema/estoque/estoque-produtos/detalhes-produto/detalhes-produto.component';
 import { FinanceiroComponent } from './sistema/financeiro/financeiro.component';
+import { ListarPedidosComprasComponent } from './sistema/compras/pedidos-compras/listar-pedidos-compras/listar-pedidos-compras.component';
 
 const routes: Routes = [
   {
@@ -116,6 +117,10 @@ const routes: Routes = [
                 path: '',
                 redirectTo: 'listar',
                 pathMatch: 'full'
+              },
+              {
+                path: 'listar',
+                component: ListarPedidosComprasComponent
               },
               {
                 path: 'criar',
