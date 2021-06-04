@@ -42,6 +42,7 @@ import { FinanceiroComponent } from './sistema/financeiro/financeiro.component';
 import { ContasAPagarComponent } from './sistema/financeiro/contas-a-pagar/contas-a-pagar.component';
 import { AdicionarPagamentoComponent } from './sistema/financeiro/contas-a-pagar/adicionar-pagamento/adicionar-pagamento.component';
 import { ContasAReceberComponent } from './sistema/financeiro/contas-a-receber/contas-a-receber.component';
+import { AdicionarRecebimentoComponent } from './sistema/financeiro/contas-a-receber/adicionar-recebimento/adicionar-recebimento.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -91,7 +92,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ContasAPagarComponent,
     AdicionarPagamentoComponent,
     ContasAReceberComponent,
-    AdicionarPagamentoComponent
+    AdicionarRecebimentoComponent
   ],
   imports: [
     BrowserModule,
