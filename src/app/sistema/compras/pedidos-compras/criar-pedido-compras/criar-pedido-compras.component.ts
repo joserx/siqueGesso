@@ -41,7 +41,11 @@ export class CriarPedidoComprasComponent implements OnInit {
   ngOnInit(): void {
     this.atualizarTotalPedido()
   }
-  
+
+  public adicionarItemPedido(): void {
+    this.itensPedido.push({ })
+  }
+
   public atualizarTotalPedido(): void {
     this.pedido.total = this.pedido.subtotal - this.pedido.desconto + this.pedido.frete + this.pedido.encargos;
   }

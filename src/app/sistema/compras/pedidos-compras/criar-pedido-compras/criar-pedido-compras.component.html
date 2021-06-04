@@ -49,7 +49,7 @@
 
           <!-- Adicionar  -->
           <div class="col-1 px-2 pt-3 p-0 m-0 text-center">
-            <a class="px-2 py-2">
+            <a class="px-2 py-2" routerLink="/sistema/estoque">
               <i class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"></i>
             </a>
           </div>
@@ -96,8 +96,11 @@
 
         <!-- Tabela de Itens -->
         <div class="row mt-4">
-          <div class="col-12 py-4 border-bottom">
+          <div class="col-6 py-4 border-bottom">
             <h4 class="m-0 text-custom-dark">Itens</h4>
+          </div>
+          <div class="col-6 py-4 border-bottom">
+            <button (click)="adicionarItemPedido()" type="button" class="float-end btn btn-outline-dark rounded-15">+ Adicionar linha</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -116,7 +119,8 @@
               <tr class="align-items-center" *ngFor="let item of itensPedido">
                 <th scope="row">{{ item.codigo }}</th>
                 <td>
-                  <select class="form-select form-select-sm">
+                  <select class="form-select form-select-sm" >
+                    <option value="">Selecione um produto</option>
                     <option *ngFor="let produto of produtos" [value]="produto.codigo" [selected]="item.codigo == produto.codigo">{{produto.nome}}</option>
                   </select>
                 </td>
