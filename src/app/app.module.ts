@@ -45,6 +45,8 @@ import { ContasAReceberComponent } from './sistema/financeiro/contas-a-receber/c
 import { AdicionarRecebimentoComponent } from './sistema/financeiro/contas-a-receber/adicionar-recebimento/adicionar-recebimento.component';
 import { FluxoDeCaixaComponent } from './sistema/financeiro/fluxo-de-caixa/fluxo-de-caixa.component';
 import { ListarPedidosComprasComponent } from './sistema/compras/pedidos-compras/listar-pedidos-compras/listar-pedidos-compras.component';
+import { ExpedicaoComponent } from './sistema/expedicao/expedicao.component';
+import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-expedicao/criar-ordem-expedicao.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -96,7 +98,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ContasAReceberComponent,
     AdicionarRecebimentoComponent,
     FluxoDeCaixaComponent,
-    ListarPedidosComprasComponent
+    ListarPedidosComprasComponent,
+    ExpedicaoComponent,
+    CriarOrdemExpedicaoComponent
   ],
   imports: [
     BrowserModule,

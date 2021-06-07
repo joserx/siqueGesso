@@ -1,0 +1,12 @@
+@import "../../../../_variables.scss";
+
+.bi-search{
+    color: $custom-dark;
+}
+
+.align-td{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}

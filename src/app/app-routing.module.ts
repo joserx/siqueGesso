@@ -16,6 +16,8 @@ import { CriarPedidoComprasComponent } from './sistema/compras/pedidos-compras/c
 import { DetalhesProdutoComponent } from './sistema/estoque/estoque-produtos/detalhes-produto/detalhes-produto.component';
 import { FinanceiroComponent } from './sistema/financeiro/financeiro.component';
 import { ListarPedidosComprasComponent } from './sistema/compras/pedidos-compras/listar-pedidos-compras/listar-pedidos-compras.component';
+import { ExpedicaoComponent } from './sistema/expedicao/expedicao.component';
+import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-expedicao/criar-ordem-expedicao.component';
 
 const routes: Routes = [
   {
@@ -168,6 +170,19 @@ const routes: Routes = [
             path: '',
             component: FinanceiroComponent
           }
+        ]
+      },
+      {
+        path: 'expedicao',
+        children: [
+          {
+            path: '',
+            component: ExpedicaoComponent
+          },
+          {
+            path: 'criar',
+            component: CriarOrdemExpedicaoComponent
+          },
         ]
       }
     ]
