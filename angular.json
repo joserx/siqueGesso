@@ -46,6 +46,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "baseHref": "/sique-gesso/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
