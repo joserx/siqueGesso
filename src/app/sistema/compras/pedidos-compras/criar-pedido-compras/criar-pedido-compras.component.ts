@@ -43,7 +43,8 @@ export class CriarPedidoComprasComponent implements OnInit {
   }
 
   public adicionarItemPedido(): void {
-    this.itensPedido.push({ })
+    // this.itensPedido.push({ })
+    this.itensPedido.push({ codigo: this.itensPedido.length + 1, nome: '', quantidade: '', valor_unitario: '', subtotal: '' })
   }
 
   public atualizarTotalPedido(): void {
@@ -77,4 +78,16 @@ export class CriarPedidoComprasComponent implements OnInit {
     });
   }
 
+  //insere o valor unitário no objeto
+  insereValorNoObj(valor:any, codigo:any){
+    let valorRecebido = valor.target.value;
+    
+    this.itensPedido.map((itemPedido:any, i: any) => {
+      if(itemPedido.codigo == codigo){
+        console.log('item pedido', itemPedido);
+        this.itensPedido[i].valor_unitario = parseInt(valorRecebido)
+      }
+    })    
+  }
+ 
 }

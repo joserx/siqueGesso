@@ -107,7 +107,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AppRoutingModule,
     NgbModule,
     NgbDropdownModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

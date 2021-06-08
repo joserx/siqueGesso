@@ -124,7 +124,13 @@
                     <option *ngFor="let produto of produtos" [value]="produto.codigo" [selected]="item.codigo == produto.codigo">{{produto.nome}}</option>
                   </select>
                 </td>
-                <td>{{ item.valor_unitario | currency:'BRL'}}</td>
+                <td> 
+                  <input
+                  type="text" class="form-control form-control-sm" 
+                  [value]="item.valor_unitario | currency:'BRL'"
+                  (change)="insereValorNoObj($event , item.codigo)"
+                  > <!-- currencyMask [options]="{prefix: 'R$', thousands: '.', decimal: ','}" -->
+                </td>
                 <td>
                   <input (change)="atualizarSubtotalProduto($event.target, item.codigo)" class="form-control form-control-sm" type="number" [value]="item.quantidade" placeholder="Quantidade">
                 </td>
