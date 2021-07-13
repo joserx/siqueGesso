@@ -62,18 +62,18 @@
       <!-- Tabela -->
       <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let usuario of usuarios">
         <div class="col-3">
-          <p>{{ usuario.nome }} {{ usuario.sobrenome }}</p>
+          <p>{{ usuario.name }} {{ usuario.surname }}</p>
         </div>
         <div class="col-5 col-lg-4">
           <p>{{ usuario.email }}</p>
         </div>
         <div class="col-2 col-lg-3">
-          <p>{{ usuario.permissao }}</p>
+          <p>{{ usuario.permission == 1 ? 'Administrador' : 'Funcionário ' }}</p>
         </div>
         <div class="col-2 text-end">
           <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
           <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/usuarios-sistema/editar/{{usuario.id}}" cursor="pointer"></i>
-          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="deleteUser(usuario.id)"></i>
         </div>
       </div>
 
