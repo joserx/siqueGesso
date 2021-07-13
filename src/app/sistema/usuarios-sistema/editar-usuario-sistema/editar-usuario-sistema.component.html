@@ -16,64 +16,74 @@
       </div>
 
       <!-- Formulário -->
-      <div class="row m-0 mt-4 justify-content-center">
+      <form [formGroup]="userForm" (ngSubmit)="sendForm(userForm.value)">
+        <div class="row m-0 mt-4 justify-content-center">
 
-        <div class="col-6 pb-4 d-flex align-items-center border-bottom">
-          <img class="avatar shadow-sm rounded-circle img-fluid" src="assets/sem-foto.jpg" alt="Ricardo Botega">
-          <a class="fw-bold text-custom-dark fs-5 px-5">Trocar foto de perfil</a>
+            <div class="col-12 pb-4 d-flex align-items-center">
+                <h2>Adicionar novo usuário</h2>
+            </div>
+
+            <div class="col-12 pb-4 d-flex align-items-center border-bottom">
+                <img class="avatar shadow-sm rounded-circle img-fluid" src="assets/sem-foto.jpg"
+                    alt="Ricardo Botega">
+                <a class="fw-bold text-custom-dark fs-5 px-5">Trocar foto de perfil</a>
+            </div>
+
+            <!-- Nome -->
+            <div class="col-4 px-2 pt-4 p-0 m-0">
+                <input formControlName="name" [class.invalid]="name?.invalid && (name?.dirty || name?.touched)" class="invalid form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                    type="text" placeholder="Nome">
+            </div>
+
+            <!-- Sobrenome -->
+            <div class="col-4 px-2 pt-4 p-0 m-0">
+                <input formControlName="surname" [class.invalid]="surname?.invalid && (surname?.dirty || surname?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                    type="text" placeholder="Sobrenome">
+            </div>
+
+            <!-- Email -->
+            <div class="col-4 px-2 pt-4 p-0 m-0">
+                <input formControlName="email" [class.invalid]="email?.invalid && (email?.dirty || email?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                    type="text" placeholder="Email">
+            </div>
+
+            <!-- Senha -->
+            <div class="col-4 px-2 pt-4 p-0 m-0">
+                <input formControlName="password" (blur)="checkPasswords()" [class.invalid]="password?.invalid && (password?.dirty || password?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                    type="password" placeholder="Senha">
+            </div>
+
+            <!-- Repetir senha -->
+            <div class="col-4 px-2 pt-4 p-0 m-0">
+                <span *ngIf="passwordRetype?.invalid && (passwordRetype?.dirty || passwordRetype?.touched) && passwordRetype?.errors?.incorrect" class="invalid">Sua senha deve ser igual a última senha inserida.</span>
+                <input formControlName="passwordRetype" (blur)="checkPasswords()" [class.invalid]="passwordRetype?.invalid && (passwordRetype?.dirty || passwordRetype?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                    type="password" placeholder="Repetir senha">
+            </div>
+
+            <!-- Permissão -->
+            <div class="col-4 px-2 pt-4 p-0 m-0">
+                <select formControlName="permission" [class.invalid]="permission?.invalid && (permission?.dirty || permission?.touched)"
+                    class="form-select form-select-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+                    type="text" placeholder="Permissão">
+                    <option value="-1" disabled selected>Permissão</option>
+                    <option value="0">Funcionário</option>
+                    <option value="1">Administrador</option>
+                </select>
+            </div>
         </div>
-        <div class="col-6 pb-4 d-flex border-bottom align-items-end justify-content-end">
-          <label class="form-check-label me-3 fs-5" for="desativado">Desativado</label>
-          <div class="form-check form-switch text-custom-dark">
-            <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado" checked>
-          </div>
+
+        <div class="row m-0 mt-4 justify-content-end">
+
+            <!-- Botão Salvar -->
+            <div class="col-4 d-grid px-2 p-0 m-0">
+                <button type="submit"
+                    class="btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
+                    <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Salvar</h5>
+                </button>
+            </div>
+
         </div>
-
-        <!-- Nome -->
-        <div class="col-4 px-2 pt-4 p-0 m-0">
-          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome">
-        </div>
-
-        <!-- Sobrenome -->
-        <div class="col-4 px-2 pt-4 p-0 m-0">
-          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Sobrenome">
-        </div>
-
-        <!-- Email -->
-        <div class="col-4 px-2 pt-4 p-0 m-0">
-          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Email">
-        </div>
-
-        <!-- Senha -->
-        <div class="col-4 px-2 pt-4 p-0 m-0">
-          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="password" placeholder="Senha">
-        </div>
-
-        <!-- Repetir senha -->
-        <div class="col-4 px-2 pt-4 p-0 m-0">
-          <input class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm" type="password" placeholder="Repetir senha">
-        </div>
-
-        <!-- Permissão -->
-        <div class="col-4 px-2 pt-4 p-0 m-0">
-          <select class="form-select form-select-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Permissão">
-            <option value="" disabled selected>Permissão</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Funcionário">Funcionário</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row m-0 mt-4 justify-content-end">
-
-        <!-- Botão Salvar -->
-        <div class="col-4 d-grid px-2 p-0 m-0">
-          <button type="button" class="btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Salvar</h5>
-          </button>
-        </div>
-
-      </div>
+    </form>
       <!-- /Lista de Usuários do Sistema -->
     </div>
   </div>
