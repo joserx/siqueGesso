@@ -141,3 +141,19 @@ label {
     }
   }
 }
+
+input.invalid {
+  border: 3px solid rgba($color: #df2121, $alpha: .3) !important;
+  color: #df2121;
+  text-decoration: none;
+}
+
+input.invalid:focus {
+  color: #df2121;
+  text-decoration: none;
+}
+
+.invalid {
+  color: #df2121;
+  text-decoration: underline;
+}

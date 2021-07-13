@@ -18,6 +18,7 @@ import { FinanceiroComponent } from './sistema/financeiro/financeiro.component';
 import { ListarPedidosComprasComponent } from './sistema/compras/pedidos-compras/listar-pedidos-compras/listar-pedidos-compras.component';
 import { ExpedicaoComponent } from './sistema/expedicao/expedicao.component';
 import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-expedicao/criar-ordem-expedicao.component';
+import { CriarUsuarioSistemaComponent } from './sistema/usuarios-sistema/criar-usuario-sistema/criar-usuario-sistema.component';
 
 const routes: Routes = [
   {
@@ -139,6 +140,10 @@ const routes: Routes = [
             path: '',
             redirectTo: 'listar',
             pathMatch: 'full'
+          },
+          {
+            path: 'criar',
+            component: CriarUsuarioSistemaComponent
           },
           {
             path: 'listar',

@@ -47,6 +47,9 @@ import { FluxoDeCaixaComponent } from './sistema/financeiro/fluxo-de-caixa/fluxo
 import { ListarPedidosComprasComponent } from './sistema/compras/pedidos-compras/listar-pedidos-compras/listar-pedidos-compras.component';
 import { ExpedicaoComponent } from './sistema/expedicao/expedicao.component';
 import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-expedicao/criar-ordem-expedicao.component';
+import { CriarUsuarioSistemaComponent } from './sistema/usuarios-sistema/criar-usuario-sistema/criar-usuario-sistema.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -100,7 +103,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FluxoDeCaixaComponent,
     ListarPedidosComprasComponent,
     ExpedicaoComponent,
-    CriarOrdemExpedicaoComponent
+    CriarOrdemExpedicaoComponent,
+    CriarUsuarioSistemaComponent
   ],
   imports: [
     BrowserModule,
@@ -108,6 +112,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgbModule,
     NgbDropdownModule,
     CurrencyMaskModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
