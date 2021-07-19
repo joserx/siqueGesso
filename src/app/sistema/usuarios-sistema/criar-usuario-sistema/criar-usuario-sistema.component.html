@@ -24,9 +24,10 @@
                     </div>
 
                     <div class="col-12 pb-4 d-flex align-items-center border-bottom">
-                        <img class="avatar shadow-sm rounded-circle img-fluid" src="assets/sem-foto.jpg"
-                            alt="Ricardo Botega">
-                        <a class="fw-bold text-custom-dark fs-5 px-5">Trocar foto de perfil</a>
+                        <div class="avatar shadow-sm rounded-circle img-fluid" [ngStyle]="{ background : 'url(' + avatarImg + ')' }"
+                            alt="Ricardo Botega"></div>
+                        <input type="file" accept="image/*" (change)="uploadImage($event)" style="display: none;" #fileInput>
+                        <a class="fw-bold text-custom-dark fs-5 px-5" (click)="fileInput.click()">Trocar foto de perfil</a>
                     </div>
 
                     <!-- Nome -->

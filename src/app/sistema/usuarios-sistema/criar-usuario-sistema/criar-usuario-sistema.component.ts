@@ -10,18 +10,19 @@ import { UsuarioSistemaService } from 'src/app/services/usuario-sistema.service'
 })
 export class CriarUsuarioSistemaComponent implements OnInit {
 
-  userForm : FormGroup = new FormGroup({
+  userForm: FormGroup = new FormGroup({
     'name': new FormControl('', [Validators.required]),
     'surname': new FormControl('', [Validators.required]),
     'email': new FormControl('', [Validators.required, Validators.email]),
     'password': new FormControl('', [Validators.required, Validators.minLength(8)]),
-    'passwordRetype' : new FormControl('', [Validators.required, Validators.minLength(8)]),
+    'passwordRetype': new FormControl('', [Validators.required, Validators.minLength(8)]),
     'permission': new FormControl('', [Validators.required, Validators.min(0)])
   });
+  avatarImg : any = 'assets/sem-foto.jpg';
 
   constructor(
-    private readonly router : Router,
-    private readonly usuarioSistemaService : UsuarioSistemaService
+    private readonly router: Router,
+    private readonly usuarioSistemaService: UsuarioSistemaService
   ) { }
 
   ngOnInit(): void {
@@ -52,18 +53,35 @@ export class CriarUsuarioSistemaComponent implements OnInit {
   }
 
   checkPasswords() {
-    if(this.password?.value != this.passwordRetype?.value) {
-      this.userForm.get('passwordRetype')?.setErrors({'incorrect': true});
+    if (this.password?.value != this.passwordRetype?.value) {
+      this.userForm.get('passwordRetype')?.setErrors({ 'incorrect': true });
     } else {
       this.userForm.get('passwordRetype')?.setErrors(null);
     }
   }
 
-  sendForm(data : any) {
-    if(this.userForm.valid) {
-      let {passwordRetype, ...user} = data
-      this.usuarioSistemaService.create(user).subscribe((res : any) => {
-        if(res.id) {
+  uploadImage(event: any) {
+
+    let files: File[] = event.target.files;
+    var reader : any = new FileReader();
+
+    reader.onloadend = async () => {
+      this.avatarImg = reader.result;
+    }
+
+    if (files[0]) {
+      reader.readAsDataURL(files[0]);
+    } else {
+      this.avatarImg = "assets/sem-foto.jpg";
+    }
+
+  }
+
+  sendForm(data: any) {
+    if (this.userForm.valid) {
+      let { passwordRetype, ...user } = data
+      this.usuarioSistemaService.create(user).subscribe((res: any) => {
+        if (res.id) {
           this.router.navigate(['sistema', 'usuarios-sistema', 'listar'])
         }
       })

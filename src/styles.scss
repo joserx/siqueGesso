@@ -64,6 +64,10 @@
 
 // Páginas de editar/cadastrar usuário
 .avatar {
+  background-position: center !important;
+  background-size: cover !important;
+  min-height: 150px;
+  min-width: 150px;
   max-height: 150px;
 }
 
