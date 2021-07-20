@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FileService } from 'src/app/services/file.service';
 import { UsuarioSistemaService } from 'src/app/services/usuario-sistema.service';
 
 @Component({
@@ -19,10 +20,12 @@ export class CriarUsuarioSistemaComponent implements OnInit {
     'permission': new FormControl('', [Validators.required, Validators.min(0)])
   });
   avatarImg : any = 'assets/sem-foto.jpg';
+  avatarFile : any = {};
 
   constructor(
     private readonly router: Router,
-    private readonly usuarioSistemaService: UsuarioSistemaService
+    private readonly usuarioSistemaService: UsuarioSistemaService,
+    private readonly fileService : FileService
   ) { }
 
   ngOnInit(): void {
@@ -71,8 +74,14 @@ export class CriarUsuarioSistemaComponent implements OnInit {
 
     if (files[0]) {
       reader.readAsDataURL(files[0]);
+
+      this.fileService.create(files[0]).subscribe((file : any) => {
+        this.avatarFile = file;
+      })
+
     } else {
       this.avatarImg = "assets/sem-foto.jpg";
+      this.avatarFile = null;
     }
 
   }
@@ -80,6 +89,9 @@ export class CriarUsuarioSistemaComponent implements OnInit {
   sendForm(data: any) {
     if (this.userForm.valid) {
       let { passwordRetype, ...user } = data
+      if(this.avatarFile) {
+        user.avatar = this.avatarFile.id;
+      }
       this.usuarioSistemaService.create(user).subscribe((res: any) => {
         if (res.id) {
           this.router.navigate(['sistema', 'usuarios-sistema', 'listar'])
