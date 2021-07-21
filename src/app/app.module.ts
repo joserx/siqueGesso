@@ -48,8 +48,10 @@ import { ListarPedidosComprasComponent } from './sistema/compras/pedidos-compras
 import { ExpedicaoComponent } from './sistema/expedicao/expedicao.component';
 import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-expedicao/criar-ordem-expedicao.component';
 import { CriarUsuarioSistemaComponent } from './sistema/usuarios-sistema/criar-usuario-sistema/criar-usuario-sistema.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './sistema/login/login.component';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -104,7 +106,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ListarPedidosComprasComponent,
     ExpedicaoComponent,
     CriarOrdemExpedicaoComponent,
-    CriarUsuarioSistemaComponent
+    CriarUsuarioSistemaComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +120,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

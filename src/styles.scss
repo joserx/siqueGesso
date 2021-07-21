@@ -71,6 +71,14 @@
   max-height: 150px;
 }
 
+.avatar-mini {
+  background-position: center !important;
+  background-size: cover !important;
+  min-height: 40px;
+  min-width: 40px;
+  max-height: 40px;
+}
+
 .h-limited, input.form-control-lg, select.form-control-lg { 
   min-height: 64px;
   max-height: 64px;

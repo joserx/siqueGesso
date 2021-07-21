@@ -22,7 +22,7 @@ export class EditarUsuarioSistemaComponent implements OnInit {
     'passwordRetype' : new FormControl('', [Validators.required, Validators.minLength(8)]),
     'permission': new FormControl('', [Validators.required, Validators.min(0)])
   });
-  avatarImg = '';
+  avatarImg = 'assets/sem-foto.jpg';
   avatarFile : any = {};
 
   constructor(

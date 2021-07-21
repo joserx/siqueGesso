@@ -1,0 +1,32 @@
+<div class="wrapper d-flex justify-content-center align-items-center">
+    <div class="container row d-flex justify-content-center">
+        <div class="col-12 logo align-items-center justify-content-center">
+            <img src="assets/sique-gesso-logo.png" alt="Sique Gesso">
+        </div>
+        <form class="col-12 justify-content-center" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="alert alert-danger" role="alert" *ngIf="notFound">
+                    Usuário não encontrado
+                </div> 
+            </div> 
+            <div class="row m-0 justify-content-center">
+                <div class="col-12 pb-4 d-flex align-items-center form-group">
+                    <input type="text" formControlName="email" placeholder="Email"
+                    [class.invalid]="email?.invalid && (email?.dirty || email?.touched)"
+                     class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm">
+                </div>
+                <div class="col-12 pb-4 d-flex align-items-center form-group">
+                    <input placeholder="Senha" formControlName="password" type="password"
+                        [class.invalid]="password?.invalid && (password?.dirty || password?.touched)"
+                        class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm">
+                </div>
+                <div class="col-12 pb-4 d-flex align-items-center form-group">
+                    <button type="submit"
+                        class="btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
+                        <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Entrar</h5>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

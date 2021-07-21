@@ -19,6 +19,8 @@ import { ListarPedidosComprasComponent } from './sistema/compras/pedidos-compras
 import { ExpedicaoComponent } from './sistema/expedicao/expedicao.component';
 import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-expedicao/criar-ordem-expedicao.component';
 import { CriarUsuarioSistemaComponent } from './sistema/usuarios-sistema/criar-usuario-sistema/criar-usuario-sistema.component';
+import { LoginComponent } from './sistema/login/login.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -27,11 +29,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'sistema',
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
       },
       {
         path: 'home',

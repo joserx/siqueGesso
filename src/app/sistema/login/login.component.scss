@@ -1,0 +1,23 @@
+.container {
+    max-width: 900px !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 100% !important;
+    height: 100vh !important;
+}
+
+.logo {
+    align-self: center;
+    max-width: 256px !important;
+
+    img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+}
