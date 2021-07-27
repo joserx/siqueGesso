@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RhService } from 'src/app/services/rh.service';
 
 @Component({
   selector: 'app-listar-colaboradores',
@@ -7,19 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarColaboradoresComponent implements OnInit {
 
-  public colaboradores = [
-    { id: 1, nome: 'Michael', sobrenome: 'B. Jordan', cargo: 'Diretor', departamento: 'Marketing', admissao: '08/02/2020', loja: 'Matriz', status: 0 },
-    { id: 2, nome: 'Ricardo', sobrenome: 'Botega', cargo: 'Auxiliar', departamento: 'Expedição', admissao: '08/02/2020', loja: 'São Bernardo', status: 1 },
-    { id: 3, nome: 'Thais', sobrenome: 'Camila', cargo: 'Estoquista', departamento: 'Comercial', admissao: '08/02/2020', loja: 'Itaqua', status: 1 },
-    { id: 4, nome: 'Deise', sobrenome: 'Teixeira', cargo: 'Estoquista', departamento: 'Expedição', admissao: '08/02/2020', loja: 'Matriz', status: 1 },
-    { id: 5, nome: 'Henrique', sobrenome: 'Bustillos', cargo: 'Vendedor', departamento: 'Comercial', admissao: '08/02/2020', loja: 'Matriz', status: 1 },
-  ]
+  profiles: any[] = [];
+  data: any = {}
 
-  public dados = { ativos: 72, inativos: 10 }
-
-  constructor() { }
+  constructor(
+    private readonly rhService: RhService
+  ) { }
 
   ngOnInit(): void {
+    this.rhService.find().subscribe((rhs: any) => {
+      this.profiles = rhs
+    })
+    this.rhService.data().subscribe((data: any) => {
+      this.data = data;
+    })
+  }
+
+  deleteRh(id : number) {
+    this.rhService.delete(id).subscribe((data : any) => {
+      this.profiles = this.profiles.filter((ele : any) => { return ele.id != id })
+      this.rhService.data().subscribe((data: any) => {
+        this.data = data;
+      })
+    })
   }
 
 }

@@ -30,7 +30,7 @@
         <div class="col-4 px-2 p-0 m-0">
           <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
             <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-success"></i>
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark">{{ dados.ativos }} ativos</h5>
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">{{data.enabled}} ativos</h5>
           </div>
         </div>
 
@@ -38,7 +38,7 @@
         <div class="col-4 px-2 p-0 m-0">
           <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
             <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-danger"></i>
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark">{{ dados.inativos }} inativos</h5>
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">{{data.disabled}} inativos</h5>
           </div>
         </div>
       </div>
@@ -66,26 +66,26 @@
       </div>
 
       <!-- Tabela -->
-      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let colaborador of colaboradores">
+      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let rh of profiles">
         <div class="col-2">
-          <p>{{ colaborador.nome }} {{ colaborador.sobrenome }}</p>
+          <p>{{ rh.name }} {{ rh.surname }}</p>
         </div>
         <div class="col-2">
-          <p>{{ colaborador.cargo }}</p>
+          <p>{{ rh.role }}</p>
         </div>
         <div class="col-2">
-          <p>{{ colaborador.departamento }}</p>
+          <p>{{ rh.department }}</p>
         </div>
         <div class="col-2">
-          <p>{{ colaborador.admissao }}</p>
+          <p>{{ rh.admission | date }}</p>
         </div>
         <div class="col-2">
-          <p>{{ colaborador.loja }}</p>
+          <p>{{ rh.shop }}</p>
         </div>
         <div class="col-2 text-end">
-          <i class="fs-5 bi-circle-fill p-3" [class]="colaborador.status == 1 ? 'text-success' : 'text-danger'" cursor="pointer"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/rh/editar/{{colaborador.id}}" cursor="pointer"></i>
-          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+          <i class="fs-5 bi-circle-fill p-3" [class]="rh.status == 1 ? 'text-success' : 'text-danger'" cursor="pointer"></i>
+          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/rh/editar/{{rh.id}}" cursor="pointer"></i>
+          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="deleteRh(rh.id)"></i>
         </div>
       </div>
 

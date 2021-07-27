@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { FileService } from 'src/app/services/file.service';
 import { RhService } from 'src/app/services/rh.service';
+import { environment } from 'src/environments/environment';
 import { getDate } from '../../../../environments/global';
 
 @Component({
-  selector: 'app-cadastrar-colaborador',
-  templateUrl: './cadastrar-colaborador.component.html',
-  styleUrls: ['./cadastrar-colaborador.component.scss']
+  selector: 'app-editar-colaborador',
+  templateUrl: './editar-colaborador.component.html',
+  styleUrls: ['./editar-colaborador.component.scss']
 })
-export class CadastrarColaboradorComponent implements OnInit {
+export class EditarColaboradorComponent implements OnInit {
 
   public getDate: any = getDate;
 
-  public avatarImg : string = './assets/sem-foto.jpg';
-  avatarFile : any = {};
+  avatarImg = 'assets/sem-foto.jpg';
+  avatarFile : any = null;
   public desativadoCheckbox: boolean = false;
   public rhForm : FormGroup = new FormGroup({
     'disabled' : new FormControl(''),
@@ -65,9 +66,11 @@ export class CadastrarColaboradorComponent implements OnInit {
   })
 
   user : any = {}
+  rhId : number = 0;
 
   constructor(
     private readonly fileService : FileService,
+    private readonly route : ActivatedRoute,
     private readonly rhService : RhService,
     private readonly authService : AuthenticationService,
     private readonly router : Router
@@ -75,6 +78,56 @@ export class CadastrarColaboradorComponent implements OnInit {
 
   ngOnInit(): void {    
     this.user = this.authService.currentUserValue
+    const routeParams = this.route.snapshot.paramMap;
+    this.rhId = Number(routeParams.get('id'));
+    this.rhService.findOne(this.rhId).subscribe((data : any) => {
+      if(data.avatar) {
+        this.avatarImg = environment.apiUrl + 'file/download/' + data.avatar.fileName
+      }
+      this.rhForm.get('name')?.setValue(data.name)
+      this.rhForm.get('surname')?.setValue(data.surname)
+      this.rhForm.get('birthDate')?.setValue(data.birthDate)
+      this.rhForm.get('rg')?.setValue(data.rg)
+      this.rhForm.get('rgExpedicao')?.setValue(data.rgExpedicao)
+      this.rhForm.get('rgOrgaoEmissor')?.setValue(data.rgOrgaoEmissor)
+      this.rhForm.get('cnpj')?.setValue(data.cnpj)
+      this.rhForm.get('cnh')?.setValue(data.cnh)
+      this.rhForm.get('gender')?.setValue(data.gender)
+      this.rhForm.get('civilState')?.setValue(data.civilState)
+      this.rhForm.get('deficiency')?.setValue(data.deficiency)
+      this.rhForm.get('scholarship')?.setValue(data.scholarship)
+      this.rhForm.get('nacionality')?.setValue(data.nacionality)
+      this.rhForm.get('naturality')?.setValue(data.naturality)
+      this.rhForm.get('motherName')?.setValue(data.motherName)
+      this.rhForm.get('fatherName')?.setValue(data.fatherName)
+      this.rhForm.get('cep')?.setValue(data.cep)
+      this.rhForm.get('street')?.setValue(data.street)
+      this.rhForm.get('addressNumber')?.setValue(data.addressNumber)
+      this.rhForm.get('addressComplement')?.setValue(data.addressComplement)
+      this.rhForm.get('neighborhood')?.setValue(data.neighborhood)
+      this.rhForm.get('city')?.setValue(data.city)
+      this.rhForm.get('state')?.setValue(data.state)
+      this.rhForm.get('telephone')?.setValue(data.telephone)
+      this.rhForm.get('whatsapp')?.setValue(data.whatsapp)
+      this.rhForm.get('emergencyTelephone')?.setValue(data.emergencyTelephone)
+      this.rhForm.get('personalEmail')?.setValue(data.personalEmail)
+      this.rhForm.get('corporativeEmail')?.setValue(data.corporativeEmail)
+      this.rhForm.get('department')?.setValue(data.department)
+      this.rhForm.get('role')?.setValue(data.role)
+      this.rhForm.get('contractType')?.setValue(data.contractType)
+      this.rhForm.get('shift')?.setValue(data.shift)
+      this.rhForm.get('paycheck')?.setValue(data.paycheck)
+      this.rhForm.get('admission')?.setValue(data.admission)
+      this.rhForm.get('experiencePeriod')?.setValue(data.experiencePeriod)
+      this.rhForm.get('fireDate')?.setValue(data.fireDate)
+      this.rhForm.get('pis')?.setValue(data.pis)
+      this.rhForm.get('mei')?.setValue(data.mei)
+      this.rhForm.get('bank')?.setValue(data.bank)
+      this.rhForm.get('bankAccountType')?.setValue(data.bankAccountType)
+      this.rhForm.get('bankAgency')?.setValue(data.bankAgency)
+      this.rhForm.get('bankAccountNumber')?.setValue(data.bankAccountNumber)
+
+    });
   }
 
   public toggleDesativadoCheckbox(): void {
@@ -118,7 +171,8 @@ export class CadastrarColaboradorComponent implements OnInit {
       if(this.desativadoCheckbox) {
         data.status = 0
       }
-      this.rhService.create(data).subscribe((res: any) => {
+      console.log(data)
+      this.rhService.update(this.rhId, data).subscribe((res: any) => {
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
         }

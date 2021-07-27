@@ -21,6 +21,7 @@ import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-ex
 import { CriarUsuarioSistemaComponent } from './sistema/usuarios-sistema/criar-usuario-sistema/criar-usuario-sistema.component';
 import { LoginComponent } from './sistema/login/login.component';
 import { AuthGuard } from './services/auth.guard';
+import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,10 @@ const routes: Routes = [
           {
             path: 'cadastrar',
             component: CadastrarColaboradorComponent
+          },
+          {
+            path: 'editar/:id',
+            component: EditarColaboradorComponent
           }
         ]
       },
