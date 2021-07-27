@@ -7,7 +7,9 @@
     <!-- Informações -->
     <div class="my-auto text-custom-dark">
 
-      <!-- Dropdown Notificações -->
+      <!-- Textos e perfil -->
+      <div class="d-flex flex-row justify-content-center align-items-center">
+              <!-- Dropdown Notificações -->
       <div ngbDropdown class="btn-group dropdown" autoClose="outside" display="dynamic" placement="bottom-center">
         <!-- Botão do dropdown de notificações -->
         <button ngbDropdownToggle type="button" id="btnNotificacoes" class="btn btn-white px-2 py-1 rounded-15 mx-3 fs-4">
@@ -49,11 +51,9 @@
           </li>
         </ul>
       </div>
-
-      <!-- Textos e perfil -->
-      <div class="d-none d-md-inline">
         <span class="fw-bold">{{user.name}} {{user.surname}},</span> seja bem vindo!
-        <img class="rounded-circle ms-3 border border-primary" height="40" [src]="avatarImg" alt="Perfil">
+        <div class="rounded-circle ms-3 border border-primary" style="height: 40px; width: 40px;background-image: url('{{avatarImg}}');background-position: center; background-size: cover;"></div>
+        <!-- <img class="rounded-circle ms-3 border border-primary" height="40" [src]="avatarImg" alt="Perfil"> -->
       </div>
 
     </div>
