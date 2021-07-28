@@ -53,7 +53,7 @@
           
           <!-- RG -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="00.000.000-0||0.000.000-0" formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="RG">
+            <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-0||0.000.000-0" formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="RG">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
           </div>
           
@@ -71,7 +71,7 @@
           
           <!-- CNPJ -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="CPF_CNPJ" formControlName="cnpj" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CPF">
+            <input [class.invalid]="cpf?.invalid && (cpf?.dirty || cpf?.touched)" mask="000.000.000-00" formControlName="cnpj" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CPF">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF</label>
           </div>
           
@@ -156,7 +156,7 @@
           
           <!-- CEP -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input (blur)="changeAddress($event)" mask="00000-000" formControlName="cep" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP">
+            <input [class.invalid]="cep?.invalid && (cep?.dirty || cep?.touched)" (blur)="changeAddress($event)" mask="00000-000" formControlName="cep" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
           </div>
           
@@ -290,7 +290,7 @@
           
           <!-- MEI -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="CPF_CNPJ" formControlName="mei" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CNPJ">
+            <input [class.invalid]="mei?.invalid && (mei?.dirty || mei?.touched)" mask="CPF_CNPJ" formControlName="mei" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CNPJ">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
           </div>
 

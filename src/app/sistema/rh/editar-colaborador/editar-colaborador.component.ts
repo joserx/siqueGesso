@@ -5,6 +5,7 @@ import { AuthenticationService } from 'src/app/services/auth.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
 import { RhService } from 'src/app/services/rh.service';
+import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { environment } from 'src/environments/environment';
 import { getDate } from '../../../../environments/global';
 
@@ -25,10 +26,10 @@ export class EditarColaboradorComponent implements OnInit {
     'name' : new FormControl(''),
     'surname' : new FormControl(''),
     'birthDate' : new FormControl(null),
-    'rg' : new FormControl(''),
+    'rg' : new FormControl('', [BrazilValidator.isValidRG]),
     'rgExpedicao' : new FormControl(''),
     'rgOrgaoEmissor' : new FormControl(''),
-    'cnpj' : new FormControl(''),
+    'cnpj' : new FormControl('', [BrazilValidator.isValidCpf]),
     'cnh' : new FormControl(''),
     'gender' : new FormControl(''),
     'civilState' : new FormControl(''),
@@ -38,7 +39,7 @@ export class EditarColaboradorComponent implements OnInit {
     'naturality' : new FormControl(''),
     'motherName' : new FormControl(''),
     'fatherName' : new FormControl(''),
-    'cep' : new FormControl(''),
+    'cep' : new FormControl('', [BrazilValidator.isValidCEP]),
     'street' : new FormControl(''),
     'addressNumber' : new FormControl(''),
     'addressComplement' : new FormControl(''),
@@ -59,7 +60,7 @@ export class EditarColaboradorComponent implements OnInit {
     'experiencePeriod' : new FormControl(''),
     'fireDate' : new FormControl(null),
     'pis' : new FormControl(''),
-    'mei' : new FormControl(''),
+    'mei' : new FormControl('', [BrazilValidator.isValidCpf]),
     'bank' : new FormControl(''),
     'bankAccountType' : new FormControl(''),
     'bankAgency' : new FormControl(''),
@@ -130,6 +131,22 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('bankAccountNumber')?.setValue(data.bankAccountNumber)
 
     });
+  }
+
+  get cpf() {
+    return this.rhForm.get('cnpj');
+  }
+
+  get rg() {
+    return this.rhForm.get('rg');
+  }
+  
+  get cep() {
+    return this.rhForm.get('cep');
+  }
+
+  get mei() {
+    return this.rhForm.get('mei');
   }
 
   public toggleDesativadoCheckbox(): void {
