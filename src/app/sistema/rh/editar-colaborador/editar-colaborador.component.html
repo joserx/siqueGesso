@@ -190,7 +190,7 @@
 
           <!-- CEP -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="00000-000" formControlName="cep"
+            <input (blur)="changeAddress($event)" mask="00000-000" formControlName="cep"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="CEP">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>

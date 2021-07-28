@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth.service';
+import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
 import { RhService } from 'src/app/services/rh.service';
 import { environment } from 'src/environments/environment';
@@ -73,6 +74,7 @@ export class EditarColaboradorComponent implements OnInit {
     private readonly route : ActivatedRoute,
     private readonly rhService : RhService,
     private readonly authService : AuthenticationService,
+    private readonly correiosService : CorreiosService,
     private readonly router : Router
   ) { }
 
@@ -159,6 +161,20 @@ export class EditarColaboradorComponent implements OnInit {
       this.avatarFile = null;
     }
 
+  }
+
+  changeAddress(event : any) {
+    let cep : string = event.target.value;
+    cep = cep.replace('-', '');
+
+    this.correiosService.consultaCep(cep).subscribe((data : any) => {
+      if(data.cep) {
+        this.rhForm.get('street')?.setValue(data.logradouro)
+        this.rhForm.get('neighborhood')?.setValue(data.bairro)
+        this.rhForm.get('city')?.setValue(data.localidade)
+        this.rhForm.get('state')?.setValue(data.uf)
+      }
+    })
   }
 
   sendForm(data : any) {
