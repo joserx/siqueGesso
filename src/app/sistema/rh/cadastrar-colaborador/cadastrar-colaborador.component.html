@@ -60,7 +60,7 @@
           <!-- Expedição -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input formControlName="rgExpedicao" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Expedição">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Expedição</label>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Expedição</label>
           </div>
           
           <!-- Órgão emissor -->
@@ -93,8 +93,14 @@
           
           <!-- Estado civil -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="civilState" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Estado civil">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado civil</label>
+            <select formControlName="civilState" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Necessidade especial">
+              <option value="" disabled selected>Estado Civil</option>
+              <option value="Solteiro">Solteiro</option>
+              <option value="Casado">Casado</option>
+              <option value="Divorciado">Divorciado</option>
+              <option value="Viúvo">Viúvo</option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado Civil</label>
           </div>
           
           <!-- PcD -->
@@ -114,7 +120,13 @@
           
           <!-- Escolaridade -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="scholarship" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Escolaridade">
+            <select formControlName="scholarship" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Necessidade especial">
+              <option value="" disabled selected>Escolaridade</option>
+              <option value="Solteiro">Solteiro</option>
+              <option value="Casado">Casado</option>
+              <option value="Divorciado">Divorciado</option>
+              <option value="Viúvo">Viúvo</option>
+            </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Escolaridade</label>
           </div>
           
@@ -290,7 +302,12 @@
           
           <!-- Tipo de conta -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="bankAccountType" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tipo de conta">
+            <select formControlName="bankAccountType" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Necessidade especial">
+              <option value="" disabled selected>Tipo de conta</option>
+              <option value="poupança">Poupança</option>
+              <option value="corrente">Corrente</option>
+              <option value="pagamento">Pagamento</option>
+            </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de conta</label>
           </div>
 

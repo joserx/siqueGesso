@@ -9,6 +9,7 @@ import { UsuarioSistemaService } from 'src/app/services/usuario-sistema.service'
 export class ListarUsuariosSistemaComponent implements OnInit {
 
   usuarios : any;
+  usuariosOriginal : any;
 
   constructor(
     private readonly usuarioSistemasService : UsuarioSistemaService
@@ -17,6 +18,7 @@ export class ListarUsuariosSistemaComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioSistemasService.find().subscribe((data : any) => {
       this.usuarios = data
+      this.usuariosOriginal = data
     })
   }
 
@@ -24,6 +26,24 @@ export class ListarUsuariosSistemaComponent implements OnInit {
     this.usuarioSistemasService.delete(id).subscribe((data : any) => {
       this.usuarios = this.usuarios.filter((ele : any) => { return ele.id != id })
     })
+  }
+
+  filterBefore = "";
+
+  filtrar(event : any) {
+    let str = event.target.value;
+    if(str != '') {
+      if(str.length > this.filterBefore.length) {
+        this.usuarios = this.usuariosOriginal.filter((user : any) => `${user.name} ${user.surname}`.toUpperCase().includes(str.toUpperCase()))
+        this.filterBefore = str
+      } else {
+        this.usuarios = this.usuariosOriginal;
+        this.usuarios = this.usuariosOriginal.filter((user : any) => `${user.name} ${user.surname}`.toUpperCase().includes(str.toUpperCase()))
+        this.filterBefore = str
+      }
+    } else {
+      this.usuarios = this.usuariosOriginal;
+    }
   }
 
 }

@@ -167,9 +167,11 @@ export class EditarColaboradorComponent implements OnInit {
       if(this.avatarFile) {
         data.avatar = this.avatarFile.id;
       }
-      data.disabled = this.desativadoCheckbox;
-      if(this.desativadoCheckbox) {
+      data.disabled = !this.desativadoCheckbox;
+      if(!this.desativadoCheckbox) {
         data.status = 0
+      } else {
+        data.status = 1
       }
       console.log(data)
       this.rhService.update(this.rhId, data).subscribe((res: any) => {

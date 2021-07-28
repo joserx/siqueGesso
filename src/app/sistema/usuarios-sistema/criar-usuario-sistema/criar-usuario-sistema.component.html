@@ -10,7 +10,8 @@
 
             <!-- Botão de voltar -->
             <div class="row m-0 justify-content-start mt-4">
-                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/usuarios-sistema/listar">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto"
+                    routerLink="/sistema/usuarios-sistema/listar">
                     <i class="bi-arrow-left fs-3 text-secondary"></i>
                 </a>
             </div>
@@ -24,52 +25,67 @@
                     </div>
 
                     <div class="col-12 pb-4 d-flex align-items-center border-bottom">
-                        <div class="avatar shadow-sm rounded-circle img-fluid" [ngStyle]="{ background : 'url(' + avatarImg + ')' }"
-                            alt="Ricardo Botega"></div>
-                        <input type="file" accept="image/*" (change)="uploadImage($event)" style="display: none;" #fileInput>
-                        <a class="fw-bold text-custom-dark fs-5 px-5" (click)="fileInput.click()">Trocar foto de perfil</a>
+                        <div class="avatar shadow-sm rounded-circle img-fluid"
+                            [ngStyle]="{ background : 'url(' + avatarImg + ')' }" alt="Ricardo Botega"></div>
+                        <input type="file" accept="image/*" (change)="uploadImage($event)" style="display: none;"
+                            #fileInput>
+                        <a class="fw-bold text-custom-dark fs-5 px-5" (click)="fileInput.click()">Trocar foto de
+                            perfil</a>
                     </div>
 
                     <!-- Nome -->
                     <div class="col-4 px-2 pt-4 p-0 m-0">
-                        <input formControlName="name" [class.invalid]="name?.invalid && (name?.dirty || name?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                        <input formControlName="name" [class.invalid]="name?.invalid && (name?.dirty || name?.touched)"
+                            class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
                             type="text" placeholder="Nome">
                     </div>
 
                     <!-- Sobrenome -->
                     <div class="col-4 px-2 pt-4 p-0 m-0">
-                        <input formControlName="surname" [class.invalid]="surname?.invalid && (surname?.dirty || surname?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                        <input formControlName="surname"
+                            [class.invalid]="surname?.invalid && (surname?.dirty || surname?.touched)"
+                            class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
                             type="text" placeholder="Sobrenome">
                     </div>
 
                     <!-- Email -->
                     <div class="col-4 px-2 pt-4 p-0 m-0">
-                        <input formControlName="email" [class.invalid]="email?.invalid && (email?.dirty || email?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                        <input formControlName="email"
+                            [class.invalid]="email?.invalid && (email?.dirty || email?.touched)"
+                            class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
                             type="text" placeholder="Email">
                     </div>
 
                     <!-- Senha -->
                     <div class="col-4 px-2 pt-4 p-0 m-0">
-                        <input formControlName="password" (blur)="checkPasswords()" [class.invalid]="password?.invalid && (password?.dirty || password?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                        <input formControlName="password" (blur)="checkPasswords()"
+                            [class.invalid]="password?.invalid && (password?.dirty || password?.touched)"
+                            class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
                             type="password" placeholder="Senha">
                     </div>
 
                     <!-- Repetir senha -->
                     <div class="col-4 px-2 pt-4 p-0 m-0">
-                        <span *ngIf="passwordRetype?.invalid && (passwordRetype?.dirty || passwordRetype?.touched) && passwordRetype?.errors?.incorrect" class="invalid">Sua senha deve ser igual a última senha inserida.</span>
-                        <input formControlName="passwordRetype" (blur)="checkPasswords()" [class.invalid]="passwordRetype?.invalid && (passwordRetype?.dirty || passwordRetype?.touched)" class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
+                        <span
+                            *ngIf="passwordRetype?.invalid && (passwordRetype?.dirty || passwordRetype?.touched) && passwordRetype?.errors?.incorrect"
+                            class="invalid">Sua senha deve ser igual a última senha inserida.</span>
+                        <input formControlName="passwordRetype" (blur)="checkPasswords()"
+                            [class.invalid]="passwordRetype?.invalid && (passwordRetype?.dirty || passwordRetype?.touched)"
+                            class="form-control form-control-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm"
                             type="password" placeholder="Repetir senha">
                     </div>
 
                     <!-- Permissão -->
-                    <div class="col-4 px-2 pt-4 p-0 m-0">
-                        <select formControlName="permission" [class.invalid]="permission?.invalid && (permission?.dirty || permission?.touched)"
-                            class="form-select form-select-lg border-0 h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-                            type="text" placeholder="Permissão">
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                        <select formControlName="permission"
+                            [class.invalid]="permission?.invalid && (permission?.dirty || permission?.touched)"
+                            class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                            placeholder="Permissão">
                             <option value="-1" disabled selected>Permissão</option>
                             <option value="0">Funcionário</option>
                             <option value="1">Administrador</option>
                         </select>
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Permissão</label>
                     </div>
                 </div>
 

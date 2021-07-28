@@ -114,9 +114,11 @@ export class CadastrarColaboradorComponent implements OnInit {
       if(this.avatarFile) {
         data.avatar = this.avatarFile.id;
       }
-      data.disabled = this.desativadoCheckbox;
-      if(this.desativadoCheckbox) {
+      data.disabled = !this.desativadoCheckbox;
+      if(!this.desativadoCheckbox) {
         data.status = 0
+      } else {
+        data.status = 1
       }
       this.rhService.create(data).subscribe((res: any) => {
         if (res.id) {
