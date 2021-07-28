@@ -24,7 +24,8 @@ export class SidemenuComponent implements OnInit {
           ]
         },
         { titulo: '', descricao: '', paginas: [
-          { nome: 'Configurações', href: '/sistema/config'}
+          { nome: 'Configurações', href: '/sistema/config'},
+          { nome: 'Sair', href: '/logout'},
         ]}
       ]
     },

@@ -53,6 +53,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './sistema/login/login.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
+import { LogoutComponent } from './sistema/login/logout/logout.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -109,7 +110,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CriarOrdemExpedicaoComponent,
     CriarUsuarioSistemaComponent,
     LoginComponent,
-    EditarColaboradorComponent
+    EditarColaboradorComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

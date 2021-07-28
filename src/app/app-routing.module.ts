@@ -22,6 +22,7 @@ import { CriarUsuarioSistemaComponent } from './sistema/usuarios-sistema/criar-u
 import { LoginComponent } from './sistema/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
+import { LogoutComponent } from './sistema/login/logout/logout.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
   },
   {
     path: 'sistema',
