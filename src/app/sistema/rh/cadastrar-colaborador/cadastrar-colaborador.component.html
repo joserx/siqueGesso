@@ -53,7 +53,7 @@
           
           <!-- RG -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="RG">
+            <input mask="00.000.000-0||0.000.000-0" formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="RG">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
           </div>
           
@@ -71,8 +71,8 @@
           
           <!-- CNPJ -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="cnpj" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CNPJ">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+            <input mask="CPF_CNPJ" formControlName="cnpj" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CPF">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF</label>
           </div>
           
           <!-- CNH -->
@@ -156,7 +156,7 @@
           
           <!-- CEP -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="cep" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP">
+            <input mask="00000-000" formControlName="cep" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
           </div>
           
@@ -198,19 +198,19 @@
           
           <!-- Telefone -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="telephone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone">
+            <input mask="(00) 0000-0000||(00) 00000-0000" formControlName="telephone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
           </div>
           
           <!-- WhatsApp -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="whatsapp" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="WhatsApp">
+            <input mask="(00) 00000-000" formControlName="whatsapp" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="WhatsApp">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">WhatsApp</label>
           </div>
           
           <!-- Telefone Emergência -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="emergencyTelephone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone Emergência">
+            <input mask="(00) 0000-000||(00) 00000-0000" formControlName="emergencyTelephone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone Emergência">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone Emergência</label>
           </div>
           
@@ -290,8 +290,8 @@
           
           <!-- MEI -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="mei" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="MEI">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">MEI</label>
+            <input mask="CPF_CNPJ" formControlName="mei" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CNPJ">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
           </div>
 
           <!-- Banco -->

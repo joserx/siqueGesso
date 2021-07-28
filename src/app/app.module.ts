@@ -54,6 +54,7 @@ import { LoginComponent } from './sistema/login/login.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
 import { LogoutComponent } from './sistema/login/logout/logout.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -120,7 +121,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgbDropdownModule,
     CurrencyMaskModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false
+    })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

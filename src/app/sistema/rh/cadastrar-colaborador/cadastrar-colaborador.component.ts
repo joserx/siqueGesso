@@ -15,65 +15,65 @@ export class CadastrarColaboradorComponent implements OnInit {
 
   public getDate: any = getDate;
 
-  public avatarImg : string = './assets/sem-foto.jpg';
-  avatarFile : any = {};
+  public avatarImg: string = './assets/sem-foto.jpg';
+  avatarFile: any = {};
   public desativadoCheckbox: boolean = false;
-  public rhForm : FormGroup = new FormGroup({
-    'disabled' : new FormControl(''),
-    'name' : new FormControl(''),
-    'surname' : new FormControl(''),
-    'birthDate' : new FormControl(null),
-    'rg' : new FormControl(''),
-    'rgExpedicao' : new FormControl(''),
-    'rgOrgaoEmissor' : new FormControl(''),
-    'cnpj' : new FormControl(''),
-    'cnh' : new FormControl(''),
-    'gender' : new FormControl(''),
-    'civilState' : new FormControl(''),
-    'deficiency' : new FormControl(''),
-    'scholarship' : new FormControl(''),
-    'nacionality' : new FormControl(''),
-    'naturality' : new FormControl(''),
-    'motherName' : new FormControl(''),
-    'fatherName' : new FormControl(''),
-    'cep' : new FormControl(''),
-    'street' : new FormControl(''),
-    'addressNumber' : new FormControl(''),
-    'addressComplement' : new FormControl(''),
-    'neighborhood' : new FormControl(''),
-    'city' : new FormControl(''),
-    'state' : new FormControl(''),
-    'telephone' : new FormControl(''),
-    'whatsapp' : new FormControl(''),
-    'emergencyTelephone' : new FormControl(''),
-    'personalEmail' : new FormControl(''),
-    'corporativeEmail' : new FormControl(''),
-    'department' : new FormControl(''),
-    'role' : new FormControl(''),
-    'contractType' : new FormControl(''),
-    'shift' : new FormControl(''),
-    'paycheck' : new FormControl(''),
-    'admission' : new FormControl(null),
-    'experiencePeriod' : new FormControl(''),
-    'fireDate' : new FormControl(null),
-    'pis' : new FormControl(''),
-    'mei' : new FormControl(''),
-    'bank' : new FormControl(''),
-    'bankAccountType' : new FormControl(''),
-    'bankAgency' : new FormControl(''),
-    'bankAccountNumber' : new FormControl(''),
+  public rhForm: FormGroup = new FormGroup({
+    'disabled': new FormControl(''),
+    'name': new FormControl(''),
+    'surname': new FormControl(''),
+    'birthDate': new FormControl(null),
+    'rg': new FormControl(''),
+    'rgExpedicao': new FormControl(''),
+    'rgOrgaoEmissor': new FormControl(''),
+    'cnpj': new FormControl(''),
+    'cnh': new FormControl(''),
+    'gender': new FormControl(''),
+    'civilState': new FormControl(''),
+    'deficiency': new FormControl(''),
+    'scholarship': new FormControl(''),
+    'nacionality': new FormControl(''),
+    'naturality': new FormControl(''),
+    'motherName': new FormControl(''),
+    'fatherName': new FormControl(''),
+    'cep': new FormControl(''),
+    'street': new FormControl(''),
+    'addressNumber': new FormControl(''),
+    'addressComplement': new FormControl(''),
+    'neighborhood': new FormControl(''),
+    'city': new FormControl(''),
+    'state': new FormControl(''),
+    'telephone': new FormControl(''),
+    'whatsapp': new FormControl(''),
+    'emergencyTelephone': new FormControl(''),
+    'personalEmail': new FormControl(''),
+    'corporativeEmail': new FormControl(''),
+    'department': new FormControl(''),
+    'role': new FormControl(''),
+    'contractType': new FormControl(''),
+    'shift': new FormControl(''),
+    'paycheck': new FormControl(''),
+    'admission': new FormControl(null),
+    'experiencePeriod': new FormControl(''),
+    'fireDate': new FormControl(null),
+    'pis': new FormControl(''),
+    'mei': new FormControl(''),
+    'bank': new FormControl(''),
+    'bankAccountType': new FormControl(''),
+    'bankAgency': new FormControl(''),
+    'bankAccountNumber': new FormControl(''),
   })
 
-  user : any = {}
+  user: any = {}
 
   constructor(
-    private readonly fileService : FileService,
-    private readonly rhService : RhService,
-    private readonly authService : AuthenticationService,
-    private readonly router : Router
+    private readonly fileService: FileService,
+    private readonly rhService: RhService,
+    private readonly authService: AuthenticationService,
+    private readonly router: Router
   ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.user = this.authService.currentUserValue
   }
 
@@ -81,14 +81,14 @@ export class CadastrarColaboradorComponent implements OnInit {
     this.desativadoCheckbox === true ? this.desativadoCheckbox = false : this.desativadoCheckbox = true;
   }
 
-  public log(e: any):void {
+  public log(e: any): void {
     // console.log(e);    
   }
 
   uploadImage(event: any) {
 
     let files: File[] = event.target.files;
-    var reader : any = new FileReader();
+    var reader: any = new FileReader();
 
     reader.onloadend = async () => {
       this.avatarImg = reader.result;
@@ -97,7 +97,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     if (files[0]) {
       reader.readAsDataURL(files[0]);
 
-      this.fileService.create(files[0]).subscribe((file : any) => {
+      this.fileService.create(files[0]).subscribe((file: any) => {
         this.avatarFile = file;
       })
 
@@ -108,14 +108,14 @@ export class CadastrarColaboradorComponent implements OnInit {
 
   }
 
-  sendForm(data : any) {
+  sendForm(data: any) {
     if (this.rhForm.valid) {
       data.createdBy = this.user.result.id;
-      if(this.avatarFile) {
+      if (this.avatarFile) {
         data.avatar = this.avatarFile.id;
       }
       data.disabled = !this.desativadoCheckbox;
-      if(!this.desativadoCheckbox) {
+      if (!this.desativadoCheckbox) {
         data.status = 0
       } else {
         data.status = 1
