@@ -18,7 +18,7 @@
 
       <!-- Formulário -->
       <form [formGroup]="rhForm" (ngSubmit)="sendForm(rhForm.value)">
-        <div class="row m-0 mt-4 justify-content-center">
+        <div class="row m-0 mt-4 justify-content-center border-bottom">
 
           <div class="col-6 pb-4 d-flex align-items-center border-bottom">
             <div class="avatar shadow-sm rounded-circle img-fluid" [ngStyle]="{ background : 'url(' + avatarImg + ')' }"
@@ -60,9 +60,9 @@
 
           <!-- RG -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-0||0.000.000-0" formControlName="rg"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="RG">
+            <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-0||0.000.000-0"
+              formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+              type="text" placeholder="RG">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
           </div>
 
@@ -190,7 +190,8 @@
 
           <!-- CEP -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input [class.invalid]="cep?.invalid && (cep?.dirty || cep?.touched)" (blur)="changeAddress($event)" mask="00000-000" formControlName="cep"
+            <input [class.invalid]="cep?.invalid && (cep?.dirty || cep?.touched)" (blur)="changeAddress($event)"
+              mask="00000-000" formControlName="cep"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="CEP">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
@@ -290,8 +291,12 @@
               class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
               placeholder="Departamento">
               <option value="" disabled selected>Departamento</option>
-              <option value="Departamento 1">Departamento 1</option>
-              <option value="Departamento 2">Departamento 2</option>
+              <option value="Compras">Compras</option>
+              <option value="RH">RH</option>
+              <option value="Comercial">Comercial</option>
+              <option value="Expedição">Expedição</option>
+              <option value="Estoque">Estoque</option>
+              <option value="Controladoria/Diretoria">Controladoria/Diretoria</option>
             </select>
           </div>
 
@@ -402,6 +407,28 @@
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="Conta">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta</label>
+          </div>
+
+        </div>
+
+        <div class="row m-0 mt-2">
+
+          <div class="col-12 px-2 pt-4 p-0 m-0 form-floating d-flex flex-column justify-content-between">
+            <a *ngFor="let anex of anexes" [href]="anexesRepo + anex.fileName" target="_blank"
+              class="my-3 btn rounded-15 py-3 px-4 pl-2 bg-warning h-100 d-flex justify-content-between shadow-sm w-100">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Anexo: {{ anex.date | date}} Download</h5>
+              <div class="d-flex">
+                <i (click)="deleteAnex($event, anex)" class="bi-trash-fill my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
+                <i class="bi-cloud-download-fill px-4 my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
+              </div>
+            </a>
+            <button
+              class="my-3 btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm w-100"
+              type="button" (click)="newFile.click()">
+              <input type="file" (change)="addFile($event)" #newFile style="display: none;">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar Arquivo</h5>
+              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
+            </button>
           </div>
 
         </div>

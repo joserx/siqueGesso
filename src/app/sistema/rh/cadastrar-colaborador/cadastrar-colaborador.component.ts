@@ -6,6 +6,7 @@ import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
 import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
+import { environment } from 'src/environments/environment';
 import { getDate } from '../../../../environments/global';
 
 @Component({
@@ -67,6 +68,8 @@ export class CadastrarColaboradorComponent implements OnInit {
   })
 
   user: any = {}
+  data = new Date()
+  anexesRepo = environment.apiUrl + 'file/download/'
 
   constructor(
     private readonly fileService: FileService,
@@ -102,6 +105,24 @@ export class CadastrarColaboradorComponent implements OnInit {
 
   public log(e: any): void {
     // console.log(e);    
+  }
+
+  anexes : any[]= [];
+
+  addFile(event : any) {
+    let files: File[] = event.target.files;
+
+    if (files[0]) {
+      this.fileService.create(files[0]).subscribe((file: any) => {
+        this.anexes.push(file);
+      })
+    } else {
+    }
+  }
+
+  deleteAnex(event : any, anex : any) {
+    event.preventDefault();
+    this.anexes = this.anexes.filter((anexFil : any) => { return anex.id !== anexFil.id})
   }
 
   uploadImage(event: any) {
@@ -148,6 +169,9 @@ export class CadastrarColaboradorComponent implements OnInit {
         data.avatar = this.avatarFile.id;
       }
       data.disabled = !this.desativadoCheckbox;
+      if(this.anexes.length > 0) {
+        data.anexes = this.anexes
+      }
       if (!this.desativadoCheckbox) {
         data.status = 0
       } else {

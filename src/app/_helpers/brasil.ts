@@ -1,6 +1,7 @@
 import { AbstractControl, Validators } from "@angular/forms";
 
 export class BrazilValidator {
+    
     constructor() { }
 
     /**
@@ -56,6 +57,9 @@ export class BrazilValidator {
         };
     }
 
+    /**
+     * Valida se um CEP é verdadeiro
+     */
     static isValidCEP() {
         return (control : AbstractControl) => {
             const validacep = /^[0-9]{8}$/;
@@ -71,6 +75,9 @@ export class BrazilValidator {
         }
     }
 
+    /**
+     * Valida de um RG é verdadeiro.
+     */
     static isValidRG() {
         return (control : AbstractControl) => {
             const validarg = /(\d{1,2})(\d{3})(\d{3})(\d{1})$/; 
@@ -85,4 +92,5 @@ export class BrazilValidator {
             return null;
         }
     }
+
 }

@@ -69,6 +69,7 @@ export class EditarColaboradorComponent implements OnInit {
 
   user : any = {}
   rhId : number = 0;
+  anexesRepo = environment.apiUrl + 'file/download/'
 
   constructor(
     private readonly fileService : FileService,
@@ -84,6 +85,9 @@ export class EditarColaboradorComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.rhId = Number(routeParams.get('id'));
     this.rhService.findOne(this.rhId).subscribe((data : any) => {
+      if(data.anexes && data.anexes.length > 0) {
+        this.anexes = data.anexes
+      }
       if(data.avatar) {
         this.avatarImg = environment.apiUrl + 'file/download/' + data.avatar.fileName
       }
@@ -157,6 +161,24 @@ export class EditarColaboradorComponent implements OnInit {
     // console.log(e);    
   }
 
+  anexes : any[]= [];
+
+  addFile(event : any) {
+    let files: File[] = event.target.files;
+
+    if (files[0]) {
+      this.fileService.create(files[0]).subscribe((file: any) => {
+        this.anexes.push(file);
+      })
+    } else {
+    }
+  }
+
+  deleteAnex(event : any, anex : any) {
+    event.preventDefault();
+    this.anexes = this.anexes.filter((anexFil : any) => { return anex.id !== anexFil.id})
+  }
+
   uploadImage(event: any) {
 
     let files: File[] = event.target.files;
@@ -205,6 +227,9 @@ export class EditarColaboradorComponent implements OnInit {
         data.status = 0
       } else {
         data.status = 1
+      }
+      if(this.anexes.length > 0) {
+        data.anexes = this.anexes
       }
       console.log(data)
       this.rhService.update(this.rhId, data).subscribe((res: any) => {
