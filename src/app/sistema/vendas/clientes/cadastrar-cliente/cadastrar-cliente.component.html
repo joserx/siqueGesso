@@ -4,38 +4,169 @@
 
     <!-- Botão Pessoa Física -->
     <div class="col-4 px-2 p-0 m-0">
-      <a [class.bg-custom-success]="tipoPessoa == 'fisica'" class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm" (click)="toggleTipoPessoa('fisica')">
+      <a [class.bg-custom-success]="tipoPessoa == 'fisica'"
+        class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm"
+        (click)="toggleTipoPessoa('fisica')">
         <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Física</h5>
       </a>
     </div>
 
     <!-- Botão Pessoa Física -->
     <div class="col-4 px-2 p-0 m-0">
-      <a [class.bg-custom-success]="tipoPessoa == 'juridica'" class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm" (click)="toggleTipoPessoa('juridica')">
+      <a [class.bg-custom-success]="tipoPessoa == 'juridica'"
+        class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm"
+        (click)="toggleTipoPessoa('juridica')">
         <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Jurídica</h5>
       </a>
     </div>
 
     <div class="col-4"></div>
 
-    <div class="col-6 py-3 d-flex align-items-end border-bottom">
-      <span class="fs-5 m-0">Código: XXXXXX</span>
-    </div>
 
-    <div class="col-6 py-3 d-flex border-bottom align-items-end justify-content-end">
-      <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' : 'Desativado' }}</label>
+    <div class="col-12 py-3 d-flex border-bottom align-items-end justify-content-end">
+      <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' :
+        'Desativado' }}</label>
       <div class="form-check form-switch">
-        <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado" (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
+        <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado"
+          (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
       </div>
     </div>
 
   </div>
 
   <div *ngIf="tipoPessoa === 'fisica'">
-    <app-pessoa-fisica></app-pessoa-fisica>
+
+    <!-- Dados do cliente -->
+    <div class="row m-0 pb-4 border-bottom justify-content-center">
+
+      <!-- Nome -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Nome">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+      </div>
+
+      <!-- Sobrenome -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Sobrenome">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Sobrenome</label>
+      </div>
+
+      <!-- CPF -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="CPF">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF</label>
+      </div>
+
+      <!-- RG -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="RG">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
+      </div>
+
+      <!-- Celular -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Celular">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+      </div>
+
+      <!-- Telefone -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Telefone">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+      </div>
+
+      <!-- Data de nascimento -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+          placeholder="Data de nascimento" [max]="getDate()">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+      </div>
+
+      <!-- Email -->
+      <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="email"
+          placeholder="Email">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
+      </div>
+
+
+    </div>
   </div>
   <div *ngIf="tipoPessoa === 'juridica'">
-    <app-pessoa-juridica></app-pessoa-juridica>
+
+    <!-- Dados do cliente -->
+    <div class="row m-0 pb-4 border-bottom justify-content-center">
+
+      <!-- CNPJ -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CNPJ">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+      </div>
+
+      <!-- Inscrição Estadual -->
+      <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Inscrição Estadual">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição Estadual</label>
+      </div>
+
+      <!-- Razão Social -->
+      <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Razão Social">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão Social</label>
+      </div>
+
+      <!-- Nome fantasia -->
+      <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Nome fantasia">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome fantasia</label>
+      </div>
+
+      <!-- Data de nascimento -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
+          placeholder="Data de nascimento" [max]="getDate()">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+      </div>
+
+      <!-- Email -->
+      <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="email"
+          placeholder="Email">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
+      </div>
+
+      <!-- Celular -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Celular">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+      </div>
+
+      <!-- Telefone -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Telefone">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+      </div>
+
+      <!-- Ramal -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Ramal">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ramal</label>
+      </div>
+
+    </div>
+
   </div>
 
 
@@ -50,7 +181,8 @@
 
     <!-- Logradouro -->
     <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-      <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Logradouro">
+      <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+        placeholder="Logradouro">
       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
     </div>
 
@@ -62,7 +194,8 @@
 
     <!-- Complemento -->
     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-      <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Complemento">
+      <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+        placeholder="Complemento">
       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
     </div>
 
@@ -92,7 +225,8 @@
 
     <!-- Botão Remover endereço -->
     <div class="col-5 px-2 pt-4 p-0 m-0">
-      <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm" (click)="removerEndereco(i)">
+      <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm"
+        (click)="removerEndereco(i)">
         <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Remover endereço</h5>
       </a>
     </div>
@@ -105,14 +239,16 @@
 
     <!-- Botão Cadastrar outro endereço -->
     <div class="col-5 px-2 p-0 m-0">
-      <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm" (click)="adicionarEndereco()">
+      <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm"
+        (click)="adicionarEndereco()">
         <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Cadastrar outro endereço</h5>
       </a>
     </div>
 
     <!-- Botão Salvar -->
     <div class="col-4 d-grid px-2 p-0 m-0">
-      <button type="submit" class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
+      <button type="submit"
+        class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
         <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Salvar</h5>
       </button>
     </div>

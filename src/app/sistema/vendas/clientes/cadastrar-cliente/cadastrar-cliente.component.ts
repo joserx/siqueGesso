@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { getDate } from 'src/environments/global';
 
 @Component({
   selector: 'app-cadastrar-cliente',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastrarClienteComponent implements OnInit {
 
+  public getDate: any = getDate;
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
 
