@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-listar-clientes',
@@ -7,15 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarClientesComponent implements OnInit {
 
-  public clientes = [
-    { id: 1, nome: "Ricardo Botega", email: "ricardo.botega@siquegesso.com.br", telefone: "11 9 9999-9999" },
-    { id: 2, nome: "Michael B. Jordan", email: "michael.jordan@siquegesso.com.br", telefone: "11 9 9999-9999" },
-    { id: 3, nome: "Finger Digital", email: "finger@fingerdigital.com.br", telefone: "11 9 9999-9999" },
-  ]
+  public clientes : any[] = []
 
-  constructor() { }
+  constructor(
+    private readonly clientService : ClientService
+  ) { }
 
   ngOnInit(): void {
+    this.clientService.find().subscribe((data : any) => {
+      this.clientes = data
+    })
   }
 
 }
