@@ -15,7 +15,7 @@ export class CriarPedidoComprasComponent implements OnInit {
     { id: 2, razao_social: "Fornecedor 2", cnpj: "234234234", cep: "23451-231", endereco: "Rua Doná Olinda de Albuquerque, 123", complemento: "" },
     { id: 3, razao_social: "Fornecedor 3", cnpj: "345345345", cep: "64532-123", endereco: "Rua Doná Olinda de Albuquerque, 234", complemento: "" },
   ]
-
+  
   public fornecedorSelecionado: any = { id: null, razao_social: "", cnpj: "", cep: "", endereco: "", complemento: "" }
 
   public pedido: any = {
