@@ -55,6 +55,13 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
 import { LogoutComponent } from './sistema/login/logout/logout.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { EditarClientesComponent } from './sistema/vendas/editar-clientes/editar-clientes.component';
+import { EditarAvaliacaoCreditoComponent } from './sistema/vendas/editar-clientes/avaliacao-credito/avaliacao-credito.component';
+import { EditarCadastrarClienteComponent } from './sistema/vendas/editar-clientes/cadastrar-cliente/cadastrar-cliente.component';
+import { EditarDadosVendaComponent } from './sistema/vendas/editar-clientes/dados-venda/dados-venda.component';
+import { EditarListarClientesComponent } from './sistema/vendas/editar-clientes/listar-clientes/listar-clientes.component';
+import { EditarPedidosRealizadosComponent } from './sistema/vendas/editar-clientes/pedidos-realizados/pedidos-realizados.component';
+import { EditarResumoFinanceiroComponent } from './sistema/vendas/editar-clientes/resumo-financeiro/resumo-financeiro.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -112,7 +119,14 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CriarUsuarioSistemaComponent,
     LoginComponent,
     EditarColaboradorComponent,
-    LogoutComponent
+    LogoutComponent,
+    EditarClientesComponent,
+    EditarAvaliacaoCreditoComponent,
+    EditarCadastrarClienteComponent,
+    EditarDadosVendaComponent,
+    EditarListarClientesComponent,
+    EditarPedidosRealizadosComponent,
+    EditarResumoFinanceiroComponent
   ],
   imports: [
     BrowserModule,

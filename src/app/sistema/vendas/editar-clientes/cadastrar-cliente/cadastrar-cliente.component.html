@@ -1,0 +1,265 @@
+<form [formGroup]="clienteForm" (ngSubmit)="submitClient(clienteForm.value)">
+  <!-- Pessoa Física, Jurídica -->
+  <div class="row m-0 mt-4 justify-content-center">
+
+    <!-- Botão Pessoa Física -->
+    <div class="col-4 px-2 p-0 m-0">
+      <a [class.bg-custom-success]="tipoPessoa == 'fisica'"
+        class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm"
+        (click)="toggleTipoPessoa('fisica')">
+        <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Física</h5>
+      </a>
+    </div>
+
+    <!-- Botão Pessoa Física -->
+    <div class="col-4 px-2 p-0 m-0">
+      <a [class.bg-custom-success]="tipoPessoa == 'juridica'"
+        class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm"
+        (click)="toggleTipoPessoa('juridica')">
+        <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Jurídica</h5>
+      </a>
+    </div>
+
+    <div class="col-4"></div>
+
+
+    <div class="col-12 py-3 d-flex border-bottom align-items-end justify-content-end">
+      <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' :
+        'Desativado' }}</label>
+      <div class="form-check form-switch">
+        <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado"
+          (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="tipoPessoa === 'fisica'">
+
+    <!-- Dados do cliente -->
+    <div class="row m-0 pb-4 border-bottom justify-content-center">
+
+      <!-- Nome -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="name" [class.invalid]="clienteForm.controls.name.invalid && (clienteForm.controls.name.dirty || clienteForm.controls.name.touched)" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Nome">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+      </div>
+
+      <!-- Sobrenome -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="surname" [class.invalid]="clienteForm.controls.surname.invalid && (clienteForm.controls.surname.dirty || clienteForm.controls.surname.touched)" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Sobrenome">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Sobrenome</label>
+      </div>
+
+      <!-- CPF -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="000.000.000-00" [class.invalid]="clienteForm.controls.cpf.invalid && (clienteForm.controls.cpf.dirty || clienteForm.controls.cpf.touched)" formControlName="cpf" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="CPF">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF</label>
+      </div>
+
+      <!-- RG -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="00.000.000-0||0.000.000-0" [class.invalid]="clienteForm.controls.rg.invalid && (clienteForm.controls.rg.dirty || clienteForm.controls.rg.touched)" formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="RG">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
+      </div>
+
+      <!-- Celular -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.cellphone.invalid && (clienteForm.controls.cellphone.dirty || clienteForm.controls.cellphone.touched)" formControlName="cellphone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Celular">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+      </div>
+
+      <!-- Telefone -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.telephone.invalid && (clienteForm.controls.telephone.dirty || clienteForm.controls.telephone.touched)" formControlName="telephone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Telefone">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+      </div>
+
+      <!-- Data de nascimento -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="birthDate" [class.invalid]="clienteForm.controls.birthDate.invalid && (clienteForm.controls.birthDate.dirty || clienteForm.controls.birthDate.touched)" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="date" placeholder="Data de nascimento" [max]="getDate()">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+      </div>
+
+      <!-- Email -->
+      <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+        <input [class.invalid]="clienteForm.controls.email.invalid && (clienteForm.controls.email.dirty || clienteForm.controls.email.touched)" formControlName="email" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+          type="email" placeholder="Email">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
+      </div>
+
+
+    </div>
+  </div>
+  <div *ngIf="tipoPessoa === 'juridica'">
+
+    <!-- Dados do cliente -->
+    <div class="row m-0 pb-4 border-bottom justify-content-center">
+
+      <!-- CNPJ -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="CPF_CNPJ" [class.invalid]="clienteForm.controls.cnpj.invalid && (clienteForm.controls.cnpj.dirty || clienteForm.controls.cnpj.touched)" formControlName="cnpj" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="CNPJ">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+      </div>
+
+      <!-- Inscrição Estadual -->
+      <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="subcription" [class.invalid]="clienteForm.controls.subcription.invalid && (clienteForm.controls.subcription.dirty || clienteForm.controls.subcription.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Inscrição Estadual">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição Estadual</label>
+      </div>
+
+      <!-- Razão Social -->
+      <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="socialReason" [class.invalid]="clienteForm.controls.socialReason.invalid && (clienteForm.controls.socialReason.dirty || clienteForm.controls.socialReason.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Razão Social">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão Social</label>
+      </div>
+
+      <!-- Nome fantasia -->
+      <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="fantasyName" [class.invalid]="clienteForm.controls.fantasyName.invalid && (clienteForm.controls.fantasyName.dirty || clienteForm.controls.fantasyName.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Nome fantasia">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome fantasia</label>
+      </div>
+
+      <!-- Data de nascimento -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="birthDateCompany" [class.invalid]="clienteForm.controls.birthDateCompany.invalid && (clienteForm.controls.birthDateCompany.dirty || clienteForm.controls.birthDateCompany.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="date" placeholder="Data de nascimento" [max]="getDate()">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+      </div>
+
+      <!-- Email -->
+      <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="companyEmail" [class.invalid]="clienteForm.controls.companyEmail.invalid && (clienteForm.controls.companyEmail.dirty || clienteForm.controls.companyEmail.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="email" placeholder="Email">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
+      </div>
+
+      <!-- Celular -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.companyCellphone.invalid && (clienteForm.controls.companyCellphone.dirty || clienteForm.controls.companyCellphone.touched)" formControlName="companyCellphone" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Celular">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+      </div>
+
+      <!-- Telefone -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="(00) 0000-000||(00) 00000-0000" formControlName="companyTelephone" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Telefone">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+      </div>
+
+      <!-- Ramal -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input mask="0000" formControlName="ramal" [class.invalid]="clienteForm.controls.ramal.invalid && (clienteForm.controls.ramal.dirty || clienteForm.controls.ramal.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+          type="text" placeholder="Ramal">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ramal</label>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Endereços -->
+  <div formArrayName="addresses" class="pb-4 m-0 border-bottom"
+    *ngFor="let endereco of addresses['controls']; let i = index">
+
+    <div [formGroupName]="i" class="row">
+
+      <!-- CEP -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input (blur)="changeAddress($event, i)" mask="00000-000" [class.invalid]="endereco?.get('cep')?.invalid && (endereco?.get('cep')?.dirty || endereco?.get('cep')?.touched)" formControlName="cep" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+      </div>
+
+      <!-- Logradouro -->
+      <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="address" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Logradouro">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
+      </div>
+
+      <!-- Número -->
+      <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="number" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Número">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+      </div>
+
+      <!-- Complemento -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="complement" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Complemento">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+      </div>
+
+      <!-- Bairro -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="neighborhood" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Bairro">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
+      </div>
+
+      <!-- Cidade -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="city" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+          placeholder="Cidade">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+      </div>
+
+      <!-- UF -->
+      <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="state" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="UF">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">UF</label>
+      </div>
+
+      <!-- País -->
+      <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+        <input formControlName="country" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="País">
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">País</label>
+      </div>
+
+      <!-- Botão Remover endereço -->
+      <div class="col-5 px-2 pt-4 p-0 m-0">
+        <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm"
+          (click)="removerEndereco(i)">
+          <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Remover endereço</h5>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Final -->
+  <div class="row m-0 pb-4 mt-4 justify-content-end">
+
+    <!-- Botão Cadastrar outro endereço -->
+    <div class="col-5 px-2 p-0 m-0">
+      <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm"
+        (click)="adicionarEndereco()">
+        <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Cadastrar outro endereço</h5>
+      </a>
+    </div>
+
+    <!-- Botão Salvar -->
+    <div class="col-4 d-grid px-2 p-0 m-0">
+      <button type="submit"
+        class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
+        <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Salvar</h5>
+      </button>
+    </div>
+
+  </div>
+</form>

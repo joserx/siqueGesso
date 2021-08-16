@@ -23,6 +23,7 @@ import { LoginComponent } from './sistema/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
 import { LogoutComponent } from './sistema/login/logout/logout.component';
+import { EditarClientesComponent } from './sistema/vendas/editar-clientes/editar-clientes.component';
 
 const routes: Routes = [
   {
@@ -99,6 +100,15 @@ const routes: Routes = [
               {
                 path: 'cadastro',
                 component: ClientesComponent
+              },
+              {
+                path: 'editar/:id',
+                redirectTo: 'editar/:id/cadastro',
+                pathMatch: 'full'
+              },
+              {
+                path: 'editar/:id/cadastro',
+                component: EditarClientesComponent
               }
             ]
           },

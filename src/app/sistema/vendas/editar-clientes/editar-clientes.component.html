@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col pb-4 m-0 bg-custom-white">
+    <!-- Página -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas/clientes">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <div class="row m-0 mt-4">
+        <div class="col-12">
+          <ul class="nav nav-tabs fs-5 fw-lighter">
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="clienteSection == 'cadastro'" (click)="toggleClienteSection('cadastro')">Dados pessoais</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="clienteSection == 'venda'" (click)="toggleClienteSection('venda')">Dados para venda</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="clienteSection == 'avaliacao'" (click)="toggleClienteSection('avaliacao')">Avaliação de crédito</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="clienteSection == 'pedidos'" (click)="toggleClienteSection('pedidos')">Pedidos realizados</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="clienteSection == 'resumo'" (click)="toggleClienteSection('resumo')">Resumo financeiro</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="clienteSection == 'cadastro'">
+        <app-editar-cadastrar-cliente></app-editar-cadastrar-cliente>
+      </div>
+
+      <div *ngIf="clienteSection == 'venda'">
+        <app-editar-dados-venda></app-editar-dados-venda>
+      </div>
+
+      <div *ngIf="clienteSection == 'avaliacao'">
+        <app-editar-avaliacao-credito></app-editar-avaliacao-credito>
+      </div>
+
+      <div *ngIf="clienteSection == 'pedidos'">
+        <app-editar-pedidos-realizados></app-editar-pedidos-realizados>
+      </div>
+
+      <div *ngIf="clienteSection == 'resumo'">
+        <app-editar-resumo-financeiro></app-editar-resumo-financeiro>
+      </div>
+
+    </div>
+    <!-- /Página -->
+  </div>
+</div>

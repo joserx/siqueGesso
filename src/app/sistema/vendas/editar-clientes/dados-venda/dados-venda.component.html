@@ -1,0 +1,141 @@
+<!-- Vendedor -->
+<div class="row m-0">
+
+  <div class="col-12 pt-3 text-custom-dark">
+    <h5 class="m-0">Vendedor</h5>
+  </div>
+
+  <!-- Código -->
+  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código">
+    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
+  </div>
+
+  <!-- Nome do vendedor -->
+  <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor">
+    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do vendedor</label>
+  </div>
+
+</div>
+
+<!-- Condições de pagamento -->
+<!-- Títulos da Tabela -->
+<div class="row m-0 my-4 text-custom-dark justify-content-between">
+  <div class="col-3">
+    <h5 class="fw-bold text-truncate">Condição</h5>
+  </div>
+  <div class="col-3">
+    <h5 class="fw-bold text-truncate">Status</h5>
+  </div>
+  <div class="col-2">
+    <h5 class="fw-bold text-truncate">Ação</h5>
+  </div>
+</div>
+
+<!-- Tabela Condições de pagamento -->
+<div class="row m-0 border-bottom align-items-center justify-content-between" *ngFor="let condicao of condicoes;">
+  <div class="col-3 py-2">
+    <p class="my-1 m-0">{{ condicao.nome }}</p>
+  </div>
+  <div class="col-3 py-2">
+    <select class="form-select" [attr.disabled]="tipoUsuario === 2">
+      <option value="liberado" [attr.selected]="condicao.status == 'liberado'">Liberado</option>
+      <option value="aguardando" [attr.selected]="condicao.status == 'aguardando'">Aguardando liberação</option>
+    </select>
+  </div>
+  <div class="col-2 py-2 d-grid gap-2">
+    <!-- Botão Solicitar -->
+    <button *ngIf="condicao.status == 'aguardando'" type="button" class="btn rounded-15 px-4 bg-warning shadow-sm">
+      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitar</h5>
+    </button>
+    <!-- Botão Selecionar -->
+    <button *ngIf="condicao.status == 'liberado'" type="button" class="btn rounded-15 px-4 bg-custom-success shadow-sm">
+      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar</h5>
+    </button>
+  </div>
+</div>
+
+<div class="row m-0">
+  <div class="col-12 pt-3 text-custom-dark">
+    <h5 class="m-0">Tabelas de venda</h5>
+  </div>
+  <div class="col-3 mt-3 text-custom-dark">
+    <!-- Tabela A -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_a" id="tabela_a">
+      <label class="form-check-label" for="tabela_a">Tabela A</label>
+    </div>
+    <!-- Tabela B -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_b" id="tabela_b">
+      <label class="form-check-label" for="tabela_b">Tabela B</label>
+    </div>
+    <!-- Tabela C -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_c" id="tabela_a">
+      <label class="form-check-label" for="tabela_c">Tabela C</label>
+    </div>
+    <!-- Tabela D -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_d" id="tabela_d">
+      <label class="form-check-label" for="tabela_d">Tabela D</label>
+    </div>
+    <!-- Tabela E -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_e" id="tabela_e">
+      <label class="form-check-label" for="tabela_e">Tabela E</label>
+    </div>
+  </div>
+
+
+  <div class="col-3 mt-3 text-custom-dark">
+    <!-- Tabela F -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_f" id="tabela_f">
+      <label class="form-check-label" for="tabela_f">Tabela F</label>
+    </div>
+    <!-- Tabela G -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_g" id="tabela_g">
+      <label class="form-check-label" for="tabela_g">Tabela G</label>
+    </div>
+    <!-- Tabela H -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_h" id="tabela_h">
+      <label class="form-check-label" for="tabela_h">Tabela H</label>
+    </div>
+    <!-- Tabela I -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_i" id="tabela_i">
+      <label class="form-check-label" for="tabela_i">Tabela I</label>
+    </div>
+    <!-- Tabela J -->
+    <div class="form-check mt-2">
+      <input class="form-check-input" type="checkbox" value="tabela_j" id="tabela_j">
+      <label class="form-check-label" for="tabela_j">Tabela J</label>
+    </div>
+  </div>
+</div>
+
+<div class="row m-0">
+  <!-- Observações -->
+  <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+    <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
+    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+  </div>
+
+</div>
+
+
+<!-- Final -->
+<div class="row m-0 pb-4 mt-4 justify-content-end">
+
+  <!-- Botão Salvar -->
+  <div class="col-4 d-grid px-2 p-0 m-0">
+    <button type="submit" class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
+      <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Salvar</h5>
+    </button>
+  </div>
+
+</div>
