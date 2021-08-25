@@ -409,6 +409,50 @@
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta</label>
           </div>
 
+          <!-- Adicionar loja -->
+          <div class="col-4 px-2 pt-4  p-2 m-2 form-floating d-flex">
+            <select formControlName="loja"
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Necessidade especial">
+              <option value="Sique Leste" disabled selected>Sique Leste</option>
+              <option value="Sique Penha">Sique Penha</option>
+              <option value="Gesso Mais Atibaia">Gesso Mais Atibaia</option>
+              <option value="Gesso Cardon">Gesso Cardon</option>
+              <option value="Gesso Mais Caraguatatuba">Gesso Mais Caraguatatuba</option>
+              <option value="Gesso Juquehy">Gesso Juquehy</option>
+              <option value="Sique Intaim">Sique Intaim</option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Filial</label>
+            <div class="col-1 px-0 m-0 text-center d-flex align-items-center">
+              <a class="px-2 py-2" data-bs-toggle="modal" data-bs-target="#adicionarFornecedor">
+                <i class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-12 pt-4 p-0 m-0 border-bottom"></div>
+          <!-- Ultimo exame -->
+          <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
+            <input formControlName="bankAccountNumber"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Conta">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultimo exame</label>
+          </div>
+
+          <!-- Próximo exame -->
+          <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
+            <input formControlName="bankAccountNumber"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Conta">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Próximo exame</label>
+          </div>
+
+          <!-- Vencimento de Férias -->
+          <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
+            <input formControlName="bankAccountNumber"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Conta">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vencimento de Férias</label>
+          </div>
         </div>
 
         <div class="row m-0 mt-2">

@@ -1,0 +1,81 @@
+
+<!-- Modal -->
+<div class="modal fade" id="pesquisarCliente" tabindex="-1" aria-labelledby="pesquisarClienteLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Pesquisar Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+          <div class="col-4 px-2 p-0 m-0 position-relative">
+            <input (keyup)="filtrar($event)" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+            <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+          </div>
+
+         <!-- Lista de clientes -->
+          <div class="row py-3 p-0 m-0">
+            <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let cliente of clientes">
+              <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngIf="typeClient(cliente)=='fisica'">
+                <div class="col-1">
+                  <p>{{ cliente.id }}</p>
+                </div>
+                <div class="col-2">
+                  <p>{{ cliente.name + ' ' + cliente.surname }} </p>
+                </div>
+                <div class="col-3">
+                  <p>{{ cliente.email  }}</p>
+                </div>
+                <div class="col-2">
+                  <p>{{ cliente.telephone }}</p>
+                </div>
+                <div class="col text-end">
+                  <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
+                  <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" data-bs-dismiss="modal"></i>
+                  <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+                </div>
+              </div>
+              <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngIf="typeClient(cliente)=='juridica'">
+                <div class="col-1">
+                  <p>{{ cliente.id }}</p>
+                </div>
+                <div class="col-2">
+                  <p>{{ cliente.fantasyName }} </p>
+                </div>
+                <div class="col-3">
+                  <p>{{ cliente.companyEmail }}</p>
+                </div>
+                <div class="col-2">
+                  <p>{{ cliente.companyTelephone }}</p>
+                </div>
+                <div class="col text-end">
+                  <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
+                  <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" data-bs-dismiss="modal"></i>
+                  <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Dados cadastrais -->
+        </div>
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+
+          <!-- Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button data-bs-dismiss="modal" type="reset"
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+            </button>
+          </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>

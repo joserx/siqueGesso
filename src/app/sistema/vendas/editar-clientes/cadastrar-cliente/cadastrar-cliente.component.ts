@@ -23,12 +23,12 @@ export class EditarCadastrarClienteComponent implements OnInit {
     'cnpj' : new FormControl(null, [BrazilValidator.isValidCpf]),
     'rg' : new FormControl(null, [Validators.required, BrazilValidator.isValidRG]),
     'cellphone' : new FormControl(null, [Validators.required]),
-    'companyCellphone' : new FormControl(null),
+    'companyCellPhone' : new FormControl(null),
     'telephone' : new FormControl(null, [Validators.required]),
     'companyTelephone' : new FormControl(null),
     'birthDate' : new FormControl(null, [Validators.required]),
     'birthDateCompany' : new FormControl(null),
-    'subcription' : new FormControl(null),
+    'subscription' : new FormControl(null),
     'socialReason' : new FormControl(null),
     'fantasyName' : new FormControl(null),
     'ramal' : new FormControl(null),
@@ -57,6 +57,26 @@ export class EditarCadastrarClienteComponent implements OnInit {
     this.clientService.findOne(this.clientId).subscribe((data : any) => {
       this.client = data
       console.log(this.client)
+      /* CPF */
+      this.clienteForm.get('name')?.setValue(this.client.name)
+      this.clienteForm.get('surname')?.setValue(this.client.surname)
+      this.clienteForm.get('cpf')?.setValue(this.client.cpf)
+      this.clienteForm.get('rg')?.setValue(this.client.rg)
+      this.clienteForm.get('cellphone')?.setValue(this.client.cellphone)
+      this.clienteForm.get('telephone')?.setValue(this.client.telephone)
+      // ver se tem como mudar o valor do input de date
+      this.clienteForm.get('birthDate')?.setValue(this.client.birthDate)
+      this.clienteForm.get('email')?.setValue(this.client.email)
+      /* CNPJ */
+      this.clienteForm.get("cnpj")?.setValue(this.client.cnpj)
+      this.clienteForm.get("subscription")?.setValue(this.client.subscription)
+      this.clienteForm.get("socialReason")?.setValue(this.client.socialReason)
+      this.clienteForm.get("fantasyName")?.setValue(this.client.fantasyName)
+      this.clienteForm.get("birthDateCompany")?.setValue(this.client.birthDateCompany)
+      this.clienteForm.get("companyEmail")?.setValue(this.client.companyEmail)
+      this.clienteForm.get("companyCellPhone")?.setValue(this.client.companyCellPhone)
+      this.clienteForm.get("companyTelephone")?.setValue(this.client.companyTelephone)
+      this.clienteForm.get("ramal")?.setValue(this.client.ramal)
     }, (err) => {
       console.log(err)
     })
@@ -94,7 +114,7 @@ export class EditarCadastrarClienteComponent implements OnInit {
     this.tipoPessoa = value;
     if(value == 'fisica') {
       // Person validators
-      this.clienteForm.controls.name.setValidators([Validators.required])      
+      this.clienteForm.controls.name.setValidators([Validators.required])     
       this.clienteForm.controls.surname.setValidators([Validators.required])      
       this.clienteForm.controls.cpf.setValidators([Validators.required, BrazilValidator.isValidCpf])      
       this.clienteForm.controls.rg.setValidators([Validators.required, BrazilValidator.isValidRG])      
@@ -107,12 +127,12 @@ export class EditarCadastrarClienteComponent implements OnInit {
       this.clienteForm.controls.fantasyName.updateValueAndValidity()
       this.clienteForm.controls.socialReason.clearValidators()
       this.clienteForm.controls.socialReason.updateValueAndValidity()
-      this.clienteForm.controls.subcription.clearValidators()
-      this.clienteForm.controls.subcription.updateValueAndValidity()
+      this.clienteForm.controls.subscription.clearValidators()
+      this.clienteForm.controls.subscription.updateValueAndValidity()
       this.clienteForm.controls.cnpj.clearValidators()
       this.clienteForm.controls.cnpj.updateValueAndValidity()
-      this.clienteForm.controls.companyCellphone.clearValidators()
-      this.clienteForm.controls.companyCellphone.updateValueAndValidity()
+      this.clienteForm.controls.companyCellPhone.clearValidators()
+      this.clienteForm.controls.companyCellPhone.updateValueAndValidity()
       this.clienteForm.controls.companyTelephone.clearValidators()
       this.clienteForm.controls.companyTelephone.updateValueAndValidity()
       this.clienteForm.controls.birthDateCompany.clearValidators()
@@ -125,9 +145,9 @@ export class EditarCadastrarClienteComponent implements OnInit {
       // Company validators
       this.clienteForm.controls.fantasyName.setValidators([Validators.required])      
       this.clienteForm.controls.socialReason.setValidators([Validators.required])      
-      this.clienteForm.controls.subcription.setValidators([Validators.required])      
+      this.clienteForm.controls.subscription.setValidators([Validators.required])      
       this.clienteForm.controls.cnpj.setValidators([Validators.required, BrazilValidator.isValidCpf])      
-      this.clienteForm.controls.companyCellphone.setValidators([Validators.required])      
+      this.clienteForm.controls.companyCellPhone.setValidators([Validators.required])      
       this.clienteForm.controls.companyTelephone.setValidators([Validators.required])      
       this.clienteForm.controls.birthDateCompany.setValidators([Validators.required])      
       this.clienteForm.controls.ramal.setValidators([Validators.required])      
@@ -151,7 +171,13 @@ export class EditarCadastrarClienteComponent implements OnInit {
       this.clienteForm.controls.email.updateValueAndValidity()
     }
   }
-
+  typeUser(data: any): string{
+    if(data.cpf==null){
+      return 'juridica'
+    }else{
+      return 'fisica'
+    }
+  }
   changeAddress(event : any, i : number) {
     let cep: string = event.target.value;
     cep = cep.replace('-', '');
@@ -165,7 +191,6 @@ export class EditarCadastrarClienteComponent implements OnInit {
       }
     })
   }
-
   submitClient(data : any) {
     if(this.clienteForm.valid) {
       if (!this.desativadoCheckbox) {
@@ -173,12 +198,11 @@ export class EditarCadastrarClienteComponent implements OnInit {
       } else {
         data.disabled = false
       }
-      this.clientService.create(data).subscribe((dataReturn) => {
+      this.clientService.update(this.clientId, data).subscribe((dataReturn) => {
         this.router.navigate(['sistema', 'vendas', 'clientes', 'listar'])
       }, (err) => {
         console.log(err)
       })
     }
   }
-
 }

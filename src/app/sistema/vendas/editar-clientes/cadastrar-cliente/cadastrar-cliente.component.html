@@ -33,7 +33,7 @@
     </div>
 
   </div>
-
+  
   <div *ngIf="tipoPessoa === 'fisica'">
 
     <!-- Dados do cliente -->
@@ -42,7 +42,7 @@
       <!-- Nome -->
       <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
         <input formControlName="name" [class.invalid]="clienteForm.controls.name.invalid && (clienteForm.controls.name.dirty || clienteForm.controls.name.touched)" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-          type="text" placeholder="Nome">
+          type="text" placeholder="Nome" value="teste">
         <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
       </div>
 
@@ -98,8 +98,9 @@
 
     </div>
   </div>
+  
   <div *ngIf="tipoPessoa === 'juridica'">
-
+    {{ toggleTipoPessoa('juridica') }}
     <!-- Dados do cliente -->
     <div class="row m-0 pb-4 border-bottom justify-content-center">
 
@@ -112,7 +113,7 @@
 
       <!-- Inscrição Estadual -->
       <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-        <input formControlName="subcription" [class.invalid]="clienteForm.controls.subcription.invalid && (clienteForm.controls.subcription.dirty || clienteForm.controls.subcription.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+        <input formControlName="subscription" [class.invalid]="clienteForm.controls.subscription.invalid && (clienteForm.controls.subscription.dirty || clienteForm.controls.subscription.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
           type="text" placeholder="Inscrição Estadual">
         <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição Estadual</label>
       </div>
@@ -147,7 +148,7 @@
 
       <!-- Celular -->
       <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-        <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.companyCellphone.invalid && (clienteForm.controls.companyCellphone.dirty || clienteForm.controls.companyCellphone.touched)" formControlName="companyCellphone" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+        <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.companyCellPhone.invalid && (clienteForm.controls.companyCellPhone.dirty || clienteForm.controls.companyCellPhone.touched)" formControlName="companyCellPhone" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
           type="text" placeholder="Celular">
         <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
       </div>

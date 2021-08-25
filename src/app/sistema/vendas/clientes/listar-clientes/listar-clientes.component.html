@@ -46,32 +46,54 @@
         </div>
         <div class="col text-end">
           <h5 class="fw-bold text-truncate d-none">Ações</h5>
-          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
+          <button class="button-modal fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarCliente"></button>
           <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
         </div>
       </div>
 
       <!-- Tabela -->
       <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let cliente of clientes">
-        <div class="col-1">
-          <p>{{ cliente.id }}</p>
+        <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngIf="typeClient(cliente)=='fisica'">
+          <div class="col-1">
+            <p>{{ cliente.id }}</p>
+          </div>
+          <div class="col-2">
+            <p>{{ cliente.name + ' ' + cliente.surname }} </p>
+          </div>
+          <div class="col-3">
+            <p>{{ cliente.email  }}</p>
+          </div>
+          <div class="col-2">
+            <p>{{ cliente.telephone }}</p>
+          </div>
+          <div class="col text-end">
+            <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
+            <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
+            <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+          </div>
         </div>
-        <div class="col-2">
-          <p>{{ cliente.name + ' ' + cliente.surname }} </p>
-        </div>
-        <div class="col-3">
-          <p>{{ cliente.email  }}</p>
-        </div>
-        <div class="col-2">
-          <p>{{ cliente.telephone }}</p>
-        </div>
-        <div class="col text-end">
-          <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
-          <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
-          <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+        <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngIf="typeClient(cliente)=='juridica'">
+          <div class="col-1">
+            <p>{{ cliente.id }}</p>
+          </div>
+          <div class="col-2">
+            <p>{{ cliente.fantasyName }} </p>
+          </div>
+          <div class="col-3">
+            <p>{{ cliente.companyEmail }}</p>
+          </div>
+          <div class="col-2">
+            <p>{{ cliente.companyTelephone }}</p>
+          </div>
+          <div class="col text-end">
+            <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
+            <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
+            <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 </div>
+<app-pesquisar-cliente></app-pesquisar-cliente>
