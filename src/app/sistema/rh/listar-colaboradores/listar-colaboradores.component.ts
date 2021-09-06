@@ -12,12 +12,13 @@ export class ListarColaboradoresComponent implements OnInit {
   data: any = {}
 
   constructor(
-    private readonly rhService: RhService
+    public  rhService: RhService
   ) { }
 
   ngOnInit(): void {
     this.rhService.find().subscribe((rhs: any) => {
       this.profiles = rhs
+      console.log(this.profiles)
     })
     this.rhService.data().subscribe((data: any) => {
       this.data = data;

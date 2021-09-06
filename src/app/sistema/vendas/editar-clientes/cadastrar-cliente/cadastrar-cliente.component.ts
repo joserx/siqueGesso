@@ -65,14 +65,14 @@ export class EditarCadastrarClienteComponent implements OnInit {
       this.clienteForm.get('cellphone')?.setValue(this.client.cellphone)
       this.clienteForm.get('telephone')?.setValue(this.client.telephone)
       // ver se tem como mudar o valor do input de date
-      this.clienteForm.get('birthDate')?.setValue(this.client.birthDate)
+      this.clienteForm.get('birthDate')?.setValue(String(this.client.birthDate.substring(10, 0)))
       this.clienteForm.get('email')?.setValue(this.client.email)
       /* CNPJ */
       this.clienteForm.get("cnpj")?.setValue(this.client.cnpj)
       this.clienteForm.get("subscription")?.setValue(this.client.subscription)
       this.clienteForm.get("socialReason")?.setValue(this.client.socialReason)
       this.clienteForm.get("fantasyName")?.setValue(this.client.fantasyName)
-      this.clienteForm.get("birthDateCompany")?.setValue(this.client.birthDateCompany)
+      this.clienteForm.get("birthDateCompany")?.setValue(String(this.client.birthDateCompany.substring(10, 0)))
       this.clienteForm.get("companyEmail")?.setValue(this.client.companyEmail)
       this.clienteForm.get("companyCellPhone")?.setValue(this.client.companyCellPhone)
       this.clienteForm.get("companyTelephone")?.setValue(this.client.companyTelephone)

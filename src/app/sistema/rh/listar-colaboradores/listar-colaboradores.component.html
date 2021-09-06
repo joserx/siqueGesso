@@ -64,7 +64,6 @@
           <h5 class="fw-bold text-truncate d-none">Ações</h5>
         </div>
       </div>
-
       <!-- Tabela -->
       <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let rh of profiles">
         <div class="col-2">
@@ -80,7 +79,7 @@
           <p>{{ rh.admission | date }}</p>
         </div>
         <div class="col-2">
-          <p>{{ rh.shop }}</p>
+          <p>{{ rh.filial }}</p>
         </div>
         <div class="col-2 text-end">
           <i class="fs-5 bi-circle-fill p-3" [class]="rh.status == 1 ? 'text-success' : 'text-danger'" cursor="pointer"></i>

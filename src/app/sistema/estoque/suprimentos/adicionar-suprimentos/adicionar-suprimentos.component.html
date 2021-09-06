@@ -6,7 +6,7 @@
 <!-- Modal -->
 <div class="modal fade" id="adicionarSuprimentos" tabindex="-1" aria-labelledby="adicionarSuprimentosLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
-    <form>
+    <form [formGroup]="supForm" (ngSubmit)="submitSupForm(supForm.value)">
       <!-- Modal content -->
       <div class="modal-content rounded-15 bg-custom-light">
         <div class="modal-header px-4">
@@ -23,17 +23,17 @@
 
                 <!-- Nome -->
                 <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome" formControlName="nome">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
                 </div>
                 <!-- Código -->
                 <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código" formControlName="codigo">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
                 </div>
                 <!-- Categoria -->
                 <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Categoria">
+                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Categoria" formControlName="categoria">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria</label>
                 </div>
                 <!-- Botão Adicionar -->
@@ -59,7 +59,7 @@
 
             <!-- Descrição -->
             <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Descrição" style="height: 150px"></textarea>
+              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Descrição" style="height: 150px" formControlName="descricao"></textarea>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label>
             </div>
           </div>
@@ -67,31 +67,31 @@
           <div class="row m-0 p-0">
             <!-- Unidade de medida -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Unidade de medida">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Unidade de medida" formControlName="unidadeMedida">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Unidade de medida</label>
             </div>
 
             <!-- Quantidade -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Quantidade">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Quantidade" formControlName="quantidade">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Quantidade</label>
             </div>
 
             <!-- Preço de custo -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Preço de custo">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Preço de custo" formControlName="preco">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Preço de custo</label>
             </div>
 
             <!-- Estoque atual -->
             <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="number" min="0" placeholder="Estoque atual">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="number" min="0" placeholder="Estoque atual" formControlName="estoque">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque atual</label>
             </div>
 
             <!-- Estoque mínimo -->
             <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="number" min="0" placeholder="Estoque mínimo">
+              <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="number" min="0" placeholder="Estoque mínimo" formControlName="estoqueMin">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estoque mínimo</label>
             </div>
 
@@ -99,8 +99,10 @@
             <div *ngFor="let fornecedor of fornecedoresUsuais" class="col-9 px-2 pt-4 p-0 m-0 form-floating">
               <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example">
                 <option selected disabled>Selecione um fornecedor</option>
-                <option *ngFor="let listaFornecedor of listaFornecedores" [value]="listaFornecedor.nome">{{listaFornecedor.nome}}</option>
+                <option ></option>
               </select>
+              <!-- *ngFor="let listaFornecedor of listaFornecedores" [value]="listaFornecedor.nome" -->
+              <!-- {{listaFornecedor.nome}} -->
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
             </div>
 

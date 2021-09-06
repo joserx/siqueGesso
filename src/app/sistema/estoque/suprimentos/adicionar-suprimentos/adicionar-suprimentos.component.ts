@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-adicionar-suprimentos',
@@ -7,18 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdicionarSuprimentosComponent implements OnInit {
 
-  public listaFornecedores: any = [
-    { nome: "Fornecedor 1" },
-    { nome: "Fornecedor 2" },
-    { nome: "Fornecedor 3" },
-    { nome: "Fornecedor 4" },
-  ]
+  public supForm: FormGroup = new FormGroup({
+
+  })
 
   public fornecedoresUsuais: any = [{}];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  submitSupForm(value: any){
+    alert("teste")
   }
 
   public adicionarFornecedorUsual(): any {
