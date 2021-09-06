@@ -24,6 +24,7 @@ import { AuthGuard } from './services/auth.guard';
 import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
 import { LogoutComponent } from './sistema/login/logout/logout.component';
 import { EditarClientesComponent } from './sistema/vendas/editar-clientes/editar-clientes.component';
+import { AddFilialComponent } from './sistema/rh/cadastrar-colaborador/add-filial/add-filial.component';
 
 const routes: Routes = [
   {
@@ -75,7 +76,7 @@ const routes: Routes = [
           {
             path: 'editar/:id',
             component: EditarColaboradorComponent
-          }
+          },
         ]
       },
       {

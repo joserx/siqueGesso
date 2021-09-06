@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
+import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { environment } from 'src/environments/environment';
@@ -17,6 +18,8 @@ import { getDate } from '../../../../environments/global';
 export class CadastrarColaboradorComponent implements OnInit {
 
   public getDate: any = getDate;
+  public openModal: boolean= false;
+  filiais: any[] = []
 
   public avatarImg: string = './assets/sem-foto.jpg';
   avatarFile: any = {};
@@ -55,7 +58,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     'role': new FormControl(''),
     'contractType': new FormControl(''),
     'shift': new FormControl(''),
-    'paycheck': new FormControl(''),
+    'paycheck': new FormControl(null),
     'admission': new FormControl(null),
     'experiencePeriod': new FormControl(''),
     'fireDate': new FormControl(null),
@@ -65,6 +68,29 @@ export class CadastrarColaboradorComponent implements OnInit {
     'bankAccountType': new FormControl(''),
     'bankAgency': new FormControl(''),
     'bankAccountNumber': new FormControl(''),
+    'filial': new FormControl(''),
+    'lastExam': new FormControl(''),
+    'nextExam': new FormControl(''), 
+    'vacationDueDate': new FormControl(''),
+    'workDays': new FormControl(null),
+    'conducaoIda': new FormControl(null),
+    'conducaoVolta': new FormControl(null),
+    'linesNames': new FormControl(''), 
+    'totalValue': new FormControl(null), 
+    'tshirtSize': new FormControl(''),
+    'lastDeliveryTshirt': new FormControl(''),
+    'pantsSize': new FormControl(''),
+    'lastDeliveryPants' : new FormControl(''),
+    'shoesSize': new FormControl(''),
+    'lastDeliveryShoes': new FormControl(''),
+    'beltSize': new FormControl(''),
+    'lastDeliveryBelt': new FormControl(''),
+    'glovesSize': new FormControl(''),
+    'lastDeliveryGloves': new FormControl(''),
+    'jacketSize': new FormControl(''),
+    'lastDeliveryJacket': new FormControl(''),
+    'duplaFuncao': new FormControl(null),
+    'falta': new FormArray([])
   })
 
   user: any = {}
@@ -76,11 +102,17 @@ export class CadastrarColaboradorComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly authService: AuthenticationService,
     private readonly correiosService: CorreiosService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly filialService: FilialService
   ) { }
 
   ngOnInit(): void {
     this.user = this.authService.currentUserValue
+    this.updateFilial()
+  }
+
+  get faltas(){
+    return this.rhForm.get('falta') as FormArray;
   }
 
   get cpf() {
@@ -119,6 +151,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     } else {
     }
   }
+
 
   deleteAnex(event : any, anex : any) {
     event.preventDefault();
@@ -161,9 +194,19 @@ export class CadastrarColaboradorComponent implements OnInit {
       }
     })
   }
-
+  
+  duplaFuncao(data: any){
+    data.duplaFuncao=Number(data.paycheck)*(20/100)
+    console.log(data.duplaFuncao)
+  }
+  
   sendForm(data: any) {
-    if (this.rhForm.valid) {
+    // console.log(data)
+    this.duplaFuncao(data)
+     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
+      data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
+      }
+      if (this.rhForm.valid) {
       data.createdBy = this.user.result.id;
       if (this.avatarFile) {
         data.avatar = this.avatarFile.id;
@@ -177,12 +220,31 @@ export class CadastrarColaboradorComponent implements OnInit {
       } else {
         data.status = 1
       }
+      console.log(data)
       this.rhService.create(data).subscribe((res: any) => {
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
         }
+      }, (err) => {
+        console.log(err)
       })
     }
+  }
+
+  updateFilial(){
+    this.filialService.find().subscribe((res: any)=>{
+      this.filiais = res
+      this.openModal = false
+    })
+  }
+
+  adicionarFalta(){
+    this.faltas.push(
+      new FormGroup({
+        'data': new FormControl(''),
+        'tipo': new FormControl('')
+      })
+    )
   }
 
 }
