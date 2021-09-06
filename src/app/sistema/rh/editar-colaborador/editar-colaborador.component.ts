@@ -1,13 +1,19 @@
+/* Ver o porque as filiais não estão vindo do banco e o porque não está abrindo o 
+modal de filial */
+
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { on } from 'process';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
+import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { environment } from 'src/environments/environment';
 import { getDate } from '../../../../environments/global';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-editar-colaborador',
@@ -17,6 +23,9 @@ import { getDate } from '../../../../environments/global';
 export class EditarColaboradorComponent implements OnInit {
 
   public getDate: any = getDate;
+  public openModal: boolean= false;
+  filiais: any[] = []
+  colabFaltas: any[] = [];
 
   avatarImg = 'assets/sem-foto.jpg';
   avatarFile : any = null;
@@ -55,7 +64,7 @@ export class EditarColaboradorComponent implements OnInit {
     'role' : new FormControl(''),
     'contractType' : new FormControl(''),
     'shift' : new FormControl(''),
-    'paycheck' : new FormControl(''),
+    'paycheck' : new FormControl(null),
     'admission' : new FormControl(null),
     'experiencePeriod' : new FormControl(''),
     'fireDate' : new FormControl(null),
@@ -65,6 +74,30 @@ export class EditarColaboradorComponent implements OnInit {
     'bankAccountType' : new FormControl(''),
     'bankAgency' : new FormControl(''),
     'bankAccountNumber' : new FormControl(''),
+    'filial': new FormControl(''),
+    'lastExam': new FormControl(''),
+    'nextExam': new FormControl(''), 
+    'vacationDueDate': new FormControl(''),
+    'workDays': new FormControl(null),
+    'conducaoIda': new FormControl(null),
+    'conducaoVolta': new FormControl(null),
+    'linesNames': new FormControl(''), 
+    'totalValue': new FormControl(null),
+    'tshirtSize': new FormControl(''),
+    'lastDeliveryTshirt': new FormControl(''),
+    'pantsSize': new FormControl(''),
+    'lastDeliveryPants' : new FormControl(''),
+    'shoesSize': new FormControl(''),
+    'lastDeliveryShoes': new FormControl(''),
+    'beltSize': new FormControl(''),
+    'lastDeliveryBelt': new FormControl(''),
+    'glovesSize': new FormControl(''),
+    'lastDeliveryGloves': new FormControl(''),
+    'jacketSize': new FormControl(''),
+    'lastDeliveryJacket': new FormControl(''),
+    'duplaFuncao': new FormControl(null),
+    'falta': new FormArray([]),
+    'editarFalta': new FormArray([])
   })
 
   user : any = {}
@@ -77,13 +110,27 @@ export class EditarColaboradorComponent implements OnInit {
     private readonly rhService : RhService,
     private readonly authService : AuthenticationService,
     private readonly correiosService : CorreiosService,
-    private readonly router : Router
+    private readonly router : Router,
+    private readonly filialService: FilialService
   ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {  
     this.user = this.authService.currentUserValue
     const routeParams = this.route.snapshot.paramMap;
     this.rhId = Number(routeParams.get('id'));
+    this.rhService.findOne(this.rhId).subscribe((data: any)=>{
+      this.colabFaltas = data.falta;
+      console.log(this.colabFaltas)
+      if(this.colabFaltas.length>0){
+        console.log('teste')
+        this.editarFalta.push(
+          new FormControl({
+            'data' : new FormControl(''),
+            'tipo': new FormControl('')
+          })
+        )
+      }
+    })
     this.rhService.findOne(this.rhId).subscribe((data : any) => {
       if(data.anexes && data.anexes.length > 0) {
         this.anexes = data.anexes
@@ -93,9 +140,9 @@ export class EditarColaboradorComponent implements OnInit {
       }
       this.rhForm.get('name')?.setValue(data.name)
       this.rhForm.get('surname')?.setValue(data.surname)
-      this.rhForm.get('birthDate')?.setValue(data.birthDate)
+      this.rhForm.get('birthDate')?.setValue(String(data.birthDate.substring(10, 0)))
       this.rhForm.get('rg')?.setValue(data.rg)
-      this.rhForm.get('rgExpedicao')?.setValue(data.rgExpedicao)
+      this.rhForm.get('rgExpedicao')?.setValue(String(data.rgExpedicao.substring(10, 0)))
       this.rhForm.get('rgOrgaoEmissor')?.setValue(data.rgOrgaoEmissor)
       this.rhForm.get('cnpj')?.setValue(data.cnpj)
       this.rhForm.get('cnh')?.setValue(data.cnh)
@@ -124,17 +171,51 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('contractType')?.setValue(data.contractType)
       this.rhForm.get('shift')?.setValue(data.shift)
       this.rhForm.get('paycheck')?.setValue(data.paycheck)
-      this.rhForm.get('admission')?.setValue(data.admission)
+      this.rhForm.get('admission')?.setValue(String(data.admission.substring(10, 0)))
       this.rhForm.get('experiencePeriod')?.setValue(data.experiencePeriod)
-      this.rhForm.get('fireDate')?.setValue(data.fireDate)
+      this.rhForm.get('fireDate')?.setValue(String(data.fireDate.substring(10, 0)))
       this.rhForm.get('pis')?.setValue(data.pis)
       this.rhForm.get('mei')?.setValue(data.mei)
       this.rhForm.get('bank')?.setValue(data.bank)
       this.rhForm.get('bankAccountType')?.setValue(data.bankAccountType)
       this.rhForm.get('bankAgency')?.setValue(data.bankAgency)
       this.rhForm.get('bankAccountNumber')?.setValue(data.bankAccountNumber)
-
+      this.rhForm.get('filial')?.setValue(data.filial)
+      this.rhForm.get('lastExam')?.setValue(String(data.lastExam.substring(10, 0))),
+      this.rhForm.get('nextExam')?.setValue(String(data.nextExam.substring(10, 0))),
+      this.rhForm.get('vacationDueDate')?.setValue(String(data.vacationDueDate.substring(10, 0)))
+      this.rhForm.get('workDays')?.setValue(data.workDays)
+      this.rhForm.get('conducaoIda')?.setValue(data.conducaoIda)
+      this.rhForm.get('conducaoVolta')?.setValue(data.conducaoVolta)
+      this.rhForm.get('linesNames')?.setValue(data.linesNames)
+      this.rhForm.get('totalValue')?.setValue(data.totalValue)
+      this.rhForm.get('duplaFuncao')?.setValue(data.duplaFuncao)
+      this.rhForm.get('tshirtSize')?.setValue(data.tshirtSize)
+      this.rhForm.get('lastDeliveryTshirt')?.setValue(String(data.lastDeliveryTshirt.substring(10, 0)))
+      this.rhForm.get('pantsSize')?.setValue(data.pantsSize)
+      this.rhForm.get('lastDeliveryPants')?.setValue(String(data.lastDeliveryPants.substring(10, 0)))
+      this.rhForm.get('shoesSize')?.setValue(data.shoesSize)
+      this.rhForm.get('lastDeliveryShoes')?.setValue(String(data.lastDeliveryShoes.substring(10, 0)))
+      this.rhForm.get('beltSize')?.setValue(data.beltSize)
+      this.rhForm.get('lastDeliveryBelt')?.setValue(String(data.lastDeliveryBelt.substring(10, 0)))
+      this.rhForm.get('glovesSize')?.setValue(data.glovesSize)
+      this.rhForm.get('lastDeliveryGloves')?.setValue(String(data.lastDeliveryGloves.substring(10, 0)))
+      this.rhForm.get('jacketSize')?.setValue(data.jacketSize)
+      this.rhForm.get('lastDeliveryJacket')?.setValue(String(data.lastDeliveryJacket.substring(10, 0)))
     });
+    this.updateFilial()
+    this.filialService.find().subscribe((res: any)=>{
+      this.filiais = res
+      console.log(this.filiais)
+    })
+  }
+
+  get faltas(){
+    return this.rhForm.get('falta') as FormArray;
+  }
+
+  get editarFalta(){
+    return this.rhForm.get('editarFalta') as FormArray;
   }
 
   get cpf() {
@@ -153,12 +234,12 @@ export class EditarColaboradorComponent implements OnInit {
     return this.rhForm.get('mei');
   }
 
-  public toggleDesativadoCheckbox(): void {
+  public toggleDesativadoCheckbox(data: any): void {
     this.desativadoCheckbox === true ? this.desativadoCheckbox = false : this.desativadoCheckbox = true;
   }
 
   public log(e: any):void {
-    // console.log(e);    
+    
   }
 
   anexes : any[]= [];
@@ -215,8 +296,12 @@ export class EditarColaboradorComponent implements OnInit {
       }
     })
   }
-
+  // o status mostra se o usuário está ativo ou desativo
   sendForm(data : any) {
+    if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
+      data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
+      console.log(data)
+    }
     if (this.rhForm.valid) {
       data.createdBy = this.user.result.id;
       if(this.avatarFile) {
@@ -238,6 +323,28 @@ export class EditarColaboradorComponent implements OnInit {
         }
       })
     }
+    console.log(data);
+  }
+
+  duplaFuncao(data: any){
+    data.duplaFuncao=data.paycheck*(20/100)
+    console.log(data.duplaFuncao)
+  }
+
+  updateFilial(){
+    this.filialService.find().subscribe((res: any)=>{
+      this.filiais = res
+      this.openModal = false
+    })
+  }
+
+  adicionarFalta(){
+    this.faltas.push(
+      new FormGroup({
+        'dataFalta': new FormControl(''),
+        'tipoFalta': new FormControl('')
+      })
+    )
   }
 
 }

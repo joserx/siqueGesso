@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-
+<app-add-filial class="overlay" *ngIf="openModal" (closeModal)="updateFilial()"></app-add-filial>
 <div class="row p-0 m-0">
   <div class="col-auto m-0 p-0 bg-custom-light">
     <app-sidemenu></app-sidemenu>
@@ -31,7 +31,7 @@
               'Desativado' }}</label>
             <div class="form-check form-switch">
               <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado"
-                (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
+                (click)="toggleDesativadoCheckbox(rhForm.value.disabled)" [checked]="desativadoCheckbox === true">
             </div>
           </div>
 
@@ -69,7 +69,7 @@
           <!-- Expedição -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input formControlName="rgExpedicao"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
               placeholder="Expedição">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Expedição</label>
           </div>
@@ -127,20 +127,22 @@
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <select #pcd (change)="log(pcd.value)"
               class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Necessidade especial">
+              placeholder="Necessidade especial" >
               <option value="" disabled selected>Pessoa com deficiência?</option>
               <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
+              <option value="Nao">Não</option>
             </select>
           </div>
+          <!--  -->
 
           <!-- Necessidade especial -->
-          <div *ngIf="pcd.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+          <div *ngIf="pcd.value === 'Sim'"  class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input formControlName="deficiency"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="Necessidade especial">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Necessidade especial</label>
           </div>
+          <!--  -->
 
           <!-- Escolaridade -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -148,17 +150,17 @@
               class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
               placeholder="Necessidade especial">
               <option value="" disabled selected>Escolaridade</option>
-              <option value="Solteiro">Solteiro</option>
-              <option value="Casado">Casado</option>
-              <option value="Divorciado">Divorciado</option>
-              <option value="Viúvo">Viúvo</option>
+              <option value="Ensino fundamental">Ensino fundamental</option>
+              <option value="Ensino médio">Ensino médio</option>
+              <option value="Ensino superior">Ensino superior</option>
+              <option value="Pós graduação">Pós graduação</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Escolaridade</label>
           </div>
 
           <!-- Nacionalidade -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="nacionality" formControlName="name"
+            <input formControlName="nacionality" 
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="Nacionalidade">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nacionalidade</label>
@@ -253,7 +255,7 @@
 
           <!-- WhatsApp -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="(00) 00000-000" formControlName="whatsapp"
+            <input mask="(00) 00000-0000" formControlName="whatsapp"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="WhatsApp">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">WhatsApp</label>
@@ -261,7 +263,7 @@
 
           <!-- Telefone Emergência -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="(00) 0000-000||(00) 00000-0000" formControlName="emergencyTelephone"
+            <input mask="(00) 0000-0000||(00) 00000-0000" formControlName="emergencyTelephone"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="Telefone Emergência">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone Emergência</label>
@@ -290,7 +292,7 @@
             <select formControlName="department"
               class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
               placeholder="Departamento">
-              <option value="" disabled selected>Departamento</option>
+              <option value="Escolaridade" disabled selected>Departamento</option>
               <option value="Compras">Compras</option>
               <option value="RH">RH</option>
               <option value="Comercial">Comercial</option>
@@ -329,9 +331,17 @@
           <!-- Salário -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input formControlName="paycheck"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Salário">
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Salário" (change)="duplaFuncao(rhForm.value)">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Salário</label>
+          </div>
+
+          <!-- Dupla Função -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="duplaFuncao"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Dupla Função" readonly>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dupla Função</label>
           </div>
 
           <!-- Data de admissão -->
@@ -410,29 +420,22 @@
           </div>
 
           <!-- Adicionar loja -->
-          <div class="col-4 px-2 pt-4  p-2 m-2 form-floating d-flex">
-            <select formControlName="loja"
+          <div class="col-4 px-0 pt-4 p-2 m-0 form-floating d-flex">
+            <select formControlName="filial"
               class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
               placeholder="Necessidade especial">
-              <option value="Sique Leste" disabled selected>Sique Leste</option>
-              <option value="Sique Penha">Sique Penha</option>
-              <option value="Gesso Mais Atibaia">Gesso Mais Atibaia</option>
-              <option value="Gesso Cardon">Gesso Cardon</option>
-              <option value="Gesso Mais Caraguatatuba">Gesso Mais Caraguatatuba</option>
-              <option value="Gesso Juquehy">Gesso Juquehy</option>
-              <option value="Sique Intaim">Sique Intaim</option>
+              <option value="" disabled selected>Filial</option>
+              <option *ngFor="let umaFilial of filiais" value="{{ umaFilial.nome }}">{{ umaFilial.nome }}</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Filial</label>
             <div class="col-1 px-0 m-0 text-center d-flex align-items-center">
-              <a class="px-2 py-2" data-bs-toggle="modal" data-bs-target="#adicionarFornecedor">
-                <i class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"></i>
-              </a>
+              <i class="button-modal bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer" (click)="openModal=true"></i>
             </div>
           </div>
           <div class="col-12 pt-4 p-0 m-0 border-bottom"></div>
           <!-- Ultimo exame -->
           <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
-            <input formControlName="bankAccountNumber"
+            <input formControlName="lastExam"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
               placeholder="Conta">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultimo exame</label>
@@ -440,7 +443,7 @@
 
           <!-- Próximo exame -->
           <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
-            <input formControlName="bankAccountNumber"
+            <input formControlName="nextExam"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
               placeholder="Conta">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Próximo exame</label>
@@ -448,12 +451,286 @@
 
           <!-- Vencimento de Férias -->
           <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
-            <input formControlName="bankAccountNumber"
+            <input formControlName="vacationDueDate"
               class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
               placeholder="Conta">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vencimento de Férias</label>
           </div>
+
+           <!-- Dias trabalhados -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="workDays"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Dias trabalhados">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dias trabalhados</label>
+          </div>
+
+          <!-- Vale Transporte -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <select #vt (change)="log(vt.value)"
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Vale Transporte">
+              <option value="" disabled selected>Vale Transporte (VT)?</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+
+          <!-- Valor da condução -->
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="conducaoIda"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Valor da condução ida">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(ida)</label>
+          </div>
+
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="conducaoVolta"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Valor da condução volta">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(volta)</label>
+          </div>
+
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="linesNames"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Nome das linhas de transporte">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome das linhas de transporte</label>
+          </div>
+
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="totalValue"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Valor total" readonly>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor total</label>
+          </div>
+          
+          <div class="col-12 d-flex justify-content-center">
+
+            <!-- Tamnho da camiseta -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Tamnho da camiseta" formControlName="tshirtSize">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="XG">XG</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da camiseta</label>
+            </div>
+
+            <!-- Ultima entrega -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="lastDeliveryTshirt"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Ultima entrega">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (camiseta)</label>
+           </div>
+
+          </div>
+
+          <div class="col-12 d-flex justify-content-center">
+
+            <!-- tamanho da calça -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Tamnho da calça" formControlName="pantsSize">
+                <option value="38">36</option>
+                <option value="40">40</option>
+                <option value="42">42</option>
+                <option value="44">44</option>
+                <option value="48">48</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da calça</label>
+            </div>
+
+            <!-- Ultima entrega -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="lastDeliveryPants"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Ultima entrega">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (calça)</label>
+           </div>
+
+          </div>
+
+          <div class="col-12 d-flex justify-content-center">
+
+            <!-- Tamanho do sapato -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Tamnho da calçado" formControlName="shoesSize">
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho do calçado</label>
+            </div>
+
+            <!-- Ultima entrega -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="lastDeliveryShoes"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Ultima entrega">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (sapato)</label>
+           </div>
+
+          </div>
+
+          <div class="col-12 d-flex justify-content-center">
+
+            <!-- Tamanho do cinto -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Tamnho do cinto" formControlName="beltSize">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho do cinto</label>
+            </div>
+
+            <!-- Ultima entrega -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="lastDeliveryBelt"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Ultima entrega">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (cinto)</label>
+           </div>
+
+          </div>
+
+          <div class="col-12 d-flex justify-content-center">
+
+            <!-- Tamanho do luva -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Tamnho das luvas" formControlName="glovesSize">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho das luvas</label>
+            </div>
+
+            <!-- Ultima entrega -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="lastDeliveryGloves"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Ultima entrega">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (luva)</label>
+           </div>
+
+          </div>
+          
+          <div class="col-12 d-flex justify-content-center">
+
+            <!-- Tamanho do jaqueta -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Tamnho da jaqueta" formControlName="jacketSize">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+                <option value="GG">GG</option>
+                <option value="XG">XG</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da jaqueta</label>
+            </div>
+
+            <!-- Ultima entrega -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="lastDeliveryJacket"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Ultima entrega">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (jaqueta)</label>
+           </div>
+
+          </div>
+          <!-- teste -->
+          <div class="col-12 d-flex flex-column" *ngIf="colabFaltas.length>0" formArrayName="editarFalta">
+            <div *ngFor="let falta of colabFaltas" >
+              <div class="col-12 d-flex row justify-content-end m-0">
+                <!-- Data da falta -->
+                <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+                  <!-- <input formControlName="data"
+                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                  placeholder="Data da falta"> -->
+                  <label class="ms-2 mt-2 small text-truncate text-custom-dark">Data da falta</label>
+                  <p class="h-limited px-4 py-3 rounded-15 shadow-sm border border-1 border-black bg-light">{{falta.data.substring(10, 0)}}</p>
+                </div>
+              
+                <!-- Tipo de falta -->
+                <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+                  <!-- <select
+                  class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                  placeholder="Tipo de falta" formControlName="tipo">
+                    <option value="" disabled selected>Tipo de falta</option>
+                    <option value="Justificada">Justificada</option>
+                    <option value="Não justificada">Não justificada</option>
+                  </select> -->
+                  <label class="ms-2 mt-2 small text-truncate text-custom-dark">Tipo de falta</label>
+                  <p class="h-limited px-4 py-3 rounded-15 shadow-sm border border-1 border-black bg-light">{{falta.tipo}}</p>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                  <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 d-flex justify-content-center" formArrayName="falta" *ngFor="let falta of faltas['controls']; let i = index">
+            <div class="col-12 d-flex justify-content-center" [formGroupName]="i">
+              
+              <!-- Data da falta -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                  <input formControlName="data"
+                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                  placeholder="Data da falta">
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da falta</label>
+                </div>
+              
+              <!-- Tipo de falta -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                  <select
+                  class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                  placeholder="Tamnho do cinto" formControlName="tipo">
+                    <option value="" disabled selected>Tipo de falta</option>
+                    <option value="Justificada">Justificada</option>
+                    <option value="Não justificada">Não justificada</option>
+                  </select>
+                </div>
+            
+            </div>
+          
+          </div>
+
+          <div class="col-5 px-2 p-0 m-0 pt-4">
+            <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm" (click)="adicionarFalta()">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark ">adicionar falta</h5>
+            </a>
+          </div>
+
         </div>
+
+        
+
 
         <div class="row m-0 mt-2">
 

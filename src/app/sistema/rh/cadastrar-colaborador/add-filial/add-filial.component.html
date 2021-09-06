@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal-add-filial_ctn" id="addFilial" tabindex="-1" aria-labelledby="addFilialLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar Filial</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal.emit()"></button>
+        </div>
+        <form [formGroup]="filialForm" (ngSubmit)="addFilial(filialForm.value)">
+          <div class="col-12 d-flex m-2 justify-content-center">
+              <div class="col-4 px-4 pt-0 p-0 m-0 form-floating">
+                  <input formControlName="nome"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Filial">
+                </div>
+              <button type="submit"
+                    class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
+                    <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+              </button>
+          </div>
+        </form>
+        <div class="row m-0 py-3 modal-footer">
+        </div>''
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>
