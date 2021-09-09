@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { on } from 'process';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { CorreiosService } from 'src/app/services/correios.service';
+import { FaltasService } from 'src/app/services/faltas.service';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
@@ -25,7 +26,6 @@ export class EditarColaboradorComponent implements OnInit {
   public getDate: any = getDate;
   public openModal: boolean= false;
   filiais: any[] = []
-  colabFaltas: any[] = [];
 
   avatarImg = 'assets/sem-foto.jpg';
   avatarFile : any = null;
@@ -97,7 +97,6 @@ export class EditarColaboradorComponent implements OnInit {
     'lastDeliveryJacket': new FormControl(''),
     'duplaFuncao': new FormControl(null),
     'falta': new FormArray([]),
-    'editarFalta': new FormArray([])
   })
 
   user : any = {}
@@ -111,26 +110,14 @@ export class EditarColaboradorComponent implements OnInit {
     private readonly authService : AuthenticationService,
     private readonly correiosService : CorreiosService,
     private readonly router : Router,
-    private readonly filialService: FilialService
+    private readonly filialService: FilialService,
+    private readonly faltasService: FaltasService
   ) { }
 
   ngOnInit(): void {  
     this.user = this.authService.currentUserValue
     const routeParams = this.route.snapshot.paramMap;
-    this.rhId = Number(routeParams.get('id'));
-    this.rhService.findOne(this.rhId).subscribe((data: any)=>{
-      this.colabFaltas = data.falta;
-      console.log(this.colabFaltas)
-      if(this.colabFaltas.length>0){
-        console.log('teste')
-        this.editarFalta.push(
-          new FormControl({
-            'data' : new FormControl(''),
-            'tipo': new FormControl('')
-          })
-        )
-      }
-    })
+    this.rhId = Number(routeParams.get('id'));  
     this.rhService.findOne(this.rhId).subscribe((data : any) => {
       if(data.anexes && data.anexes.length > 0) {
         this.anexes = data.anexes
@@ -202,6 +189,13 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('lastDeliveryGloves')?.setValue(String(data.lastDeliveryGloves.substring(10, 0)))
       this.rhForm.get('jacketSize')?.setValue(data.jacketSize)
       this.rhForm.get('lastDeliveryJacket')?.setValue(String(data.lastDeliveryJacket.substring(10, 0)))
+      for(let umaFalta of data.falta){
+        this.faltas.push(new FormGroup({
+          'data': new FormControl(String(umaFalta.data.substring(10, 0))),
+          'tipo': new FormControl(umaFalta.tipo),
+          'id': new FormControl(umaFalta.id)
+        }))
+      }
     });
     this.updateFilial()
     this.filialService.find().subscribe((res: any)=>{
@@ -212,10 +206,6 @@ export class EditarColaboradorComponent implements OnInit {
 
   get faltas(){
     return this.rhForm.get('falta') as FormArray;
-  }
-
-  get editarFalta(){
-    return this.rhForm.get('editarFalta') as FormArray;
   }
 
   get cpf() {
@@ -341,10 +331,21 @@ export class EditarColaboradorComponent implements OnInit {
   adicionarFalta(){
     this.faltas.push(
       new FormGroup({
-        'dataFalta': new FormControl(''),
-        'tipoFalta': new FormControl('')
+        'data': new FormControl(''),
+        'tipo': new FormControl(''),
+        'id': new FormControl(null)
       })
     )
+  }
+
+  deleteFalta(i : any) {
+    console.log(this.faltas['controls'][i].get('id'))
+    if(this.faltas['controls'][i].get('id')?.value){
+      this.faltasService.delete(this.faltas['controls'][i].get('id')?.value).subscribe((data : any) => {
+        alert("falta deletada")
+      })
+    }
+    this.faltas.removeAt(i)
   }
 
 }
