@@ -664,63 +664,36 @@
 
           </div>
           <!-- teste -->
-          <div class="col-12 d-flex flex-column" *ngIf="colabFaltas.length>0" formArrayName="editarFalta">
-            <div *ngFor="let falta of colabFaltas" >
-              <div class="col-12 d-flex row justify-content-end m-0">
-                <!-- Data da falta -->
-                <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-                  <!-- <input formControlName="data"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-                  placeholder="Data da falta"> -->
-                  <label class="ms-2 mt-2 small text-truncate text-custom-dark">Data da falta</label>
-                  <p class="h-limited px-4 py-3 rounded-15 shadow-sm border border-1 border-black bg-light">{{falta.data.substring(10, 0)}}</p>
-                </div>
-              
-                <!-- Tipo de falta -->
-                <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-                  <!-- <select
-                  class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                  placeholder="Tipo de falta" formControlName="tipo">
-                    <option value="" disabled selected>Tipo de falta</option>
-                    <option value="Justificada">Justificada</option>
-                    <option value="Não justificada">Não justificada</option>
-                  </select> -->
-                  <label class="ms-2 mt-2 small text-truncate text-custom-dark">Tipo de falta</label>
-                  <p class="h-limited px-4 py-3 rounded-15 shadow-sm border border-1 border-black bg-light">{{falta.tipo}}</p>
-                </div>
-                <div class="col-1 d-flex align-items-center justify-content-center">
-                  <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+          <div class="col-12 d-flex flex-column">
+            <div formArrayName="falta" *ngFor="let falta of  faltas['controls']; let i = index">
+              <div [formGroupName]="i" class="d-felx col-12">
+                <div class="col-12 d-flex row justify-content-center align-items-center m-0 p-0">
+                  <!-- Data da falta -->
+                  <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="data"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                    placeholder="Data da falta">
+                  </div>
+                
+                  <!-- Tipo de falta -->
+
+                 <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+                   <select
+                   class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                   placeholder="Tipo de falta" formControlName="tipo">
+                     <option value="" disabled selected>Tipo de falta</option>
+                     <option value="Justificada">Justificada</option>
+                     <option value="Não justificada">Não justificada</option>
+                   </select>
+                 </div>
+
+                  <div class="col-1 d-flex align-items-center  m-0 p-0">
+                    <i class="fs-3 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="deleteFalta(i) "></i>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="col-12 d-flex justify-content-center" formArrayName="falta" *ngFor="let falta of faltas['controls']; let i = index">
-            <div class="col-12 d-flex justify-content-center" [formGroupName]="i">
-              
-              <!-- Data da falta -->
-                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                  <input formControlName="data"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-                  placeholder="Data da falta">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da falta</label>
-                </div>
-              
-              <!-- Tipo de falta -->
-                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                  <select
-                  class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                  placeholder="Tamnho do cinto" formControlName="tipo">
-                    <option value="" disabled selected>Tipo de falta</option>
-                    <option value="Justificada">Justificada</option>
-                    <option value="Não justificada">Não justificada</option>
-                  </select>
-                </div>
-            
-            </div>
-          
-          </div>
-
           <div class="col-5 px-2 p-0 m-0 pt-4">
             <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm" (click)="adicionarFalta()">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark ">adicionar falta</h5>

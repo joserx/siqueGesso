@@ -12,18 +12,18 @@ export class FaltasService {
   ) { }
 
   find() {
-    return this.http.get(environment.apiUrl + 'falta/');
+    return this.http.get(environment.apiUrl + 'faltas/');
   }
 
   create(data: any) {
-    return this.http.post(environment.apiUrl + 'falta', data);
+    return this.http.post(environment.apiUrl + 'faltas', data);
   }
 
   update(id : number, data : any) {
-    return this.http.put(environment.apiUrl + 'falta/' + id, data);
+    return this.http.put(environment.apiUrl + 'faltas/' + id, data);
   }
 
   delete(id : number) {
-    return this.http.delete(environment.apiUrl + 'falta/' + id);
+    return this.http.delete(environment.apiUrl + 'faltas/' + id);
   }
 }
