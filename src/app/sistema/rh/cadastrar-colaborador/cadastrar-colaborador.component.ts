@@ -8,6 +8,7 @@ import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 import { getDate } from '../../../../environments/global';
 
 @Component({
@@ -26,16 +27,16 @@ export class CadastrarColaboradorComponent implements OnInit {
   public desativadoCheckbox: boolean = false;
   public rhForm: FormGroup = new FormGroup({
     'disabled': new FormControl(''),
-    'name': new FormControl(''),
-    'surname': new FormControl(''),
-    'birthDate': new FormControl(null),
+    'name': new FormControl('', [Validators.required]),
+    'surname': new FormControl('', [Validators.required]),
+    'birthDate': new FormControl(null, [Validators.required]),
     'rg': new FormControl('', [BrazilValidator.isValidRG]),
-    'rgExpedicao': new FormControl(''),
-    'rgOrgaoEmissor': new FormControl(''),
+    'rgExpedicao': new FormControl('', [Validators.required]),
+    'rgOrgaoEmissor': new FormControl('', [Validators.required]),
     'cnpj': new FormControl('', [BrazilValidator.isValidCpf]),
     'cnh': new FormControl(''),
     'gender': new FormControl(''),
-    'civilState': new FormControl(''),
+    'civilState': new FormControl('', [Validators.required]),
     'deficiency': new FormControl(''),
     'scholarship': new FormControl(''),
     'nacionality': new FormControl(''),
@@ -49,10 +50,10 @@ export class CadastrarColaboradorComponent implements OnInit {
     'neighborhood': new FormControl(''),
     'city': new FormControl(''),
     'state': new FormControl(''),
-    'telephone': new FormControl(''),
-    'whatsapp': new FormControl(''),
-    'emergencyTelephone': new FormControl(''),
-    'personalEmail': new FormControl(''),
+    'telephone': new FormControl('', [Validators.required]),
+    'whatsapp': new FormControl('', [Validators.required]),
+    'emergencyTelephone': new FormControl('', [Validators.required]),
+    'personalEmail': new FormControl('', [Validators.required]),
     'corporativeEmail': new FormControl(''),
     'department': new FormControl(''),
     'role': new FormControl(''),
@@ -64,10 +65,10 @@ export class CadastrarColaboradorComponent implements OnInit {
     'fireDate': new FormControl(null),
     'pis': new FormControl(''),
     'mei': new FormControl('', [BrazilValidator.isValidCpf]),
-    'bank': new FormControl(''),
-    'bankAccountType': new FormControl(''),
-    'bankAgency': new FormControl(''),
-    'bankAccountNumber': new FormControl(''),
+    'bank': new FormControl('', [Validators.required]),
+    'bankAccountType': new FormControl('', [Validators.required]),
+    'bankAgency': new FormControl('', [Validators.required]),
+    'bankAccountNumber': new FormControl('', [Validators.required]),
     'filial': new FormControl(''),
     'lastExam': new FormControl(''),
     'nextExam': new FormControl(''), 
@@ -203,10 +204,10 @@ export class CadastrarColaboradorComponent implements OnInit {
   sendForm(data: any) {
     // console.log(data)
     this.duplaFuncao(data)
-     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
+    if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
-      }
-      if (this.rhForm.valid) {
+    }
+    if (this.rhForm.valid) {
       data.createdBy = this.user.result.id;
       if (this.avatarFile) {
         data.avatar = this.avatarFile.id;
@@ -220,7 +221,6 @@ export class CadastrarColaboradorComponent implements OnInit {
       } else {
         data.status = 1
       }
-      console.log(data)
       this.rhService.create(data).subscribe((res: any) => {
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
@@ -228,6 +228,9 @@ export class CadastrarColaboradorComponent implements OnInit {
       }, (err) => {
         console.log(err)
       })
+    }else{
+      console.log('teste swal')
+      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
     }
   }
 
@@ -242,7 +245,8 @@ export class CadastrarColaboradorComponent implements OnInit {
     this.faltas.push(
       new FormGroup({
         'data': new FormControl(''),
-        'tipo': new FormControl('')
+        'tipo': new FormControl(''),
+        'id': new FormControl(null)
       })
     )
   }

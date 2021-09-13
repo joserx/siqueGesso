@@ -13,6 +13,7 @@ import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 import { getDate } from '../../../../environments/global';
 // import { DatePipe } from '@angular/common';
 
@@ -31,49 +32,49 @@ export class EditarColaboradorComponent implements OnInit {
   avatarFile : any = null;
   public desativadoCheckbox: boolean = false;
   public rhForm : FormGroup = new FormGroup({
-    'disabled' : new FormControl(''),
-    'name' : new FormControl(''),
-    'surname' : new FormControl(''),
-    'birthDate' : new FormControl(null),
-    'rg' : new FormControl('', [BrazilValidator.isValidRG]),
-    'rgExpedicao' : new FormControl(''),
-    'rgOrgaoEmissor' : new FormControl(''),
-    'cnpj' : new FormControl('', [BrazilValidator.isValidCpf]),
-    'cnh' : new FormControl(''),
-    'gender' : new FormControl(''),
-    'civilState' : new FormControl(''),
-    'deficiency' : new FormControl(''),
-    'scholarship' : new FormControl(''),
-    'nacionality' : new FormControl(''),
-    'naturality' : new FormControl(''),
-    'motherName' : new FormControl(''),
-    'fatherName' : new FormControl(''),
-    'cep' : new FormControl('', [BrazilValidator.isValidCEP]),
-    'street' : new FormControl(''),
-    'addressNumber' : new FormControl(''),
-    'addressComplement' : new FormControl(''),
-    'neighborhood' : new FormControl(''),
-    'city' : new FormControl(''),
-    'state' : new FormControl(''),
-    'telephone' : new FormControl(''),
-    'whatsapp' : new FormControl(''),
-    'emergencyTelephone' : new FormControl(''),
-    'personalEmail' : new FormControl(''),
-    'corporativeEmail' : new FormControl(''),
-    'department' : new FormControl(''),
-    'role' : new FormControl(''),
-    'contractType' : new FormControl(''),
-    'shift' : new FormControl(''),
-    'paycheck' : new FormControl(null),
-    'admission' : new FormControl(null),
-    'experiencePeriod' : new FormControl(''),
-    'fireDate' : new FormControl(null),
-    'pis' : new FormControl(''),
-    'mei' : new FormControl('', [BrazilValidator.isValidCpf]),
-    'bank' : new FormControl(''),
-    'bankAccountType' : new FormControl(''),
-    'bankAgency' : new FormControl(''),
-    'bankAccountNumber' : new FormControl(''),
+    'disabled': new FormControl(''),
+    'name': new FormControl('', [Validators.required]),
+    'surname': new FormControl('', [Validators.required]),
+    'birthDate': new FormControl(null, [Validators.required]),
+    'rg': new FormControl('', [BrazilValidator.isValidRG]),
+    'rgExpedicao': new FormControl('', [Validators.required]),
+    'rgOrgaoEmissor': new FormControl('', [Validators.required]),
+    'cnpj': new FormControl('', [BrazilValidator.isValidCpf]),
+    'cnh': new FormControl(''),
+    'gender': new FormControl(''),
+    'civilState': new FormControl('', [Validators.required]),
+    'deficiency': new FormControl(''),
+    'scholarship': new FormControl(''),
+    'nacionality': new FormControl(''),
+    'naturality': new FormControl(''),
+    'motherName': new FormControl(''),
+    'fatherName': new FormControl(''),
+    'cep': new FormControl('', [BrazilValidator.isValidCEP]),
+    'street': new FormControl(''),
+    'addressNumber': new FormControl(''),
+    'addressComplement': new FormControl(''),
+    'neighborhood': new FormControl(''),
+    'city': new FormControl(''),
+    'state': new FormControl(''),
+    'telephone': new FormControl('', [Validators.required]),
+    'whatsapp': new FormControl('', [Validators.required]),
+    'emergencyTelephone': new FormControl('', [Validators.required]),
+    'personalEmail': new FormControl('', [Validators.required]),
+    'corporativeEmail': new FormControl(''),
+    'department': new FormControl(''),
+    'role': new FormControl(''),
+    'contractType': new FormControl(''),
+    'shift': new FormControl(''),
+    'paycheck': new FormControl(null),
+    'admission': new FormControl(null),
+    'experiencePeriod': new FormControl(''),
+    'fireDate': new FormControl(null),
+    'pis': new FormControl(''),
+    'mei': new FormControl('', [BrazilValidator.isValidCpf]),
+    'bank': new FormControl('', [Validators.required]),
+    'bankAccountType': new FormControl('', [Validators.required]),
+    'bankAgency': new FormControl('', [Validators.required]),
+    'bankAccountNumber': new FormControl('', [Validators.required]),
     'filial': new FormControl(''),
     'lastExam': new FormControl(''),
     'nextExam': new FormControl(''), 
@@ -82,7 +83,7 @@ export class EditarColaboradorComponent implements OnInit {
     'conducaoIda': new FormControl(null),
     'conducaoVolta': new FormControl(null),
     'linesNames': new FormControl(''), 
-    'totalValue': new FormControl(null),
+    'totalValue': new FormControl(null), 
     'tshirtSize': new FormControl(''),
     'lastDeliveryTshirt': new FormControl(''),
     'pantsSize': new FormControl(''),
@@ -96,7 +97,7 @@ export class EditarColaboradorComponent implements OnInit {
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(''),
     'duplaFuncao': new FormControl(null),
-    'falta': new FormArray([]),
+    'falta': new FormArray([])
   })
 
   user : any = {}
@@ -287,33 +288,37 @@ export class EditarColaboradorComponent implements OnInit {
     })
   }
   // o status mostra se o usuário está ativo ou desativo
-  sendForm(data : any) {
+  sendForm(data: any) {
+    // console.log(data)
+    this.duplaFuncao(data)
     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
-      console.log(data)
     }
     if (this.rhForm.valid) {
       data.createdBy = this.user.result.id;
-      if(this.avatarFile) {
+      if (this.avatarFile) {
         data.avatar = this.avatarFile.id;
       }
       data.disabled = !this.desativadoCheckbox;
-      if(!this.desativadoCheckbox) {
+      if(this.anexes.length > 0) {
+        data.anexes = this.anexes
+      }
+      if (!this.desativadoCheckbox) {
         data.status = 0
       } else {
         data.status = 1
       }
-      if(this.anexes.length > 0) {
-        data.anexes = this.anexes
-      }
-      console.log(data)
-      this.rhService.update(this.rhId, data).subscribe((res: any) => {
+      this.rhService.create(data).subscribe((res: any) => {
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
         }
+      }, (err) => {
+        console.log(err)
       })
+    }else{
+      console.log('teste swal')
+      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
     }
-    console.log(data);
   }
 
   duplaFuncao(data: any){
