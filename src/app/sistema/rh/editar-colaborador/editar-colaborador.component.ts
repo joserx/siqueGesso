@@ -76,26 +76,26 @@ export class EditarColaboradorComponent implements OnInit {
     'bankAgency': new FormControl('', [Validators.required]),
     'bankAccountNumber': new FormControl('', [Validators.required]),
     'filial': new FormControl(''),
-    'lastExam': new FormControl(''),
-    'nextExam': new FormControl(''), 
-    'vacationDueDate': new FormControl(''),
+    'lastExam': new FormControl(null),
+    'nextExam': new FormControl(null), 
+    'vacationDueDate': new FormControl(null),
     'workDays': new FormControl(null),
     'conducaoIda': new FormControl(null),
     'conducaoVolta': new FormControl(null),
     'linesNames': new FormControl(''), 
     'totalValue': new FormControl(null), 
     'tshirtSize': new FormControl(''),
-    'lastDeliveryTshirt': new FormControl(''),
+    'lastDeliveryTshirt': new FormControl(null),
     'pantsSize': new FormControl(''),
-    'lastDeliveryPants' : new FormControl(''),
+    'lastDeliveryPants' : new FormControl(null),
     'shoesSize': new FormControl(''),
-    'lastDeliveryShoes': new FormControl(''),
+    'lastDeliveryShoes': new FormControl(null),
     'beltSize': new FormControl(''),
-    'lastDeliveryBelt': new FormControl(''),
+    'lastDeliveryBelt': new FormControl(null),
     'glovesSize': new FormControl(''),
-    'lastDeliveryGloves': new FormControl(''),
+    'lastDeliveryGloves': new FormControl(null),
     'jacketSize': new FormControl(''),
-    'lastDeliveryJacket': new FormControl(''),
+    'lastDeliveryJacket': new FormControl(null),
     'duplaFuncao': new FormControl(null),
     'falta': new FormArray([])
   })
@@ -308,7 +308,7 @@ export class EditarColaboradorComponent implements OnInit {
       } else {
         data.status = 1
       }
-      this.rhService.create(data).subscribe((res: any) => {
+      this.rhService.update(this.rhId, data).subscribe((res: any) => {
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
         }

@@ -70,26 +70,26 @@ export class CadastrarColaboradorComponent implements OnInit {
     'bankAgency': new FormControl('', [Validators.required]),
     'bankAccountNumber': new FormControl('', [Validators.required]),
     'filial': new FormControl(''),
-    'lastExam': new FormControl(''),
-    'nextExam': new FormControl(''), 
-    'vacationDueDate': new FormControl(''),
+    'lastExam': new FormControl(null),
+    'nextExam': new FormControl(null), 
+    'vacationDueDate': new FormControl(null),
     'workDays': new FormControl(null),
     'conducaoIda': new FormControl(null),
     'conducaoVolta': new FormControl(null),
     'linesNames': new FormControl(''), 
     'totalValue': new FormControl(null), 
     'tshirtSize': new FormControl(''),
-    'lastDeliveryTshirt': new FormControl(''),
+    'lastDeliveryTshirt': new FormControl(null),
     'pantsSize': new FormControl(''),
-    'lastDeliveryPants' : new FormControl(''),
+    'lastDeliveryPants' : new FormControl(null),
     'shoesSize': new FormControl(''),
-    'lastDeliveryShoes': new FormControl(''),
+    'lastDeliveryShoes': new FormControl(null),
     'beltSize': new FormControl(''),
-    'lastDeliveryBelt': new FormControl(''),
+    'lastDeliveryBelt': new FormControl(null),
     'glovesSize': new FormControl(''),
-    'lastDeliveryGloves': new FormControl(''),
+    'lastDeliveryGloves': new FormControl(null),
     'jacketSize': new FormControl(''),
-    'lastDeliveryJacket': new FormControl(''),
+    'lastDeliveryJacket': new FormControl(null),
     'duplaFuncao': new FormControl(null),
     'falta': new FormArray([])
   })
@@ -207,7 +207,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
     }
-    if (this.rhForm.valid) {
+    if (this.rhForm.valid){
       data.createdBy = this.user.result.id;
       if (this.avatarFile) {
         data.avatar = this.avatarFile.id;
@@ -244,7 +244,7 @@ export class CadastrarColaboradorComponent implements OnInit {
   adicionarFalta(){
     this.faltas.push(
       new FormGroup({
-        'data': new FormControl(''),
+        'data': new FormControl(null),
         'tipo': new FormControl(''),
         'id': new FormControl(null)
       })
