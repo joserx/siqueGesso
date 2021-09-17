@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioSistemaService } from 'src/app/services/usuario-sistema.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar-usuarios-sistema',
@@ -24,6 +25,7 @@ export class ListarUsuariosSistemaComponent implements OnInit {
 
   deleteUser(id : number) {
     this.usuarioSistemasService.delete(id).subscribe((data : any) => {
+      Swal.fire({ title: 'Usuário deletado com sucesso!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true });
       this.usuarios = this.usuarios.filter((ele : any) => { return ele.id != id })
     })
   }
