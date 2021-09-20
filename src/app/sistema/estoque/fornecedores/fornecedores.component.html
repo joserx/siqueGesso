@@ -50,13 +50,13 @@
 <!-- Tabela -->
 <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let fornecedor of fornecedores">
   <div class="col-3">
-    <p>{{ fornecedor.nome }}</p>
+    <p>{{ fornecedor.fantasy_name }}</p>
   </div>
   <div class="col-3">
-    <p>{{ fornecedor.telefone }}</p>
+    <p>{{ fornecedor.contacts[0].tel_1 }}</p>
   </div>
   <div class="col-3">
-    <p>{{ fornecedor.email }}</p>
+    <p>{{ fornecedor.contacts[0].email }}</p>
   </div>
   <div class="col text-end">
     <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
