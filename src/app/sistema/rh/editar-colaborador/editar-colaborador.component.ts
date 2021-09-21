@@ -24,6 +24,7 @@ import { getDate } from '../../../../environments/global';
 })
 export class EditarColaboradorComponent implements OnInit {
 
+  public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
   filiais: any[] = []
@@ -39,7 +40,7 @@ export class EditarColaboradorComponent implements OnInit {
     'rg': new FormControl('', [BrazilValidator.isValidRG]),
     'rgExpedicao': new FormControl('', [Validators.required]),
     'rgOrgaoEmissor': new FormControl('', [Validators.required]),
-    'cnpj': new FormControl('', [BrazilValidator.isValidCpf]),
+    'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf]),
     'cnh': new FormControl(''),
     'gender': new FormControl(''),
     'civilState': new FormControl('', [Validators.required]),
@@ -70,7 +71,6 @@ export class EditarColaboradorComponent implements OnInit {
     'experiencePeriod': new FormControl(''),
     'fireDate': new FormControl(null),
     'pis': new FormControl(''),
-    'mei': new FormControl('', [BrazilValidator.isValidCpf]),
     'bank': new FormControl('', [Validators.required]),
     'bankAccountType': new FormControl('', [Validators.required]),
     'bankAgency': new FormControl('', [Validators.required]),
@@ -132,7 +132,7 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('rg')?.setValue(data.rg)
       this.rhForm.get('rgExpedicao')?.setValue(String(data.rgExpedicao.substring(10, 0)))
       this.rhForm.get('rgOrgaoEmissor')?.setValue(data.rgOrgaoEmissor)
-      this.rhForm.get('cnpj')?.setValue(data.cnpj)
+      this.rhForm.get('cpfcnpj')?.setValue(data.cpfcnpj)
       this.rhForm.get('cnh')?.setValue(data.cnh)
       this.rhForm.get('gender')?.setValue(data.gender)
       this.rhForm.get('civilState')?.setValue(data.civilState)
@@ -163,7 +163,6 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('experiencePeriod')?.setValue(data.experiencePeriod)
       this.rhForm.get('fireDate')?.setValue(String(data.fireDate.substring(10, 0)))
       this.rhForm.get('pis')?.setValue(data.pis)
-      this.rhForm.get('mei')?.setValue(data.mei)
       this.rhForm.get('bank')?.setValue(data.bank)
       this.rhForm.get('bankAccountType')?.setValue(data.bankAccountType)
       this.rhForm.get('bankAgency')?.setValue(data.bankAgency)
@@ -351,6 +350,16 @@ export class EditarColaboradorComponent implements OnInit {
       })
     }
     this.faltas.removeAt(i)
+  }
+
+  /* 
+  ................................
+  ::sistema de trocar de página ::
+  ::............................::
+  */
+
+  public toggleEstoqueSection(value: string): void {
+    this.estoqueSection = value;
   }
 
 }

@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+<div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col pb-4 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
+        <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/rh/">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-12 text-center">
+            <h1 class="text-custom-dark text-truncate">Controle de Vale Transporte</h1>
+        </div>
+
+        <div class="tabela col-12 mt-4 row">
+            <table class="col-11 m-auto">
+                <thead class="col-12">
+                    <tr>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">VT</td>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Dias</td>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Total</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Colaborador</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">R$ 6,00</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">15</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">R$ 12,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+         <div class="col-12 row">
+                <div class="col-10 row">
+                    <div class="col-4 row m-auto">
+                        <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
+                            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+                        </a>
+                    </div>
+                    <div class="col-4 row m-auto">
+                        <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
+                            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-2 row">
+                    <div class="col px-0 m-0 text-center d-flex align-items-center" for="add-falta">
+                        <i class="bi bi-file-earmark-pdf-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
+                    </div>
+                    <!-- bi bi-file-excel -->
+                    <div class="col px-0 m-0 text-center d-flex align-items-center" for="add-falta">
+                        <i class="bi bi-file-excel icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

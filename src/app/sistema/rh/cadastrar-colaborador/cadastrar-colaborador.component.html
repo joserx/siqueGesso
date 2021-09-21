@@ -1,14 +1,13 @@
 <app-navbar></app-navbar>
 <app-add-filial class="overlay" *ngIf="openModal" (closeModal)="updateFilial()"></app-add-filial>
+
 <div class="row p-0 m-0">
-  <!-- positions: fixed; -->
   <div class="col-auto m-0 p-0 bg-custom-light">
     <app-sidemenu></app-sidemenu>
   </div>
-  <div class="col m-0 pb-5 bg-custom-white">
+  <div class="col pb-4 m-0 bg-custom-white">
     <!-- Página -->
     <div class="container">
-
 
       <!-- Botão de voltar -->
       <div class="row m-0 justify-content-start mt-4">
@@ -17,720 +16,634 @@
         </a>
       </div>
 
-      <!-- Formulário -->
-      <form [formGroup]="rhForm" (ngSubmit)="sendForm(rhForm.value)">
-        <div class="row m-0 mt-4 pb-4 justify-content-center border-bottom">
-
-          <div class="col-6 pb-4 d-flex align-items-center border-bottom">
-            <div class="avatar shadow-sm rounded-circle img-fluid" [ngStyle]="{ background : 'url(' + avatarImg + ')' }"
-              alt="Avatar"></div>
-            <input type="file" accept="image/*" (change)="uploadImage($event)" style="display: none;" #fileInput>
-            <a class="fw-bold text-custom-dark fs-5 px-5" (click)="fileInput.click()">Trocar foto de perfil</a>
-          </div>
-          <div class="col-6 pb-4 d-flex border-bottom align-items-end justify-content-end">
+      <div class="row m-0 my-4">
+        <div class="col-12 row">
+          <ul class="nav nav-tabs fs-5 fw-lighter">
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="estoqueSection == 'dados-pessoais'" (click)="toggleEstoqueSection('dados-pessoais')">Dados pessoais</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="estoqueSection == 'setor'" (click)="toggleEstoqueSection('setor')">Setor/dpo</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="estoqueSection == 'dados-fin'" (click)="toggleEstoqueSection('dados-fin')">Dados Financeiros</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="estoqueSection == 'exames'" (click)="toggleEstoqueSection('exames')">Exames</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link px-4" [class.active]="estoqueSection == 'uniforme'" (click)="toggleEstoqueSection('uniforme')">Uniforme/epi</a>
+            </li>
+          </ul>
+          <div class="col-12 pb-4 d-flex border-bottom align-items-end justify-content-end">
             <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' :
-              'Desativado' }}</label>
+            'Desativado' }}</label>
             <div class="form-check form-switch">
-              <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado"
+            <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado"
                 (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Nome -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="name" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="Nome">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
-          </div>
+      <form [formGroup]="rhForm" (ngSubmit)="sendForm(rhForm.value)">
+        <div *ngIf="estoqueSection == 'dados-pessoais'">
+          <!-- Formulário -->
+              <div class="row m-0 mt-4 justify-content-center border-bottom rh-form">
+                <div class="col-12 pb-4 d-flex align-items-center border-bottom">
+                    <div class="avatar shadow-sm rounded-circle img-fluid" [ngStyle]="{ background : 'url(' + avatarImg + ')' }"
+                    alt="Avatar"></div>
+                    <input type="file" accept="image/*" (change)="uploadImage($event)" style="display: none;" #fileInput>
+                    <a class="fw-bold text-custom-dark fs-5 px-5" (click)="fileInput.click()">Trocar foto de perfil</a>
+                </div>
 
-          <!-- Sobrenome -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="surname"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Sobrenome">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Sobrenome</label>
-          </div>
+                <!-- Nome -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="name" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                    type="text" placeholder="Nome">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+                </div>
 
-          <!-- Data de nascimento -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="birthDate"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Data de nascimento" [max]="getDate(18)">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
-          </div>
+                <!-- Sobrenome -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="surname"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Sobrenome">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Sobrenome</label>
+                </div>
 
-          <!-- RG -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-0||0.000.000-0"
-              formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="RG">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
-          </div>
+                <!-- Data de nascimento -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="birthDate"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                    placeholder="Data de nascimento" [max]="getDate(18)">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+                </div>
 
-          <!-- Expedição -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="rgExpedicao"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Expedição">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Expedição</label>
-          </div>
+                <!-- RG -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-0||0.000.000-0"
+                    formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                    type="text" placeholder="RG">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
+                </div>
 
-          <!-- Órgão emissor -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="rgOrgaoEmissor"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Órgão emissor">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Órgão emissor</label>
-          </div>
+                <!-- Expedição -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="rgExpedicao"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                    placeholder="Expedição">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Expedição</label>
+                </div>
 
-          <!-- CNPJ -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input [class.invalid]="cpf?.invalid && (cpf?.dirty || cpf?.touched)" mask="000.000.000-00"
-              formControlName="cnpj" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="CPF">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF</label>
-          </div>
+                <!-- Órgão emissor -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="rgOrgaoEmissor"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Órgão emissor">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Órgão emissor</label>
+                </div>
 
-          <!-- CNH -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="cnh" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" maxlength="11" type="text" placeholder="CNH">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNH</label>
-          </div>
+                <!-- CPF ou CNPJ -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input [class.invalid]="cpf?.invalid && (cpf?.dirty || cpf?.touched)" mask="CPF_CNPJ" formControlName="cpfcnpj"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="CPF">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF/CNPJ</label>
+                </div>
 
-          <!-- Gênero -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select formControlName="gender"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Necessidade especial">
-              <option value="" disabled selected>Gênero</option>
-              <option value="Feminino">Feminino</option>
-              <option value="Masculino">Masculino</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Gênero</label>
-          </div>
+                <!-- CNH -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input maxlength="11" formControlName="cnh" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"  type="text" placeholder="CNH">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNH</label>
+                </div>
 
-          <!-- Estado civil -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select formControlName="civilState"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Necessidade especial">
-              <option value="" disabled selected>Estado Civil</option>
-              <option value="Solteiro">Solteiro</option>
-              <option value="Casado">Casado</option>
-              <option value="Divorciado">Divorciado</option>
-              <option value="Viúvo">Viúvo</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado Civil</label>
-          </div>
+                <!-- Gênero -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <select formControlName="gender"
+                    class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                    placeholder="Necessidade especial">
+                    <option value="" disabled selected>Gênero</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                    </select>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Gênero</label>
+                </div>
 
-          <!-- PcD -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select #pcd (change)="log(pcd.value)"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Necessidade especial" FormControlName="pcd">
-              <option value="" disabled selected>Pessoa com deficiência?</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
-            </select>
-          </div>
+                <!-- Estado civil -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <select formControlName="civilState"
+                    class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                    placeholder="Necessidade especial">
+                    <option value="" disabled selected>Estado Civil</option>
+                    <option value="Solteiro">Solteiro</option>
+                    <option value="Casado">Casado</option>
+                    <option value="Divorciado">Divorciado</option>
+                    <option value="Viúvo">Viúvo</option>
+                    </select>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado Civil</label>
+                </div>
 
-          <!-- Necessidade especial -->
-          <div *ngIf="pcd.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="deficiency"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Necessidade especial">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Necessidade especial</label>
-          </div>
+                <!-- PcD -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <select #pcd (change)="log(pcd.value)"
+                    class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                    placeholder="Necessidade especial" >
+                    <option value="" disabled selected>Pessoa com deficiência?</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Nao">Não</option>
+                    </select>
+                </div>
+                <!--  -->
 
-          <!-- Escolaridade -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select formControlName="scholarship"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Necessidade especial">
-              <option value="Escolaridade" disabled selected>Escolaridade</option>
-              <option value="Ensino fundamental">Ensino fundamental</option>
-              <option value="Ensino médio">Ensino médio</option>
-              <option value="Ensino superior">Ensino superior</option>
-              <option value="Pós graduação">Pós graduação</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Escolaridade</label>
-          </div>
+                <!-- Necessidade especial -->
+                <div *ngIf="pcd.value === 'Sim'"  class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="deficiency"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Necessidade especial">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Necessidade especial</label>
+                </div>
+                <!--  -->
 
-          <!-- Nacionalidade -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="nacionality"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Nacionalidade">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nacionalidade</label>
-          </div>
+                <!-- Escolaridade -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <select formControlName="scholarship"
+                    class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                    placeholder="Necessidade especial">
+                    <option value="" disabled selected>Escolaridade</option>
+                    <option value="Ensino fundamental">Ensino fundamental</option>
+                    <option value="Ensino médio">Ensino médio</option>
+                    <option value="Ensino superior">Ensino superior</option>
+                    <option value="Pós graduação">Pós graduação</option>
+                    </select>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Escolaridade</label>
+                </div>
 
-          <!-- Naturalidade -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="naturality"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Naturalidade">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Naturalidade</label>
-          </div>
+                <!-- Nacionalidade -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="nacionality" 
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Nacionalidade">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nacionalidade</label>
+                </div>
 
-          <!-- Nome da mãe -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="motherName"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Nome da mãe">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome da mãe</label>
-          </div>
+                <!-- Naturalidade -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="naturality"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Naturalidade">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Naturalidade</label>
+                </div>
 
-          <!-- Nome do pai -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="fatherName"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Nome do pai">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do pai</label>
-          </div>
+                <!-- Nome da mãe -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="motherName"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Nome da mãe">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome da mãe</label>
+                </div>
 
-          <!-- CEP -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input [class.invalid]="cep?.invalid && (cep?.dirty || cep?.touched)" (blur)="changeAddress($event)"
-              mask="00000-000" formControlName="cep"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="CEP">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
-          </div>
+                <!-- Nome do pai -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="fatherName"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Nome do pai">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do pai</label>
+                </div>
 
-          <!-- Logradouro -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="street"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Logradouro">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
-          </div>
+                <!-- CEP -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input [class.invalid]="cep?.invalid && (cep?.dirty || cep?.touched)" (blur)="changeAddress($event)"
+                    mask="00000-000" formControlName="cep"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="CEP">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+                </div>
 
-          <!-- Número -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="addressNumber"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Número">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
-          </div>
+                <!-- Logradouro -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="street"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Logradouro">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
+                </div>
 
-          <!-- Complemento -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="addressComplement"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Complemento">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
-          </div>
+                <!-- Número -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="addressNumber"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Número">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+                </div>
 
-          <!-- Bairro -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="neighborhood"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Bairro">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
-          </div>
+                <!-- Complemento -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="addressComplement"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Complemento">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+                </div>
 
-          <!-- Cidade -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="city" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="Cidade">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
-          </div>
+                <!-- Bairro -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="neighborhood"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Bairro">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
+                </div>
 
-          <!-- Estado -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="state" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="Estado">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado</label>
-          </div>
+                <!-- Cidade -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="city" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                    type="text" placeholder="Cidade">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+                </div>
 
-          <!-- Telefone -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="(00) 0000-0000||(00) 00000-0000" formControlName="telephone"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Telefone">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
-          </div>
+                <!-- Estado -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="state" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                    type="text" placeholder="Estado">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Estado</label>
+                </div>
 
-          <!-- WhatsApp -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="(00) 00000-0000" formControlName="whatsapp"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="WhatsApp">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">WhatsApp</label>
-          </div>
+                <!-- Telefone -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input mask="(00) 0000-0000||(00) 00000-0000" formControlName="telephone"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Telefone">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+                </div>
 
-          <!-- Telefone Emergência -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="(00) 0000-0000||(00) 00000-0000" formControlName="emergencyTelephone"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Telefone Emergência">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone Emergência</label>
-          </div>
+                <!-- WhatsApp -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input mask="(00) 00000-0000" formControlName="whatsapp"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="WhatsApp">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">WhatsApp</label>
+                </div>
 
-          <!-- Email pessoal -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="personalEmail"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="email"
-              placeholder="Email pessoal">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email pessoal</label>
-          </div>
+                <!-- Telefone Emergência -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input mask="(00) 0000-0000||(00) 00000-0000" formControlName="emergencyTelephone"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                    placeholder="Telefone Emergência">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone Emergência</label>
+                </div>
 
-          <!-- Email corporativo -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="corporativeEmail"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="email"
-              placeholder="Email corporativo">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email corporativo</label>
-          </div>
+                <!-- Email pessoal -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="personalEmail"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="email"
+                    placeholder="Email pessoal">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email pessoal</label>
+                </div>
 
-          <div class="col-12 pt-4 p-0 m-0 border-bottom"></div>
+                <!-- Email corporativo -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="corporativeEmail"
+                    class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="email"
+                    placeholder="Email corporativo">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email corporativo</label>
+                </div>
+            </div>
+        </div>
 
+        <div *ngIf="estoqueSection == 'setor'">
           <!-- Departamento -->
-          <div class="col-6 px-2 pt-4 p-0 m-0">
-            <select formControlName="department"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Departamento">
-              <option value="" disabled selected>Departamento</option>
-              <option value="Compras">Compras</option>
-              <option value="RH">RH</option>
-              <option value="Comercial">Comercial</option>
-              <option value="Expedição">Expedição</option>
-              <option value="Estoque">Estoque</option>
-              <option value="Controladoria/Diretoria">Controladoria/Diretoria</option>
-            </select>
-          </div>
-
-          <!-- Cargo -->
-          <div class="col-6 px-2 pt-4 p-0 m-0">
-            <select formControlName="role"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Cargo">
-              <option value="" disabled selected>Cargo</option>
-              <option value="Cargo 1">Cargo 1</option>
-              <option value="Cargo 2">Cargo 2</option>
-            </select>
-          </div>
-
-          <!-- Tipo de contrato -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="contractType"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Tipo de contrato">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de contrato</label>
-          </div>
-
-          <!-- Turno -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="shift" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="Turno">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Turno</label>
-          </div>
-
-          <!-- Salário -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="paycheck"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
-              placeholder="Salário">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Salário</label>
-          </div>
-
-          <!-- Dupla Função -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="duplaFuncao"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
-              placeholder="Dupla Função" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dupla Função</label>
-          </div>
-
-          <!-- Data de admissão -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="admission"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              [max]="getDate()" placeholder="Data de admissão">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de admissão</label>
-          </div>
-
-          <!-- Período de experiência -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="experiencePeriod"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Período de experiência">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Período de experiência</label>
-          </div>
-
-          <!-- Data da demissão -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="fireDate"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Data da demissão">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da demissão</label>
-          </div>
-
-          <!-- PIS -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="pis" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="PIS">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">PIS</label>
-          </div>
-
-          <!-- MEI -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input [class.invalid]="mei?.invalid && (mei?.dirty || mei?.touched)" mask="CPF_CNPJ" formControlName="mei"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="CNPJ">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
-          </div>
-
-          <!-- Banco -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="bank" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="text" placeholder="Banco">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Banco</label>
-          </div>
-
-          <!-- Tipo de conta -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select formControlName="bankAccountType"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Necessidade especial">
-              <option value="" disabled selected>Tipo de conta</option>
-              <option value="poupança">Poupança</option>
-              <option value="corrente">Corrente</option>
-              <option value="pagamento">Pagamento</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de conta</label>
-          </div>
-
-          <!-- Agência -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="bankAgency"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Agência">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Agência</label>
-          </div>
-
-          <!-- Conta -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="bankAccountNumber"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Conta">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta</label>
-          </div>
-
-          <!-- Adicionar loja -->
-          <div class="col-4 px-0 pt-4 p-2 m-0 form-floating d-flex">
-            <select formControlName="filial"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Necessidade especial">
-              <option value="" disabled selected>Filial</option>
-              <!-- <option value="Sique Gesso Leste">Sique Gesso Leste</option>
-              <option value="Sique Gesso Penha">Sique Gesso Penha</option>
-              <option value="Sique Gesso Mais Atibaia">Sique Gesso Mais Atibaia</option>
-              <option value="Sique Gesso Cardon">Sique Gesso Cardon</option>
-              <option value="Sique Gesso Mais Caraguatatuba">Sique Gesso Mais Caraguatatuba</option>
-              <option value="Sique Gesso Juquehy">Sique Gesso Juquehy</option>
-              <option value="Sique Gesso Intaim">Sique Gesso Intaim</option> -->
-              <option *ngFor="let umaFilial of filiais" value="{{ umaFilial.nome }}">{{ umaFilial.nome }}</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Filial</label>
-            <div class="col-1 px-0 m-0 text-center d-flex align-items-center">
-              <i class="button-modal bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer" (click)="openModal=true"></i>
+          <div class="row m-0 mt-4 justify-content-center border-bottom rh-form">
+            <div class="col-6 px-2 pt-4 p-0 m-0">
+                <select formControlName="department"
+                class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                placeholder="Departamento">
+                <option value="Escolaridade" disabled selected>Departamento</option>
+                <option value="Compras">Compras</option>
+                <option value="RH">RH</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Expedição">Expedição</option>
+                <option value="Estoque">Estoque</option>
+                <option value="Controladoria/Diretoria">Controladoria/Diretoria</option>
+                </select>
             </div>
-          </div>
-          <div class="col-12 pt-4 p-0 m-0 border-bottom"></div>
-          <!-- Ultimo exame -->
-          <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
-            <input formControlName="lastExam"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Conta">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultimo exame</label>
-          </div>
 
-          <!-- Próximo exame -->
-          <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
-            <input formControlName="nextExam"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Conta">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Próximo exame</label>
-          </div>
+            <!-- Cargo -->
+            <div class="col-6 px-2 pt-4 p-0 m-0">
+                <select formControlName="role"
+                class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                placeholder="Cargo">
+                <option value="" disabled selected>Cargo</option>
+                <option value="Cargo 1">Cargo 1</option>
+                <option value="Cargo 2">Cargo 2</option>
+                </select>
+            </div>
 
-          <!-- Vencimento de Férias -->
-          <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
-            <input formControlName="vacationDueDate"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Conta">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vencimento de Férias</label>
-          </div>
-
-          <!-- Dias trabalhados -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="workDays"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
-              placeholder="Dias trabalhados">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dias trabalhados</label>
-          </div>
-
-          <!-- Vale Transporte -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select #vt (change)="log(vt.value)"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Vale Transporte" FormControl="vt">
-              <option value="" disabled selected>Vale Transporte (VT)?</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
-            </select>
-          </div>
-
-          <!-- Valor da condução -->
-          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="conducaoIda"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
-              placeholder="Valor da condução ida">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(ida)</label>
-          </div>
-
-          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="conducaoVolta"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
-              placeholder="Valor da condução volta">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(volta)</label>
-          </div>
-
-          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="linesNames"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Nome das linhas de transporte">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome das linhas de transporte</label>
-          </div>
-
-          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="totalValue"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
-              placeholder="Valor total" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor total</label>
-          </div>
-
-          <div class="col-12 pt-4 p-0 m-0 border-bottom"></div>
-
-          <div class="col-12 d-flex justify-content-center">
-
-            <!-- Tamnho da camiseta -->
+            <!-- Tipo de contrato -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Tamnho da camiseta" formControlName="tshirtSize">
-                <option value="" disabled selected>Tamanho da camiseta</option>
-                <option value="P">P</option>
-                <option value="M">M</option>
-                <option value="G">G</option>
-                <option value="GG">GG</option>
-                <option value="XG">XG</option>
-              </select>
+                <input formControlName="contractType"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Tipo de contrato">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de contrato</label>
             </div>
 
-            <!-- Ultima entrega -->
-           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="lastDeliveryTshirt"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Ultima entrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (camiseta)</label>
-           </div>
-
-          </div>
-
-          <div class="col-12 d-flex justify-content-center">
-
-            <!-- tamanho da calça -->
+            <!-- Turno -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Tamnho da calça" formControlName="pantsSize">
-                <option value="" disabled selected>Tamanho da calça</option>
-                <option value="38">36</option>
-                <option value="40">40</option>
-                <option value="42">42</option>
-                <option value="44">44</option>
-                <option value="48">48</option>
-              </select>
+                <input formControlName="shift" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                type="text" placeholder="Turno">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Turno</label>
             </div>
 
-            <!-- Ultima entrega -->
-           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="lastDeliveryPants"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Ultima entrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (calça)</label>
-           </div>
-
-          </div>
-
-          <div class="col-12 d-flex justify-content-center">
-
-            <!-- Tamanho do sapato -->
+            <!-- Data de admissão -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Tamnho da calçado" formControlName="shoesSize">
-                <option value="" disabled selected>Tamanho da calçado</option>
-                <option value="33">33</option>
-                <option value="34">34</option>
-                <option value="35">35</option>
-                <option value="36">36</option>
-                <option value="37">37</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-              </select>
+                <input formControlName="admission"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                [max]="getDate()" placeholder="Data de admissão">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de admissão</label>
             </div>
 
-            <!-- Ultima entrega -->
-           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="lastDeliveryShoes"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Ultima entrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (sapato)</label>
-           </div>
-
-          </div>
-
-          <div class="col-12 d-flex justify-content-center">
-
-            <!-- Tamanho do cinto -->
+            <!-- Período de experiência -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Tamnho do cinto" formControlName="beltSize">
-                <option value="" disabled selected>Tamanho do cinto</option>
-                <option value="P">P</option>
-                <option value="M">M</option>
-                <option value="G">G</option>
-                <option value="GG">GG</option>
-              </select>
+                <input formControlName="experiencePeriod"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Período de experiência">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Período de experiência</label>
             </div>
 
-            <!-- Ultima entrega -->
-           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="lastDeliveryBelt"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Ultima entrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (cinto)</label>
-           </div>
-
-          </div>
-
-          <div class="col-12 d-flex justify-content-center">
-
-            <!-- Tamanho do luva -->
+            <!-- Data da demissão -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Tamnho das luvas" formControlName="glovesSize">
-                <option value="" disabled selected>Tamanho das luvas</option>
-                <option value="P">P</option>
-                <option value="M">M</option>
-                <option value="G">G</option>
-              </select>
+                <input formControlName="fireDate"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                placeholder="Data da demissão">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da demissão</label>
             </div>
 
-            <!-- Ultima entrega -->
-           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="lastDeliveryGloves"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Ultima entrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (luva)</label>
-           </div>
-
-          </div>
-          
-          <div class="col-12 d-flex justify-content-center">
-
-            <!-- Tamanho do jaqueta -->
+            <!-- PIS -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Tamnho da jaqueta" formControlName="jacketSize">
-                <option value="" disabled selected>Tamanho da jaqueta</option>
-                <option value="P">P</option>
-                <option value="M">M</option>
-                <option value="G">G</option>
-                <option value="GG">GG</option>
-                <option value="XG">XG</option>
-              </select>
+                <input formControlName="pis" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                type="text" placeholder="PIS">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">PIS</label>
             </div>
-
-            <!-- Ultima entrega -->
-           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input formControlName="lastDeliveryJacket"
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Ultima entrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (jaqueta)</label>
-           </div>
-
-          </div>
-
-          <div class="col-12 pt-4 p-0 m-0 border-bottom"></div>
-
-          
-          <div class="col-12 d-flex justify-content-center" formArrayName="falta" *ngFor="let falta of faltas['controls']; let i = index">
-            <div class="col-12 d-flex justify-content-center" [formGroupName]="i">
-              
-              <!-- Ultima entrega -->
-                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                  <input formControlName="data"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-                  placeholder="Ultima entrega">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de falta</label>
-                </div>
-              
-              <!-- Tipo de falta -->
-                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                  <select
-                  class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                  placeholder="Tamnho do cinto" formControlName="tipo">
-                    <option value="" disabled selected>Tipo de falta</option>
-                    <option value="Justificada">Justificada</option>
-                    <option value="Não justificada">Não justificada</option>
-                  </select>
-                </div>
             
+            <!-- Vencimento de Férias -->
+            <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
+              <input formControlName="vacationDueDate"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Conta">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vencimento de Férias</label>
             </div>
-          
+
+            <!-- Adicionar loja -->
+            <div class="col-4 px-0 pt-4 p-2 m-0 form-floating d-flex">
+                <select formControlName="filial"
+                class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                placeholder="Necessidade especial">
+                <option value="" disabled selected>Filial</option>
+                <option *ngFor="let umaFilial of filiais" value="{{ umaFilial.nome }}">{{ umaFilial.nome }}</option>
+                </select>
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Filial</label>
+                <div class="col-1 px-0 m-0 text-center d-flex align-items-center">
+                <i class="button-modal bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer" (click)="openModal=true"></i>
+                </div>
+            </div>
           </div>
+        </div>
+
+        <div *ngIf="estoqueSection == 'dados-fin'">
+          <div class="row m-0 mt-4 justify-content-center border-bottom rh-form">
+            <!-- Banco -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="bank" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                type="text" placeholder="Banco">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Banco</label>
+            </div>
         
-        <div class="col-5 px-2 p-0 m-0 pt-4">
-          <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm" (click)="adicionarFalta()">
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark ">adicionar falta</h5>
-          </a>
-        </div>
-         
+            <!-- Tipo de conta -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <select formControlName="bankAccountType"
+                class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                placeholder="Necessidade especial">
+                <option value="" disabled selected>Tipo de conta</option>
+                <option value="poupança">Poupança</option>
+                <option value="corrente">Corrente</option>
+                <option value="pagamento">Pagamento</option>
+                </select>
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de conta</label>
+            </div>
+        
+            <!-- Agência -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="bankAgency"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Agência">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Agência</label>
+            </div>
+        
+            <!-- Conta -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="bankAccountNumber"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Conta">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta</label>
+            </div>
+        
+            <!-- Salário -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="paycheck"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+                placeholder="Salário" (change)="duplaFuncao(rhForm.value)">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Salário</label>
+            </div>
+        
+            <!-- Dupla Função -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="duplaFuncao"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+                placeholder="Dupla Função" readonly>
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dupla Função</label>
+            </div>
+          </div>    
         </div>
 
-        <div class="row m-0 mt-2">
+        <div *ngIf="estoqueSection == 'exames'">
+          <!-- Ultimo exame -->
+          <div class="row m-0 mt-4 justify-content-center rh-form">
+            <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
+                <input formControlName="lastExam"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                placeholder="Conta">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultimo exame</label>
+            </div>
 
-          <div class="col-12 px-2 pt-4 p-0 m-0 form-floating d-flex flex-column justify-content-between">
-            <a *ngFor="let anex of anexes" 
-              class="my-3 btn rounded-15 py-3 px-4 pl-2 bg-warning h-100 d-flex justify-content-between shadow-sm w-100">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Anexo: {{ anex.date | date}} Download</h5>
-              <div class="d-flex">
-                <i (click)="deleteAnex($event, anex)" class="bi-trash-fill my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
-                <i class="bi-cloud-download-fill px-4 my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
-              </div>
-          </a>
-            <button
-              class="my-3 btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm w-100"
-              type="button"
-              (click)="newFile.click()">
-              <input type="file" (change)="addFile($event)"  #newFile style="display: none;">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar Arquivo</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
-            </button>
+            <!-- Próximo exame -->
+            <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
+                <input formControlName="nextExam"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                placeholder="Conta">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Próximo exame</label>
+            </div>
           </div>
-
         </div>
 
+        <div *ngIf="estoqueSection == 'uniforme'">
+            <div class="row m-0 mt-4 justify-content-center border-bottom rh-form">
+                <div class="col-12 d-flex justify-content-center">
+
+                    <!-- Tamnho da camiseta -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                      <select
+                      class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                      placeholder="Tamnho da camiseta" formControlName="tshirtSize">
+                        <option value="P">P</option>
+                        <option value="M">M</option>
+                        <option value="G">G</option>
+                        <option value="GG">GG</option>
+                        <option value="XG">XG</option>
+                      </select>
+                      <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da camiseta</label>
+                    </div>
+        
+                    <!-- Ultima entrega -->
+                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="lastDeliveryTshirt"
+                      class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                      placeholder="Ultima entrega">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (camiseta)</label>
+                   </div>
+        
+                  </div>
+        
+                  <div class="col-12 d-flex justify-content-center">
+        
+                    <!-- tamanho da calça -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                      <select
+                      class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                      placeholder="Tamnho da calça" formControlName="pantsSize">
+                        <option value="38">36</option>
+                        <option value="40">40</option>
+                        <option value="42">42</option>
+                        <option value="44">44</option>
+                        <option value="48">48</option>
+                      </select>
+                      <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da calça</label>
+                    </div>
+        
+                    <!-- Ultima entrega -->
+                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="lastDeliveryPants"
+                      class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                      placeholder="Ultima entrega">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (calça)</label>
+                   </div>
+        
+                  </div>
+        
+                  <div class="col-12 d-flex justify-content-center">
+        
+                    <!-- Tamanho do sapato -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                      <select
+                      class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                      placeholder="Tamnho da calçado" formControlName="shoesSize">
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="43">43</option>
+                        <option value="44">44</option>
+                      </select>
+                      <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho do calçado</label>
+                    </div>
+        
+                    <!-- Ultima entrega -->
+                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="lastDeliveryShoes"
+                      class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                      placeholder="Ultima entrega">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (sapato)</label>
+                   </div>
+        
+                  </div>
+        
+                  <div class="col-12 d-flex justify-content-center">
+        
+                    <!-- Tamanho do cinto -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                      <select
+                      class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                      placeholder="Tamnho do cinto" formControlName="beltSize">
+                        <option value="P">P</option>
+                        <option value="M">M</option>
+                        <option value="G">G</option>
+                        <option value="GG">GG</option>
+                      </select>
+                      <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho do cinto</label>
+                    </div>
+        
+                    <!-- Ultima entrega -->
+                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="lastDeliveryBelt"
+                      class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                      placeholder="Ultima entrega">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (cinto)</label>
+                   </div>
+        
+                  </div>
+        
+                  <div class="col-12 d-flex justify-content-center">
+        
+                    <!-- Tamanho do luva -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                      <select
+                      class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                      placeholder="Tamnho das luvas" formControlName="glovesSize">
+                        <option value="P">P</option>
+                        <option value="M">M</option>
+                        <option value="G">G</option>
+                      </select>
+                      <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho das luvas</label>
+                    </div>
+        
+                    <!-- Ultima entrega -->
+                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="lastDeliveryGloves"
+                      class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                      placeholder="Ultima entrega">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (luva)</label>
+                   </div>
+        
+                  </div>
+                  
+                  <div class="col-12 d-flex justify-content-center">
+        
+                    <!-- Tamanho do jaqueta -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                      <select
+                      class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                      placeholder="Tamnho da jaqueta" formControlName="jacketSize">
+                        <option value="P">P</option>
+                        <option value="M">M</option>
+                        <option value="G">G</option>
+                        <option value="GG">GG</option>
+                        <option value="XG">XG</option>
+                      </select>
+                      <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da jaqueta</label>
+                    </div>
+        
+                    <!-- Ultima entrega -->
+                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="lastDeliveryJacket"
+                      class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
+                      placeholder="Ultima entrega">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (jaqueta)</label>
+                   </div>
+        
+                </div>
+            </div>
+        </div>
         <div class="row m-0 mt-4 justify-content-end">
 
           <!-- Botão Salvar -->
@@ -743,7 +656,7 @@
 
         </div>
       </form>
-
+          
     </div>
     <!-- /Página -->
   </div>

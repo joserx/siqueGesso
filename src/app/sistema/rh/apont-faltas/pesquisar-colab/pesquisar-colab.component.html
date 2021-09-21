@@ -1,0 +1,66 @@
+
+<!-- Modal -->
+<div class="modal fade" id="pesquisarColaborador" tabindex="-1" aria-labelledby="pesquisarClienteLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Pesquisar Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+          <div class="col-4 px-2 p-0 m-0 position-relative">
+            <input (keyup)="filtrar($event)" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+            <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+          </div>
+
+         <!-- Lista de clientes -->
+          <div class="row py-3 p-0 m-0">
+            <div>
+              <table class="col-11 m-auto">
+                <thead class="col-12">
+                    <tr>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">id</td>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nome</td>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Sobrenome</td>
+                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="for let nome of colab">
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.id}}</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.name}}</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.surname}}</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.role}}</td>
+                        <td class="lead text-custom-dark text-center fw-normal">
+                          <button type="submit"class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex m-auto justify-content-between shadow-sm" (click)="value.emit(nome)">
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar</h5>
+                          </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+          </div>
+          <!-- Dados cadastrais -->
+        </div>
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+
+          <!-- Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button data-bs-dismiss="modal" type="reset"
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+            </button>
+          </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>

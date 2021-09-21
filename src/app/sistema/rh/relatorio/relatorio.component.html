@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+<div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col pb-4 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/rh/faltas">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
+            <div class="col-12 text-center">
+                <h1 class="text-custom-dark text-truncate">Relatório</h1>
+            </div>
+            <div class="col-12 row">
+                <form class="row" [formGroup]="faltaForm">
+
+                    <div class="col row">
+                        <label class="col-1 px-0 m-0 text-center d-flex align-items-center" for="add-falta">
+                          <i class="bi bi-calendar icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
+                        </label>
+                        <div class="col-11 px-2 p-0 m-0 position-relative">
+                          <input formControlName="data" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="date"id="add-falta" name="add-falta">
+                        </div>
+                    </div>
+                    <div class="col row">
+                        <div class="px-2 p-0 m-0 form-floating">
+                          <select formControlName="cargo"
+                          class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                          placeholder="Necessidade especial">
+                          <option value="" disabled selected>Colaborador</option>
+                          <option value="Colaborador 1"> Colaborador 1</option>
+                          <option value="Colaborador 2">Colaborador 2</option>
+                          </select>
+                          <label class="ms-2 small text-truncate text-custom-dark">Colaborador</label>
+                        </div>
+                    </div>
+                    <div class="col row">
+                        <div class="px-2 p-0 m-0 form-floating">
+                          <select formControlName="tipoFalta"
+                          class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                          placeholder="Necessidade especial">
+                          <option value="" disabled selected>Tipo de falta</option>
+                          <option value="Justificada"> Justificada</option>
+                          <option value="Não Justificada">Não Justificada</option>
+                          </select>
+                          <label class="ms-2 small text-truncate text-custom-dark">Tipo de falta</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tabela col-12 mt-4">
+                <table class="col-12">
+                    <thead class="col-12">
+                        <tr>
+                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
+                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
+                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
+                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Colaborador</td>
+                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Cargo</td>
+                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Data</td>
+                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Tipo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 row">
+                <div class="col-10 row">
+                    <div class="col-4 row m-auto">
+                        <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
+                            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+                        </a>
+                    </div>
+                    <div class="col-4 row m-auto">
+                        <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
+                            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-2 row">
+                    <div class="col px-0 m-0 text-center d-flex align-items-center" for="add-falta">
+                        <i class="bi bi-file-earmark-pdf-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
+                    </div>
+                    <!-- bi bi-file-excel -->
+                    <div class="col px-0 m-0 text-center d-flex align-items-center" for="add-falta">
+                        <i class="bi bi-file-excel icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

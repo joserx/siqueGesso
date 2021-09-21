@@ -25,6 +25,10 @@ import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/edit
 import { LogoutComponent } from './sistema/login/logout/logout.component';
 import { EditarClientesComponent } from './sistema/vendas/editar-clientes/editar-clientes.component';
 import { AddFilialComponent } from './sistema/rh/cadastrar-colaborador/add-filial/add-filial.component';
+import { RhMenuComponent } from './sistema/rh/rh-menu/rh-menu.component';
+import { ApontFaltasComponent } from './sistema/rh/apont-faltas/apont-faltas.component';
+import { ControleVtComponent } from './sistema/rh/controle-vt/controle-vt.component';
+import { RelatorioComponent } from './sistema/rh/relatorio/relatorio.component';
 
 const routes: Routes = [
   {
@@ -62,8 +66,12 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'listar',
+            redirectTo: 'menu-rh',
             pathMatch: 'full'
+          },
+          {
+            path:'menu-rh',
+            component: RhMenuComponent
           },
           {
             path: 'listar',
@@ -77,6 +85,18 @@ const routes: Routes = [
             path: 'editar/:id',
             component: EditarColaboradorComponent
           },
+          {
+            path: 'faltas',
+            component: ApontFaltasComponent
+          },
+          {
+            path: 'controle',
+            component: ControleVtComponent
+          },
+          {
+            path: 'relatorio',
+            component: RelatorioComponent
+          }
         ]
       },
       {

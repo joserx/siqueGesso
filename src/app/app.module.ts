@@ -64,6 +64,11 @@ import { EditarPedidosRealizadosComponent } from './sistema/vendas/editar-client
 import { EditarResumoFinanceiroComponent } from './sistema/vendas/editar-clientes/resumo-financeiro/resumo-financeiro.component';
 import { PesquisarClienteComponent } from './sistema/vendas/clientes/listar-clientes/pesquisar-cliente/pesquisar-cliente.component';
 import { AddFilialComponent } from './sistema/rh/cadastrar-colaborador/add-filial/add-filial.component';
+import { RhMenuComponent } from './sistema/rh/rh-menu/rh-menu.component';
+import { ApontFaltasComponent } from './sistema/rh/apont-faltas/apont-faltas.component';
+import { ControleVtComponent } from './sistema/rh/controle-vt/controle-vt.component';
+import { RelatorioComponent } from './sistema/rh/relatorio/relatorio.component';
+import { PesquisarColabComponent } from './sistema/rh/apont-faltas/pesquisar-colab/pesquisar-colab.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -131,6 +136,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditarResumoFinanceiroComponent,
     PesquisarClienteComponent,
     AddFilialComponent,
+    RhMenuComponent,
+    ApontFaltasComponent,
+    ControleVtComponent,
+    RelatorioComponent,
+    PesquisarColabComponent,
   ],
   imports: [
     BrowserModule,
