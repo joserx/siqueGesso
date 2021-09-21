@@ -1,3 +1,5 @@
+@import "../../../../_variables.scss";
+
 button.button-modal{
     border: none;
     background: transparent;
@@ -15,4 +17,25 @@ button.button-modal{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.nav-link.active {
+  background: transparent;
+  font-weight: normal;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.nav-link {
+  background-color: $custom-dark;
+  color: $custom-light;
+  &:hover {
+    background-color: #464646;
+  }
+}
+
+.rh-form{
+  min-height: 300px;
 }

@@ -18,6 +18,7 @@ import { getDate } from '../../../../environments/global';
 })
 export class CadastrarColaboradorComponent implements OnInit {
 
+  public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
   filiais: any[] = []
@@ -33,7 +34,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     'rg': new FormControl('', [BrazilValidator.isValidRG]),
     'rgExpedicao': new FormControl('', [Validators.required]),
     'rgOrgaoEmissor': new FormControl('', [Validators.required]),
-    'cnpj': new FormControl('', [BrazilValidator.isValidCpf]),
+    'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf]),
     'cnh': new FormControl(''),
     'gender': new FormControl(''),
     'civilState': new FormControl('', [Validators.required]),
@@ -249,6 +250,16 @@ export class CadastrarColaboradorComponent implements OnInit {
         'id': new FormControl(null)
       })
     )
+  }
+
+   /* 
+  ................................
+  ::sistema de trocar de página ::
+  ::............................::
+  */
+
+  public toggleEstoqueSection(value: string): void {
+    this.estoqueSection = value;
   }
 
 }

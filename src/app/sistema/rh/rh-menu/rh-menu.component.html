@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+      <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+      <!-- Página home -->
+      <div class="container">
+  
+        <!-- Botão de voltar -->
+        <div class="row m-0 justify-content-start mt-4">
+          <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/">
+            <i class="bi-arrow-left fs-3 text-secondary"></i>
+          </a>
+        </div>
+
+        <div class="col-12 text-center">
+          <h1 class="text-custom-dark text-truncate">Área de RH</h1>
+        </div>
+  
+        <!-- Cards -->
+        <div class="row m-0 my-5 p-0 justify-content-center align-items-center">
+          <a class="col-3 mx-3 my-3 p-4 text-center rounded-15 bg-white shadow-sm" *ngFor="let card of cards;" routerLink="{{card.href}}">
+            <i class="{{card.icon}} text-custom-dark" style="font-size: 4rem;"></i>
+            <h4 class="text-custom-dark fw-normal text-truncate">{{card.nome}}</h4>
+          </a>
+        </div>
+  
+      </div>
+    </div>
+  </div>
