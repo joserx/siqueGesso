@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { FornecedorService } from 'src/app/services/fornecedores.service';
+import Swal from 'sweetalert2';
+import { EditFornecedorComponent } from './edit-fornecedor/edit-fornecedor.component';
+import { ViewFornecedorComponent } from './view-fornecedor/view-fornecedor.component';
 
 @Component({
   selector: 'app-fornecedores',
@@ -7,16 +11,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FornecedoresComponent implements OnInit {
 
-  public fornecedores: any = [
-    { id: 1, nome: "Finger Digital", telefone: "11 9 9999-9999", email: "michael.jordan@siquegesso.com"},
-    { id: 2, nome: "Finger Digital", telefone: "11 9 9999-9999", email: "ricardo.botega@siquegesso.com"},
-    { id: 3, nome: "Finger Digital", telefone: "11 9 9999-9999", email: "deise.teixeira@siquegesso.com"},
-    { id: 4, nome: "Finger Digital", telefone: "11 9 9999-9999", email: "thais.camila@siquegesso.com"},
-  ]
+  public fornecedores: any = []
 
-  constructor() { }
+  @ViewChild(ViewFornecedorComponent)
+  viewFornecedorCompenent: any
+
+  @ViewChild(EditFornecedorComponent)
+  editFornecedorComponent: any
+
+  constructor(
+    private fornecedorService: FornecedorService
+  ) { }
 
   ngOnInit(): void {
+    this.getFornecedores()
+  }
+
+  getFornecedores(){
+    this.fornecedorService.find().subscribe(res => {
+      this.fornecedores = res
+    })
+  }
+
+  loadFornecedorView(fornecedor: any){ this.viewFornecedorCompenent.loadForm(fornecedor) }
+  loadFornecedorEdit(fornecedor: any){ this.editFornecedorComponent.loadForm(fornecedor) }
+
+  delete(fornecedor: any){
+    Swal.fire({
+      title: `Deseja deletar ${fornecedor.fantasy_name}?`,
+      icon: 'question',
+      showConfirmButton: true,
+      confirmButtonText: 'Confirmar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar'
+    }).then(res => {
+      if (res.isConfirmed) 
+        this.fornecedorService.delete(fornecedor.id).subscribe(() => {
+          this.getFornecedores()
+          return Swal.fire({ title: 'Forncedor deletado!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
+        })
+      else Swal.fire({ title: 'Ação cancelada!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
+    })
   }
 
 }

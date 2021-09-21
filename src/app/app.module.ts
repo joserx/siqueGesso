@@ -64,6 +64,8 @@ import { EditarPedidosRealizadosComponent } from './sistema/vendas/editar-client
 import { EditarResumoFinanceiroComponent } from './sistema/vendas/editar-clientes/resumo-financeiro/resumo-financeiro.component';
 import { PesquisarClienteComponent } from './sistema/vendas/clientes/listar-clientes/pesquisar-cliente/pesquisar-cliente.component';
 import { AddFilialComponent } from './sistema/rh/cadastrar-colaborador/add-filial/add-filial.component';
+import { ViewFornecedorComponent } from './sistema/estoque/fornecedores/view-fornecedor/view-fornecedor.component';
+import { EditFornecedorComponent } from './sistema/estoque/fornecedores/edit-fornecedor/edit-fornecedor.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -131,6 +133,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditarResumoFinanceiroComponent,
     PesquisarClienteComponent,
     AddFilialComponent,
+    ViewFornecedorComponent,
+    EditFornecedorComponent,
   ],
   imports: [
     BrowserModule,

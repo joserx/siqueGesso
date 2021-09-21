@@ -16,7 +16,7 @@ export class UsuarioSistemaService {
   }
 
   findOne(id : number) {
-    return this.http.get(environment.apiUrl + 'user/' + id);
+    return this.http.get(environment.apiUrl + 'user/info/' + id);
   }
 
   create(data : any) {

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 import { UsuarioSistemaService } from 'src/app/services/usuario-sistema.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-criar-usuario-sistema',
@@ -94,6 +95,7 @@ export class CriarUsuarioSistemaComponent implements OnInit {
       }
       this.usuarioSistemaService.create(user).subscribe((res: any) => {
         if (res.id) {
+          Swal.fire({ title: 'Usuário criado com sucesso!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true });
           this.router.navigate(['sistema', 'usuarios-sistema', 'listar'])
         }
       })
