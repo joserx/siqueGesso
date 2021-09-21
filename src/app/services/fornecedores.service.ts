@@ -20,6 +20,10 @@ export class FornecedorService {
     return this.http.post(`${environment.apiUrl}provider/`, payload)
   }
 
+  delete(id: number){
+    return this.http.delete(`${environment.apiUrl}provider/${id}`)
+  }
+
   updateCep(cep: string) {
     return new Observable((x) => {
       var request = new XMLHttpRequest();
