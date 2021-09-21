@@ -1,17 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
+import { BrazilValidator } from 'src/app/_helpers/brasil';
 import Swal, { SweetAlertResult } from 'sweetalert2';
-import { BrazilValidator } from '../../../../_helpers/brasil';
 
 @Component({
-  selector: 'app-adicionar-fornecedores',
-  templateUrl: './adicionar-fornecedores.component.html',
-  styleUrls: ['./adicionar-fornecedores.component.scss']
+  selector: 'app-edit-fornecedor',
+  templateUrl: './edit-fornecedor.component.html',
+  styleUrls: ['./edit-fornecedor.component.scss']
 })
-export class AdicionarFornecedoresComponent implements OnInit {
+export class EditFornecedorComponent implements OnInit {
 
   fornecedorForm: FormGroup = new FormGroup({
+    id: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
     cnpj: new FormControl('', [Validators.required, BrazilValidator.isValidCNPJ]),
     fantasy_name: new FormControl('', Validators.required),
@@ -22,6 +23,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
     is_exempt: new FormControl(false, Validators.required),
     municipal_registration: new FormControl('', Validators.required),
     address: new FormGroup({
+      id: new FormControl('', Validators.required),
       cep: new FormControl('', Validators.required),
       street: new FormControl('', Validators.required),
       number: new FormControl('', Validators.required),
@@ -32,6 +34,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
       country: new FormControl('Brasil', Validators.required)
     }),
     contacts: new FormArray([new FormGroup({
+      id: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       whatsApp: new FormControl('', Validators.required),
       tel_1: new FormControl('', Validators.required),
@@ -55,6 +58,51 @@ export class AdicionarFornecedoresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+  
+  loadForm(fornecedorInput: any){
+    console.log(fornecedorInput)
+    this.fornecedorForm = new FormGroup({
+      id: new FormControl(fornecedorInput.id, Validators.required),
+      category: new FormControl(fornecedorInput.category, Validators.required),
+      cnpj: new FormControl(fornecedorInput.cnpj, [Validators.required, BrazilValidator.isValidCNPJ]),
+      fantasy_name: new FormControl(fornecedorInput.fantasy_name, Validators.required),
+      social_reason: new FormControl(fornecedorInput.social_reason, Validators.required),
+      tribute_code: new FormControl(fornecedorInput.tribute_code, Validators.required),
+      contribuinte: new FormControl(fornecedorInput.contribuinte, Validators.required),
+      state_registration: new FormControl(fornecedorInput.state_registration, Validators.required),
+      is_exempt: new FormControl(fornecedorInput.is_exempt, Validators.required),
+      municipal_registration: new FormControl(fornecedorInput.municipal_registration, Validators.required),
+      address: new FormGroup({
+        id: new FormControl(fornecedorInput.address.id, Validators.required),
+        cep: new FormControl(fornecedorInput.address.cep, Validators.required),
+        street: new FormControl(fornecedorInput.address.street, Validators.required),
+        number: new FormControl(fornecedorInput.address.number, Validators.required),
+        complement: new FormControl(fornecedorInput.address.complement),
+        neighborhood: new FormControl(fornecedorInput.address.neighborhood, Validators.required),
+        city: new FormControl(fornecedorInput.address.city, Validators.required),
+        state: new FormControl(fornecedorInput.address.state, Validators.required)
+      }),
+      contacts: new FormArray([]),
+      payment_condition: new FormControl(),
+      first_payment: new FormControl(fornecedorInput.first_payment, Validators.required),
+      last_payment: new FormControl(fornecedorInput.last_payment, Validators.required),
+      notes: new FormControl(fornecedorInput.notes, Validators.required)
+    })
+    for (let fornecedor of fornecedorInput.contacts){
+      this.c.push(new FormGroup({
+        id: new FormControl(fornecedor.id, Validators.required),
+        name: new FormControl(fornecedor.name, Validators.required),
+        whatsApp: new FormControl(fornecedor.whatsApp, Validators.required),
+        tel_1: new FormControl(fornecedor.tel_1, Validators.required),
+        ramal_1: new FormControl(fornecedor.ramal_1, Validators.required),
+        tel_2: new FormControl(fornecedor.tel_2, Validators.required),
+        ramal_2: new FormControl(fornecedor.ramal_2, Validators.required),
+        email: new FormControl(fornecedor.email, [Validators.required, Validators.email]),
+        email_nf: new FormControl(fornecedor.email_nf, [Validators.required, Validators.email]),
+        site: new FormControl(fornecedor.site, Validators.required),
+      }))
+    }
   }
 
   public adicionarContato(): void {
@@ -81,18 +129,6 @@ export class AdicionarFornecedoresComponent implements OnInit {
       this.closeBtn.nativeElement.click()
       return Swal.fire({ title: 'Forncedor salvo!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
     })
-  }
-
-  loadCep(cep: any) {
-    cep = cep.value
-    if (cep.length == 9) {
-      this.fornecedorService.updateCep(cep.replace(/-/g, "")).subscribe((data: any) => {
-        this.a.get('street')!.setValue(data.logradouro)
-        this.a.get('state')!.setValue(data.uf)
-        this.a.get('city')!.setValue(data.localidade)
-        this.a.get('neighborhood')!.setValue(data.bairro)
-      })
-    }
   }
 
 }

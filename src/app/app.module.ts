@@ -69,6 +69,8 @@ import { ApontFaltasComponent } from './sistema/rh/apont-faltas/apont-faltas.com
 import { ControleVtComponent } from './sistema/rh/controle-vt/controle-vt.component';
 import { RelatorioComponent } from './sistema/rh/relatorio/relatorio.component';
 import { PesquisarColabComponent } from './sistema/rh/apont-faltas/pesquisar-colab/pesquisar-colab.component';
+import { ViewFornecedorComponent } from './sistema/estoque/fornecedores/view-fornecedor/view-fornecedor.component';
+import { EditFornecedorComponent } from './sistema/estoque/fornecedores/edit-fornecedor/edit-fornecedor.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -141,6 +143,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ControleVtComponent,
     RelatorioComponent,
     PesquisarColabComponent,
+    ViewFornecedorComponent,
+    EditFornecedorComponent
   ],
   imports: [
     BrowserModule,
