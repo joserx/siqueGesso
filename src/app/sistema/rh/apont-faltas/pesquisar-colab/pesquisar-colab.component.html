@@ -34,7 +34,7 @@
                         <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.surname}}</td>
                         <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.role}}</td>
                         <td class="lead text-custom-dark text-center fw-normal">
-                          <button type="submit"class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex m-auto justify-content-between shadow-sm" (click)="value.emit(nome)">
+                          <button type="button" class="rounded-15 py-3 px-4 bg-custom-success h-limited d-flex m-auto justify-content-between shadow-sm border-0" (click)="value.emit(nome)" data-bs-dismiss="modal" aria-label="Close">
                             <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar</h5>
                           </button>
                         </td>

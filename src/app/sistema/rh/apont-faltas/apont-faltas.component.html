@@ -26,11 +26,11 @@
 
                 <!-- Pesquisa -->
                 <div class="col-6 px-2 p-0 m-0 position-relative">
-                  <input class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+                  <input class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar" (keyup)="filtrar($event)">
                   <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
                 </div>
             </div>
-          <form [formGroup]="apontForm" class="row">
+          <form [formGroup]="apontForm" (ngSubmit)="submitForm(apontForm.value)" class="row">
               <div class="row m-0 my-5 text-custom-dark justify-content-center">
                 <div class="col-6 row">
                     <div class="col-1 px-0 m-0 text-center d-flex align-items-center">
@@ -54,18 +54,18 @@
                 </div> 
               </div>
               <!-- Tabela -->
-              <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" >
+              <div class="row m-0 mt-3 text-custom-dark justify-content-center" >
                 <div class="col-6 row">
                   <label class="col-1 px-0 m-0 text-center d-flex align-items-center" for="add-falta">
                     <i class="bi bi-calendar icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
                   </label>
                   <div class="col-11 px-2 p-0 m-0 position-relative">
-                    <input class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="date"id="add-falta" name="add-falta">
+                    <input formControlName="data" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="date" id="add-falta" name="add-falta">
                   </div>
                 </div>
                 <div class="col-6 row">
                   <div class="col-11 px-2 p-0 m-0 form-floating">
-                    <select formControlName="cargo"
+                    <select formControlName="tipo"
                     class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
                     placeholder="Necessidade especial">
                     <option value="" disabled selected>Tipo de falta</option>
@@ -82,6 +82,29 @@
               </div>
             </div>
           </form>
+          <div class="tabela col-12 mt-4">
+            <table class="col-12">
+                <thead class="col-12">
+                    <tr>
+                      <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
+                      <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
+                      <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
+                      <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let oneColab of colab">
+                      <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.colaborador}}</td>
+                      <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.cargo}}</td>
+                      <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.data.substring(10, 0)}}</td>
+                      <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.tipo}}</td>
+                      <td class="lead text-custom-dark text-center fw-normal">
+                      <i class="w-100 h-100 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(oneColab.id)"></i>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
         </div>
     </div>
 </div>
