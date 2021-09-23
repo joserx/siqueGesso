@@ -459,6 +459,54 @@
                 placeholder="Dupla Função" readonly>
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dupla Função</label>
             </div>
+
+          <!-- Dias trabalhados -->
+           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="workDays"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Dias trabalhados">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dias trabalhados</label>
+          </div>
+
+            <!-- Vale Transporte -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <select #vt (change)="log(vt.value)" formControlName="vale"
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Vale Transporte">
+              <option value="" disabled selected>Vale Transporte (VT)?</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+
+          <!-- Valor da condução -->
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="conducaoIda"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Valor da condução ida">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(ida)</label>
+          </div>
+
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="conducaoVolta"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Valor da condução volta">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(volta)</label>
+          </div>
+
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="linesNames"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Nome das linhas de transporte">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome das linhas de transporte</label>
+          </div>
+
+          <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input formControlName="totalValue"
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              placeholder="Valor total" readonly>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor total</label>
+          </div>
           </div>    
         </div>
 

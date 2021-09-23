@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RhService } from 'src/app/services/rh.service';
 
 @Component({
   selector: 'app-controle-vt',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControleVtComponent implements OnInit {
 
-  constructor() { }
+  colabOriginal: any
+  public colab: any[] = []
+  constructor(
+    private rhService: RhService
+  ) { }
 
   ngOnInit(): void {
+    this.rhService.find().subscribe((data: any)=>{
+      this.colab = data
+      this.colabOriginal = data
+    })
+    console.log(this.colab)
   }
-
+  
 }

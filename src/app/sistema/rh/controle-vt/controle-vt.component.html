@@ -28,19 +28,25 @@
                         <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Total</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let oneColab of colab">
                     <tr>
-                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Colaborador</td>
-                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">R$ 6,00</td>
-                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">15</td>
-                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">R$ 12,00</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.name}} {{oneColab.surname}}</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.vale}}</td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">
+                            <p class="h-100 m-0" *ngIf="oneColab.workDays!=null">{{oneColab.workDays}}</p>
+                            <p class="h-100 m-0" *ngIf="oneColab.workDays==null">-</p>
+                        </td>
+                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">
+                           <p class="h-100 m-0" *ngIf="oneColab.totalValue!=null">R$: {{oneColab.totalValue}}</p>
+                           <p class="h-100 m-0" *ngIf="oneColab.totalValue==null">-</p>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
          <div class="col-12 row">
                 <div class="col-10 row">
-                    <div class="col-4 row m-auto">
+                    <!-- <div class="col-4 row m-auto">
                         <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
                             <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
                         </a>
@@ -49,7 +55,7 @@
                         <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
                             <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-2 row">
                     <div class="col px-0 m-0 text-center d-flex align-items-center" for="add-falta">

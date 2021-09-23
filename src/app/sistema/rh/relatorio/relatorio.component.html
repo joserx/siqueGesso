@@ -16,24 +16,22 @@
                 <h1 class="text-custom-dark text-truncate">Relatório</h1>
             </div>
             <div class="col-12 row">
-                <form class="row" [formGroup]="faltaForm">
-
+                <form class="row col-12 p-0 m-0" [formGroup]="faltaForm">
                     <div class="col row">
                         <label class="col-1 px-0 m-0 text-center d-flex align-items-center" for="add-falta">
                           <i class="bi bi-calendar icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
                         </label>
                         <div class="col-11 px-2 p-0 m-0 position-relative">
-                          <input formControlName="data" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="date"id="add-falta" name="add-falta">
+                          <input formControlName="data" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="date" id="add-falta" name="add-falta" (change)="filter($event)">
                         </div>
                     </div>
                     <div class="col row">
                         <div class="px-2 p-0 m-0 form-floating">
-                          <select formControlName="cargo"
+                          <select formControlName="colaborador"
                           class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                          placeholder="Necessidade especial">
+                          placeholder="Necessidade especial" (change)="filter($event)">
                           <option value="" disabled selected>Colaborador</option>
-                          <option value="Colaborador 1"> Colaborador 1</option>
-                          <option value="Colaborador 2">Colaborador 2</option>
+                          <option *ngFor="let oneColab of rh" value="{{oneColab.name}} {{oneColab.surname}}">{{oneColab.name}} {{oneColab.surname}}</option>
                           </select>
                           <label class="ms-2 small text-truncate text-custom-dark">Colaborador</label>
                         </div>
@@ -42,7 +40,7 @@
                         <div class="px-2 p-0 m-0 form-floating">
                           <select formControlName="tipoFalta"
                           class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                          placeholder="Necessidade especial">
+                          placeholder="Necessidade especial" (change)="filter($event)">
                           <option value="" disabled selected>Tipo de falta</option>
                           <option value="Justificada"> Justificada</option>
                           <option value="Não Justificada">Não Justificada</option>
@@ -62,19 +60,21 @@
                             <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Colaborador</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Cargo</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Data</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">Tipo</td>
-                        </tr>
-                    </tbody>
+                    <!-- <div class="col-12" *ngIf="booleanValue()"> -->
+                        <tbody *ngFor="let oneColab of colab">
+                            <tr>
+                                <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.colaborador}}</td>
+                                <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.cargo}}</td>
+                                <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.data.substring(10, 0)}}</td>
+                                <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{oneColab.tipo}}</td>
+                            </tr>
+                        </tbody>
+                    <!-- </div> -->
                 </table>
             </div>
             <div class="col-12 row">
                 <div class="col-10 row">
-                    <div class="col-4 row m-auto">
+                    <!-- <div class="col-4 row m-auto">
                         <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
                             <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
                         </a>
@@ -83,13 +83,12 @@
                         <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
                             <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-2 row">
                     <div class="col px-0 m-0 text-center d-flex align-items-center" for="add-falta">
                         <i class="bi bi-file-earmark-pdf-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
                     </div>
-                    <!-- bi bi-file-excel -->
                     <div class="col px-0 m-0 text-center d-flex align-items-center" for="add-falta">
                         <i class="bi bi-file-excel icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
                     </div>
