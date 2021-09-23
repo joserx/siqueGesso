@@ -1,12 +1,12 @@
 <!-- Modal -->
-<div class="modal fade" id="adicionarFornecedor" tabindex="-1" aria-labelledby="adicionarFornecedorLabel"
+<div class="modal fade" id="editarFornecedor" tabindex="-1" aria-labelledby="editarFornecedorLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <form [formGroup]="fornecedorForm">
       <!-- Modal content -->
       <div class="modal-content rounded-15 bg-custom-light">
         <div class="modal-header px-4">
-          <h5 class="modal-title text-custom-dark" id="adicionarFornecedorLabel">Adicionar fornecedor</h5>
+          <h5 class="modal-title text-custom-dark" id="adicionarFornecedorLabel">Editar fornecedor</h5>
           <button type="button" class="btn-close" #close data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body px-4">
@@ -117,7 +117,7 @@
             <!-- CEP -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text"
-                placeholder="CEP" formControlName="cep" mask="00000-000" (input)="loadCep($event.target)">
+                placeholder="CEP" formControlName="cep" mask="00000-000">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
             </div>
 

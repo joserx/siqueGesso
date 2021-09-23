@@ -25,8 +25,8 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  valida(id: number) {
-    return this.http.get<any>(`${environment.apiUrl}user/${id}`);
+  valida() {
+    return this.http.get<any>(`${environment.apiUrl}user/valida`);
   }
 
   login(email: string, password: string) {
