@@ -32,7 +32,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     'surname': new FormControl('', [Validators.required]),
     'birthDate': new FormControl(null, [Validators.required]),
     'rg': new FormControl('', [BrazilValidator.isValidRG]),
-    'rgExpedicao': new FormControl('', [Validators.required]),
+    'rgExpedicao': new FormControl(null, [Validators.required]),
     'rgOrgaoEmissor': new FormControl('', [Validators.required]),
     'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf]),
     'cnh': new FormControl(''),
@@ -92,6 +92,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(null),
     'duplaFuncao': new FormControl(null),
+    'vt': new FormControl('', [Validators.required]),
     'falta': new FormArray([])
   })
 

@@ -17,7 +17,8 @@ export class ApontFaltasComponent implements OnInit {
     'colaborador': new FormControl('', [Validators.required]),
     'cargo': new FormControl('', [Validators.required]),
     'data': new FormControl(null, [Validators.required]),
-    'tipo': new FormControl('', [Validators.required])
+    'tipo': new FormControl('', [Validators.required]),
+    'rh': new FormControl(null)
   })
   constructor(
     private faltaService: FaltasService,
@@ -30,7 +31,7 @@ export class ApontFaltasComponent implements OnInit {
       this.colabOriginal = data
     })
   }
-  
+
   selecionar(data: any){
     this.apontForm.get('colaborador')?.setValue(`${data.name} ${data.surname}`),
     this.apontForm.get('cargo')?.setValue(data.role)
@@ -38,6 +39,7 @@ export class ApontFaltasComponent implements OnInit {
 
   submitForm(data: any){
     if(this.apontForm.valid){
+      
       this.faltaService.create(data).subscribe(()=>{
         this.faltaService.find().subscribe((data: any)=>{
           this.colab = data
@@ -54,6 +56,10 @@ export class ApontFaltasComponent implements OnInit {
       this.faltaService.find().subscribe((data: any)=>{
         this.colab = data
         console.log(this.colab)
+        this.apontForm.get('colaborador')?.setValue('')
+        this.apontForm.get('cargo')?.setValue('')
+        this.apontForm.get('data')?.setValue(null)
+        this.apontForm.get('tipo')?.setValue('')
       })
     })
   }

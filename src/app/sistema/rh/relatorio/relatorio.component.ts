@@ -9,14 +9,13 @@ import { RhService } from 'src/app/services/rh.service';
   styleUrls: ['./relatorio.component.scss']
 })
 export class RelatorioComponent implements OnInit {
-
   colabOriginal: any
   public rh: any[] = []
   public colab: any[] = []
   public faltaForm: FormGroup = new FormGroup({
     'data': new FormControl(null),
-    'cargo': new FormControl(''),
-    'tipoFalta': new FormControl('')
+    'colaborador': new FormControl(''),
+    'tipo': new FormControl('')
   })
   constructor(
     private faltaService: FaltasService,
@@ -34,36 +33,24 @@ export class RelatorioComponent implements OnInit {
     console.log(this.rh)
   }
 
-  filterBefore = "";
-  dataFilter(event : any) {
+  filterBefore= "";
+  filter(event: any) {
     let str = event.target.value;
     if(str != '') {
       if(str.length > this.filterBefore.length) {
-        this.colab = this.colabOriginal.filter((user : any) => `${user.data.substring(10, 0)}`.toUpperCase().includes(str.toUpperCase()))
+        this.colab = this.colabOriginal.filter((user : any) => `${user.colaborador} ${user.data.substring(10, 0)} ${user.tipo}`.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.colab = this.colabOriginal;
-        this.colab = this.colabOriginal.filter((user : any) => `${user.name} ${user.surname}`.toUpperCase().includes(str.toUpperCase()))
+        this.colab = this.colabOriginal.filter((user : any) => `${user.colaborador} ${user.data.substring(10, 0)} ${user.tipo}`.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {
       this.colab = this.colabOriginal;
     }
   }
-  colabFilter(event: any){
-    let str = event.target.value;
-    if(str != '') {
-      if(str.length > this.filterBefore.length) {
-        this.colab = this.colabOriginal.filter((user : any) => `${user.colaborador}`.toUpperCase().includes(str.toUpperCase()))
-        this.filterBefore = str
-      } else {
-        this.colab = this.colabOriginal;
-        this.colab = this.colabOriginal.filter((user : any) => `${user.name} ${user.surname}`.toUpperCase().includes(str.toUpperCase()))
-        this.filterBefore = str
-      }
-    } else {
-      this.colab = this.colabOriginal;
-    }
+  booleanValue(): boolean{
+    return this.colab.length <=10
   }
 
 }

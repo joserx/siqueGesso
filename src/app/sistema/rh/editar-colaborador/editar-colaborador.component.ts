@@ -97,7 +97,8 @@ export class EditarColaboradorComponent implements OnInit {
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(null),
     'duplaFuncao': new FormControl(null),
-    'falta': new FormArray([])
+    'vale': new FormControl(''),
+    // 'falta': new FormArray([])
   })
 
   user : any = {}
@@ -128,9 +129,9 @@ export class EditarColaboradorComponent implements OnInit {
       }
       this.rhForm.get('name')?.setValue(data.name)
       this.rhForm.get('surname')?.setValue(data.surname)
-      this.rhForm.get('birthDate')?.setValue(String(data.birthDate.substring(10, 0)))
+      this.rhForm.get('birthDate')?.setValue(data.birthDate.substring(10, 0))
       this.rhForm.get('rg')?.setValue(data.rg)
-      this.rhForm.get('rgExpedicao')?.setValue(String(data.rgExpedicao.substring(10, 0)))
+      this.rhForm.get('rgExpedicao')?.setValue(data.rgExpedicao.substring(10, 0))
       this.rhForm.get('rgOrgaoEmissor')?.setValue(data.rgOrgaoEmissor)
       this.rhForm.get('cpfcnpj')?.setValue(data.cpfcnpj)
       this.rhForm.get('cnh')?.setValue(data.cnh)
@@ -159,18 +160,29 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('contractType')?.setValue(data.contractType)
       this.rhForm.get('shift')?.setValue(data.shift)
       this.rhForm.get('paycheck')?.setValue(data.paycheck)
-      this.rhForm.get('admission')?.setValue(String(data.admission.substring(10, 0)))
+      if(data.admission!=null){
+        this.rhForm.get('admission')?.setValue(data.admission.substring(10, 0))
+      }
       this.rhForm.get('experiencePeriod')?.setValue(data.experiencePeriod)
-      this.rhForm.get('fireDate')?.setValue(String(data.fireDate.substring(10, 0)))
+      if(data.fireDate!=null){ 
+        this.rhForm.get('fireDate')?.setValue(data.fireDate.substring(10, 0))
+      }
       this.rhForm.get('pis')?.setValue(data.pis)
       this.rhForm.get('bank')?.setValue(data.bank)
       this.rhForm.get('bankAccountType')?.setValue(data.bankAccountType)
       this.rhForm.get('bankAgency')?.setValue(data.bankAgency)
       this.rhForm.get('bankAccountNumber')?.setValue(data.bankAccountNumber)
       this.rhForm.get('filial')?.setValue(data.filial)
-      this.rhForm.get('lastExam')?.setValue(String(data.lastExam.substring(10, 0))),
-      this.rhForm.get('nextExam')?.setValue(String(data.nextExam.substring(10, 0))),
-      this.rhForm.get('vacationDueDate')?.setValue(String(data.vacationDueDate.substring(10, 0)))
+      if(data.lastExam!=null){
+        this.rhForm.get('lastExam')?.setValue(data.lastExam.substring(10, 0))
+      }
+      
+      if(data.nextExam!=null){
+        this.rhForm.get('nextExam')?.setValue(data.nextExam.substring(10, 0))
+      }
+      if(data.vacationDueDate!=null){
+        this.rhForm.get('vacationDueDate')?.setValue(data.vacationDueDate.substring(10, 0))
+      }
       this.rhForm.get('workDays')?.setValue(data.workDays)
       this.rhForm.get('conducaoIda')?.setValue(data.conducaoIda)
       this.rhForm.get('conducaoVolta')?.setValue(data.conducaoVolta)
@@ -178,24 +190,43 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('totalValue')?.setValue(data.totalValue)
       this.rhForm.get('duplaFuncao')?.setValue(data.duplaFuncao)
       this.rhForm.get('tshirtSize')?.setValue(data.tshirtSize)
-      this.rhForm.get('lastDeliveryTshirt')?.setValue(String(data.lastDeliveryTshirt.substring(10, 0)))
-      this.rhForm.get('pantsSize')?.setValue(data.pantsSize)
-      this.rhForm.get('lastDeliveryPants')?.setValue(String(data.lastDeliveryPants.substring(10, 0)))
-      this.rhForm.get('shoesSize')?.setValue(data.shoesSize)
-      this.rhForm.get('lastDeliveryShoes')?.setValue(String(data.lastDeliveryShoes.substring(10, 0)))
-      this.rhForm.get('beltSize')?.setValue(data.beltSize)
-      this.rhForm.get('lastDeliveryBelt')?.setValue(String(data.lastDeliveryBelt.substring(10, 0)))
-      this.rhForm.get('glovesSize')?.setValue(data.glovesSize)
-      this.rhForm.get('lastDeliveryGloves')?.setValue(String(data.lastDeliveryGloves.substring(10, 0)))
-      this.rhForm.get('jacketSize')?.setValue(data.jacketSize)
-      this.rhForm.get('lastDeliveryJacket')?.setValue(String(data.lastDeliveryJacket.substring(10, 0)))
-      for(let umaFalta of data.falta){
-        this.faltas.push(new FormGroup({
-          'data': new FormControl(String(umaFalta.data.substring(10, 0))),
-          'tipo': new FormControl(umaFalta.tipo),
-          'id': new FormControl(umaFalta.id)
-        }))
+      if(data.lastDeliveryTshirt!=null){
+        this.rhForm.get('lastDeliveryTshirt')?.setValue(data.lastDeliveryTshirt.substring(10, 0))
       }
+      this.rhForm.get('pantsSize')?.setValue(data.pantsSize)
+      if(data.lastDeliveryPants!=null){
+        this.rhForm.get('lastDeliveryPants')?.setValue(data.lastDeliveryPants.substring(10, 0))
+      }
+      this.rhForm.get('shoesSize')?.setValue(data.shoesSize)
+      if(data.lastDeliveryShoes!=null){
+        this.rhForm.get('lastDeliveryShoes')?.setValue(data.lastDeliveryShoes.substring(10, 0))
+      }
+      this.rhForm.get('beltSize')?.setValue(data.beltSize)
+      if(data.lastDeliveryBelt!=null){
+        this.rhForm.get('lastDeliveryBelt')?.setValue(data.lastDeliveryBelt.substring(10, 0))
+      }
+      this.rhForm.get('glovesSize')?.setValue(data.glovesSize)
+      if(data.lastDeliveryGloves!=null){
+        this.rhForm.get('lastDeliveryGloves')?.setValue(data.lastDeliveryGloves.substring(10, 0))
+      }
+      this.rhForm.get('jacketSize')?.setValue(data.jacketSize)
+      if(data.lastDeliveryJacket!=null){
+        this.rhForm.get('lastDeliveryJacket')?.setValue(data.lastDeliveryJacket.substring(10, 0))
+      }
+      this.rhForm.get('vale')?.setValue(data.vale)
+      if(data.vale=="nao"){
+        this.rhForm.get('conducaoIda')?.setValue(null)
+        this.rhForm.get('conducaoVolta')?.setValue(null)
+        this.rhForm.get('linesNames')?.setValue('')
+        this.rhForm.get('totalValue')?.setValue(null)
+      }
+      // for(let umaFalta of data.falta){
+      //   this.faltas.push(new FormGroup({
+      //     'data': new FormControl(String(umaFalta.data.substring(10, 0))),
+      //     'tipo': new FormControl(umaFalta.tipo),
+      //     'id': new FormControl(umaFalta.id)
+      //   }))
+      // }
     });
     this.updateFilial()
     this.filialService.find().subscribe((res: any)=>{
@@ -287,8 +318,8 @@ export class EditarColaboradorComponent implements OnInit {
     })
   }
   // o status mostra se o usuário está ativo ou desativo
-  sendForm(data: any) {
-    // console.log(data)
+  sendForm(data: any, control: any) {
+
     this.duplaFuncao(data)
     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
@@ -332,15 +363,15 @@ export class EditarColaboradorComponent implements OnInit {
     })
   }
 
-  adicionarFalta(){
-    this.faltas.push(
-      new FormGroup({
-        'data': new FormControl(''),
-        'tipo': new FormControl(''),
-        'id': new FormControl(null)
-      })
-    )
-  }
+  // adicionarFalta(){
+  //   this.faltas.push(
+  //     new FormGroup({
+  //       'data': new FormControl(''),
+  //       'tipo': new FormControl(''),
+  //       'id': new FormControl(null)
+  //     })
+  //   )
+  // }
 
   deleteFalta(i : any) {
     console.log(this.faltas['controls'][i].get('id'))
