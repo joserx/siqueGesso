@@ -1,0 +1,72 @@
+
+<!-- Modal -->
+<div class="modal fade" id="generateVtPdf" tabindex="-1" aria-labelledby="generateVtPdfLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Pesquisar Cliente</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="col-12 modal-body px-4 d-flex justify-content-center">
+
+            <!-- Lista de clientes -->
+          <div class="pdf-preview d-flex justify-content-center"  id="content" #content>
+              <div class="mt-4 bg-white col-12 p-2">
+                <div class="row">
+                    <div class="col-2">
+                        <img height="30" src="./../../../../../assets/sique-gesso-logo.png" alt="sique-gesso">
+                    </div>
+                    <div class="col">
+                        <h2 class="text-custom-dark text-center">
+                            Controle de VT
+                        </h2>
+                    </div>
+                </div>
+                <table class="bg-white tabela m-0 p-0">
+                    <thead>
+                        <tr>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">VT</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Dias</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Total</td>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let oneColab of colab">
+                        <tr>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.name}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.vt}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.workDays}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal text-truncate">{{oneColab.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          <!-- Dados cadastrais -->
+        </div>
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+                <button data-bs-dismiss="modal" type="reset"
+                class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start" (click)="savePdf()">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Donwload</h5>
+                </button>
+            </div>
+            <!-- Cancelar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+                <button data-bs-dismiss="modal" type="reset"
+                class="h-limited-sm btn rounded-15 py-1 px-4 bg-danger shadow-sm text-start">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+                </button>
+            </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>
