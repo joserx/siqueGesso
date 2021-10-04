@@ -7,14 +7,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { on } from 'process';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { CorreiosService } from 'src/app/services/correios.service';
+import { ExamesService } from 'src/app/services/exames.service';
 import { FaltasService } from 'src/app/services/faltas.service';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
+import { VtService } from 'src/app/services/vt.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { getDate } from '../../../../environments/global';
+import { StatusExame } from '../enum/status.exame.enum';
 // import { DatePipe } from '@angular/common';
 
 @Component({
@@ -23,11 +26,22 @@ import { getDate } from '../../../../environments/global';
   styleUrls: ['./editar-colaborador.component.scss']
 })
 export class EditarColaboradorComponent implements OnInit {
-
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
   filiais: any[] = []
+  exames: any[] = []
+  public vt: any = {
+    'id': null,
+    'name': null,
+    'vt': null,
+    'rh': null,
+    'workDays': null,
+    'total': null,
+    'colabId': null,
+    'originalTotal': null
+  }
+  allVt: any
 
   avatarImg = 'assets/sem-foto.jpg';
   avatarFile : any = null;
@@ -79,7 +93,6 @@ export class EditarColaboradorComponent implements OnInit {
     'lastExam': new FormControl(null),
     'nextExam': new FormControl(null), 
     'vacationDueDate': new FormControl(null),
-    'workDays': new FormControl(null),
     'conducaoIda': new FormControl(null),
     'conducaoVolta': new FormControl(null),
     'linesNames': new FormControl(''), 
@@ -98,6 +111,11 @@ export class EditarColaboradorComponent implements OnInit {
     'lastDeliveryJacket': new FormControl(null),
     'duplaFuncao': new FormControl(null),
     'vale': new FormControl(''),
+    'pix': new FormControl(''),
+    'pcd': new FormControl(''),
+    'abafador': new FormControl(''),
+    'lastDelveryAbafador': new FormControl(''),
+    'exame': new FormArray([])
     // 'falta': new FormArray([])
   })
 
@@ -113,7 +131,8 @@ export class EditarColaboradorComponent implements OnInit {
     private readonly correiosService : CorreiosService,
     private readonly router : Router,
     private readonly filialService: FilialService,
-    private readonly faltasService: FaltasService
+    private readonly exameService: ExamesService,
+    private readonly vtService: VtService
   ) { }
 
   ngOnInit(): void {  
@@ -220,19 +239,39 @@ export class EditarColaboradorComponent implements OnInit {
         this.rhForm.get('linesNames')?.setValue('')
         this.rhForm.get('totalValue')?.setValue(null)
       }
-      // for(let umaFalta of data.falta){
-      //   this.faltas.push(new FormGroup({
-      //     'data': new FormControl(String(umaFalta.data.substring(10, 0))),
-      //     'tipo': new FormControl(umaFalta.tipo),
-      //     'id': new FormControl(umaFalta.id)
-      //   }))
-      // }
+      this.rhForm.get('pix')?.setValue(data.pix)
+      this.rhForm.get('pcd')?.setValue(data.pcd)
+      this.rhForm.get('abafador')?.setValue(data.abafador)
+      this.rhForm.get('lastDeliveryAbafador')?.setValue(data.lastDeliveryAbafador)
+      for(let exame in data.exame){
+        this.exames.push(data[exame])
+        this.exame.push(
+          new FormGroup({
+            'data' : new FormControl(data.exame[exame].data.substring(10,0)),
+            'tipo' : new FormControl(data.exame[exame].tipo),
+            'vencimento': new FormControl(data.exame[exame].vencimento.substring(10,0)),
+            'status': new FormControl(StatusExame.ULTIMO), 
+            'rh': new FormControl(this.rhId),
+            'id': new FormControl(data.exame[exame].id)
+          }) 
+        )
+      }
     });
     this.updateFilial()
     this.filialService.find().subscribe((res: any)=>{
       this.filiais = res
       console.log(this.filiais)
     })
+    this.vtService.find().subscribe((data:any)=>{
+      this.allVt = data
+      console.log('----')
+      console.log(this.allVt)
+    })
+    
+  }
+
+  get exame(){
+    return this.rhForm.get('exame') as FormArray;
   }
 
   get faltas(){
@@ -253,6 +292,18 @@ export class EditarColaboradorComponent implements OnInit {
 
   get mei() {
     return this.rhForm.get('mei');
+  }
+  
+  public exameAdd(): void {
+    this.exame.push(
+      new FormGroup({
+        'data' : new FormControl(null),
+        'tipo' : new FormControl(''),
+        'vencimento': new FormControl(null),
+        'status': new FormControl(StatusExame.ULTIMO), 
+        'rh': new FormControl(this.rhId)
+      })
+    )
   }
 
   public toggleDesativadoCheckbox(data: any): void {
@@ -318,11 +369,18 @@ export class EditarColaboradorComponent implements OnInit {
     })
   }
   // o status mostra se o usuário está ativo ou desativo
-  sendForm(data: any, control: any) {
-
+  sendForm(data: any) {
+    
+    if(data.vale=="Não"){
+      data.conducaoIda = null
+      data.conducaoVolta = null
+      data.totalValue = null
+      data.linesNames = ''
+    }
     this.duplaFuncao(data)
-    if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
-      data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
+    if(data.conducaoIda>0 && data.conducaoVolta>0){
+      data.totalValue = data.conducaoIda + data.conducaoVolta
+      this.rhForm.get('totalValue')?.setValue(data.totalValue)
     }
     if (this.rhForm.valid) {
       data.createdBy = this.user.result.id;
@@ -339,8 +397,31 @@ export class EditarColaboradorComponent implements OnInit {
         data.status = 1
       }
       this.rhService.update(this.rhId, data).subscribe((res: any) => {
+        this.vt.name = `${res.name} ${res.surname}`
+        this.vt.colabId = res.id
+        this.vt.vt = res.vale
+        this.vt.rh = res.id
+        this.vt.disabled = res.disabled
+        this.vt.originalTotal = res.totalValue
+        for(let value in this.allVt){
+          if(this.allVt[value].colabId == this.vt.colabId){
+            this.vt.id = this.allVt[value].id
+          }
+        }
+        console.log(this.vt)
+          this.vtService.update(this.vt).subscribe((data:any)=>{
+            console.log(data)
+          })
+        // this.vtService.create(this.vt).subscribe((data:any)=>{})
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
+          Swal.fire({
+            position: 'top-right',
+            icon: 'success',
+            title: 'Colaborador atualizado',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }, (err) => {
         console.log(err)
@@ -363,24 +444,35 @@ export class EditarColaboradorComponent implements OnInit {
     })
   }
 
-  // adicionarFalta(){
-  //   this.faltas.push(
-  //     new FormGroup({
-  //       'data': new FormControl(''),
-  //       'tipo': new FormControl(''),
-  //       'id': new FormControl(null)
-  //     })
-  //   )
-  // }
-
-  deleteFalta(i : any) {
-    console.log(this.faltas['controls'][i].get('id'))
-    if(this.faltas['controls'][i].get('id')?.value){
-      this.faltasService.delete(this.faltas['controls'][i].get('id')?.value).subscribe((data : any) => {
-        alert("falta deletada")
+  deleteExame(i: any){
+    if(this.exame['controls'][i].get('id')?.value){
+      Swal.fire({
+        title: 'Você gostaria de deletar esse colaborador ?',
+        icon: 'warning',
+        showDenyButton: true,
+        confirmButtonText: 'Deletar',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.exameService.delete(this.exame['controls'][i].get('id')?.value).subscribe((event:any)=>{
+            Swal.fire({
+              position: 'top-right',
+              icon: 'success',
+              title: 'Exame deletado',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
+          this.exame.removeAt(i)
+        } else if (result.isDenied) {
+          Swal.fire('O exame não foi deletado', '', 'info')
+        }
       })
+    }else{
+      this.exame.removeAt(i)
     }
-    this.faltas.removeAt(i)
+    
   }
 
   /* 

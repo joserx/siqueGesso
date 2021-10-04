@@ -1,6 +1,6 @@
 
 <!-- Modal -->
-<div class="modal fade" id="generateVtPdf" tabindex="-1" aria-labelledby="generateVtPdfLabel"
+<div class="modal fade" id="generateAusenciaPdf" tabindex="-1" aria-labelledby="generateAusenciaPdfLabel"
   aria-hidden="true" aria-label="Close">
   <div class="modal-dialog modal-xl">
       <!-- Modal content -->
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col">
                         <h2 class="text-custom-dark text-center">
-                            Controle de VT
+                            Relatório de Ausência
                         </h2>
                     </div>
                 </div>
@@ -29,17 +29,21 @@
                     <thead>
                         <tr>
                             <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">VT</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Dias</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Total</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">De</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Até</td>
                         </tr>
                     </thead>
                     <tbody *ngFor="let oneColab of colab">
                         <tr>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.name}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.vt}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.workDays}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal text-truncate">{{oneColab.total}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.colaborador}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.cargo}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.data.substring(10, 0)}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal text-truncate">{{oneColab.tipo}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.de.substring(10, 0)}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.ate.substring(10, 0)}}</td>
                         </tr>
                     </tbody>
                 </table>

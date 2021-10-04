@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RhService } from 'src/app/services/rh.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar-colaboradores',
@@ -26,11 +27,25 @@ export class ListarColaboradoresComponent implements OnInit {
   }
 
   deleteRh(id : number) {
-    this.rhService.delete(id).subscribe((data : any) => {
-      this.profiles = this.profiles.filter((ele : any) => { return ele.id != id })
-      this.rhService.data().subscribe((data: any) => {
-        this.data = data;
-      })
+    Swal.fire({
+      title: 'Você gostaria de deletar esse colaborador ?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Colaborador Deletado', '', 'success')
+        this.rhService.delete(id).subscribe((data : any) => {
+          this.profiles = this.profiles.filter((ele : any) => { return ele.id != id })
+          this.rhService.data().subscribe((data: any) => {
+            this.data = data;
+          })
+        })
+      } else if (result.isDenied) {
+        Swal.fire('O colaborador não foi deletado', '', 'info')
+      }
     })
   }
 

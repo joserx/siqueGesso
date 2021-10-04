@@ -21,15 +21,13 @@
               <table class="col-11 m-auto">
                 <thead class="col-12">
                     <tr>
-                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">id</td>
                         <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nome</td>
                         <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Sobrenome</td>
                         <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="for let nome of colab">
-                        <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.id}}</td>
+                    <tr *ngFor="for let nome of colabAtivo">
                         <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.name}}</td>
                         <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.surname}}</td>
                         <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.role}}</td>
