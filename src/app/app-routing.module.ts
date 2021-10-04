@@ -29,6 +29,9 @@ import { RhMenuComponent } from './sistema/rh/rh-menu/rh-menu.component';
 import { ApontFaltasComponent } from './sistema/rh/apont-faltas/apont-faltas.component';
 import { ControleVtComponent } from './sistema/rh/controle-vt/controle-vt.component';
 import { RelatorioComponent } from './sistema/rh/relatorio/relatorio.component';
+import { ApontamentosComponent } from './sistema/rh/apontamentos/apontamentos.component';
+import { AusenciaComponent } from './sistema/rh/ausencia/ausencia.component';
+import { RelatorioAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-ausencia.component';
 
 const routes: Routes = [
   {
@@ -78,12 +81,24 @@ const routes: Routes = [
             component: ListarColaboradoresComponent
           },
           {
+            path: 'ausencia',
+            component: AusenciaComponent
+          },
+          {
+            path: 'ausencia-rel',
+            component: RelatorioAusenciaComponent
+          },
+          {
             path: 'cadastrar',
             component: CadastrarColaboradorComponent
           },
           {
             path: 'editar/:id',
             component: EditarColaboradorComponent
+          },
+          {
+            path: 'apontamentos',
+            component: ApontamentosComponent
           },
           {
             path: 'faltas',
@@ -94,7 +109,7 @@ const routes: Routes = [
             component: ControleVtComponent
           },
           {
-            path: 'relatorio',
+            path: 'faltas-rel',
             component: RelatorioComponent
           }
         ]

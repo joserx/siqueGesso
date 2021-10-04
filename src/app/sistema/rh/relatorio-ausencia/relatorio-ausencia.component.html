@@ -8,12 +8,12 @@
         <div class="container">
             <!-- Botão de voltar -->
             <div class="row m-0 justify-content-start mt-4">
-                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/rh/faltas">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/rh/ausencia">
                     <i class="bi-arrow-left fs-3 text-secondary"></i>
                 </a>
             </div>
             <div class="col-12 text-center">
-                <h1 class="text-custom-dark text-truncate">Relatório (Falta)</h1>
+                <h1 class="text-custom-dark text-truncate">Relatório (Ausência)</h1>
             </div>
             <div class="col-12 row">
                 <form class="row col-12 p-0 m-0" [formGroup]="faltaForm">
@@ -58,8 +58,8 @@
                             <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
                             <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
                             <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Periodo</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tempo</td>
+                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">De</td>
+                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Até</td>
                         </tr>
                     </thead>
                     <tbody *ngFor="let oneColab of colab">
@@ -68,14 +68,14 @@
                             <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.cargo}}</td>
                             <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.data.substring(10, 0)}}</td>
                             <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.tipo}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.periodo}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.tempo}}</td>
+                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.de.substring(10, 0)}}</td>
+                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.ate.substring(10, 0)}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-12 row">
-                <div class="col-10 row">
+                <div class="col-9 row">
                     <!-- <div class="col-4 row m-auto">
                         <a class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/rh/relatorio">
                             <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
@@ -87,16 +87,16 @@
                         </a>
                     </div> -->
                 </div>
-                <div class="col-2 row">
-                    <button class="m-1 col px-0 m-0 pdf-button rounded text-white text-center border-0" for="add-falta">
-                        <i class="bi bi-file-earmark-pdf-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark text-white" cursor="pointer" data-bs-toggle="modal" data-bs-target="#generatePdf"></i>
+                <div class="col-3 row d-flex justify-content-between">
+                    <button class="m-1 col px-0 m-0 pdf-button rounded text-white text-center border-0" for="add-falta" data-bs-toggle="modal" data-bs-target="#generateAusenciaPdf">
+                        <i class="bi bi-file-earmark-pdf-fill fs-3 p-2 m-0 fw-bold text-white" cursor="pointer"></i>
                     </button>
-                    <button class="m-1 col px-0 m-0 excel-button rounded text-center border-0" for="add-falta">
-                        <i class="bi bi-file-excel icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark text-white" cursor="pointer"></i>
+                    <button class="m-1 col px-0 m-0 excel-button rounded text-center border-0" for="add-falta" (click)="exportExcel()">
+                        <i class="bi bi-file-excel text-white icon-view my-auto fs-3 p-2 m-0 fw-bold" cursor="pointer"></i>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<app-relatorio-modal></app-relatorio-modal>
+<app-relatorio-modal-ausencia></app-relatorio-modal-ausencia>

@@ -9,7 +9,7 @@ export class RhMenuComponent implements OnInit {
   
   public cards = [
     { nome: "Adicionar Colaboradores", icon: "bi-person-circle", href: "/sistema/rh/listar" },
-    { nome: "Apontamento de faltas", icon: "bi-card-checklist", href: "/sistema/rh/faltas" },
+    { nome: "Apontamentos", icon: "bi-card-checklist", href: "/sistema/rh/apontamentos" },
     { nome: "Controle VT", icon: "fas fa-bus", href: "/sistema/rh/controle" }
   ]
 

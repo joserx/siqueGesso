@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+  import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
@@ -71,6 +71,13 @@ import { RelatorioComponent } from './sistema/rh/relatorio/relatorio.component';
 import { PesquisarColabComponent } from './sistema/rh/apont-faltas/pesquisar-colab/pesquisar-colab.component';
 import { ViewFornecedorComponent } from './sistema/estoque/fornecedores/view-fornecedor/view-fornecedor.component';
 import { EditFornecedorComponent } from './sistema/estoque/fornecedores/edit-fornecedor/edit-fornecedor.component';
+import { ApontamentosComponent } from './sistema/rh/apontamentos/apontamentos.component';
+import { AusenciaComponent } from './sistema/rh/ausencia/ausencia.component';
+import { VtService } from './services/vt.service';
+import { RelatorioModalComponent } from './sistema/rh/relatorio/relatorio-modal/relatorio-modal.component';
+import { RelatorioAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-ausencia.component';
+import { RelatorioModalAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-modal-ausencia/relatorio-modal-ausencia.component';
+import { RelatorioVtComponent } from './sistema/rh/controle-vt/relatorio-vt/relatorio-vt.component'
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -144,8 +151,14 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     RelatorioComponent,
     PesquisarColabComponent,
     ViewFornecedorComponent,
-    EditFornecedorComponent
-  ],
+    EditFornecedorComponent,
+    ApontamentosComponent,
+    AusenciaComponent,
+    RelatorioModalComponent,
+    RelatorioAusenciaComponent,
+    RelatorioModalAusenciaComponent,
+    RelatorioVtComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

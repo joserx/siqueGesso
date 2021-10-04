@@ -1,37 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FaltasService } from 'src/app/services/faltas.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AusenciaService } from 'src/app/services/ausencia.service';
 import { RhService } from 'src/app/services/rh.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-apont-faltas',
-  templateUrl: './apont-faltas.component.html',
-  styleUrls: ['./apont-faltas.component.scss']
+  selector: 'app-ausencia',
+  templateUrl: './ausencia.component.html',
+  styleUrls: ['./ausencia.component.scss']
 })
-export class ApontFaltasComponent implements OnInit {
+export class AusenciaComponent implements OnInit {
 
   public colabAtivo: any[] = []
   colabOriginal: any
   public colab: any[] = []
-  public apontForm: FormGroup = new FormGroup({
+  public ausenciaForm: FormGroup = new FormGroup({
     'colaborador': new FormControl('', [Validators.required]),
     'cargo': new FormControl('', [Validators.required]),
     'data': new FormControl(null, [Validators.required]),
     'tipo': new FormControl('', [Validators.required]),
-    'rh': new FormControl(null),
-    'periodo': new FormControl('', [Validators.required]),
-    'tempo': new FormControl('', [Validators.required]),
-    'diasAtestado': new FormControl(''),
-    'atestado': new FormControl('')
+    'de': new FormControl(null),
+    'ate': new FormControl(null),
+    'rh': new FormControl(null)
   })
   constructor(
-    private faltaService: FaltasService,
+    private ausenciaService: AusenciaService,
     private rhService: RhService
-  ) {}
-  
+  ) { }
+
   ngOnInit(): void {
-    this.faltaService.find().subscribe((data: any)=>{
+    this.ausenciaService.find().subscribe((data: any)=>{
       this.colab = data
       this.colabOriginal = data
     })
@@ -45,22 +43,19 @@ export class ApontFaltasComponent implements OnInit {
   }
 
   selecionar(data: any){
-    this.apontForm.get('colaborador')?.setValue(`${data.name} ${data.surname}`)
-    this.apontForm.get('cargo')?.setValue(data.role)
-    this.apontForm.get('rh')?.setValue(data.id)
+    this.ausenciaForm.get('colaborador')?.setValue(`${data.name} ${data.surname}`)
+    this.ausenciaForm.get('cargo')?.setValue(data.role)
+    this.ausenciaForm.get('rh')?.setValue(data.id)
+    console.log(this.ausenciaForm)
   }
 
   submitForm(data: any){
-    if(this.apontForm.valid){
-      this.faltaService.create(data).subscribe(()=>{
-        this.apontForm.get('colaborador')?.setValue('')
-        this.apontForm.get('cargo')?.setValue('')
-        this.apontForm.get('data')?.setValue(null)
-        this.apontForm.get('tipo')?.setValue('')
-        this.apontForm.get('periodo')?.setValue('')
-        this.apontForm.get('tempo')?.setValue(null)
-        this.apontForm.get('diasAtestado')?.setValue('')
-        this.apontForm.get('atestado')?.setValue('')
+    if(this.ausenciaForm.valid){
+      this.ausenciaService.create(data).subscribe(()=>{
+        this.ausenciaForm.get('colaborador')?.setValue('')
+        this.ausenciaForm.get('cargo')?.setValue('')
+        this.ausenciaForm.get('data')?.setValue(null)
+        this.ausenciaForm.get('tipo')?.setValue('')
         Swal.fire({
           position: 'top',
           icon: 'success',
@@ -68,7 +63,7 @@ export class ApontFaltasComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-        this.faltaService.find().subscribe((data: any)=>{
+        this.ausenciaService.find().subscribe((data: any)=>{
           this.colab = data
           console.log(this.colab)
         })
@@ -89,18 +84,14 @@ export class ApontFaltasComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('Falta deletada', '', 'success')
-        this.faltaService.delete(id).subscribe(()=>{
-          this.faltaService.find().subscribe((data: any)=>{
+        this.ausenciaService.delete(id).subscribe(()=>{
+          this.ausenciaService.find().subscribe((data: any)=>{
             this.colab = data
             console.log(this.colab)
-            this.apontForm.get('colaborador')?.setValue('')
-            this.apontForm.get('cargo')?.setValue('')
-            this.apontForm.get('data')?.setValue(null)
-            this.apontForm.get('tipo')?.setValue('')
-            this.apontForm.get('periodo')?.setValue('')
-            this.apontForm.get('tempo')?.setValue(null)
-            this.apontForm.get('diasAtestado')?.setValue('')
-            this.apontForm.get('atestado')?.setValue('')
+            this.ausenciaForm.get('colaborador')?.setValue('')
+            this.ausenciaForm.get('cargo')?.setValue('')
+            this.ausenciaForm.get('data')?.setValue(null)
+            this.ausenciaForm.get('tipo')?.setValue('')
           })
         })
       } else if (result.isDenied) {

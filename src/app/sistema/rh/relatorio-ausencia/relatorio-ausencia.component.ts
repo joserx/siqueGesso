@@ -1,15 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import jsPDF from 'jspdf';
+import { AusenciaService } from 'src/app/services/ausencia.service';
 import { FaltasService } from 'src/app/services/faltas.service';
 import { RhService } from 'src/app/services/rh.service';
-import { jsPDF } from 'jspdf'
 
 @Component({
-  selector: 'app-relatorio',
-  templateUrl: './relatorio.component.html',
-  styleUrls: ['./relatorio.component.scss']
+  selector: 'app-relatorio-ausencia',
+  templateUrl: './relatorio-ausencia.component.html',
+  styleUrls: ['./relatorio-ausencia.component.scss']
 })
-export class RelatorioComponent implements OnInit {
+export class RelatorioAusenciaComponent implements OnInit {
+
   @ViewChild('generatePdf', {static: true, read: ViewContainerRef}) generatePdf: ViewContainerRef
   @ViewChild('content', {static: false})el: ElementRef
   colabOriginal: any
@@ -22,12 +24,32 @@ export class RelatorioComponent implements OnInit {
     'tipo': new FormControl('')
   })
   constructor(
-    private faltaService: FaltasService,
+    private ausenciaService: AusenciaService,
     private rhService: RhService
   ) { }
 
+  // Excel
+  data: any[]
+  columns: any[]
+  footerData: any[][] = []
+  totalSalesAmount = 0
+
   ngOnInit(): void {
-    this.faltaService.find().subscribe((data: any)=>{
+
+     // Excel
+     this.columns = ['Invoice ID', 'Invoice Date', 'Device Name', 'Amount']
+     this.data = [
+       {
+         InvoiceId: 1,
+         Date: '00-00-0000',
+         DeviceName: 'Redmi note 9 s',
+         Amount: 1500
+       }
+     ]
+     this.totalSalesAmount = this.data.reduce((sum, item)=> sum + item.Amonut, 0)
+     this.footerData.push(['Total', '', '', this.totalSalesAmount])
+
+    this.ausenciaService.find().subscribe((data: any)=>{
       this.colab = data
       this.colabOriginal = data
     })
@@ -38,6 +60,11 @@ export class RelatorioComponent implements OnInit {
         }
       }
     })
+  }
+
+  // Excel
+  exportExcel(){
+    
   }
   
   savePdf(){
@@ -72,5 +99,6 @@ export class RelatorioComponent implements OnInit {
   booleanValue(): boolean{
     return this.colab.length <=10
   }
+
 
 }

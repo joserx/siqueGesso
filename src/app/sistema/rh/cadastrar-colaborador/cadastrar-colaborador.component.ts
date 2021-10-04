@@ -6,10 +6,12 @@ import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
+import { VtService } from 'src/app/services/vt.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { getDate } from '../../../../environments/global';
+import { StatusExame } from '../enum/status.exame.enum';
 
 @Component({
   selector: 'app-cadastrar-colaborador',
@@ -21,7 +23,27 @@ export class CadastrarColaboradorComponent implements OnInit {
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
+  public vt: any = {
+    'name': null,
+    'vt': null,
+    'rh': null,
+    'workDays': null,
+    'total': null,
+    'disabled': null,
+    'colabId': null,
+    'originalTotal': null
+  }
   filiais: any[] = []
+
+  // public ultimoEx: FormGroup = new FormGroup({
+  //   'lastExam': new FormControl(''),
+  //   'tipoUltimoExame': new FormControl('')
+  // })
+
+  // public proximoEx: FormGroup = new FormGroup({
+  //   'nextExam': new FormControl(''),
+  //   'nextExameTipo': new FormControl('')
+  // })
 
   public avatarImg: string = './assets/sem-foto.jpg';
   avatarFile: any = {};
@@ -71,10 +93,7 @@ export class CadastrarColaboradorComponent implements OnInit {
     'bankAgency': new FormControl('', [Validators.required]),
     'bankAccountNumber': new FormControl('', [Validators.required]),
     'filial': new FormControl(''),
-    'lastExam': new FormControl(null),
-    'nextExam': new FormControl(null), 
     'vacationDueDate': new FormControl(null),
-    'workDays': new FormControl(null),
     'conducaoIda': new FormControl(null),
     'conducaoVolta': new FormControl(null),
     'linesNames': new FormControl(''), 
@@ -92,8 +111,12 @@ export class CadastrarColaboradorComponent implements OnInit {
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(null),
     'duplaFuncao': new FormControl(null),
-    'vt': new FormControl('', [Validators.required]),
-    'falta': new FormArray([])
+    'vale': new FormControl('', [Validators.required]),
+    'pix': new FormControl(''),
+    'pcd': new FormControl('', [Validators.required]),
+    'abafador': new FormControl(''),
+    'lastDelveryAbafador': new FormControl(''),
+    'exame': new FormArray([])
   })
 
   user: any = {}
@@ -106,7 +129,8 @@ export class CadastrarColaboradorComponent implements OnInit {
     private readonly authService: AuthenticationService,
     private readonly correiosService: CorreiosService,
     private readonly router: Router,
-    private readonly filialService: FilialService
+    private readonly filialService: FilialService,
+    private readonly vtService: VtService,
   ) { }
 
   ngOnInit(): void {
@@ -114,8 +138,8 @@ export class CadastrarColaboradorComponent implements OnInit {
     this.updateFilial()
   }
 
-  get faltas(){
-    return this.rhForm.get('falta') as FormArray;
+  get exame(){
+    return this.rhForm.get('exame') as FormArray;
   }
 
   get cpf() {
@@ -132,6 +156,17 @@ export class CadastrarColaboradorComponent implements OnInit {
 
   get mei() {
     return this.rhForm.get('mei');
+  }
+
+  public exameAdd(): void {
+    this.exame.push(
+      new FormGroup({
+        'data' : new FormControl(null),
+        'tipo' : new FormControl(''),
+        'vencimento': new FormControl(null),
+        'status': new FormControl(StatusExame.PROXIMO) 
+      })
+    )
   }
 
   public toggleDesativadoCheckbox(): void {
@@ -205,7 +240,7 @@ export class CadastrarColaboradorComponent implements OnInit {
   
   sendForm(data: any) {
     // console.log(data)
-    this.duplaFuncao(data)
+    
     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
     }
@@ -223,9 +258,24 @@ export class CadastrarColaboradorComponent implements OnInit {
       } else {
         data.status = 1
       }
+      data.exame = [...data.exame]
       this.rhService.create(data).subscribe((res: any) => {
+        this.vt.name = `${res.name} ${res.surname}`
+        this.vt.colabId = res.id
+        this.vt.vt = res.vale
+        this.vt.rh = res.id
+        this.vt.originalTotal = res.totalValue
+        this.vt.disabled = res.disabled
+        this.vtService.create(this.vt).subscribe((data:any)=>{})
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
+          Swal.fire({
+            position: 'top-right',
+            icon: 'success',
+            title: 'Colaborador adicionado',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }, (err) => {
         console.log(err)
@@ -243,15 +293,10 @@ export class CadastrarColaboradorComponent implements OnInit {
     })
   }
 
-  adicionarFalta(){
-    this.faltas.push(
-      new FormGroup({
-        'data': new FormControl(null),
-        'tipo': new FormControl(''),
-        'id': new FormControl(null)
-      })
-    )
+  deleteExame(exame: any){
+    this.exame.removeAt(exame)
   }
+
 
    /* 
   ................................
