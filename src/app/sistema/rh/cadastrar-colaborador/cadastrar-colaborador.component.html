@@ -1,4 +1,53 @@
 <app-navbar></app-navbar>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="addCargo" tabindex="-1" aria-labelledby="addCargoLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content rounded-15 bg-custom-light">
+      <div class="modal-header px-4">
+        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar Filial</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="cargoForm" (ngSubmit)="addCargo(cargoForm)">
+        <div class="col-12 d-flex m-2 justify-content-center">
+            <div class="col-4 px-4 pt-0 p-0 m-0 form-floating">
+                <input formControlName="nome"
+                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                  placeholder="Filial">
+              </div>
+            <button type="submit"
+                  class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+                  <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+            </button>
+        </div>
+      </form>
+      <div class="col-12" *ngFor="let cargo of selectCargos">
+        <div class="col-12 d-felx justify-content-center row text-center m-0 p-0">
+          <div class="list-item col-6">
+            <p class="h2 fw-normal text-truncate">{{cargo.nome}}</p>
+          </div>
+          <div class="col-1">
+            <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(cargo.id)"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 py-3 modal-footer">
+      </div>
+      <!-- /Modal footer -->
+
+    </div>
+    <!-- /Modal content -->
+
+  </div>
+</div>
+
+
+
+
+
 <app-add-filial class="overlay" *ngIf="openModal" (closeModal)="updateFilial()"></app-add-filial>
 
 <div class="row p-0 m-0">
@@ -340,13 +389,13 @@
             <!-- Cargo -->
             <div class="col-4 px-2 pt-4 p-0 m-0 d-flex form-floating">
               <select formControlName="role"
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              class="col form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
               placeholder="Cargo">
               <option value="" disabled selected>Cargo</option>
-              <option value="Cargo 1">Cargo 1</option>
-              <option value="Cargo 2">Cargo 2</option>
+              <option *ngFor="let cargo of selectCargos" value="{{cargo.nome}}">{{cargo.nome}}</option>
               </select>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Departamento</label>
+              <i class="button-modal d-flex align-items-center bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer" data-bs-toggle="modal" data-bs-target="#addCargo"></i>
             </div>
 
             <!-- Tipo de contrato -->
