@@ -77,7 +77,7 @@ import { VtService } from './services/vt.service';
 import { RelatorioModalComponent } from './sistema/rh/relatorio/relatorio-modal/relatorio-modal.component';
 import { RelatorioAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-ausencia.component';
 import { RelatorioModalAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-modal-ausencia/relatorio-modal-ausencia.component';
-import { RelatorioVtComponent } from './sistema/rh/controle-vt/relatorio-vt/relatorio-vt.component'
+import { RelatorioVtComponent } from './sistema/rh/controle-vt/relatorio-vt/relatorio-vt.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",

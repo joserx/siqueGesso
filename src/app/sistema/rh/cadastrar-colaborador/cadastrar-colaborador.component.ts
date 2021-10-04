@@ -2,6 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth.service';
+import { CargoService } from 'src/app/services/cargo.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
@@ -18,11 +19,25 @@ import { StatusExame } from '../enum/status.exame.enum';
   templateUrl: './cadastrar-colaborador.component.html',
   styleUrls: ['./cadastrar-colaborador.component.scss']
 })
-export class CadastrarColaboradorComponent implements OnInit {
+export class CadastrarColaboradorComponent implements OnInit{
 
+  /* 
+  ...............................
+  ::sistema de adicionar cargos::
+  ::...........................::
+  */
+  public cargoForm: FormGroup = new FormGroup({
+    'nome': new FormControl('', [Validators.required])
+  })
+
+  /* ::::::::::::::::::::::::::::: */
+
+  public cargos: any = []
+  public selectCargos: any = []
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
+  public openCargoModal: boolean = true
   public vt: any = {
     'name': null,
     'vt': null,
@@ -74,9 +89,9 @@ export class CadastrarColaboradorComponent implements OnInit {
     'city': new FormControl(''),
     'state': new FormControl(''),
     'telephone': new FormControl('', [Validators.required]),
-    'whatsapp': new FormControl('', [Validators.required]),
+    'whatsapp': new FormControl(''),
     'emergencyTelephone': new FormControl('', [Validators.required]),
-    'personalEmail': new FormControl('', [Validators.required]),
+    'personalEmail': new FormControl(''),
     'corporativeEmail': new FormControl(''),
     'department': new FormControl(''),
     'role': new FormControl(''),
@@ -124,16 +139,20 @@ export class CadastrarColaboradorComponent implements OnInit {
   anexesRepo = environment.apiUrl + 'file/download/'
 
   constructor(
-    private readonly fileService: FileService,
-    private readonly rhService: RhService,
-    private readonly authService: AuthenticationService,
-    private readonly correiosService: CorreiosService,
-    private readonly router: Router,
-    private readonly filialService: FilialService,
-    private readonly vtService: VtService,
+    protected readonly fileService: FileService,
+    protected readonly rhService: RhService,
+    protected readonly authService: AuthenticationService,
+    protected readonly correiosService: CorreiosService,
+    protected readonly router: Router,
+    protected readonly filialService: FilialService,
+    protected readonly vtService: VtService,
+    protected readonly cargoService: CargoService
   ) { }
 
   ngOnInit(): void {
+    this.cargoService.find().subscribe((data:any)=>{
+      this.selectCargos = data
+    })
     this.user = this.authService.currentUserValue
     this.updateFilial()
   }
@@ -297,8 +316,62 @@ export class CadastrarColaboradorComponent implements OnInit {
     this.exame.removeAt(exame)
   }
 
+  /* 
+  ...............................
+  ::sistema de adicionar cargos::
+  ::...........................::
+  */
 
-   /* 
+  addCargo(data: any){
+    if(data.valid){
+      this.cargoService.create(data.value).subscribe((data: any)=>{
+        Swal.fire({
+          position: 'top-right',
+          icon: 'success',
+          title: 'Cargo adicionado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.cargoForm.get('nome')?.setValue('')
+        this.initializer()
+      })
+    }else{
+      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+    }
+  }
+
+  delete(id:number){
+    Swal.fire({
+      title: 'Você gostaria de deletar esse cargo ?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Cargo Deletado', '', 'success')
+        if(id && Number(id)){
+          this.cargoService.delete(id).subscribe((data:any)=>{
+            this.initializer()
+          })
+        }
+      } else if (result.isDenied) {
+        Swal.fire('O cargo não foi deletado', '', 'info')
+      }
+    })
+  }
+
+  initializer(){
+    this.cargoService.find().subscribe((data:any)=>{
+      this.selectCargos = data
+      console.log(this.selectCargos)
+    })
+  }
+
+  /* ::::::::::::::::::::::::::::: */
+
+  /* 
   ................................
   ::sistema de trocar de página ::
   ::............................::
@@ -307,5 +380,7 @@ export class CadastrarColaboradorComponent implements OnInit {
   public toggleEstoqueSection(value: string): void {
     this.estoqueSection = value;
   }
+
+  /* ::::::::::::::::::::::::::::: */
 
 }
