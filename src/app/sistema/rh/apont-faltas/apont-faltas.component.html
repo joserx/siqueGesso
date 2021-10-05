@@ -33,7 +33,7 @@
           <form [formGroup]="apontForm" (ngSubmit)="submitForm(apontForm.value)" class="row">
               <div class="row m-0 mt-5 text-custom-dark justify-content-center">
                 <div class="col form-floating m-1 row">
-                    <div class="col-1 px-0 m-0 text-center">
+                    <div class="col-1 px-0 py-2 m-0 text-center">
                         <i class="button-modal d-flex align-items-center bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarColaborador"></i>
                     </div>
                     <div class="col px-2 p-0 m-0 form-floating">
@@ -44,7 +44,7 @@
                 <div class="col form-floating m-1">
                     <input formControlName="cargo" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Cargo" readonly>
                     <label class="ms-2 small text-truncate text-custom-dark">Cargo</label>
-                </div> 
+                </div>
               </div>
               <div class="row m-0 mt-5 text-custom-dark justify-content-center">
                 <div class="col m-1 row form-floating">
@@ -75,7 +75,7 @@
                   <input formControlName="tempo" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="number" placeholder="Colaborador" >
                   <label class="ms-2 small text-truncate text-custom-dark">Tempo de falta</label>
                 </div>
-               
+
               </div>
 
               <div class="row m-0 mt-3 text-custom-dark justify-content-center">
@@ -104,18 +104,18 @@
 
             </div>
           </form>
-          <div class="tabela col-12 mt-4">
+          <div class="tabela row mt-4 text-center">
             <table class="col-12">
                 <thead class="col-12">
                     <tr>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Período</td>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tempo</td>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Dias (atestado)</td>
-                      <td class="h3 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Atestado</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Período</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tempo</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Dias (atestado)</td>
+                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Atestado</td>
                     </tr>
                 </thead>
                 <tbody>
