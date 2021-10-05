@@ -78,6 +78,8 @@ import { RelatorioModalComponent } from './sistema/rh/relatorio/relatorio-modal/
 import { RelatorioAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-ausencia.component';
 import { RelatorioModalAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-modal-ausencia/relatorio-modal-ausencia.component';
 import { RelatorioVtComponent } from './sistema/rh/controle-vt/relatorio-vt/relatorio-vt.component';
+import { EditarExpedicaoComponent } from './sistema/expedicao/editar-expedicao/editar-expedicao.component';
+import { VisualizarExpedicaoComponent } from './sistema/expedicao/visualizar-expedicao/visualizar-expedicao.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -158,6 +160,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     RelatorioAusenciaComponent,
     RelatorioModalAusenciaComponent,
     RelatorioVtComponent,
+    EditarExpedicaoComponent,
+    VisualizarExpedicaoComponent,
     ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientesComponent } from './sistema/vendas/clientes/clientes.component';
 import { EstoqueComponent } from './sistema/estoque/estoque.component';
@@ -32,6 +32,7 @@ import { RelatorioComponent } from './sistema/rh/relatorio/relatorio.component';
 import { ApontamentosComponent } from './sistema/rh/apontamentos/apontamentos.component';
 import { AusenciaComponent } from './sistema/rh/ausencia/ausencia.component';
 import { RelatorioAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-ausencia.component';
+import { VisualizarExpedicaoComponent } from './sistema/expedicao/visualizar-expedicao/visualizar-expedicao.component';
 
 const routes: Routes = [
   {
@@ -251,6 +252,10 @@ const routes: Routes = [
             path: 'criar',
             component: CriarOrdemExpedicaoComponent
           },
+          {
+            path: 'visualizar',
+            component: VisualizarExpedicaoComponent
+          }
         ]
       }
     ]
