@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { on } from 'process';
 import { AuthenticationService } from 'src/app/services/auth.service';
+import { CargoService } from 'src/app/services/cargo.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { ExamesService } from 'src/app/services/exames.service';
 import { FaltasService } from 'src/app/services/faltas.service';
@@ -26,6 +27,20 @@ import { StatusExame } from '../enum/status.exame.enum';
   styleUrls: ['./editar-colaborador.component.scss']
 })
 export class EditarColaboradorComponent implements OnInit {
+
+   /* 
+  ...............................
+  ::sistema de adicionar cargos::
+  ::...........................::
+  */
+  public cargoForm: FormGroup = new FormGroup({
+    'nome': new FormControl('', [Validators.required])
+  })
+  public cargos: any = []
+  public selectCargos: any = []
+
+  /* ::::::::::::::::::::::::::::: */
+
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
@@ -132,10 +147,14 @@ export class EditarColaboradorComponent implements OnInit {
     private readonly router : Router,
     private readonly filialService: FilialService,
     private readonly exameService: ExamesService,
-    private readonly vtService: VtService
+    private readonly vtService: VtService,
+    private readonly cargoService: CargoService
   ) { }
 
   ngOnInit(): void {  
+    this.cargoService.find().subscribe((data:any)=>{
+      this.selectCargos = data
+    })
     this.user = this.authService.currentUserValue
     const routeParams = this.route.snapshot.paramMap;
     this.rhId = Number(routeParams.get('id'));  
@@ -474,6 +493,62 @@ export class EditarColaboradorComponent implements OnInit {
     }
     
   }
+
+  /* 
+  ...............................
+  ::sistema de adicionar cargos::
+  ::...........................::
+  */
+
+  addCargo(data: any){
+    if(data.valid){
+      this.cargoService.create(data.value).subscribe((data: any)=>{
+        Swal.fire({
+          position: 'top-right',
+          icon: 'success',
+          title: 'Cargo adicionado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.cargoForm.get('nome')?.setValue('')
+        this.initializer()
+      })
+    }else{
+      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+    }
+  }
+
+  delete(id:number){
+    Swal.fire({
+      title: 'Você gostaria de deletar esse cargo ?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Cargo Deletado', '', 'success')
+        if(id && Number(id)){
+          this.cargoService.delete(id).subscribe((data:any)=>{
+            this.initializer()
+          })
+        }
+      } else if (result.isDenied) {
+        Swal.fire('O cargo não foi deletado', '', 'info')
+      }
+    })
+  }
+
+  initializer(){
+    this.cargoService.find().subscribe((data:any)=>{
+      this.selectCargos = data
+      console.log(this.selectCargos)
+    })
+  }
+
+  /* ::::::::::::::::::::::::::::: */
+
 
   /* 
   ................................
