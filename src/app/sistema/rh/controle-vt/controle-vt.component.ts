@@ -6,6 +6,8 @@ import { RhService } from 'src/app/services/rh.service';
 import { VtService } from 'src/app/services/vt.service';
 import Swal from 'sweetalert2';
 import { threadId } from 'worker_threads';
+import { Workbook, TableStyleProperties } from 'exceljs';
+import * as fs from 'file-saver';
 
 @Component({
   selector: 'app-controle-vt',
@@ -13,6 +15,14 @@ import { threadId } from 'worker_threads';
   styleUrls: ['./controle-vt.component.scss']
 })
 export class ControleVtComponent implements OnInit {
+
+  // Excel
+  vts: any=[]
+  workbook = new Workbook();
+  worksheet = this.workbook.addWorksheet("Employee Data");
+  header=["Colaborador","VT","Dias","Total"]
+  headerRow = this.worksheet.addRow(this.header);
+  fname="controle-vt"
   calc: any
   colabOriginal: any
   public colabVt: any[] = []
@@ -40,6 +50,17 @@ export class ControleVtComponent implements OnInit {
     }, (err)=>{
       console.log(err)
     }, ()=>{
+        for(let value of this.colabVt){
+          this.vts.push(
+            {
+              "colaborador": value.name,
+              "vt": value.vt,
+              "dias": value.workDays,
+              "total": value.total,
+            }
+          )
+        }
+        console.log(this.vt)
       for(let value in this.colabVt){
         if(this.colabVt[value].vt=="Sim"){
             this.vt.push(new FormGroup({
@@ -87,5 +108,52 @@ export class ControleVtComponent implements OnInit {
       showConfirmButton: false, 
       timer: 1500
     })
+  }
+
+  // Excel
+  exportexcel(): void{
+    this.worksheet.getRow(1).font={
+      size: 20,
+      bold: true,
+      color: {argb: 'FFFFFF'}
+    }
+    this.worksheet.getCell('A1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+    };
+    this.worksheet.getCell('B1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getCell('C1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getCell('D1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getColumn("A").width = 50
+    for (let x1 of this.vts){
+      let x2: any=Object.keys(x1);
+      var temp: any=[]
+      console.log(temp)
+      for(let y of x2){
+        temp.push(x1[y])
+      }
+      this.worksheet.addRow(temp)
+    }
+    this.vts = []
+    this.workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, this.fname+'-'+new Date().valueOf()+'.xlsx');
+    });
   }
 }
