@@ -29,11 +29,11 @@ export class CadastrarColaboradorComponent implements OnInit{
   public cargoForm: FormGroup = new FormGroup({
     'nome': new FormControl('', [Validators.required])
   })
+  public cargos: any = []
+  public selectCargos: any = []
 
   /* ::::::::::::::::::::::::::::: */
 
-  public cargos: any = []
-  public selectCargos: any = []
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;

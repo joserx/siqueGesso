@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import jsPDF from 'jspdf';
 import { RhService } from 'src/app/services/rh.service';
 import { VtService } from 'src/app/services/vt.service';
-
 @Component({
   selector: 'app-relatorio-vt',
   templateUrl: './relatorio-vt.component.html',
@@ -14,6 +13,7 @@ export class RelatorioVtComponent implements OnInit {
   colabOriginal: any
   public colabAtivado: any[] = []
   public colab: any[] = []
+  
   constructor(
     private vtService: VtService,
     private rhService: RhService

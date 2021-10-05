@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FaltasService } from 'src/app/services/faltas.service';
 import { RhService } from 'src/app/services/rh.service';
 import { jsPDF } from 'jspdf'
+import { Workbook, TableStyleProperties } from 'exceljs';
+import * as fs from 'file-saver';
 
 @Component({
   selector: 'app-relatorio',
@@ -21,6 +23,16 @@ export class RelatorioComponent implements OnInit {
     'colaborador': new FormControl(''),
     'tipo': new FormControl('')
   })
+
+    // Excel
+
+    faltas: any=[]
+    workbook = new Workbook();
+    worksheet = this.workbook.addWorksheet("Employee Data");
+    header=["Colaborador","Cargo","Data","Tipo","De","Até"]
+    headerRow = this.worksheet.addRow(this.header);
+    fname="relatorio-ausencias"
+
   constructor(
     private faltaService: FaltasService,
     private rhService: RhService
@@ -30,6 +42,22 @@ export class RelatorioComponent implements OnInit {
     this.faltaService.find().subscribe((data: any)=>{
       this.colab = data
       this.colabOriginal = data
+    }, (err)=>{
+      console.log(err)
+    }, ()=>{
+      for(let value of this.colab){
+        this.faltas.push(
+          {
+            "colaborador": value.colaborador,
+            "cargo": value.cargo,
+            "data": value.data,
+            "tipo": value.tipo,
+            "periodo": value.periodo,
+            "tempo": value.tempo
+          }
+        )
+      }
+      console.log(this.faltas)
     })
     this.rhService.find().subscribe((data: any)=>{
       for(let value in data){
@@ -71,6 +99,68 @@ export class RelatorioComponent implements OnInit {
   }
   booleanValue(): boolean{
     return this.colab.length <=10
+  }
+
+  // Excel
+  exportexcel(): void{
+    this.worksheet.getRow(1).font={
+      size: 20,
+      bold: true,
+      color: {argb: 'FFFFFF'}
+    }
+    this.worksheet.getCell('A1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+    };
+    this.worksheet.getCell('B1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getColumn('B').width = 10
+    this.worksheet.getCell('C1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getCell('D1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getCell('E1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getCell('F1').fill = {
+      type: 'pattern',
+      pattern:'solid',
+      fgColor:{argb:'FF6060'},
+
+    };
+    this.worksheet.getColumn("A").width = 50
+    for(let i of this.faltas){
+      // this.worksheet.getColumn(i).
+    }
+    for (let x1 of this.faltas){
+      let x2: any=Object.keys(x1);
+      let temp=[]
+      for(let y of x2){
+        temp.push(x1[y])
+      }
+      this.worksheet.addRow(temp)
+    }
+    this.faltas = []
+    this.workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, this.fname+'-'+new Date().valueOf()+'.xlsx');
+    });
   }
 
 }

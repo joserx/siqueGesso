@@ -41,9 +41,11 @@
                           <select formControlName="tipoFalta"
                           class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
                           placeholder="Necessidade especial" (change)="filter($event)">
-                          <option value="" disabled selected>Tipo de falta</option>
-                          <option value="Justificada"> Justificada</option>
-                          <option value="Não Justificada">Não Justificada</option>
+                            <option value="" disabled selected>Tipo de ausencia</option>
+                            <option value="Licença maternidade">Licença maternidade</option>
+                            <option value="Acidente de trabalho">Acidente de trabalho</option>
+                            <option value="Auxílio doença">Auxílio doença</option>
+                            <option value="Férias">Férias</option>
                           </select>
                           <label class="ms-2 small text-truncate text-custom-dark">Tipo de falta</label>
                         </div>
@@ -62,7 +64,7 @@
                             <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Até</td>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let oneColab of colab">
+                    <tbody *ngFor="let oneColab of ausencia">
                         <tr>
                             <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.colaborador}}</td>
                             <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.cargo}}</td>
@@ -91,7 +93,7 @@
                     <button class="m-1 col px-0 m-0 pdf-button rounded text-white text-center border-0" for="add-falta" data-bs-toggle="modal" data-bs-target="#generateAusenciaPdf">
                         <i class="bi bi-file-earmark-pdf-fill fs-3 p-2 m-0 fw-bold text-white" cursor="pointer"></i>
                     </button>
-                    <button class="m-1 col px-0 m-0 excel-button rounded text-center border-0" for="add-falta" (click)="exportExcel()">
+                    <button class="m-1 col px-0 m-0 excel-button rounded text-center border-0" for="add-falta" (click)=" exportexcel()">
                         <i class="bi bi-file-excel text-white icon-view my-auto fs-3 p-2 m-0 fw-bold" cursor="pointer"></i>
                     </button>
                 </div>
