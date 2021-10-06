@@ -95,24 +95,25 @@
           </form>
           <div class="tabela row mt-4 text-center">
             <table class="col-12">
-                <thead class="col-12">
+                <thead class="header_table col-12">
                     <tr>
-                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
-                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
-                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
-                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
-                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">De</td>
-                      <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Até</td>
+                      <td class="lead rounded-start text-center fw-bold">Colaborador</td>
+                      <td class="lead text-center fw-bold">Cargo</td>
+                      <td class="lead text-center fw-bold">Data</td>
+                      <td class="lead text-center fw-bold">Tipo</td>
+                      <td class="lead text-center fw-bold">De</td>
+                      <td class="lead text-center fw-bold">Até</td>
+                      <td class="lead pe-2 rounded-end text-center fw-bold">Ações</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="body_table">
                     <tr *ngFor="let oneColab of colab">
-                      <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.colaborador}}</td>
-                      <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.cargo}}</td>
-                      <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.data.substring(10, 0)}}</td>
-                      <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.tipo}}</td>
-                      <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.de.substring(10, 0)}}</td>
-                      <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.ate.substring(10, 0)}}</td>
+                      <td class="lead text-custom-dark fw-normal">{{oneColab.colaborador}}</td>
+                      <td class="lead text-custom-dark fw-normal">{{oneColab.cargo}}</td>
+                      <td class="lead text-custom-dark fw-normal">{{oneColab.data.substring(10, 0)}}</td>
+                      <td class="lead text-custom-dark fw-normal">{{oneColab.tipo}}</td>
+                      <td class="lead text-custom-dark fw-normal">{{oneColab.de.substring(10, 0)}}</td>
+                      <td class="lead text-custom-dark fw-normal">{{oneColab.ate.substring(10, 0)}}</td>
                       <td class="lead text-custom-dark fw-normal">
                       <i class="w-100 h-100 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(oneColab.id)"></i>
                       </td>
