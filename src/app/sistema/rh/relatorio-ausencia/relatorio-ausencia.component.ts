@@ -6,7 +6,6 @@ import { FaltasService } from 'src/app/services/faltas.service';
 import { RhService } from 'src/app/services/rh.service';
 import { Workbook, TableStyleProperties } from 'exceljs';
 import * as fs from 'file-saver';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-relatorio-ausencia',

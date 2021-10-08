@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-
+<app-pesquisar-exp></app-pesquisar-exp>
 <div class="row p-0 m-0">
   <div class="col-auto m-0 p-0 bg-custom-light">
     <app-sidemenu></app-sidemenu>
@@ -46,34 +46,46 @@
         </div>
         <div class="col text-end">
           <h5 class="fw-bold text-truncate d-none">Ações</h5>
-          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
+          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarExp"></i>
           <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
         </div>
       </div>
 
       <!-- Tabela -->
-      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor = " let ordem of ordens">
+      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor = " let page of atualPage">
         <div class="col">
-          <p>{{ordem.dataCriacao}}</p>
+          <p>{{page.emissao | date}}</p>
         </div>
         <div class="col">
-          <p>{{ordem.numOrdem}}</p>
+          <p>{{page.codigo}}</p>
         </div>
         <div class="col">
-          <p>{{ordem.pedido}}</p>
+          <p>{{page.nPedido}}</p>
         </div>
         <div class="col">
-          <p>{{ordem.dataDespacho}}</p>
+          <p>{{page.despacho}}</p>
         </div>
         <div class="col">
-          <p>{{ordem.status}}</p>
+          <p>{{page.status}}</p>
         </div>
          <div class="col text-end">
-          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="" cursor="pointer"></i>
+          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/expedicao/visualizar/{{page.id}}"></i>
+          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="" cursor="pointer" routerLink="/sistema/expedicao/editar/{{page.id}}"></i>
           <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
         </div>
-      </div>      
+      </div>   
+      <div class="col-12 row mt-3 d-flex justify-content-around">
+        <div class="col-4 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0" (click)="anterior()">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+          </button>
+        </div>
+        <div class="col-4 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0" (click)="proximo()">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Proximo</h5>
+          </button>
+        </div>
+      </div>   
 
     </div>
   </div>

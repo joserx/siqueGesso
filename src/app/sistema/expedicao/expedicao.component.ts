@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExpedicaoService } from 'src/app/services/expedicao.service';
 
 @Component({
   selector: 'app-expedicao',
@@ -7,18 +8,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpedicaoComponent implements OnInit {
 
-  public ordens = [
-    { dataCriacao: '05/05/2021', numOrdem: "001", pedido: "001", dataDespacho: "06/05/2021", status: "Aguardando" },
-    { dataCriacao: '10/05/2021', numOrdem: "002", pedido: "003", dataDespacho: "10/05/2021", status: "Aguardando"},
-    { dataCriacao: '15/05/2021', numOrdem: "003", pedido: "004", dataDespacho: "15/05/2021", status: "Aguardando"},
-    { dataCriacao: '21/05/2021', numOrdem: "004", pedido: "005", dataDespacho: "22/05/2021", status: "Aguardando" },
-    { dataCriacao: '23/05/2021', numOrdem: "005", pedido: "006", dataDespacho: "23/05/2021", status: "Aguardando"},
-    { dataCriacao: '25/05/2021', numOrdem: "006", pedido: "007", dataDespacho: "25/05/2021", status: "Aguardando"},
-  ]
+  /* 
+  ::::::::::::::::::::::::::::::
+  ::-----------vars-----------::
+  ::::::::::::::::::::::::::::::
+  */
 
-  constructor() { }
+  public ordens: any = []
+  public pages: any[] = []
+  public pagesNumber: number
+  public atualPageNumber: number = 0
+  public atualPage: any[] = []
+
+  
+  /* 
+  :::::::::::::::::::::::::::::
+  ::-------constructor-------::
+  :::::::::::::::::::::::::::::
+  */
+
+
+
+  constructor(
+    private readonly expedicaoService: ExpedicaoService
+  ) { }
+
+
+
+  /* 
+  :::::::::::::::::::::::::::::
+  ::---------methods---------::
+  :::::::::::::::::::::::::::::
+  */
 
   ngOnInit(): void {
+    this.expedicaoService.find().subscribe((data:any)=>{
+      this.ordens = data
+    }, (err)=>{
+      console.log(err)
+    }, ()=>{
+      for(let control = 0; control <= this.ordens.length; control++){
+        this.expedicaoService.findByPage(control).subscribe((data:any)=>{
+          if(data.length > 0){
+            this.pages.push(data)
+          }
+        })
+      }
+    })
+    this.expedicaoService.findByPage(0).subscribe((data:any)=>{
+      this.atualPage = data
+    })
   }
+
+  proximo(){
+    if(this.atualPageNumber < (Object.keys(this.pages).length - 1)){
+      this.atualPageNumber++
+      this.expedicaoService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+        this.atualPage = data
+      })
+    }
+  }
+  anterior(){
+    if(this.atualPageNumber >= (Object.keys(this.pages).length - 1)){
+      this.atualPageNumber--
+      this.expedicaoService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+        this.atualPage = data
+      })
+    }
+  }
+  // Page number - 1 page number + 1, mas n pode ser menor que 0 e maior que o page number 
 
 }

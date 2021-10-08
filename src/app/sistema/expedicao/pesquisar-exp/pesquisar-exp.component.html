@@ -1,0 +1,78 @@
+
+<!-- Modal -->
+<div class="modal fade" id="pesquisarExp" tabindex="-1" aria-labelledby="pesquisarExpLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="pesquisarExpLabel">Pesquisar Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+          <div class="col-4 px-2 p-0 m-0 position-relative">
+            <input (keyup)="filtrar($event)" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+            <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+          </div>
+
+         <!-- Lista de clientes -->
+          <div class="row py-3 p-0 m-0">
+            <div class="row m-0 my-5 text-custom-dark justify-content-center">
+              <div class="col-2">
+                <h5 class="fw-bold text-truncate">Data de criação</h5>
+              </div>
+              <div class="col-2">
+                <h5 class="fw-bold text-truncate">Nº da ordem</h5>
+              </div>
+              <div class="col-2">
+                <h5 class="fw-bold text-truncate">Nº do pedido</h5>
+              </div>
+              <div class="col-2">
+                <h5 class="fw-bold text-truncate">Data despacho</h5>
+              </div>
+              <div class="col">
+                <h5 class="fw-bold text-truncate">Status</h5>
+              </div>
+              <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor = " let expedicao of expedicoes">
+                <div class="col-2">
+                  <p>{{expedicao.emissao.substring(10, 0)}}</p>
+                </div>
+                <div class="col-2 text-center">
+                  <p>{{expedicao.codigo}}</p>
+                </div>
+                <div class="col-2">
+                  <p>{{expedicao.nPedido}}</p>
+                </div>
+                <div class="col-2">
+                  <p>{{expedicao.despacho}}</p>
+                </div>
+                <div class="col">
+                  <p>{{expedicao.status}}</p>
+                </div>
+                 <div class="col text-end">
+                  <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/expedicao/visualizar/{{expedicao.id}}" data-bs-dismiss="modal" aria-label="Close"></i>
+                  <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="" cursor="pointer" routerLink="/sistema/expedicao/editar/{{expedicao.id}}" data-bs-dismiss="modal" aria-label="Close"></i>
+                  <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+                </div>
+              </div>    
+          <!-- Dados cadastrais -->
+        </div>
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+
+          <!-- Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button data-bs-dismiss="modal" type="reset"
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+            </button>
+          </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>
