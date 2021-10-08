@@ -49,7 +49,7 @@
 
 .bg-custom {
   &-white {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(236, 239, 246, 1) 75%);
+    background: linear-gradient(180deg, rgba(248, 248, 248, 1) 0%, rgba(236, 239, 246, 1) 75%);
   }
   &-light {
     background-color: $custom-light;
@@ -79,11 +79,11 @@
   max-height: 40px;
 }
 
-.h-limited, input.form-control-lg, select.form-control-lg { 
+.h-limited, input.form-control-lg, select.form-control-lg {
   min-height: 64px;
   max-height: 64px;
 }
-.h-limited-sm { 
+.h-limited-sm {
   min-height: 50px;
   max-height: 50px;
 }

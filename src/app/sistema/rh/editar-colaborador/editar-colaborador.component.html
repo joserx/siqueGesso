@@ -164,20 +164,20 @@
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF/CNPJ</label>
                 </div>
 
-                
+
                 <!-- CNH -->
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                   <input maxlength="11" formControlName="cnh" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"  type="text" placeholder="CNH">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNH</label>
                 </div>
-                
+
                 <!-- PIS -->
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                   <input formControlName="pis" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
                   type="text" placeholder="PIS">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">PIS</label>
                 </div>
-                
+
                 <!-- Gênero -->
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <select formControlName="gender"
@@ -242,7 +242,7 @@
 
                 <!-- Nacionalidade -->
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                    <input formControlName="nacionality" 
+                    <input formControlName="nacionality"
                     class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
                     placeholder="Nacionalidade">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nacionalidade</label>
@@ -437,7 +437,7 @@
                 placeholder="Data da demissão">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da demissão</label>
             </div>
-            
+
             <!-- Vencimento de Férias -->
             <div class="col-4 px-2 pt-4 p-2 mb-2 form-floating">
               <input formControlName="vacationDueDate"
@@ -470,7 +470,7 @@
                 type="text" placeholder="Banco">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Banco</label>
             </div>
-        
+
             <!-- Tipo de conta -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                 <select formControlName="bankAccountType"
@@ -483,7 +483,7 @@
                 </select>
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de conta</label>
             </div>
-        
+
             <!-- Agência -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                 <input formControlName="bankAgency"
@@ -491,7 +491,7 @@
                 placeholder="Agência">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Agência</label>
             </div>
-        
+
             <!-- Conta -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                 <input formControlName="bankAccountNumber"
@@ -499,7 +499,7 @@
                 placeholder="Conta">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Conta</label>
             </div>
-        
+
             <!-- Salário -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                 <input formControlName="paycheck"
@@ -507,7 +507,7 @@
                 placeholder="Salário" (change)="duplaFuncao(rhForm.value)">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Salário</label>
             </div>
-        
+
             <!-- Dupla Função -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                 <input formControlName="duplaFuncao"
@@ -565,7 +565,7 @@
               placeholder="Pix">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Pix</label>
             </div>
-          </div>    
+          </div>
         </div>
 
         <div *ngIf="estoqueSection == 'exames'">
@@ -575,14 +575,14 @@
           </div>
           <div class="col-12" *ngFor="let exame of exame['controls']; let i = index" formArrayName="exame">
             <div class="col-12 d-flex justify-content-center" [formGroupName]="i">
-          
+
               <div class="col px-2 pt-4 p-2 mb-2 form-floating">
                 <input formControlName="data"
                   class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
                   placeholder="Conta">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">Último exame</label>
               </div>
-  
+
               <div class="col px-2 pt-4 p-0 m-0 form-floating">
                 <select
                 class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
@@ -601,7 +601,7 @@
                   placeholder="Conta">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vencimento</label>
               </div>
-              
+
               <div class="col-1 row">
                 <i class="display-6 d-flex align-items-center w-100 h-100 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="deleteExame(i)"></i>
               </div>
@@ -609,7 +609,7 @@
             </div>
           </div>
 
-          
+
         </div>
 
         <div *ngIf="estoqueSection == 'uniforme'">
@@ -629,7 +629,7 @@
                       </select>
                       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da camiseta</label>
                     </div>
-        
+
                     <!-- Ultima entrega -->
                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <input formControlName="lastDeliveryTshirt"
@@ -637,11 +637,11 @@
                       placeholder="Ultima entrega">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (camiseta)</label>
                    </div>
-        
+
                   </div>
-        
+
                   <div class="col-12 d-flex justify-content-center">
-        
+
                     <!-- tamanho da calça -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                       <select
@@ -655,7 +655,7 @@
                       </select>
                       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da calça</label>
                     </div>
-        
+
                     <!-- Ultima entrega -->
                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <input formControlName="lastDeliveryPants"
@@ -663,11 +663,11 @@
                       placeholder="Ultima entrega">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (calça)</label>
                    </div>
-        
+
                   </div>
-        
+
                   <div class="col-12 d-flex justify-content-center">
-        
+
                     <!-- Tamanho do sapato -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                       <select
@@ -687,7 +687,7 @@
                       </select>
                       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho do calçado</label>
                     </div>
-        
+
                     <!-- Ultima entrega -->
                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <input formControlName="lastDeliveryShoes"
@@ -695,11 +695,11 @@
                       placeholder="Ultima entrega">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (sapato)</label>
                    </div>
-        
+
                   </div>
-        
+
                   <div class="col-12 d-flex justify-content-center">
-        
+
                     <!-- Tamanho do cinto -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                       <select
@@ -712,7 +712,7 @@
                       </select>
                       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho do cinta</label>
                     </div>
-        
+
                     <!-- Ultima entrega -->
                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <input formControlName="lastDeliveryBelt"
@@ -720,11 +720,11 @@
                       placeholder="Ultima entrega">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (cinta)</label>
                    </div>
-        
+
                   </div>
-        
+
                   <div class="col-12 d-flex justify-content-center">
-        
+
                     <!-- Tamanho do luva -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                       <select
@@ -736,7 +736,7 @@
                       </select>
                       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho das luvas</label>
                     </div>
-        
+
                     <!-- Ultima entrega -->
                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <input formControlName="lastDeliveryGloves"
@@ -744,11 +744,11 @@
                       placeholder="Ultima entrega">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (luva)</label>
                    </div>
-        
+
                   </div>
-                  
+
                   <div class="col-12 d-flex justify-content-center">
-        
+
                     <!-- Tamanho do jaqueta -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                       <select
@@ -762,7 +762,7 @@
                       </select>
                       <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tamanho da jaqueta</label>
                     </div>
-        
+
                     <!-- Ultima entrega -->
                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <input formControlName="lastDeliveryJacket"
@@ -770,11 +770,11 @@
                       placeholder="Ultima entrega">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (jaqueta)</label>
                    </div>
-        
+
                 </div>
 
                 <div class="col-12 d-flex justify-content-center">
-        
+
                   <!-- Tamanho do jaqueta -->
                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                     <select
@@ -785,7 +785,7 @@
                     </select>
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Abafador de ruído?</label>
                   </div>
-      
+
                   <!-- Ultima entrega -->
                  <div *ngIf="abafador.value=='sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                   <input formControlName="lastDeliveryAbafador"
@@ -793,7 +793,7 @@
                     placeholder="Ultima entrega">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ultima entrega (Abafador de ruído)</label>
                  </div>
-      
+
               </div>
             </div>
         </div>
@@ -819,9 +819,9 @@
                       <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
                     </button>
                   </div>
-        
+
                 </div>
-        
+
               </div>
           </div>
       </div>
@@ -831,13 +831,13 @@
           <div class="col-4 d-grid px-2 p-0 m-0">
             <button type="submit"
               class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Salvar</h5>
             </button>
           </div>
 
         </div>
       </form>
-          
+
     </div>
     <!-- /Página -->
   </div>

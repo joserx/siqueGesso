@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl : 'http://localhost:25565/'
+  apiUrl: 'https://siquegesso.fingerapis.com.br/'
+  //apiUrl: 'http://localhost:25565/'
 };
 
 /*

@@ -52,26 +52,26 @@
                     </div>
                 </form>
             </div>
-            <div class="tabela col-12 mt-4">
+            <div class="tabela col-12 mt-4 text-center">
                 <table class="col-12">
-                    <thead class="col-12">
+                    <thead class="header_table col-12">
                         <tr>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">De</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Até</td>
+                            <td class="lead rounded-start text-center fw-bold">Colaborador</td>
+                            <td class="lead text-center fw-bold">Cargo</td>
+                            <td class="lead text-center fw-bold">Data</td>
+                            <td class="lead text-center fw-bold">Tipo</td>
+                            <td class="lead text-center fw-bold">De</td>
+                            <td class="lead rounded-end text-center fw-bold">Até</td>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let oneColab of ausencia">
+                    <tbody class="body_table" *ngFor="let oneColab of ausencia">
                         <tr>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.colaborador}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.cargo}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.data.substring(10, 0)}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.tipo}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.de.substring(10, 0)}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.ate.substring(10, 0)}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.colaborador}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.cargo}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.data.substring(10, 0)}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.tipo}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.de.substring(10, 0)}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.ate.substring(10, 0)}}</td>
                         </tr>
                     </tbody>
                 </table>
