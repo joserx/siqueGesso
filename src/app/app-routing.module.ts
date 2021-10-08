@@ -33,6 +33,7 @@ import { ApontamentosComponent } from './sistema/rh/apontamentos/apontamentos.co
 import { AusenciaComponent } from './sistema/rh/ausencia/ausencia.component';
 import { RelatorioAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-ausencia.component';
 import { VisualizarExpedicaoComponent } from './sistema/expedicao/visualizar-expedicao/visualizar-expedicao.component';
+import { EditarExpedicaoComponent } from './sistema/expedicao/editar-expedicao/editar-expedicao.component';
 
 const routes: Routes = [
   {
@@ -253,8 +254,12 @@ const routes: Routes = [
             component: CriarOrdemExpedicaoComponent
           },
           {
-            path: 'visualizar',
+            path: 'visualizar/:id',
             component: VisualizarExpedicaoComponent
+          },
+          {
+            path: 'editar/:id',
+            component: EditarExpedicaoComponent
           }
         ]
       }

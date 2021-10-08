@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-
+<app-add-pedido (value)="selecionar($event)"></app-add-pedido>
 <div class="row p-0 m-0">
   <div class="col-auto m-0 p-0 bg-custom-light">
     <app-sidemenu></app-sidemenu>
@@ -21,246 +21,237 @@
         </div>
       </div>
 
-      <form>
+      <form [formGroup]="expedicaoForm" (submit)="submitForm(expedicaoForm)">
 
         <!-- Criar ordem expedição -->
         <div class="row">
 
-          <!-- Código (automático) -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="001">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código (automático)</label>
+            <!-- Código (automático) -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="001" formControlName="codigo">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código (automático)</label>
+            </div>
+  
+            <!-- Unidade -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="" formControlName="unidade">
+                <option value="" disabled >Selecione uma unidade</option>
+                <option value="Matriz"selected>Matriz</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Unidade</label>
+            </div>
+  
+            <!-- Status -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="" formControlName="status">
+                <option value="aguardando" selected>Aguardando</option>
+                <option value="realizado">Realizado</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+            </div>
+  
+            <!--Responsável Separação-->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="" formControlName="respSeparacao">
+                <option value="Matheus" selected>Matheus</option>
+                <option value="Deise">Deise</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Responsável Separação</label>
+            </div>
+            
+            <!--Responsável Despacho-->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="" formControlName="respDespacho">
+                <option value="Matheus" selected>Matheus</option>
+                <option value="Deise">Deise</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Responsável Despacho</label>
+            </div>
+  
+            <!-- Data emissão -->
+            <div class="col-2 px-1 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-limited px-2 py-3 rounded-15 shadow-sm" type="date" placeholder="Data emissão" formControlName="emissao">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data emissão</label>
+            </div>
+  
+            <!-- Data despacho -->
+            <div class="col-2 px-1 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-limited px-2 py-3 rounded-15 shadow-sm" type="date" placeholder="Data despacho" formControlName="despacho" readonly>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data despacho</label>
+            </div>
           </div>
-
-          <!-- Unidade -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="">
-              <option value="" disabled >Selecione uma unidade</option>
-              <option value=""selected>Matriz</option>
-              <option value=""></option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Unidade</label>
+  
+          <div class="row m-0 mt-4 py-3 border-bottom">
+            <div class="col-12 m-0 p-0 text-custom-dark">
+              <h4>Localizar Pedidos</h4>
+            </div>
           </div>
-
-          <!-- Status -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="">
-              <option value="aguardando" selected>Aguardando</option>
-              <option value="realizado">Realizado</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
-          </div>
-
-          <!--Responsável Separação-->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="">
-              <option value="aguardando" selected>Matheus</option>
-              <option value="realizado">Deise</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Responsável Separação</label>
+  
+          <div class="row mt-4 m-0">
+            <div class="col-12 p-0 m-0">
+              <h6 class="fw-bold text-custom-dark">Pedido</h6>
+            </div>
           </div>
           
-          <!--Responsável Despacho-->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="">
-              <option value="aguardando" selected>Matheus</option>
-              <option value="realizado">Deise</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Responsável Despacho</label>
+          <!-- Pedido -->
+          <div class="row m-0 justify-content-center align-items-center">
+            <div class="col-6 pt-4 px-2 p-0 m-0 form-floating">
+              <input formControlName="pedido" readonly class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark">
+            </div>
+  
+            <!-- Adicionar  -->
+            <div class="col-1 px-0 pt-3 p-0 m-0 text-center">
+              <a class="px-0 py-0" data-bs-toggle="modal" data-bs-target="#addPedido">
+                <i class="bi-plus-square-fill icon-view my-auto fs-3 pt-4 p-2 m-0 fw-bold text-custom-dark"></i>
+              </a>
+            </div>
           </div>
-
-          <!-- Data emissão -->
-          <div class="col-2 px-1 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-2 py-3 rounded-15 shadow-sm" type="date" placeholder="Data emissão">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data emissão</label>
+  
+          <!-- Informações o Pedido -->
+          <div class="row mt-4 m-0">
+            <div class="col-12 p-0 m-0">
+              <h6 class="fw-bold text-custom-dark">Informações do Pedido Selecionado</h6>
+            </div>
           </div>
-
-          <!-- Data despacho -->
-          <div class="col-2 px-1 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-2 py-3 rounded-15 shadow-sm" type="date" placeholder="Data despacho" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data despacho</label>
+  
+          <div class="row">
+            <!--Cliente-->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="cliente" readonly>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cliente</label>
+            </div>
+  
+            <!--Vendedor-->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="vendedor" readonly>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+            </div>
+  
+            <!--Loja-->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="loja" readonly>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
+            </div>
           </div>
-        </div>
-
-        <div class="row m-0 mt-4 py-3 border-bottom">
-          <div class="col-12 m-0 p-0 text-custom-dark">
-            <h4>Localizar Pedidos</h4>
+  
+          <div class="row mt-5 m-0">
+            <div class="col-12 p-0 m-0">
+              <h6 class="fw-bold text-custom-dark">Selecione os produtos desta ordem de expedição</h6>
+            </div>
           </div>
-        </div>
-
-        <div class="row mt-4 m-0">
-          <div class="col-12 p-0 m-0">
-            <h6 class="fw-bold text-custom-dark">Pedido</h6>
+  
+          <!-- Tabela de pedidos -->
+          <div class="table-responsive mt-2">
+            <table class="table text-custom-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Seleção</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Qtd</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Tipo de Retirada</th>
+                  <th scope="col">Data Retirada</th>
+                  <th scope="col">Endereço</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- *ngFor="let pedido of pedidos.value" -->
+                <tr class="align-items-center" *ngFor="let pedido of pedidosAntes">
+                  <td class="align-td">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input mt-2"  type="checkbox" value="" id="" cursor="pointer">
+                    </div>
+                    <i class="fs-5 bi-trash-fill icon-delete p-0" cursor="pointer"></i>
+                  </td>
+                  <th>{{ pedido.codigo }}</th>
+                  <td>{{ pedido.produto }}</td>
+                  <td>{{ pedido.qtd }}</td>
+                  <td>{{ pedido.valor }}</td>
+                  <td>{{ pedido.tipo }}</td>
+                  <td>{{ pedido.data }}</td>
+                  <td>{{ pedido.endereco }}</td>
+  
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-        
-        <!-- Pedido -->
-        <div class="row m-0 justify-content-center align-items-center">
-          <div class="col-6 pt-4 px-2 p-0 m-0 form-floating">
-            <input value="PEDIDO 123456 | 02/06/2021 | VENDEDOR MAURO" readonly class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark">
+          <!-- /Tabela de pedidos -->
+  
+          <!--Informações de Transporte-->
+          <div class="row m-0 mt-4 py-3 border-bottom">
+            <div class="col-12 m-0 p-0 text-custom-dark">
+              <h4>Informações de Transporte</h4>
+            </div>
           </div>
-
-          <!-- Adicionar  -->
-          <div class="col-1 px-0 pt-3 p-0 m-0 text-center">
-            <a class="px-0 py-0">
-              <i class="bi-plus-square-fill icon-view my-auto fs-3 pt-4 p-2 m-0 fw-bold text-custom-dark"></i>
-            </a>
+  
+          <div class="row">
+            <!-- Transportadora -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="" formControlName="transportadora">
+                <option value="" disabled >Selecione uma transportadora</option>
+                <option value="Sique Gesso" selected>Sique Gesso</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Transportadora</label>
+            </div>
+  
+            <!-- Motorista -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="motorista">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
+            </div>
+  
+            <!-- Placa do Veículo -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="placa">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa do Veículo</label>
+            </div>
+  
+            <!-- Peso Produtos -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input mask="0 || 00 || 000 || 0000 || 00000 || 000000" suffix="Kg" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="peso">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Peso Produtos</label>
+            </div>
+  
+            <!-- Observações -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="observacoes"></textarea>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+            </div>
           </div>
-
-          <!-- Pesquisar -->
-          <div class="col-5  px-2 mt-4 p-0 m-0 position-relative">
-            <input class="form-control form-control-lg border-0 h-limited py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
-            <a class="position-absolute translate-middle top-50 me-4 end-0">
-              <i class="bi-search fs-4 "></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Informações o Pedido -->
-        <div class="row mt-4 m-0">
-          <div class="col-12 p-0 m-0">
-            <h6 class="fw-bold text-custom-dark">Informações do Pedido Selecionado</h6>
-          </div>
-        </div>
-
-        <div class="row">
-          <!--Cliente-->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input value="RICARDO BOTEGA" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" disabled>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cliente</label>
-          </div>
-
-          <!--Vendedor-->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input value="MATHEUS MARTINS" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" disabled>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
-          </div>
-
-          <!--Loja-->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input value="MATRIZ" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" disabled>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
-          </div>
-        </div>
-
-        <div class="row mt-5 m-0">
-          <div class="col-12 p-0 m-0">
-            <h6 class="fw-bold text-custom-dark">Selecione os produtos desta ordem de expedição</h6>
-          </div>
-        </div>
-
-        <!-- Tabela de pedidos -->
-        <div class="table-responsive mt-2">
-          <table class="table text-custom-dark">
-            <thead>
-              <tr>
-                <th scope="col">Seleção</th>
-                <th scope="col">Código</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Qtd</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Tipo de Retirada</th>
-                <th scope="col">Data Retirada</th>
-                <th scope="col">Endereço</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="align-items-center" *ngFor="let pedidos of pedidos">
-                <td class="align-td">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input mt-2" type="checkbox" value="" id="" cursor="pointer">
-                  </div>
-                  <i class="fs-5 bi-trash-fill icon-delete p-0" cursor="pointer"></i>
-                </td>
-                <th>{{ pedidos.codigo }}</th>
-                <td>{{ pedidos.produto }}</td>
-                <td>{{ pedidos.qtd }}</td>
-                <td>{{ pedidos.valor }}</td>
-                <td>{{ pedidos.tipo }}</td>
-                <td>{{ pedidos.data }}</td>
-                <td>{{ pedidos.endereco }}</td>
-
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- /Tabela de pedidos -->
-
-        <!--Informações de Transporte-->
-        <div class="row m-0 mt-4 py-3 border-bottom">
-          <div class="col-12 m-0 p-0 text-custom-dark">
-            <h4>Informações de Transporte</h4>
-          </div>
-        </div>
-
-        <div class="row">
-          <!-- Transportadora -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="">
-              <option value="" disabled >Selecione uma transportadora</option>
-              <option value="" selected>Sique Gesso</option>
-              <option value=""></option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Transportadora</label>
-          </div>
-
-          <!-- Motorista -->
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
-          </div>
-
-          <!-- Placa do Veículo -->
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa do Veículo</label>
-          </div>
-
-          <!-- Peso Produtos -->
-          <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Peso Produtos</label>
-          </div>
-
-          <!-- Observações -->
-          <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
-          </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="row mt-3 py-3 pb-5 justify-content-end">
-
-          <!-- Botão Salvar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-            </button>
-          </div>
-
-          <!-- Botão Cancelar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
-              <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
-            </button>
-          </div>
-
-          <!-- Botão Finalizar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate">Finalizar</h5>
-            </button>
-          </div>
-
-          <!-- Botão Exportar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-light d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Exportar</h5>
-            </button>
-          </div>          
+  
+          <!-- Footer -->
+          <div class="row mt-3 py-3 pb-5 justify-content-end">
+  
+            <!-- Botão Salvar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+              <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+                <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+              </button>
+            </div>
+  
+            <!-- Botão Cancelar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+              <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" routerLink="/sistema/expedicao">
+                <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
+                <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
+              </button>
+            </div>
+  
+            <!-- Botão Finalizar -->
+            <!-- <div class="col-3 px-2 p-0 m-0 d-grid">
+              <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+                <h5 class="fw-normal my-auto text-truncate">Finalizar</h5>
+              </button>
+            </div> -->
+  
+            <!-- Botão Exportar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+              <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-light d-flex justify-content-between shadow-sm">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Exportar</h5>
+              </button>
+            </div>          
 
         </div>
         <!-- /Footer -->        
