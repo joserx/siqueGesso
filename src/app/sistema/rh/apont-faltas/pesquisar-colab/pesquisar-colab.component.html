@@ -21,9 +21,9 @@
               <table class="col-11 m-auto">
                 <thead class="col-12">
                     <tr>
-                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nome</td>
-                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Sobrenome</td>
-                        <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
+                        <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nome</td>
+                        <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Sobrenome</td>
+                        <td class="h4 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,7 @@
                         <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.surname}}</td>
                         <td class="lead text-custom-dark border border-custom-dark border-1 text-center fw-normal">{{nome.role}}</td>
                         <td class="lead text-custom-dark text-center fw-normal">
-                          <button type="button" class="rounded-15 py-3 px-4 bg-custom-success h-limited d-flex m-auto justify-content-between shadow-sm border-0" (click)="value.emit(nome)" data-bs-dismiss="modal" aria-label="Close">
+                          <button type="button" class="rounded-15 mt-1 py-3 px-4 bg-custom-success h-limited d-flex m-auto justify-content-between shadow-sm border-0" (click)="value.emit(nome)" data-bs-dismiss="modal" aria-label="Close">
                             <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar</h5>
                           </button>
                         </td>
@@ -49,7 +49,7 @@
           <!-- Cancelar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button data-bs-dismiss="modal" type="reset"
-              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-center">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
             </button>
           </div>

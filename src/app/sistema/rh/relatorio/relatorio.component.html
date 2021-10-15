@@ -21,12 +21,12 @@
                         <label class="col-1 px-0 m-0 text-center d-flex align-items-center" for="add-falta">
                           <i class="bi bi-calendar icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark" cursor="pointer"></i>
                         </label>
-                        <div class="col-11 px-2 p-0 m-0 position-relative">
+                        <div class="col-11 px-3 p-0 m-0 position-relative">
                           <input formControlName="data" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="date" id="add-falta" name="add-falta" (change)="filter($event)">
                         </div>
                     </div>
                     <div class="col row">
-                        <div class="px-2 p-0 m-0 form-floating">
+                        <div class="px-3 p-0 m-0 form-floating">
                           <select formControlName="colaborador"
                           class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
                           placeholder="Necessidade especial" (change)="filter($event)">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="col row">
-                        <div class="px-2 p-0 m-0 form-floating">
+                        <div class="px-3 p-0 m-0 form-floating">
                           <select formControlName="tipoFalta"
                           class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
                           placeholder="Necessidade especial" (change)="filter($event)">
@@ -50,26 +50,26 @@
                     </div>
                 </form>
             </div>
-            <div class="tabela col-12 mt-4">
+            <div class="tabela col-12 mt-4 text-center">
                 <table class="col-12">
-                    <thead class="col-12">
+                    <thead class="header_table col-12">
                         <tr>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cargo</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Periodo</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tempo</td>
+                            <td class="lead rounded-start text-center fw-bold">Colaborador</td>
+                            <td class="lead text-center fw-bold">Cargo</td>
+                            <td class="lead text-center fw-bold">Data</td>
+                            <td class="lead text-center fw-bold">Tipo</td>
+                            <td class="lead text-center fw-bold">Periodo</td>
+                            <td class="lead rounded-end text-center fw-bold">Tempo</td>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let oneColab of colab">
+                    <tbody class="body_table" *ngFor="let oneColab of colab">
                         <tr>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.colaborador}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.cargo}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.data.substring(10, 0)}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.tipo}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.periodo}}</td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.tempo}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.colaborador}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.cargo}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.data.substring(10, 0)}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.tipo}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.periodo}}</td>
+                            <td class="lead text-custom-dark fw-normal">{{oneColab.tempo}}</td>
                         </tr>
                     </tbody>
                 </table>
