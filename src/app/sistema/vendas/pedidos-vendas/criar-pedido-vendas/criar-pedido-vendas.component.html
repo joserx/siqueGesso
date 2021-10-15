@@ -21,20 +21,20 @@
         </div>
       </div>
 
-      <form>
+      <form [formGroup]="pedidosForm" (submit)="submitForm(pedidosForm, item)">
 
         <!-- Criar pedido -->
         <div class="row">
 
           <!-- Data -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()" formControlName="data">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label>
           </div>
 
           <!-- Loja -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Loja">
+            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Loja" formControlName="loja">
               <option value="" disabled selected>Selecione uma loja</option>
               <option value="Loja 1">Loja 1</option>
               <option value="Loja 2">Loja 2</option>
@@ -44,7 +44,7 @@
 
           <!-- Vendedor -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Vendedor">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Vendedor" formControlName="vendedor">
               <option value="" disabled selected>Selecione um vendedor</option>
               <option value="Vendedor 1">Vendedor 1</option>
               <option value="Vendedor 2">Vendedor 2</option>
@@ -54,7 +54,7 @@
 
           <!-- Dados do cliente -->
           <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Cliente">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Cliente" formControlName="cliente">
               <option value="" disabled selected>Selecione um cliente</option>
               <option *ngFor="let cliente of clientes;" [value]="cliente.nome">{{cliente.nome}}</option>
             </select>
@@ -82,7 +82,7 @@
           <div class="col-4 p-0 m-0">
 
             <div class="pt-4 px-2 form-floating">
-              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento">
+              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" formControlName="condPagamento">
                 <option value="" disabled selected>Selecione uma condição</option>
                 <option value="Loja 1">À vista</option>
                 <option value="Loja 2">Parcelado</option>
@@ -92,7 +92,7 @@
             </div>
 
             <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="pagPersonalizado">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
             </div>
           </div>
@@ -100,7 +100,7 @@
           <!-- Tabela de preço -->
           <div class="col-4 p-0 m-0">
             <div class="pt-4 px-2 form-floating">
-              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas">
+              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas" formControlName="tabPreco">
                 <option value="" disabled selected>Selecione uma tabela</option>
                 <option value="Tabela A">Tabela A</option>
                 <option value="Tabela B">Tabela B</option>
@@ -113,7 +113,7 @@
             </div>
 
             <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" formControlName="tabPersonalizado">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
             </div>
           </div>
@@ -121,7 +121,7 @@
           <!-- Desconto máximo -->
           <div class="col-4 p-0 m-0">
             <div class="form-floating pt-4 px-2">
-              <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto máximo">
+              <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto máximo" formControlName="descontoMax">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máximo</label>
             </div>
 
@@ -162,21 +162,21 @@
                 <th scope="col">Valor Frete</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let item of itens">
-                <th scope="row">{{ item.codigo }}</th>
-                <td>{{ item.produto }}</td>
+            <tbody formArrayName="item">
+              <tr [formGroupName]="i" *ngFor="let oneItem of itens; let i = index">
+                <th scope="row">{{ oneItem.codigo }}</th>
+                <td>{{ oneItem.produto }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" placeholder="Quantidade">
+                  <input class="form-control form-control-sm" type="number" placeholder="Quantidade" fromControlName="quantidade" (keyup)="evento($event)">
                 </td>
-                <td>{{ item.valor_unitario | currency:'BRL'}}</td>
-                <td>{{ item.desconto_tab | currency:'BRL'}}</td>
+                <td>{{ oneItem.valor_unitario | currency:'BRL'}}</td>
+                <td>{{ oneItem.desconto_tab | currency:'BRL'}}</td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$">
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="desconto">
                 </td>
-                <td>{{ item.valor_venda | currency:'BRL' }}</td>
+                <td>{{ oneItem.valor_venda | currency:'BRL' }}</td>
                 <td>
-                  <select class="form-select form-select-sm">
+                  <select class="form-select form-select-sm" formControlName="tipoRetirada">
                     <option value="" disabled selected>Selecionar...</option>
                     <option value="tipo1">tipo 1</option>
                     <option value="tipo2">tipo 2</option>
@@ -184,10 +184,10 @@
                   </select>
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="date">
+                  <input class="form-control form-control-sm" type="date" formControlName="prevRetirada">
                 </td>
                 <td>
-                  <select class="form-select form-select-sm">
+                  <select class="form-select form-select-sm" formControlName="endereco">
                     <option value="" disabled selected>Selecionar...</option>
                     <option value="endereco1">Endereço 1</option>
                     <option value="endereco2">Endereço 2</option>
@@ -195,7 +195,7 @@
                   </select>
                 </td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" value="" placeholder="R$">
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="valorFrete">
                 </td>
               </tr>
             </tbody>
@@ -210,7 +210,7 @@
 
           <!-- Desconto geral -->
           <div class="col-4 px-2 p-0 m-0 form-floating">
-            <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto geral">
+            <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto geral" formControlName="descontoGeral">
             <label class="ms-2 mb-2 small text-truncate text-custom-dark">Desconto geral</label>
           </div>
         </div>
@@ -223,7 +223,7 @@
 
           <!-- Tipo de entrega -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tipo de entrega">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tipo de entrega" formControlName="tipoEntrega">
               <option value="" disabled selected>Selecione um tipo de entrega</option>
               <option value="entrega">Entrega</option>
               <option value="retirada">Retirada</option>
@@ -233,13 +233,13 @@
 
           <!-- Endereço -->
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço" formControlName="enderecoEntrega">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
           </div>
 
           <!-- Valor do frete -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input currencyMask [value]="300 | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete">
+            <input currencyMask [value]="300 | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" formControlName="valorFreteEntrega">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor do frete</label>
           </div>
 
@@ -308,7 +308,7 @@
 
           <!-- Meio de pagamento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="meioPagamento">
               <option value="" disabled selected>Selecione um meio de pagamento</option>
               <option value="boleto">Boleto</option>
               <option value="credito">Crédito</option>
@@ -319,19 +319,19 @@
 
           <!-- Dias -->
           <div class="col-1 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm" min="0" type="number" placeholder="Dias">
+            <input class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm" min="0" type="number" placeholder="Dias" formControlName="dias">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dias</label>
           </div>
 
           <!-- Data de vencimento -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" formControlName="dataVencimento">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de vencimento</label>
           </div>
 
           <!-- Status -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="status">
               <option value="aguardando" selected>Aguardando pagamento</option>
               <option value="realizado">Realizado</option>
             </select>
@@ -340,19 +340,19 @@
 
           <!-- Link do boleto -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto" formControlName="linkBoleto">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link do boleto</label>
           </div>
 
           <!-- Link da nota fiscal -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" fromControlName="linkNf">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link da nota fiscal</label>
           </div>
 
           <!-- Observações -->
           <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
+            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="obs"></textarea>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
           </div>
 
@@ -387,7 +387,7 @@
 
           <!-- Botão Salvar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+            <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
               <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
             </button>

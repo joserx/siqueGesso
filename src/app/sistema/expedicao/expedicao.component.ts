@@ -19,7 +19,6 @@ export class ExpedicaoComponent implements OnInit {
   public pagesNumber: number
   public atualPageNumber: number = 0
   public atualPage: any[] = []
-
   
   /* 
   :::::::::::::::::::::::::::::
@@ -52,6 +51,10 @@ export class ExpedicaoComponent implements OnInit {
           if(data.length > 0){
             this.pages.push(data)
           }
+        }, (err)=>{
+          console.log(err)
+        }, ()=>{
+          this.pagesNumber = Object.keys(this.pages).length
         })
       }
     })
@@ -69,7 +72,8 @@ export class ExpedicaoComponent implements OnInit {
     }
   }
   anterior(){
-    if(this.atualPageNumber >= (Object.keys(this.pages).length - 1)){
+    console.log(Object.keys(this.pages).length - 1)
+    if(this.atualPageNumber <= (Object.keys(this.pages).length - 1) && this.atualPageNumber > 0){
       this.atualPageNumber--
       this.expedicaoService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
         this.atualPage = data
