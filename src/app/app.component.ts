@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sique-gesso';
+
+  loader = true;
+
+  constructor() { }
+
+  ngOnInit(): void {
+    window.onload = (event: any) => {
+
+      setTimeout(() =>{this.loader = false;}, 1000)
+    };
+  }
+
 }
