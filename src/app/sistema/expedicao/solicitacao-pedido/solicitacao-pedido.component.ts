@@ -1,0 +1,84 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { timingSafeEqual } from 'crypto';
+import { SolicitacaoService } from 'src/app/services/solicitacao.service';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-solicitacao-pedido',
+  templateUrl: './solicitacao-pedido.component.html',
+  styleUrls: ['./solicitacao-pedido.component.scss']
+})
+export class SolicitacaoPedidoComponent implements OnInit {
+
+  public pedidos = [
+    {cliente: "Guilherme", data: "2021-10-10", numero: 1, status: "Separado", loja: "loja 2", valor: "2,00", vendedor: "Rodrigo"},
+    {cliente: "Felipe", data: "2021-6-11", numero: 2, status: "Entrega Parcial", loja: "loja 2", valor: "12,00", vendedor: "Anderson"},
+    {cliente: "Henrique", data: "2021-2-15", numero: 3, status: "Pendente de envio", loja: "loja 2", valor: "56,00", vendedor: "Ricardo"}
+  ]
+  public solicitacoes: any = []
+  public solId: number 
+  public atualSol: any = []
+
+  solicitacaoForm: FormGroup = new FormGroup({
+    'numero': new FormControl('', [Validators.required]),
+    'data': new FormControl(null, [Validators.required]),
+    'cliente': new FormControl('', [Validators.required]),
+    'valor': new FormControl('', [Validators.required]),
+    'status': new FormControl('', [Validators.required]),
+    'vendedor': new FormControl('', [Validators.required])
+  })
+
+  constructor(
+    private readonly solicitacaoService: SolicitacaoService
+  ) { }
+
+  ngOnInit(): void {
+    this.solicitacaoService.find().subscribe((data:any)=>{
+      this.solicitacoes = data
+      console.log(this.solicitacoes)
+    })
+  }
+
+  prencherInput(data: any){
+    console.log(data)
+    for(let umDado of this.pedidos){
+      if(umDado['numero'] == data.numero){
+       this.solicitacaoForm.get('cliente')?.setValue(umDado['cliente'])
+       this.solicitacaoForm.get('valor')?.setValue(umDado['valor'])
+       this.solicitacaoForm.get('status')?.setValue(umDado['status'])
+       this.solicitacaoForm.get('vendedor')?.setValue(umDado['vendedor'])
+      }
+    }
+  }
+  
+  submitForm(data:any){
+    if(data.valid){
+      this.solicitacaoService.create(data.value).subscribe((data:any)=>{
+        this.solId = data.id
+        this.solicitacaoService.findOne(this.solId).subscribe((data:any)=>{
+          Swal.fire({ 
+            title: 'Solicitação salva!', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true 
+          })
+          this.atualSol.push(data)
+        })
+      })
+    }else{
+      Swal.fire({ 
+        title: 'Preencha todos os campos', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true 
+      })
+    }
+  }
+}

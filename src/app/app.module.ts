@@ -82,6 +82,11 @@ import { EditarExpedicaoComponent } from './sistema/expedicao/editar-expedicao/e
 import { VisualizarExpedicaoComponent } from './sistema/expedicao/visualizar-expedicao/visualizar-expedicao.component';
 import { AddPedidoComponent } from './sistema/expedicao/add-pedido/add-pedido.component';
 import { PesquisarExpComponent } from './sistema/expedicao/pesquisar-exp/pesquisar-exp.component';
+import { ExpedicaoHomeComponent } from './sistema/expedicao/expedicao-home/expedicao-home.component';
+import { SolicitacaoPedidoComponent } from './sistema/expedicao/solicitacao-pedido/solicitacao-pedido.component';
+import { ListaPedidosComponent } from './sistema/expedicao/lista-pedidos/lista-pedidos.component';
+import { CriarEmbarqueComponent } from './sistema/expedicao/lista-pedidos/criar-embarque/criar-embarque.component';
+import { StatusPedidoComponent } from './sistema/expedicao/lista-pedidos/status-pedido/status-pedido.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -166,6 +171,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     VisualizarExpedicaoComponent,
     AddPedidoComponent,
     PesquisarExpComponent,
+    ExpedicaoHomeComponent,
+    SolicitacaoPedidoComponent,
+    ListaPedidosComponent,
+    CriarEmbarqueComponent,
+    StatusPedidoComponent,
     ],
   imports: [
     BrowserModule,
