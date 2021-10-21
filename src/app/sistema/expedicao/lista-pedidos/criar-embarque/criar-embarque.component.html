@@ -1,0 +1,82 @@
+<!-- Modal -->
+<div class="modal fade" id="criarEmbarque">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content rounded-15 bg-custom-light">
+      <div class="modal-header px-4">
+        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Criar Embarque</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="emabrqueForm">
+        <div class="row">
+          <div class="row m-2 py-2">
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="numero">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+            </div>
+            <div class="col-1 px-2 pt-4 m-0 text-center d-flex align-items-center">
+              <button type="button" cursor="pointer" class="submit-buton h-100 w-100 border border-0 bg-trasnparente" (click)="findThis(emabrqueForm.value)">
+                <i class="submit-buton button-modal bi bi-plus-circle-fill icon-view my-auto fs-3 d-flex align-items-center justify-content-center h-100 w-100 p-0 m-0 fw-bold color-dark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex m-2 py-2">
+          <div class="label mt-2 mb-2 px-3 pt-4">
+            <label for="sign" class=" label py-2 text-center lead rounded-15 h-100 w-100 m-0 bg-secondary text-white">Carro</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="sign" id="sign">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
+          </div>
+        </div>
+        <div class="row m-2 py-2">
+          <div class="label mt-2 mb-2 px-3 pt-4">
+            <label for="driver" class=" label py-2 text-center lead rounded-15 h-100 w-100 m-0 bg-secondary text-white">Motorista</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="driver" id="driver">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+          </div>
+        </div>
+      </form>
+      <div class="row m-2 py-2">
+        <table class="col-12 mt-4">
+          <thead class="header_table col-12">
+            <tr>
+              <td class="lead text-center fw-bold">Nº Pedido</td>
+              <td class="lead text-center fw-bold">Cliente</td>
+              <td class="lead text-center fw-bold">Vendedor</td>
+              <td class="lead text-center fw-bold">Data Entrega</td>
+              <td class="lead text-center fw-bold">Status</td>
+            </tr>
+          </thead>
+          <tbody class="body_table">
+            <tr class="mt-2" *ngFor="let solicitacao of embarqueSol">
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
+              <td class="lead rounded-start text-center fw-bold"><i _ngcontent-eru-c124="" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row m-3 d-flex justify-content-end">
+        <div class="col-3 px-2 p-0 m-0 d-grid">
+          <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+            <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="row m-0 py-3 modal-footer">
+      </div>
+      <!-- /Modal footer -->
+
+    </div>
+    <!-- /Modal content -->
+
+  </div>
+</div>

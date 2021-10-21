@@ -90,7 +90,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'state': new FormControl(''),
     'telephone': new FormControl('', [Validators.required]),
     'whatsapp': new FormControl(''),
-    'emergencyTelephone': new FormControl('', [Validators.required]),
+    'emergencyTelephone': new FormControl(''),
     'personalEmail': new FormControl(''),
     'corporativeEmail': new FormControl(''),
     'department': new FormControl(''),
@@ -258,7 +258,7 @@ export class CadastrarColaboradorComponent implements OnInit{
   }
   
   sendForm(data: any) {
-    // console.log(data)
+    console.log(data)
     
     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays

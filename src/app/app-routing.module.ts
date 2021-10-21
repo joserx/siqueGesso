@@ -34,6 +34,9 @@ import { AusenciaComponent } from './sistema/rh/ausencia/ausencia.component';
 import { RelatorioAusenciaComponent } from './sistema/rh/relatorio-ausencia/relatorio-ausencia.component';
 import { VisualizarExpedicaoComponent } from './sistema/expedicao/visualizar-expedicao/visualizar-expedicao.component';
 import { EditarExpedicaoComponent } from './sistema/expedicao/editar-expedicao/editar-expedicao.component';
+import { ExpedicaoHomeComponent } from './sistema/expedicao/expedicao-home/expedicao-home.component';
+import { SolicitacaoPedidoComponent } from './sistema/expedicao/solicitacao-pedido/solicitacao-pedido.component';
+import { ListaPedidosComponent } from './sistema/expedicao/lista-pedidos/lista-pedidos.component';
 
 const routes: Routes = [
   {
@@ -247,7 +250,15 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: ExpedicaoComponent
+            component: ExpedicaoHomeComponent
+          },
+          {
+            path: 'lista',
+            component: ListaPedidosComponent
+          },
+          {
+            path: 'solicitacao',
+            component: SolicitacaoPedidoComponent
           },
           {
             path: 'criar',

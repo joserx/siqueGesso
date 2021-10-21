@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col pb-4 m-0 bg-custom-white">
+    <!-- Página -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <div class="row m-0 mt-4 py-3 border-bottom">
+        <div class="col-12 m-0 p-0 text-custom-dark text-center">
+          <h2>Solicitação de pedido a expedição</h2>
+        </div>
+      </div>
+
+      <form [formGroup]="solicitacaoForm">  
+            <div class="row">
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="number" placeholder="" formControlName="numero" (keydown.enter)="prencherInput(solicitacaoForm.value)">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número do Pedido</label>
+                </div>
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="" formControlName="data">
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da Entrega</label>
+                </div>
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="cliente" readonly>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Cliente</label>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-end mt-5">
+                <div class="col-3 px-2 p-0 m-0 d-grid">
+                    <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="submitForm(solicitacaoForm)">
+                      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Incluir</h5>
+                      <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+                    </button>
+                  </div>
+            </div>
+            <div class="row">
+              <table class="col-12 mt-4">
+                <thead class="header_table col-12">
+                    <tr>
+                      <td class="lead text-center fw-bold">Número</td>
+                      <td class="lead text-center fw-bold">Data de entrega</td>
+                      <td class="lead text-center fw-bold">Nome do Cliente</td>
+                      <td class="lead text-center fw-bold">Valor</td>
+                    </tr>
+                </thead>
+                <tbody class="body_table">
+                    <tr class="mt-2" *ngFor="let solicitacao of atualSol">
+                      <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
+                      <td class="lead rounded-start text-center fw-bold">{{solicitacao.data.substring(10,0)}}</td>
+                      <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
+                      <td class="lead rounded-start text-center fw-bold">R$: {{solicitacao.valor}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+      </form>
+
+    </div>
+    <!-- /Página -->
+  </div>
+</div>
