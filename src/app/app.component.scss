@@ -1,0 +1,63 @@
+.http-loading {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: rgb(255 255 255 / 85%);
+  z-index: 99999999999999999;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    opacity: 0.9;
+    margin-left: 1.5%;
+
+    @media (max-width: 475px) {
+      width: 100%;
+      height: 40%;
+      margin-left: 0;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      width: 20vw;
+      height: 20vh;
+      margin-left: 5%;
+    }
+  }
+}
+
+
+.loader-hide{
+  display: none;
+}
+
+.animated{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-wrapper{
+    width: 20%;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  &-img{
+    width: 50%;
+    animation: spin .8s linear infinite;
+    animation-direction: reverse;
+  }
+
+  &-other{
+    width: 35%;
+    position: absolute;
+    top: 50%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
