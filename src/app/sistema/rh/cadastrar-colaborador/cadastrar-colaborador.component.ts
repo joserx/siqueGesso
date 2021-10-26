@@ -1,6 +1,8 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { time } from 'console';
+import { AddTurnoService } from 'src/app/services/add-turno.service';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { CargoService } from 'src/app/services/cargo.service';
 import { CorreiosService } from 'src/app/services/correios.service';
@@ -32,7 +34,19 @@ export class CadastrarColaboradorComponent implements OnInit{
   public cargos: any = []
   public selectCargos: any = []
 
-  /* ::::::::::::::::::::::::::::: */
+
+    /* 
+  ...............................
+  ::sistema de adicionar turnos::
+  ::...........................::
+  */
+
+  public turnoForm: FormGroup = new FormGroup({
+    'nome': new FormControl('', [Validators.required])
+  })
+  public turnos: any = []
+  public selectTurno: any = []
+  
 
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
@@ -50,18 +64,10 @@ export class CadastrarColaboradorComponent implements OnInit{
   }
   filiais: any[] = []
 
-  // public ultimoEx: FormGroup = new FormGroup({
-  //   'lastExam': new FormControl(''),
-  //   'tipoUltimoExame': new FormControl('')
-  // })
-
-  // public proximoEx: FormGroup = new FormGroup({
-  //   'nextExam': new FormControl(''),
-  //   'nextExameTipo': new FormControl('')
-  // })
-
   public avatarImg: string = './assets/sem-foto.jpg';
   avatarFile: any = {};
+  public dupla: number = 10
+  public salario: number = 10
   public desativadoCheckbox: boolean = false;
   public rhForm: FormGroup = new FormGroup({
     'disabled': new FormControl(''),
@@ -88,9 +94,9 @@ export class CadastrarColaboradorComponent implements OnInit{
     'neighborhood': new FormControl(''),
     'city': new FormControl(''),
     'state': new FormControl(''),
-    'telephone': new FormControl('', [Validators.required]),
+    'telephone': new FormControl(''),
     'whatsapp': new FormControl(''),
-    'emergencyTelephone': new FormControl(''),
+    'emergencyTelephone': new FormControl('', [Validators.required]),
     'personalEmail': new FormControl(''),
     'corporativeEmail': new FormControl(''),
     'department': new FormControl(''),
@@ -125,7 +131,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'lastDeliveryGloves': new FormControl(null),
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(null),
-    'duplaFuncao': new FormControl(null),
+    'duplaFuncao': new FormControl(''),
     'vale': new FormControl('', [Validators.required]),
     'pix': new FormControl(''),
     'pcd': new FormControl('', [Validators.required]),
@@ -146,10 +152,14 @@ export class CadastrarColaboradorComponent implements OnInit{
     protected readonly router: Router,
     protected readonly filialService: FilialService,
     protected readonly vtService: VtService,
-    protected readonly cargoService: CargoService
+    protected readonly cargoService: CargoService,
+    protected readonly turnoService:  AddTurnoService
   ) { }
 
   ngOnInit(): void {
+    this.turnoService.find().subscribe((data:any)=>{
+      this.selectTurno = data
+    })
     this.cargoService.find().subscribe((data:any)=>{
       this.selectCargos = data
     })
@@ -198,14 +208,15 @@ export class CadastrarColaboradorComponent implements OnInit{
 
   anexes : any[]= [];
 
+  //  this.fileAnex = files[0].name
   addFile(event : any) {
     let files: File[] = event.target.files;
 
-    if (files[0]) {
+    if (files[0] && files[0].size !== 0) {
       this.fileService.create(files[0]).subscribe((file: any) => {
         this.anexes.push(file);
       })
-    } else {
+
     }
   }
 
@@ -252,14 +263,19 @@ export class CadastrarColaboradorComponent implements OnInit{
     })
   }
   
-  duplaFuncao(data: any){
-    data.duplaFuncao=Number(data.paycheck)*(20/100)
-    console.log(data.duplaFuncao)
-  }
+  // duplaFuncao(data: any){
+  //   this.rhForm.get('duplaFuncao')?.setValue(Number(data.paycheck)*(20/100))
+  //   data.duplaFuncao=Number(data.paycheck)*(20/100)
+  //   console.log(data.duplaFuncao)
+  // }
   
   sendForm(data: any) {
-    console.log(data)
-    
+    for(let control in this.rhForm['controls']){
+      if(this.rhForm['controls'][control].valid==false){
+        console.log(this.rhForm['controls'][control])
+      }
+    }
+    console.log(this.rhForm)
     if(data.workDays>0 && data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta * data.workDays
     }
@@ -362,6 +378,77 @@ export class CadastrarColaboradorComponent implements OnInit{
     })
   }
 
+   // add turno
+   addTurno(data: any){
+    if(data.valid){
+      this.turnoService.create(data.value).subscribe((data:any)=>{
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Novo turno adicionado',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
+        this.turnoForm.get('nome')?.setValue('')
+        this.turnoInitializer()
+      })
+    }else{
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Preencha o campo primeiro',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true
+      })
+    }
+  }
+
+  // delete turno
+  deleteTurno(id: number){
+    Swal.fire({
+      title: 'Você gostaria de deletar esse turno ?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Turno deletado',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
+        if(id && Number(id)){
+          this.turnoService.delete(id).subscribe((data:any)=>{
+            this.turnoInitializer()
+          })
+        }
+      } else if (result.isDenied) {
+        Swal.fire({
+          position: 'top',
+          icon: 'info',
+          title: 'Turno não deletado',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
+      }
+    })
+  }
+
+  
+  turnoInitializer(){
+    this.turnoService.find().subscribe((data:any)=>{
+      this.selectTurno = data
+    })
+  }
+
   initializer(){
     this.cargoService.find().subscribe((data:any)=>{
       this.selectCargos = data
@@ -383,4 +470,35 @@ export class CadastrarColaboradorComponent implements OnInit{
 
   /* ::::::::::::::::::::::::::::: */
 
+
+  // Data cadastrada
+  // data de hj
+  // data daqui 45 dias
+
+  // a data atual n pode ser maior que a daqui 45 dias
+  // precisamos saber quantos dias se passaram da data cadastrada até a data atual
+  // let data = new Date()
+  // data.setDate(data.getDate()+45)
+  // console.log(data)
+
+  getExpDate(setDate: any){
+    // Data atual
+    let atual: any = new Date()
+    // Data setada
+    let setted: any = new Date(setDate)
+    setted.setDate(setted.getDate() + 1)
+    // Data máxima
+    let max: any = new Date()
+    max.setDate(setted.getDate() + 45)
+    let vacation = new Date()
+    console.log()
+    // vacation.setDate(setted.getDate() + 365)
+    // this.rhForm.get('vacationDueDate')?.setValue(vacation.toISOString().substring(10,0))
+    // if((45-Math.ceil(Math.abs(atual-max)/(1000 * 3600 * 24)))<=45){
+    //   this.rhForm.get('experiencePeriod')?.setValue(45-Math.ceil(Math.abs(atual-max)/(1000 * 3600 * 24)))
+    //   console.log(Math.ceil(Math.abs(atual.getDate()-max.getDate())/(1000 * 3600 * 24)))
+    // }else{
+    //   this.rhForm.get('experiencePeriod')?.setValue(45)
+    // }
+  }
 }

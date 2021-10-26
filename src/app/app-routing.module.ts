@@ -37,6 +37,10 @@ import { EditarExpedicaoComponent } from './sistema/expedicao/editar-expedicao/e
 import { ExpedicaoHomeComponent } from './sistema/expedicao/expedicao-home/expedicao-home.component';
 import { SolicitacaoPedidoComponent } from './sistema/expedicao/solicitacao-pedido/solicitacao-pedido.component';
 import { ListaPedidosComponent } from './sistema/expedicao/lista-pedidos/lista-pedidos.component';
+import { ConsultaStatusComponent } from './sistema/expedicao/consulta-status/consulta-status.component';
+import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.component';
+import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
+import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
 
 const routes: Routes = [
   {
@@ -261,6 +265,23 @@ const routes: Routes = [
             component: SolicitacaoPedidoComponent
           },
           {
+            path: 'cadastro',
+            children: [
+              {
+                path: '',
+                component: CadastroComponent
+              },
+              {
+                path: 'motorista',
+                component: CadastroMotoristaComponent
+              },
+              {
+                path: 'veiculo',
+                component: CadastroVeiculoComponent
+              }
+            ]
+          },
+          {
             path: 'criar',
             component: CriarOrdemExpedicaoComponent
           },
@@ -271,6 +292,10 @@ const routes: Routes = [
           {
             path: 'editar/:id',
             component: EditarExpedicaoComponent
+          },
+          {
+            path: 'consulta',
+            component: ConsultaStatusComponent
           }
         ]
       }

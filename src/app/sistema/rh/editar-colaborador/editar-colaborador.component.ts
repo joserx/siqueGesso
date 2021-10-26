@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { on } from 'process';
+import { AddTurnoService } from 'src/app/services/add-turno.service';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { CargoService } from 'src/app/services/cargo.service';
 import { CorreiosService } from 'src/app/services/correios.service';
@@ -33,14 +34,29 @@ export class EditarColaboradorComponent implements OnInit {
   ::sistema de adicionar cargos::
   ::...........................::
   */
+ 
   public cargoForm: FormGroup = new FormGroup({
     'nome': new FormControl('', [Validators.required])
   })
   public cargos: any = []
   public selectCargos: any = []
 
-  /* ::::::::::::::::::::::::::::: */
 
+  /* 
+  ...............................
+  ::sistema de adicionar turnos::
+  ::...........................::
+  */
+
+  public turnoForm: FormGroup = new FormGroup({
+    'nome': new FormControl('', [Validators.required])
+  })
+  public turnos: any = []
+  public selectTurno: any = []
+
+
+  public dupla: number = 10
+  public salario: number = 10
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
@@ -124,7 +140,7 @@ export class EditarColaboradorComponent implements OnInit {
     'lastDeliveryGloves': new FormControl(null),
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(null),
-    'duplaFuncao': new FormControl(null),
+    'duplaFuncao': new FormControl(''),
     'vale': new FormControl(''),
     'pix': new FormControl(''),
     'pcd': new FormControl(''),
@@ -148,10 +164,14 @@ export class EditarColaboradorComponent implements OnInit {
     private readonly filialService: FilialService,
     private readonly exameService: ExamesService,
     private readonly vtService: VtService,
-    private readonly cargoService: CargoService
+    private readonly cargoService: CargoService,
+    private readonly turnoService: AddTurnoService
   ) { }
 
   ngOnInit(): void {  
+    this.turnoService.find().subscribe((data:any)=>{
+      this.selectTurno = data
+    })
     this.cargoService.find().subscribe((data:any)=>{
       this.selectCargos = data
     })
@@ -335,14 +355,15 @@ export class EditarColaboradorComponent implements OnInit {
 
   anexes : any[]= [];
 
-  addFile(event : any) {
+   //  this.fileAnex = files[0].name
+   addFile(event : any) {
     let files: File[] = event.target.files;
 
-    if (files[0]) {
+    if (files[0] && files[0].size !== 0) {
       this.fileService.create(files[0]).subscribe((file: any) => {
         this.anexes.push(file);
       })
-    } else {
+
     }
   }
 
@@ -387,6 +408,71 @@ export class EditarColaboradorComponent implements OnInit {
       }
     })
   }
+
+  // add turno
+  addTurno(data: any){
+    if(data.valid){
+      this.turnoService.create(data.value).subscribe((data:any)=>{
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Novo turno adicionado',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
+        this.turnoForm.get('nome')?.setValue('')
+        this.turnoInitializer()
+      })
+    }else{
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Preencha o campo primeiro',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true
+      })
+    }
+  }
+
+  // delete turno
+  deleteTurno(id: number){
+    Swal.fire({
+      title: 'Você gostaria de deletar esse turno ?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Turno deletado',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
+        if(id && Number(id)){
+          this.turnoService.delete(id).subscribe((data:any)=>{
+            this.turnoInitializer()
+          })
+        }
+      } else if (result.isDenied) {
+        Swal.fire({
+          position: 'top',
+          icon: 'info',
+          title: 'Turno não deletado',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
+      }
+    })
+  }
+
   // o status mostra se o usuário está ativo ou desativo
   sendForm(data: any) {
     
@@ -396,7 +482,6 @@ export class EditarColaboradorComponent implements OnInit {
       data.totalValue = null
       data.linesNames = ''
     }
-    this.duplaFuncao(data)
     if(data.conducaoIda>0 && data.conducaoVolta>0){
       data.totalValue = data.conducaoIda + data.conducaoVolta
       this.rhForm.get('totalValue')?.setValue(data.totalValue)
@@ -452,6 +537,7 @@ export class EditarColaboradorComponent implements OnInit {
   }
 
   duplaFuncao(data: any){
+    this.rhForm.get('duplaFuncao')?.setValue(Number(data.paycheck)*(20/100))
     data.duplaFuncao=data.paycheck*(20/100)
     console.log(data.duplaFuncao)
   }
@@ -492,6 +578,10 @@ export class EditarColaboradorComponent implements OnInit {
       this.exame.removeAt(i)
     }
     
+  }
+
+  calculoFerias(){
+    alert('teste')
   }
 
   /* 
@@ -547,6 +637,12 @@ export class EditarColaboradorComponent implements OnInit {
     })
   }
 
+  turnoInitializer(){
+    this.turnoService.find().subscribe((data:any)=>{
+      this.selectTurno = data
+    })
+  }
+
   /* ::::::::::::::::::::::::::::: */
 
 
@@ -558,6 +654,36 @@ export class EditarColaboradorComponent implements OnInit {
 
   public toggleEstoqueSection(value: string): void {
     this.estoqueSection = value;
+  }
+
+  // Data cadastrada
+  // data de hj
+  // data daqui 45 dias
+
+  // a data atual n pode ser maior que a daqui 45 dias
+  // precisamos saber quantos dias se passaram da data cadastrada até a data atual
+  // let data = new Date()
+  // data.setDate(data.getDate()+45)
+  // console.log(data)
+
+  getExpDate(setDate: any){
+    // Data atual
+    let atual: any = new Date()
+    // Data setada
+    let setted: any = new Date(setDate)
+    setted.setDate(setted.getDate() + 1)
+    // Data máxima
+    let max: any = new Date()
+    max.setDate(setted.getDate() + 45)
+    let vacation = new Date()
+    vacation.setDate(setted.getDate() + 365)
+    this.rhForm.get('vacationDueDate')?.setValue(vacation.toISOString().substring(10,0))
+    // if((45-Math.round(Math.abs(atual-max)/(1000 * 3600 * 24)))<=45){
+      this.rhForm.get('experiencePeriod')?.setValue((Math.abs(atual-max)/(1000 * 3600 * 24)))
+      console.log(Math.ceil(Math.abs(atual.getDate()-max.getDate())/(1000 * 3600 * 24)))
+    // }else{
+    //   this.rhForm.get('experiencePeriod')?.setValue(45)
+    // }
   }
 
 }

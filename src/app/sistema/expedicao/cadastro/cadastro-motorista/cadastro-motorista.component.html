@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+      <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+      <!-- Página home -->
+      <div class="container">
+  
+        <!-- Botão de voltar -->
+        <div class="row m-0 justify-content-start mt-4">
+          <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao/cadastro">
+            <i class="bi-arrow-left fs-3 text-secondary"></i>
+          </a>
+        </div>
+
+        <div class="col-12 text-center">
+          <h1 class="text-custom-dark text-truncate">Cadastro de motorista</h1>
+        </div>
+  
+        <!-- Cards -->
+        <div class="row justify-content-end">
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+                  <h5 class="fw-normal my-auto text-truncate text-custom-dark">Adicionar motorista</h5>
+                  <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+                </button>
+              </div>
+        </div>
+        <table class="col-12 mt-4">
+            <thead class="header_table col-12">
+                <tr>
+                  <td class="lead text-center fw-bold">Cadastro</td>
+                  <td class="lead text-center fw-bold">Nome</td>
+                  <td class="lead text-center fw-bold">Categoria</td>
+                  <td class="lead text-center fw-bold">Ultima data de embarque</td>
+                </tr>
+            </thead>
+            <tbody class="body_table">
+                <tr class="mt-2">
+                  <td class="lead rounded-start text-center fw-bold"></td>
+                  <td class="lead rounded-start text-center fw-bold"></td>
+                  <td class="lead rounded-start text-center fw-bold"></td>
+                  <td class="lead rounded-start text-center fw-bold"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+  
+      </div>
+    </div>
+  </div>

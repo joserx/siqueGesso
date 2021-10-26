@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 bg-custom-white">
+    <!-- Página -->
+    <div class="container">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao/">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <div class="col-12 text-center">
+        <h1 class="text-custom-dark text-truncate">Consulta status expedição pedido</h1>
+      </div>
+
+      <!-- Adicionar, Ativos e Inativos -->
+      <div class="row m-0 mt-4 justify-content-start">
+        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+          <input
+          class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" 
+          placeholder="Número do pedido">
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número do pedido</label>
+        </div>
+        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+          <input
+          class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" 
+          placeholder="Vendedor">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+        </div>
+      </div>
+      <div class="row m-0 mt-4 justify-content-between">
+        <div class="col-4 px-2 pt-4 p-0 m-0 position-relative">
+          <input  type="text" placeholder="Pesquisar" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm">
+          <i  class="bi-search fs-4 mt-2 position-absolute translate-middle top-50 me-4 end-0"></i>
+        </div>
+        <div class="col-3 px-2 pt-4 p-0 m-0 d-grid">
+          <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtrar</h5>
+            <i class="bi-funnel my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista de pedidos -->
+      <table class="col-12 mt-4">
+        <thead class="header_table col-12">
+            <tr>
+              <td class="lead text-center fw-bold">Nº Pedido</td>
+              <td class="lead text-center fw-bold">Cliente</td>
+              <td class="lead text-center fw-bold">Vendedor</td>
+              <td class="lead text-center fw-bold">Data Entrega</td>
+              <td class="lead text-center fw-bold">Status</td>
+            </tr>
+        </thead>
+        <tbody class="body_table">
+            <tr class="mt-2" *ngFor="let solicitacao of solicitacoes">
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
+              <td class="lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>
+    <!-- /Página -->
+  </div>
+</div>

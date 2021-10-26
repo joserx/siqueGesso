@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { $ } from 'protractor';
-import { Subscriber } from 'rxjs';
 import { RhService } from 'src/app/services/rh.service';
 import { VtService } from 'src/app/services/vt.service';
 import Swal from 'sweetalert2';
-import { threadId } from 'worker_threads';
-import { Workbook, TableStyleProperties } from 'exceljs';
+import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 
 @Component({
@@ -42,7 +39,7 @@ export class ControleVtComponent implements OnInit {
   ngOnInit(): void {
     this.vtService.find().subscribe((thisvt: any)=>{
       for(let value in thisvt){
-        if(thisvt[value]['disabled']==false){
+        if(thisvt[value]['disabled']==false && thisvt[value]['vt']=="Sim"){
           this.colabVt.push(thisvt[value])
         }
       }
@@ -66,10 +63,10 @@ export class ControleVtComponent implements OnInit {
             this.vt.push(new FormGroup({
               'id': new FormControl(this.colabVt[value].id),
               'rh': new FormControl(this.colabVt[value].colabId),
+              'valorTotal': new FormControl(this.colabVt[value].originalTotal),
               'name': new FormControl(this.colabVt[value].name),
               'workDays': new FormControl(this.colabVt[value].workDays),
-              'vt': new FormControl(this.colabVt[value].vt),
-              'total': new FormControl(this.colabVt[value].total)
+              'total': new FormControl(`R$ ${this.colabVt[value].total}`)
             }))
         }else{
           this.vt.push(new FormGroup({
@@ -90,7 +87,7 @@ export class ControleVtComponent implements OnInit {
     for(let value in this.colabVt){
       this.vt['value'][value].total=((Number(this.colabVt[value].originalTotal) * Number(this.vt['controls'][value].get('workDays')?.value)))
 
-      this.vt['controls'][value].get('total')?.setValue(this.vt['value'][value].total)
+      this.vt['controls'][value].get('total')?.setValue(`R$ ${this.vt['value'][value].total}`)
     }
     
     for(let value in data.vt){
