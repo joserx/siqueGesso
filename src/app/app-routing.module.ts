@@ -41,7 +41,6 @@ import { ConsultaStatusComponent } from './sistema/expedicao/consulta-status/con
 import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.component';
 import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
 import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
-import { CadastrarMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastrar-motorista/cadastrar-motorista.component';
 import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastrar-veiculo/cadastrar-veiculo.component';
 
 const routes: Routes = [
@@ -279,10 +278,6 @@ const routes: Routes = [
                   {
                     path: '',
                     component: CadastroMotoristaComponent
-                  },
-                  {
-                    path: 'cadastrar',
-                    component: CadastrarMotoristaComponent
                   }
                 ]
               },

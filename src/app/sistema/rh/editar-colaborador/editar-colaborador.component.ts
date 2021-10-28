@@ -79,15 +79,15 @@ export class EditarColaboradorComponent implements OnInit {
   avatarImg = 'assets/sem-foto.jpg';
   avatarFile : any = null;
   public desativadoCheckbox: boolean = false;
-  public rhForm : FormGroup = new FormGroup({
+  public rhForm: FormGroup = new FormGroup({
     'disabled': new FormControl(''),
     'name': new FormControl('', [Validators.required]),
     'surname': new FormControl('', [Validators.required]),
     'birthDate': new FormControl(null, [Validators.required]),
-    'rg': new FormControl('', [BrazilValidator.isValidRG]),
-    'rgExpedicao': new FormControl('', [Validators.required]),
+    'rg': new FormControl('', [BrazilValidator.isValidRG()]),
+    'rgExpedicao': new FormControl(null, [Validators.required]),
     'rgOrgaoEmissor': new FormControl('', [Validators.required]),
-    'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf]),
+    'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf()]),
     'cnh': new FormControl(''),
     'gender': new FormControl(''),
     'civilState': new FormControl('', [Validators.required]),
@@ -97,16 +97,16 @@ export class EditarColaboradorComponent implements OnInit {
     'naturality': new FormControl(''),
     'motherName': new FormControl(''),
     'fatherName': new FormControl(''),
-    'cep': new FormControl('', [BrazilValidator.isValidCEP]),
+    'cep': new FormControl('', [BrazilValidator.isValidCEP()]),
     'street': new FormControl(''),
     'addressNumber': new FormControl(''),
     'addressComplement': new FormControl(''),
     'neighborhood': new FormControl(''),
     'city': new FormControl(''),
     'state': new FormControl(''),
-    'telephone': new FormControl('', [Validators.required]),
+    'telephone': new FormControl(''),
     'whatsapp': new FormControl(''),
-    'emergencyTelephone': new FormControl('', [Validators.required]),
+    'emergencyTelephone': new FormControl(''),
     'personalEmail': new FormControl(''),
     'corporativeEmail': new FormControl(''),
     'department': new FormControl(''),
@@ -118,13 +118,12 @@ export class EditarColaboradorComponent implements OnInit {
     'experiencePeriod': new FormControl(''),
     'fireDate': new FormControl(null),
     'pis': new FormControl(''),
+    'mei': new FormControl('', [BrazilValidator.isValidCpf()]),
     'bank': new FormControl('', [Validators.required]),
     'bankAccountType': new FormControl('', [Validators.required]),
     'bankAgency': new FormControl('', [Validators.required]),
     'bankAccountNumber': new FormControl('', [Validators.required]),
     'filial': new FormControl(''),
-    'lastExam': new FormControl(null),
-    'nextExam': new FormControl(null), 
     'vacationDueDate': new FormControl(null),
     'conducaoIda': new FormControl(null),
     'conducaoVolta': new FormControl(null),
@@ -142,16 +141,14 @@ export class EditarColaboradorComponent implements OnInit {
     'lastDeliveryGloves': new FormControl(null),
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(null),
-    'duplaFuncao': new FormControl(''),
-    'vale': new FormControl(''),
+    'duplaFuncao': new FormControl(null),
+    'vale': new FormControl('', [Validators.required]),
     'pix': new FormControl(''),
-    'pcd': new FormControl(''),
+    'pcd': new FormControl('', [Validators.required]),
     'abafador': new FormControl(''),
     'lastDelveryAbafador': new FormControl(''),
-    'exame': new FormArray([])
-    // 'falta': new FormArray([])
+    'exame': new FormArray([]),
   })
-
   user : any = {}
   rhId : number = 0;
   anexesRepo = environment.apiUrl + 'file/download/'
@@ -477,7 +474,12 @@ export class EditarColaboradorComponent implements OnInit {
 
   // o status mostra se o usuário está ativo ou desativo
   sendForm(data: any) {
-    
+    for(let form in this.rhForm['controls']){
+      if(this.rhForm['controls'][form].status=="INVALID"){
+        console.log(form ,this.rhForm['controls'][form])
+      }
+      
+    }
     if(data.vale=="Não"){
       data.conducaoIda = null
       data.conducaoVolta = null
@@ -522,11 +524,12 @@ export class EditarColaboradorComponent implements OnInit {
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
           Swal.fire({
-            position: 'top-right',
+            position: 'top',
             icon: 'success',
-            title: 'Colaborador atualizado',
+            title: 'Colaborador atualizado!',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            toast: true
           })
         }
       }, (err) => {
@@ -534,7 +537,14 @@ export class EditarColaboradorComponent implements OnInit {
       })
     }else{
       console.log('teste swal')
-      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Preencha os campos necessários!',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true
+      })
     }
   }
 
@@ -564,16 +574,24 @@ export class EditarColaboradorComponent implements OnInit {
         if (result.isConfirmed) {
           this.exameService.delete(this.exame['controls'][i].get('id')?.value).subscribe((event:any)=>{
             Swal.fire({
-              position: 'top-right',
+              position: 'top',
               icon: 'success',
-              title: 'Exame deletado',
+              title: 'Exame deletado!',
               showConfirmButton: false,
-              timer: 1500
+              timer: 1500,
+              toast: true
             })
           })
           this.exame.removeAt(i)
         } else if (result.isDenied) {
-          Swal.fire('O exame não foi deletado', '', 'info')
+          Swal.fire({
+            position: 'top',
+            icon: 'info',
+            title: 'O exame não foi deletado!',
+            showConfirmButton: false,
+            timer: 1500,
+            toast: true
+          })
         }
       })
     }else{
@@ -596,11 +614,12 @@ export class EditarColaboradorComponent implements OnInit {
     if(data.valid){
       this.cargoService.create(data.value).subscribe((data: any)=>{
         Swal.fire({
-          position: 'top-right',
+          position: 'top',
           icon: 'success',
           title: 'Cargo adicionado',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          toast: true
         })
         this.cargoForm.get('nome')?.setValue('')
         this.initializer()
@@ -620,14 +639,28 @@ export class EditarColaboradorComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Cargo Deletado', '', 'success')
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Cargo deletado!',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
         if(id && Number(id)){
           this.cargoService.delete(id).subscribe((data:any)=>{
             this.initializer()
           })
         }
       } else if (result.isDenied) {
-        Swal.fire('O cargo não foi deletado', '', 'info')
+        Swal.fire({
+          position: 'top',
+          icon: 'info',
+          title: 'O cargo não foi deletado!',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true
+        })
       }
     })
   }

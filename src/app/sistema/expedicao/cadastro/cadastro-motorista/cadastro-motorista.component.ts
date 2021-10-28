@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RhService } from 'src/app/services/rh.service';
 
 @Component({
   selector: 'app-cadastro-motorista',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroMotoristaComponent implements OnInit {
 
-  constructor() { }
+  public motoristas: any[] = []
+
+  constructor(
+    private readonly rhService: RhService
+  ) { }
 
   ngOnInit(): void {
+    this.rhService.find().subscribe((data:any)=>{
+      for(let oneData of data){
+        if(oneData.role.toLowerCase()==="motorista"){
+          this.motoristas.push(oneData)
+        }
+      }
+    })
   }
 
 }

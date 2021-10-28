@@ -20,14 +20,6 @@
         </div>
   
         <!-- Cards -->
-        <div class="container row justify-content-end">
-            <div class="col-2 mx-5">
-                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" routerLink="/sistema/expedicao/cadastro/motorista/cadastrar">
-                  <h5 class="fw-normal my-auto text-truncate text-custom-dark">Adicionar motorista</h5>
-                  <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-                </button>
-              </div>
-        </div>
         <table class="col-12 mt-4">
             <thead class="header_table col-12">
                 <tr>
@@ -38,11 +30,11 @@
                 </tr>
             </thead>
             <tbody class="body_table">
-                <tr class="mt-2">
-                  <td class="lead rounded-start text-center fw-bold"></td>
-                  <td class="lead rounded-start text-center fw-bold"></td>
-                  <td class="lead rounded-start text-center fw-bold"></td>
-                  <td class="lead rounded-start text-center fw-bold"></td>
+                <tr class="mt-2" *ngFor="let motorista of motoristas">
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.id}}</td>
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.name}}  {{motorista.surname}}</td>
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.cnh}}</td>
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.dataExpedicao | date}}</td>
                 </tr>
             </tbody>
         </table>

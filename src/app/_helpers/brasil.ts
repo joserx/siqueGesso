@@ -124,7 +124,7 @@ export class BrazilValidator {
     static isValidCEP() {
         return (control : AbstractControl) => {
             const validacep = /^[0-9]{8}$/;
-            const cep = control.value;
+            const cep = control.value.replace(/-/g, "");
             if(cep) {
                 if(!validacep.test(cep)) {
                     return { cepNotValid: true } 
@@ -142,7 +142,7 @@ export class BrazilValidator {
     static isValidRG() {
         return (control : AbstractControl) => {
             const validarg = /(\d{1,2})(\d{3})(\d{3})(\d{1})$/; 
-            const rg = control.value;
+            const rg = control.value.replace(/.|-/g, "");
             if(rg) {
                 if(!validarg.test(rg)) {
                     return { rgNotValid : true }

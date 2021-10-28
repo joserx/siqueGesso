@@ -66,17 +66,8 @@ export class ControleVtComponent implements OnInit {
               'valorTotal': new FormControl(this.colabVt[value].originalTotal),
               'name': new FormControl(this.colabVt[value].name),
               'workDays': new FormControl(this.colabVt[value].workDays),
-              'total': new FormControl(`R$ ${this.colabVt[value].total}`)
+              'total': new FormControl(this.colabVt[value].total)
             }))
-        }else{
-          this.vt.push(new FormGroup({
-            'id': new FormControl(this.colabVt[value].id),
-            'rh': new FormControl(this.colabVt[value].colabId),
-            'name': new FormControl(this.colabVt[value].name),
-            'workDays': new FormControl(0),
-            'vt': new FormControl(this.colabVt[value].vt),
-            'total': new FormControl(0)
-          }))
         }
       }
     })

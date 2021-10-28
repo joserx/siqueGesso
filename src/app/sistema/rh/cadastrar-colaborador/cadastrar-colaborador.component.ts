@@ -76,10 +76,10 @@ export class CadastrarColaboradorComponent implements OnInit{
     'name': new FormControl('', [Validators.required]),
     'surname': new FormControl('', [Validators.required]),
     'birthDate': new FormControl(null, [Validators.required]),
-    'rg': new FormControl('', [BrazilValidator.isValidRG]),
+    'rg': new FormControl('', [BrazilValidator.isValidRG()]),
     'rgExpedicao': new FormControl(null, [Validators.required]),
     'rgOrgaoEmissor': new FormControl('', [Validators.required]),
-    'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf]),
+    'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf()]),
     'cnh': new FormControl(''),
     'gender': new FormControl(''),
     'civilState': new FormControl('', [Validators.required]),
@@ -89,7 +89,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'naturality': new FormControl(''),
     'motherName': new FormControl(''),
     'fatherName': new FormControl(''),
-    'cep': new FormControl('', [BrazilValidator.isValidCEP]),
+    'cep': new FormControl('', [BrazilValidator.isValidCEP()]),
     'street': new FormControl(''),
     'addressNumber': new FormControl(''),
     'addressComplement': new FormControl(''),
@@ -110,7 +110,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'experiencePeriod': new FormControl(''),
     'fireDate': new FormControl(null),
     'pis': new FormControl(''),
-    'mei': new FormControl('', [BrazilValidator.isValidCpf]),
+    'mei': new FormControl('', [BrazilValidator.isValidCpf()]),
     'bank': new FormControl('', [Validators.required]),
     'bankAccountType': new FormControl('', [Validators.required]),
     'bankAgency': new FormControl('', [Validators.required]),
@@ -139,7 +139,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'pcd': new FormControl('', [Validators.required]),
     'abafador': new FormControl(''),
     'lastDelveryAbafador': new FormControl(''),
-    'exame': new FormArray([])
+    'exame': new FormArray([]),
   })
 
   user: any = {}
