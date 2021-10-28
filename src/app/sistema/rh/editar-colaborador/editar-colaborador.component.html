@@ -585,15 +585,15 @@
 
             <!-- Valor da condução -->
             <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input formControlName="conducaoIda"
-                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              <input formControlName="conducaoIda" currencyMask [value]="ida | currency: 'BRL'"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
                 placeholder="Valor da condução ida">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(ida)</label>
             </div>
 
             <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input formControlName="conducaoVolta"
-                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+              <input formControlName="conducaoVolta" currencyMask [value]="volta | currency: 'BRL'"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
                 placeholder="Valor da condução volta">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor da condução(volta)</label>
             </div>
@@ -607,7 +607,7 @@
 
             <div *ngIf="vt.value === 'Sim'" class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input formControlName="totalValue"
-                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" currencyMask [value]="total | currency: 'BRL'" type="text"
                 placeholder="Valor total" readonly>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor total</label>
             </div>

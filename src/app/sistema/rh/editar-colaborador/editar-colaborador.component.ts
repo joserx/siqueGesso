@@ -54,7 +54,9 @@ export class EditarColaboradorComponent implements OnInit {
   public turnos: any = []
   public selectTurno: any = []
 
-
+  public ida: number = 10
+  public volta: number = 10
+  public total: number = 10
   public dupla: number = 10
   public salario: number = 10
   public estoqueSection: string = 'dados-pessoais';

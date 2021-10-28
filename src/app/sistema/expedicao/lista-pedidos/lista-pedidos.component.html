@@ -1,9 +1,98 @@
 <app-navbar></app-navbar>
 
 
+
+
+
 <!-- Modal -->
 <!-- Criar embarque -->
-<div class="modal fade" id="criarEmbarque">
+<div class="modal fade" tabindex="-1" id="criarEmbarque">
+
+
+  <!-- Modal -->
+  <!-- Exibir Solicitacao -->
+  <div class="modal fade m-0" id="exibirSolicitacao">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="addFilialLabel">Pedido no embarque</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="row">
+            <div class="row m-2 py-2">
+              <div class="row justify-content-start">
+                <div class="row">
+                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.numero}}" readonly>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nº do Pedido</label>
+                  </div>
+                </div>
+                <div class="row justify-content-between">
+                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.cliente}}" readonly>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cliente</label>
+                  </div>
+                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.vendedor}}" readonly>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+                  </div>
+                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.data | date}}" readonly>
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Entrega</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row tabela-row my-5">
+                <table class="col mt-4">
+                  <thead class="header_table col-12">
+                    <tr>
+                      <td class="lead text-center fw-bold">Nº Pedido</td>
+                      <td class="lead text-center fw-bold">Produto</td>
+                      <td class="lead text-center fw-bold">Vendedor</td>
+                      <td class="lead text-center fw-bold">Status</td>
+                    </tr>
+                  </thead>
+                  <tbody class="body_table">
+                    <tr class="mt-2" *ngFor="let produto of produtos">
+                      <td class="col lead rounded-start text-center fw-bold">{{umPedido.numero}}</td>
+                      <td class="col lead rounded-start text-center fw-bold">{{produto.nome}}</td>
+                      <td class="col lead rounded-start text-center fw-bold">{{umPedido.vendedor}}</td>
+                      <td class="col-2 lead rounded-start text-center fw-bold">
+                        <div class="px-2 pt-4 p-0 m-0 form-floating">
+                          <select
+                          class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                          placeholder="Necessidade especial">
+                          <option value="Não tem">Não tem</option>
+                          <option value="Separado">Separado</option>
+                          <option value="Não Coube">Ensino superior</option>
+                          </select>
+                          <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+                      </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-12 d-flex justify-content-end mx-5">
+                <div class="col-2 p-0 m-0">
+                  <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+                    <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row m-0 py-3 modal-footer">
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+    </div>
+  </div>
+
+
   <div class="modal-dialog modal-xl">
     <div class="modal-content rounded-15 bg-custom-light">
       <div class="modal-header px-4">
@@ -25,21 +114,15 @@
           </div>
         </div>
         <div class="d-flex m-2 py-2">
-          <div class="label mt-2 mb-2 px-3 pt-4">
-            <label for="sign" class=" label py-2 text-center lead rounded-15 h-100 w-100 m-0 bg-secondary text-white">Carro</label>
-          </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="sign" id="sign">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
           </div>
         </div>
         <div class="row m-2 py-2">
-          <div class="label mt-2 mb-2 px-3 pt-4">
-            <label for="driver" class=" label py-2 text-center lead rounded-15 h-100 w-100 m-0 bg-secondary text-white">Motorista</label>
-          </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="driver" id="driver">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Motorista</label>
           </div>
         </div>
         <div class="row m-2 py-2">
@@ -63,7 +146,7 @@
                 <td class="col lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
                 <td class="col lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
                 <td class="col-1 lead rounded-start text-center fw-bold">
-                  <button class="w-100 h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+                  <button type="button" class="w-100 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="findSolicitation(solicitacao.id)" data-bs-toggle="modal" data-bs-target="#exibirSolicitacao">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Exibir</h5>
                   </button>
                 </td>
@@ -72,8 +155,8 @@
             </tbody>
           </table>
         </div>
-        <div class="row m-3 d-flex justify-content-end">
-          <div class="col-3 px-2 p-0 m-0 d-grid">
+        <div class="row mx-5 d-flex justify-content-end">
+          <div class="col-2 mx-3 px-2 p-0 m-0 d-grid">
             <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">Finalizar Embarque</h5>
             </button>
@@ -106,18 +189,29 @@
         <div class="row">
           <div class="row m-2 py-2">
             <div class="row justify-content-start">
-              <p *ngFor="let pedido of embarquePedidos">Nº: {{ pedido.numero }} Cliente: {{ pedido.cliente }} Vendedor: {{ pedido.vendedor }}</p>
+              <table class="col-12 mt-4">
+                <thead class="header_table col-12">
+                    <tr>
+                      <td class="lead text-center fw-bold">Nº Pedido</td>
+                      <td class="lead text-center fw-bold">Cliente</td>
+                      <td class="lead text-center fw-bold">Vendedor</td>
+                      <td class="lead text-center fw-bold">Data Entrega</td>
+                      <td class="lead text-center fw-bold">Status</td>
+                    </tr>
+                </thead>
+                <tbody class="body_table">
+                    <tr class="mt-2" *ngFor="let pedido of embarquePedidos">
+                      <td class="lead rounded-start text-center fw-bold">{{pedido.numero}}</td>
+                      <td class="lead rounded-start text-center fw-bold">{{pedido.cliente}}</td>
+                      <td class="lead rounded-start text-center fw-bold">{{pedido.vendedor}}</td>
+                      <td class="lead rounded-start text-center fw-bold">{{pedido.data | date}}</td>
+                      <td class="lead rounded-start text-center fw-bold">{{pedido.status}}</td>
+                    </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="row m-3 d-flex justify-content-end">
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Finalizar Embarque</h5>
-            </button>
-          </div>
-        </div>
-      
       <div class="row m-0 py-3 modal-footer">
       </div>
       <!-- /Modal footer -->
@@ -282,7 +376,6 @@
                   <td class="lead text-center fw-bold">Motorista</td>
                   <td class="lead text-center fw-bold">Pedidos</td>
                   <td class="lead text-center fw-bold"> </td>
-                  <td class="lead text-center fw-bold"> </td>
                 </tr>
             </thead>
             <tbody class="body_table">
@@ -290,13 +383,8 @@
                   <td class="lead rounded-start text-center fw-bold">{{embarque.sign}}</td>
                   <td class="lead rounded-start text-center fw-bold">{{embarque.driver}}</td>
                   <td class="lead rounded-start text-center fw-bold row text-truncate justify-content-center">
-                    <button class="w-50 h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
+                    <button class="col-4 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
                       <h5 class="fw-normal my-auto text-truncate text-custom-dark">Vizualizar</h5>
-                    </button>
-                  </td>
-                  <td class="col-1 lead rounded-start text-center fw-bold">
-                    <button class="w-100 h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm">
-                      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Exibir</h5>
                     </button>
                   </td>
                   <td class="col-1 lead rounded-start text-center fw-bold"><i (click)="deleteEmbarque(embarque.id)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>

@@ -91,7 +91,9 @@ import { NaoConformComponent } from './sistema/expedicao/nao-conform/nao-conform
 import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.component';
 import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
 import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
-import { VizualizarPedidoComponent } from './sistema/expedicao/lista-pedidos/vizualizar-pedido/vizualizar-pedido.component';
+import { CadastrarMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastrar-motorista/cadastrar-motorista.component';
+import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastrar-veiculo/cadastrar-veiculo.component';
+
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
   allowNegative: true,
@@ -184,7 +186,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CadastroComponent,
     CadastroMotoristaComponent,
     CadastroVeiculoComponent,
-    VizualizarPedidoComponent,
+    CadastrarMotoristaComponent,
+    CadastrarVeiculoComponent,
     ],
   imports: [
     BrowserModule,

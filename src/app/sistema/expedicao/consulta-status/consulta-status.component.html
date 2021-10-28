@@ -1,5 +1,4 @@
 <app-navbar></app-navbar>
-
 <div class="row p-0 m-0">
   <div class="col-auto m-0 p-0 bg-custom-light">
     <app-sidemenu></app-sidemenu>
@@ -24,26 +23,14 @@
         <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
           <input
           class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" 
-          placeholder="Número do pedido">
+          placeholder="Número do pedido" (keyup)="filtrarNumero($event)">
           <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número do pedido</label>
         </div>
         <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
           <input
           class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" 
-          placeholder="Vendedor">
+          placeholder="Vendedor" (keyup)="filtrarVendor($event)">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
-        </div>
-      </div>
-      <div class="row m-0 mt-4 justify-content-between">
-        <div class="col-4 px-2 pt-4 p-0 m-0 position-relative">
-          <input  type="text" placeholder="Pesquisar" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm">
-          <i  class="bi-search fs-4 mt-2 position-absolute translate-middle top-50 me-4 end-0"></i>
-        </div>
-        <div class="col-3 px-2 pt-4 p-0 m-0 d-grid">
-          <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtrar</h5>
-            <i class="bi-funnel my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-          </button>
         </div>
       </div>
 

@@ -11,6 +11,15 @@ import Swal from 'sweetalert2';
 })
 export class ListaPedidosComponent implements OnInit {
 
+  public produtos: any = [
+    {'nome': 'produto 1', 'quantidade': 10},
+    {'nome': 'produto 2', 'quantidade': 15},
+    {'nome': 'produto 3', 'quantidade': 20},
+    {'nome': 'produto 4', 'quantidade': 25},
+    {'nome': 'produto 5', 'quantidade': 30}
+  ]
+
+  public umPedido: any = {}
   public estoqueSection: string = 'pedidos';
   public peidos: any[] = []
   public embarquePedidos: any[] = []
@@ -151,7 +160,7 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   delete(id: number){
-    alert(id)
+    
   }
 
   findThis(data: any){
@@ -230,20 +239,55 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   deleteEmbarque(id: number){
-    this.embarqueService.delete(id).subscribe(()=>{
-      this.initializer()
+    Swal.fire({
+      title: 'Você gostaria de deletar o embarque ?',
+      text: '(As solicitações de pedidos que estão dentro do embarque serão excluídas também)',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({ 
+          title: 'Embarque deletado !', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true 
+        })
+        if(id && Number(id)){
+          this.embarqueService.delete(id).subscribe(()=>{
+            this.initializer()
+          })
+        }
+      } else if (result.isDenied) {
+        Swal.fire({ 
+          title: 'Embarque não deletado !', 
+          icon: 'info', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true 
+        })
+      }
     })
+    
   }
 
   findPedidos(id: number){
-    this.embarqueService.findOne(id).subscribe((data: any)=>{
-      this.embarquePedidos = data
-    }, (err)=>{
-      console.log(err)
-    }, ()=>{
-      console.log(this.embarquePedidos)
+    this.embarqueService.findOne(id).subscribe((data:any)=>{
+      this.embarquePedidos = data.solicitacao
     })
-    
+  }
+
+  findSolicitation(id: number){
+    this.solicitacaoService.findOne(id).subscribe((data: any)=>{
+      this.umPedido = data
+    })
   }
 
 }

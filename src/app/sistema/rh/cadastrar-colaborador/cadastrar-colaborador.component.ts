@@ -47,7 +47,9 @@ export class CadastrarColaboradorComponent implements OnInit{
   public turnos: any = []
   public selectTurno: any = []
   
-
+  public ida: number = 10
+  public volta: number = 10
+  public total: number = 10
   public estoqueSection: string = 'dados-pessoais';
   public getDate: any = getDate;
   public openModal: boolean= false;
@@ -96,7 +98,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'state': new FormControl(''),
     'telephone': new FormControl(''),
     'whatsapp': new FormControl(''),
-    'emergencyTelephone': new FormControl('', [Validators.required]),
+    'emergencyTelephone': new FormControl(''),
     'personalEmail': new FormControl(''),
     'corporativeEmail': new FormControl(''),
     'department': new FormControl(''),
@@ -131,7 +133,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'lastDeliveryGloves': new FormControl(null),
     'jacketSize': new FormControl(''),
     'lastDeliveryJacket': new FormControl(null),
-    'duplaFuncao': new FormControl(''),
+    'duplaFuncao': new FormControl(null),
     'vale': new FormControl('', [Validators.required]),
     'pix': new FormControl(''),
     'pcd': new FormControl('', [Validators.required]),
@@ -304,12 +306,14 @@ export class CadastrarColaboradorComponent implements OnInit{
         this.vtService.create(this.vt).subscribe((data:any)=>{})
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
-          Swal.fire({
-            position: 'top-right',
-            icon: 'success',
-            title: 'Colaborador adicionado',
-            showConfirmButton: false,
-            timer: 1500
+          Swal.fire({ 
+            title: 'Colaborador Cadastrado!', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true 
           })
         }
       }, (err) => {
@@ -317,7 +321,15 @@ export class CadastrarColaboradorComponent implements OnInit{
       })
     }else{
       console.log('teste swal')
-      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+      Swal.fire({ 
+        title: 'Preencha os campos necessários!', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true 
+      })
     }
   }
 
@@ -341,12 +353,14 @@ export class CadastrarColaboradorComponent implements OnInit{
   addCargo(data: any){
     if(data.valid){
       this.cargoService.create(data.value).subscribe((data: any)=>{
-        Swal.fire({
-          position: 'top-right',
-          icon: 'success',
-          title: 'Cargo adicionado',
-          showConfirmButton: false,
-          timer: 1500
+        Swal.fire({ 
+          title: 'Cargo Adicionado!', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true 
         })
         this.cargoForm.get('nome')?.setValue('')
         this.initializer()
@@ -366,14 +380,30 @@ export class CadastrarColaboradorComponent implements OnInit{
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Cargo Deletado', '', 'success')
+        Swal.fire({ 
+          title: 'Cargo deletado!', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true 
+        })
         if(id && Number(id)){
           this.cargoService.delete(id).subscribe((data:any)=>{
             this.initializer()
           })
         }
       } else if (result.isDenied) {
-        Swal.fire('O cargo não foi deletado', '', 'info')
+        Swal.fire({ 
+          title: 'O cargo não foi deletado!', 
+          icon: 'info', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true 
+        })
       }
     })
   }
