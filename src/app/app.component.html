@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<div class="http-loading" [class.loader-hide]="!loader">
+  <div class="animated-wrapper http-loading">
+    <img src="../assets/circle.svg" alt="" class="animated-img">
+    <img src="../assets/bg-loader.png" class="animated-other">
+    <!-- <img src="./assets/img/logo/logo2.png" alt="" class="animated-other"> -->
+  </div>
+
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
