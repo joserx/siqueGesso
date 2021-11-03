@@ -82,6 +82,7 @@ import { EditarExpedicaoComponent } from './sistema/expedicao/editar-expedicao/e
 import { VisualizarExpedicaoComponent } from './sistema/expedicao/visualizar-expedicao/visualizar-expedicao.component';
 import { AddPedidoComponent } from './sistema/expedicao/add-pedido/add-pedido.component';
 import { PesquisarExpComponent } from './sistema/expedicao/pesquisar-exp/pesquisar-exp.component';
+import { ViewProdutoComponent } from './sistema/estoque/produtos/view-produto/view-produto.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -166,6 +167,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     VisualizarExpedicaoComponent,
     AddPedidoComponent,
     PesquisarExpComponent,
+    ViewProdutoComponent,
     ],
   imports: [
     BrowserModule,
