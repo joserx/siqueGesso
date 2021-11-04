@@ -20,6 +20,6 @@ export class SolicitacaoService {
   }
 
   findOne(id: number){
-    return this.http.get(environment.apiUrl + 'solicitacao/' +id)
+    return this.http.get(environment.apiUrl + 'solicitacao/' + id)
   }
 }

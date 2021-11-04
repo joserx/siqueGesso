@@ -148,6 +148,7 @@ export class EditarColaboradorComponent implements OnInit {
     'abafador': new FormControl(''),
     'lastDelveryAbafador': new FormControl(''),
     'exame': new FormArray([]),
+    'categoriaCnh': new FormControl('')
   })
   user : any = {}
   rhId : number = 0;
@@ -281,6 +282,7 @@ export class EditarColaboradorComponent implements OnInit {
       this.rhForm.get('pcd')?.setValue(data.pcd)
       this.rhForm.get('abafador')?.setValue(data.abafador)
       this.rhForm.get('lastDeliveryAbafador')?.setValue(data.lastDeliveryAbafador)
+      this.rhForm.get('categoriaCnh')?.setValue(data.categoriaCnh)
       for(let exame in data.exame){
         this.exames.push(data[exame])
         this.exame.push(

@@ -35,14 +35,19 @@
                   <td class="lead text-center fw-bold">Placa</td>
                   <td class="lead text-center fw-bold">Placa 2</td>
                   <td class="lead text-center fw-bold">Tipo</td>
+                  <td class="lead text-center fw-bold"></td>
                 </tr>
             </thead>
             <tbody class="body_table">
-                <tr class="mt-2">
-                  <td class="lead rounded-start text-center fw-bold"></td>
-                  <td class="lead rounded-start text-center fw-bold"></td>
-                  <td class="lead rounded-start text-center fw-bold"></td>
-                  <td class="lead rounded-start text-center fw-bold"></td>
+                <tr class="mt-2" *ngFor="let veiculo of veiculos">
+                  <td class="col lead rounded-start text-center fw-bold">{{ veiculo.id }}</td>
+                  <td class="col lead rounded-start text-center fw-bold">{{ veiculo.placa }}</td>
+                  <td class="col lead rounded-start text-center fw-bold">{{ veiculo.placa2 }}</td>
+                  <td class="col lead rounded-start text-center fw-bold">{{ veiculo.tipo }}</td>
+                  <td class="col-1 lead rounded-start tet-center fw-bold">
+                    <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/expedicao/cadastro/veiculo/editar/{{veiculo.id}}" cursor="pointer"></i>
+                    <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(veiculo.id)"></i>
+                  </td>
                 </tr>
             </tbody>
         </table>

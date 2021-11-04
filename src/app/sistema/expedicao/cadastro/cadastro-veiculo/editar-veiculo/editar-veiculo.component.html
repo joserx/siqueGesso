@@ -1,0 +1,166 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+      <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+      <!-- Página home -->
+      <div class="container">
+  
+        <!-- Botão de voltar -->
+        <div class="row m-0 justify-content-start mt-4">
+          <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao/cadastro/veiculo">
+            <i class="bi-arrow-left fs-3 text-secondary"></i>
+          </a>
+        </div>
+
+        <div class="col-12 text-center">
+          <h1 class="text-custom-dark text-truncate">Editar Veículo</h1>
+        </div>
+  
+        <!-- Cards -->
+        <form [formGroup]="veiculoForm" (ngSubmit)="sendForm(veiculoForm)">
+            <div class="row justify-content-center mt-4">
+              <!-- Placa -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="placa"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Placa">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
+              </div>
+  
+  
+              <!-- Uf -->
+              <div class="col-1 px-2 pt-4 p-0 m-0 d-flex form-floating">
+                <select formControlName="uf"
+                class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                placeholder="Departamento">
+                <option value="Escolaridade" disabled selected>UF</option>
+                <option *ngFor="let uf of ufs" value="{{uf.sigla}}">{{uf.sigla}}</option>
+                </select>
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">UF</label>
+              </div>
+  
+  
+              <!-- Cidade -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 d-flex form-floating">
+                <input formControlName="cidade"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Cidade">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+              </div>
+  
+  
+              <!-- Tipo carroceria -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 d-flex form-floating">
+                <input formControlName="tipo"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Tipo (carroceria)">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo (carroceria)</label>
+              </div>
+  
+  
+              <!-- Marca/modelo -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 d-flex form-floating">
+                <input formControlName="marca"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Marca/modelo">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Marca/modelo</label>
+              </div>
+  
+  
+              <!-- Cor -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="cor"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Cor">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cor</label>
+              </div>
+  
+  
+              <!-- Ano Fabricação -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="fabricacao" mask="0000"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Ano fabricação">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ano fabricação</label>
+              </div>
+  
+  
+              <!-- Código Revan -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="codigo"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Código Revan">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código Revan</label>
+              </div>
+  
+  
+              <!-- RNTRC-->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="rntrc"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="RNTRC">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">RNTRC</label>
+              </div>
+  
+              <!-- Capacidade Kg-->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="capacidade" mask="0 || 00 || 000 || 0000 || 00000 || 000000" suffix=" Kg"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Capacidade Kg">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Capacidade Kg</label>
+              </div>
+  
+  
+              <!-- Tara Kg-->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="tara" mask="0 || 00 || 000 || 0000 || 00000 || 000000" suffix=" Kg"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Tara Kg">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tara Kg</label>
+              </div>
+  
+  
+              <!-- Capacidade M³ -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="capacidadeM3"  mask="0 || 00 || 000 || 0000 || 00000 || 000000" suffix=" M³"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Capacidade M³">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Capacidade M<sup>3</sup></label>
+              </div>
+  
+  
+              <!-- Placa 2 -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="placa2"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Placa 2">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa 2</label>
+              </div>
+  
+  
+              <!-- Placa 3 -->
+              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input formControlName="placa3"
+                class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Placa 3">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa 3</label>
+              </div>
+            </div>
+            <div class="row mt-4 justify-content-end">
+              <!-- Botão Salvar -->
+              <div class="col-2 d-grid px-2 p-0 m-0">
+                <button type="submit"
+                  class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-center shadow-sm">
+                  <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Salvar</h5>
+                </button>
+              </div>
+            </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>

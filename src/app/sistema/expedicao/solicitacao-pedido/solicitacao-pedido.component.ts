@@ -14,7 +14,8 @@ export class SolicitacaoPedidoComponent implements OnInit {
   public pedidos = [
     {cliente: "Guilherme", data: "2021-10-10", numero: 1, status: "Separado", loja: "loja 2", valor: "2,00", vendedor: "Rodrigo"},
     {cliente: "Felipe", data: "2021-6-11", numero: 2, status: "Entrega Parcial", loja: "loja 2", valor: "12,00", vendedor: "Anderson"},
-    {cliente: "Henrique", data: "2021-2-15", numero: 3, status: "Pendente de envio", loja: "loja 2", valor: "56,00", vendedor: "Ricardo"}
+    {cliente: "Henrique", data: "2021-2-15", numero: 3, status: "Pendente de envio", loja: "loja 2", valor: "56,00", vendedor: "Ricardo"},
+    {cliente: "Thais", data: "2021-6-16", numero: 4, status: "Pendente de envio", loja: "loja 2", valor: "79,00", vendedor: "Felipe"}
   ]
   public solicitacoes: any = []
   public solId: number 

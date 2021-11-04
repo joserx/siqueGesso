@@ -92,6 +92,9 @@ import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.compone
 import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
 import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
 import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastrar-veiculo/cadastrar-veiculo.component';
+import { EditarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/editar-veiculo/editar-veiculo.component';
+import { StatusNconformComponent } from './sistema/expedicao/status-nconform/status-nconform.component';
+import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -186,6 +189,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CadastroMotoristaComponent,
     CadastroVeiculoComponent,
     CadastrarVeiculoComponent,
+    EditarVeiculoComponent,
+    StatusNconformComponent,
+    BaixaEntregaComponent,
     ],
   imports: [
     BrowserModule,

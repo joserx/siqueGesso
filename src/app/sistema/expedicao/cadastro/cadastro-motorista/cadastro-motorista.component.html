@@ -32,9 +32,10 @@
             <tbody class="body_table">
                 <tr class="mt-2" *ngFor="let motorista of motoristas">
                   <td class="lead rounded-start text-center fw-bold">{{motorista.id}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{motorista.name}}  {{motorista.surname}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{motorista.cnh}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{motorista.dataExpedicao | date}}</td>
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.name}} {{motorista.surname}}</td>
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.categoriaCnh}}</td>
+                  <td class="lead rounded-start text-center fw-bold" *ngIf="motorista.ultimoEmbarque != undefined">{{motorista.ultimoEmbarque | date}}</td>
+                  <td class="lead rounded-start text-center fw-bold" *ngIf="motorista.ultimoEmbarque == undefined">-</td>
                 </tr>
             </tbody>
         </table>

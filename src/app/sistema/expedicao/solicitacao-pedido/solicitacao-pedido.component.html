@@ -23,7 +23,7 @@
       <form [formGroup]="solicitacaoForm">  
             <div class="row">
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="number" placeholder="" formControlName="numero" (keydown.enter)="prencherInput(solicitacaoForm.value)">
+                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="number" placeholder="" formControlName="numero" (keydown.enter)="prencherInput(solicitacaoForm.value)" (keydown.tab)="prencherInput(solicitacaoForm.value)" (blur)="prencherInput(solicitacaoForm.value)">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número do Pedido</label>
                 </div>
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">

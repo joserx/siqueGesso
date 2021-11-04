@@ -140,6 +140,7 @@ export class CadastrarColaboradorComponent implements OnInit{
     'abafador': new FormControl(''),
     'lastDelveryAbafador': new FormControl(''),
     'exame': new FormArray([]),
+    'categoriaCnh': new FormControl('')
   })
 
   user: any = {}

@@ -57,3 +57,12 @@ div.modalEbarque{
 .tabela-row{
   min-height: 350px;
 }
+
+.search-sugestion{
+  z-index: 1000;
+  background: #fff;
+}
+
+.drivers-list li:hover{
+  background: #f0f0f0;
+}

@@ -42,6 +42,9 @@ import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.compone
 import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
 import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
 import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastrar-veiculo/cadastrar-veiculo.component';
+import { EditarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/editar-veiculo/editar-veiculo.component';
+import { StatusNconformComponent } from './sistema/expedicao/status-nconform/status-nconform.component';
+import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
 
 const routes: Routes = [
   {
@@ -291,10 +294,22 @@ const routes: Routes = [
                   {
                     path: 'cadastrar',
                     component: CadastrarVeiculoComponent
+                  },
+                  {
+                    path: 'editar/:id',
+                    component: EditarVeiculoComponent
                   }
                 ]
               }
             ]
+          },
+          {
+            path: 'status',
+            component: StatusNconformComponent
+          },
+          {
+            path: 'baixa',
+            component: BaixaEntregaComponent
           },
           {
             path: 'criar',
