@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import Swal, { SweetAlertResult } from 'sweetalert2';
@@ -49,6 +49,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
   })
 
   @ViewChild('close') closeBtn: any
+  @Output() reload = new EventEmitter()
 
   constructor(
     private fornecedorService: FornecedorService
@@ -78,6 +79,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
   save(): void | Promise<SweetAlertResult<any>>{
     if (this.fornecedorForm.invalid) return Swal.fire({ title: 'Preencha todos os campos obrigatórios!', icon: 'error', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
     this.fornecedorService.create(this.fornecedorForm.value).subscribe(() => {
+      this.reload.emit()
       this.closeBtn.nativeElement.click()
       return Swal.fire({ title: 'Forncedor salvo!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
     })

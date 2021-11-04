@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FornecedorService } from 'src/app/services/fornecedores.service';
+import { ProdutoService } from 'src/app/services/produto.service';
 
 @Component({
   selector: 'app-produtos',
@@ -7,17 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProdutosComponent implements OnInit {
 
-  public produtos: any = [
-    { codigo: 1, nome: "Placa Cimentícia", estoque: "3000", custo: 20, venda: 80, margem: 300},
-    { codigo: 2, nome: "Placa Cimentícia", estoque: "3000", custo: 20, venda: 80, margem: 300},
-    { codigo: 3, nome: "Placa Cimentícia", estoque: "3000", custo: 20, venda: 80, margem: 300},
-    { codigo: 4, nome: "Placa Cimentícia", estoque: "3000", custo: 20, venda: 80, margem: 300},
-    { codigo: 5, nome: "Placa Cimentícia", estoque: "3000", custo: 20, venda: 80, margem: 300},
-  ]
+  produtos: any
+  produto: any
   
-  constructor() { }
+  constructor(
+    private fornecedorService: FornecedorService,
+    private produtoService: ProdutoService
+  ) { }
 
   ngOnInit(): void {
+    if (!this.fornecedorService.fornecedores)
+      this.fornecedorService.find().subscribe(res => {
+        this.fornecedorService.fornecedores = res
+      })
+    this.getProdutos()
+  }
+
+  getProdutos(){
+    this.produtoService.find().subscribe(res => {
+      this.produtos = res
+    })
+  }
+
+  selectProduto(produto: any){
+    this.produto = produto
   }
 
 }

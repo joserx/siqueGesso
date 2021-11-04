@@ -1,18 +1,15 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
-import { ProdutoService } from 'src/app/services/produto.service';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-adicionar-produtos',
-  templateUrl: './adicionar-produtos.component.html',
-  styleUrls: ['./adicionar-produtos.component.scss']
+  selector: 'app-view-produto',
+  templateUrl: './view-produto.component.html',
+  styleUrls: ['./view-produto.component.scss']
 })
-export class AdicionarProdutosComponent implements OnInit {
+export class ViewProdutoComponent implements OnInit {
 
   fornecedores: any
-
   fornecedorForm = new FormGroup({
     destinacao: new FormControl('', Validators.required),
     categoria: new FormControl('', Validators.required),
@@ -50,44 +47,22 @@ export class AdicionarProdutosComponent implements OnInit {
     infoAdd: new FormControl('', Validators.required)
   })
 
-  @ViewChild('close') closeBtn: any
-  @Output() reload = new EventEmitter()
+  @Input() produto: any
 
   constructor(
-    private formBuilder: FormBuilder,
-    private fornecedorService: FornecedorService,
-    private produtoService: ProdutoService
+    private fornecedorService: FornecedorService
   ) { }
 
+  get fornecedorArray() { return this.fornecedorForm.get('fornecedores')! as FormArray }
+
   ngOnInit(): void {
+    console.log(this.produto)
     if (!this.fornecedorService.fornecedores)
       this.fornecedorService.find().subscribe(res => {
         this.fornecedorService.fornecedores = res
         this.fornecedores = res
       })
     else this.fornecedores = this.fornecedorService.fornecedores
-  }
-
-  get fornecedorArray() { return this.fornecedorForm.get('fornecedores')! as FormArray }
-
-  adicionarFornecedorPadrao(): any {
-    this.fornecedorArray.push(this.formBuilder.group({
-      id: [null, Validators.required]
-    }));
-  }
-
-  removerFornecedorPadrao(i: number) {
-    this.fornecedorArray.removeAt(i)
-  }
-
-  submit(): any {
-    console.log(this.fornecedorForm)
-    if (this.fornecedorForm.invalid) return Swal.fire({ title: 'Preencha todos os campos corretamente!', icon: 'error', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
-    this.produtoService.create(this.fornecedorForm.value).subscribe(() => {
-      this.reload.emit()
-      this.closeBtn.nativeElement.click()
-      return Swal.fire({ title: 'Produto salvo!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
-    })
   }
 
 }

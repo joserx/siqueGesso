@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class FornecedorService {
 
+  fornecedores: any
+
   constructor(
     private readonly http : HttpClient
   ) { }

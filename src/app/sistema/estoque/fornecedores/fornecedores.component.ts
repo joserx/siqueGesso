@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import Swal from 'sweetalert2';
 import { EditFornecedorComponent } from './edit-fornecedor/edit-fornecedor.component';
@@ -29,6 +29,7 @@ export class FornecedoresComponent implements OnInit {
 
   getFornecedores(){
     this.fornecedorService.find().subscribe(res => {
+      this.fornecedorService.fornecedores = res
       this.fornecedores = res
     })
   }
@@ -48,7 +49,7 @@ export class FornecedoresComponent implements OnInit {
       if (res.isConfirmed) 
         this.fornecedorService.delete(fornecedor.id).subscribe(() => {
           this.getFornecedores()
-          return Swal.fire({ title: 'Forncedor deletado!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
+          return Swal.fire({ title: 'Fornecedor deletado!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
         })
       else Swal.fire({ title: 'Ação cancelada!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
     })
