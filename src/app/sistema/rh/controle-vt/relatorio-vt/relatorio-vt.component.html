@@ -29,7 +29,6 @@
                     <thead>
                         <tr>
                             <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">VT</td>
                             <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Dias</td>
                             <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Total</td>
                         </tr>
@@ -37,7 +36,6 @@
                     <tbody *ngFor="let oneColab of colab">
                         <tr>
                             <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.name}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.vt}}</td>
                             <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{oneColab.workDays}}</td>
                             <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal text-truncate">{{oneColab.total}}</td>
                         </tr>

@@ -36,7 +36,15 @@ export class ListarColaboradoresComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Colaborador Deletado', '', 'success')
+        Swal.fire({ 
+          title: 'Colaborador Deletado!', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true 
+        })
         this.rhService.delete(id).subscribe((data : any) => {
           this.profiles = this.profiles.filter((ele : any) => { return ele.id != id })
           this.rhService.data().subscribe((data: any) => {
@@ -44,7 +52,15 @@ export class ListarColaboradoresComponent implements OnInit {
           })
         })
       } else if (result.isDenied) {
-        Swal.fire('O colaborador não foi deletado', '', 'info')
+        Swal.fire({ 
+          title: 'O colaborador não foi deletado!', 
+          icon: 'info', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true 
+        })
       }
     })
   }

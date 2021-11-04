@@ -18,4 +18,12 @@ export class EmbarqueService {
   create(data: any){
     return this.http.post(environment.apiUrl + 'embarque', data)
   }
+
+  delete(id: number){
+    return this.http.delete(environment.apiUrl + 'embarque/' + id) 
+  }
+
+  findOne(id: number){
+    return this.http.get(environment.apiUrl + 'embarque/' + id)
+  }
 }

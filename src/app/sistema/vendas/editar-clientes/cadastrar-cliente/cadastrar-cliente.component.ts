@@ -19,9 +19,9 @@ export class EditarCadastrarClienteComponent implements OnInit {
   clienteForm : FormGroup = new FormGroup({
     'name' : new FormControl(null, [Validators.required]),
     'surname' : new FormControl(null, [Validators.required]),
-    'cpf' : new FormControl(null, [Validators.required, BrazilValidator.isValidCpf]),
-    'cnpj' : new FormControl(null, [BrazilValidator.isValidCpf]),
-    'rg' : new FormControl(null, [Validators.required, BrazilValidator.isValidRG]),
+    'cpf' : new FormControl(null, [Validators.required, BrazilValidator.isValidCpf()]),
+    'cnpj' : new FormControl(null, [BrazilValidator.isValidCpf()]),
+    'rg' : new FormControl(null, [Validators.required, BrazilValidator.isValidRG()]),
     'cellphone' : new FormControl(null, [Validators.required]),
     'companyCellPhone' : new FormControl(null),
     'telephone' : new FormControl(null, [Validators.required]),
@@ -89,7 +89,7 @@ export class EditarCadastrarClienteComponent implements OnInit {
   public adicionarEndereco(): void {
     this.addresses.push(
       new FormGroup({
-        'cep' : new FormControl(null, [BrazilValidator.isValidCEP]),
+        'cep' : new FormControl(null, [BrazilValidator.isValidCEP()]),
         'address' : new FormControl(null),
         'number' : new FormControl(null),
         'complement' : new FormControl(null),
@@ -116,8 +116,8 @@ export class EditarCadastrarClienteComponent implements OnInit {
       // Person validators
       this.clienteForm.controls.name.setValidators([Validators.required])     
       this.clienteForm.controls.surname.setValidators([Validators.required])      
-      this.clienteForm.controls.cpf.setValidators([Validators.required, BrazilValidator.isValidCpf])      
-      this.clienteForm.controls.rg.setValidators([Validators.required, BrazilValidator.isValidRG])      
+      this.clienteForm.controls.cpf.setValidators([Validators.required, BrazilValidator.isValidCpf()])      
+      this.clienteForm.controls.rg.setValidators([Validators.required, BrazilValidator.isValidRG()])      
       this.clienteForm.controls.cellphone.setValidators([Validators.required])      
       this.clienteForm.controls.telephone.setValidators([Validators.required])      
       this.clienteForm.controls.birthDate.setValidators([Validators.required])      
@@ -146,7 +146,7 @@ export class EditarCadastrarClienteComponent implements OnInit {
       this.clienteForm.controls.fantasyName.setValidators([Validators.required])      
       this.clienteForm.controls.socialReason.setValidators([Validators.required])      
       this.clienteForm.controls.subscription.setValidators([Validators.required])      
-      this.clienteForm.controls.cnpj.setValidators([Validators.required, BrazilValidator.isValidCpf])      
+      this.clienteForm.controls.cnpj.setValidators([Validators.required, BrazilValidator.isValidCpf()])      
       this.clienteForm.controls.companyCellPhone.setValidators([Validators.required])      
       this.clienteForm.controls.companyTelephone.setValidators([Validators.required])      
       this.clienteForm.controls.birthDateCompany.setValidators([Validators.required])      

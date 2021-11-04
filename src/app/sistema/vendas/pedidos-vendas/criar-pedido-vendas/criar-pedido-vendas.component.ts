@@ -1,6 +1,5 @@
-import { EventHandlerVars } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { getDate } from '../../../../../environments/global';
@@ -70,12 +69,12 @@ export class CriarPedidoVendasComponent implements OnInit {
     for(let item of this.itens){
       this.item.push(new FormGroup({
         'pedidoId': new FormControl(null),
-        'quantidade': new FormControl(null),  
+        'quantidade': new FormControl(null, [Validators.required]),  
         'desconto': new FormControl(''),
-        'tipoRetirada': new FormControl(''),
-        'prevRetirada': new FormControl(null),
+        'tipoRetirada': new FormControl('', [Validators.required]),
+        'prevRetirada': new FormControl(null, [Validators.required]),
         'valorFrete': new FormControl(''),
-        'endereco': new FormControl(''),
+        'endereco': new FormControl('', [Validators.required]),
       }))
     }
   }

@@ -10,7 +10,7 @@ import { VtService } from 'src/app/services/vt.service';
 export class RelatorioVtComponent implements OnInit {
 
   @ViewChild('content', {static: false})el: ElementRef
-  colabOriginal: any
+  colabOriginal: any[] = []
   public colabAtivado: any[] = []
   public colab: any[] = []
   
@@ -21,13 +21,10 @@ export class RelatorioVtComponent implements OnInit {
 
   ngOnInit(): void {
     this.vtService.find().subscribe((data: any)=>{
-      this.colab = data
-      this.colabOriginal = data
-    })
-    this.rhService.find().subscribe((data: any)=>{
       for(let value in data){
-        if(data[value]['disabled']==false){
-          this.colabAtivado.push(data[value])
+        if(data[value]['vt']=="Sim"){
+          this.colab.push(data[value])
+          this.colabOriginal.push(data[value])
         }
       }
     })

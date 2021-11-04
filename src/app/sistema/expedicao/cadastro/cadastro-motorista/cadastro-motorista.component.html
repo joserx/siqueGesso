@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+      <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+      <!-- Página home -->
+      <div class="container">
+  
+        <!-- Botão de voltar -->
+        <div class="row m-0 justify-content-start mt-4">
+          <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao/cadastro">
+            <i class="bi-arrow-left fs-3 text-secondary"></i>
+          </a>
+        </div>
+
+        <div class="col-12 text-center">
+          <h1 class="text-custom-dark text-truncate">Cadastro de motorista</h1>
+        </div>
+  
+        <!-- Cards -->
+        <table class="col-12 mt-4">
+            <thead class="header_table col-12">
+                <tr>
+                  <td class="lead text-center fw-bold">Cadastro</td>
+                  <td class="lead text-center fw-bold">Nome</td>
+                  <td class="lead text-center fw-bold">Categoria</td>
+                  <td class="lead text-center fw-bold">Ultima data de embarque</td>
+                </tr>
+            </thead>
+            <tbody class="body_table">
+                <tr class="mt-2" *ngFor="let motorista of motoristas">
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.id}}</td>
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.name}} {{motorista.surname}}</td>
+                  <td class="lead rounded-start text-center fw-bold">{{motorista.categoriaCnh}}</td>
+                  <td class="lead rounded-start text-center fw-bold" *ngIf="motorista.ultimoEmbarque != undefined">{{motorista.ultimoEmbarque | date}}</td>
+                  <td class="lead rounded-start text-center fw-bold" *ngIf="motorista.ultimoEmbarque == undefined">-</td>
+                </tr>
+            </tbody>
+        </table>
+        
+  
+      </div>
+    </div>
+  </div>

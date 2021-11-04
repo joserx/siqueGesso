@@ -1,3 +1,21 @@
+@import "../../../../_variables.scss";
+
+.nav-link.active {
+  background: transparent;
+  font-weight: normal;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.nav-link {
+  background-color: $custom-dark;
+  color: $custom-light;
+  &:hover {
+    background-color: #464646;
+  }
+}
+
 .header_table {
     background-color: hsl(357, 85%, 51%);;
     color: #fff;
@@ -6,3 +24,45 @@
   .body_table {
     background-color: #fdfbfb;
   }
+
+  button.submit-buton{
+    background: transparent;
+    color: #000;
+}
+button.submit-buton:hover:hover{
+    background: transparent;
+}
+
+.header_table {
+    background-color: hsl(357, 85%, 51%);;
+    color: #fff;
+  }
+  
+  .body_table {
+    background-color: #fdfbfb;
+  }
+
+.label{
+  width: 12%;
+}
+
+div.modalEbarque{
+  z-index: 1042 !important;
+}
+
+.pedidoLabel{
+  background: hsl(357, 85%, 51%);
+}
+
+.tabela-row{
+  min-height: 350px;
+}
+
+.search-sugestion{
+  z-index: 1000;
+  background: #fff;
+}
+
+.drivers-list li:hover{
+  background: #f0f0f0;
+}

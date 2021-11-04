@@ -49,7 +49,7 @@ import { ExpedicaoComponent } from './sistema/expedicao/expedicao.component';
 import { CriarOrdemExpedicaoComponent } from './sistema/expedicao/criar-ordem-expedicao/criar-ordem-expedicao.component';
 import { CriarUsuarioSistemaComponent } from './sistema/usuarios-sistema/criar-usuario-sistema/criar-usuario-sistema.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './sistema/login/login.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { EditarColaboradorComponent } from './sistema/rh/editar-colaborador/editar-colaborador.component';
@@ -85,8 +85,16 @@ import { PesquisarExpComponent } from './sistema/expedicao/pesquisar-exp/pesquis
 import { ExpedicaoHomeComponent } from './sistema/expedicao/expedicao-home/expedicao-home.component';
 import { SolicitacaoPedidoComponent } from './sistema/expedicao/solicitacao-pedido/solicitacao-pedido.component';
 import { ListaPedidosComponent } from './sistema/expedicao/lista-pedidos/lista-pedidos.component';
-import { CriarEmbarqueComponent } from './sistema/expedicao/lista-pedidos/criar-embarque/criar-embarque.component';
 import { StatusPedidoComponent } from './sistema/expedicao/lista-pedidos/status-pedido/status-pedido.component';
+import { ConsultaStatusComponent } from './sistema/expedicao/consulta-status/consulta-status.component';
+import { NaoConformComponent } from './sistema/expedicao/nao-conform/nao-conform.component';
+import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.component';
+import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
+import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
+import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastrar-veiculo/cadastrar-veiculo.component';
+import { EditarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/editar-veiculo/editar-veiculo.component';
+import { StatusNconformComponent } from './sistema/expedicao/status-nconform/status-nconform.component';
+import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "",
@@ -174,8 +182,16 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ExpedicaoHomeComponent,
     SolicitacaoPedidoComponent,
     ListaPedidosComponent,
-    CriarEmbarqueComponent,
     StatusPedidoComponent,
+    ConsultaStatusComponent,
+    NaoConformComponent,
+    CadastroComponent,
+    CadastroMotoristaComponent,
+    CadastroVeiculoComponent,
+    CadastrarVeiculoComponent,
+    EditarVeiculoComponent,
+    StatusNconformComponent,
+    BaixaEntregaComponent,
     ],
   imports: [
     BrowserModule,
@@ -185,6 +201,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CurrencyMaskModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
     })
