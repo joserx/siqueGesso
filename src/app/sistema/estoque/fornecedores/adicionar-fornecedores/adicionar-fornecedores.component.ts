@@ -13,7 +13,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
 
   fornecedorForm: FormGroup = new FormGroup({
     category: new FormControl('', Validators.required),
-    cnpj: new FormControl('', [Validators.required, BrazilValidator.isValidCNPJ]),
+    cnpj: new FormControl('', [Validators.required, BrazilValidator.isValidCNPJ()]),
     fantasy_name: new FormControl('', Validators.required),
     social_reason: new FormControl('', Validators.required),
     tribute_code: new FormControl('', Validators.required),

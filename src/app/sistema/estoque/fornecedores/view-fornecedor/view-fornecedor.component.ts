@@ -11,7 +11,7 @@ export class ViewFornecedorComponent implements OnInit {
 
   fornecedorForm: FormGroup = new FormGroup({
     category: new FormControl({ value: '', disabled: true }, Validators.required),
-    cnpj: new FormControl({ value: '', disabled: true }, [Validators.required, BrazilValidator.isValidCNPJ]),
+    cnpj: new FormControl({ value: '', disabled: true }, [Validators.required, BrazilValidator.isValidCNPJ()]),
     fantasy_name: new FormControl({ value: '', disabled: true }, Validators.required),
     social_reason: new FormControl({ value: '', disabled: true }, Validators.required),
     tribute_code: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -54,7 +54,7 @@ export class ViewFornecedorComponent implements OnInit {
   loadForm(fornecedorInput: any){
     this.fornecedorForm = new FormGroup({
       category: new FormControl({ value: fornecedorInput.category, disabled: true }, Validators.required),
-      cnpj: new FormControl({ value: fornecedorInput.cnpj, disabled: true }, [Validators.required, BrazilValidator.isValidCNPJ]),
+      cnpj: new FormControl({ value: fornecedorInput.cnpj, disabled: true }, [Validators.required, BrazilValidator.isValidCNPJ()]),
       fantasy_name: new FormControl({ value: fornecedorInput.fantasy_name, disabled: true }, Validators.required),
       social_reason: new FormControl({ value: fornecedorInput.social_reason, disabled: true }, Validators.required),
       tribute_code: new FormControl({ value: fornecedorInput.tribute_code, disabled: true }, Validators.required),

@@ -21,22 +21,22 @@
         <div class="tabela col-12 mt-4">
 
                 <div class="col-12 row border border-1 border-custom-dark m-0 p-0">
-                    <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark">
+                    <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                         <p class="w-100 h-100 text-center text-custom-dark">
                             Colaborador
                         </p>
                     </div>
-                    <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark">
+                    <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                         <p class="w-100 h-100 text-center text-custom-dark">
-                            VT
+                            Valor total da passagem
                         </p>
                     </div>
-                    <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark">
+                    <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                         <p class="w-100 h-100 text-center text-custom-dark">
                             Dias
                         </p>
                     </div>
-                    <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark">
+                    <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                         <p class="w-100 h-100 text-center text-custom-dark">
                             Total
                         </p>
@@ -45,21 +45,21 @@
                 <form class="row m-0 p-0" [formGroup]="vtForm" (submit)="salvar(vtForm.value)">
                     <div class="col-12 row border border-1 border-custom-dark m-0 p-0" *ngFor="let value of vt['value']; let i = index" formArrayName="vt">
                         <div class="col-12 row m-0 p-0" [formGroupName]="i">
-                            <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark">
+                            <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                                 <div class="p-0 m-0 form-floating">
                                     <input formControlName="name"
                                     class="form-control form-control-lg shadow-sm" type="text"
                                     placeholder="Dias trabalhados" readonly>
                                 </div>
                             </div>
-                            <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark">
+                            <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                                 <div class="p-0 m-0 form-floating">
-                                    <input formControlName="vt"
-                                        class="form-control form-control-lg shadow-sm" type="text"
-                                        placeholder="Dias trabalhados" readonly>
+                                    <input formControlName="originalTotal"
+                                    class="form-control form-control-lg shadow-sm" type="text"
+                                    placeholder="Dias trabalhados" readonly>
                                 </div>
                             </div>
-                            <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark" *ngIf="value.vt=='Sim'">
+                            <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                                 <div class="p-0 m-0 form-floating">
                                     <input formControlName="workDays"
                                     class="form-control form-control-lg shadow-sm" type="number"
@@ -67,18 +67,10 @@
                                     <label class="pl-1 pt-1 small text-truncate text-custom-dark">Dias trabalhados</label>
                                 </div>
                             </div>
-                            <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark" *ngIf="value.vt=='Não'">
-                                <div class="p-0 m-0 form-floating">
-                                    <input formControlName="workDays"
-                                    class="form-control form-control-lg shadow-sm" type="number"
-                                    placeholder="Dias trabalhados" readonly>
-                                    <label class="pl-1 pt-1 small text-truncate text-custom-dark">Dias trabalhados</label>
-                                </div>
-                            </div>
-                            <div class="col-3 row h3 m-0 p-0 border border-1 border-custom-dark">
+                            <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                                 <div class="p-0 m-0 form-floating">
                                     <input formControlName="total"
-                                        class="form-control form-control-lg shadow-sm" type="number"
+                                        class="form-control form-control-lg shadow-sm" type="text"
                                         placeholder="Dias trabalhados" readonly>
                                 </div>
                             </div>
@@ -96,53 +88,6 @@
 
                     </div>
                 </form>
-                <!-- <table class="col-11 m-auto">
-                    <thead class="col-12">
-                        <tr>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Colaborador</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">VT</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Dias</td>
-                            <td class="display-6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Total</td>
-                        </tr>
-                    </thead> -->
-
-
-                    <!-- <tbody *ngFor="let oneColab of colab">
-                        <tr>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">
-                                <div class="p-0 m-0 form-floating">
-                                    <input formControlName="name"
-                                    class="form-control form-control-lg rounded-15 shadow-sm" type="text"
-                                    placeholder="Dias trabalhados" readonly>
-                                </div>
-                            </td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">
-                                <div class="p-0 m-0 form-floating">
-                                    <input formControlName="vt"
-                                        class="form-control form-control-lg rounded-15 shadow-sm" type="text"
-                                        placeholder="Dias trabalhados" readonly>
-                                </div>
-                            </td>
-                            <td class="col-2 lead text-custom-dark border border-custom-dark border-1 fw-normal">
-                                <div class="p-0 m-0 form-floating">
-                                    <input formControlName="workDays"
-                                    class="form-control form-control-lg rounded-15 shadow-sm" type="number"
-                                    placeholder="Dias trabalhados">
-                                    <label class="pl-1 pt-1 small text-truncate text-custom-dark">Dias trabalhados</label>
-                                </div>
-                            </td>
-                            <td class="lead text-custom-dark border border-custom-dark border-1 fw-normal">
-                                <div class="p-0 m-0 form-floating">
-                                    <input formControlName="total"
-                                        class="form-control form-control-lg rounded-15 shadow-sm" type="text"
-                                        placeholder="Dias trabalhados" readonly>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-
-
-                </table> -->
         </div>
          <div class="col-12 row">
                 <div class="col-10 row">

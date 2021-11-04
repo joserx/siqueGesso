@@ -19,10 +19,11 @@ export class FileService {
     return this.http.get(environment.apiUrl + 'file/' + id);
   }
 
-  create(file : File) {
+  create(file : File, nome?: string) {
     const formData: FormData = new FormData();
 
-    formData.append('file', file);
+    formData.append('file', file, file.name);
+    if (nome) formData.append('nome', nome)
 
     return this.http.post(`${environment.apiUrl}file/upload`, formData);
   }

@@ -14,7 +14,7 @@ export class EditFornecedorComponent implements OnInit {
   fornecedorForm: FormGroup = new FormGroup({
     id: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
-    cnpj: new FormControl('', [Validators.required, BrazilValidator.isValidCNPJ]),
+    cnpj: new FormControl('', [Validators.required, BrazilValidator.isValidCNPJ()]),
     fantasy_name: new FormControl('', Validators.required),
     social_reason: new FormControl('', Validators.required),
     tribute_code: new FormControl('', Validators.required),
@@ -65,7 +65,7 @@ export class EditFornecedorComponent implements OnInit {
     this.fornecedorForm = new FormGroup({
       id: new FormControl(fornecedorInput.id, Validators.required),
       category: new FormControl(fornecedorInput.category, Validators.required),
-      cnpj: new FormControl(fornecedorInput.cnpj, [Validators.required, BrazilValidator.isValidCNPJ]),
+      cnpj: new FormControl(fornecedorInput.cnpj, [Validators.required, BrazilValidator.isValidCNPJ()]),
       fantasy_name: new FormControl(fornecedorInput.fantasy_name, Validators.required),
       social_reason: new FormControl(fornecedorInput.social_reason, Validators.required),
       tribute_code: new FormControl(fornecedorInput.tribute_code, Validators.required),

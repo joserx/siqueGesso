@@ -1,0 +1,18 @@
+.header_table {
+    background-color: hsl(357, 85%, 51%);;
+    color: #fff;
+  }
+  
+  .body_table {
+    background-color: #fdfbfb;
+  }
+
+  input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+  }
+  input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+  
+  }
