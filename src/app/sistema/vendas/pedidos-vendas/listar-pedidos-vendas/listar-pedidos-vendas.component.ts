@@ -28,6 +28,7 @@ export class ListarPedidosVendasComponent implements OnInit {
   ngOnInit(): void {
     this.pedidosService.find().subscribe((data:any)=>{
       this.pedidos = data
+      console.log(data)
     })
   }
 

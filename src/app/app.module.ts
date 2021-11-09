@@ -88,7 +88,6 @@ import { SolicitacaoPedidoComponent } from './sistema/expedicao/solicitacao-pedi
 import { ListaPedidosComponent } from './sistema/expedicao/lista-pedidos/lista-pedidos.component';
 import { StatusPedidoComponent } from './sistema/expedicao/lista-pedidos/status-pedido/status-pedido.component';
 import { ConsultaStatusComponent } from './sistema/expedicao/consulta-status/consulta-status.component';
-import { NaoConformComponent } from './sistema/expedicao/nao-conform/nao-conform.component';
 import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.component';
 import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
 import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
@@ -186,7 +185,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ListaPedidosComponent,
     StatusPedidoComponent,
     ConsultaStatusComponent,
-    NaoConformComponent,
     CadastroComponent,
     CadastroMotoristaComponent,
     CadastroVeiculoComponent,

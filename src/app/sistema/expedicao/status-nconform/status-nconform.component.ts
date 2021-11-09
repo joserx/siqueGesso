@@ -48,13 +48,14 @@ export class StatusNconformComponent implements OnInit {
       this.statusService.create(data.value).subscribe((data: any)=>{
         this.initializer("status")
         Swal.fire({ 
-          title: 'Status criado !', 
+          title: '<h4>Status criado !</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
       })
     }
@@ -65,13 +66,14 @@ export class StatusNconformComponent implements OnInit {
       this.nConformService.create(data.value).subscribe((data: any)=>{
         this.initializer("nConform")
         Swal.fire({ 
-          title: 'Não conformidade criada !', 
+          title: '<h4>Não conformidade criada !</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
       })
     }
@@ -100,13 +102,14 @@ export class StatusNconformComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire({ 
-          title: 'Não conformidade deletada !', 
+          title: '<h4>Não conformidade deletada !</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
         if(id && Number(id)){
           this.nConformService.delete(id).subscribe((data: any)=>{
@@ -115,13 +118,14 @@ export class StatusNconformComponent implements OnInit {
         }
       } else if (result.isDenied) {
         Swal.fire({ 
-          title: 'Não conformidade não deletada !', 
+          title: '<h5>Não conformidade não deletada !</h5>', 
           icon: 'info', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px', 
         })
       }
     })
@@ -138,13 +142,14 @@ export class StatusNconformComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire({ 
-          title: 'Status deletado !', 
+          title: '<h4>Status deletado !</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true ,
+          width: '500px',
         })
         if(id && Number(id)){
           this.statusService.delete(id).subscribe((data: any)=>{
@@ -153,13 +158,14 @@ export class StatusNconformComponent implements OnInit {
         }
       } else if (result.isDenied) {
         Swal.fire({ 
-          title: 'Status não deletado !', 
+          title: '<h4>Status não deletado !</h4>', 
           icon: 'info', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
       }
     })
@@ -191,13 +197,14 @@ export class StatusNconformComponent implements OnInit {
     this.nConformService.update(id, data.value).subscribe((data: any)=>{
       this.initializer("nConform")
       Swal.fire({ 
-        title: 'Não conformidade atualizada!', 
+        title: '<h4>Não conformidade atualizada!</h4>', 
         icon: 'success', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true
+        timerProgressBar: true,
+        width: '500px'
       })
     })
   }
@@ -206,13 +213,14 @@ export class StatusNconformComponent implements OnInit {
     this.statusService.update(id, data.value).subscribe((data: any)=>{
       this.initializer("status")
       Swal.fire({ 
-        title: 'Status atualizado!', 
+        title: '<h4>Status atualizado!</h4>', 
         icon: 'success', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true
+        timerProgressBar: true,
+        width: '500px'
       })
     })
   }

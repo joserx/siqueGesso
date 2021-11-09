@@ -209,36 +209,39 @@ export class ListaPedidosComponent implements OnInit {
                 'vendedor': new FormControl(sol.vendedor)
               }))
             Swal.fire({ 
-              title: 'Pedido encontrado!', 
+              title: '<h4>Pedido encontrado!</h4>', 
               icon: 'success', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
               timer: 2000, 
-              timerProgressBar: true
+              timerProgressBar: true,
+              width: '500px',
             })
           }
           if(this.embarqueSol.length == 0){
             Swal.fire({ 
-              title: 'Esse pedido já está em um embarque!', 
+              title: '<h4>Esse pedido já está em um embarque!</h4>', 
               icon: 'error', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
               timer: 2000, 
-              timerProgressBar: true
+              timerProgressBar: true,
+              width: '500px',
             })
           }
         }
       }else{
         Swal.fire({ 
-          title: 'Pedido não encontrado!', 
+          title: '<h4>Pedido não encontrado!</h4>', 
           icon: 'error', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
       }
   }
@@ -259,13 +262,14 @@ export class ListaPedidosComponent implements OnInit {
               })
               console.log(dt.solicitacao)
               Swal.fire({ 
-                title: 'Embarque criado!', 
+                title: '<h4>Embarque criado!</h4>', 
                 icon: 'success', 
                 toast: true, 
                 position: 'top', 
                 showConfirmButton: false, 
                 timer: 2000, 
-                timerProgressBar: true
+                timerProgressBar: true,
+                width: '500px',
               })
               this.emabrqueForm.get('sign')?.setValue('')
               this.emabrqueForm.get('driver')?.setValue('')
@@ -275,36 +279,39 @@ export class ListaPedidosComponent implements OnInit {
           }
           if(foundDriver.length == 0){
             Swal.fire({ 
-              title: 'Motorista não existe!', 
+              title: '<h4>Motorista não existe!</h4>', 
               icon: 'error', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
               timer: 2000, 
-              timerProgressBar: true 
+              timerProgressBar: true,
+              width: '500px',
             })
           }
         }
       }else{
         Swal.fire({ 
-          title: 'Veículo não existe!', 
+          title: '<h4>Veículo não existe!</h4>', 
           icon: 'error', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px', 
         })
       }
     }else{
       Swal.fire({ 
-        title: 'Preencha todos os campos!', 
+        title: '<h4>Preencha todos os campos!</h4>', 
         icon: 'error', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true 
+        timerProgressBar: true,
+        width: '500px',
       })
     }
   }
@@ -327,13 +334,14 @@ export class ListaPedidosComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire({ 
-          title: 'Embarque deletado !', 
+          title: '<h4>Embarque deletado !</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
         if(id && Number(id)){
           this.embarqueService.delete(id).subscribe(()=>{
@@ -342,13 +350,14 @@ export class ListaPedidosComponent implements OnInit {
         }
       } else if (result.isDenied) {
         Swal.fire({ 
-          title: 'Embarque não deletado !', 
+          title: '<h4>Embarque não deletado !</h4>', 
           icon: 'info', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px', 
         })
       }
     })

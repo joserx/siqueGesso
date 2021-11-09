@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import Swal from 'sweetalert2';
 
@@ -56,10 +57,14 @@ export class AdicionarProdutosComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private fornecedorService: FornecedorService,
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private pedidoService: PedidosService
   ) { }
 
   ngOnInit(): void {
+    this.pedidoService.find().subscribe((data: any)=>{
+      console.log(data)
+    })
     if (!this.fornecedorService.fornecedores)
       this.fornecedorService.find().subscribe(res => {
         this.fornecedorService.fornecedores = res

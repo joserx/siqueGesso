@@ -59,26 +59,28 @@ export class SolicitacaoPedidoComponent implements OnInit {
         this.solId = data.id
         this.solicitacaoService.findOne(this.solId).subscribe((data:any)=>{
           Swal.fire({ 
-            title: 'Solicitação salva!', 
+            title: '<h4>Solicitação salva!</h4>', 
             icon: 'success', 
             toast: true, 
             position: 'top', 
             showConfirmButton: false, 
             timer: 2000, 
-            timerProgressBar: true 
+            timerProgressBar: true,
+            width: '500px',
           })
           this.atualSol.push(data)
         })
       })
     }else{
       Swal.fire({ 
-        title: 'Preencha todos os campos', 
+        title: '<h4>Preencha todos os campos</h4>', 
         icon: 'error', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true 
+        timerProgressBar: true,
+        width: '500px',
       })
     }
   }

@@ -21,7 +21,7 @@
   
         <!-- Cards -->
         <form [formGroup]="veiculoForm" (ngSubmit)="sendForm(veiculoForm)">
-            <div class="row justify-content-center mt-4">
+            <div class="row justify-content-start mt-4">
               <!-- Placa -->
               <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
                 <input formControlName="placa"
@@ -32,7 +32,7 @@
   
   
               <!-- Uf -->
-              <div class="col-1 px-2 pt-4 p-0 m-0 d-flex form-floating">
+              <div class="col-3 px-2 pt-4 p-0 m-0 d-flex form-floating">
                 <select formControlName="uf"
                 class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
                 placeholder="Departamento">
