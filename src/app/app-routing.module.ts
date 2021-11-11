@@ -45,6 +45,8 @@ import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro
 import { EditarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/editar-veiculo/editar-veiculo.component';
 import { StatusNconformComponent } from './sistema/expedicao/status-nconform/status-nconform.component';
 import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
+import { ListarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/listar-vendas-diretas/listar-vendas-diretas.component';
+import { CriarPedidoVendasDiretasComponent } from './sistema/vendas/vendas-diretas/criar-pedido-vendas-diretas/criar-pedido-vendas-diretas.component';
 
 const routes: Routes = [
   {
@@ -133,6 +135,24 @@ const routes: Routes = [
           {
             path: '',
             component: VendasComponent
+          },
+          {
+            path: 'vendas-diretas',
+            children: [
+              {
+                path: '',
+                redirectTo: 'listar',
+                pathMatch: 'full'
+              },
+              {
+                path: 'listar',
+                component: ListarVendasDiretasComponent
+              },
+              {
+                path: 'cadastro',
+                component: CriarPedidoVendasDiretasComponent
+              }
+            ]
           },
           {
             path: 'clientes',
