@@ -45,6 +45,8 @@ import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro
 import { EditarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/editar-veiculo/editar-veiculo.component';
 import { StatusNconformComponent } from './sistema/expedicao/status-nconform/status-nconform.component';
 import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
+import { EditarPedidoComponent } from './sistema/vendas/pedidos-vendas/editar-pedido/editar-pedido.component';
+import { VisualizarPedidoComponent } from './sistema/vendas/pedidos-vendas/visualizar-pedido/visualizar-pedido.component';
 
 const routes: Routes = [
   {
@@ -176,6 +178,14 @@ const routes: Routes = [
               {
                 path: 'criar',
                 component: CriarPedidoVendasComponent
+              },
+              {
+                path: 'editar/:id',
+                component: EditarPedidoComponent
+              },
+              {
+                path: 'visualizar/:id',
+                component: VisualizarPedidoComponent
               }
             ]
           }

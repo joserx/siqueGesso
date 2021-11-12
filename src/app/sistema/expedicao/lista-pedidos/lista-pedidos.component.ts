@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmbarqueService } from 'src/app/services/embarque.service';
 import { RhService } from 'src/app/services/rh.service';
 import { SolicitacaoService } from 'src/app/services/solicitacao.service';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 import Swal from 'sweetalert2';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -12,7 +13,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
-
+  @ViewChild('embarque') embarque: ElementRef;
+  @ViewChild('opt') opt: ElementRef;
+  @ViewChild('content', {static: false})el: ElementRef
   public show: boolean 
   public showSign: boolean
   public allVeiculos: any = []
@@ -28,7 +31,10 @@ export class ListaPedidosComponent implements OnInit {
     {'nome': 'produto 4', 'quantidade': 25},
     {'nome': 'produto 5', 'quantidade': 30}
   ]
-
+  public pages: any[] = []
+  public pagesNumber: number
+  public atualPageNumber: number = 0
+  public atualPage: any[] = []
   public umPedido: any = {}
   public estoqueSection: string = 'pedidos';
   public peidos: any[] = []
@@ -94,7 +100,42 @@ export class ListaPedidosComponent implements OnInit {
         this.solCodes.push(sol.numero)
       }
       console.log(this.solCodes)
+    }, (err)=>{
+      console.log(err)
+    }, ()=>{
+      for(let control = 0; control <= this.solicitacoes.length; control++){
+        this.solicitacaoService.findByPage(control).subscribe((data:any)=>{
+          if(data.length > 0){
+            this.pages.push(data)
+          }
+        }, (err)=>{
+          console.log(err)
+        }, ()=>{
+          this.pagesNumber = Object.keys(this.pages).length
+        })
+      }
     })
+    this.solicitacaoService.findByPage(0).subscribe((data:any)=>{
+      this.atualPage = data
+    })
+  }
+
+  proximo(){
+    if(this.atualPageNumber < (Object.keys(this.pages).length - 1)){
+      this.atualPageNumber++
+      this.solicitacaoService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+        this.atualPage = data
+      })
+    }
+  }
+  anterior(){
+    console.log(Object.keys(this.pages).length - 1)
+    if(this.atualPageNumber <= (Object.keys(this.pages).length - 1) && this.atualPageNumber > 0){
+      this.atualPageNumber--
+      this.solicitacaoService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+        this.atualPage = data
+      })
+    }
   }
 
   public toggleEstoqueSection(value: string): void {
@@ -246,6 +287,14 @@ export class ListaPedidosComponent implements OnInit {
       }
   }
 
+  closeEmbarque(){
+    this.embarque.nativeElement.click()
+  }
+
+  closeOpt(){
+    this.opt.nativeElement.click()
+  }
+
   addEmbarque(data:any){
     if(data.valid){
       let foundDriver: any[] = []
@@ -315,7 +364,6 @@ export class ListaPedidosComponent implements OnInit {
       })
     }
   }
-
   initializer(){
     this.embarqueService.find().subscribe((data:any)=>{
       this.embarques = data
@@ -428,6 +476,19 @@ export class ListaPedidosComponent implements OnInit {
   selectThisVeiculo(sign: string){
     this.emabrqueForm.get('sign')?.setValue(sign)
     this.showSign = false
+  }
+
+  savePdf(){
+    // const doc = new jsPDF();
+    // doc.text("Hello world!", 10, 10);
+    // doc.save("relatorio-faltas.pdf");
+
+    let pdf = new jsPDF("p", "pt", "a4")
+    pdf.html(this.el.nativeElement, {
+      callback: (pdf)=>{
+        pdf.save("embarque.pdf")
+      }
+    })
   }
 
 }

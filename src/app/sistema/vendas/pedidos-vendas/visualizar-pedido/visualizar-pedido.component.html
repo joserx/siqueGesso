@@ -1,42 +1,4 @@
 <!-- Modal -->
-<div class="modal fade" id="gerarPedido" tabindex="-1" aria-labelledby="pedidoPdfLabel"
-  aria-hidden="true" aria-label="Close">
-  <div class="modal-dialog modal-md">
-      <!-- Modal content -->
-      <div class="modal-content rounded-15 bg-custom-light">
-        <div class="modal-header px-4">
-          <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Senha</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="col-12 modal-body px-5 d-flex justify-content-center">  
-          <div class="d-flex justify-content-center"  id="content">
-            <div class="px-2 pt-4 p-0 m-0 form-floating">
-              <input class="col-12 form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="password" placeholder="Senha" fromControlName="linkNf">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Senha</label>
-            </div>
-          </div>
-        </div>
-        <!-- Modal footer -->
-        <div class="row m-0 py-3 modal-footer">
-            <div class="col-3 px-2 p-0 m-0 mx-5">
-                <button data-bs-dismiss="modal" type="submit"
-                class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Confirmar</h5>
-                </button>
-            </div>
-
-        </div>
-        <!-- /Modal footer -->
-
-      </div>
-      <!-- /Modal content -->
-
-  </div>
-</div>
-
-
-
-<!-- Modal -->
 <div class="modal fade" id="pedidoPdf" tabindex="-1" aria-labelledby="pedidoPdfLabel"
   aria-hidden="true" aria-label="Close">
   <div class="modal-dialog modal-xl">
@@ -138,100 +100,6 @@
   </div>
 </div>
 
-
-<!-- Modal -->
-<!-- Criar pdf -->
-<div class="modal fade" id="selecionarProdutos" tabindex="-1" aria-labelledby="selecionarProdutosLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <form>
-      <!-- Modal content -->
-      <div class="modal-content rounded-15 bg-custom-light">
-        <div class="modal-header px-4">
-          <h5 class="modal-title text-custom-dark" id="selecionarProdutosLabel">Selecionar produtos</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body px-4">
-
-          <div class="row m-0 justify-content-start align-items-center">
-            <!-- Pesquisar -->
-            <div class="col-3 px-2 p-0 m-0 position-relative">
-              <input class="form-control form-control-lg border-0 h-limited py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar" (keyup)="filtrar($event)">
-              <a>
-                <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Títulos da Tabela -->
-          <div class="row m-0 my-5 text-custom-dark justify-content-between">
-            <div class="col-1">
-            </div>
-            <div class="col-1">
-              <h5 class="fw-bold">Código</h5>
-            </div>
-            <div class="col-3">
-              <h5 class="fw-bold">Produto</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold">Estoque</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold">Custo</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold">Venda</h5>
-            </div>
-            <div class="col-1">
-              <h5 class="fw-bold">Margem</h5>
-            </div>
-          </div>
-
-          <!-- Tabela -->
-          <label *ngFor="let produto of allProdutos" class="row m-0 mt-3 border-bottom text-custom-dark justify-content-between" [for]="produto.id">
-            <div class="col-1">
-              <div class="form-check" *ngIf="check(produto.id)">
-                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id" (click)="checkIfChecked($event)" checked>
-              </div>
-              <div class="form-check" *ngIf="!check(produto.id)">
-                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id" (click)="checkIfChecked($event)">
-              </div>
-            </div>
-            <div class="col-1">
-              <p>{{ produto.id }}</p>
-            </div>
-            <div class="col-3">
-              <p>{{ produto.nome }}</p>
-            </div>
-            <div class="col-2">
-              <p>{{ produto.atual }} un.</p>
-            </div>
-            <div class="col-2">
-              <p>{{ produto.custoMedio | currency:'BRL' }} un.</p>
-            </div>
-            <div class="col-2">
-              <p>{{ produto.precoMedio | currency:'BRL' }} un.</p>
-            </div>
-            <div class="col-1">
-              <p>{{ produto.margemLucro }}%</p>
-            </div>
-          </label>
-
-        </div>
-
-        <!-- Modal footer -->
-        <div class="row m-0 py-3 modal-footer">
-
-        </div>
-        <!-- /Modal footer -->
-
-      </div>
-      <!-- /Modal content -->
-    </form>
-
-  </div>
-</div>
-
-
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
@@ -262,65 +130,26 @@
 
           <!-- Data -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()" formControlName="data">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()" formControlName="data" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label>
           </div>
 
           <!-- Loja -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Loja" formControlName="loja">
-              <option value="" disabled selected>Selecione uma loja</option>
-              <option value="Loja 1">Loja 1</option>
-              <option value="Loja 2">Loja 2</option>
-            </select>
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="loja" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
           </div>
 
           <!-- Vendedor -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Vendedor" formControlName="vendedor">
-              <option value="" disabled selected>Selecione um vendedor</option>
-              <option value="Vendedor 1">Vendedor 1</option>
-              <option value="Vendedor 2">Vendedor 2</option>
-            </select>
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="vendedor" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
           </div>
 
           <!-- Dados do cliente -->
           <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Cliente" formControlName="cliente">
-              <option value="" disabled selected>Selecione um cliente</option>
-              <option *ngFor="let cliente of clientes;" [value]="cliente.nome">{{cliente.nome}}</option>
-            </select>
+            <input class="form-control form-control-sm" type="text" formControlName="cliente" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dados do cliente</label>
-          </div>
-
-          <!-- Botão adicionar cliente -->
-          <div class="col-4 px-2 mt-4 p-0 m-0 d-grid">
-            <a type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" routerLink="/sistema/vendas/clientes/cadastro">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Adicionar cliente</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-            </a>
-          </div>
-
-        </div>
-
-        <!-- Dados da venda -->
-        <div class="row mt-4 justify-content-end">
-
-          <div class="col-12 py-4 border-bottom">
-            <h4 class="m-0 text-custom-dark">Dados da venda</h4>
-          </div>
-
-            <div class="col-12 pt-4 px-2">
-              <button type="button" class="col-3 h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#selecionarProdutos">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar produto(s)</h5>
-                <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-              </button>
-            </div>
-
-          <!-- Botão adicionar produto -->
-          <div class="col-4 px-2 mt-4 p-0 m-0 d-grid">
           </div>
 
         </div>
@@ -352,34 +181,24 @@
                 <th scope="row">{{ oneItem.value.codigo }}</th>
                 <td>{{ oneItem.value.produto }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" formControlName="quantidade" (keyup)="totalQuanti(this.item.value)">
+                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" formControlName="quantidade" readonly>
                 </td>
                 <td>{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
                 <td>
-                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" formControlName="desconto" (keyup)="changeDesconto(this.item.value)">
+                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" readonly>
                 </td>
                 <td>{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
                 <td>
-                  <select class="form-select form-select-sm" formControlName="tipoRetirada">
-                    <option value="" disabled selected>Selecionar...</option>
-                    <option value="tipo1">tipo 1</option>
-                    <option value="tipo2">tipo 2</option>
-                    <option value="tipo3">tipo 3</option>
-                  </select>
+                  <input class="form-control form-control-sm" type="text" formControlName="tipoRetirada" readonly>
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="date" formControlName="prevRetirada">
+                  <input class="form-control form-control-sm" type="date" formControlName="prevRetirada" readonly>
                 </td>
                 <td>
-                  <select class="form-select form-select-sm" formControlName="endereco">
-                    <option value="" disabled selected>Selecionar...</option>
-                    <option value="endereco1">Endereço 1</option>
-                    <option value="endereco2">Endereço 2</option>
-                    <option value="endereco3">Endereço 3</option>
-                  </select>
+                  <input class="form-control form-control-sm" type="text" formControlName="endereco" readonly>
                 </td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="valorFrete" (keyup)="changeFrete(this.item.value)">
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="valorFrete" (keyup)="changeFrete(this.item.value)" readonly>
                 </td>
               </tr>
             </tbody>
@@ -394,7 +213,7 @@
 
           <!-- Desconto geral -->
           <div class="col-4 px-2 p-0 m-0 form-floating">
-            <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto geral" formControlName="descontoGeral">
+            <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto geral" formControlName="descontoGeral" readonly>
             <label class="ms-2 mb-2 small text-truncate text-custom-dark">Desconto geral</label>
           </div>
         </div>
@@ -407,23 +226,19 @@
 
           <!-- Tipo de entrega -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tipo de entrega" formControlName="tipoEntrega">
-              <option value="" disabled selected>Selecione um tipo de entrega</option>
-              <option value="entrega">Entrega</option>
-              <option value="retirada">Retirada</option>
-            </select>
+            <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" formControlName="tipoEntrega" (keyup)="changeDesconto(this.item.value)" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de entrega</label>
           </div>
 
           <!-- Endereço -->
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço" formControlName="enderecoEntrega">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço" formControlName="enderecoEntrega" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
           </div>
 
           <!-- Valor do frete -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input currencyMask [value]="300 | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" formControlName="valorFreteEntrega">
+            <input currencyMask [value]="300 | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" formControlName="valorFreteEntrega" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor do frete</label>
           </div>
 
@@ -494,17 +309,13 @@
           <div class="col-6 p-0 m-0">
 
             <div class="pt-4 px-2 form-floating">
-              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" formControlName="condPagamento">
-                <option value="" disabled selected>Selecione uma condição</option>
-                <option value="Loja 1">À vista</option>
-                <option value="Loja 2">Parcelado</option>
-                <option value="personalizado">Personalizado</option>
-              </select>
+              
+              <input class="form-control form-control-sm" type="text" #condicao formControlName="condPagamento" (keyup)="changeDesconto(this.item.value)" readonly>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de pagamento</label>
             </div>
 
             <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="pagPersonalizado">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="pagPersonalizado" readonly>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
             </div>
           </div>
@@ -512,20 +323,12 @@
           <!-- Tabela de preço -->
           <div class="col-6 p-0 m-0">
             <div class="pt-4 px-2 form-floating">
-              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas" formControlName="tabPreco">
-                <option value="" disabled selected>Selecione uma tabela</option>
-                <option value="Tabela A">Tabela A</option>
-                <option value="Tabela B">Tabela B</option>
-                <option value="Tabela C">Tabela C</option>
-                <option value="Tabela D">Tabela D</option>
-                <option value="Tabela E">Tabela E</option>
-                <option value="personalizado">Personalizado</option>
-              </select>
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" #tabela placeholder="Condição personalizada" formControlName="tabPreco" readonly>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de preço aplicada</label>
             </div>
 
             <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" formControlName="tabPersonalizado">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" formControlName="tabPersonalizado" readonly>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
             </div>
           </div>
@@ -533,51 +336,43 @@
 
           <!-- Meio de pagamento -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="meioPagamento">
-              <option value="" disabled selected>Selecione um meio de pagamento</option>
-              <option value="boleto">Boleto</option>
-              <option value="credito">Crédito</option>
-              <option value="debito">Débito</option>
-            </select>
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="meioPagamento" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Meio de pagamento</label>
           </div>
 
           <!-- Dias -->
           <div class="col-1 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm" min="0" type="number" placeholder="Dias" formControlName="dias">
+            <input class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm" min="0" type="number" placeholder="Dias" formControlName="dias" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dias</label>
           </div>
 
           <!-- Data de vencimento -->
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" formControlName="dataVencimento">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" formControlName="dataVencimento" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de vencimento</label>
           </div>
 
           <!-- Status -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="status">
-              <option value="aguardando" selected disabled>Status</option>
-              <option *ngFor="let oneStatus of status" value="{{oneStatus.name}}">{{oneStatus.name}}</option>
-            </select>
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="status" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
           </div>
 
           <!-- Link do boleto -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto" formControlName="linkBoleto">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto" formControlName="linkBoleto" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link do boleto</label>
           </div>
 
           <!-- Link da nota fiscal -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" formControlName="linkNf">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" formControlName="linkNf" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link da nota fiscal</label>
           </div>
 
           <!-- Observações -->
           <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="obs"></textarea>
+            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="obs" readonly></textarea>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
           </div>
 
@@ -586,35 +381,11 @@
         <!-- Footer -->
         <div class="row mt-3 py-3 pb-5">
 
-          <!-- Botão Cancelar -->
-          <!-- <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
-              <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
-            </button>
-          </div> -->
-
-          <!-- Botão Gerar pedido -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#gerarPedido">
-              <h5 class="fw-normal my-auto text-truncate">Gerar pedido</h5>
-              <i class="bi-file-text my-auto fs-4 p-0 m-0 fw-bold"></i>
-            </button>
-          </div>
-
           <!-- Botão Gerar PDF -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidoPdf">
               <h5 class="fw-normal my-auto text-truncate">Gerar PDF</h5>
               <i class="bi-file-earmark-pdf my-auto fs-4 p-0 m-0 fw-bold"></i>
-            </button>
-          </div>
-
-          <!-- Botão Salvar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
             </button>
           </div>
         </div>

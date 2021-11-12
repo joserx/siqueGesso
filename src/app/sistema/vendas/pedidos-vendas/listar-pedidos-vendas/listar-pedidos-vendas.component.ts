@@ -32,4 +32,12 @@ export class ListarPedidosVendasComponent implements OnInit {
     })
   }
 
+  totalPedidos(data: any){
+    let total = 0
+    for(let item of data){
+      total += Number(item.total)
+    }
+    return total
+  }
+
 }

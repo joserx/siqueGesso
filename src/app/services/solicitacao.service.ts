@@ -22,4 +22,8 @@ export class SolicitacaoService {
   findOne(id: number){
     return this.http.get(environment.apiUrl + 'solicitacao/' + id)
   }
+
+  findByPage(no : any){
+    return this.http.get(environment.apiUrl + 'solicitacao/page/' + no)
+  }
 }
