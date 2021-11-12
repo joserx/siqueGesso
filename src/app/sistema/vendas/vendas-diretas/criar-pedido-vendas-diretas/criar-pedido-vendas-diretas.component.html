@@ -1,0 +1,373 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 bg-custom-white">
+    <!-- Página home -->
+    <div class="container pb-5">
+
+      <!-- Botão de voltar -->
+      <div class="row m-0 justify-content-start mt-4">
+        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas/vendas-diretas/listar">
+          <i class="bi-arrow-left fs-3 text-secondary"></i>
+        </a>
+      </div>
+
+      <div class="row m-0 mt-4 py-3 border-bottom">
+        <div class="col-12 m-0 p-0 text-custom-dark">
+          <h4>Criar pedido</h4>
+        </div>
+      </div>
+
+      <form>
+
+        <!-- Criar pedido -->
+        <div class="row m-0">
+
+          <!-- Data da compra -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Data da compra" [max]="getDate()">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da compra</label>
+          </div>
+
+          <!-- Loja -->
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <select #loja (change)="setLojaSelecionada(loja.value)"
+              class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Loja">
+              <option value="" disabled selected>Selecione uma Loja</option>
+              <option *ngFor="let loja of lojas;" [value]="loja.id">{{loja.razao_social}}
+              </option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
+          </div>
+
+          <!-- Vendedor -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <select #vendedor (change)="setVendedorSelecionado(vendedor.value)"
+              class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+              placeholder="Vendedor">
+              <option value="" disabled selected>Selecione um Vendedor</option>
+              <option *ngFor="let vendedor of vendedores;" [value]="vendedor.id">{{vendedor.razao_social}}
+              </option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+          </div>
+
+
+
+          <!-- Adicionar  -->
+          <div class="col-1 px-2 pt-3 mt-3 text-center">
+            <a class="px-2 py-2" routerLink="/sistema/estoque">
+              <i class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="row m-0">
+
+          <!-- CNPJ -->
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="CNPJ">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+          </div>
+          <!-- Nome do Cliente -->
+          <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Nome do Cliente">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Cliente</label>
+          </div>
+
+        </div>
+
+        <!-- Dados da Venda -->
+
+        <div class="row m-0 mt-2 py-3 border-bottom">
+          <div class="col-12 m-0 p-0 text-custom-dark">
+            <h4>Dados da Venda</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Condição de pagamento -->
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text" placeholder="Condição de pagamento">
+              <option value="" disabled selected>Condição de pagamento</option>
+              <option value="7">7 Dias</option>
+              <option value="30">30 Dias</option>
+              <option value="90">90 Dias</option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição de pagamento</label>
+          </div>
+
+          <!-- Tabela de Preço Aplicada -->
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text" placeholder="Tabela de Preço Aplicada especial">
+              <option value="" disabled selected>Selecione uma Tabela</option>
+              <option value="7">7 Dias</option>
+              <option value="30">30 Dias</option>
+              <option value="90">90 Dias</option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de Preço Aplicada especial</label>
+          </div>
+
+          <!-- Frete Fixo -->
+          <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Frete Fixo">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Frete Fixo</label>
+          </div>
+
+
+          <div class="col-2 ms-5 pt-4 p-0 m-0 d-grid">
+            <button (click)="adicionarItemPedido()"  type="button"
+              class="flex-end h-limited btn rounded-15 py-1 px-3 bg-custom-success d-flex justify-content-between shadow-sm">
+              <h6 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar produto(s)</h6>
+              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+            </button>
+          </div>
+
+        </div>
+
+
+
+
+        <!-- Tabela de Itens -->
+        <div class="row mt-4">
+          <div class="col-6 py-4 border-bottom">
+            <h4 class="m-0 text-custom-dark">Itens</h4>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table text-custom-dark">
+            <thead>
+              <tr>
+                <th scope="col">Cód.</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Valor Unitário</th>
+                <th scope="col">Valor Venda</th>
+                <th scope="col">Frete Unitário</th>
+                <th scope="col">Total por Produto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="align-items-center" *ngFor="let item of itensPedido">
+                <th scope="row">{{ item.codigo }}</th>
+                <td>
+                  {{item.nome}}
+                </td>
+                <td>
+                  <input (change)="atualizarSubtotalProduto($event.target, item.codigo)"
+                    class="form-control form-control-sm" type="number" [value]="item.quantidade"
+                    placeholder="Quantidade">
+                </td>
+                <td>
+                  {{item.valor_unitario | currency:'BRL'}}
+                </td>
+                <td>
+                  {{item.valor_venda | currency:'BRL'}}
+                </td>
+                <td>
+                  {{item.frete_unitario | currency:'BRL'}}
+                </td>
+                <td>
+                  {{ item.total_por_produto | currency:'BRL' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /Tabela de itens -->
+
+        <!-- Dados de Entrega -->
+        <div class="row m-0 mt-2 py-3 border-bottom">
+          <div class="col-12 m-0 p-0 text-custom-dark">
+            <h4>Dados de Entrega</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="CEP">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Endereço">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
+          </div>
+          <div class="col-2 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Número">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Bairro">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Cidade">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Complemento">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+          </div>
+        </div>
+
+
+        <div class="row m-0 mt-3  py-2 d-flex justify-content-between  border-bottom border-top">
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="CNPJ">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="CNPJ">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 me-2 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Previsão de Entrega" [max]="getDate()">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Previsão de Entrega</label>
+          </div>
+        </div>
+
+
+
+        <div class="row m-0 mt-4 d-flex justify-content-between py-2 px-5 rounded bg-light border border-secondary">
+          <div class="col-1 m-0 p-0">
+            <p class="fw-bold fs-5">Produtos
+            <p>{{pedido.quantidade_itens}}</p>
+          </div>
+          <div class="col-1 m-0 p-0">
+            <p class="fw-bold fs-5">Quantidade
+            <p>{{pedido.quantidade_total}}</p>
+          </div>
+          <div class="col-1 m-0 p-0">
+            <p class="fw-bold fs-5">Venda
+            <p>{{pedido.venda | currency:'BRL' }}</p>
+          </div>
+
+          <div class="col-1 m-0 p-0">
+            <p class="fw-bold fs-5">Frete
+            <p>{{pedido.frete | currency:'BRL' }}</p>
+          </div>
+
+          <div class="col-1 m-0 p-0">
+            <p class="fw-bold fs-5">Total
+            <p>{{pedido.total_preco | currency:'BRL' }}</p>
+          </div>
+
+
+        </div>
+
+        <div class="row m-0 mt-4 py-3 border-bottom">
+          <div class="col-12 m-0 p-0 text-custom-dark">
+            <h4>Condições de Pagamento</h4>
+          </div>
+        </div>
+
+        <div class="row ps-5 pe-5 d-flex justify-content-between">
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text" placeholder="Meio de Pagamento">
+              <option value="" disabled selected>Selecione um meio de pagamento</option>
+              <option value="7">7 Dias</option>
+              <option value="30">30 Dias</option>
+              <option value="90">90 Dias</option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Meio de Pagamento</label>
+          </div>
+          <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
+              placeholder="Data de Vencimento" [max]="getDate()">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Vencimento</label>
+          </div>
+          <div class="col-4 px-2 pt-4 p-0 m-0 me-2 form-floating">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text" placeholder="Meio de Pagamento">
+              <option value="" disabled selected>Aguardando Pagamento</option>
+              <option value="7">7 Dias</option>
+              <option value="30">30 Dias</option>
+              <option value="90">90 Dias</option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status do Pagamento</label>
+          </div>
+        </div>
+
+        <div class="row ps-5 pe-5 d-flex justify-content-between">
+          <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Link do Boleto">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link do Boleto</label>
+          </div>
+          <div class="col-5 px-2 pt-4 p-0 m-0 me-5 form-floating">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+              placeholder="Link da Nota Fiscal">
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link da Nota Fiscal</label>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <!-- Observações -->
+          <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações"
+              style="height: 150px"></textarea>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="row mt-3 px-5 py-3 pb-5 justify-content-between">
+
+          <!-- Botão Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button type="button"
+              class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
+              <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
+            </button>
+          </div>
+
+          <!-- Botão Gerar PDF -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button type="button"
+              class="h-limited btn rounded-15 py-1 px-4 pdf-button d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate">Gerar PDF</h5>
+              <i class="bi-file-earmark-pdf my-auto fs-4 p-0 m-0 fw-bold"></i>
+            </button>
+          </div>
+
+
+          <!-- Botão Salvar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button type="button"
+              class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /Footer -->
+
+      </form>
+    </div>
+  </div>
+</div>
