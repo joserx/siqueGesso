@@ -17,6 +17,7 @@ export class AuthenticationService {
     private http: HttpClient,
     private readonly router : Router
   ) {
+    console.log(String(localStorage.getItem("currentUser")))
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(String(localStorage.getItem("currentUser"))));
     this.currentUser = this.currentUserSubject.asObservable();
   }
