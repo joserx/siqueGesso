@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
+import { AuthenticationService } from 'src/app/services/auth.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -17,12 +18,17 @@ import { getDate } from '../../../../../environments/global';
 export class CriarPedidoVendasComponent implements OnInit {
 
   @ViewChild('content', {static: false})el: ElementRef
+  public user: any
   public valUnit: number = 0
   public dataId: number = 0
   public inputs: any = []
   public pedidoId: number
   public getDate: any = getDate;
   public desconto: number = 10;
+  public passwordForm: FormGroup = new FormGroup({
+    'email': new FormControl(''),
+    'password': new FormControl('', [Validators.required])
+  })
   public pedidosForm: FormGroup = new FormGroup({
     'data': new FormControl(null, [Validators.required]),
     'loja': new FormControl('', [Validators.required]),
@@ -76,10 +82,16 @@ export class CriarPedidoVendasComponent implements OnInit {
     private readonly itensPedidoService: ItensPedidosService,
     private readonly statusService: StatusService,
     private readonly produtoService: ProdutoService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly authService: AuthenticationService,
     ) { }
     
     ngOnInit(): void {
+      this.authService.currentUser.subscribe((user)=>{
+        this.user = user.result 
+        console.log(typeof(user.result))  
+        this.passwordForm.get('email')?.setValue(user.result.email)
+      })
       this.produtoService.find().subscribe((data: any)=>{
         this.allProdutos = data
         this.allProdutosOriginal = data
@@ -139,7 +151,7 @@ export class CriarPedidoVendasComponent implements OnInit {
   
   /* 
   { codigo: 1, produto: 'Drywall', quantidade: 50, valor_unitario: 25.90, desconto_tab: 5, desconto_ad: 0, valor_venda: 20.90 },
-       { codigo: 2, produto: 'Gesso', quantidade: 4, valor_unitario: 16.90, desconto_tab: 0, desconto_ad: 0, valor_venda: 16.90 },
+  { codigo: 2, produto: 'Gesso', quantidade: 4, valor_unitario: 16.90, desconto_tab: 0, desconto_ad: 0, valor_venda: 16.90 },
   */
   checkIfChecked(event: any){
     console.log(this.allProdutos)
@@ -271,4 +283,77 @@ export class CriarPedidoVendasComponent implements OnInit {
       }
     })
   }
+
+  gerarPedido(data:any, allForm: any){
+    // console.log(data.value.password)
+    if(this.user.permission == 1){
+      this.authService.checkPassword(data.value).subscribe((data:any)=>{
+        if(data == true){
+          Swal.fire({ 
+            title: '<h4>Senha correta !</h4>', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px'
+          })
+          this.passwordForm.get('password')?.setValue('')
+          if(allForm.valid){
+            allForm.value.total = (((this.totalQuanti(this.item.value)*this.valUnit) - this.changeDesconto(this.item.value)) + this.changeFrete(this.item.value))
+            allForm.value.status="Gerado"
+            this.pedidoService.create(allForm.value).subscribe((data: any)=>{
+              this.router.navigate(['sistema', 'vendas', 'pedidos'])
+              Swal.fire({ 
+                title: '<h4>Pedido gerado !</h4>', 
+                icon: 'success', 
+                toast: true, 
+                position: 'top', 
+                showConfirmButton: false, 
+                timer: 2000, 
+                timerProgressBar: true,
+                width: '500px'
+              })
+            })
+          }else{
+            Swal.fire({ 
+              title: '<h4>Preencha todos os campos necessários !</h4>', 
+              icon: 'error', 
+              toast: true, 
+              position: 'top', 
+              showConfirmButton: false, 
+              timer: 2000, 
+              timerProgressBar: true,
+              width: '500px'
+            })
+          }
+        }else{
+          Swal.fire({ 
+            title: '<h4>Senha Incorreta!</h4>', 
+            icon: 'error', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px'
+          })
+          this.passwordForm.get('password')?.setValue('')
+        }
+      })
+    }else{
+      Swal.fire({ 
+        title: '<h4>Você não tem permissão para realizar esta ação !</h4>', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true,
+        width: '500px'
+      })
+    }
+  }
+
 }

@@ -103,6 +103,9 @@ import { EditarPedidoComponent } from './sistema/vendas/pedidos-vendas/editar-pe
 import { VisualizarPedidoComponent } from './sistema/vendas/pedidos-vendas/visualizar-pedido/visualizar-pedido.component';
 import { ListarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/listar-vendas-diretas/listar-vendas-diretas.component';
 import { CriarPedidoVendasDiretasComponent } from './sistema/vendas/vendas-diretas/criar-pedido-vendas-diretas/criar-pedido-vendas-diretas.component';
+import { PerquisarVendaComponent } from './sistema/vendas/perquisar-venda/perquisar-venda.component';
+import { FiltrarVendasComponent } from './sistema/vendas/filtrar-vendas/filtrar-vendas.component';
+import { FiltrarClientesComponent } from './sistema/vendas/clientes/filtrar-clientes/filtrar-clientes.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -204,6 +207,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     VisualizarPedidoComponent,
     ListarVendasDiretasComponent,
     CriarPedidoVendasDiretasComponent,
+    PerquisarVendaComponent,
+    FiltrarVendasComponent,
+    FiltrarClientesComponent,
     ],
   imports: [
     BrowserModule,

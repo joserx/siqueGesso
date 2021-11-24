@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import jsPDF from 'jspdf';
-import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
+import { AuthenticationService } from 'src/app/services/auth.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { StatusService } from 'src/app/services/status.service';
@@ -18,6 +18,7 @@ export class EditarPedidoComponent implements OnInit {
 
   @ViewChild('content', {static: false})el: ElementRef
   public id: number
+  public user: any
   public pedido: any[] = []
   public valUnit: number = 0
   public dataId: number = 0
@@ -25,6 +26,10 @@ export class EditarPedidoComponent implements OnInit {
   public pedidoId: number
   public getDate: any = getDate;
   public desconto: number = 10;
+  public passwordForm: FormGroup = new FormGroup({
+    'email': new FormControl(''),
+    'password': new FormControl('', [Validators.required])
+  })
   public pedidosForm: FormGroup = new FormGroup({
     'data': new FormControl(null, [Validators.required]),
     'loja': new FormControl('', [Validators.required]),
@@ -75,14 +80,19 @@ export class EditarPedidoComponent implements OnInit {
   
   constructor(
     private readonly pedidoService: PedidosService,
-    private readonly itensPedidoService: ItensPedidosService,
     private readonly statusService: StatusService,
     private readonly produtoService: ProdutoService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly authService: AuthenticationService,
     ) { }
     
     ngOnInit(): void {
+      this.authService.currentUser.subscribe((user)=>{
+        this.user = user.result 
+        console.log(typeof(user.result))  
+        this.passwordForm.get('email')?.setValue(user.result.email)
+      })
       const routerParams = this.route.snapshot.paramMap
       this.id = Number(routerParams.get('id'))
       this.pedidoService.findOne(this.id).subscribe((data: any)=>{
@@ -139,14 +149,15 @@ export class EditarPedidoComponent implements OnInit {
     submitForm(data:any, data2: any){
       if(data.valid){
         data.value.total = (((this.totalQuanti(this.item.value)*this.valUnit) - this.changeDesconto(this.item.value)) + this.changeFrete(this.item.value))
-        data.value.status="Aguardando aprovação"
-        this.pedidoService.create(data.value).subscribe((dt: any)=>{
+        if(data.value.status != "Gerado"){
+          data.value.status="Aguardando aprovação"
+        }
+        this.pedidoService.update(this.id, data.value).subscribe((dt: any)=>{
           console.log(dt)
           this.pedidoId = data.id
           for(let OnItem in this.item['value']){
             this.item['value'][OnItem].pedidoId = this.pedidoId
           }
-          this.itensPedidoService.create(data2.value).subscribe((data:any)=>{})
           this.router.navigate(['sistema', 'vendas', 'pedidos'])
           Swal.fire({ 
             title: '<h4>Pedido adicionado !<h4>', 
@@ -314,5 +325,117 @@ export class EditarPedidoComponent implements OnInit {
       }
     })
   }
+
+  gerarPedido(data:any, allForm: any){
+    // console.log(data.value.password)
+    if(this.user.permission == 1){
+      this.authService.checkPassword(data.value).subscribe((data:any)=>{
+        if(data == true){
+          Swal.fire({ 
+            title: '<h4>Senha correta !</h4>', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px'
+          })
+          this.passwordForm.get('password')?.setValue('')
+          if(allForm.valid){
+            allForm.value.total = (((this.totalQuanti(this.item.value)*this.valUnit) - this.changeDesconto(this.item.value)) + this.changeFrete(this.item.value))
+            allForm.value.status="Gerado"
+            this.pedidoService.update(this.id, allForm.value).subscribe((data: any)=>{
+              this.router.navigate(['sistema', 'vendas', 'pedidos'])
+              Swal.fire({ 
+                title: '<h4>Pedido gerado</h4>', 
+                icon: 'success', 
+                toast: true, 
+                position: 'top', 
+                showConfirmButton: false, 
+                timer: 2000, 
+                timerProgressBar: true,
+                width: '500px'
+              })
+            })
+          }else{
+            Swal.fire({ 
+              title: '<h4>Preencha todos os campos necessários !</h4>', 
+              icon: 'error', 
+              toast: true, 
+              position: 'top', 
+              showConfirmButton: false, 
+              timer: 2000, 
+              timerProgressBar: true,
+              width: '500px'
+            })
+          }
+        }else{
+          Swal.fire({ 
+            title: '<h4>Senha Incorreta!</h4>', 
+            icon: 'error', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px'
+          })
+          this.passwordForm.get('password')?.setValue('')
+        }
+      })
+    }else{
+      Swal.fire({ 
+        title: '<h4>Você não tem permissão para realizar esta ação !</h4>', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true,
+        width: '500px'
+      })
+    }
+  }
+
+ cancelarPedido(id: number){
+  Swal.fire({
+    title: 'Você gostaria de cancelar este pedido?',
+    text: 'Ao cancelar este pedido, ele será deletado !',
+    icon: 'warning',
+    showDenyButton: true,
+    confirmButtonText: 'Sim',
+    denyButtonText: `Não`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      this.pedidoService.delete(id).subscribe((data:any)=>{
+        this.router.navigate(['sistema', 'vendas', 'pedidos'])
+        Swal.fire({ 
+          title: '<h4>Pedido Cancelado !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true ,
+          width: '500px'
+        })
+      })
+    } else if (result.isDenied) {
+      Swal.fire({ 
+        title: '<h4>O pedido não foi cancelado!</h4>', 
+        icon: 'info', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true ,
+        width: '500px'
+      })
+    }
+  })
+  
+ }
 
 }

@@ -8,24 +8,25 @@
           <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Senha</h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="col-12 modal-body px-5 d-flex justify-content-center">  
-          <div class="d-flex justify-content-center"  id="content">
-            <div class="px-2 pt-4 p-0 m-0 form-floating">
-              <input class="col-12 form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="password" placeholder="Senha" fromControlName="linkNf">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Senha</label>
+        <form [formGroup]="passwordForm">
+          <div class="col-12 modal-body px-5 d-flex justify-content-center">  
+            <div class="d-flex justify-content-center"  id="content">
+              <div class="px-2 pt-4 p-0 m-0 form-floating">
+                <input class="col-12 form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="password" placeholder="Senha" formControlName="password">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Senha</label>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- Modal footer -->
-        <div class="row m-0 py-3 modal-footer">
-            <div class="col-3 px-2 p-0 m-0 mx-5">
-                <button data-bs-dismiss="modal" type="submit"
-                class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Confirmar</h5>
-                </button>
-            </div>
-
-        </div>
+          <!-- Modal footer -->
+          <div class="row m-0 py-3 modal-footer">
+              <div class="col-3 px-2 p-0 m-0 mx-5">
+                  <button data-bs-dismiss="modal" type="submit"
+                  class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start" (click)="gerarPedido(passwordForm, pedidosForm)">
+                  <h5 class="fw-normal my-auto text-truncate text-custom-dark">Confirmar</h5>
+                  </button>
+              </div>
+          </div>
+        </form>
         <!-- /Modal footer -->
 
       </div>
@@ -558,7 +559,8 @@
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="status">
               <option value="aguardando" selected disabled>Status</option>
-              <option *ngFor="let oneStatus of status" value="{{oneStatus.name}}">{{oneStatus.name}}</option>
+              <option value="Aguardando aprovação">Aguardando aprovação</option>
+              <option value="Gerado">Gerado</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
           </div>
@@ -588,7 +590,7 @@
 
           <!-- Botão Cancelar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" (click)="cancelarPedido(id)">
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
             </button>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
@@ -19,9 +19,9 @@ export class EditarCadastrarClienteComponent implements OnInit {
   clienteForm : FormGroup = new FormGroup({
     'name' : new FormControl(null, [Validators.required]),
     'surname' : new FormControl(null, [Validators.required]),
-    'cpf' : new FormControl(null, [Validators.required, BrazilValidator.isValidCpf()]),
-    'cnpj' : new FormControl(null, [BrazilValidator.isValidCpf()]),
-    'rg' : new FormControl(null, [Validators.required, BrazilValidator.isValidRG()]),
+    'cpf' : new FormControl('', [Validators.required, ]),
+    'cnpj' : new FormControl('', [BrazilValidator.isValidCpf()]),
+    'rg' : new FormControl('', [Validators.required, BrazilValidator.isValidRG()]),
     'cellphone' : new FormControl(null, [Validators.required]),
     'companyCellPhone' : new FormControl(null),
     'telephone' : new FormControl(null, [Validators.required]),
@@ -57,6 +57,9 @@ export class EditarCadastrarClienteComponent implements OnInit {
     this.clientService.findOne(this.clientId).subscribe((data : any) => {
       this.client = data
       console.log(this.client)
+      if(this.client.cnpj!=null){
+        this.tipoPessoa = 'juridica'
+      }
       /* CPF */
       this.clienteForm.get('name')?.setValue(this.client.name)
       this.clienteForm.get('surname')?.setValue(this.client.surname)
@@ -64,15 +67,14 @@ export class EditarCadastrarClienteComponent implements OnInit {
       this.clienteForm.get('rg')?.setValue(this.client.rg)
       this.clienteForm.get('cellphone')?.setValue(this.client.cellphone)
       this.clienteForm.get('telephone')?.setValue(this.client.telephone)
-      // ver se tem como mudar o valor do input de date
-      this.clienteForm.get('birthDate')?.setValue(String(this.client.birthDate.substring(10, 0)))
+      this.clienteForm.get('birthDate')?.setValue(this.client.birthDate.substring(10, 0))
       this.clienteForm.get('email')?.setValue(this.client.email)
       /* CNPJ */
       this.clienteForm.get("cnpj")?.setValue(this.client.cnpj)
       this.clienteForm.get("subscription")?.setValue(this.client.subscription)
       this.clienteForm.get("socialReason")?.setValue(this.client.socialReason)
       this.clienteForm.get("fantasyName")?.setValue(this.client.fantasyName)
-      this.clienteForm.get("birthDateCompany")?.setValue(String(this.client.birthDateCompany.substring(10, 0)))
+      this.clienteForm.get("birthDateCompany")?.setValue(this.client.birthDateCompany.substring(10, 0))
       this.clienteForm.get("companyEmail")?.setValue(this.client.companyEmail)
       this.clienteForm.get("companyCellPhone")?.setValue(this.client.companyCellPhone)
       this.clienteForm.get("companyTelephone")?.setValue(this.client.companyTelephone)

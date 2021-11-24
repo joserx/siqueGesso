@@ -29,6 +29,10 @@ export class AuthenticationService {
     return this.http.get<any>(`${environment.apiUrl}user/valida`);
   }
 
+  checkPassword(data:any){
+    return this.http.post<any>(environment.apiUrl + 'user/check', data)
+  }
+
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}user/login`, { email, password }).pipe(
       map(
