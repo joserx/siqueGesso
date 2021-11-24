@@ -183,7 +183,7 @@
 
                 <!-- RG -->
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                    <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-0||0.000.000-0"
+                    <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-A||0.000.000-A"
                     formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
                     type="text" placeholder="RG">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
@@ -221,19 +221,13 @@
                 </div>
 
 
-                 <!-- categoria CNH -->
-                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                  <select formControlName="categoriaCnh"
-                  class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                <!-- categoria CNH -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                  <input formControlName="categoriaCnh"
+                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
                   placeholder="Categoria CNH">
-                    <option value="" disabled selected>Categoria CNH</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="E">E</option>
-                  </select>
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria CNH</label>
-                  </div>
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria da CNH</label>
+                </div>
 
 
                 <!-- PIS -->

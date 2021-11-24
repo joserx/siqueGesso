@@ -84,7 +84,7 @@ export class EditarColaboradorComponent implements OnInit {
     'name': new FormControl('', [Validators.required]),
     'surname': new FormControl('', [Validators.required]),
     'birthDate': new FormControl(null, [Validators.required]),
-    'rg': new FormControl('', [BrazilValidator.isValidRG()]),
+    'rg': new FormControl('', [Validators.required]),
     'rgExpedicao': new FormControl(null, [Validators.required]),
     'rgOrgaoEmissor': new FormControl('', [Validators.required]),
     'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf()]),

@@ -145,7 +145,7 @@ export class BrazilValidator {
             const validarg = /(\d{1,2})(\d{3})(\d{3})(\d{1})$/; 
             var rg = control.value
             if(rg) {
-                // rg = rg.replace(/.|-/g, "");
+                rg = rg.replace(/.|-/g, "");
                 if(!validarg.test(rg)) {
                     return { rgNotValid : true }
                 } else {
