@@ -1,14 +1,95 @@
 <app-navbar></app-navbar>
 
 
+<!-- Modal -->
+<!-- Imprimir -->
+<div class="modal fade" id="imprimir" tabindex="-1" aria-labelledby="imrpimirLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Imprimir</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="col-12 modal-body px-4 d-flex justify-content-center">
+          <div class="pdf-preview d-flex justify-content-center"  id="content" #content>
+            <div class="mt-4 bg-white col-12 p-2">
+              <div class="row">
+                  <div class="col-2">
+                      <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso">
+                  </div>
+                  <div class="col">
+                      <h2 class="text-custom-dark text-center">
+                          Embarques
+                      </h2>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-4">Placa: {{emabrqueForm.value.sign}}</div>
+                <div class="col-4">Nome: {{emabrqueForm.value.driver}}</div>
+                <div class="col-12">
+                  <table class="bg-white tabela m-0 p-0">
+                    <thead>
+                        <tr>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nº Pedido</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cliente</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Vendedor</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
+                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Status</td>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let solicitacao of emabrqueForm.value.solicitacao">
+                        <tr>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.numero}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.cliente}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.vendedor}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.data | date}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+              </div>
+          </div>
+        </div>
 
+        </div>
+        <!-- Modal footer -->
+        <div class="row mx-4 py-3 modal-footer">
+          <div class="col-1 mx-3 px-2 p-0 m-0">
+            <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="savePdf()">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Imprimir</h5>
+            </button>
+          </div>
+        </div>
+        <!-- /Modal footer -->
 
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" #opt id="options" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content  bg-custom-light">
+      <div class="modal-header">
+        <h5 class="modal-title text-custom-dark" id="addFilialLabel">O que você deseja fazer ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="addEmbarque(emabrqueForm)">Salvar</button>
+        <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex align-items-center justify-content-between shadow-sm" (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimir">Imprimir</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal -->
 <!-- Criar embarque -->
-<div class="modal fade" tabindex="-1" id="criarEmbarque">
-
-
+<div class="modal fade" #embarque tabindex="-1" id="criarEmbarque">
   <!-- Modal -->
   <!-- Exibir Solicitacao -->
   <div class="modal fade m-0" id="exibirSolicitacao">
@@ -43,35 +124,35 @@
                 </div>
               </div>
               <div class="row tabela-row my-5">
-                <table class="col mt-4">
-                  <thead class="header_table col-12">
-                    <tr>
-                      <td class="lead text-center fw-bold">Nº Pedido</td>
-                      <td class="lead text-center fw-bold">Produto</td>
-                      <td class="lead text-center fw-bold">Vendedor</td>
-                      <td class="lead text-center fw-bold">Status</td>
-                    </tr>
-                  </thead>
-                  <tbody class="body_table">
-                    <tr class="mt-2" *ngFor="let produto of produtos">
-                      <td class="col lead rounded-start text-center fw-bold">{{umPedido.numero}}</td>
-                      <td class="col lead rounded-start text-center fw-bold">{{produto.nome}}</td>
-                      <td class="col lead rounded-start text-center fw-bold">{{umPedido.vendedor}}</td>
-                      <td class="col-2 lead rounded-start text-center fw-bold">
-                        <div class="px-2 pt-4 p-0 m-0 form-floating">
-                          <select
-                          class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                          placeholder="Necessidade especial">
-                          <option value="Não tem">Não tem</option>
-                          <option value="Separado">Separado</option>
-                          <option value="Não Coube">Ensino superior</option>
-                          </select>
-                          <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
-                      </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                  <table class="col mt-4">
+                    <thead class="header_table col-12">
+                      <tr>
+                        <td class="lead text-center fw-bold">Nº Pedido</td>
+                        <td class="lead text-center fw-bold">Produto</td>
+                        <td class="lead text-center fw-bold">Vendedor</td>
+                        <td class="lead text-center fw-bold">Status</td>
+                      </tr>
+                    </thead>
+                    <tbody class="body_table">
+                      <tr class="mt-2" *ngFor="let produto of produtos">
+                        <td class="col lead rounded-start text-center fw-bold">{{umPedido.numero}}</td>
+                        <td class="col lead rounded-start text-center fw-bold">{{produto.nome}}</td>
+                        <td class="col lead rounded-start text-center fw-bold">{{umPedido.vendedor}}</td>
+                        <td class="col-2 lead rounded-start text-center fw-bold">
+                          <div class="px-2 pt-4 p-0 m-0 form-floating">
+                            <select
+                            class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                            placeholder="Necessidade especial">
+                            <option value="Não tem">Não tem</option>
+                            <option value="Separado">Separado</option>
+                            <option value="Não Coube">Ensino superior</option>
+                            </select>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+                        </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
               </div>
               <div class="col-12 d-flex justify-content-end mx-5">
                 <div class="col-2 p-0 m-0">
@@ -92,7 +173,8 @@
     </div>
   </div>
 
-
+  <!-- Modal -->
+  <!-- Modal de criar embarque -->
   <div class="modal-dialog modal-xl">
     <div class="modal-content rounded-15 bg-custom-light">
       <div class="modal-header px-4">
@@ -165,10 +247,10 @@
             </tbody>
           </table>
         </div>
-        <div class="row mx-5 d-flex justify-content-end">
+        <div class="row mx-5 d-flex justify-content-end mb-2">
           <div class="col-2 mx-3 px-2 p-0 m-0 d-grid">
-            <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Finalizar Embarque</h5>
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="closeEmbarque()" data-bs-toggle="modal" data-bs-target="#options">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Finalizar embarque</h5>
             </button>
           </div>
         </div>
@@ -363,7 +445,7 @@
                 </tr>
             </thead>
             <tbody class="body_table">
-                <tr class="mt-2" *ngFor="let solicitacao of solicitacoes">
+                <tr class="mt-2" *ngFor="let solicitacao of atualPage">
                   <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
                   <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
                   <td class="lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
@@ -372,6 +454,21 @@
                 </tr>
             </tbody>
           </table>
+          <div class="col-12 row mt-3 d-flex justify-content-around">
+        <div class="col-3 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0" (click)="anterior()" [class.noActiveButton]="this.atualPageNumber == 0">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+          </button>
+        </div>
+        <div class="col-1 d-flex justify-content-end">
+          <p class="h3 fw-normal text-custom-dark">{{atualPageNumber + 1}}/{{pagesNumber}}</p>
+        </div>
+        <div class="col-3 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0" (click)="proximo()" [class.noActiveButton]="this.atualPageNumber == (pagesNumber - 1)">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Proximo</h5>
+          </button>
+        </div>
+      </div>  
         </div>
       </div>
 

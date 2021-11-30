@@ -150,23 +150,26 @@ export class EditarExpedicaoComponent implements OnInit {
     if(data.valid){
       this.expedicaoService.update(this.exId, data.value).subscribe((data: any)=>{
         this.router.navigate(['sistema', 'expedicao'])
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'Ordem de expedição adicionado',
-          showConfirmButton: false,
-          timer: 1500,
-          toast: true
+        Swal.fire({ 
+          title: '<h4>Ordem de expedição adicionada !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px', 
         })
       })
     }else{
       Swal.fire({
         position: 'top',
         icon: 'error',
-        title: 'preecha todo o formulário',
+        title: '<h4>preecha todo o formulário !</h4>',
         showConfirmButton: false,
         timer: 1500,
-        toast: true
+        toast: true,
+        width: '500px',
       })
       console.log(data)
     }
@@ -310,12 +313,30 @@ export class EditarExpedicaoComponent implements OnInit {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Ordem Cancelada', '', 'success')
+          Swal.fire({ 
+            title: '<h4>Ordem deletada !</h4>', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px', 
+          })
           this.expedicaoService.delete(id).subscribe((data:any)=>{
             this.router.navigate(['sistema', 'expedicao'])
           })
         } else if (result.isDenied) {
-          Swal.fire('A ordem não foi cancelada', '', 'info')
+          Swal.fire({ 
+            title: '<h4>Ordem não deletada !</h4>', 
+            icon: 'info', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px', 
+          })
         }
       })
       

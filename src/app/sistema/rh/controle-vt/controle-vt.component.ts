@@ -79,7 +79,7 @@ export class ControleVtComponent implements OnInit {
     for(let value in this.colabVt){
       this.vt['value'][value].total=((Number(this.colabVt[value].originalTotal) * Number(this.vt['controls'][value].get('workDays')?.value)))
 
-      this.vt['controls'][value].get('total')?.setValue(`R$ ${this.vt['value'][value].total}`)
+      this.vt['controls'][value].get('total')?.setValue(this.vt['value'][value].total)
     }
     
     for(let value in data.vt){
@@ -91,11 +91,13 @@ export class ControleVtComponent implements OnInit {
       }
     }
     Swal.fire({
-      position: 'top-right',
+      position: 'top',
       icon: 'success',
-      title: 'Vale Transporte atualizado',
-      showConfirmButton: false, 
-      timer: 1500
+      title: '<h4>Vale transporte atualizado !</h4>',
+      showConfirmButton: false,
+      timer: 1500,
+      toast: true,
+      width: '500px',
     })
   }
 

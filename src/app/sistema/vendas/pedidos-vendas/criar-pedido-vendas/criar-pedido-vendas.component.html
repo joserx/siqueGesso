@@ -1,3 +1,238 @@
+<!-- Modal -->
+<div class="modal fade" id="gerarPedido" tabindex="-1" aria-labelledby="pedidoPdfLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-md">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Senha</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="passwordForm">
+          <div class="col-12 modal-body px-5 d-flex justify-content-center">  
+            <div class="d-flex justify-content-center"  id="content">
+              <div class="px-2 pt-4 p-0 m-0 form-floating">
+                <input class="col-12 form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="password" placeholder="Senha" formControlName="password">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Senha</label>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="row m-0 py-3 modal-footer">
+              <div class="col-3 px-2 p-0 m-0 mx-5">
+                  <button data-bs-dismiss="modal" type="submit"
+                  class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start" (click)="gerarPedido(passwordForm, pedidosForm)">
+                  <h5 class="fw-normal my-auto text-truncate text-custom-dark">Confirmar</h5>
+                  </button>
+              </div>
+          </div>
+        </form>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="pedidoPdf" tabindex="-1" aria-labelledby="pedidoPdfLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Pesquisar Cliente</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="col-12 modal-body px-4 d-flex justify-content-center">
+          <div class="pdf-preview d-flex justify-content-center"  id="content" #content>
+              <div class="mt-4 bg-white col-12 p-2">
+                <div class="row">
+                    <div class="col-2">
+                        <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso">
+                    </div>
+                    <div class="col">
+                        <h2 class="text-custom-dark text-center">
+                            Pedidos de venda
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Data de pedido: {{pedidosForm.value.data | date}}</div>
+                  <div class="col-6">Loja: {{pedidosForm.value.loja}}</div>
+                  <div class="col-6">Vendedor: {{pedidosForm.value.cliente}}</div>
+                  <div class="col-12">
+                    <h3>Itens:</h3>
+                    <table class="bg-white tabela m-0 p-0">
+                      <thead>
+                          <tr>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cód.</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Produto</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Quantidade</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Valor unitário</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Desconto</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Valor venda</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo de retirada</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data prev. da retirada</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Endereço</th>
+                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Valor Frete</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngFor="let oneItem of item['controls']; let i = index">
+                          <tr>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.codigo }}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.produto }}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.quantidade}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.desconto | currency:'BRL'}}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.tipoRetirada }}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.prevRetirada }}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.endereco }}</td>
+                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.valorFrete | currency:'BRL'}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col-6">Desconto geral: {{pedidosForm.value.descontoGeral | currency:'BRL'}}</div>
+                    <div class="col-6">Tipo de entrega: {{pedidosForm.value.tipoEntrega}}</div>
+                    <div class="col-6">Endereço: {{pedidosForm.value.enderecoEntrega}}</div>
+                    <div class="col-6">Valor de entrega: {{pedidosForm.value.valorFreteEntrega}}</div>
+                    <div class="col-6">Meio de pagamento: {{pedidosForm.value.meioPagamento}}</div>
+                    <div class="col-6">Dias: {{pedidosForm.value.dias}}</div>
+                    <div class="col-6">Data de vencimento: {{pedidosForm.value.dataVencimento | date}}</div>
+                    <div class="col-6">Dias: {{pedidosForm.value.status}}</div>
+                    </div>
+                    <div class="col-6">Link do boleto: {{pedidosForm.value.linkBoleto}}</div>
+                    </div>
+                    <div class="col-6">Link da nota fiscal: {{pedidosForm.value.linkNf}}</div>
+                  </div>
+                  <div class="col-12">Observações: {{pedidosForm.value.obs}}</div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+                <button data-bs-dismiss="modal" type="reset"
+                class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start" (click)="savePdf()">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Donwload</h5>
+                </button>
+            </div>
+            <!-- Cancelar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+                <button data-bs-dismiss="modal" type="reset"
+                class="h-limited-sm btn rounded-15 py-1 px-4 bg-danger shadow-sm text-start">
+                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+                </button>
+            </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<!-- Criar pdf -->
+<div class="modal fade" id="selecionarProdutos" tabindex="-1" aria-labelledby="selecionarProdutosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <form>
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="selecionarProdutosLabel">Selecionar produtos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+
+          <div class="row m-0 justify-content-start align-items-center">
+            <!-- Pesquisar -->
+            <div class="col-3 px-2 p-0 m-0 position-relative">
+              <input class="form-control form-control-lg border-0 h-limited py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar" (keyup)="filtrar($event)">
+              <a>
+                <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Títulos da Tabela -->
+          <div class="row m-0 my-5 text-custom-dark justify-content-between">
+            <div class="col-1">
+            </div>
+            <div class="col-1">
+              <h5 class="fw-bold">Código</h5>
+            </div>
+            <div class="col-3">
+              <h5 class="fw-bold">Produto</h5>
+            </div>
+            <div class="col-2">
+              <h5 class="fw-bold">Estoque</h5>
+            </div>
+            <div class="col-2">
+              <h5 class="fw-bold">Custo</h5>
+            </div>
+            <div class="col-2">
+              <h5 class="fw-bold">Venda</h5>
+            </div>
+            <div class="col-1">
+              <h5 class="fw-bold">Margem</h5>
+            </div>
+          </div>
+
+          <!-- Tabela -->
+          <label *ngFor="let produto of allProdutos" class="row m-0 mt-3 border-bottom text-custom-dark justify-content-between" [for]="produto.id">
+            <div class="col-1">
+              <div class="form-check" *ngIf="check(produto.id)">
+                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id" (click)="checkIfChecked($event)" checked>
+              </div>
+              <div class="form-check" *ngIf="!check(produto.id)">
+                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id" (click)="checkIfChecked($event)">
+              </div>
+            </div>
+            <div class="col-1">
+              <p>{{ produto.id }}</p>
+            </div>
+            <div class="col-3">
+              <p>{{ produto.nome }}</p>
+            </div>
+            <div class="col-2">
+              <p>{{ produto.atual }} un.</p>
+            </div>
+            <div class="col-2">
+              <p>{{ produto.custoMedio | currency:'BRL' }} un.</p>
+            </div>
+            <div class="col-2">
+              <p>{{ produto.precoMedio | currency:'BRL' }} un.</p>
+            </div>
+            <div class="col-1">
+              <p>{{ produto.margemLucro }}%</p>
+            </div>
+          </label>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+    </form>
+
+  </div>
+</div>
+
+
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
@@ -78,60 +313,12 @@
             <h4 class="m-0 text-custom-dark">Dados da venda</h4>
           </div>
 
-          <!-- Condição de pagamento -->
-          <div class="col-4 p-0 m-0">
-
-            <div class="pt-4 px-2 form-floating">
-              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" formControlName="condPagamento">
-                <option value="" disabled selected>Selecione uma condição</option>
-                <option value="Loja 1">À vista</option>
-                <option value="Loja 2">Parcelado</option>
-                <option value="personalizado">Personalizado</option>
-              </select>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de pagamento</label>
-            </div>
-
-            <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="pagPersonalizado">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
-            </div>
-          </div>
-
-          <!-- Tabela de preço -->
-          <div class="col-4 p-0 m-0">
-            <div class="pt-4 px-2 form-floating">
-              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas" formControlName="tabPreco">
-                <option value="" disabled selected>Selecione uma tabela</option>
-                <option value="Tabela A">Tabela A</option>
-                <option value="Tabela B">Tabela B</option>
-                <option value="Tabela C">Tabela C</option>
-                <option value="Tabela D">Tabela D</option>
-                <option value="Tabela E">Tabela E</option>
-                <option value="personalizado">Personalizado</option>
-              </select>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de preço aplicada</label>
-            </div>
-
-            <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" formControlName="tabPersonalizado">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
-            </div>
-          </div>
-
-          <!-- Desconto máximo -->
-          <div class="col-4 p-0 m-0">
-            <div class="form-floating pt-4 px-2">
-              <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto máximo" formControlName="descontoMax">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máximo</label>
-            </div>
-
-            <div class="d-grid pt-4 px-2">
-              <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#selecionarProdutos">
+            <div class="col-12 pt-4 px-2">
+              <button type="button" class="col-3 h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#selecionarProdutos">
                 <h5 class="fw-normal my-auto text-truncate text-custom-dark">Selecionar produto(s)</h5>
                 <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
               </button>
             </div>
-          </div>
 
           <!-- Botão adicionar produto -->
           <div class="col-4 px-2 mt-4 p-0 m-0 d-grid">
@@ -149,32 +336,30 @@
           <table class="table text-custom-dark">
             <thead>
               <tr>
-                <th scope="col">Cód.</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Valor unitário</th>
-                <th scope="col">Desconto tabela</th>
-                <th scope="col">Desconto adicional</th>
-                <th scope="col">Valor venda</th>
-                <th scope="col">Tipo de retirada</th>
-                <th scope="col">Data prev. da retirada</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">Valor Frete</th>
+                <th scope="col-1">Cód.</th>
+                <th scope="col-1">Produto</th>
+                <th scope="col-1">Quantidade</th>
+                <th scope="col-1">Valor unitário</th>
+                <th scope="col-1">Desconto</th>
+                <th scope="col-1">Valor venda</th>
+                <th scope="col-1">Tipo de retirada</th>
+                <th scope="col-1">Data prev. da retirada</th>
+                <th scope="col-1">Endereço</th>
+                <th scope="col-1">Valor Frete</th>
               </tr>
             </thead>
-            <tbody formArrayName="item">
-              <tr [formGroupName]="i" *ngFor="let oneItem of itens; let i = index">
-                <th scope="row">{{ oneItem.codigo }}</th>
-                <td>{{ oneItem.produto }}</td>
+            <tbody *ngFor="let oneItem of item['controls']; let i = index" formArrayName="item">
+              <tr [formGroupName]="i" >
+                <th scope="row">{{ oneItem.value.codigo }}</th>
+                <td>{{ oneItem.value.produto }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" placeholder="Quantidade" fromControlName="quantidade" (keyup)="evento($event)">
+                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" formControlName="quantidade" (keyup)="totalQuanti(this.item.value)">
                 </td>
-                <td>{{ oneItem.valor_unitario | currency:'BRL'}}</td>
-                <td>{{ oneItem.desconto_tab | currency:'BRL'}}</td>
+                <td>{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="desconto">
+                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" formControlName="desconto" (keyup)="changeDesconto(this.item.value)">
                 </td>
-                <td>{{ oneItem.valor_venda | currency:'BRL' }}</td>
+                <td>{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
                 <td>
                   <select class="form-select form-select-sm" formControlName="tipoRetirada">
                     <option value="" disabled selected>Selecionar...</option>
@@ -195,7 +380,7 @@
                   </select>
                 </td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="valorFrete">
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="valorFrete" (keyup)="changeFrete(this.item.value)">
                 </td>
               </tr>
             </tbody>
@@ -274,25 +459,25 @@
             <!-- Tabela resumo -->
             <div font="montserrat" class="row m-0 mt-2 border-bottom text-light justify-content-center align-items-center">
               <div class="col-1 text-center">
-                <p>{{ resumo.produtos }}</p>
+                <p>{{ item.value.length }}</p>
               </div>
               <div class="col-1 text-center">
-                <p>{{ resumo.unidades }}</p>
+                <p>{{ totalQuanti(item.value) }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ resumo.subtotal | currency:'BRL' }}</p>
+                <p>{{ totalQuanti(item.value)*valUnit | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ resumo.descontos | currency:'BRL' }}</p>
+                <p>{{ changeDesconto(item.value) | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ resumo.venda | currency:'BRL' }}</p>
+                <p>{{ (totalQuanti(item.value)*valUnit) - changeDesconto(item.value) | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ resumo.frete | currency:'BRL' }}</p>
+                <p>{{ changeFrete(item.value) | currency:'BRL' }}</p>
               </div>
               <div class="col text-center">
-                <p>{{ resumo.total | currency:'BRL' }}</p>
+                <p>{{ (((totalQuanti(item.value)*valUnit) - changeDesconto(item.value)) + changeFrete(item.value)) | currency:'BRL' }}</p>
               </div>
             </div>
 
@@ -306,8 +491,49 @@
             <h4 class="m-0 text-custom-dark">Condições de pagamento</h4>
           </div>
 
+          <!-- Condição de pagamento -->
+          <div class="col-6 p-0 m-0">
+
+            <div class="pt-4 px-2 form-floating">
+              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" formControlName="condPagamento">
+                <option value="" disabled selected>Selecione uma condição</option>
+                <option value="Loja 1">À vista</option>
+                <option value="Loja 2">Parcelado</option>
+                <option value="personalizado">Personalizado</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de pagamento</label>
+            </div>
+
+            <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="pagPersonalizado">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
+            </div>
+          </div>
+
+          <!-- Tabela de preço -->
+          <div class="col-6 p-0 m-0">
+            <div class="pt-4 px-2 form-floating">
+              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas" formControlName="tabPreco">
+                <option value="" disabled selected>Selecione uma tabela</option>
+                <option value="Tabela A">Tabela A</option>
+                <option value="Tabela B">Tabela B</option>
+                <option value="Tabela C">Tabela C</option>
+                <option value="Tabela D">Tabela D</option>
+                <option value="Tabela E">Tabela E</option>
+                <option value="personalizado">Personalizado</option>
+              </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de preço aplicada</label>
+            </div>
+
+            <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" formControlName="tabPersonalizado">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
+            </div>
+          </div>
+
+
           <!-- Meio de pagamento -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+          <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
             <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="meioPagamento">
               <option value="" disabled selected>Selecione um meio de pagamento</option>
               <option value="boleto">Boleto</option>
@@ -324,7 +550,7 @@
           </div>
 
           <!-- Data de vencimento -->
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+          <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
             <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" formControlName="dataVencimento">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de vencimento</label>
           </div>
@@ -332,21 +558,21 @@
           <!-- Status -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="status">
-              <option value="aguardando" selected>Aguardando pagamento</option>
-              <option value="realizado">Realizado</option>
+              <option value="aguardando" selected disabled>Status</option>
+              <option *ngFor="let oneStatus of status" value="{{oneStatus.name}}">{{oneStatus.name}}</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
           </div>
 
           <!-- Link do boleto -->
-          <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto" formControlName="linkBoleto">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link do boleto</label>
           </div>
 
           <!-- Link da nota fiscal -->
-          <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" fromControlName="linkNf">
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" formControlName="linkNf">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link da nota fiscal</label>
           </div>
 
@@ -362,16 +588,16 @@
         <div class="row mt-3 py-3 pb-5">
 
           <!-- Botão Cancelar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
+          <!-- <div class="col-3 px-2 p-0 m-0 d-grid">
             <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
             </button>
-          </div>
+          </div> -->
 
           <!-- Botão Gerar pedido -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#gerarPedido">
               <h5 class="fw-normal my-auto text-truncate">Gerar pedido</h5>
               <i class="bi-file-text my-auto fs-4 p-0 m-0 fw-bold"></i>
             </button>
@@ -379,7 +605,7 @@
 
           <!-- Botão Gerar PDF -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidoPdf">
               <h5 class="fw-normal my-auto text-truncate">Gerar PDF</h5>
               <i class="bi-file-earmark-pdf my-auto fs-4 p-0 m-0 fw-bold"></i>
             </button>
@@ -399,5 +625,3 @@
     </div>
   </div>
 </div>
-
-<app-selecionar-produtos-modal></app-selecionar-produtos-modal>

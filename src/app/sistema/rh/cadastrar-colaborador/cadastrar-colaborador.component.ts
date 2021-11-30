@@ -308,13 +308,14 @@ export class CadastrarColaboradorComponent implements OnInit{
         if (res.id) {
           this.router.navigate(['sistema', 'rh', 'listar'])
           Swal.fire({ 
-            title: 'Colaborador Cadastrado!', 
+            title: '<h4>Colaborador Cadastrado!<h4>', 
             icon: 'success', 
             toast: true, 
             position: 'top', 
             showConfirmButton: false, 
             timer: 2000, 
-            timerProgressBar: true 
+            timerProgressBar: true,
+            width: '500px'
           })
         }
       }, (err) => {
@@ -323,13 +324,14 @@ export class CadastrarColaboradorComponent implements OnInit{
     }else{
       console.log('teste swal')
       Swal.fire({ 
-        title: 'Preencha os campos necessários!', 
+        title: '<h4>Preencha os campos necessários!</h4>', 
         icon: 'error', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true 
+        timerProgressBar: true,
+        width: '500px'
       })
     }
   }
@@ -355,19 +357,29 @@ export class CadastrarColaboradorComponent implements OnInit{
     if(data.valid){
       this.cargoService.create(data.value).subscribe((data: any)=>{
         Swal.fire({ 
-          title: 'Cargo Adicionado!', 
+          title: '<h4>Cargo adicionado !</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
         this.cargoForm.get('nome')?.setValue('')
         this.initializer()
       })
     }else{
-      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+      Swal.fire({ 
+        title: '<h4>Preencha os campos necessários !</h4>', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true,
+        width: '500px',
+      })
     }
   }
 
@@ -382,13 +394,14 @@ export class CadastrarColaboradorComponent implements OnInit{
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire({ 
-          title: 'Cargo deletado!', 
+          title: '<h4>Cargo deletado!</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
         if(id && Number(id)){
           this.cargoService.delete(id).subscribe((data:any)=>{
@@ -397,13 +410,14 @@ export class CadastrarColaboradorComponent implements OnInit{
         }
       } else if (result.isDenied) {
         Swal.fire({ 
-          title: 'O cargo não foi deletado!', 
+          title: '<h4>O cargo não foi deletado!</h4>', 
           icon: 'info', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
       }
     })
@@ -416,10 +430,11 @@ export class CadastrarColaboradorComponent implements OnInit{
         Swal.fire({
           position: 'top',
           icon: 'success',
-          title: 'Novo turno adicionado',
+          title: '<h4>Novo turno adicionado</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px',
         })
         this.turnoForm.get('nome')?.setValue('')
         this.turnoInitializer()
@@ -428,10 +443,11 @@ export class CadastrarColaboradorComponent implements OnInit{
       Swal.fire({
         position: 'top',
         icon: 'error',
-        title: 'Preencha o campo primeiro',
+        title: '<h4>Preencha o campo primeiro</h4>',
         showConfirmButton: false,
         timer: 1500,
-        toast: true
+        toast: true,
+        width: '500px',
       })
     }
   }
@@ -450,10 +466,11 @@ export class CadastrarColaboradorComponent implements OnInit{
         Swal.fire({
           position: 'top',
           icon: 'success',
-          title: 'Turno deletado',
+          title: '<h4>Turno deletado</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px',
         })
         if(id && Number(id)){
           this.turnoService.delete(id).subscribe((data:any)=>{
@@ -464,10 +481,11 @@ export class CadastrarColaboradorComponent implements OnInit{
         Swal.fire({
           position: 'top',
           icon: 'info',
-          title: 'Turno não deletado',
+          title: '<h4>Turno não deletado</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px',
         })
       }
     })

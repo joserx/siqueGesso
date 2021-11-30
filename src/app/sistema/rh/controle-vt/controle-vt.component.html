@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <form class="row m-0 p-0" [formGroup]="vtForm" (submit)="salvar(vtForm.value)">
-                    <div class="col-12 row border border-1 border-custom-dark m-0 p-0" *ngFor="let value of vt['value']; let i = index" formArrayName="vt">
+                    <div class="col-12 row border border-1 border-custom-dark m-0 p-0" *ngFor="let value of vt['controls']; let i = index" formArrayName="vt">
                         <div class="col-12 row m-0 p-0" [formGroupName]="i">
                             <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                                 <div class="p-0 m-0 form-floating">
@@ -54,9 +54,9 @@
                             </div>
                             <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                                 <div class="p-0 m-0 form-floating">
-                                    <input formControlName="originalTotal"
+                                    <input currencyMask placeholder="R$" formControlName="originalTotal"
                                     class="form-control form-control-lg shadow-sm" type="text"
-                                    placeholder="Dias trabalhados" readonly>
+                                    placeholder="Valor da passagem" readonly>
                                 </div>
                             </div>
                             <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col row h3 m-0 p-0 border border-1 border-custom-dark">
                                 <div class="p-0 m-0 form-floating">
-                                    <input formControlName="total"
+                                    <input currencyMask placeholder="R$" formControlName="total"
                                         class="form-control form-control-lg shadow-sm" type="text"
                                         placeholder="Dias trabalhados" readonly>
                                 </div>

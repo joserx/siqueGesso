@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { VtService } from './vt.service';
+import { PedidoGeradoService } from './pedido-gerado.service';
 
-describe('VtService', () => {
-  let service: VtService;
+describe('PedidoGeradoService', () => {
+  let service: PedidoGeradoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(VtService);
+    service = TestBed.inject(PedidoGeradoService);
   });
 
   it('should be created', () => {

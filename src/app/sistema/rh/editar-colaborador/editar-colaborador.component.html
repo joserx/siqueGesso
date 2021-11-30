@@ -183,7 +183,7 @@
 
                 <!-- RG -->
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                    <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-0||0.000.000-0"
+                    <input [class.invalid]="rg?.invalid && (rg?.dirty || rg?.touched)" mask="00.000.000-A||0.000.000-A"
                     formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
                     type="text" placeholder="RG">
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
@@ -221,19 +221,13 @@
                 </div>
 
 
-                 <!-- categoria CNH -->
-                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                  <select formControlName="categoriaCnh"
-                  class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                <!-- categoria CNH -->
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                  <input formControlName="categoriaCnh"
+                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
                   placeholder="Categoria CNH">
-                    <option value="" disabled selected>Categoria CNH</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="E">E</option>
-                  </select>
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria CNH</label>
-                  </div>
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria da CNH</label>
+                </div>
 
 
                 <!-- PIS -->
@@ -685,7 +679,7 @@
 
         <div *ngIf="estoqueSection == 'uniforme'">
             <div class="row m-0 mt-4 justify-content-center border-bottom rh-form">
-                <div class="col-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-start">
 
                     <!-- Tamnho da camiseta -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -711,7 +705,7 @@
 
                   </div>
 
-                  <div class="col-12 d-flex justify-content-center">
+                  <div class="col-12 d-flex justify-content-start">
 
                     <!-- tamanho da calça -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -737,7 +731,7 @@
 
                   </div>
 
-                  <div class="col-12 d-flex justify-content-center">
+                  <div class="col-12 d-flex justify-content-start">
 
                     <!-- Tamanho do sapato -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -769,7 +763,7 @@
 
                   </div>
 
-                  <div class="col-12 d-flex justify-content-center">
+                  <div class="col-12 d-flex justify-content-start">
 
                     <!-- Tamanho do cinto -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -794,7 +788,7 @@
 
                   </div>
 
-                  <div class="col-12 d-flex justify-content-center">
+                  <div class="col-12 d-flex justify-content-start">
 
                     <!-- Tamanho do luva -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -818,7 +812,7 @@
 
                   </div>
 
-                  <div class="col-12 d-flex justify-content-center">
+                  <div class="col-12 d-flex justify-content-start">
 
                     <!-- Tamanho do jaqueta -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -844,7 +838,7 @@
 
                 </div>
 
-                <div class="col-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-start">
 
                   <!-- Tamanho do jaqueta -->
                   <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
@@ -876,7 +870,7 @@
                   <div class="col-12 px-2 pt-4 p-0 m-0 form-floating d-flex flex-column justify-content-between align-items-end">
                     <div class="row col-12 justify-content-start" *ngFor="let anex of anexes">
                       <a [href]="anexesRepo + anex.fileName" target="_blank"
-                        class="my-3 btn rounded-15 py-3 px-4 pl-2 bg-warning d-flex justify-content-between shadow-sm col-4">
+                        class="col-5 my-3 btn rounded-15 py-3 px-4 pl-2 bg-warning d-flex justify-content-between shadow-sm col-4">
                         <h5 class="fw-normal my-auto text-truncate text-custom-dark ">{{ anex.originalName }}</h5>
                         <div class="d-flex">
                           <i (click)="deleteAnex($event, anex)" class="bi-trash-fill my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>

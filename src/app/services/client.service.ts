@@ -35,4 +35,8 @@ export class ClientService {
     return this.http.delete(environment.apiUrl + 'client/' + id);
   }
 
+  findByPage(no: number){
+    return this.http.get(environment.apiUrl + 'client/page/' + no)
+  }
+
 }

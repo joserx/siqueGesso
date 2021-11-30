@@ -84,7 +84,7 @@ export class EditarColaboradorComponent implements OnInit {
     'name': new FormControl('', [Validators.required]),
     'surname': new FormControl('', [Validators.required]),
     'birthDate': new FormControl(null, [Validators.required]),
-    'rg': new FormControl('', [BrazilValidator.isValidRG()]),
+    'rg': new FormControl('', [Validators.required]),
     'rgExpedicao': new FormControl(null, [Validators.required]),
     'rgOrgaoEmissor': new FormControl('', [Validators.required]),
     'cpfcnpj': new FormControl('', [BrazilValidator.isValidCpf()]),
@@ -179,6 +179,10 @@ export class EditarColaboradorComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.rhId = Number(routeParams.get('id'));  
     this.rhService.findOne(this.rhId).subscribe((data : any) => {
+      // console.log(data)
+      if(data.disabled == false){
+        this.desativadoCheckbox = true
+      }
       if(data.anexes && data.anexes.length > 0) {
         this.anexes = data.anexes
       }
@@ -417,10 +421,11 @@ export class EditarColaboradorComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'success',
-          title: 'Novo turno adicionado',
+          title: '<h4>Novo turno adicionado</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px',
         })
         this.turnoForm.get('nome')?.setValue('')
         this.turnoInitializer()
@@ -429,10 +434,11 @@ export class EditarColaboradorComponent implements OnInit {
       Swal.fire({
         position: 'top',
         icon: 'error',
-        title: 'Preencha o campo primeiro',
+        title: '<h4>Preencha o campo primeiro</h4>',
         showConfirmButton: false,
         timer: 1500,
-        toast: true
+        toast: true,
+        width: '500px'
       })
     }
   }
@@ -451,10 +457,11 @@ export class EditarColaboradorComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'success',
-          title: 'Turno deletado',
+          title: '<h4>Turno deletado</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px'
         })
         if(id && Number(id)){
           this.turnoService.delete(id).subscribe((data:any)=>{
@@ -465,10 +472,11 @@ export class EditarColaboradorComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'info',
-          title: 'Turno não deletado',
+          title: '<h4>Turno não deletado</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px'
         })
       }
     })
@@ -528,10 +536,11 @@ export class EditarColaboradorComponent implements OnInit {
           Swal.fire({
             position: 'top',
             icon: 'success',
-            title: 'Colaborador atualizado!',
+            title: '<h4>Colaborador atualizado!</h4>',
             showConfirmButton: false,
             timer: 1500,
-            toast: true
+            toast: true,
+            width: '500px'
           })
         }
       }, (err) => {
@@ -542,10 +551,11 @@ export class EditarColaboradorComponent implements OnInit {
       Swal.fire({
         position: 'top',
         icon: 'error',
-        title: 'Preencha os campos necessários!',
+        title: '<h4>Preencha os campos necessários!</h4s>',
         showConfirmButton: false,
         timer: 1500,
-        toast: true
+        toast: true,
+        width: '500px'
       })
     }
   }
@@ -578,10 +588,11 @@ export class EditarColaboradorComponent implements OnInit {
             Swal.fire({
               position: 'top',
               icon: 'success',
-              title: 'Exame deletado!',
+              title: '<h4>Exame deletado!</h4>',
               showConfirmButton: false,
               timer: 1500,
-              toast: true
+              toast: true,
+              width: '500px'
             })
           })
           this.exame.removeAt(i)
@@ -589,10 +600,11 @@ export class EditarColaboradorComponent implements OnInit {
           Swal.fire({
             position: 'top',
             icon: 'info',
-            title: 'O exame não foi deletado!',
+            title: '<h4>O exame não foi deletado!</h4>',
             showConfirmButton: false,
             timer: 1500,
-            toast: true
+            toast: true,
+            width: '500px'
           })
         }
       })
@@ -618,16 +630,25 @@ export class EditarColaboradorComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'success',
-          title: 'Cargo adicionado',
+          title: '<h4>Cargo adicionado</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px'
         })
         this.cargoForm.get('nome')?.setValue('')
         this.initializer()
       })
     }else{
-      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: '<h4>Preecha os campos necessários</h4>',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
+        width: '500px',
+      })
     }
   }
 
@@ -644,10 +665,11 @@ export class EditarColaboradorComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'success',
-          title: 'Cargo deletado!',
+          title: '<h4>Cargo deletado!</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500x'
         })
         if(id && Number(id)){
           this.cargoService.delete(id).subscribe((data:any)=>{
@@ -658,10 +680,11 @@ export class EditarColaboradorComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'info',
-          title: 'O cargo não foi deletado!',
+          title: '<h4>O cargo não foi deletado!</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px'
         })
       }
     })

@@ -23,7 +23,15 @@ export class PedidosService {
     return this.http.patch(environment.apiUrl + 'pedidos/' + id, data)
   }
 
+  findOne(id: number){
+    return this.http.get(environment.apiUrl + 'pedidos/' + id)
+  }
+
   delete(id:number){
     return this.http.delete(environment.apiUrl + 'pedidos/' + id)
+  }
+
+  findByPage(no: number){
+    return this.http.get(environment.apiUrl + 'pedidos/page/' + no)
   }
 }

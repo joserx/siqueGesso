@@ -92,7 +92,6 @@ import { SolicitacaoPedidoComponent } from './sistema/expedicao/solicitacao-pedi
 import { ListaPedidosComponent } from './sistema/expedicao/lista-pedidos/lista-pedidos.component';
 import { StatusPedidoComponent } from './sistema/expedicao/lista-pedidos/status-pedido/status-pedido.component';
 import { ConsultaStatusComponent } from './sistema/expedicao/consulta-status/consulta-status.component';
-import { NaoConformComponent } from './sistema/expedicao/nao-conform/nao-conform.component';
 import { CadastroComponent } from './sistema/expedicao/cadastro/cadastro.component';
 import { CadastroMotoristaComponent } from './sistema/expedicao/cadastro/cadastro-motorista/cadastro-motorista.component';
 import { CadastroVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/cadastro-veiculo.component';
@@ -100,8 +99,13 @@ import { CadastrarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro
 import { EditarVeiculoComponent } from './sistema/expedicao/cadastro/cadastro-veiculo/editar-veiculo/editar-veiculo.component';
 import { StatusNconformComponent } from './sistema/expedicao/status-nconform/status-nconform.component';
 import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
+import { EditarPedidoComponent } from './sistema/vendas/pedidos-vendas/editar-pedido/editar-pedido.component';
+import { VisualizarPedidoComponent } from './sistema/vendas/pedidos-vendas/visualizar-pedido/visualizar-pedido.component';
 import { ListarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/listar-vendas-diretas/listar-vendas-diretas.component';
 import { CriarPedidoVendasDiretasComponent } from './sistema/vendas/vendas-diretas/criar-pedido-vendas-diretas/criar-pedido-vendas-diretas.component';
+import { PerquisarVendaComponent } from './sistema/vendas/perquisar-venda/perquisar-venda.component';
+import { FiltrarVendasComponent } from './sistema/vendas/filtrar-vendas/filtrar-vendas.component';
+import { FiltrarClientesComponent } from './sistema/vendas/clientes/filtrar-clientes/filtrar-clientes.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -192,7 +196,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ListaPedidosComponent,
     StatusPedidoComponent,
     ConsultaStatusComponent,
-    NaoConformComponent,
     CadastroComponent,
     CadastroMotoristaComponent,
     CadastroVeiculoComponent,
@@ -200,9 +203,14 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditarVeiculoComponent,
     StatusNconformComponent,
     BaixaEntregaComponent,
+    EditarPedidoComponent,
+    VisualizarPedidoComponent,
     ListarVendasDiretasComponent,
     CriarPedidoVendasDiretasComponent,
-  ],
+    PerquisarVendaComponent,
+    FiltrarVendasComponent,
+    FiltrarClientesComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

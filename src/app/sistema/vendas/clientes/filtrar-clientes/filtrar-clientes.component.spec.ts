@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NaoConformComponent } from './nao-conform.component';
+import { FiltrarClientesComponent } from './filtrar-clientes.component';
 
-describe('NaoConformComponent', () => {
-  let component: NaoConformComponent;
-  let fixture: ComponentFixture<NaoConformComponent>;
+describe('FiltrarClientesComponent', () => {
+  let component: FiltrarClientesComponent;
+  let fixture: ComponentFixture<FiltrarClientesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NaoConformComponent ]
+      declarations: [ FiltrarClientesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NaoConformComponent);
+    fixture = TestBed.createComponent(FiltrarClientesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

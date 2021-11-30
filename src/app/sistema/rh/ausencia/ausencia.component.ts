@@ -56,12 +56,15 @@ export class AusenciaComponent implements OnInit {
         this.ausenciaForm.get('cargo')?.setValue('')
         this.ausenciaForm.get('data')?.setValue(null)
         this.ausenciaForm.get('tipo')?.setValue('')
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'Falta adicionada',
-          showConfirmButton: false,
-          timer: 1500
+        Swal.fire({ 
+          title: '<h4>Ausência adicionada !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px',
         })
         this.ausenciaService.find().subscribe((data: any)=>{
           this.colab = data
@@ -69,7 +72,16 @@ export class AusenciaComponent implements OnInit {
         })
       })
     }else{
-      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+      Swal.fire({ 
+        title: '<h4>Preencha os campos necessários !</h4>', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true,
+        width: '500px',
+      })
     }
   }
 
@@ -83,7 +95,16 @@ export class AusenciaComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Falta deletada', '', 'success')
+        Swal.fire({ 
+          title: '<h4>Ausência deletada !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px',
+        })
         this.ausenciaService.delete(id).subscribe(()=>{
           this.ausenciaService.find().subscribe((data: any)=>{
             this.colab = data
@@ -95,7 +116,16 @@ export class AusenciaComponent implements OnInit {
           })
         })
       } else if (result.isDenied) {
-        Swal.fire('A falta não foi deletada', '', 'info')
+        Swal.fire({ 
+          title: '<h4>Ausência não deletada !</h4>', 
+          icon: 'info', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px',
+        })
       }
     })
   }

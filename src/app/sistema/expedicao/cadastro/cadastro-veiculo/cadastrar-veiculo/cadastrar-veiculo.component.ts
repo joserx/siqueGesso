@@ -44,24 +44,26 @@ export class CadastrarVeiculoComponent implements OnInit {
       this.veiculosService.create(data.value).subscribe((data: any)=>{
         this.router.navigate(['sistema', 'expedicao', 'cadastro', 'veiculo'])
         Swal.fire({ 
-          title: 'Novo veículo cadastrado!', 
+          title: '<h4>Novo veículo cadastrado!</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
       })
     }else{
       Swal.fire({ 
-        title: 'Preencha os campos obrigatórios!', 
+        title: '<h4>Preencha os campos obrigatórios!</h4>', 
         icon: 'error', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true 
+        timerProgressBar: true,
+        width: '500px',
       })
     }
   }

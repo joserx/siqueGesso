@@ -61,12 +61,15 @@ export class ApontFaltasComponent implements OnInit {
         this.apontForm.get('tempo')?.setValue(null)
         this.apontForm.get('diasAtestado')?.setValue('')
         this.apontForm.get('atestado')?.setValue('')
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'Falta adicionada',
-          showConfirmButton: false,
-          timer: 1500
+        Swal.fire({ 
+          title: '<h4>Falta adicionada !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px',
         })
         this.faltaService.find().subscribe((data: any)=>{
           this.colab = data
@@ -74,7 +77,16 @@ export class ApontFaltasComponent implements OnInit {
         })
       })
     }else{
-      Swal.fire('Erro', 'Preencha os campos necessários', 'error')
+      Swal.fire({ 
+        title: '<h4>Preencha os campos necessários !</h4>', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true,
+        width: '500px',
+      })
     }
   }
 
@@ -88,7 +100,16 @@ export class ApontFaltasComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Falta deletada', '', 'success')
+        Swal.fire({ 
+          title: '<h4>Falta deletada !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px',
+        })
         this.faltaService.delete(id).subscribe(()=>{
           this.faltaService.find().subscribe((data: any)=>{
             this.colab = data
@@ -104,7 +125,16 @@ export class ApontFaltasComponent implements OnInit {
           })
         })
       } else if (result.isDenied) {
-        Swal.fire('A falta não foi deletada', '', 'info')
+        Swal.fire({ 
+          title: '<h4>Falta não deletada !</h4>', 
+          icon: 'info', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px',
+        })
       }
     })
   }

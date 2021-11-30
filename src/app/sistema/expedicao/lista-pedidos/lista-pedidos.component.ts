@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmbarqueService } from 'src/app/services/embarque.service';
 import { RhService } from 'src/app/services/rh.service';
 import { SolicitacaoService } from 'src/app/services/solicitacao.service';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 import Swal from 'sweetalert2';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -12,7 +13,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
-
+  @ViewChild('embarque') embarque: ElementRef;
+  @ViewChild('opt') opt: ElementRef;
+  @ViewChild('content', {static: false})el: ElementRef
   public show: boolean 
   public showSign: boolean
   public allVeiculos: any = []
@@ -28,7 +31,10 @@ export class ListaPedidosComponent implements OnInit {
     {'nome': 'produto 4', 'quantidade': 25},
     {'nome': 'produto 5', 'quantidade': 30}
   ]
-
+  public pages: any[] = []
+  public pagesNumber: number
+  public atualPageNumber: number = 0
+  public atualPage: any[] = []
   public umPedido: any = {}
   public estoqueSection: string = 'pedidos';
   public peidos: any[] = []
@@ -94,7 +100,42 @@ export class ListaPedidosComponent implements OnInit {
         this.solCodes.push(sol.numero)
       }
       console.log(this.solCodes)
+    }, (err)=>{
+      console.log(err)
+    }, ()=>{
+      for(let control = 0; control <= this.solicitacoes.length; control++){
+        this.solicitacaoService.findByPage(control).subscribe((data:any)=>{
+          if(data.length > 0){
+            this.pages.push(data)
+          }
+        }, (err)=>{
+          console.log(err)
+        }, ()=>{
+          this.pagesNumber = Object.keys(this.pages).length
+        })
+      }
     })
+    this.solicitacaoService.findByPage(0).subscribe((data:any)=>{
+      this.atualPage = data
+    })
+  }
+
+  proximo(){
+    if(this.atualPageNumber < (Object.keys(this.pages).length - 1)){
+      this.atualPageNumber++
+      this.solicitacaoService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+        this.atualPage = data
+      })
+    }
+  }
+  anterior(){
+    console.log(Object.keys(this.pages).length - 1)
+    if(this.atualPageNumber <= (Object.keys(this.pages).length - 1) && this.atualPageNumber > 0){
+      this.atualPageNumber--
+      this.solicitacaoService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+        this.atualPage = data
+      })
+    }
   }
 
   public toggleEstoqueSection(value: string): void {
@@ -209,38 +250,49 @@ export class ListaPedidosComponent implements OnInit {
                 'vendedor': new FormControl(sol.vendedor)
               }))
             Swal.fire({ 
-              title: 'Pedido encontrado!', 
+              title: '<h4>Pedido encontrado!</h4>', 
               icon: 'success', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
               timer: 2000, 
-              timerProgressBar: true
+              timerProgressBar: true,
+              width: '500px',
             })
           }
           if(this.embarqueSol.length == 0){
             Swal.fire({ 
-              title: 'Esse pedido já está em um embarque!', 
+              title: '<h4>Esse pedido já está em um embarque!</h4>', 
               icon: 'error', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
               timer: 2000, 
-              timerProgressBar: true
+              timerProgressBar: true,
+              width: '500px',
             })
           }
         }
       }else{
         Swal.fire({ 
-          title: 'Pedido não encontrado!', 
+          title: '<h4>Pedido não encontrado!</h4>', 
           icon: 'error', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
       }
+  }
+
+  closeEmbarque(){
+    this.embarque.nativeElement.click()
+  }
+
+  closeOpt(){
+    this.opt.nativeElement.click()
   }
 
   addEmbarque(data:any){
@@ -259,13 +311,14 @@ export class ListaPedidosComponent implements OnInit {
               })
               console.log(dt.solicitacao)
               Swal.fire({ 
-                title: 'Embarque criado!', 
+                title: '<h4>Embarque criado!</h4>', 
                 icon: 'success', 
                 toast: true, 
                 position: 'top', 
                 showConfirmButton: false, 
                 timer: 2000, 
-                timerProgressBar: true
+                timerProgressBar: true,
+                width: '500px',
               })
               this.emabrqueForm.get('sign')?.setValue('')
               this.emabrqueForm.get('driver')?.setValue('')
@@ -275,40 +328,42 @@ export class ListaPedidosComponent implements OnInit {
           }
           if(foundDriver.length == 0){
             Swal.fire({ 
-              title: 'Motorista não existe!', 
+              title: '<h4>Motorista não existe!</h4>', 
               icon: 'error', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
               timer: 2000, 
-              timerProgressBar: true 
+              timerProgressBar: true,
+              width: '500px',
             })
           }
         }
       }else{
         Swal.fire({ 
-          title: 'Veículo não existe!', 
+          title: '<h4>Veículo não existe!</h4>', 
           icon: 'error', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px', 
         })
       }
     }else{
       Swal.fire({ 
-        title: 'Preencha todos os campos!', 
+        title: '<h4>Preencha todos os campos!</h4>', 
         icon: 'error', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true 
+        timerProgressBar: true,
+        width: '500px',
       })
     }
   }
-
   initializer(){
     this.embarqueService.find().subscribe((data:any)=>{
       this.embarques = data
@@ -327,13 +382,14 @@ export class ListaPedidosComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire({ 
-          title: 'Embarque deletado !', 
+          title: '<h4>Embarque deletado !</h4>', 
           icon: 'success', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
         if(id && Number(id)){
           this.embarqueService.delete(id).subscribe(()=>{
@@ -342,13 +398,14 @@ export class ListaPedidosComponent implements OnInit {
         }
       } else if (result.isDenied) {
         Swal.fire({ 
-          title: 'Embarque não deletado !', 
+          title: '<h4>Embarque não deletado !</h4>', 
           icon: 'info', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px', 
         })
       }
     })
@@ -419,6 +476,19 @@ export class ListaPedidosComponent implements OnInit {
   selectThisVeiculo(sign: string){
     this.emabrqueForm.get('sign')?.setValue(sign)
     this.showSign = false
+  }
+
+  savePdf(){
+    // const doc = new jsPDF();
+    // doc.text("Hello world!", 10, 10);
+    // doc.save("relatorio-faltas.pdf");
+
+    let pdf = new jsPDF("p", "pt", "a4")
+    pdf.html(this.el.nativeElement, {
+      callback: (pdf)=>{
+        pdf.save("embarque.pdf")
+      }
+    })
   }
 
 }

@@ -83,20 +83,22 @@ export class CriarOrdemExpedicaoComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'success',
-          title: 'Ordem de expedição adicionado',
+          title: '<h4>Ordem de expedição adicionado !</h4>',
           showConfirmButton: false,
           timer: 1500,
-          toast: true
+          toast: true,
+          width: '500px',
         })
       })
     }else{
       Swal.fire({
         position: 'top',
         icon: 'error',
-        title: 'preecha todo o formulário',
+        title: '<h4>Preecha todo o formulário !</h4>',
         showConfirmButton: false,
         timer: 1500,
-        toast: true
+        toast: true,
+        width: '500px',
       })
       console.log(data)
     }

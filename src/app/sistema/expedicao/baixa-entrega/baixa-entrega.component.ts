@@ -37,27 +37,27 @@ export class BaixaEntregaComponent implements OnInit {
           this.baixaForm.get('sign')?.setValue('')
           this.baixaForm.get('driver')?.setValue('')
           Swal.fire({ 
-            title: 'Embarque não existe !', 
+            title: '<h4>Embarque não existe !</h4>', 
             icon: 'error', 
             toast: true, 
             position: 'top', 
             showConfirmButton: false, 
             timer: 2000, 
-            timerProgressBar: true 
-            
+            timerProgressBar: true,
+            width: '500px',
           })
         }else{
           this.baixaForm.get('sign')?.setValue(data.sign)
           this.baixaForm.get('driver')?.setValue(data.driver)
           Swal.fire({ 
-            title: 'Embarque encontrado !', 
+            title: '<h4>Embarque encontrado !</h4>', 
             icon: 'success', 
             toast: true, 
             position: 'top', 
             showConfirmButton: false, 
             timer: 2000, 
-            timerProgressBar: true 
-            
+            timerProgressBar: true,
+            width: '500px',
           })
         }
       })
@@ -79,38 +79,40 @@ export class BaixaEntregaComponent implements OnInit {
         this.baixaService.create(data.value).subscribe((data:any)=>{
         this.initializer()
         Swal.fire({ 
-            title: 'Baixa de entrega realizada com sucesso !', 
+            title: '<h4>Baixa de entrega realizada com sucesso !</h4>', 
             icon: 'success', 
             toast: true, 
             position: 'top', 
             showConfirmButton: false, 
             timer: 2000, 
-            timerProgressBar: true 
+            timerProgressBar: true,
+            width: '500px',
           })
         })
       }else{
         Swal.fire({ 
-          title: 'Entrega já recebeu baixa !', 
+          title: '<h3>Entrega já recebeu baixa !</h3>', 
           icon: 'error', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
           timer: 2000, 
-          timerProgressBar: true 
+          timerProgressBar: true,
+          width: '500px',
         })
         exists = []
       }
      
     }else{
       Swal.fire({ 
-        title: 'Preencha os campos necessários !', 
+        title: '<h4>Preencha os campos necessários !</h4>', 
         icon: 'error', 
         toast: true, 
         position: 'top', 
         showConfirmButton: false, 
         timer: 2000, 
-        timerProgressBar: true 
-        
+        timerProgressBar: true,
+        width: '500px',
       })
     }
   }

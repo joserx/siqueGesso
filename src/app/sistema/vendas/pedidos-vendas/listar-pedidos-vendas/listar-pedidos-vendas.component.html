@@ -29,14 +29,14 @@
 
         <!-- Pedidos gerados -->
         <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="dados.gerados.valor | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <input [value]="0 | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
           <label class="ms-2 small text-truncate" for="gerados">{{dados.gerados.qtd}} pedidos gerados</label>
         </div>
 
         <!-- Pedidos em digitação -->
         <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="dados.digitacao.valor | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
-          <label class="ms-2 small text-truncate" for="gerados">{{dados.digitacao.qtd}} pedidos em digitação</label>
+          <input [value]="totalPedidos(pedidos) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <label class="ms-2 small text-truncate" for="gerados">{{ pedidos.length }} pedidos em digitação</label>
         </div>
       </div>
 
@@ -65,18 +65,18 @@
         </div>
         <div class="col text-end">
           <h5 class="fw-bold text-truncate d-none">Ações</h5>
-          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
-          <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer"></i>
+          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarPedidos"></i>
+          <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#filtrarPedidos"></i>
         </div>
       </div>
 
       <!-- Tabela -->
-      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let pedido of pedidos">
+      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let pedido of atualPage">
         <div class="col-1">
           <p>{{ pedido.id }}</p>
         </div>
         <div class="col-1">
-          <p>{{ pedido.data.substring(10, 0) }}</p>
+          <p>{{ pedido.data | date }}</p>
         </div>
         <div class="col-1">
           <p>{{ pedido.loja }}</p>
@@ -88,18 +88,35 @@
           <p>{{ pedido.cliente }}</p>
         </div>
         <div class="col-2">
-          <p>{{ pedido.valor | currency:'BRL' }}</p>
+          <p>{{ pedido.total | currency:'BRL'}}</p>
         </div>
         <div class="col-1">
           <p>{{ pedido.status }}</p>
         </div>
         <div class="col text-end">
-          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/editar/{{pedido.id}}" cursor="pointer"></i>
-          <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
+          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}"></i>
+          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
         </div>
       </div>
+
+      <div class="col-12 row mt-3 d-flex justify-content-around">
+        <div class="col-3 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0" (click)="anterior()" [class.noActiveButton]="this.atualPageNumber == 0">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+          </button>
+        </div>
+        <div class="col-1 d-flex justify-content-end">
+          <p class="h3 fw-normal text-custom-dark">{{atualPageNumber + 1}}/{{pagesNumber}}</p>
+        </div>
+        <div class="col-3 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0" (click)="proximo()" [class.noActiveButton]="this.atualPageNumber == (pagesNumber - 1)">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Proximo</h5>
+          </button>
+        </div>
+      </div> 
 
     </div>
   </div>
 </div>
+<app-perquisar-venda></app-perquisar-venda>
+<app-filtrar-vendas></app-filtrar-vendas>
