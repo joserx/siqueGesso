@@ -16,12 +16,6 @@
     </a>
   </div>
 
-  <!-- Botão Filtro -->
-  <div class="col-3 px-2 p-0 m-0">
-    <a class="rounded-15 py-2 px-4 bg-white h-limited d-flex shadow-sm">
-      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Mais opções</h5>
-    </a>
-  </div>
 
   <!-- Adicionar produtos -->
   <div class="col-1 px-2 p-0 m-0 text-center">
@@ -65,9 +59,14 @@
     <p>{{ suprimento.quantidade }} unidade(s)</p>
   </div>
   <div class="col-2 text-end">
-    <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
+    <a data-bs-toggle="modal" data-bs-target="#viewSuprimento" (click)="loadSuprimentoView(suprimento)">
+    <i class="fs-5 bi-eye-fill icon-view p-3" (click)="loadSuprimentoView(suprimento)" cursor="pointer"></i>
+    </a> 
+  <a>
     <i class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
-  </div>
+  </a>
+ </div>
 </div>
 
 <app-adicionar-suprimentos></app-adicionar-suprimentos>
+<app-view-suprimento></app-view-suprimento>

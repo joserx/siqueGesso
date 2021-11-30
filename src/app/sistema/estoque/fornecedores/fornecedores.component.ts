@@ -7,52 +7,69 @@ import { ViewFornecedorComponent } from './view-fornecedor/view-fornecedor.compo
 @Component({
   selector: 'app-fornecedores',
   templateUrl: './fornecedores.component.html',
-  styleUrls: ['./fornecedores.component.scss']
+  styleUrls: ['./fornecedores.component.scss'],
 })
 export class FornecedoresComponent implements OnInit {
-
-  public fornecedores: any = []
+  public fornecedores: any = [];
 
   @ViewChild(ViewFornecedorComponent)
-  viewFornecedorCompenent: any
+  viewFornecedorCompenent: any;
 
   @ViewChild(EditFornecedorComponent)
-  editFornecedorComponent: any
+  editFornecedorComponent: any;
 
-  constructor(
-    private fornecedorService: FornecedorService
-  ) { }
+  constructor(private fornecedorService: FornecedorService) {}
 
   ngOnInit(): void {
-    this.getFornecedores()
+    this.getFornecedores();
   }
 
-  getFornecedores(){
-    this.fornecedorService.find().subscribe(res => {
-      this.fornecedorService.fornecedores = res
-      this.fornecedores = res
-    })
+  getFornecedores() {
+    this.fornecedorService.find().subscribe((res) => {
+      this.fornecedorService.fornecedores = res;
+      this.fornecedores = res;
+    });
   }
 
-  loadFornecedorView(fornecedor: any){ this.viewFornecedorCompenent.loadForm(fornecedor) }
-  loadFornecedorEdit(fornecedor: any){ this.editFornecedorComponent.loadForm(fornecedor) }
+  loadFornecedorView(fornecedor: any) {
+    this.viewFornecedorCompenent.loadForm(fornecedor);
+  }
+  loadFornecedorEdit(fornecedor: any) {
+    this.editFornecedorComponent.loadForm(fornecedor);
+  }
 
-  delete(fornecedor: any){
+  delete(fornecedor: any) {
     Swal.fire({
       title: `Deseja deletar ${fornecedor.fantasy_name}?`,
       icon: 'question',
       showConfirmButton: true,
       confirmButtonText: 'Confirmar',
       showCancelButton: true,
-      cancelButtonText: 'Cancelar'
-    }).then(res => {
-      if (res.isConfirmed) 
+      cancelButtonText: 'Cancelar',
+    }).then((res) => {
+      if (res.isConfirmed)
         this.fornecedorService.delete(fornecedor.id).subscribe(() => {
-          this.getFornecedores()
-          return Swal.fire({ title: 'Fornecedor deletado!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
-        })
-      else Swal.fire({ title: 'Ação cancelada!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
-    })
+          this.getFornecedores();
+          return Swal.fire({
+            title: 'Fornecedor deletado!',
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+        });
+      else
+        Swal.fire({
+          title: 'Ação cancelada!',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+    });
   }
-
 }
