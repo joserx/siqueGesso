@@ -179,6 +179,10 @@ export class EditarColaboradorComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     this.rhId = Number(routeParams.get('id'));  
     this.rhService.findOne(this.rhId).subscribe((data : any) => {
+      // console.log(data)
+      if(data.disabled == false){
+        this.desativadoCheckbox = true
+      }
       if(data.anexes && data.anexes.length > 0) {
         this.anexes = data.anexes
       }
