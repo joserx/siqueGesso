@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { getDate } from '../../../../../environments/global';
 
 @Component({
@@ -8,6 +10,35 @@ import { getDate } from '../../../../../environments/global';
 })
 export class CriarPedidoVendasDiretasComponent implements OnInit {
   public getDate: any = getDate;
+
+  public pedidos: any[] = [];
+  public itens: any[] = []
+  public vendasDiretasForm: FormGroup = new FormGroup({
+    "data": new FormControl(null), //
+    "loja": new FormControl(''), //
+    "vendedor": new FormControl(''), //
+    "cnpj": new FormControl(''), // adicionar
+    "cliente": new FormControl(''), //
+    "condPagamento": new FormControl(''), //
+    "tabPreco": new FormControl(''), //
+    "valorFreteEntrega": new FormControl(''), //
+    "item": new FormArray([]),
+    "cep": new FormControl(''),
+    "endereço": new FormControl(''),
+    "numero": new FormControl(''),
+    "bairro": new FormControl(''),
+    "cidade": new FormControl(''),
+    "complemento": new FormControl(''),
+    "motorista": new FormControl(''),
+    "placa": new FormControl(''),
+    "previsaoEntrega": new FormControl(''),
+    "meioPagamento": new FormControl(''),
+    "dataVencimento": new FormControl(null),
+    "aguradandoPagamento": new FormControl(''),
+    "linkBoleto": new FormControl(''),
+    "linkNf": new FormControl(''),
+    "obs": new FormControl('')
+  })
 
   public lojas: any = [
     {
@@ -124,10 +155,26 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private readonly pedidosService: PedidosService
+  ) {}
 
   ngOnInit(): void {
     this.atualizarTotalPedido();
+    
+  }
+
+  // get item(){
+
+  // }
+
+  // submit no vendasDiretasForm
+  sendForm(data: any): void{
+    /* 
+      ############################
+      ## Função para salvar o form
+      #
+    */
   }
 
   public adicionarItemPedido(): void {

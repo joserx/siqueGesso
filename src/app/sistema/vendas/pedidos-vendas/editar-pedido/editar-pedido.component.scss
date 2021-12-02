@@ -54,3 +54,14 @@ input[type=number]::-webkit-inner-spin-button {
 div.pdf-preview{
   font-size: 10px;
 }
+
+
+.drivers-list li:hover{
+  background: #f0f0f0;
+}
+
+.search-sugestion{
+  z-index: 1000;
+  background: #fff;
+  position: absolute;
+}

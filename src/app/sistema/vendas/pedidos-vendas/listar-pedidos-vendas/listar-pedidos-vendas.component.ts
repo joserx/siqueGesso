@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FilialService } from 'src/app/services/filial.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+
+
+// Trocar para o body
+
 
 @Component({
   selector: 'app-listar-pedidos-vendas',
@@ -32,12 +37,15 @@ export class ListarPedidosVendasComponent implements OnInit {
   ngOnInit(): void {
     this.pedidosService.find().subscribe((data:any)=>{
       this.pedidos = data
+      for(let oneData of data){
+        console.log(oneData)
+      }
       console.log(data)
     }, (err)=>{
       console.log(err)
     }, ()=>{
       for(let control = 0; control <= this.pedidos.length; control++){
-        this.pedidosService.findByPage(control).subscribe((data:any)=>{
+        this.pedidosService.findByPage([control + "0"]).subscribe((data:any)=>{
           if(data.length > 0){
             this.pages.push(data)
           }
@@ -48,7 +56,7 @@ export class ListarPedidosVendasComponent implements OnInit {
         })
       }
     })
-    this.pedidosService.findByPage(0).subscribe((data:any)=>{
+    this.pedidosService.findByPage([0 + "0"]).subscribe((data:any)=>{
       this.atualPage = data
     })
   }
@@ -64,7 +72,7 @@ export class ListarPedidosVendasComponent implements OnInit {
   proximo(){
     if(this.atualPageNumber < (Object.keys(this.pages).length - 1)){
       this.atualPageNumber++
-      this.pedidosService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+      this.pedidosService.findByPage([this.atualPageNumber + "0"]).subscribe((data:any)=>{
         this.atualPage = data
       })
     }
@@ -73,7 +81,7 @@ export class ListarPedidosVendasComponent implements OnInit {
     console.log(Object.keys(this.pages).length - 1)
     if(this.atualPageNumber <= (Object.keys(this.pages).length - 1) && this.atualPageNumber > 0){
       this.atualPageNumber--
-      this.pedidosService.findByPage(this.atualPageNumber).subscribe((data:any)=>{
+      this.pedidosService.findByPage([this.atualPageNumber + "0"]).subscribe((data:any)=>{
         this.atualPage = data
       })
     }

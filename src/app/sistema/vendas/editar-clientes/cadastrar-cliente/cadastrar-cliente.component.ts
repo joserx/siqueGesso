@@ -67,14 +67,14 @@ export class EditarCadastrarClienteComponent implements OnInit {
       this.clienteForm.get('rg')?.setValue(this.client.rg)
       this.clienteForm.get('cellphone')?.setValue(this.client.cellphone)
       this.clienteForm.get('telephone')?.setValue(this.client.telephone)
-      this.clienteForm.get('birthDate')?.setValue(this.client.birthDate.substring(10, 0))
+      this.clienteForm.get('birthDate')?.setValue(this.client.birthDate!=null? this.client.birthDate.substring(10, 0) : null)
       this.clienteForm.get('email')?.setValue(this.client.email)
       /* CNPJ */
       this.clienteForm.get("cnpj")?.setValue(this.client.cnpj)
       this.clienteForm.get("subscription")?.setValue(this.client.subscription)
       this.clienteForm.get("socialReason")?.setValue(this.client.socialReason)
       this.clienteForm.get("fantasyName")?.setValue(this.client.fantasyName)
-      this.clienteForm.get("birthDateCompany")?.setValue(this.client.birthDateCompany.substring(10, 0))
+      this.clienteForm.get("birthDateCompany")?.setValue(this.client.birthDateCompany!= null? this.client.birthDateCompany.substring(10, 0) : null)
       this.clienteForm.get("companyEmail")?.setValue(this.client.companyEmail)
       this.clienteForm.get("companyCellPhone")?.setValue(this.client.companyCellPhone)
       this.clienteForm.get("companyTelephone")?.setValue(this.client.companyTelephone)
@@ -194,6 +194,7 @@ export class EditarCadastrarClienteComponent implements OnInit {
     })
   }
   submitClient(data : any) {
+    alert('teste')
     if(this.clienteForm.valid) {
       if (!this.desativadoCheckbox) {
         data.disabled = true

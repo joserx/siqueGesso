@@ -47,6 +47,8 @@ import { StatusNconformComponent } from './sistema/expedicao/status-nconform/sta
 import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
 import { ListarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/listar-vendas-diretas/listar-vendas-diretas.component';
 import { CriarPedidoVendasDiretasComponent } from './sistema/vendas/vendas-diretas/criar-pedido-vendas-diretas/criar-pedido-vendas-diretas.component';
+import { EditarPedidoComponent } from './sistema/vendas/pedidos-vendas/editar-pedido/editar-pedido.component';
+import { VisualizarPedidoComponent } from './sistema/vendas/pedidos-vendas/visualizar-pedido/visualizar-pedido.component';
 
 const routes: Routes = [
   {
@@ -196,6 +198,14 @@ const routes: Routes = [
               {
                 path: 'criar',
                 component: CriarPedidoVendasComponent
+              }, 
+              {
+                path: 'editar/:id',
+                component: EditarPedidoComponent
+              },
+              {
+                path: 'visualizar/:id',
+                component: VisualizarPedidoComponent
               }
             ]
           }
