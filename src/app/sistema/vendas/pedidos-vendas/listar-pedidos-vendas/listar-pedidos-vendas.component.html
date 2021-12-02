@@ -42,25 +42,25 @@
 
       <!-- Títulos da Tabela -->
       <div class="row m-0 my-5 text-custom-dark justify-content-center">
-        <div class="col-1">
-          <h5 class="fw-bold text-truncate">ID</h5>
+        <div class="col-1 row justify-content-center">
+          <h5 class="fw-bold text-truncate w-50 row justify-content-start">ID</h5>
         </div>
-        <div class="col-1">
+        <div class="col">
           <h5 class="fw-bold text-truncate">Data</h5>
         </div>
         <div class="col-1">
           <h5 class="fw-bold text-truncate">Loja</h5>
         </div>
-        <div class="col-2">
+        <div class="col">
           <h5 class="fw-bold text-truncate">Vendedor</h5>
         </div>
-        <div class="col-2">
+        <div class="col">
           <h5 class="fw-bold text-truncate">Cliente</h5>
         </div>
-        <div class="col-2">
+        <div class="col">
           <h5 class="fw-bold text-truncate">Valor</h5>
         </div>
-        <div class="col-1">
+        <div class="col-2">
           <h5 class="fw-bold text-truncate">Status</h5>
         </div>
         <div class="col text-end">
@@ -72,25 +72,25 @@
 
       <!-- Tabela -->
       <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let pedido of atualPage">
-        <div class="col-1">
-          <p>{{ pedido.id }}</p>
+        <div class="row justify-content-center col-1 text-center">
+          <p class="w-50 row justify-content-start">{{ pedido.id }}</p>
         </div>
-        <div class="col-1">
+        <div class="col">
           <p>{{ pedido.data | date }}</p>
         </div>
         <div class="col-1">
           <p>{{ pedido.loja }}</p>
         </div>
-        <div class="col-2">
+        <div class="col">
           <p>{{ pedido.vendedor }}</p>
         </div>
-        <div class="col-2">
+        <div class="col">
           <p>{{ pedido.cliente }}</p>
         </div>
-        <div class="col-2">
+        <div class="col">
           <p>{{ pedido.total | currency:'BRL'}}</p>
         </div>
-        <div class="col-1">
+        <div class="col-2">
           <p>{{ pedido.status }}</p>
         </div>
         <div class="col text-end">
