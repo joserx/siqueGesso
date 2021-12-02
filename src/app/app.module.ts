@@ -106,6 +106,8 @@ import { CriarPedidoVendasDiretasComponent } from './sistema/vendas/vendas-diret
 import { PerquisarVendaComponent } from './sistema/vendas/perquisar-venda/perquisar-venda.component';
 import { FiltrarVendasComponent } from './sistema/vendas/filtrar-vendas/filtrar-vendas.component';
 import { FiltrarClientesComponent } from './sistema/vendas/clientes/filtrar-clientes/filtrar-clientes.component';
+import { ViewSuprimentoComponent } from './sistema/estoque/suprimentos/view-suprimento/view-suprimento.component';
+import { EditSuprimentoComponent } from './sistema/estoque/suprimentos/edit-suprimento/edit-suprimento.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -210,6 +212,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     PerquisarVendaComponent,
     FiltrarVendasComponent,
     FiltrarClientesComponent,
+    ViewSuprimentoComponent,
+    EditSuprimentoComponent,
     ],
   imports: [
     BrowserModule,
