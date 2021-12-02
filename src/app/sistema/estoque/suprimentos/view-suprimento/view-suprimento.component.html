@@ -4,14 +4,14 @@
 </button> -->
 
 <!-- Modal -->
-<div class="modal fade" id="adicionarSuprimentos" tabindex="-1" aria-labelledby="adicionarSuprimentosLabel" aria-hidden="true">
+<div class="modal fade" id="viewSuprimento" tabindex="-1" aria-labelledby="viewSuprimentoLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <form [formGroup]="suprimentoForm" (ngSubmit)="submitSupForm(suprimentoForm.value)">
+        <form [formGroup]="suprimentoForm">
             <!-- Modal content -->
             <div class="modal-content rounded-15 bg-custom-light">
                 <div class="modal-header px-4">
-                    <h5 class="modal-title text-custom-dark" id="adicionarSuprimentosLabel">
-                        Adicionar suprimento
+                    <h5 class="modal-title text-custom-dark" id="viewSuprimentoLabel">
+                        Suprimento X
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -73,22 +73,22 @@
                 </div>
                 <!-- Botão Adicionar -->
                 <!-- <div class="col-12 px-2 pt-4 p-0 m-0">
-                  <a class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
-                    <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
-                    <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
-                  </a>
-                </div> -->
+                    <a class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
+                      <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
+                      <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
+                    </a>
+                  </div> -->
               </div>
             </div>
 
             <!-- Adicionar imagem -->
             <!-- <div class="col-8 pt-4 px-2 m-0 p-0 h-100 d-grid">
-              <label for="anexos" class="btn rounded-15 px-4 bg-white d-flex justify-content-center align-items-center shadow-sm" style="height: 270px;">
-                <div>
-                  <i class="bi-images rounded-circle fs-3 px-4 py-3 my-4 bg-custom-dark text-light"></i>
-                  <p class="fw-bold text-custom-dark mt-3">Adicionar imagem</p>
-                </div>
-              </label>
+                <label for="anexos" class="btn rounded-15 px-4 bg-white d-flex justify-content-center align-items-center shadow-sm" style="height: 270px;">
+                  <div>
+                    <i class="bi-images rounded-circle fs-3 px-4 py-3 my-4 bg-custom-dark text-light"></i>
+                    <p class="fw-bold text-custom-dark mt-3">Adicionar imagem</p>
+                  </div>
+                </label>
                                     <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
                                 </div> -->
 
@@ -140,9 +140,6 @@
                 type="text"
                 placeholder="Preço de custo"
                 formControlName="cust_price"
-                mask="separator.2"
-                prefix="R$"
-                thousandSeparator="."
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Preço de custo</label
@@ -178,62 +175,31 @@
             </div>
 
             <!-- Fornecedor -->
-            <div
-              *ngFor="let fornecedor of fornecedoresUsuais"
-              class="col-9 px-2 pt-4 p-0 m-0 form-floating"
-            >
-              <select
-                class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm"
-                aria-label="Default select example "
-              >
-                <option selected disabled>Selecione um fornecedor</option>
-                <option
-                  *ngFor="let listaFornecedor of fornecedores"
-                  [value]="listaFornecedor.fantasy_name"
-                >
-                  {{ listaFornecedor.fantasy_name }}
-                </option>
-              </select>
+            <!-- <div *ngFor="let fornecedor of fornecedoresUsuais" class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+                <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example">
+                  <option selected disabled>Selecione um fornecedor</option>
+                  <option ></option>
+                </select> -->
+            <!-- *ngFor="let listaFornecedor of listaFornecedores" [value]="listaFornecedor.nome" -->
+            <!-- {{listaFornecedor.nome}} -->
+            <!-- <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
+                                </div>
+                                -->
+                                <!-- Botão Adicionar -->
+                                <!-- <div class="col-3 px-2 pt-4 p-0 m-0">
+                <a (click)="adicionarFornecedorUsual()" class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
+                  <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
+                  <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
+                </a>
+              </div> -->
+                            </div>
+                        </div>
 
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Fornecedor</label
-              >
-            </div>
-
-            <!-- Botão Adicionar -->
-            <div class="col-3 px-2 pt-4 p-0 m-0">
-              <a
-                (click)="adicionarFornecedorUsual()"
-                class="
-                  rounded-15
-                  py-1
-                  px-4
-                  bg-custom-success
-                  h-limited-sm
-                  d-flex
-                  justify-content-between
-                  shadow-sm
-                "
-              >
-                <span class="fw-normal my-auto text-truncate text-custom-dark"
-                  >Adicionar</span
-                >
-                <i
-                  class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark"
-                ></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="row m-0 py-3 modal-footer">
-          <!-- Cancelar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button
-              data-bs-dismiss="modal"
-              type="reset"
-              class="
+                        <!-- Modal footer -->
+                        <div class="row m-0 py-3 modal-footer">
+                            <!-- Cancelar -->
+                            <div class="col-3 px-2 p-0 m-0 d-grid">
+                                <button data-bs-dismiss="modal" type="reset" class="
                 h-limited-sm
                 btn
                 rounded-15
@@ -242,8 +208,7 @@
                 bg-light
                 shadow-sm
                 text-start
-              "
-            >
+              ">
               <h5
                 class="
                   fw-normal
@@ -254,13 +219,11 @@
                 Cancelar
               </h5>
             </button>
-          </div>
+                            </div>
 
-          <!-- Salvar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button
-              type="submit"
-              class="
+                            <!-- Salvar -->
+                            <div class="col-3 px-2 p-0 m-0 d-grid">
+                                <button type="submit" class="
                 h-limited-sm
                 btn
                 rounded-15
@@ -269,8 +232,7 @@
                 bg-custom-success
                 shadow-sm
                 text-start
-              "
-            >
+              ">
               <h5
                 class="
                   fw-normal
@@ -281,11 +243,11 @@
                 Salvar
               </h5>
             </button>
-          </div>
+                            </div>
+                        </div>
+                        <!-- /Modal footer -->
+                    </div>
+                    <!-- /Modal content -->
+        </form>
         </div>
-        <!-- /Modal footer -->
-      </div>
-      <!-- /Modal content -->
-    </form>
-  </div>
-</div>
+        </div>
