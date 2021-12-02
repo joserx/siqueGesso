@@ -2,20 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class SuprimentosService {
+export class SuprimentoService {
+  suprimentos: any;
+  constructor(private readonly http: HttpClient) {}
 
-  suprimentos: any
-  constructor(
-    private readonly http : HttpClient
-
-  ) { }
- 
-  find(){
+  find() {
     return this.http.get(environment.apiUrl + 'provider/');
   }
-
+  create(payload: any) {
+    return this.http.post(`${environment.apiUrl}provider/`, payload);
+  }
 }

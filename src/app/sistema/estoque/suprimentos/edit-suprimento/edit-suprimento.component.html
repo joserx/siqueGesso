@@ -1,0 +1,253 @@
+<!-- Botão para abrir o modal
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adicionarSuprimentos">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="editSuprimento" tabindex="-1" aria-labelledby="editSuprimentoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <form [formGroup]="suprimentoForm">
+            <!-- Modal content -->
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="viewSuprimentoLabel">
+                        Suprimento X
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <div class="row p-0 m-0 border-bottom pb-4">
+                        <!-- Nome, código, categoria, adicionar -->
+                        <div class="col-12 px-2 m-0 p-0">
+                            <div class="row m-0 p-0">
+                                <!-- Nome -->
+                                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                                    <input class="
+                      form-control
+                      h-limited-sm
+                      px-4
+                      py-3
+                      rounded-15
+                      shadow-sm
+                    " type="text" placeholder="Nome" formControlName="name" />
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label
+                  >
+                </div>
+                <!-- Código -->
+                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                  <input
+                    class="
+                      form-control
+                      h-limited-sm
+                      px-4
+                      py-3
+                      rounded-15
+                      shadow-sm
+                    "
+                    type="text"
+                    placeholder="Código"
+                    formControlName="code"
+                  />
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                    >Código</label
+                  >
+                </div>
+                <!-- Categoria -->
+                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                  <input
+                    class="
+                      form-control
+                      h-limited-sm
+                      px-4
+                      py-3
+                      rounded-15
+                      shadow-sm
+                    "
+                    type="text"
+                    placeholder="Categoria"
+                    formControlName="category"
+                  />
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                    >Categoria</label
+                  >
+                </div>
+                <!-- Botão Adicionar -->
+                <!-- <div class="col-12 px-2 pt-4 p-0 m-0">
+                  <a class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
+                    <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
+                    <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
+                  </a>
+                </div> -->
+              </div>
+            </div>
+
+            <!-- Adicionar imagem -->
+            <!-- <div class="col-8 pt-4 px-2 m-0 p-0 h-100 d-grid">
+              <label for="anexos" class="btn rounded-15 px-4 bg-white d-flex justify-content-center align-items-center shadow-sm" style="height: 270px;">
+                <div>
+                  <i class="bi-images rounded-circle fs-3 px-4 py-3 my-4 bg-custom-dark text-light"></i>
+                  <p class="fw-bold text-custom-dark mt-3">Adicionar imagem</p>
+                </div>
+              </label>
+                                    <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
+                                </div> -->
+
+                                <!-- Descrição -->
+                                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                                    <textarea class="
+                  form-control form-control-lg
+                  px-4
+                  py-3
+                  rounded-15
+                  shadow-sm
+                " placeholder="Descrição" style="height: 150px" formControlName="description"></textarea>
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label
+              >
+            </div>
+          </div>
+
+          <div class="row m-0 p-0">
+            <!-- Unidade de medida -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="number"
+                placeholder="Unidade de medida"
+                formControlName="unit_metrics"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Unidade de medida</label
+              >
+            </div>
+
+            <!-- Quantidade -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Quantidade"
+                formControlName="quantity"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Quantidade</label
+              >
+            </div>
+
+            <!-- Preço de custo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Preço de custo"
+                formControlName="cust_price"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Preço de custo</label
+              >
+            </div>
+
+            <!-- Estoque atual -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="number"
+                min="0"
+                placeholder="current_storage"
+                formControlName="current_storage"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Estoque atual</label
+              >
+            </div>
+
+            <!-- Estoque mínimo -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="number"
+                min="0"
+                placeholder="minimum_storage"
+                formControlName="minimum_storage"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Estoque mínimo</label
+              >
+            </div>
+
+            <!-- Fornecedor -->
+            <!-- <div *ngFor="let fornecedor of fornecedoresUsuais" class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+              <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example">
+                <option selected disabled>Selecione um fornecedor</option>
+                <option ></option>
+              </select> -->
+            <!-- *ngFor="let listaFornecedor of listaFornecedores" [value]="listaFornecedor.nome" -->
+            <!-- {{listaFornecedor.nome}} -->
+            <!-- <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
+                                </div>
+                                -->
+                                <!-- Botão Adicionar -->
+                                <!-- <div class="col-3 px-2 pt-4 p-0 m-0">
+              <a (click)="adicionarFornecedorUsual()" class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
+                <span class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</span>
+                <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
+              </a>
+            </div> -->
+                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="row m-0 py-3 modal-footer">
+                            <!-- Cancelar -->
+                            <div class="col-3 px-2 p-0 m-0 d-grid">
+                                <button data-bs-dismiss="modal" type="reset" class="
+                h-limited-sm
+                btn
+                rounded-15
+                py-1
+                px-4
+                bg-light
+                shadow-sm
+                text-start
+              ">
+              <h5
+                class="
+                  fw-normal
+                  my-auto
+                  text-truncate text-custom-dark text-center
+                "
+              >
+                Cancelar
+              </h5>
+            </button>
+                            </div>
+
+                            <!-- Salvar -->
+                            <div class="col-3 px-2 p-0 m-0 d-grid">
+                                <button type="submit" class="
+                h-limited-sm
+                btn
+                rounded-15
+                py-1
+                px-4
+                bg-custom-success
+                shadow-sm
+                text-start
+              " (click)="save()">
+              <h5
+                class="
+                  fw-normal
+                  my-auto
+                  text-truncate text-custom-dark text-center
+                "
+              >
+                Salvar
+              </h5>
+            </button>
+                            </div>
+                        </div>
+                        <!-- /Modal footer -->
+                    </div>
+                    <!-- /Modal content -->
+        </form>
+        </div>
+        </div>

@@ -4,26 +4,23 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FornecedorService {
+  fornecedores: any;
 
-  fornecedores: any
-
-  constructor(
-    private readonly http : HttpClient
-  ) { }
+  constructor(private readonly http: HttpClient) {}
 
   find() {
     return this.http.get(environment.apiUrl + 'provider/');
   }
 
-  create(payload: any){
-    return this.http.post(`${environment.apiUrl}provider/`, payload)
+  create(payload: any) {
+    return this.http.post(`${environment.apiUrl}provider/`, payload);
   }
 
-  delete(id: number){
-    return this.http.delete(`${environment.apiUrl}provider/${id}`)
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}provider/${id}`);
   }
 
   updateCep(cep: string) {
@@ -33,9 +30,8 @@ export class FornecedorService {
       request.send();
       request.onload = function () {
         var data = JSON.parse(this.response);
-        x.next(data)
-      }
-    })
+        x.next(data);
+      };
+    });
   }
-  
 }
