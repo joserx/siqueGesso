@@ -141,7 +141,7 @@
 
 
 <!-- Modal -->
-<!-- Criar pdf -->
+<!-- Selecionar produtos -->
 <div class="modal fade" id="selecionarProdutos" tabindex="-1" aria-labelledby="selecionarProdutosLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <form>
@@ -271,8 +271,7 @@
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Loja" id="loja" formControlName="loja">
               <option value="" disabled selected>Selecione uma loja</option>
-              <option value="Loja 1">Loja 1</option>
-              <option value="Loja 2">Loja 2</option>
+              <option *ngFor="let loja of filial" value="{{loja.nome}}">{{loja.nome}}</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
           </div>

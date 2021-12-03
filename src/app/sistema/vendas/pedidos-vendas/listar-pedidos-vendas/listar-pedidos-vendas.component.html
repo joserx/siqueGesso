@@ -40,64 +40,74 @@
         </div>
       </div>
 
-      <!-- Títulos da Tabela -->
-      <div class="row m-0 my-5 text-custom-dark justify-content-center">
-        <div class="col-1 row justify-content-center">
-          <h5 class="fw-bold text-truncate w-50 row justify-content-start">ID</h5>
-        </div>
-        <div class="col">
-          <h5 class="fw-bold text-truncate">Data</h5>
-        </div>
-        <div class="col-1">
-          <h5 class="fw-bold text-truncate">Loja</h5>
-        </div>
-        <div class="col">
-          <h5 class="fw-bold text-truncate">Vendedor</h5>
-        </div>
-        <div class="col">
-          <h5 class="fw-bold text-truncate">Cliente</h5>
-        </div>
-        <div class="col">
-          <h5 class="fw-bold text-truncate">Valor</h5>
-        </div>
-        <div class="col-2">
-          <h5 class="fw-bold text-truncate">Status</h5>
-        </div>
-        <div class="col text-end">
-          <h5 class="fw-bold text-truncate d-none">Ações</h5>
-          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarPedidos"></i>
-          <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#filtrarPedidos"></i>
-        </div>
-      </div>
-
       <!-- Tabela -->
-      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let pedido of atualPage">
-        <div class="row justify-content-center col-1 text-center">
-          <p class="w-50 row justify-content-start">{{ pedido.id }}</p>
-        </div>
-        <div class="col">
-          <p>{{ pedido.data | date }}</p>
-        </div>
-        <div class="col-1">
-          <p>{{ pedido.loja }}</p>
-        </div>
-        <div class="col">
-          <p>{{ pedido.vendedor }}</p>
-        </div>
-        <div class="col">
-          <p>{{ pedido.cliente }}</p>
-        </div>
-        <div class="col">
-          <p>{{ pedido.total | currency:'BRL'}}</p>
-        </div>
-        <div class="col-2">
-          <p>{{ pedido.status }}</p>
-        </div>
-        <div class="col text-end">
-          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
-        </div>
-      </div>
+      <table class="w-100 justify-content-center">
+        <thead class="w-100 row m-0 my-5 text-custom-dark">
+          <tr class="d-flex justify-content-between">
+            <td class="">
+              <h5 class="fw-bold text-truncate text-center">ID</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Criado em</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Loja</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Vendedor</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Cliente</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Valor</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Status</h5>
+            </td>
+            <td class="col-2">
+              <h5 class="fw-bold text-truncate text-center">Atualizado em</h5>
+            </td>
+            <td>
+              <h5 class="fw-bold text-truncate d-none">Ações</h5>
+              <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarPedidos"></i>
+              <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#filtrarPedidos"></i>
+            </td>
+          </tr>
+        </thead>
+        <tbody class="w-100 row m-0 mt-3 text-custom-dark justify-content-center align-items-center">
+          <tr class="d-flex justify-content-between border-bottom" *ngFor="let pedido of atualPage">
+            <td class="">
+              <p class="text-center">{{ pedido.id>1000? pedido(pedido.id | slice:0:2) + "..." : pedido.id }}</p>
+            </td>
+            <td class="col-1">
+              <p class="px-1">{{ pedido.created_at | date }}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.loja.length>20? (pedido.loja | slice:0:20)  + "..."  : pedido.loja }}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.vendedor.length>15? (pedido.vendedor | slice:0:15) + "..." : pedido.vendedor}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.cliente.length>15? (pedido.cliente | slice:0:20) + "..." : pedido.cliente}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.total | currency:'BRL'}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.status }}</p>
+            </td>
+            <td class="col-2">
+              <p  class="px-1 text-center">{{ pedido.updated_at | date }}</p>
+            </td>
+            <td>
+              <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}"></i>
+              <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <div class="col-12 row mt-3 d-flex justify-content-around">
         <div class="col-3 row m-auto">

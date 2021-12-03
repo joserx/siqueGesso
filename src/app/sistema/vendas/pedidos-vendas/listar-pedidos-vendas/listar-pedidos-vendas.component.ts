@@ -64,6 +64,7 @@ export class ListarPedidosVendasComponent implements OnInit {
     })
     this.pedidosService.findByPage([0 + "0"]).subscribe((data:any)=>{
       this.atualPage = data
+      console.log('atualPage', data)
     })
   }
 
