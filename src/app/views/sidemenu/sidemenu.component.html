@@ -18,19 +18,19 @@
       <div *ngIf="navItem.nome == menuActive">
 
         <!-- Submenus -->
-        <div *ngFor="let subMenu of navItem.subMenus;">
+        <!-- <div *ngFor="let subMenu of navItem.subMenus;">
           <p class="fw-bold text-custom-dark">{{subMenu.titulo}}</p>
           <p class="text-custom-dark">{{subMenu.descricao}}</p>
 
-          <!-- Páginas do Submenu -->
+          //Páginas do Submenu
           <div *ngFor="let pagina of subMenu.paginas;">
             <a [routerLink]="pagina.href" class="nav-link px-0 align-middle text-custom-dark">
               <span class="fw-bold">{{pagina.nome}}</span>
             </a>
           </div>
-          <!-- /Páginas do Submenu -->
+           //Páginas do Submenu 
           <hr>
-        </div>
+        </div> -->
         <!-- /Submenus -->
 
       </div>

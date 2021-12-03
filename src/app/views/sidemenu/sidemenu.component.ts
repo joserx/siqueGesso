@@ -13,23 +13,25 @@ export class SidemenuComponent implements OnInit {
 
   public navItems = [
     { nome: 'home', icon: 'bi-house-door', href: '/sistema/home', subMenus: [] },
-    { nome: 'configuracoes', icon: 'bi-gear', href: null, subMenus: [
-        { titulo: 'Usuário', descricao: 'Liste, crie, edite ou remova os usuários do sistema.', paginas: [
-            { nome: 'Usuários do sistema', href: '/sistema/usuarios-sistema' },
-            { nome: 'Permissões', href: '/sistema/usuarios-sistema/permissoes' },
-          ]
-        },
-        { titulo: 'Notificações', descricao: 'Configure as notificações do sistema.', paginas: [
-            { nome: 'Definir notificações', href: '/sistema/notificacoes' }
-          ]
-        },
-        { titulo: '', descricao: '', paginas: [
-          { nome: 'Configurações', href: '/sistema/config'},
-          { nome: 'Sair', href: '/logout'},
-        ]}
-      ]
-    },
-    { nome: 'info', icon: 'bi-info-circle', href: '/sistema/info', subMenus: [] }
+    { nome: 'Configurações',  icon: 'bi-gear', href: '/sistema/configuracoes'},
+    // { nome: 'configuracoes', icon: 'bi-gear', href: null, subMenus: [
+    //     { titulo: 'Usuário', descricao: 'Liste, crie, edite ou remova os usuários do sistema.', paginas: [
+    //         { nome: 'Usuários do sistema', href: '/sistema/usuarios-sistema' },
+    //         { nome: 'Permissões', href: '/sistema/usuarios-sistema/permissoes' },
+    //       ]
+    //     },
+    //     { titulo: 'Notificações', descricao: 'Configure as notificações do sistema.', paginas: [
+    //         { nome: 'Definir notificações', href: '/sistema/notificacoes' }
+    //       ]
+    //     },
+    //     { titulo: '', descricao: '', paginas: [
+    //       { nome: 'Configurações', href: '/sistema/configuracoes'},
+    //       { nome: 'Sair', href: '/logout'},
+    //     ]}
+    //   ]
+    // },
+    // { nome: 'info', icon: 'bi-info-circle', href: '/sistema/info', subMenus: [] },
+    { nome: 'Sair', icon: 'bi-arrow-bar-left', href: '/logout'},
   ]
 
   constructor(

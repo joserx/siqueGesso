@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+  <div class="col-auto m-0 p-0 bg-custom-light">
+    <app-sidemenu></app-sidemenu>
+  </div>
+  <div class="col m-0 bg-custom-white">
+    <!-- Página configurações -->
+    <div class="container">
+
+      <!-- Cards -->
+      <div class="row m-0 my-5 p-0 justify-content-center align-items-center">
+        <a class="col-3 mx-3 my-3 p-4 text-center rounded-15 bg-white shadow-sm" *ngFor="let card of cards;" routerLink="{{card.href}}">
+          <i class="{{card.icon}} text-custom-dark" style="font-size: 4rem;"></i>
+          <h4 class="text-custom-dark fw-normal text-truncate">{{card.nome}}</h4>
+        </a>
+      </div>
+
+    </div>
+    <!-- /Página configurações -->
+  </div>
+</div>
