@@ -108,6 +108,14 @@ import { FiltrarVendasComponent } from './sistema/vendas/filtrar-vendas/filtrar-
 import { FiltrarClientesComponent } from './sistema/vendas/clientes/filtrar-clientes/filtrar-clientes.component';
 import { ViewSuprimentoComponent } from './sistema/estoque/suprimentos/view-suprimento/view-suprimento.component';
 import { EditSuprimentoComponent } from './sistema/estoque/suprimentos/edit-suprimento/edit-suprimento.component';
+import { ConfiguracoesComponent } from './sistema/config/configuracoes/configuracoes.component';
+import { ListarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/listar-cadastro-loja/listar-cadastro-loja.component';
+import { CadastrarLojaComponent } from './sistema/config/cadastro-de-loja/cadastrar-loja/cadastrar-loja.component';
+import { CadastroDeCategoriaComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-categoria/cadastro-de-categoria.component';
+import { CadastroDeProdutoListaComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto-lista/cadastro-de-produto-lista.component';
+import { CadastroDeProdutoComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto/cadastro-de-produto.component';
+import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-lista/destinacao-da-venda-lista.component';
+import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -214,6 +222,14 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FiltrarClientesComponent,
     ViewSuprimentoComponent,
     EditSuprimentoComponent,
+    ConfiguracoesComponent,
+    ListarCadastroLojaComponent,
+    CadastrarLojaComponent,
+    CadastroDeCategoriaComponent,
+    CadastroDeProdutoListaComponent,
+    CadastroDeProdutoComponent,
+    DestinacaoDaVendaListaComponent,
+    DestinacaoDaVendaCadastroComponent,
     ],
   imports: [
     BrowserModule,
