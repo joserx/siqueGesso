@@ -108,6 +108,9 @@ import { FiltrarVendasComponent } from './sistema/vendas/filtrar-vendas/filtrar-
 import { FiltrarClientesComponent } from './sistema/vendas/clientes/filtrar-clientes/filtrar-clientes.component';
 import { ViewSuprimentoComponent } from './sistema/estoque/suprimentos/view-suprimento/view-suprimento.component';
 import { EditSuprimentoComponent } from './sistema/estoque/suprimentos/edit-suprimento/edit-suprimento.component';
+import { RelatorioProdutosViewComponent } from './sistema/estoque/estoque-produtos/relatorio-produtos-view/relatorio-produtos-view.component';
+import { FiltrarProdutosComponent } from './sistema/estoque/produtos/filtrar-produtos/filtrar-produtos.component';
+import { EditProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/edit-produto-estoque/edit-produto-estoque.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -214,7 +217,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FiltrarClientesComponent,
     ViewSuprimentoComponent,
     EditSuprimentoComponent,
-    ],
+    RelatorioProdutosViewComponent,
+    FiltrarProdutosComponent,
+    EditProdutoEstoqueComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

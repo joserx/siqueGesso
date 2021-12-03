@@ -23,6 +23,9 @@ export class FornecedoresComponent implements OnInit {
   ngOnInit(): void {
     this.getFornecedores();
   }
+  pesquisaFornecedores(event: any) {
+    const search = event.target.value;
+  }
 
   getFornecedores() {
     this.fornecedorService.find().subscribe((res) => {

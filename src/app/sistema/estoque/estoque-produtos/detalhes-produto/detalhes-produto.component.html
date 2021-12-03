@@ -1,117 +1,181 @@
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col pb-4 m-0 bg-custom-white">
-    <!-- Página -->
-    <div class="container">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col pb-4 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/estoque">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/estoque">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-      </div>
+            <div class="row mt-4 m-0 justify-content-center align-items-center">
+                <div class="col-12 px-2 p-0 m-0">
+                    <h4 class="fw-bold text-custom-dark m-0 p-0">Detalhes</h4>
+                </div>
+            </div>
 
-      <div class="row mt-4 m-0 justify-content-center align-items-center">
-        <div class="col-12 px-2 p-0 m-0">
-          <h4 class="fw-bold text-custom-dark m-0 p-0">Detalhes</h4>
-        </div>
-      </div>
+            <!-- Produto -->
+            <div class="row m-0 mt-5" *ngFor="let produto of produtos">
+                <div class="col-12">
+                    <h5 class="fw-bold text-custom-dark">{{ produto.nome }}</h5>
+                </div>
+                <div class="col-12 m-0 p-0">
+                    <!-- Títulos da Tabela -->
+                    <div class="row m-0 my-4 text-custom-dark">
+                        <div class="col-1">
+                            <h5 class="fw-bold">Data</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="fw-bold">Movimento</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="fw-bold">Fornecedor</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="fw-bold">Valor unit.</h5>
+                        </div>
+                        <div class="col-1">
+                            <h5 class="fw-bold text-truncate">Qtd.</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="fw-bold">Custo</h5>
+                        </div>
+                        <div class="col-1">
+                            <h5 class="fw-bold">Disponível</h5>
+                        </div>
+                    </div>
 
-      <!-- Produto -->
-      <div class="row m-0 mt-5" *ngFor="let produto of produtos">
-        <div class="col-12">
-          <h5 class="fw-bold text-custom-dark">{{produto.nome}}</h5>
-        </div>
-        <div class="col-12 m-0 p-0">
+                    <!-- Tabela -->
+                    <div class="row m-0 mt-3 border-bottom text-custom-dark" *ngFor="let dados of produto.dados">
+                        <div class="col-1">
+                            <p>{{ dados.data }}</p>
+                        </div>
+                        <div class="col-2">
+                            <p>{{ dados.movimento }}</p>
+                        </div>
+                        <div class="col-2">
+                            <p>{{ dados.fornecedor }}</p>
+                        </div>
+                        <div class="col-2">
+                            <p>{{ dados.valor_unitario | currency: "BRL" }}</p>
+                        </div>
+                        <div class="col-1">
+                            <p>{{ dados.quantidade }}</p>
+                        </div>
+                        <div class="col-2">
+                            <p>{{ dados.custo | currency: "BRL" }}</p>
+                        </div>
+                        <div class="col-1">
+                            <p>{{ dados.disponivel }}</p>
+                        </div>
+                    </div>
+                </div>
 
-          <!-- Títulos da Tabela -->
-          <div class="row m-0 my-4 text-custom-dark">
-            <div class="col-1">
-              <h5 class="fw-bold">Data</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold">Movimento</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold">Fornecedor</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold">Valor unit.</h5>
-            </div>
-            <div class="col-1">
-              <h5 class="fw-bold text-truncate">Qtd.</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold">Custo</h5>
-            </div>
-            <div class="col-1">
-              <h5 class="fw-bold">Disponível</h5>
-            </div>
-          </div>
-
-          <!-- Tabela -->
-          <div class="row m-0 mt-3 border-bottom text-custom-dark" *ngFor="let dados of produto.dados">
-            <div class="col-1">
-              <p>{{ dados.data }}</p>
-            </div>
-            <div class="col-2">
-              <p>{{ dados.movimento }}</p>
-            </div>
-            <div class="col-2">
-              <p>{{ dados.fornecedor }}</p>
-            </div>
-            <div class="col-2">
-              <p>{{ dados.valor_unitario | currency:'BRL'}}</p>
-            </div>
-            <div class="col-1">
-              <p>{{ dados.quantidade }}</p>
-            </div>
-            <div class="col-2">
-              <p>{{ dados.custo | currency:'BRL' }}</p>
-            </div>
-            <div class="col-1">
-              <p>{{ dados.disponivel }}</p>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Estoque disponível no fim -->
-        <div class="row m-0 mt-4 justify-content-end">
-          <div class="col-4 px-2 p-0 m-0">
-            <a class="rounded-15 py-2 px-4 bg-white h-limited d-flex justify-content-between shadow-sm">
-              <span class=" fw-bold my-auto text-truncate text-custom-dark">Estoque disponível no fim</span>
-              <span font="montserrat" class="fw-light my-auto text-truncate text-custom-dark">1000</span>
+                <!-- Estoque disponível no fim -->
+                <div class="row m-0 mt-4 justify-content-end">
+                    <div class="col-4 px-2 p-0 m-0">
+                        <a class="
+                rounded-15
+                py-2
+                px-4
+                bg-white
+                h-limited
+                d-flex
+                justify-content-between
+                shadow-sm
+              ">
+                            <span class="fw-bold my-auto text-truncate text-custom-dark">Estoque disponível no fim</span
+              >
+              <span
+                font="montserrat"
+                class="fw-light my-auto text-truncate text-custom-dark"
+                >1000</span
+              >
             </a>
           </div>
         </div>
         <!-- /Estoque disponível no fim -->
 
-        <!-- Exportar e nova movimentação -->
+        <!-- Export -->
         <div class="row m-0 justify-content-end">
           <!-- Botão Exportar -->
-          <div class="col-3 px-2 mt-4 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-light d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Exportar</h5>
+          <div class="col-2 px-1 mt-2 p-0 m-0 d-grid">
+            <button
+              type="button"
+              class="
+                excel-button
+                h-limited
+                btn
+                rounded-15
+                py-0
+                px-2
+                bg-light
+                d-flex
+                justify-content-center
+                shadow-sm
+              "
+            >
+              <i
+                class="
+                  bi bi-file-excel
+                  icon-view
+                  my-auto
+                  fs-2
+                  p-1
+                  m-0
+                  fw-bold
+                  text-custom-dark text-white
+                "
+                cursor="pointer"
+              ></i>
             </button>
           </div>
 
-          <!-- Botão Nova movimentação -->
-          <div class="col-3 px-2 mt-4 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Nova movimentação</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+          <!-- Export -->
+          <div class="col-2 px-1 mt-2 p-0 m-0 d-grid">
+            <button
+              type="button"
+              class="
+                pdf-button
+                h-limited
+                btn
+                rounded-15
+                py-0
+                px-2
+                bg-custom-success
+                d-flex
+                justify-content-center
+                shadow-sm
+              "
+              data-bs-toggle="modal"
+              data-bs-target="generateEstoquePdf"
+            >
+              <i
+                class="
+                  bi bi-file-earmark-pdf-fill
+                  icon-view
+                  my-auto
+                  fs-2
+                  p-1
+                  m-0
+                  fw-bold
+                  text-custom-dark text-white
+                "
+                cursor="pointer"
+              ></i>
             </button>
           </div>
         </div>
-        <!-- /Exportar e nova movimentação -->
-
+        <!-- /Export-->
       </div>
       <!-- /Produto -->
     </div>
   </div>
 </div>
+<app-relatorio-produtos-view></app-relatorio-produtos-view>
