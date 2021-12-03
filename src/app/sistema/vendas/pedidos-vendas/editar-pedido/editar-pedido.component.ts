@@ -91,14 +91,26 @@ export class EditarPedidoComponent implements OnInit {
     ) { }
     
     ngOnInit(): void {
+      let teste = this.item['controls']
+      console.log(teste)
       this.filialService.find().subscribe((data: any)=>{
         this.filial = data
         console.log(data)
       })
       this.clienteService.find().subscribe((data:any)=>{
+        for(let cliente of data){
+          if(cliente.name != null && cliente.surname !=null){
+            if(`${cliente.name} ${cliente.surname}`== this.pedidosForm.get('cliente')?.value){
+              this.enderecos = cliente.addresses
+            }
+          }else{
+            if(cliente.fantasyName == this.pedidosForm.get('cliente')?.value){
+              this.enderecos = cliente.addresses
+            }
+          }
+        }
         this.clientes = data
         this.originalClientes = data
-        // console.log('clintes', this.clientes)
       })
       this.rhService.find().subscribe((data: any)=>{
         for(let oneData of data){
@@ -145,21 +157,19 @@ export class EditarPedidoComponent implements OnInit {
             'valorUnitario': new FormControl(Number(data.item[item].valorUnitario)),
             'desconto': new FormControl(Number(data.item[item].desconto)),
             'tipoRetirada': new FormControl(data.item[item].tipoRetirada),
-            'prevRetirada': new FormControl(data.item[item].prevRetirada.substring(10,0)),
+            'prevRetirada': new FormControl(data.item[item].prevRetirada==!null? data.item[item].prevRetirada.substring(10,0):null),
             'valorFrete': new FormControl(Number(data.item[item].valorFrete)),
             'valorVenda': new FormControl(Number(data.item[item].valorVenda)),
             'endereco': new FormControl(data.item[item].endereco),
             'enderecoLoja': new FormControl(data.item[item].enderecoLoja),
             'tipoEntrega': new FormControl(data.item[item].tipoEntrega, [Validators.required]),
           }))
+          this.valUnit += data.item[item].valorVenda
         }
       })
       this.produtoService.find().subscribe((data: any)=>{
         this.allProdutos = data
         this.allProdutosOriginal = data
-        for(let unit of data){
-          this.valUnit += unit.atual
-        }
       })
       this.statusService.find().subscribe((data:any)=>{
         this.status = data
@@ -257,6 +267,7 @@ export class EditarPedidoComponent implements OnInit {
             'enderecoLoja': new FormControl(''),
             'tipoEntrega': new FormControl('', [Validators.required]),
           }))
+          this.valUnit += produto.precoMedio
         }
       }
     }else{

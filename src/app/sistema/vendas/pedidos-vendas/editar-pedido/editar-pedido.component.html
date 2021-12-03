@@ -429,7 +429,7 @@
   
             <!-- Valor do frete -->
             <div class="col px-2 pt-4 p-0 m-0 form-floating">
-              <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" [value]="changeFrete(item.value) | currency:'BRL'" readonly>
+              <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" [value]="oneItem.value.valorFrete | currency:'BRL'" readonly>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor do frete</label>
             </div>
           </div>
