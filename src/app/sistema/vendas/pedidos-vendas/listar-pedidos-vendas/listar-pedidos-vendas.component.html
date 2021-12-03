@@ -29,14 +29,14 @@
 
         <!-- Pedidos gerados -->
         <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="0 | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
-          <label class="ms-2 small text-truncate" for="gerados">{{dados.gerados.qtd}} pedidos gerados</label>
+          <input [value]="totalPedidos(pedidosGerados) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <label class="ms-2 small text-truncate" for="gerados">{{ pedidosGerados.length }} pedidos gerados</label>
         </div>
 
         <!-- Pedidos em digitação -->
         <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="totalPedidos(pedidos) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
-          <label class="ms-2 small text-truncate" for="gerados">{{ pedidos.length }} pedidos em digitação</label>
+          <input [value]="totalPedidos(pedidosAguardando) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <label class="ms-2 small text-truncate" for="gerados">{{ pedidosAguardando.length }} pedidos em digitação</label>
         </div>
       </div>
 
