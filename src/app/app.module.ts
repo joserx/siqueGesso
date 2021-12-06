@@ -116,6 +116,7 @@ import { CadastroDeProdutoListaComponent } from './sistema/config/cadastro-de-ca
 import { CadastroDeProdutoComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto/cadastro-de-produto.component';
 import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-lista/destinacao-da-venda-lista.component';
 import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
+import { NgChartjsModule } from 'ng-chartjs';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -243,6 +244,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false,
     }),
+    NgChartjsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

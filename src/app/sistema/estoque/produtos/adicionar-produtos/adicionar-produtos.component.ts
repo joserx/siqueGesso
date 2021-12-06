@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./adicionar-produtos.component.scss']
 })
 export class AdicionarProdutosComponent implements OnInit {
+  tabelas = [
+    {},{},{},{},{},{},{},{},{},
+  ]
 
   fornecedores: any
 
@@ -93,6 +96,10 @@ export class AdicionarProdutosComponent implements OnInit {
       this.closeBtn.nativeElement.click()
       return Swal.fire({ title: 'Produto salvo!', icon: 'success', toast: true, position: 'top', showConfirmButton: false, timer: 3000, timerProgressBar: true })
     })
+  }
+
+  adicionarTabela(){
+    this.tabelas.push({})
   }
 
 }
