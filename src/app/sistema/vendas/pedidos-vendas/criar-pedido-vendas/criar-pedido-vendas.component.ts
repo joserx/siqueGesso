@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
+import { FilialService } from 'src/app/services/filial.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProdutoService } from 'src/app/services/produto.service';
@@ -20,6 +21,7 @@ import { getDate } from '../../../../../environments/global';
 export class CriarPedidoVendasComponent implements OnInit {
 
   @ViewChild('content', {static: false})el: ElementRef
+  public filial: any[] = []
   public enderecos: any[] = []
   public descontoG: any
   public showSign: boolean
@@ -82,10 +84,14 @@ export class CriarPedidoVendasComponent implements OnInit {
     private readonly router: Router,
     private readonly authService: AuthenticationService,
     private readonly rhService: RhService,
-    private readonly clienteService: ClientService
+    private readonly clienteService: ClientService,
+    private readonly filialServices: FilialService
     ) { }
     
     ngOnInit(): void {
+      this.filialServices.find().subscribe((data:any)=>{
+        this.filial = data
+      })
       this.clienteService.find().subscribe((data:any)=>{
         this.clientes = data
         this.originalClientes = data
@@ -106,9 +112,6 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.produtoService.find().subscribe((data: any)=>{
         this.allProdutos = data
         this.allProdutosOriginal = data
-        for(let unit of data){
-          this.valUnit += unit.atual
-        }
       })
       this.statusService.find().subscribe((data:any)=>{
         this.status = data
@@ -127,7 +130,7 @@ export class CriarPedidoVendasComponent implements OnInit {
       let timezone = data.value.data.getTimezoneOffset() * 60000
       data.value.data = new Date(data.value.data + timezone).toISOString()
       console.log(data.value.data)
-
+      console.log(data2)
       if(data.valid){
     
         data.value.total = (((this.totalQuanti(this.item.value)*this.valUnit) - this.changeDesconto(this.item.value)) + this.changeFrete(this.item.value))
@@ -178,10 +181,7 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.dataId++
     }
   
-  /* 
-  { codigo: 1, produto: 'Drywall', quantidade: 50, valor_unitario: 25.90, desconto_tab: 5, desconto_ad: 0, valor_venda: 20.90 },
-  { codigo: 2, produto: 'Gesso', quantidade: 4, valor_unitario: 16.90, desconto_tab: 0, desconto_ad: 0, valor_venda: 16.90 },
-  */
+
   checkIfChecked(event: any){
     console.log(this.allProdutos)
     let input = event.target
@@ -206,6 +206,7 @@ export class CriarPedidoVendasComponent implements OnInit {
             'enderecoLoja': new FormControl(''),
             'tipoEntrega': new FormControl('', [Validators.required]),
           }))
+          this.valUnit += produto.precoMedio
         }
       }
       console.log(this.item)

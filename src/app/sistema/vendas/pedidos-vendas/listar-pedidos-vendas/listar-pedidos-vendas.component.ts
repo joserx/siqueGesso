@@ -13,6 +13,8 @@ import { PedidosService } from 'src/app/services/pedidos.service';
 })
 export class ListarPedidosVendasComponent implements OnInit {
 
+  public pedidosGerados: any[] = []
+  public pedidosAguardando: any[] = []
   public pedidos: any[] = []
   public pages: any[] = []
   public pagesNumber: number
@@ -38,7 +40,11 @@ export class ListarPedidosVendasComponent implements OnInit {
     this.pedidosService.find().subscribe((data:any)=>{
       this.pedidos = data
       for(let oneData of data){
-        console.log(oneData)
+        if(oneData.status=="Gerado"){
+          this.pedidosGerados.push(oneData)
+        } else if(oneData.status=="Aguardando aprovação"){
+          this.pedidosAguardando.push(oneData)
+        }
       }
       console.log(data)
     }, (err)=>{
@@ -58,6 +64,7 @@ export class ListarPedidosVendasComponent implements OnInit {
     })
     this.pedidosService.findByPage([0 + "0"]).subscribe((data:any)=>{
       this.atualPage = data
+      console.log('atualPage', data)
     })
   }
 
