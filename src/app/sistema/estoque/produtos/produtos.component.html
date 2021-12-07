@@ -1,7 +1,7 @@
 <div class="row m-0 justify-content-center align-items-center">
     <!-- Pesquisar -->
     <div class="col-4 px-2 p-0 m-0 position-relative">
-        <input class="
+        <input [(ngModel)]="search" (input)="pesquisaProdutos()" class="
         form-control form-control-lg
         border-0
         h-limited
@@ -26,7 +26,7 @@
 
     <!-- Botão Filtro -->
     <div class="col-4 px-2 p-0 m-0">
-        <a class="
+        <a data-bs-toggle="modal" data-bs-target="#filtrarProdutos" class="
         rounded-15
         py-2
         px-4
@@ -84,7 +84,7 @@
 </div>
 
 <!-- Tabela -->
-<div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let produto of produtos">
+<div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let produto of produtosFiltrados">
     <div class="col-1">
         <p>{{ produto.id }}</p>
     </div>

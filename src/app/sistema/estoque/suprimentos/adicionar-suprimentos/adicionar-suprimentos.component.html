@@ -17,20 +17,66 @@
                 </div>
                 <div class="modal-body px-4">
                     <div class="row p-0 m-0 border-bottom pb-4">
-                        <!-- Nome, código, categoria, adicionar -->
-                        <div class="col-12 px-2 m-0 p-0">
-                            <div class="row m-0 p-0">
-                                <!-- Nome -->
-                                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                                    <input class="
+                        <!-- Fornecedor -->
+                        <div *ngFor="let fornecedor of fornecedoresUsuais" class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+                            <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example ">
+                <option selected disabled>Selecione um fornecedor</option>
+                <option
+                  *ngFor="let listaFornecedor of fornecedores"
+                  [value]="listaFornecedor.fantasy_name"
+                >
+                  {{ listaFornecedor.fantasy_name }}
+                </option>
+              </select>
+
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label
+              >
+            </div>
+
+            <!-- Botão Adicionar -->
+            <div class="col-3 px-2 pt-4 p-0 m-0">
+              <a
+                data-bs-toggle="modal"
+                data-bs-target="#adicionarFornecedor"
+                class="
+                  rounded-15
+                  py-1
+                  px-4
+                  bg-custom-success
+                  h-limited-sm
+                  d-flex
+                  justify-content-between
+                  shadow-sm
+                "
+              >
+                <span class="fw-normal my-auto text-truncate text-custom-dark"
+                  >Adicionar</span
+                >
+                <i
+                  class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark"
+                ></i>
+              </a>
+            </div>
+            <!-- Nome, código, categoria, adicionar -->
+            <div class="col-12 px-2 m-0 p-0">
+              <div class="row m-0 p-0">
+                <!-- Nome -->
+                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                  <input
+                    class="
                       form-control
                       h-limited-sm
                       px-4
                       py-3
                       rounded-15
                       shadow-sm
-                    " type="text" placeholder="Nome" formControlName="name" />
-                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label
+                    "
+                    type="text"
+                    placeholder="Nome"
+                    formControlName="name"
+                  />
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                    >Nome</label
                   >
                 </div>
                 <!-- Código -->
@@ -89,37 +135,24 @@
                   <p class="fw-bold text-custom-dark mt-3">Adicionar imagem</p>
                 </div>
               </label>
-                                    <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
-                                </div> -->
+                            <input class="d-none" type="file" id="anexos" accept="image/png, image/jpeg">
+                        </div> -->
 
-                                <!-- Descrição -->
-                                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                                    <textarea class="
+                        <!-- Descrição -->
+                        <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                            <textarea class="
                   form-control form-control-lg
                   px-4
                   py-3
                   rounded-15
                   shadow-sm
                 " placeholder="Descrição" style="height: 150px" formControlName="description"></textarea>
-                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label
               >
             </div>
           </div>
 
           <div class="row m-0 p-0">
-            <!-- Unidade de medida -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="number"
-                placeholder="Unidade de medida"
-                formControlName="unit_metrics"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Unidade de medida</label
-              >
-            </div>
-
             <!-- Quantidade -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
@@ -134,7 +167,7 @@
             </div>
 
             <!-- Preço de custo -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
@@ -175,53 +208,6 @@
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Estoque mínimo</label
               >
-            </div>
-
-            <!-- Fornecedor -->
-            <div
-              *ngFor="let fornecedor of fornecedoresUsuais"
-              class="col-9 px-2 pt-4 p-0 m-0 form-floating"
-            >
-              <select
-                class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm"
-                aria-label="Default select example "
-              >
-                <option selected disabled>Selecione um fornecedor</option>
-                <option
-                  *ngFor="let listaFornecedor of fornecedores"
-                  [value]="listaFornecedor.fantasy_name"
-                >
-                  {{ listaFornecedor.fantasy_name }}
-                </option>
-              </select>
-
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Fornecedor</label
-              >
-            </div>
-
-            <!-- Botão Adicionar -->
-            <div class="col-3 px-2 pt-4 p-0 m-0">
-              <a
-                (click)="adicionarFornecedorUsual()"
-                class="
-                  rounded-15
-                  py-1
-                  px-4
-                  bg-custom-success
-                  h-limited-sm
-                  d-flex
-                  justify-content-between
-                  shadow-sm
-                "
-              >
-                <span class="fw-normal my-auto text-truncate text-custom-dark"
-                  >Adicionar</span
-                >
-                <i
-                  class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark"
-                ></i>
-              </a>
             </div>
           </div>
         </div>
@@ -289,3 +275,4 @@
     </form>
   </div>
 </div>
+<app-adicionar-fornecedores></app-adicionar-fornecedores>

@@ -1,7 +1,7 @@
 <!-- Modal -->
-<div class="modal fade" id="editProdutos" tabindex="-1" aria-labelledby="editProdutosLabel" aria-hidden="true">
+<div class="modal fade" id="adicionarProdutoEstoque" tabindex="-1" aria-labelledby="adicionarProdutoEstoqueLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <form [formGroup]="produtoEditForm">
+        <form [formGroup]="produtoAddForm">
             <!-- Modal content -->
             <div class="modal-content rounded-15 bg-custom-light">
                 <div class="modal-header px-4">
@@ -305,7 +305,7 @@
             </div>
 
             <!-- Fornecedores padrão -->
-            <!-- <div
+            <div
               *ngFor="
                 let fornecedor of fornecedorArray['controls'];
                 let i = index
@@ -345,7 +345,7 @@
                   </option>
                 </select>
               </div>
-            </div> -->
+            </div>
           </div>
 
           <!-- Tributação -->

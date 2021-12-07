@@ -1,7 +1,7 @@
 <div class="row m-0 justify-content-center align-items-center">
     <!-- Pesquisar -->
     <div class="col-4 px-2 p-0 m-0 position-relative">
-        <input class="
+        <input [(ngModel)]="search" (input)="pesquisaProdutos()" class="
         form-control form-control-lg
         border-0
         h-limited
@@ -26,7 +26,7 @@
 
     <!-- Adicionar -->
     <div class="col-1 px-2 p-0 m-0 text-center">
-        <a class="px-2 py-2">
+        <a class="px-2 py-2" data-bs-toggle="modal" data-bs-target="#adicionarProdutoEstoque">
             <i class="
           bi-plus-square-fill
           icon-view
@@ -70,31 +70,32 @@
 </div>
 
 <!-- Tabela -->
-<div class="row m-0 mt-3 border-bottom text-custom-dark" *ngFor="let produto of estoque_produtos">
+<div class="row m-0 mt-3 border-bottom text-custom-dark" *ngFor="let produto of produtosFiltrados">
     <div class="col-1">
-        <p>{{ produto.codigo }}</p>
+        <p>{{ produto.id }}</p>
     </div>
     <div class="col-2">
         <p>{{ produto.nome }}</p>
     </div>
     <div class="col-1">
-        <p>{{ produto.unidade_medida }}</p>
+        <p>{{ produto.unidade }}</p>
     </div>
     <div class="col-1">
-        <p>{{ produto.custo | currency: "BRL" }}</p>
+        <p>{{ produto.custoMedio | currency: "BRL" }}</p>
     </div>
     <div class="col-2">
-        <p>{{ produto.valor_venda | currency: "BRL" }}</p>
+        <p>{{ produto.precoMedio | currency: "BRL" }}</p>
     </div>
     <div class="col-1">
-        <p>{{ produto.estoque }}</p>
+        <p>{{ produto.atual }}</p>
     </div>
     <div class="col-2">
-        <p>{{ produto.total | currency: "BRL" }}</p>
+        <p>{{ produto.margemLucro | currency: "BRL" }}</p>
     </div>
     <div class="col-2 text-end">
-        <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/estoque/detalhe/{{ produto.codigo }}"></i>
-        <i class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" data-bs-toggle="modal" data-bs-target="#editProdutos"></i>
+        <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/estoque/detalhe/{{ produto.id }}"></i>
+        <i class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" (click)="loadProduto(produto)" data-bs-toggle="modal" data-bs-target="#editProdutos"></i>
     </div>
 </div>
-<app-edit-produto-estoque></app-edit-produto-estoque>
+<app-edit-produto-estoque (reload)="getProdutos()"></app-edit-produto-estoque>
+<app-adicionar-produto-estoque (reload)="getProdutos()"></app-adicionar-produto-estoque>

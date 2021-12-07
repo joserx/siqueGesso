@@ -111,6 +111,7 @@ import { EditSuprimentoComponent } from './sistema/estoque/suprimentos/edit-supr
 import { RelatorioProdutosViewComponent } from './sistema/estoque/estoque-produtos/relatorio-produtos-view/relatorio-produtos-view.component';
 import { FiltrarProdutosComponent } from './sistema/estoque/produtos/filtrar-produtos/filtrar-produtos.component';
 import { EditProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/edit-produto-estoque/edit-produto-estoque.component';
+import { AdicionarProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/adicionar-produto-estoque/adicionar-produto-estoque.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -220,6 +221,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     RelatorioProdutosViewComponent,
     FiltrarProdutosComponent,
     EditProdutoEstoqueComponent,
+    AdicionarProdutoEstoqueComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <div class="row m-0 justify-content-center align-items-center">
     <!-- Pesquisar -->
     <div class="col-4 px-2 p-0 m-0 position-relative">
-        <input (keyup)="(pesquisaFornecedores)" class="
+        <input [(ngModel)]="search" (input)="pesquisaFornecedores()" class="
         form-control form-control-lg
         border-0
         h-limited
@@ -59,7 +59,7 @@
 </div>
 
 <!-- Tabela -->
-<div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let fornecedor of fornecedores">
+<div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let fornecedor of fornecedoresFiltrados">
     <div class="col-3">
         <p>{{ fornecedor.fantasy_name }}</p>
     </div>
@@ -81,5 +81,5 @@
 </div>
 
 <app-view-fornecedor></app-view-fornecedor>
-<app-edit-fornecedor></app-edit-fornecedor>
+<app-edit-fornecedor (reload)="getFornecedores()"></app-edit-fornecedor>
 <app-adicionar-fornecedores (reload)="getFornecedores()"></app-adicionar-fornecedores>

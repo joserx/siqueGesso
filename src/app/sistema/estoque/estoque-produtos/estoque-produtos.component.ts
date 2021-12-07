@@ -1,23 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { EditProdutoEstoqueComponent } from './edit-produto-estoque/edit-produto-estoque.component';
+import { ProdutoService } from '../../../services/produto.service';
 
 @Component({
   selector: 'app-estoque-produtos',
   templateUrl: './estoque-produtos.component.html',
-  styleUrls: ['./estoque-produtos.component.scss']
+  styleUrls: ['./estoque-produtos.component.scss'],
 })
 export class EstoqueProdutosComponent implements OnInit {
+  public produtos: any = [];
+  public produtosFiltrados: any = [];
+  public search: string = '';
 
-  public estoque_produtos: any = [
-    { codigo: 1, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
-    { codigo: 2, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
-    { codigo: 3, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
-    { codigo: 4, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
-    { codigo: 5, nome: "Placa cimentícea", unidade_medida: "unidades", custo: 40, valor_venda: 80, estoque: 500, total: 20000 },
-  ]
+  @ViewChild(EditProdutoEstoqueComponent)
+  editProdutoEstoqueComponent: EditProdutoEstoqueComponent;
 
-  constructor() { }
+  constructor(private produtoService: ProdutoService) {}
 
   ngOnInit(): void {
+    this.getProdutos();
+  }
+  pesquisaProdutos() {
+    if (this.search.length > 0)
+      this.produtosFiltrados = this.produtos.filter((produto: any) =>
+        produto.nome.includes(this.search)
+      );
+    else this.produtosFiltrados = this.produtos;
   }
 
+  getProdutos() {
+    this.produtoService.find().subscribe((res) => {
+      this.produtoService.produtos = res;
+      this.produtos = res;
+      this.produtosFiltrados = this.produtos;
+    });
+  }
+
+  loadProduto(produto: any) {
+    this.editProdutoEstoqueComponent.loadForm(produto);
+  }
 }

@@ -8,10 +8,11 @@ import { ProdutoService } from 'src/app/services/produto.service';
   styleUrls: ['./produtos.component.scss'],
 })
 export class ProdutosComponent implements OnInit {
-  editSuprimentoComponent: any;
-
-  produtos: any;
-  produto: any;
+  public editSuprimentoComponent: any;
+  public produtos: any;
+  public produto: any;
+  public produtosFiltrados: any = [];
+  public search: string = '';
 
   constructor(
     private fornecedorService: FornecedorService,
@@ -25,10 +26,18 @@ export class ProdutosComponent implements OnInit {
       });
     this.getProdutos();
   }
+  pesquisaProdutos() {
+    if (this.search.length > 0)
+      this.produtosFiltrados = this.produtos.filter((produtoF: any) =>
+        produtoF.nome.includes(this.search)
+      );
+    else this.produtosFiltrados = this.produtos;
+  }
 
   getProdutos() {
     this.produtoService.find().subscribe((res) => {
       this.produtos = res;
+      this.produtosFiltrados = this.produtos;
     });
   }
 
