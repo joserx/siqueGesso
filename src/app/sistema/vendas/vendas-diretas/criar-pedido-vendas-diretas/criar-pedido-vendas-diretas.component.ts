@@ -14,6 +14,9 @@ import { getDate } from '../../../../../environments/global';
   styleUrls: ['./criar-pedido-vendas-diretas.component.scss'],
 })
 export class CriarPedidoVendasDiretasComponent implements OnInit {
+  public frete: number = 0
+  // public freteTotal: number = (this.frete / this.item.length)*this.item.length
+  public valVenda: number = 0
   public valUnit: number = 0
   public clientes: any[] = []
   public originalClientes: any[] = []
@@ -268,6 +271,27 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     }
   }
 
+  totalProduto(value:any){
+    value.total = (value.valorFrete + value.valorVenda)*value.quantidade
+    this.totalValue(this.item.value)
+  }
+
+  totalFrete(value: number, value2: any = null){
+    for(let item of this.item.value){
+      item.valorFrete = value
+    }
+    this.totalProduto(value2)
+    return value
+  }
+
+  totalValue(value: any){
+    let total: number = 0
+    for(let item of value){
+      total += item.total
+    }
+    return total
+  }
+
   check(data: number): any{
     let pos = this.item.value.map(
       (e: any)=>{return e.codigo}
@@ -280,8 +304,9 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
   // mexendo no frete
   // calcular o frete que é o fretefixo / pelo valor unitário * a quantidade
   changeFrete(event: any){
-
+   this.frete = Number(String(event.target.value).substring(3, String(event.target).length).replace(',', '.'))
   }
+
 
   checkIfChecked(event: any){
     console.log(this.allProdutos)
@@ -297,7 +322,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
             'quantidade': new FormControl(null, [Validators.required]),  
-            'valorUnitario': new FormControl(produto.atual),
+            'valorUnitario': new FormControl(produto.custoMedio),
             'desconto': new FormControl(null),
             'tipoRetirada': new FormControl(''),
             'prevRetirada': new FormControl(null),
@@ -306,8 +331,10 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'endereco': new FormControl(''),
             'enderecoLoja': new FormControl(''),
             'tipoEntrega': new FormControl('', [Validators.required]),
+            'total': new FormControl(null)
           }))
-          this.valUnit += produto.precoMedio
+          this.valVenda += produto.precoMedio
+          this.valUnit += produto.custoMedio
         }
       }
       console.log(this.item)
@@ -334,9 +361,10 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
               return e.codigo
             }).indexOf(codigo), 1
           )
+          this.valVenda -= produto.precoMedio
+          this.valUnit -= produto.custoMedio
         }
       }
-      console.log(this.item)
     }
   }
 

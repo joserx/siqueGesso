@@ -141,7 +141,7 @@
 
 
 <!-- Modal -->
-<!-- Criar pdf -->
+<!-- Selecionar produtos -->
 <div class="modal fade" id="selecionarProdutos" tabindex="-1" aria-labelledby="selecionarProdutosLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <form>
@@ -354,11 +354,11 @@
                 <th scope="row">{{ oneItem.value.codigo }}</th>
                 <td>{{ oneItem.value.produto }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" id="quantidade"  formControlName="quantidade" (keyup)="totalQuanti(this.item.value)">
+                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" id="quantidade"  formControlName="quantidade" (keyup)="totalQuanti(this.item.value)" (keyup)="totalProduto(oneItem.value)">
                 </td>
                 <td>{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
                 <td>
-                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" id="desconto" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" (keyup)="cleanDesconto()" autocomplete="off">
+                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" id="desconto" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" (keyup)="cleanDesconto()" (keyup)="totalProduto(oneItem.value)" autocomplete="off">
                 </td>
                 <td>{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
                 <td>
@@ -373,7 +373,7 @@
                   <input class="form-control form-control-sm" type="date" id="prevRetirada" formControlName="prevRetirada">
                 </td>
                 <!-- Tipo de entrega -->
-                <td>
+                <td class="row">
                   <select #tipoEntrega class="col form-select form-select-sm" id="endereco" formControlName="tipoEntrega">
                     <option value="" disabled selected>Selecionar...</option>
                     <option value="entrega">entrega</option>
@@ -381,14 +381,14 @@
                   </select>
                 </td>
                 <td>
-                  <select *ngIf="tipoEntrega.value=='entrega'" class="col form-select form-select-sm" id="endereco" formControlName="endereco">
-                      <option value="" disabled selected>Selecionar...</option>
-                      <option *ngFor="let endereco of enderecos" value="{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}">{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}</option>
-                  </select>
                   <input *ngIf="tipoEntrega.value=='retirada'" class="form-control form-control-sm" type="text" id="enderecoLoja" formControlName="enderecoLoja" placeholder="Endereco da loja">
+                  <select *ngIf="tipoEntrega.value=='entrega'" class="col form-select form-select-sm" id="endereco" formControlName="endereco">
+                    <option value="" disabled selected>Selecionar...</option>
+                    <option *ngFor="let endereco of enderecos" value="{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}">{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}</option>
+                  </select>
                 </td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" id="valorFrete" formControlName="valorFrete" (keyup)="changeFrete(this.item.value)">
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" id="valorFrete" formControlName="valorFrete" (keyup)="setThisFrete(oneItem.value, $event)" (keyup)="totalProduto(oneItem.value)">
                 </td>
               </tr>
             </tbody>
@@ -472,19 +472,19 @@
                 <p>{{ totalQuanti(item.value) }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ totalQuanti(item.value)*valUnit | currency:'BRL' }}</p>
+                <p>{{ valUnit | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
                 <p>{{ descontoG==null? (changeDesconto(item.value) | currency:'BRL' ): (descontoG | currency:'BRL') }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ (totalQuanti(item.value)*valUnit) - changeDesconto(item.value) | currency:'BRL' }}</p>
+                <p>{{ valVenda | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
                 <p>{{ changeFrete(item.value) | currency:'BRL' }}</p>
               </div>
               <div class="col text-center">
-                <p>{{ (((totalQuanti(item.value)*valUnit) - changeDesconto(item.value)) + changeFrete(item.value)) | currency:'BRL' }}</p>
+                <p>{{ totalValue(item.value) | currency:'BRL' }}</p>
               </div>
             </div>
 
@@ -504,8 +504,8 @@
             <div class="pt-4 px-2 form-floating">
               <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" id="condPagamento" formControlName="condPagamento">
                 <option value="" disabled selected>Selecione uma condição</option>
-                <option value="à vista">À vista</option>
-                <option value="parcelado">Parcelado</option>
+                <option value="Loja 1">À vista</option>
+                <option value="Loja 2">Parcelado</option>
                 <option value="personalizado">Personalizado</option>
               </select>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de pagamento</label>
@@ -586,12 +586,12 @@
         <div class="row mt-3 py-3 pb-5">
 
           <!-- Botão Cancelar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" (click)="cancelarPedido(id)">
+          <!-- <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
             </button>
-          </div>
+          </div> -->
 
           <!-- Botão Gerar pedido -->
           <div class="col-3 px-2 p-0 m-0 d-grid">

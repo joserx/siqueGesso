@@ -263,7 +263,7 @@
                 <td>
                   <input 
                     class="form-control form-control-sm" type="number" 
-                    placeholder="Quantidade" id="quantidade" formControlName="quantidade" (keyup)="totalQuanti(this.item.value)">
+                    placeholder="Quantidade" id="quantidade" formControlName="quantidade" (keyup)="totalProduto(oneItem.value)">
                 </td>
                 <td>
                   {{ oneItem.value.valorUnitario | currency:'BRL'}}
@@ -272,10 +272,10 @@
                   {{ oneItem.value.valorVenda | currency:'BRL' }}
                 </td>
                 <td>
-                  
+                  {{ totalFrete(frete/item.length, oneItem.value) | currency:'BRL'}}
                 </td>
                 <td>
-              
+                  {{ oneItem.value.total | currency:'BRL' }}
                 </td>
               </tr>
             </tbody>
@@ -358,17 +358,17 @@
           </div>
           <div class="col-1 m-0 p-0">
             <p class="fw-bold fs-5">Venda
-            <p>{{ totalQuanti(item.value)*valUnit | currency:'BRL' }}</p>
+            <p>{{ valVenda | currency:'BRL' }}</p>
           </div>
 
           <div class="col-1 m-0 p-0">
             <p class="fw-bold fs-5">Frete
-            <p>{{pedido.frete | currency:'BRL' }}</p>
+            <p>{{ frete | currency:'BRL' }}</p>
           </div>
 
           <div class="col-1 m-0 p-0">
             <p class="fw-bold fs-5">Total
-            <p>{{pedido.total_preco | currency:'BRL' }}</p>
+            <p>{{ totalValue(item.value) | currency:'BRL' }}</p>
           </div>
 
 
