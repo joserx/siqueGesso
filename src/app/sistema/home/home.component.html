@@ -9,11 +9,25 @@
     <div class="container">
 
       <!-- Cards -->
-      <div class="row m-0 my-5 p-0 justify-content-center align-items-center">
+      <!-- <div class="row m-0 my-5 p-0 justify-content-center align-items-center">
         <a class="col-3 mx-3 my-3 p-4 text-center rounded-15 bg-white shadow-sm" *ngFor="let card of cards;" routerLink="{{card.href}}">
           <i class="{{card.icon}} text-custom-dark" style="font-size: 4rem;"></i>
           <h4 class="text-custom-dark fw-normal text-truncate">{{card.nome}}</h4>
         </a>
+      </div> -->
+
+      <!-- banner -->
+      <div class="row m-0 my-5 justify-content-center align-items-center rounded-25">
+        <img src="./assets/banner.png" alt="" class="banner">
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-md-8">
+          <canvas ngChartjs [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType"
+            [inlinePlugins]="inlinePlugin">
+          </canvas>
+        </div>
       </div>
 
     </div>

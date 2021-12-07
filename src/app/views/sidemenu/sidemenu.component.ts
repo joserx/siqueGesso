@@ -13,6 +13,12 @@ export class SidemenuComponent implements OnInit {
 
   public navItems = [
     { nome: 'home', icon: 'bi-house-door', href: '/sistema/home', subMenus: [] },
+    { nome: "Vendas", icon: "bi-shop", href: "/sistema/vendas" },
+    { nome: "Compras", icon: "bi-cart4", href: "/sistema/compras" },
+    { nome: "Estoque", icon: "bi-box-seam", href: "/sistema/estoque" },
+    { nome: "Financeiro", icon: "bi-file-earmark-bar-graph", href: "/sistema/financeiro" },
+    { nome: "Expedição", icon: "bi-truck", href: "/sistema/expedicao" },
+    { nome: "RH", icon: "bi-person-lines-fill", href: "/sistema/rh" },
     { nome: 'Configurações',  icon: 'bi-gear', href: '/sistema/configuracoes'},
     // { nome: 'configuracoes', icon: 'bi-gear', href: null, subMenus: [
     //     { titulo: 'Usuário', descricao: 'Liste, crie, edite ou remova os usuários do sistema.', paginas: [
