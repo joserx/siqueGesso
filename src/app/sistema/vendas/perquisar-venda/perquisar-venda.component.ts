@@ -17,9 +17,12 @@ export class PerquisarVendaComponent implements OnInit {
 
   ngOnInit(): void {
     this.pedidosService.find().subscribe((data:any)=>{
-      this.pedidos = data
-      this.pedidosOriginal = data
-      console.log(data)
+      for(let oneData of data){
+        if(oneData.tipoVenda == 0){
+          this.pedidos.push(oneData)
+          this.pedidosOriginal.push(oneData)
+        }
+      }
     })
   }
   filterBefore = "";

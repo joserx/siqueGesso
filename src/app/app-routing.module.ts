@@ -57,6 +57,8 @@ import { CadastroDeProdutoComponent } from './sistema/config/cadastro-de-categor
 import { CadastroDeProdutoListaComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto-lista/cadastro-de-produto-lista.component';
 import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
 import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-lista/destinacao-da-venda-lista.component';
+import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
+import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
 
 const routes: Routes = [
   {
@@ -161,6 +163,14 @@ const routes: Routes = [
               {
                 path: 'cadastro',
                 component: CriarPedidoVendasDiretasComponent
+              },
+              {
+                path: 'editar/:id',
+                component: EditarVendasDiretasComponent
+              },
+              {
+                path: 'visualizar/:id',
+                component: VisualizarVendasDiretasComponent
               }
             ]
           },

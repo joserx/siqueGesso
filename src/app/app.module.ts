@@ -117,6 +117,9 @@ import { CadastroDeProdutoComponent } from './sistema/config/cadastro-de-categor
 import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-lista/destinacao-da-venda-lista.component';
 import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
 import { NgChartjsModule } from 'ng-chartjs';
+import { FiltrarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/filtrar-vendas-diretas/filtrar-vendas-diretas.component';
+import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
+import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -231,6 +234,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CadastroDeProdutoComponent,
     DestinacaoDaVendaListaComponent,
     DestinacaoDaVendaCadastroComponent,
+    FiltrarVendasDiretasComponent,
+    EditarVendasDiretasComponent,
+    VisualizarVendasDiretasComponent,
     ],
   imports: [
     BrowserModule,

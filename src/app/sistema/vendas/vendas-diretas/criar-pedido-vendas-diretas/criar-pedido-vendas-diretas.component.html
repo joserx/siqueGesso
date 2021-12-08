@@ -111,7 +111,7 @@
         </div>
       </div>
 
-      <form [formGroup]="vendasDiretasForm" (ngSubmit)="sendForm(vendasDiretasForm)">
+      <form [formGroup]="vendasDiretasForm" (ngSubmit)="sendForm(vendasDiretasForm, item)">
 
         <!-- Criar pedido -->
         <div class="row m-0">
@@ -125,7 +125,7 @@
 
           <!-- Loja -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <select #loja (change)="setLojaSelecionada(loja.value)"
+            <select #loja
               class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
               placeholder="Loja" id="loja" formControlName="loja">
               <option value="" disabled selected>Selecione uma Loja</option>
@@ -137,7 +137,7 @@
 
           <!-- Vendedor -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select #vendedor (change)="setVendedorSelecionado(vendedor.value)"
+            <select #vendedor
               class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
               placeholder="Vendedor" id="vendedor" formControlName="vendedor">
               <option value="" disabled selected>Selecione um Vendedor</option>
@@ -435,12 +435,12 @@
         <div class="row mt-3 px-5 py-3 pb-5 justify-content-between">
 
           <!-- Botão Cancelar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button"
+          <div class="col-3 px-2 p-0 m-0 d-grid" routerLink="/sistema/vendas/vendas-diretas/listar">
+            <button type="button" routerLink="/sistema/vendas/vendas-diretas/listar"
               class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
-            </button>
+          </button>
           </div>
 
           <!-- Botão Gerar PDF -->
@@ -457,7 +457,7 @@
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button type="submit"
               class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Gerar pedido</h5>
               <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
             </button>
           </div>

@@ -140,7 +140,7 @@ export class CriarPedidoVendasComponent implements OnInit {
       let timezone = data.value.data.getTimezoneOffset() * 60000
       data.value.data = new Date(data.value.data + timezone).toISOString()
       if(data.valid){
-        data.value.total = Number(String(data.value.total).substring(3, String(data.value.total).length).replace(',','.'))
+        this.totalValue(this.item.value)
         data.value.status="Aguardando aprovação"
         this.pedidoService.create(data.value).subscribe((dt: any)=>{
           console.log(dt)
@@ -148,7 +148,6 @@ export class CriarPedidoVendasComponent implements OnInit {
           for(let OnItem in this.item['value']){
             this.item['value'][OnItem].pedidoId = this.pedidoId
           }
-          this.itensPedidoService.create(data2.value).subscribe((data:any)=>{})
           this.router.navigate(['sistema', 'vendas', 'pedidos'])
           Swal.fire({ 
             title: '<h4>Pedido adicionado !<h4>', 

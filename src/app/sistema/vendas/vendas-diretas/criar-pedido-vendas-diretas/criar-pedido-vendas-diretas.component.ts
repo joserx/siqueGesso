@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { FilialService } from 'src/app/services/filial.service';
+import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RhService } from 'src/app/services/rh.service';
@@ -15,7 +17,7 @@ import { getDate } from '../../../../../environments/global';
 })
 export class CriarPedidoVendasDiretasComponent implements OnInit {
   public frete: number = 0
-  // public freteTotal: number = (this.frete / this.item.length)*this.item.length
+  public pedidoId: number = 0
   public valVenda: number = 0
   public valUnit: number = 0
   public clientes: any[] = []
@@ -54,96 +56,10 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "aguradandoPagamento": new FormControl(''), 
     "linkBoleto": new FormControl(''),
     "linkNf": new FormControl(''),
-    "obs": new FormControl('')
+    "obs": new FormControl(''),
+    "tipoVenda": new FormControl(1),
+    "total": new FormControl(0),
   })
-
-  public lojas: any = [
-    {
-      id: 1,
-      razao_social: 'Loja 1',
-      cnpj: '123456789',
-      cep: '12345-123',
-      endereco: 'Rua Doná Olinda de Albuquerque, 60',
-      complemento: '',
-    },
-    {
-      id: 2,
-      razao_social: 'Loja 2',
-      cnpj: '234234234',
-      cep: '23451-231',
-      endereco: 'Rua Doná Olinda de Albuquerque, 123',
-      complemento: '',
-    },
-    {
-      id: 3,
-      razao_social: 'Loja 3',
-      cnpj: '345345345',
-      cep: '64532-123',
-      endereco: 'Rua Doná Olinda de Albuquerque, 234',
-      complemento: '',
-    },
-  ];
-
-  public fornecedorSelecionado: any = {
-    id: null,
-    razao_social: '',
-    cnpj: '',
-    cep: '',
-    endereco: '',
-    complemento: '',
-  };
-
-  public pedido: any = {
-    quantidade_itens: 2,
-    quantidade_total: 150,
-    venda: 3.00,
-    frete: 2.00,
-    total_preco: 1000.00,
-  };
-  public itensPedido: any = [
-    {
-      codigo: 1,
-      nome: 'Parafuso',
-      quantidade: 100,
-      valor_unitario: 5,
-      valor_venda: 20,
-      frete_unitario: 50,
-      total_por_produto: 500,
-    },
-    {
-      codigo: 2,
-      nome: 'Drywall',
-      quantidade: 200,
-      valor_unitario: 10,
-      valor_venda: 40,
-      frete_unitario: 100,
-      total_por_produto: 1000,
-    },
-  ];
-
-  public produtos: any = [
-    {
-      codigo: 1,
-      nome: 'Parafuso',
-      quantidade: 100,
-      valor_unitario: 5,
-      subtotal: 20.9,
-    },
-    {
-      codigo: 2,
-      nome: 'Drywall',
-      quantidade: 100,
-      valor_unitario: 5,
-      subtotal: 20.9,
-    },
-    {
-      codigo: 3,
-      nome: 'Gesso',
-      quantidade: 100,
-      valor_unitario: 5,
-      subtotal: 20.9,
-    },
-  ];
 
   get item(){
     return this.vendasDiretasForm.get('item') as FormArray
@@ -158,11 +74,12 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     private readonly produtosService: ProdutoService,
     private readonly filialService: FilialService,
     private readonly rhService: RhService,
-    private readonly clienteService: ClientService
+    private readonly clienteService: ClientService,
+    private readonly itensPedidoService: ItensPedidosService,
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.atualizarTotalPedido();
     this.clienteService.find().subscribe((data:any)=>{
       this.clientes = data
       this.originalClientes = data
@@ -192,12 +109,30 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
   }
 
   // submit no vendasDiretasForm
-  sendForm(data: any): void{
+  sendForm(data: any, data2: any): void{
     if(data.valid){
-
+      this.totalValue(this.item.value)
+      this.pedidosService.create(data.value).subscribe((data:any)=>{
+          this.pedidoId = data.id
+          for(let OnItem in this.item['value']){
+            this.item['value'][OnItem].pedidoId = this.pedidoId
+          }
+          this.router.navigate(['sistema', 'vendas-diretas', 'listar'])
+          Swal.fire({ 
+            title: '<h4>Pedido adicionado !<h4>', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px'
+          })
+      })
     }else{
       for(let control in this.vendasDiretasForm['controls']){
         if(this.vendasDiretasForm['controls'][control].status === "INVALID"){
+          console.log(control, this.item, data)
           document.getElementById(control)?.classList.add("invalid")
         }
       }
@@ -272,7 +207,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
   }
 
   totalProduto(value:any){
-    value.total = (value.valorFrete + value.valorVenda)*value.quantidade
+    value.total = (value.valorVenda*value.quantidade)+value.valorFrete
     this.totalValue(this.item.value)
   }
 
@@ -289,6 +224,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     for(let item of value){
       total += item.total
     }
+    this.vendasDiretasForm.get('total')?.setValue(total)
     return total
   }
 
@@ -301,8 +237,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     }
   }
 
-  // mexendo no frete
-  // calcular o frete que é o fretefixo / pelo valor unitário * a quantidade
   changeFrete(event: any){
    this.frete = Number(String(event.target.value).substring(3, String(event.target).length).replace(',', '.'))
   }
@@ -315,9 +249,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     if(input.checked){
       for(let produto of this.allProdutos){
         if(produto.id == codigo){
-          // this.produto.push(new FormGroup({
-          //   'id': new FormControl(codigo)
-          // }))
           this.item.push(new FormGroup({
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
@@ -330,8 +261,8 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'valorVenda': new FormControl(produto.precoMedio),
             'endereco': new FormControl(''),
             'enderecoLoja': new FormControl(''),
-            'tipoEntrega': new FormControl('', [Validators.required]),
-            'total': new FormControl(null)
+            'tipoEntrega': new FormControl(''),
+            'total': new FormControl(0)
           }))
           this.valVenda += produto.precoMedio
           this.valUnit += produto.custoMedio
@@ -380,61 +311,5 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
         timerProgressBar: true
       })
     }
-  }
-
-  public atualizarTotalPedido(): void {
-    this.pedido.total =
-      this.pedido.subtotal -
-      this.pedido.desconto +
-      this.pedido.frete +
-      this.pedido.encargos;
-  }
-
-  public atualizarSubtotalProduto(qtd: any, codigo: any) {
-    // Atualizando o item
-    this.itensPedido.map((itemPedido: any, i: any) => {
-      if (itemPedido.codigo == codigo) {
-        this.itensPedido[i].quantidade = parseInt(qtd.value);
-        this.itensPedido[i].subtotal =
-          this.itensPedido[i].quantidade * this.itensPedido[i].valor_unitario;
-      }
-    });
-
-    // Atualizando o subtotal do pedido
-    let subtotal = 0;
-    this.itensPedido.forEach((item: any) => {
-      subtotal += item.quantidade * item.valor_unitario;
-    });
-    this.pedido.subtotal = subtotal;
-
-    this.atualizarTotalPedido();
-  }
-
-  public setLojaSelecionada(id: any): void {
-    this.lojas.forEach((fornecedor: any) => {
-      if (this.lojas.id == id) {
-        this.fornecedorSelecionado = this.lojas;
-      }
-    });
-  }
-
-  public setVendedorSelecionado(id: any): void {
-    // this.vendedores.forEach((fornecedor: any) => {
-    //   if (this.vendedores.id == id) {
-    //     this.fornecedorSelecionado = this.vendedores;
-    //   }
-    // });
-  }
-
-  //insere o valor unitário no objeto
-  insereValorNoObj(valor: any, codigo: any) {
-    let valorRecebido = valor.target.value;
-
-    this.itensPedido.map((itemPedido: any, i: any) => {
-      if (itemPedido.codigo == codigo) {
-        console.log('item pedido', itemPedido);
-        this.itensPedido[i].valor_unitario = parseInt(valorRecebido);
-      }
-    });
   }
 }
