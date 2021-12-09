@@ -450,6 +450,17 @@ export class CriarPedidoVendasComponent implements OnInit {
     }
   }
 
+  checkClient(event: any){
+    let input = event.target.value
+    for(let cliente of this.clientes){
+      if(input == `${cliente.name} ${cliente.surname}`){
+        this.selectThisCliente(cliente)
+      }else if(input == `${cliente.fantasyName}`){
+        this.selectThisCliente(cliente)
+      }
+    }
+  }
+
   selectThisCliente(value: any){
     let addresses = []
     addresses = value.addresses
@@ -487,5 +498,19 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.descontoG = 0;
     }
   }
+
+  // selectThisClienteBlur(value: string){
+  //   let thisCliente: any[] = []
+  //   for(let cliente of this.clientes){
+  //     if(cliente.name!=null && cliente.surname!=null){
+  //       thisCliente = cliente 
+  //       this.showSign = false
+  //     }else{
+  //       thisCliente = cliente 
+  //       this.showSign = false
+  //     }
+  //     this.enderecos = cliente.addresses
+  //   }
+  // }
 
 }

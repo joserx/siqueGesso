@@ -579,4 +579,15 @@ export class EditarPedidoComponent implements OnInit {
     }
   }
 
+  checkClient(event: any){
+    let input = event.target.value
+    for(let cliente of this.clientes){
+      if(input == `${cliente.name} ${cliente.surname}`){
+        this.selectThisCliente(cliente)
+      }else if(input == `${cliente.fantasyName}`){
+        this.selectThisCliente(cliente)
+      }
+    }
+  }
+
 }

@@ -8,6 +8,8 @@ import { FilialService } from 'src/app/services/filial.service';
 import { RhService } from 'src/app/services/rh.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { ClientService } from 'src/app/services/client.service';
+import { CorreiosService } from 'src/app/services/correios.service';
+import { BrazilValidator } from 'src/app/_helpers/brasil';
 
 @Component({
   selector: 'app-editar-vendas-diretas',
@@ -16,8 +18,18 @@ import { ClientService } from 'src/app/services/client.service';
 })
 export class EditarVendasDiretasComponent implements OnInit {
 
+
+  /* 
+  
+  ver o bug de checar a quantidade de produto no estoque feito
+  ver o esquema de subtrair o estoque
+  
+  */
+
+  public dados: any[] = []
+  public currentItem: any[] = []
+  public motoristas: any[] = []
   public id: number
-  public pedidoId: number = 0
   public getDate: any = getDate;
   public filial: any [] = []
   public vendedores: any[] = []
@@ -37,11 +49,11 @@ export class EditarVendasDiretasComponent implements OnInit {
     "cliente": new FormControl('', [Validators.required]),
     "condPagamento": new FormControl('', [Validators.required]),
     "tabPreco": new FormControl(''),
-    "valorFreteEntrega": new FormControl(''),
+    "valorFreteEntrega": new FormControl(0),
     "item": new FormArray([], [Validators.required]), // a fazer
     'produto': new FormArray([]),
-    "cep": new FormControl('', [Validators.required]),
-    "endereço": new FormControl('', [Validators.required]),
+    "cep": new FormControl('', [BrazilValidator.isValidCEP()]),
+    "endereco": new FormControl('', [Validators.required]),
     "numero": new FormControl('', [Validators.required]),
     "bairro": new FormControl('', [Validators.required]),
     "cidade": new FormControl('', [Validators.required]),
@@ -66,6 +78,7 @@ export class EditarVendasDiretasComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly produtosService: ProdutoService,
     private readonly clienteService: ClientService,
+    private readonly correiosService: CorreiosService
   ) { }
 
   ngOnInit(): void {
@@ -79,6 +92,9 @@ export class EditarVendasDiretasComponent implements OnInit {
         if(oneData.role.toLowerCase().substring(0,8)=="vendedor"){
           this.vendedores.push(oneData)
         }
+        if(oneData.role.toLowerCase(0,9)=="motorista"){
+          this.motoristas.push(oneData)
+        }
       }
     })
     this.produtosService.find().subscribe((data:any)=>{
@@ -91,8 +107,8 @@ export class EditarVendasDiretasComponent implements OnInit {
       this.originalClientes = data
     })
     this.pedidosService.findOne(this.id).subscribe((data: any)=>{
-      console.log(data)
-      this.vendasDiretasForm.get("data")?.setValue(data.data.substring(0,10))
+      this.dados = data.item
+      this.vendasDiretasForm.get("data")?.setValue(data.data==null? null:data.data.substring(0,10))
       this.vendasDiretasForm.get("loja")?.setValue(data.loja)
       this.vendasDiretasForm.get("vendedor")?.setValue(data.vendedor)
       this.vendasDiretasForm.get("cnpj")?.setValue(data.cnpj)
@@ -101,39 +117,41 @@ export class EditarVendasDiretasComponent implements OnInit {
       this.vendasDiretasForm.get("tabPreco")?.setValue(data.tabPreco)
       this.vendasDiretasForm.get("valorFreteEntrega")?.setValue(data.valorFreteEntrega)
       this.vendasDiretasForm.get("cep")?.setValue(data.cep)
-      this.vendasDiretasForm.get("endereço")?.setValue(data.endereço)
+      this.vendasDiretasForm.get("endereco")?.setValue(data.endereco)
       this.vendasDiretasForm.get("numero")?.setValue(data.numero)
       this.vendasDiretasForm.get("bairro")?.setValue(data.bairro)
       this.vendasDiretasForm.get("cidade")?.setValue(data.cidade)
       this.vendasDiretasForm.get("complemento")?.setValue(data.complemento)
       this.vendasDiretasForm.get("motorista")?.setValue(data.motorista)
       this.vendasDiretasForm.get("placa")?.setValue(data.placa)
-      this.vendasDiretasForm.get("previsaoEntrega")?.setValue(data.previsaoEntrega.substring(0,10))
+      this.vendasDiretasForm.get("previsaoEntrega")?.setValue(data.previsaoEntrega==null? null:data.previsaoEntrega.substring(0,10))
       this.vendasDiretasForm.get("meioPagamento")?.setValue(data.meioPagamento)
-      this.vendasDiretasForm.get("dataVencimento")?.setValue(data.dataVencimento.substring(0,10))
+      this.vendasDiretasForm.get("dataVencimento")?.setValue(data.dataVencimento==null? null:data.dataVencimento.substring(0,10))
       this.vendasDiretasForm.get("aguradandoPagamento")?.setValue(data.aguradandoPagamento)
       this.vendasDiretasForm.get("linkBoleto")?.setValue(data.linkBoleto)
       this.vendasDiretasForm.get("linkNf")?.setValue(data.linkNf)
       this.vendasDiretasForm.get("obs")?.setValue(data.obs)
-      for(let item in data.item){
+      for(let item of data.item){
+        console.log(item)
         this.item.push(new FormGroup({
-          'pedidoId': new FormControl(data.item[item].id),
-          'codigo': new FormControl(data.item[item].codigo),
-          'produto': new FormControl(data.item[item].produto),
-          'quantidade': new FormControl(data.item[item].quantidade, [Validators.required]),  
-          'valorUnitario': new FormControl(Number(data.item[item].valorUnitario)),
-          'desconto': new FormControl(Number(data.item[item].desconto)),
-          'tipoRetirada': new FormControl(data.item[item].tipoRetirada),
-          'prevRetirada': new FormControl(data.item[item].prevRetirada==!null? data.item[item].prevRetirada.substring(10,0):null),
-          'valorFrete': new FormControl(Number(data.item[item].valorFrete)),
-          'valorVenda': new FormControl(Number(data.item[item].valorVenda)),
-          'endereco': new FormControl(data.item[item].endereco),
-          'enderecoLoja': new FormControl(data.item[item].enderecoLoja),
-          'tipoEntrega': new FormControl(data.item[item].tipoEntrega),
-          'total': new FormControl(data.item[item].total)
+          'id': new FormControl(item.id),
+          'codigo': new FormControl(item.codigo),
+          'produto': new FormControl(item.produto),
+          'quantidade': new FormControl(item.quantidade, [Validators.required]),  
+          'valorUnitario': new FormControl(Number(item.valorUnitario)),
+          'desconto': new FormControl(Number(item.desconto)),
+          'tipoRetirada': new FormControl(item.tipoRetirada),
+          'prevRetirada': new FormControl(item.prevRetirada==!null? item.prevRetirada.substring(10,0):null),
+          'valorFrete': new FormControl(Number(item.valorFrete)),
+          'valorVenda': new FormControl(Number(item.valorVenda)),
+          'endereco': new FormControl(item.endereco),
+          'enderecoLoja': new FormControl(item.enderecoLoja),
+          'tipoEntrega': new FormControl(item.tipoEntrega),
+          'total': new FormControl(item.total),
+          'estoque': new FormControl(item.estoque)
         }))
-        this.valUnit += data.item[item].valorUnitario
-        this.valVenda += data.item[item].valorVenda
+        this.valUnit += item.valorUnitario
+        this.valVenda += item.valorVenda
       }
     })
     for(let control in this.vendasDiretasForm['controls']){
@@ -156,24 +174,21 @@ export class EditarVendasDiretasComponent implements OnInit {
   // submit no vendasDiretasForm
   sendForm(data: any, data2: any): void{
     if(data.valid){
-      this.totalValue(this.item.value)
-      this.pedidosService.update(this.id ,data.value).subscribe((data:any)=>{
-          this.pedidoId = data.id
-          for(let OnItem in this.item['value']){
-            this.item['value'][OnItem].pedidoId = this.pedidoId
-          }
-          this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
-          Swal.fire({ 
-            title: '<h4>Pedido adicionado !<h4>', 
-            icon: 'success', 
-            toast: true, 
-            position: 'top', 
-            showConfirmButton: false, 
-            timer: 2000, 
-            timerProgressBar: true,
-            width: '500px'
-          })
-      })
+      // Atualizar número de estoque
+        this.totalValue(this.item.value)
+        this.pedidosService.update(this.id ,data.value).subscribe((data:any)=>{
+            this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
+            Swal.fire({ 
+              title: '<h4>Pedido adicionado !<h4>', 
+              icon: 'success', 
+              toast: true, 
+              position: 'top', 
+              showConfirmButton: false, 
+              timer: 2000, 
+              timerProgressBar: true,
+              width: '500px'
+            })
+        })
     }else{
       for(let control in this.vendasDiretasForm['controls']){
         if(this.vendasDiretasForm['controls'][control].status === "INVALID"){
@@ -297,8 +312,10 @@ export class EditarVendasDiretasComponent implements OnInit {
             'endereco': new FormControl(''),
             'enderecoLoja': new FormControl(''),
             'tipoEntrega': new FormControl(''),
-            'total': new FormControl(0)
+            'total': new FormControl(0),
+            'estoque': new FormControl(produto.atual)
           }))
+          console.log(this.item.value)
           this.valVenda += produto.precoMedio
           this.valUnit += produto.custoMedio
         }
@@ -343,7 +360,7 @@ export class EditarVendasDiretasComponent implements OnInit {
     }
   }
 
-  calcelPedido(){
+  cancelPedido(){
 
     Swal.fire({
       title: 'Você gostaria de cancelar este pedido ?',
@@ -382,6 +399,49 @@ export class EditarVendasDiretasComponent implements OnInit {
       }
     })
     
+  }
+
+  changeAddress(event: any) {
+    let cep: string = event.target.value;
+    cep = cep.replace('-', '');
+
+    this.correiosService.consultaCep(cep).subscribe((data: any) => {
+      if (data.cep) {
+        this.vendasDiretasForm.get('endereco')?.setValue(data.logradouro)
+        this.vendasDiretasForm.get('bairro')?.setValue(data.bairro)
+        this.vendasDiretasForm.get('cidade')?.setValue(data.localidade)
+      }
+    })
+  }
+
+  checkClient(event: any){
+    let input = event.target.value
+    for(let cliente of this.clientes){
+      if(input == `${cliente.name} ${cliente.surname}`){
+        this.selectThisCliente(cliente)
+      }else if(input == `${cliente.fantasyName}`){
+        this.selectThisCliente(cliente)
+      }
+    }
+  }
+
+  calcEstoque(data: any, event: any){
+    console.log(data)
+    let input = Number(event.target.value)
+    if(Number(data.value.estoque)<input){
+      data.controls.quantidade.setValue(null)
+      Swal.fire({ 
+        title: '<h4>Estoque insuficiente</h4>', 
+        text: `A quantidade digitada passou da quantidade de estoque !`,
+        icon: 'error',  
+        showConfirmButton: true, 
+        confirmButtonText: 'Comprar mais',
+      }).then((result: any)=>{
+        if(result.isConfirmed){
+          this.router.navigate(['sistema', 'estoque'])
+        }
+      })
+    }
   }
 
 }

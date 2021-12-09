@@ -161,7 +161,7 @@
 
           <!-- CNPJ -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+            <input mask="00.000.000/0000-00" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="CNPJ" id="cnpj" formControlName="cnpj">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
           </div>
@@ -169,7 +169,7 @@
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="Nome do Cliente" id="cliente" formControlName="cliente" autocomplete="off"
-              (keyup)="filtrarCliente($event)">
+              (keyup)="filtrarCliente($event)" (keyup)="checkClient($event)">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Cliente</label>
             <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
               <ul class="drivers-list list-unstyled">
@@ -263,7 +263,7 @@
                 <td>
                   <input 
                     class="form-control form-control-sm" type="number" 
-                    placeholder="Quantidade" id="quantidade" formControlName="quantidade" (keyup)="totalProduto(oneItem.value)">
+                    placeholder="Quantidade" id="quantidade" formControlName="quantidade" (keyup)="totalProduto(oneItem.value)" (keyup)="calcEstoque(oneItem, $event)">
                 </td>
                 <td>
                   {{ oneItem.value.valorUnitario | currency:'BRL'}}
@@ -289,16 +289,15 @@
             <h4>Dados de Entrega</h4>
           </div>
         </div>
-
         <div class="row">
           <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+            <input mask="00000-000" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" (blur)="changeAddress($event)"
               placeholder="CEP" id="cep" formControlName="cep">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
           </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Endereço" id="endereço" formControlName="endereço">
+              placeholder="Endereço" id="endereco" formControlName="endereco">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
           </div>
           <div class="col-2 px-2 pt-4 p-0 m-0 ms-5 form-floating">
@@ -329,18 +328,23 @@
 
         <div class="row m-0 mt-3  py-2 d-flex justify-content-between  border-bottom border-top">
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="Motorista" id="motorista" formControlName="motorista">
+            <select #motorista
+                class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
+                placeholder="Motorista" id="motorista" formControlName="motorista">
+                <option value="" disabled selected>Selecione um Motorista</option>
+                <option *ngFor="let motorista of motoristas;" value="{{motorista.name}} {{motorista.surname}}">{{motorista.name}} {{motorista.surname}}
+                </option>
+              </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
           </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+            <input mask="AAA-0A00" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
               placeholder="palca" id="placa" formControlName="placa">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
           </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 me-2 form-floating">
             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Previsão de Entrega" [max]="getDate()" id="previsaoEntrega" formControlName="previsaoEntrega">
+              placeholder="Previsão de Entrega" id="previsaoEntrega" formControlName="previsaoEntrega">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Previsão de Entrega</label>
           </div>
         </div>
@@ -393,13 +397,13 @@
           </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
-              placeholder="Data de Vencimento" [max]="getDate()" id="dataVencimento" formControlName="dataVencimento">
+              placeholder="Data de Vencimento" id="dataVencimento" formControlName="dataVencimento">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Vencimento</label>
           </div>
           <div class="col-4 px-2 pt-4 p-0 m-0 me-2 form-floating">
             <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
               type="text" placeholder="Meio de Pagamento" id="aguradandoPagamento" formControlName="aguradandoPagamento">
-              <option value="" disabled selected>Aguardando Pagamento</option>
+              <option value="" disabled selected>Status do pagamento</option>
               <option value="7">7 Dias</option>
               <option value="30">30 Dias</option>
               <option value="90">90 Dias</option>
@@ -435,12 +439,12 @@
         <div class="row mt-3 px-5 py-3 pb-5 justify-content-between">
 
           <!-- Botão Cancelar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid" routerLink="/sistema/vendas/vendas-diretas/listar">
-            <button type="button" routerLink="/sistema/vendas/vendas-diretas/listar"
-              class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button type="button"
+              class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" (click)="cancelPedido()">
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
-          </button>
+            </button>
           </div>
 
           <!-- Botão Gerar PDF -->

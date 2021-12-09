@@ -287,7 +287,7 @@
 
           <!-- Dados do cliente -->
           <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cliente"  id="cliente" formControlName="cliente" (keyup)="filtrarCliente($event)" autocomplete="off">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cliente"  id="cliente" formControlName="cliente" (keyup)="filtrarCliente($event)" (keyup)="checkClient($event)" autocomplete="off">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dados do cliente</label>
             <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
               <ul class="drivers-list list-unstyled">

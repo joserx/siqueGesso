@@ -60,7 +60,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="align-items-center" *ngFor="let pedidos of pedidos">
+            <tr class="align-items-center" *ngFor="let pedidos of atualPage">
               <th scope="row justify-content-center">{{ pedidos.id }}</th>
               <td>{{ pedidos.created_at | date }}</td>
               <td>{{ pedidos.loja }}</td>
@@ -77,6 +77,21 @@
         </table>
       </div>
       <!-- /Tabela de contas -->
+      <div class="col-12 row mt-3 d-flex justify-content-around">
+        <div class="col-3 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0" (click)="anterior()" [class.noActiveButton]="this.atualPageNumber == 0">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+          </button>
+        </div>
+        <div class="col-1 d-flex justify-content-end">
+          <p class="h3 fw-normal text-custom-dark">{{atualPageNumber + 1}}/{{pagesNumber}}</p>
+        </div>
+        <div class="col-3 row m-auto">
+          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0" (click)="proximo()" [class.noActiveButton]="this.atualPageNumber == (pagesNumber - 1)">
+            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Proximo</h5>
+          </button>
+        </div>
+      </div> 
     </div>
   </div>
 </div>

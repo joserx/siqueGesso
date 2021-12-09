@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
+import { CorreiosService } from 'src/app/services/correios.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RhService } from 'src/app/services/rh.service';
+import { BrazilValidator } from 'src/app/_helpers/brasil';
 import Swal from 'sweetalert2';
 import { getDate } from '../../../../../environments/global';
 
@@ -16,6 +18,7 @@ import { getDate } from '../../../../../environments/global';
   styleUrls: ['./criar-pedido-vendas-diretas.component.scss'],
 })
 export class CriarPedidoVendasDiretasComponent implements OnInit {
+  public motoristas: any[] = []
   public frete: number = 0
   public pedidoId: number = 0
   public valVenda: number = 0
@@ -39,11 +42,11 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "cliente": new FormControl('', [Validators.required]), 
     "condPagamento": new FormControl('', [Validators.required]), 
     "tabPreco": new FormControl(''), 
-    "valorFreteEntrega": new FormControl(''), 
+    "valorFreteEntrega": new FormControl(null), 
     "item": new FormArray([], [Validators.required]), 
     'produto': new FormArray([]),
-    "cep": new FormControl('', [Validators.required]), 
-    "endereço": new FormControl('', [Validators.required]), 
+    "cep": new FormControl('', [BrazilValidator.isValidCEP()]), 
+    "endereco": new FormControl('', [Validators.required]), 
     "numero": new FormControl('', [Validators.required]), 
     "bairro": new FormControl('', [Validators.required]), 
     "cidade": new FormControl('', [Validators.required]), 
@@ -75,8 +78,8 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     private readonly filialService: FilialService,
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
-    private readonly itensPedidoService: ItensPedidosService,
     private readonly router: Router,
+    private readonly correiosService: CorreiosService
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +91,9 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
       for(let oneData of data){
         if(oneData.role.toLowerCase().substring(0,8)=="vendedor"){
           this.vendedores.push(oneData)
+        }
+        if(oneData.role.toLowerCase(0,9)=="motorista"){
+          this.motoristas.push(oneData)
         }
       }
     })
@@ -111,13 +117,14 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
   // submit no vendasDiretasForm
   sendForm(data: any, data2: any): void{
     if(data.valid){
+      console.log(data.value)
       this.totalValue(this.item.value)
       this.pedidosService.create(data.value).subscribe((data:any)=>{
           this.pedidoId = data.id
           for(let OnItem in this.item['value']){
             this.item['value'][OnItem].pedidoId = this.pedidoId
           }
-          this.router.navigate(['sistema', 'vendas-diretas', 'listar'])
+          this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
           Swal.fire({ 
             title: '<h4>Pedido adicionado !<h4>', 
             icon: 'success', 
@@ -262,7 +269,8 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'endereco': new FormControl(''),
             'enderecoLoja': new FormControl(''),
             'tipoEntrega': new FormControl(''),
-            'total': new FormControl(0)
+            'total': new FormControl(0),
+            'estoque': new FormControl(produto.atual)
           }))
           this.valVenda += produto.precoMedio
           this.valUnit += produto.custoMedio
@@ -309,6 +317,87 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
         showConfirmButton: false, 
         timer: 2000, 
         timerProgressBar: true
+      })
+    }
+  }
+
+  changeAddress(event: any) {
+    let cep: string = event.target.value;
+    cep = cep.replace('-', '');
+
+    this.correiosService.consultaCep(cep).subscribe((data: any) => {
+      if (data.cep) {
+        this.vendasDiretasForm.get('endereco')?.setValue(data.logradouro)
+        this.vendasDiretasForm.get('bairro')?.setValue(data.bairro)
+        this.vendasDiretasForm.get('cidade')?.setValue(data.localidade)
+      }
+    })
+  }
+
+  cancelPedido(){
+
+    Swal.fire({
+      title: 'Você gostaria de cancelar este pedido ?',
+      text: 'Ao cancelar este pedido, todos os dados digitados nesta tela serão descartados!',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Sim',
+      denyButtonText: `Não`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
+        Swal.fire({ 
+          title: '<h4>Pedido cancelado com sucesso!</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true,
+          width: '500px'
+        })
+      } else if (result.isDenied) {
+        Swal.fire({ 
+          title: '<h4>O pedido não foi cancelado!</h4>', 
+          icon: 'info', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true ,
+          width: '500px'
+        })
+      }
+    })
+    
+  }
+
+  checkClient(event: any){
+    let input = event.target.value
+    for(let cliente of this.clientes){
+      if(input == `${cliente.name} ${cliente.surname}`){
+        this.selectThisCliente(cliente)
+      }else if(input == `${cliente.fantasyName}`){
+        this.selectThisCliente(cliente)
+      }
+    }
+  }
+
+  calcEstoque(data: any, event: any){
+    let input = Number(event.target.value)
+    if(Number(data.value.estoque)<input){
+      data.controls.quantidade.setValue(null)
+      Swal.fire({ 
+        title: '<h4>Estoque insuficiente</h4>', 
+        text: `A quantidade digitada passou da quantidade de estoque !`,
+        icon: 'error',  
+        showConfirmButton: true, 
+        confirmButtonText: 'Comprar mais',
+      }).then((result: any)=>{
+        if(result.isConfirmed){
+          this.router.navigate(['sistema', 'estoque'])
+        }
       })
     }
   }

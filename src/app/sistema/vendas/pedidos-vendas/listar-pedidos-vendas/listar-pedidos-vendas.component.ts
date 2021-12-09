@@ -20,7 +20,6 @@ export class ListarPedidosVendasComponent implements OnInit {
   public pagesNumber: number
   public atualPageNumber: number = 0
   public atualPage: any[] = []
-  public dados = { gerados: { valor: 100000, qtd: 72 }, digitacao: { valor: 20000, qtd: 10 } }
 
   constructor(
     private readonly pedidosService: PedidosService
