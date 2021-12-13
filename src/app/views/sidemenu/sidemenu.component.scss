@@ -1,12 +1,14 @@
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 180px;
+  max-width: 180px;
   transition: all 0.4s;
   height: 100vh;
+  position: absolute;
+  left: -20rem;
 }
 
 #sidebar.hide {
-  margin-left: -300px;
+  left: 5rem;
 }
 
 #sidebar ul.components {
@@ -24,5 +26,18 @@ a[data-toggle="collapse"] {
   top: 50%;
   right: 20%;
   transform: translateY(-50%);
+}
+
+.nav-item{
+  height: 3.5rem;
+}
+
+.nav-title{
+  height: 3.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
 }
 
