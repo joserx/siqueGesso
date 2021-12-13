@@ -18,6 +18,9 @@ export class ProdutoService {
   create(data: any) {
     return this.http.post(environment.apiUrl + 'produtos', data);
   }
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}produtos/${id}`);
+  }
   update(id: number, data: any) {
     return this.http.patch(environment.apiUrl + 'produtos/' + id, data);
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EditProdutoEstoqueComponent } from './edit-produto-estoque/edit-produto-estoque.component';
 import { ProdutoService } from '../../../services/produto.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estoque-produtos',
@@ -38,5 +39,39 @@ export class EstoqueProdutosComponent implements OnInit {
 
   loadProduto(produto: any) {
     this.editProdutoEstoqueComponent.loadForm(produto);
+  }
+  delete(produto: any) {
+    Swal.fire({
+      title: `Deseja deletar ${produto.nome}?`,
+      icon: 'question',
+      showConfirmButton: true,
+      confirmButtonText: 'Confirmar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then((res) => {
+      if (res.isConfirmed)
+        this.produtoService.delete(produto.id).subscribe(() => {
+          this.getProdutos();
+          return Swal.fire({
+            title: 'Fornecedor deletado!',
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+        });
+      else
+        Swal.fire({
+          title: 'Ação cancelada!',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+    });
   }
 }

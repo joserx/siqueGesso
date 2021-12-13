@@ -1,0 +1,271 @@
+<!-- Modal -->
+<div class="modal fade" id="viewPedido" tabindex="-1" aria-labelledby="viewProdutosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <form [formGroup]="pedidoCompraForm">
+            <!-- Modal content -->
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="viewPedidosLabel">
+                        Dados do Pedido
+                    </h5>
+                    <button type="button" class="btn-close" #close data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <!-- Tributação -->
+                    <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+                        <div class="col-12 px-2 m-0 p-0">
+                            <h5 class="fw-bold text-custom-dark m-0 p-0">Dados Gerais</h5>
+                        </div>
+
+                        <!-- Origem do produto conforme ICMS -->
+                        <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                            <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" formControlName="data">
+                <option selected disabled>Selecione uma origem</option>
+                <option value="origem1">origem1</option>
+                <option value="origem2">origem2</option>
+                <option value="origem3">origem3</option>
+              </select>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Origem do produto conforme ICMS</label
+              >
+            </div>
+
+            <!-- NCM -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Loja"
+                formControlName="id"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Loja</label
+              >
+            </div>
+
+            <!-- CEST -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="vendedor"
+                formControlName="data"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Vendedor</label
+              >
+            </div>
+
+            <!-- Tributos -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="cliente"
+                formControlName="fornecedor"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >cliente</label
+              >
+            </div>
+
+            <!-- Valor base ICMS ST para retenção -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="cond_pagamento"
+                formControlName="razaoSocial"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >cond_pagamento</label
+              >
+            </div>
+
+            <!-- Valor ICMS ST para retenção -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="pag_personalizado"
+                formControlName="cnpj"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >pag_personalizado</label
+              >
+            </div>
+
+            <!-- Valor ICMS próprio do substituto -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="tab_preco"
+                formControlName="cep"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >tab_preco</label
+              >
+            </div>
+
+            <!-- Código de exceção da TIPI -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="tab_personalizado"
+                formControlName="endereco"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >tab_personalizado</label
+              >
+            </div>
+
+            <!-- Valor PIS fixo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Desconto"
+                formControlName="complemento"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Desconto</label
+              >
+            </div>
+
+            <!-- Valor COFINS fixo -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Tipo Entrega"
+                formControlName="subtotal"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Tipo Entrega</label
+              >
+            </div>
+          </div>
+
+          <!-- Características -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Valor</h5>
+            </div>
+
+            <!-- Descrição -->
+            <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Descrição"
+                formControlName="desconto"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Subtotal</label
+              >
+            </div>
+
+            <!-- Largura -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Largura"
+                formControlName="frete"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Desconto</label
+              >
+            </div>
+
+            <!-- Altura -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Altura"
+                formControlName="encargos"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Frete</label
+              >
+            </div>
+
+            <!-- Peso -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Peso"
+                formControlName="valorTotal"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Encargos</label
+              >
+            </div>
+
+            <!-- Itens por caixa -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Itens por caixa"
+                formControlName="condPagamento"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Total da Compra</label
+              >
+            </div>
+
+            <!-- Itens por caixa -->
+            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Itens por caixa"
+                formControlName="meioPag"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Total da Compra</label
+              >
+            </div>
+            <!-- Informações adicionais -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <textarea
+                class="
+                  form-control form-control-lg
+                  px-4
+                  py-3
+                  rounded-15
+                  shadow-sm
+                "
+                placeholder="Informações adicionais"
+                style="height: 150px"
+                formControlName="obs"
+              ></textarea>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Observações</label
+              >
+            </div>
+
+            <!-- Fornecedores padrão -->
+            <!-- <div *ngFor="let fornecedor of fornecedorArray['controls']; let i = index" formArrayName="fornecedores">
+              <div [formGroupName]="i" class="col-11 px-2 pt-4 p-0 m-0 d-flex align-items-center form-floating">
+                <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" formControlName="id">
+                  <option selected disabled>Selecione um fornecedor</option>
+                  <option *ngFor="let fornecedor of fornecedores" value="{{fornecedor.id}}">{{fornecedor.fantasy_name}}</option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer"></div>
+        <!-- /Modal footer -->
+      </div>
+      <!-- /Modal content -->
+    </form>
+  </div>
+</div>
