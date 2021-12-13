@@ -12,7 +12,7 @@ export class SidemenuComponent implements OnInit {
   public menuActive = '';
 
   public navItems = [
-    { nome: 'home', icon: 'bi-house-door', href: '/sistema/home', subMenus: [] },
+    { nome: 'Home', icon: 'bi-house-door', href: '/sistema/home', subMenus: [] },
     { nome: "Vendas", icon: "bi-shop", href: "/sistema/vendas" },
     { nome: "Compras", icon: "bi-cart4", href: "/sistema/compras" },
     { nome: "Estoque", icon: "bi-box-seam", href: "/sistema/estoque" },
@@ -67,6 +67,14 @@ export class SidemenuComponent implements OnInit {
         this.router.navigateByUrl(href);
       }
     }
+  }
+
+  showMenu(){
+    this.menu = true
+  }
+
+  hideMenu(){
+    this.menu = false
   }
 
 }
