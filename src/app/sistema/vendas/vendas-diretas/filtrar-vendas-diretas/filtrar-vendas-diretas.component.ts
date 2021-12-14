@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos.service';
 
 @Component({
-  selector: 'app-filtrar-vendas',
-  templateUrl: './filtrar-vendas.component.html',
-  styleUrls: ['./filtrar-vendas.component.scss']
+  selector: 'app-filtrar-vendas-diretas',
+  templateUrl: './filtrar-vendas-diretas.component.html',
+  styleUrls: ['./filtrar-vendas-diretas.component.scss']
 })
-export class FiltrarVendasComponent implements OnInit {
+export class FiltrarVendasDiretasComponent implements OnInit {
 
   constructor(
     private readonly pedidosService: PedidosService
@@ -18,7 +18,7 @@ export class FiltrarVendasComponent implements OnInit {
   ngOnInit(): void {
     this.pedidosService.find().subscribe((data:any)=>{
       for(let oneData of data){
-        if(oneData.tipoVenda == 0){
+        if(oneData.tipoVenda == 1){
           this.pedidos.push(oneData)
           this.pedidosOriginal.push(oneData)
         }
@@ -108,7 +108,7 @@ export class FiltrarVendasComponent implements OnInit {
 
   filterBeforeTotal = 0;
   filtrarTotal(event : any) {
-    let str = Number((event.target.value.substring(3,event.target.value.length).replace(",", ".")).replace(".", ""));
+    let str = Number((event.target.value.substring(3,event.target.value.length).replace(",", ".")));
     str.toFixed(2)
     if(Number(str) != 0) {
       if(String(str).length > String(this.filterBeforeTotal).length) {
@@ -124,20 +124,4 @@ export class FiltrarVendasComponent implements OnInit {
     }
   }
 
-  filterBeforeStatus = "";
-  filtrarStatus(event : any) {
-    let str = event.target.value;
-    if(str != '') {
-      if(str.length > this.filterBeforeStatus.length) {
-        this.pedidos = this.pedidosOriginal.filter((user : any) => `${user.status}`.toUpperCase().includes(str.toUpperCase()))
-        this.filterBeforeStatus = str
-      } else {
-        this.pedidos = this.pedidosOriginal;
-        this.pedidos = this.pedidosOriginal.filter((user : any) => `${user.status}`.toUpperCase().includes(str.toUpperCase()))
-        this.filterBeforeStatus = str
-      }
-    } else {
-      this.pedidos = this.pedidosOriginal;
-    }
-  }
 }

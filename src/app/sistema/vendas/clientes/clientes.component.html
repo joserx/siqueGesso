@@ -153,7 +153,7 @@
 
               <!-- Inscrição Estadual -->
               <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="subcription" [class.invalid]="clienteForm.controls.subcription.invalid && (clienteForm.controls.subcription.dirty || clienteForm.controls.subcription.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                <input formControlName="subscription" [class.invalid]="clienteForm.controls.subscription.invalid && (clienteForm.controls.subscription.dirty || clienteForm.controls.subscription.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
                   type="text" placeholder="Inscrição Estadual">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição Estadual</label>
               </div>
@@ -225,7 +225,7 @@
 
               <!-- Logradouro -->
               <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="address" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                <input formControlName="street" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
                   placeholder="Logradouro">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
               </div>
@@ -294,14 +294,6 @@
               </a>
             </div>
 
-            <!-- Botão Salvar -->
-            <div class="col-4 d-grid px-2 p-0 m-0">
-              <button type="submit"
-                class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
-              </button>
-            </div>
-
           </div>
 
 
@@ -318,13 +310,13 @@
           
             <!-- Código -->
             <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input formControlName="codigo" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código">
+              <input formControlName="codigo" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código" formControlName="codigoVendedor">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
             </div>
           
             <!-- Nome do vendedor -->
             <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
-              <input formControlName="nomeVendedor" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor">
+              <input formControlName="nomeVendedor" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor" formControlName="vendedor">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do vendedor</label>
             </div>
           
@@ -345,27 +337,95 @@
           </div>
           
           <!-- Tabela Condições de pagamento -->
-          <div class="row m-0 border-bottom align-items-center justify-content-between" *ngFor="let condicao of condicoes;">
+
+
+          <div class="row m-0 border-bottom align-items-center justify-content-between">
             <div class="col-3 py-2">
-              <p class="my-1 m-0">{{ condicao.nome }}</p>
+              <p class="my-1 m-0">Débito</p>
             </div>
             <div class="col-3">
-              <div class="my-2 px-2 p-0 m-0 form-floating" *ngIf="condicao.status=='readonly'">
-                <input class="form-control form-control-sm h-100 w-100 px-4 py-3 rounded-15 shadow-sm" type="text" readonly>
-              </div>
-              <div *ngIf="condicao.status=='none'">
-                <select class="form-select w-100">
+              <div>
+                <select class="form-select w-100" formControlName="debito">
                   <option value="liberado">Liberado</option>
+                  <option value="não liberado">Não Liberado</option>
                   <option value="aguardando">Aguardando liberação</option>
                 </select>
               </div>
             </div>
             <div class="col-2 py-2 d-grid gap-2">
-              <!-- Botão Solicitar -->
-              <button *ngIf="condicao.status == 'readonly' && solicitado==false" type="button" class="btn rounded-15 px-4 bg-warning shadow-sm" (click)="solicitar()">
+             
+            </div>
+          </div>
+
+          <div class="row m-0 border-bottom align-items-center justify-content-between">
+            <div class="col-3 py-2">
+              <p class="my-1 m-0">Crédito à vista</p>
+            </div>
+            <div class="col-3">
+              <div>
+                <select class="form-select w-100" formControlName="creditoAvista">
+                  <option value="liberado">Liberado</option>
+                  <option value="não liberado">Não Liberado</option>
+                  <option value="aguardando">Aguardando liberação</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2 py-2 d-grid gap-2">
+             
+            </div>
+          </div>
+
+          <div class="row m-0 border-bottom align-items-center justify-content-between">
+            <div class="col-3 py-2">
+              <p class="my-1 m-0">Crédito a prazo</p>
+            </div>
+            <div class="col-3">
+              <div>
+                <select class="form-select w-100" formControlName="creditoAprazo">
+                  <option value="liberado">Liberado</option>
+                  <option value="não liberado">Não Liberado</option>
+                  <option value="aguardando">Aguardando liberação</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2 py-2 d-grid gap-2">
+             
+            </div>
+          </div>
+
+          <div class="row m-0 border-bottom align-items-center justify-content-between">
+            <div class="col-3 py-2">
+              <p class="my-1 m-0">Boleto à vista</p>
+            </div>
+            <div class="col-3">
+              <div>
+                <select class="form-select w-100" formControlName="boletoAvista">
+                  <option value="liberado">Liberado</option>
+                  <option value="não liberado">Não Liberado</option>
+                  <option value="aguardando">Aguardando liberação</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2 py-2 d-grid gap-2">
+             
+            </div>
+          </div>
+
+          <div class="row m-0 border-bottom align-items-center justify-content-between">
+            <div class="col-3 py-2">
+              <p class="my-1 m-0">Boleto DDL</p>
+            </div>
+            <div class="col-3">
+              <div>
+                <input class="form-control form-control-sm h-100 w-100 px-4 py-3 rounded-15 shadow-sm" type="text" formControlName="boletoDdl" readonly>
+              </div>
+            </div>
+            <div class="col-2 py-2 d-grid gap-2">
+              <!-- Botão de solicitar -->
+              <button *ngIf="solicitado==false" type="button" class="btn rounded-15 px-4 bg-warning shadow-sm" (click)="solicitar()">
                 <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitar</h5>
               </button>
-              <button *ngIf="condicao.status == 'readonly' && solicitado==true" type="button" class="btn rounded-15 px-4 bg-success shadow-sm" (click)="solicitar()">
+              <button *ngIf="solicitado==true" type="button" class="btn rounded-15 px-4 bg-success shadow-sm" (click)="solicitar()">
                 <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitado</h5>
               </button>
             </div>
@@ -436,7 +496,7 @@
           <div class="row m-0">
             <!-- Observações -->
             <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
+              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="obs"></textarea>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
             </div>
           
@@ -445,15 +505,7 @@
           
           <!-- Final -->
           <div class="row m-0 pb-4 mt-4 justify-content-end">
-          
-            <!-- Botão Salvar -->
-            <div class="col-4 d-grid px-2 p-0 m-0">
-              <button type="submit" class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Salvar</h5>
-              </button>
-            </div>
-          
-          
+
           </div>
 
         </div>
@@ -462,12 +514,12 @@
           
           
           <div class="row m-0">
-            <div class="col-8 m-0 p-0">
+            <div class="col-12 m-0 p-0">
           
               <div class="row m-0 p-0">
                 <!-- Restrição 1 -->
                 <div class="col-6 px-2 pt-4 p-0 m-0">
-                  <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição">
+                  <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição" formControlName="restricao">
                     <option value="" disabled selected>Restrição</option>
                     <option value="Restrição 1">Restrição 1</option>
                     <option value="Restrição 2">Restrição 2</option>
@@ -476,78 +528,42 @@
           
                 <!-- Data de validade 1 -->
                 <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" [max]="getDate()" placeholder="Data de validade">
+                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" [max]="getDate()" placeholder="Data de validade" formControlName="validade">
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de validade</label>
                 </div>
           
-                <!-- Restrição 2 -->
-                <div class="col-6 px-2 pt-4 p-0 m-0">
-                  <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição">
-                    <option value="" disabled selected>Restrição</option>
-                    <option value="Restrição 1">Restrição 1</option>
-                    <option value="Restrição 2">Restrição 2</option>
-                  </select>
-                </div>
-          
-                <!-- Data de validade 2 -->
-                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" [max]="getDate()" placeholder="Data de validade">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de validade</label>
-                </div>
-          
-                <!-- Restrição 3 -->
-                <div class="col-6 px-2 pt-4 p-0 m-0">
-                  <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição">
-                    <option value="" disabled selected>Restrição</option>
-                    <option value="Restrição 1">Restrição 1</option>
-                    <option value="Restrição 2">Restrição 2</option>
-                  </select>
-                </div>
-          
-                <!-- Data de validade 3 -->
-                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" [max]="getDate()" placeholder="Data de validade">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de validade</label>
-                </div>
               </div>
           
             </div>
-            <div class="col-4 m-0 p-0">
+            <div class="col-12 row m-0 p-0 justify-content-end">
+            
+              <!-- Limite de compra -->
+              <div class="col-6 px-2 p-0 pt-4 m-0 form-floating">
+                <input font="montserrat" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="number" min="0" value="999" placeholder="Limite de compra" formControlName="limiteCompra">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Limite de compra</label>
+              </div>
+            
+              <!-- Desconto máx. -->
+              <div class="col-6 px-2 p-0 pt-4 m-0 form-floating">
+                <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" value="{{ '999' | currency: 'BRL'}}" placeholder="Desconto máx." formControlName="descontoMax">
+                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máx.</label>
+              </div>
+            
+            </div>
+            <div class="col-12 m-0 p-0">
           
               <!-- Observações -->
               <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 240px"></textarea>
+                <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 240px" formControlName="obsCredito"></textarea>
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
               </div>
           
             </div>
           </div>
           
-          <div class="row m-0 justify-content-end">
-          
-            <!-- Limite de compra -->
-            <div class="col-4 px-2 p-0 pt-4 m-0 form-floating">
-              <input font="montserrat" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="number" min="0" value="999" placeholder="Limite de compra">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Limite de compra</label>
-            </div>
-          
-            <!-- Desconto máx. -->
-            <div class="col-4 px-2 p-0 pt-4 m-0 form-floating">
-              <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" value="{{ '999' | currency: 'BRL'}}" placeholder="Desconto máx.">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máx.</label>
-            </div>
-          
-          </div>
           
           <!-- Final -->
           <div class="row m-0 pb-4 mt-4 justify-content-end">
-          
-            <!-- Botão Salvar -->
-            <div class="col-4 d-grid px-2 p-0 m-0">
-              <button type="submit" class="btn rounded-15 py-3 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Salvar</h5>
-              </button>
-            </div>
           
           </div>
 
@@ -561,6 +577,17 @@
         <div *ngIf="clienteSection == 'resumo'">
           <app-resumo-financeiro></app-resumo-financeiro>
         </div>
+
+        <!-- Botão Salvar -->
+        <div class="col-12 row justify-content-end">
+          <div class="col-2 d-grid px-2 p-0 m-0">
+            <button type="submit"
+              class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
+            </button>
+          </div>
+        </div>
+
       </form>
 
 

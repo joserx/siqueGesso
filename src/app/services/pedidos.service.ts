@@ -34,4 +34,8 @@ export class PedidosService {
   findByPage(no: any){
     return this.http.get(environment.apiUrl + 'pedidos/page/'+ no)
   }
+
+  findThis(id: number){
+    return this.http.get(environment.apiUrl + 'pedidos/find/' + id)
+  }
 }

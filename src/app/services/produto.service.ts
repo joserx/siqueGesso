@@ -18,5 +18,8 @@ export class ProdutoService {
   create(payload: any){
     return this.http.post(`${environment.apiUrl}produtos/`, payload)
   }
-  
+
+  update(id: number, data: any){
+    return this.http.patch(environment.apiUrl + '/produtos/' +id, data)
+  }
 }

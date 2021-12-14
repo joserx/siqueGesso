@@ -11,9 +11,12 @@
         <form [formGroup]="passwordForm">
           <div class="col-12 modal-body px-5 d-flex justify-content-center">  
             <div class="d-flex justify-content-center"  id="content">
-              <div class="px-2 pt-4 p-0 m-0 form-floating">
+              <div class="px-2 pt-4 p-0 m-0 form-floating" *ngIf="this.changeDesconto(this.item.value)!=0 || this.pedidosForm.get('descontoGeral')?.value != 0">
                 <input class="col-12 form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="password" placeholder="Senha" formControlName="password">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Senha</label>
+              </div>
+              <div class="px-2 pt-4 p-0 m-0 form-floating"  >
+                <p class="h3 text-custom-dark fw-normal" *ngIf="this.changeDesconto(this.item.value)==0 && this.pedidosForm.get('descontoGeral')?.value == 0">Gostaria de gerar o pedido ?</p>
               </div>
             </div>
           </div>
@@ -286,8 +289,8 @@
           </div>
 
           <!-- Dados do cliente -->
-          <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cliente"  id="cliente" formControlName="cliente" (keyup)="filtrarCliente($event)" autocomplete="off">
+          <div class="col-8 px-2 pt-4 p-0 m-0 form-floating" >
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cliente"  id="cliente" formControlName="cliente" (keyup)="filtrarCliente($event)" (keyup)="checkClient($event)" autocomplete="off">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dados do cliente</label>
             <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
               <ul class="drivers-list list-unstyled">
@@ -354,11 +357,11 @@
                 <th scope="row">{{ oneItem.value.codigo }}</th>
                 <td>{{ oneItem.value.produto }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" id="quantidade"  formControlName="quantidade" (keyup)="totalQuanti(this.item.value)">
+                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" id="quantidade"  formControlName="quantidade" (keyup)="totalQuanti(this.item.value)" (keyup)="totalProduto(oneItem.value)">
                 </td>
                 <td>{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
                 <td>
-                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" id="desconto" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" (keyup)="cleanDesconto()" autocomplete="off">
+                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" id="desconto" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" (keyup)="cleanDesconto()" (keyup)="totalProduto(oneItem.value)" autocomplete="off">
                 </td>
                 <td>{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
                 <td>
@@ -373,22 +376,22 @@
                   <input class="form-control form-control-sm" type="date" id="prevRetirada" formControlName="prevRetirada">
                 </td>
                 <!-- Tipo de entrega -->
-                <td>
+                <td class="row">
                   <select #tipoEntrega class="col form-select form-select-sm" id="endereco" formControlName="tipoEntrega">
                     <option value="" disabled selected>Selecionar...</option>
                     <option value="entrega">entrega</option>
                     <option value="retirada">retirada</option>
                   </select>
-                  <input *ngIf="tipoEntrega.value=='retirada'" class="form-control form-control-sm" type="text" id="enderecoLoja" formControlName="enderecoLoja" placeholder="Endereco da loja">
                 </td>
                 <td>
-                    <select *ngIf="tipoEntrega.value=='entrega'" class="col form-select form-select-sm" id="endereco" formControlName="endereco">
+                  <input *ngIf="tipoEntrega.value=='retirada'" class="form-control form-control-sm" type="text" id="enderecoLoja" formControlName="enderecoLoja" placeholder="Endereco da loja">
+                  <select *ngIf="tipoEntrega.value=='entrega'" class="col form-select form-select-sm" id="endereco" formControlName="endereco">
                     <option value="" disabled selected>Selecionar...</option>
                     <option *ngFor="let endereco of enderecos" value="{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}">{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}</option>
                   </select>
                 </td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" id="valorFrete" formControlName="valorFrete" (keyup)="changeFrete(this.item.value)">
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" id="valorFrete" formControlName="valorFrete" (keyup)="setThisFrete(oneItem.value, $event)" (keyup)="totalProduto(oneItem.value)">
                 </td>
               </tr>
             </tbody>
@@ -429,7 +432,7 @@
   
             <!-- Valor do frete -->
             <div class="col px-2 pt-4 p-0 m-0 form-floating">
-              <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" [value]="changeFrete(item.value) | currency:'BRL'" readonly>
+              <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" [value]="oneItem.value.valorFrete | currency:'BRL'" readonly>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor do frete</label>
             </div>
           </div>
@@ -472,19 +475,19 @@
                 <p>{{ totalQuanti(item.value) }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ totalQuanti(item.value)*valUnit | currency:'BRL' }}</p>
+                <p>{{ valUnit | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
                 <p>{{ descontoG==null? (changeDesconto(item.value) | currency:'BRL' ): (descontoG | currency:'BRL') }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ (totalQuanti(item.value)*valUnit) - changeDesconto(item.value) | currency:'BRL' }}</p>
+                <p>{{ valVenda | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
                 <p>{{ changeFrete(item.value) | currency:'BRL' }}</p>
               </div>
               <div class="col text-center">
-                <p>{{ (((totalQuanti(item.value)*valUnit) - changeDesconto(item.value)) + changeFrete(item.value)) | currency:'BRL' }}</p>
+                <p>{{ totalValue(item.value) | currency:'BRL' }}</p>
               </div>
             </div>
 

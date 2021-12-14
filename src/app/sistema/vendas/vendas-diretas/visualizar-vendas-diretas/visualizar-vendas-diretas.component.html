@@ -1,0 +1,322 @@
+<!-- Adicionar readonly pros selects, adicionar mascaras -->  
+  <app-navbar></app-navbar>
+  
+  <div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+      <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+      <!-- Página home -->
+      <div class="container pb-5">
+  
+        <!-- Botão de voltar -->
+        <div class="row m-0 justify-content-start mt-4">
+          <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas/vendas-diretas/listar">
+            <i class="bi-arrow-left fs-3 text-secondary"></i>
+          </a>
+        </div>
+  
+        <div class="row m-0 mt-4 py-3 border-bottom">
+          <div class="col-12 m-0 p-0 text-custom-dark">
+            <h4>Criar pedido</h4>
+          </div>
+        </div>
+  
+        <form [formGroup]="vendasDiretasForm" (ngSubmit)="sendForm(vendasDiretasForm, item)">
+  
+          <!-- Criar pedido -->
+          <div class="row m-0">
+  
+            <!-- Data da compra -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
+                placeholder="Data da compra" [max]="getDate()" id="data" readonly formControlName="data" >
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da compra</label>
+            </div>
+  
+            <!-- Loja -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Data da compra" id="loja" readonly formControlName="loja" >
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
+            </div>
+  
+            <!-- Vendedor -->
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Data da compra" id="vendedor" readonly formControlName="vendedor" >
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+            </div>
+  
+  
+  
+            <!-- Adicionar  -->
+            <div class="col-1 px-2 pt-3 mt-3 text-center">
+              <a class="px-2 py-2" routerLink="/sistema/estoque">
+                <i class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"></i>
+              </a>
+            </div>
+          </div>
+  
+          <div class="row m-0">
+  
+            <!-- CNPJ -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="CNPJ" id="cnpj" readonly formControlName="cnpj">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+            </div>
+            <!-- Nome do Cliente -->
+            <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Nome do Cliente" id="cliente" readonly formControlName="cliente" autocomplete="off"
+                (keyup)="filtrarCliente($event)">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Cliente</label>
+              <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
+                <ul class="drivers-list list-unstyled">
+                  <li class="p-1 px-2 user-select-none" *ngFor="let cliente of clientes" (click)="selectThisCliente(cliente)">{{ cliente.name!=null && cliente.surname!=null? cliente.name + ' ' + cliente.surname : cliente.fantasyName }}</li>
+                </ul>
+              </div>
+            </div>
+  
+          </div>
+  
+          <!-- Dados da Venda -->
+  
+          <div class="row m-0 mt-2 py-3 border-bottom">
+            <div class="col-12 m-0 p-0 text-custom-dark">
+              <h4>Dados da Venda</h4>
+            </div>
+          </div>
+  
+          <div class="row">
+            <!-- Condição de pagamento -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Data da compra" id="condPagamento" readonly formControlName="condPagamento" >
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição de pagamento</label>
+            </div>
+  
+            <!-- Tabela de Preço Aplicada -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Data da compra" id="tabPreco" readonly formControlName="tabPreco" >
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de Preço Aplicada especial</label>
+            </div>
+  
+            <!-- Frete Fixo -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="R$" id="valorFreteEntrega" readonly formControlName="valorFreteEntrega" (keyup)="changeFrete($event)">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Frete Fixo</label>
+            </div>
+  
+          </div>
+  
+  
+  
+  
+          <!-- Tabela de Itens -->
+          <div class="row mt-4">
+            <div class="col-6 py-4 border-bottom">
+              <h4 class="m-0 text-custom-dark">Itens</h4>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table text-custom-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Cód.</th>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Quantidade</th>
+                  <th scope="col">Valor Unitário</th>
+                  <th scope="col">Valor Venda</th>
+                  <th scope="col">Frete Unitário</th>
+                  <th scope="col">Total por Produto</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let oneItem of item['controls']; let i = index" formArrayName="item">
+                <tr class="align-items-center" [formGroupName]="i" >
+                  <th scope="row">{{ oneItem.value.codigo }}</th>
+                  <td>
+                    {{ oneItem.value.produto }}
+                  </td>
+                  <td>
+                    <input 
+                      class="form-control form-control-sm" type="number" 
+                      placeholder="Quantidade" id="quantidade" readonly formControlName="quantidade" (keyup)="totalProduto(oneItem.value)">
+                  </td>
+                  <td>
+                    {{ oneItem.value.valorUnitario | currency:'BRL'}}
+                  </td>
+                  <td>
+                    {{ oneItem.value.valorVenda | currency:'BRL' }}
+                  </td>
+                  <td>
+                    {{ totalFrete(frete/item.length, oneItem.value) | currency:'BRL'}}
+                  </td>
+                  <td>
+                    {{ oneItem.value.total | currency:'BRL' }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /Tabela de itens -->
+  
+          <!-- Dados de Entrega -->
+          <div class="row m-0 mt-2 py-3 border-bottom">
+            <div class="col-12 m-0 p-0 text-custom-dark">
+              <h4>Dados de Entrega</h4>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="CEP" id="cep" readonly formControlName="cep">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+            </div>
+            <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Endereço" id="endereço" readonly formControlName="endereço">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
+            </div>
+            <div class="col-2 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Número" id="numero" readonly formControlName="numero">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+            </div>
+            <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Bairro" id="bairro" readonly formControlName="bairro">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Cidade" id="cidade" readonly formControlName="cidade">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+            </div>
+            <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Complemento" id="complemento" readonly formControlName="complemento">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+            </div>
+          </div>
+  
+  
+          <div class="row m-0 mt-3  py-2 d-flex justify-content-between  border-bottom border-top">
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Motorista" id="motorista" readonly formControlName="motorista">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
+            </div>
+            <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="palca" id="placa" readonly formControlName="placa">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
+            </div>
+            <div class="col-3 px-2 pt-4 p-0 m-0 me-2 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
+                placeholder="Previsão de Entrega" [max]="getDate()" id="previsaoEntrega" readonly formControlName="previsaoEntrega">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Previsão de Entrega</label>
+            </div>
+          </div>
+  
+  
+  
+          <div class="row m-0 mt-4 d-flex justify-content-between py-2 px-5 rounded bg-light border border-secondary">
+            <div class="col-1 m-0 p-0">
+              <p class="fw-bold fs-5">Produtos
+              <p>{{ item.length }}</p>
+            </div>
+            <div class="col-1 m-0 p-0">
+              <p class="fw-bold fs-5">Quantidade
+              <p>{{ totalQuanti(item.value) }}</p>
+            </div>
+            <div class="col-1 m-0 p-0">
+              <p class="fw-bold fs-5">Venda
+              <p>{{ valVenda | currency:'BRL' }}</p>
+            </div>
+  
+            <div class="col-1 m-0 p-0">
+              <p class="fw-bold fs-5">Frete
+              <p>{{ frete | currency:'BRL' }}</p>
+            </div>
+  
+            <div class="col-1 m-0 p-0">
+              <p class="fw-bold fs-5">Total
+              <p>{{ totalValue(item.value) | currency:'BRL' }}</p>
+            </div>
+  
+  
+          </div>
+  
+          <div class="row m-0 mt-4 py-3 border-bottom">
+            <div class="col-12 m-0 p-0 text-custom-dark">
+              <h4>Condições de Pagamento</h4>
+            </div>
+          </div>
+  
+          <div class="row ps-5 pe-5 d-flex justify-content-between">
+            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Data da compra" id="meioPagamento" readonly formControlName="meioPagamento" >
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Meio de Pagamento</label>
+            </div>
+            <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
+                placeholder="Data de Vencimento" [max]="getDate()" id="dataVencimento" readonly formControlName="dataVencimento">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Vencimento</label>
+            </div>
+            <div class="col-4 px-2 pt-4 p-0 m-0 me-2 form-floating">
+                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Data da compra" id="aguradandoPagamento" readonly formControlName="aguradandoPagamento" >
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status do Pagamento</label>
+            </div>
+          </div>
+  
+          <div class="row ps-5 pe-5 d-flex justify-content-between">
+            <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Link do Boleto" id="linkBoleto" readonly formControlName="linkBoleto">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link do Boleto</label>
+            </div>
+            <div class="col-5 px-2 pt-4 p-0 m-0 me-5 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                placeholder="Link da Nota Fiscal" id="linkNf" readonly formControlName="linkNf">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link da Nota Fiscal</label>
+            </div>
+          </div>
+  
+  
+          <div class="row">
+            <!-- Observações -->
+            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações"
+                style="height: 150px" id="obs" readonly formControlName="obs"></textarea>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+            </div>
+          </div>
+  
+          <!-- Footer -->
+          <div class="row mt-3 px-5 py-3 pb-5 justify-content-between">
+            <!-- Botão Gerar PDF -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+              <button type="button"
+                class="h-limited btn rounded-15 py-1 px-4 pdf-button d-flex justify-content-between shadow-sm">
+                <h5 class="fw-normal my-auto text-truncate">Gerar PDF</h5>
+                <i class="bi-file-earmark-pdf my-auto fs-4 p-0 m-0 fw-bold"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /Footer -->
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  
