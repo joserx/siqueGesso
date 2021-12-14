@@ -121,6 +121,8 @@ import { FiltrarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/f
 import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
 import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
 import { PesquisarColaboradorComponent } from './sistema/rh/listar-colaboradores/pesquisar-colaborador/pesquisar-colaborador.component';
+import { EditarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/editar-cadastro-loja/editar-cadastro-loja.component';
+import { VisualizarLojaCadastradaComponent } from './sistema/config/cadastro-de-loja/visualizar-loja-cadastrada/visualizar-loja-cadastrada.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -239,6 +241,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditarVendasDiretasComponent,
     VisualizarVendasDiretasComponent,
     PesquisarColaboradorComponent,
+    EditarCadastroLojaComponent,
+    VisualizarLojaCadastradaComponent,
     ],
   imports: [
     BrowserModule,

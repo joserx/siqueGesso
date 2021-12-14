@@ -28,61 +28,58 @@
 
           <!-- Nome -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome" id="nome" formControlName="nome">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome" id="nome" formControlName="nome" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
           </div>
 
           <!-- CNPJ -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" mask="00.000.000/0000-00" placeholder="CNPJ"
-            id="cnpj" formControlName="cnpj">
+            id="cnpj" formControlName="cnpj" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
           </div>
 
           <!-- Logradouro -->
           <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Logradouro" id="logradouro" formControlName="logradouro">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Logradouro" id="logradouro" formControlName="logradouro" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
           </div>
           
           <!-- CEP -->
           <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"  mask="00000-000" placeholder="CEP" formControlName="cep" id="cep">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" mask="00000-000" placeholder="CEP" formControlName="cep" id="cep" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
           </div>
 
           <!-- Número -->
           <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Número" formControlName="numero" id="numero">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Número" formControlName="numero" id="numero" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
           </div>
 
           <!-- Cidade -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cidade" formControlName="cidade" id="cidade">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cidade" formControlName="cidade" id="cidade" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
           </div>
 
           <!-- País -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="País" formControlName="pais" id="pais">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="País" formControlName="pais" id="pais" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">País</label>
           </div>
 
           <!-- Capacidade de estoque -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="number" placeholder="Capacidade de estoque" formControlName="capacidade" id="capacidade">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="number" placeholder="Capacidade de estoque" formControlName="capacidade" id="capacidade" readonly>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Capacidade de estoque</label>
           </div>
 
           <!-- adicionar banner -->
           <div class="col-4 px-2 pt-4 p-0 m-0">
             <div class="upload__image rounded-15 shadow-sm p-3">
-                <label class="upload__image--wrapper" (input)="uploadImage($event)">
-                  <input type="file">
+                <label class="upload__image--wrapper">
                   <img  src="./assets/add.png" alt="" class="upload__image--img">
-
-                  <span class="mt-3 btn rounded-15 py-1 px-4 btn-outline-secondary">{{text}}</span>
                 </label>
             </div>
 
@@ -92,22 +89,7 @@
 
         <!-- Footer -->
         <div class="row mt-5 py-3 pb-5 justify-content-end">
-
-          <!-- Botão Cancelar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
-              <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
-            </button>
-          </div>
-
-          <!-- Botão Salvar -->
-          <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-            </button>
-          </div>
+          <!-- Visualizar sem ações no footer -->
         </div>
 
       </form>

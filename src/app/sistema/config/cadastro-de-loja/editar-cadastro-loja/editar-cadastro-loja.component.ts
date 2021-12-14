@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-cadastrar-loja',
-  templateUrl: './cadastrar-loja.component.html',
-  styleUrls: ['./cadastrar-loja.component.scss']
+  selector: 'app-editar-cadastro-loja',
+  templateUrl: './editar-cadastro-loja.component.html',
+  styleUrls: ['./editar-cadastro-loja.component.scss']
 })
-export class CadastrarLojaComponent implements OnInit {
+export class EditarCadastroLojaComponent implements OnInit {
   url: any;
   text = 'Adicionar banner';
   status = 'Salvar'
   anexesRepo = environment.apiUrl + 'file/download/'
   public avatarImg: string = './assets/sem-foto.jpg';
+  public id: number
   avatarFile: any = {};
   public filialForm: FormGroup = new FormGroup({
     'nome': new FormControl('', [Validators.required]),
@@ -32,10 +33,27 @@ export class CadastrarLojaComponent implements OnInit {
   constructor(
     private readonly filialService: FilialService,
     private readonly fileService: FileService,
-    private readonly router: Router
+    private readonly router : Router,
+    private readonly route : ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    const routeParams = this.route.snapshot.paramMap;
+    this.id = Number(routeParams.get('id'));  
+    this.filialService.findOne(this.id).subscribe((data: any)=>{
+      let imgDefault = document.querySelector('.upload__image--img') as HTMLImageElement;
+      if(data.banner){
+        imgDefault.src = environment.apiUrl + 'file/download/' + data.banner.fileName
+      }
+      this.filialForm.get('nome')?.setValue(data.nome)
+      this.filialForm.get('cnpj')?.setValue(data.cnpj)
+      this.filialForm.get('logradouro')?.setValue(data.logradouro)
+      this.filialForm.get('cep')?.setValue(data.cep)
+      this.filialForm.get('numero')?.setValue(data.numero)
+      this.filialForm.get('cidade')?.setValue(data.cidade)
+      this.filialForm.get('pais')?.setValue(data.pais)
+      this.filialForm.get('capacidade')?.setValue(data.capacidade)
+    })
     for(let control in this.filialForm['controls']){
       document.getElementById(control)?.addEventListener('click', ()=>{
         if(document.getElementById(control)?.classList.contains('invalid')){
@@ -66,7 +84,7 @@ export class CadastrarLojaComponent implements OnInit {
   submitForm(data: any){
     if(data.valid){
       data.value.banner = this.avatarFile.id
-      this.filialService.create(data.value).subscribe((data: any)=>{
+      this.filialService.update(this.id, data.value).subscribe((data: any)=>{
         this.router.navigate(['sistema', 'configuracoes', 'lojas-cadastradas', 'lista'])
         Swal.fire({ 
           title: '<h4>Filial cadastrada com sucesso!</h4>', 
@@ -97,5 +115,4 @@ export class CadastrarLojaComponent implements OnInit {
       })
     }
   }
-
 }
