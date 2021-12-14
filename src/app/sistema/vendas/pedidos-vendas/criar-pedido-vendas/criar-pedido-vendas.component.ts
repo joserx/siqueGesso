@@ -20,6 +20,7 @@ import { getDate } from '../../../../../environments/global';
 })
 export class CriarPedidoVendasComponent implements OnInit {
 
+  @ViewChild('gerarPedidoModal') gerarPedidoModal: any;
   @ViewChild('content', {static: false})el: ElementRef
   public filial: any[] = []
   public enderecos: any[] = []
@@ -60,7 +61,8 @@ export class CriarPedidoVendasComponent implements OnInit {
     'linkNf': new FormControl(''),
     'obs': new FormControl(''),
     'total': new FormControl(''),
-    'tipoVenda': new FormControl(0)
+    'tipoVenda': new FormControl(0),
+    'clienteId': new FormControl(null)
   })
 
   /* 
@@ -143,11 +145,6 @@ export class CriarPedidoVendasComponent implements OnInit {
         this.totalValue(this.item.value)
         data.value.status="Aguardando aprovação"
         this.pedidoService.create(data.value).subscribe((dt: any)=>{
-          console.log(dt)
-          this.pedidoId = data.id
-          for(let OnItem in this.item['value']){
-            this.item['value'][OnItem].pedidoId = this.pedidoId
-          }
           this.router.navigate(['sistema', 'vendas', 'pedidos'])
           Swal.fire({ 
             title: '<h4>Pedido adicionado !<h4>', 
@@ -250,9 +247,9 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   totalProduto(value:any){
     if(this.descontoG==0 || this.descontoG===null){   
-      value.total = ((value.valorFrete + value.valorVenda)*value.quantidade)-value.desconto
+      value.total = ((value.valorVenda*value.quantidade)+ value.valorFrete)-value.desconto
     }else{
-      value.total = ((value.valorFrete + value.valorVenda)*value.quantidade)
+      value.total = ((value.valorVenda*value.quantidade)+ value.valorFrete)
     }
   }
   totalValue(value: any){
@@ -359,39 +356,15 @@ export class CriarPedidoVendasComponent implements OnInit {
   gerarPedido(data:any, allForm: any){
     // console.log(data.value.password)
     if(this.user.permission == 1){
-      this.authService.checkPassword(data.value).subscribe((data:any)=>{
-        if(data == true){
-          Swal.fire({ 
-            title: '<h4>Senha correta !</h4>', 
-            icon: 'success', 
-            toast: true, 
-            position: 'top', 
-            showConfirmButton: false, 
-            timer: 2000, 
-            timerProgressBar: true,
-            width: '500px'
-          })
-          this.passwordForm.get('password')?.setValue('')
-          if(allForm.valid){
+      if(this.changeDesconto(this.item.value)==0 && this.pedidosForm.get('descontoGeral')?.value == 0){
+        if(allForm.valid){
             this.totalValue(this.item.value)
             allForm.value.status="Gerado"
             this.pedidoService.create(allForm.value).subscribe((data: any)=>{
               this.router.navigate(['sistema', 'vendas', 'pedidos'])
               Swal.fire({ 
-                title: '<h4>Pedido gerado !</h4>', 
-                icon: 'success', 
-                toast: true, 
-                position: 'top', 
-                showConfirmButton: false, 
-                timer: 2000, 
-                timerProgressBar: true,
-                width: '500px'
-              })
-            })
-          }else{
-            Swal.fire({ 
-              title: '<h4>Preencha todos os campos necessários !</h4>', 
-              icon: 'error', 
+              title: '<h4>Pedido gerado !</h4>', 
+              icon: 'success', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
@@ -399,10 +372,10 @@ export class CriarPedidoVendasComponent implements OnInit {
               timerProgressBar: true,
               width: '500px'
             })
-          }
+          })
         }else{
           Swal.fire({ 
-            title: '<h4>Senha Incorreta!</h4>', 
+            title: '<h4>Preencha todos os campos necessários !</h4>', 
             icon: 'error', 
             toast: true, 
             position: 'top', 
@@ -411,9 +384,64 @@ export class CriarPedidoVendasComponent implements OnInit {
             timerProgressBar: true,
             width: '500px'
           })
-          this.passwordForm.get('password')?.setValue('')
         }
-      })
+      }else{       
+        this.authService.checkPassword(data.value).subscribe((data:any)=>{
+          if(data == true){
+            Swal.fire({ 
+              title: '<h4>Senha correta !</h4>', 
+              icon: 'success', 
+              toast: true, 
+              position: 'top', 
+              showConfirmButton: false, 
+              timer: 2000, 
+              timerProgressBar: true,
+              width: '500px'
+            })
+            this.passwordForm.get('password')?.setValue('')
+            if(allForm.valid){
+              this.totalValue(this.item.value)
+              allForm.value.status="Gerado"
+              this.pedidoService.create(allForm.value).subscribe((data: any)=>{
+                this.router.navigate(['sistema', 'vendas', 'pedidos'])
+                Swal.fire({ 
+                  title: '<h4>Pedido gerado !</h4>', 
+                  icon: 'success', 
+                  toast: true, 
+                  position: 'top', 
+                  showConfirmButton: false, 
+                  timer: 2000, 
+                  timerProgressBar: true,
+                  width: '500px'
+                })
+              })
+            }else{
+              Swal.fire({ 
+                title: '<h4>Preencha todos os campos necessários !</h4>', 
+                icon: 'error', 
+                toast: true, 
+                position: 'top', 
+                showConfirmButton: false, 
+                timer: 2000, 
+                timerProgressBar: true,
+                width: '500px'
+              })
+            }
+          }else{
+            Swal.fire({ 
+              title: '<h4>Senha Incorreta!</h4>', 
+              icon: 'error', 
+              toast: true, 
+              position: 'top', 
+              showConfirmButton: false, 
+              timer: 2000, 
+              timerProgressBar: true,
+              width: '500px'
+            })
+            this.passwordForm.get('password')?.setValue('')
+          }
+        })
+      }
     }else{
       Swal.fire({ 
         title: '<h4>Você não tem permissão para realizar esta ação !</h4>', 
@@ -467,9 +495,11 @@ export class CriarPedidoVendasComponent implements OnInit {
     console.log(addresses)
     if(value.name!=null && value.surname!=null){
       this.pedidosForm.get('cliente')?.setValue(`${value.name} ${value.surname}`)
+      this.pedidosForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }else{
       this.pedidosForm.get('cliente')?.setValue(`${value.fantasyName}`)
+      this.pedidosForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }
     this.enderecos = value.addresses

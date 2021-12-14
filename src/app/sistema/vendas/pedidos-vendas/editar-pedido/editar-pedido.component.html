@@ -11,9 +11,12 @@
         <form [formGroup]="passwordForm">
           <div class="col-12 modal-body px-5 d-flex justify-content-center">  
             <div class="d-flex justify-content-center"  id="content">
-              <div class="px-2 pt-4 p-0 m-0 form-floating">
+              <div class="px-2 pt-4 p-0 m-0 form-floating" *ngIf="this.changeDesconto(this.item.value)!=0 || this.pedidosForm.get('descontoGeral')?.value != 0">
                 <input class="col-12 form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="password" placeholder="Senha" formControlName="password">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Senha</label>
+              </div>
+              <div class="px-2 pt-4 p-0 m-0 form-floating"  *ngIf="this.changeDesconto(this.item.value)==0 && this.pedidosForm.get('descontoGeral')?.value == 0">
+                <p class="h3 text-custom-dark fw-normal">Gostaria de gerar o pedido ?</p>
               </div>
             </div>
           </div>

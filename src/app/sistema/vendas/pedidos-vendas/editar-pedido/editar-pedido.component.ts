@@ -61,7 +61,8 @@ export class EditarPedidoComponent implements OnInit {
     'linkNf': new FormControl(''),
     'obs': new FormControl(''),
     'total': new FormControl(0),
-    'tipoVenda': new FormControl(0)
+    'tipoVenda': new FormControl(0),
+    'clienteId': new FormControl(null)
   })
 
   get item(){
@@ -92,6 +93,10 @@ export class EditarPedidoComponent implements OnInit {
     ) { }
     
     ngOnInit(): void {
+      for(let item of this.item.value){
+        this.totalProduto(item)
+      }
+      
       let teste = this.item['controls']
       console.log(teste)
       this.filialService.find().subscribe((data: any)=>{
@@ -100,14 +105,8 @@ export class EditarPedidoComponent implements OnInit {
       })
       this.clienteService.find().subscribe((data:any)=>{
         for(let cliente of data){
-          if(cliente.name != null && cliente.surname !=null){
-            if(`${cliente.name} ${cliente.surname}`== this.pedidosForm.get('cliente')?.value){
-              this.enderecos = cliente.addresses
-            }
-          }else{
-            if(cliente.fantasyName == this.pedidosForm.get('cliente')?.value){
-              this.enderecos = cliente.addresses
-            }
+          if(cliente.id == this.pedidosForm.get('clienteId')?.value){
+            this.enderecos = cliente.addresses
           }
         }
         this.clientes = data
@@ -148,6 +147,7 @@ export class EditarPedidoComponent implements OnInit {
         this.pedidosForm.get('linkNf')?.setValue(data.linkNf)
         this.pedidosForm.get('obs')?.setValue(data.obs)
         this.pedidosForm.get('total')?.setValue(data.total)
+        this.pedidosForm.get('clienteId')?.setValue(data.clienteId)
         console.log(data)
         for(let item in data.item){
           this.item.push(new FormGroup({
@@ -301,9 +301,9 @@ export class EditarPedidoComponent implements OnInit {
 
   totalProduto(value:any){
     if(this.descontoG==0 || this.descontoG===null){   
-      value.total = ((value.valorFrete + value.valorVenda)*value.quantidade)-value.desconto
+      value.total = ((value.valorVenda*value.quantidade)+ value.valorFrete)-value.desconto
     }else{
-      value.total = ((value.valorFrete + value.valorVenda)*value.quantidade)
+      value.total = ((value.valorVenda*value.quantidade)+ value.valorFrete)
     }
   }
   totalValue(value: any){
@@ -311,8 +311,9 @@ export class EditarPedidoComponent implements OnInit {
     let total: number = 0
     for(let item of value){
       total += item.total
+
     }
-    console.log(total)
+    console.log(value)
     if(this.descontoG==0 || this.descontoG==null){
       this.pedidosForm.get('total')?.setValue(total)
       return total
@@ -410,39 +411,15 @@ export class EditarPedidoComponent implements OnInit {
   gerarPedido(data:any, allForm: any){
     // console.log(data.value.password)
     if(this.user.permission == 1){
-      this.authService.checkPassword(data.value).subscribe((data:any)=>{
-        if(data == true){
-          Swal.fire({ 
-            title: '<h4>Senha correta !</h4>', 
-            icon: 'success', 
-            toast: true, 
-            position: 'top', 
-            showConfirmButton: false, 
-            timer: 2000, 
-            timerProgressBar: true,
-            width: '500px'
-          })
-          this.passwordForm.get('password')?.setValue('')
-          if(allForm.valid){
-            allForm.value.total = (((this.totalQuanti(this.item.value)*this.valUnit) - this.changeDesconto(this.item.value)) + this.changeFrete(this.item.value))
+      if(this.changeDesconto(this.item.value)==0 && this.pedidosForm.get('descontoGeral')?.value == 0){
+        if(allForm.valid){
+            this.totalValue(this.item.value)
             allForm.value.status="Gerado"
-            this.pedidoService.update(this.id, allForm.value).subscribe((data: any)=>{
+            this.pedidoService.create(allForm.value).subscribe((data: any)=>{
               this.router.navigate(['sistema', 'vendas', 'pedidos'])
               Swal.fire({ 
-                title: '<h4>Pedido gerado</h4>', 
-                icon: 'success', 
-                toast: true, 
-                position: 'top', 
-                showConfirmButton: false, 
-                timer: 2000, 
-                timerProgressBar: true,
-                width: '500px'
-              })
-            })
-          }else{
-            Swal.fire({ 
-              title: '<h4>Preencha todos os campos necessários !</h4>', 
-              icon: 'error', 
+              title: '<h4>Pedido gerado !</h4>', 
+              icon: 'success', 
               toast: true, 
               position: 'top', 
               showConfirmButton: false, 
@@ -450,10 +427,10 @@ export class EditarPedidoComponent implements OnInit {
               timerProgressBar: true,
               width: '500px'
             })
-          }
+          })
         }else{
           Swal.fire({ 
-            title: '<h4>Senha Incorreta!</h4>', 
+            title: '<h4>Preencha todos os campos necessários !</h4>', 
             icon: 'error', 
             toast: true, 
             position: 'top', 
@@ -462,9 +439,64 @@ export class EditarPedidoComponent implements OnInit {
             timerProgressBar: true,
             width: '500px'
           })
-          this.passwordForm.get('password')?.setValue('')
         }
-      })
+      }else{       
+        this.authService.checkPassword(data.value).subscribe((data:any)=>{
+          if(data == true){
+            Swal.fire({ 
+              title: '<h4>Senha correta !</h4>', 
+              icon: 'success', 
+              toast: true, 
+              position: 'top', 
+              showConfirmButton: false, 
+              timer: 2000, 
+              timerProgressBar: true,
+              width: '500px'
+            })
+            this.passwordForm.get('password')?.setValue('')
+            if(allForm.valid){
+              this.totalValue(this.item.value)
+              allForm.value.status="Gerado"
+              this.pedidoService.create(allForm.value).subscribe((data: any)=>{
+                this.router.navigate(['sistema', 'vendas', 'pedidos'])
+                Swal.fire({ 
+                  title: '<h4>Pedido gerado !</h4>', 
+                  icon: 'success', 
+                  toast: true, 
+                  position: 'top', 
+                  showConfirmButton: false, 
+                  timer: 2000, 
+                  timerProgressBar: true,
+                  width: '500px'
+                })
+              })
+            }else{
+              Swal.fire({ 
+                title: '<h4>Preencha todos os campos necessários !</h4>', 
+                icon: 'error', 
+                toast: true, 
+                position: 'top', 
+                showConfirmButton: false, 
+                timer: 2000, 
+                timerProgressBar: true,
+                width: '500px'
+              })
+            }
+          }else{
+            Swal.fire({ 
+              title: '<h4>Senha Incorreta!</h4>', 
+              icon: 'error', 
+              toast: true, 
+              position: 'top', 
+              showConfirmButton: false, 
+              timer: 2000, 
+              timerProgressBar: true,
+              width: '500px'
+            })
+            this.passwordForm.get('password')?.setValue('')
+          }
+        })
+      }
     }else{
       Swal.fire({ 
         title: '<h4>Você não tem permissão para realizar esta ação !</h4>', 
@@ -547,9 +579,11 @@ export class EditarPedidoComponent implements OnInit {
     console.log(addresses)
     if(value.name!=null && value.surname!=null){
       this.pedidosForm.get('cliente')?.setValue(`${value.name} ${value.surname}`)
+      this.pedidosForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }else{
       this.pedidosForm.get('cliente')?.setValue(`${value.fantasyName}`)
+      this.pedidosForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }
     this.enderecos = value.addresses

@@ -120,6 +120,7 @@ import { NgChartjsModule } from 'ng-chartjs';
 import { FiltrarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/filtrar-vendas-diretas/filtrar-vendas-diretas.component';
 import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
 import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
+import { PesquisarColaboradorComponent } from './sistema/rh/listar-colaboradores/pesquisar-colaborador/pesquisar-colaborador.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -237,6 +238,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FiltrarVendasDiretasComponent,
     EditarVendasDiretasComponent,
     VisualizarVendasDiretasComponent,
+    PesquisarColaboradorComponent,
     ],
   imports: [
     BrowserModule,

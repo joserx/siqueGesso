@@ -53,15 +53,16 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "complemento": new FormControl(''), 
     "motorista": new FormControl('', [Validators.required]), 
     "placa": new FormControl('', [Validators.required]), 
-    "previsaoEntrega": new FormControl(''),  
+    "previsaoEntrega": new FormControl(null, Validators.required),  
     "meioPagamento": new FormControl('', [Validators.required]), 
-    "dataVencimento": new FormControl(null), 
+    "dataVencimento": new FormControl(null, [Validators.required]), 
     "aguradandoPagamento": new FormControl(''), 
     "linkBoleto": new FormControl(''),
     "linkNf": new FormControl(''),
     "obs": new FormControl(''),
     "tipoVenda": new FormControl(1),
     "total": new FormControl(0),
+    "clienteId": new FormControl(null)
   })
 
   get item(){
@@ -120,10 +121,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
       console.log(data.value)
       this.totalValue(this.item.value)
       this.pedidosService.create(data.value).subscribe((data:any)=>{
-          this.pedidoId = data.id
-          for(let OnItem in this.item['value']){
-            this.item['value'][OnItem].pedidoId = this.pedidoId
-          }
           this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
           Swal.fire({ 
             title: '<h4>Pedido adicionado !<h4>', 
@@ -167,9 +164,11 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
   selectThisCliente(value: any){
     if(value.name!=null && value.surname!=null){
       this.vendasDiretasForm.get('cliente')?.setValue(`${value.name} ${value.surname}`)
+      this.vendasDiretasForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }else{
       this.vendasDiretasForm.get('cliente')?.setValue(`${value.fantasyName}`)
+      this.vendasDiretasForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }
   }

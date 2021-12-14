@@ -5,6 +5,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { getDate } from 'src/environments/global';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clientes',
@@ -29,18 +30,19 @@ export class ClientesComponent implements OnInit {
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
   clienteForm : FormGroup = new FormGroup({
+    'disabled': new FormControl(''),
     'name' : new FormControl(null, [Validators.required]),
     'surname' : new FormControl(null, [Validators.required]),
     'cpf' : new FormControl(null, [Validators.required, BrazilValidator.isValidCpf()]),
     'cnpj' : new FormControl(null, [BrazilValidator.isValidCpf()]),
-    'rg' : new FormControl(null, [Validators.required, BrazilValidator.isValidRG()]),
+    'rg' : new FormControl(null, [Validators.required]),
     'cellphone' : new FormControl(null, [Validators.required]),
-    'companyCellphone' : new FormControl(null),
+    'companyCellPhone' : new FormControl(null),
     'telephone' : new FormControl(null, [Validators.required]),
     'companyTelephone' : new FormControl(null),
     'birthDate' : new FormControl(null, [Validators.required]),
     'birthDateCompany' : new FormControl(null),
-    'subcription' : new FormControl(null),
+    'subscription' : new FormControl(null),
     'socialReason' : new FormControl(null),
     'fantasyName' : new FormControl(null),
     'ramal' : new FormControl(null),
@@ -49,7 +51,20 @@ export class ClientesComponent implements OnInit {
     'addresses' : new FormArray([]),
     'codigo': new FormControl(''),
     'nomeVendedor': new FormControl(''),
-    'tabela': new FormArray([])
+    'tabela': new FormArray([]), // ver de onde eu tirei essa tabela
+    'debito': new FormControl(''),
+    'creditoAvista': new FormControl(''),
+    'creditoAprazo': new FormControl(''),
+    'boletoAvista': new FormControl(''),
+    'boletoDdl': new FormControl('Não Solicitado'),
+    "obs": new FormControl(''),
+    "restricao": new FormControl(''),
+    "validade": new FormControl(''),
+    "limiteCompra": new FormControl(null),
+    "descontoMax": new FormControl(null),
+    "obsCredito": new FormControl(''),
+    "codigoVendedor": new FormControl(''),
+    "vendedor": new FormControl('')
   })
 
   public enderecos: any = [{}];
@@ -96,7 +111,13 @@ export class ClientesComponent implements OnInit {
   }
 
   public toggleDesativadoCheckbox(): void {
-    this.desativadoCheckbox === true ? this.desativadoCheckbox = false : this.desativadoCheckbox = true;
+    if(this.desativadoCheckbox === true){
+      this.desativadoCheckbox = false
+      this.clienteForm.get('disabled')?.setValue(false)
+    }else{
+      this.desativadoCheckbox = true
+      this.clienteForm.get('disabled')?.setValue(true)
+    }
   }
 
   public toggleTipoPessoa(value: string): void {
@@ -116,8 +137,8 @@ export class ClientesComponent implements OnInit {
       this.clienteForm.controls.fantasyName.updateValueAndValidity()
       this.clienteForm.controls.socialReason.clearValidators()
       this.clienteForm.controls.socialReason.updateValueAndValidity()
-      this.clienteForm.controls.subcription.clearValidators()
-      this.clienteForm.controls.subcription.updateValueAndValidity()
+      this.clienteForm.controls.subscription.clearValidators()
+      this.clienteForm.controls.subscription.updateValueAndValidity()
       this.clienteForm.controls.cnpj.clearValidators()
       this.clienteForm.controls.cnpj.updateValueAndValidity()
       this.clienteForm.controls.companyCellphone.clearValidators()
@@ -134,7 +155,7 @@ export class ClientesComponent implements OnInit {
       // Company validators
       this.clienteForm.controls.fantasyName.setValidators([Validators.required])      
       this.clienteForm.controls.socialReason.setValidators([Validators.required])      
-      this.clienteForm.controls.subcription.setValidators([Validators.required])      
+      this.clienteForm.controls.subscription.setValidators([Validators.required])      
       this.clienteForm.controls.cnpj.setValidators([Validators.required, BrazilValidator.isValidCpf()])      
       this.clienteForm.controls.companyCellphone.setValidators([Validators.required])      
       this.clienteForm.controls.companyTelephone.setValidators([Validators.required])      
@@ -167,7 +188,7 @@ export class ClientesComponent implements OnInit {
 
     this.correiosService.consultaCep(cep).subscribe((data: any) => {
       if (data.cep) {
-        (this.clienteForm.controls.addresses as FormArray).at(i).get('address')?.setValue(data.logradouro);
+        (this.clienteForm.controls.addresses as FormArray).at(i).get('street')?.setValue(data.logradouro);
         (this.clienteForm.controls.addresses as FormArray).at(i).get('neighborhood')?.setValue(data.bairro);
         (this.clienteForm.controls.addresses as FormArray).at(i).get('city')?.setValue(data.localidade);
         (this.clienteForm.controls.addresses as FormArray).at(i).get('state')?.setValue(data.uf);
@@ -177,12 +198,17 @@ export class ClientesComponent implements OnInit {
 
   submitClient(data : any) {
     if(this.clienteForm.valid) {
-      if (!this.desativadoCheckbox) {
-        data.disabled = true
-      } else {
-        data.disabled = false
-      }
       this.clientService.create(data).subscribe((dataReturn) => {
+        Swal.fire({ 
+          title: '<h4>Cliente adicionado !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true ,
+          width: '500px'
+        })
         this.router.navigate(['sistema', 'vendas', 'clientes', 'listar'])
       }, (err) => {
         console.log(err)
@@ -193,8 +219,10 @@ export class ClientesComponent implements OnInit {
   solicitar(){
     if(this.solicitado==false){
       this.solicitado=true
+      this.clienteForm.get('boletoDdl')?.setValue('Solicitado')
     }else{
       this.solicitado=false
+      this.clienteForm.get('boletoDdl')?.setValue('Não Solicitado')
     }
   }
 
@@ -220,7 +248,6 @@ export class ClientesComponent implements OnInit {
         }
       }
     }
-    console.log(this.tabela.value)
   }
 
 }

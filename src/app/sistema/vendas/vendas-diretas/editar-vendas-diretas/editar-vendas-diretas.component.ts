@@ -60,15 +60,16 @@ export class EditarVendasDiretasComponent implements OnInit {
     "complemento": new FormControl(''),
     "motorista": new FormControl('', [Validators.required]),
     "placa": new FormControl('', [Validators.required]),
-    "previsaoEntrega": new FormControl(''), 
+    "previsaoEntrega": new FormControl(null, Validators.required),  
     "meioPagamento": new FormControl('', [Validators.required]), 
-    "dataVencimento": new FormControl(null),
+    "dataVencimento": new FormControl(null, [Validators.required]), 
     "aguradandoPagamento": new FormControl(''),
     "linkBoleto": new FormControl(''),
     "linkNf": new FormControl(''),
     "obs": new FormControl(''),
     "tipoVenda": new FormControl(1),
     "total": new FormControl(0),
+    "clienteId": new FormControl(null)
   })
   constructor(
     private readonly router: Router,
@@ -131,6 +132,7 @@ export class EditarVendasDiretasComponent implements OnInit {
       this.vendasDiretasForm.get("linkBoleto")?.setValue(data.linkBoleto)
       this.vendasDiretasForm.get("linkNf")?.setValue(data.linkNf)
       this.vendasDiretasForm.get("obs")?.setValue(data.obs)
+      this.vendasDiretasForm.get("clienteId")?.setValue(data.clienteId)
       for(let item of data.item){
         console.log(item)
         this.item.push(new FormGroup({
@@ -260,9 +262,11 @@ export class EditarVendasDiretasComponent implements OnInit {
   selectThisCliente(value: any){
     if(value.name!=null && value.surname!=null){
       this.vendasDiretasForm.get('cliente')?.setValue(`${value.name} ${value.surname}`)
+      this.vendasDiretasForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }else{
       this.vendasDiretasForm.get('cliente')?.setValue(`${value.fantasyName}`)
+      this.vendasDiretasForm.get('clienteId')?.setValue(value.id)
       this.showSign = false
     }
   }
