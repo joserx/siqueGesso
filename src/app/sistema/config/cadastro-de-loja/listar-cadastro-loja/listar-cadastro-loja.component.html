@@ -1,5 +1,111 @@
 <app-navbar></app-navbar>
 
+
+<!-- Modal -->
+<div class="modal fade" id="filtrarLoja" tabindex="-1" aria-labelledby="filtrarLojaLabel"
+  aria-hidden="true" aria-label="Close">
+  <div class="modal-dialog modal-xl">
+      <!-- Modal content -->
+      <div class="modal-content rounded-15 bg-custom-light">
+        <div class="modal-header px-4">
+          <h5 class="modal-title text-custom-dark" id="filtrarLojaLabel">Pesquisar Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+          <div class="row">
+            <div class="col px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+              type="text" placeholder="Nome" autocomplete="no" (keyup)="filtrarNome($event)">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+            </div>
+            <div class="col px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+              type="text" placeholder="Rua" autocomplete="no" (keyup)="filtrarRua($event)">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Rua</label>
+            </div>
+            <div class="col px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+              type="number" placeholder="numero" autocomplete="no" (keyup)="filtrarNumero($event)">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Numero</label>
+            </div>
+            <div class="col px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+              type="text" placeholder="cidade" autocomplete="no" (keyup)="filtrarCidade($event)">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+            </div>
+          </div>
+
+         <!-- Lista de clientes -->
+         <table class="w-100 justify-content-center">
+          <thead class="w-100 row m-0 my-5 text-custom-dark">
+            <tr class="d-flex justify-content-between">
+              <td class="">
+                <h5 class="fw-bold text-truncate text-center">ID</h5>
+              </td>
+              <td class="col-1">
+                <h5 class="fw-bold text-truncate text-center">Nome</h5>
+              </td>
+              <td class="col-1">
+                <h5 class="fw-bold text-truncate text-center">Rua</h5>
+              </td>
+              <td class="col-1">
+                <h5 class="fw-bold text-truncate text-center">Número</h5>
+              </td>
+              <td class="col-1">
+                <h5 class="fw-bold text-truncate text-center">Cidade</h5>
+              </td>
+              <td>
+                <h5 class="fw-bold text-truncate d-none">Ações</h5>
+              </td>
+            </tr>
+          </thead>
+          <tbody class="w-100 row m-0 mt-3 text-custom-dark justify-content-center align-items-center">
+            <tr class="d-flex justify-content-between border-bottom" *ngFor="let loja of lojas">
+              <td class="">
+                <p class="text-center">{{loja.id}}</p>
+              </td>
+              <td class="col-1">
+                <p class="px-1">{{loja.nome}}</p>
+              </td>
+              <td class="col-1">
+                <p  class="px-1">{{loja.logradouro}}</p>
+              </td>
+              <td class="col-1">
+                <p  class="px-1">{{loja.numero}}</p>
+              </td>
+              <td class="col-1">
+                <p  class="px-1">{{loja.cidade}}</p>
+              </td>
+              <td>
+                <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"  routerLink="/sistema/configuracoes/lojas-cadastradas/visualizar/{{loja.id}}"></i>
+                <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/configuracoes/lojas-cadastradas/editar/{{loja.id}}" cursor="pointer"></i>
+                <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(loja.id)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+          <!-- Dados cadastrais -->
+        </div>
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+
+          <!-- Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button data-bs-dismiss="modal" type="reset"
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
+            </button>
+          </div>
+
+        </div>
+        <!-- /Modal footer -->
+
+      </div>
+      <!-- /Modal content -->
+
+  </div>
+</div>
+
 <div class="row p-0 m-0">
   <div class="col-auto m-0 p-0 bg-custom-light">
     <app-sidemenu></app-sidemenu>
@@ -31,13 +137,13 @@
 
         <!-- Pesquisar -->
         <div class="col-4 px-2 p-0 m-0 position-relative">
-          <input class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+          <input class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar" (keyup)="filtrar($event)">
           <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
         </div>
         
         <!-- Botão Filtro -->
         <div class="col-4 px-2 p-0 m-0">
-          <a class="rounded-15 py-2 px-4 bg-white h-100 d-flex justify-content-between shadow-sm">
+          <a class="rounded-15 py-2 px-4 bg-white h-100 d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#filtrarLoja">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtro</h5>
             <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark"></i>
           </a>
@@ -55,17 +161,55 @@
       </div>
 
       <!-- Tabela -->
-      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let loja of lojas">
-        <div class="col-10">
-          <p>Lorem ipsum</p>
-        </div>
-
-        <div class="col-2 text-end">
-          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="" cursor="pointer"></i>
-          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" ></i>
-        </div>
-      </div>
+      <table class="w-100 justify-content-center">
+        <thead class="w-100 row m-0 my-5 text-custom-dark">
+          <tr class="d-flex justify-content-between">
+            <td class="">
+              <h5 class="fw-bold text-truncate text-center">ID</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Nome</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Rua</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Número</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Cidade</h5>
+            </td>
+            <td>
+              <h5 class="fw-bold text-truncate d-none">Ações</h5>
+            </td>
+          </tr>
+        </thead>
+        <tbody class="w-100 row m-0 mt-3 text-custom-dark justify-content-center align-items-center">
+          <tr class="d-flex justify-content-between border-bottom" *ngFor="let loja of lojas">
+            <td class="">
+              <p class="text-center">{{loja.id}}</p>
+            </td>
+            <td class="col-1">
+              <p class="px-1">{{loja.nome}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{loja.logradouro}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{loja.numero}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{loja.cidade}}</p>
+            </td>
+            <td>
+              <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"  routerLink="/sistema/configuracoes/lojas-cadastradas/visualizar/{{loja.id}}"></i>
+              <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/configuracoes/lojas-cadastradas/editar/{{loja.id}}" cursor="pointer"></i>
+              <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(loja.id)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
 
     </div>
     <!-- /Lista de lojas cadastrardas -->

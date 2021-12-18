@@ -20,6 +20,7 @@ import Swal from 'sweetalert2';
 export class EditarPedidoComponent implements OnInit {
 
   @ViewChild('content', {static: false})el: ElementRef
+  public tipoEntregaVar: string
   public filial: any[] = []
   public enderecos: any[] = []
   public descontoG: number = 0
@@ -150,6 +151,7 @@ export class EditarPedidoComponent implements OnInit {
         this.pedidosForm.get('clienteId')?.setValue(data.clienteId)
         console.log(data)
         for(let item in data.item){
+          this.changeTipoEntrega(data.item[item].prevRetirada)
           this.item.push(new FormGroup({
             'pedidoId': new FormControl(data.item[item].id),
             'codigo': new FormControl(data.item[item].codigo),
@@ -622,6 +624,10 @@ export class EditarPedidoComponent implements OnInit {
         this.selectThisCliente(cliente)
       }
     }
+  }
+
+  changeTipoEntrega(value: string){
+    this.tipoEntregaVar = value
   }
 
 }

@@ -345,7 +345,7 @@
                 <th scope="col-1">Valor unitário</th>
                 <th scope="col-1">Desconto</th>
                 <th scope="col-1">Valor venda</th>
-                <th scope="col-1">Tipo de retirada</th>
+                <!-- <th scope="col-1">Tipo de retirada</th> -->
                 <th scope="col-1">Data prev. da retirada</th>
                 <th scope="col-1">Tipo de entrega</th>
                 <th scope="col-1">Endereço</th>
@@ -364,14 +364,14 @@
                   <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" id="desconto" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" (keyup)="cleanDesconto()" (keyup)="totalProduto(oneItem.value)" autocomplete="off">
                 </td>
                 <td>{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
-                <td>
+                <!-- <td>
                   <select class="form-select form-select-sm" id="tipoRetirada" formControlName="tipoRetirada">
                     <option value="" disabled selected>Selecionar...</option>
                     <option value="tipo1">tipo 1</option>
                     <option value="tipo2">tipo 2</option>
                     <option value="tipo3">tipo 3</option>
                   </select>
-                </td>
+                </td> -->
                 <td>
                   <input class="form-control form-control-sm" type="date" id="prevRetirada" formControlName="prevRetirada">
                 </td>
