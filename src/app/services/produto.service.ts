@@ -21,7 +21,11 @@ export class ProdutoService {
   delete(id: number) {
     return this.http.delete(`${environment.apiUrl}produtos/${id}`);
   }
-  update(id: number, data: any) {
-    return this.http.patch(environment.apiUrl + 'produtos/' + id, data);
+
+
+
+  update(id: number, data: any){
+    return this.http.patch(environment.apiUrl + '/produtos/' +id, data)
   }
+
 }

@@ -19,6 +19,10 @@ export class RhService {
     return this.http.get(environment.apiUrl + 'rh/' + id);
   }
 
+  findByPage(no: number){
+    return this.http.get(environment.apiUrl + 'rh/page/' + no)
+  }
+
   data() {
     return this.http.get(environment.apiUrl + 'rh/data');
   }

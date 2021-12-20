@@ -29,75 +29,85 @@
 
         <!-- Pedidos gerados -->
         <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="0 | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
-          <label class="ms-2 small text-truncate" for="gerados">{{dados.gerados.qtd}} pedidos gerados</label>
+          <input [value]="totalPedidos(pedidosGerados) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <label class="ms-2 small text-truncate" for="gerados">{{ pedidosGerados.length }} pedidos gerados</label>
         </div>
 
         <!-- Pedidos em digitação -->
         <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="totalPedidos(pedidos) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
-          <label class="ms-2 small text-truncate" for="gerados">{{ pedidos.length }} pedidos em digitação</label>
-        </div>
-      </div>
-
-      <!-- Títulos da Tabela -->
-      <div class="row m-0 my-5 text-custom-dark justify-content-center">
-        <div class="col-1">
-          <h5 class="fw-bold text-truncate">ID</h5>
-        </div>
-        <div class="col-1">
-          <h5 class="fw-bold text-truncate">Data</h5>
-        </div>
-        <div class="col-1">
-          <h5 class="fw-bold text-truncate">Loja</h5>
-        </div>
-        <div class="col-2">
-          <h5 class="fw-bold text-truncate">Vendedor</h5>
-        </div>
-        <div class="col-2">
-          <h5 class="fw-bold text-truncate">Cliente</h5>
-        </div>
-        <div class="col-2">
-          <h5 class="fw-bold text-truncate">Valor</h5>
-        </div>
-        <div class="col-1">
-          <h5 class="fw-bold text-truncate">Status</h5>
-        </div>
-        <div class="col text-end">
-          <h5 class="fw-bold text-truncate d-none">Ações</h5>
-          <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarPedidos"></i>
-          <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#filtrarPedidos"></i>
+          <input [value]="totalPedidos(pedidosAguardando) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
+          <label class="ms-2 small text-truncate" for="gerados">{{ pedidosAguardando.length }} pedidos em digitação</label>
         </div>
       </div>
 
       <!-- Tabela -->
-      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center align-items-center" *ngFor="let pedido of atualPage">
-        <div class="col-1">
-          <p>{{ pedido.id }}</p>
-        </div>
-        <div class="col-1">
-          <p>{{ pedido.data | date }}</p>
-        </div>
-        <div class="col-1">
-          <p>{{ pedido.loja }}</p>
-        </div>
-        <div class="col-2">
-          <p>{{ pedido.vendedor }}</p>
-        </div>
-        <div class="col-2">
-          <p>{{ pedido.cliente }}</p>
-        </div>
-        <div class="col-2">
-          <p>{{ pedido.total | currency:'BRL'}}</p>
-        </div>
-        <div class="col-1">
-          <p>{{ pedido.status }}</p>
-        </div>
-        <div class="col text-end">
-          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
-        </div>
-      </div>
+      <table class="w-100 justify-content-center">
+        <thead class="w-100 row m-0 my-5 text-custom-dark">
+          <tr class="d-flex justify-content-between">
+            <td class="">
+              <h5 class="fw-bold text-truncate text-center">ID</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Criado em</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Loja</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Vendedor</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Cliente</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Valor</h5>
+            </td>
+            <td class="col-1">
+              <h5 class="fw-bold text-truncate text-center">Status</h5>
+            </td>
+            <td class="col-2">
+              <h5 class="fw-bold text-truncate text-center">Atualizado em</h5>
+            </td>
+            <td>
+              <h5 class="fw-bold text-truncate d-none">Ações</h5>
+              <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarPedidos"></i>
+              <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#filtrarPedidos"></i>
+            </td>
+          </tr>
+        </thead>
+        <tbody class="w-100 row m-0 mt-3 text-custom-dark justify-content-center align-items-center">
+          <tr class="d-flex justify-content-between border-bottom" *ngFor="let pedido of atualPage">
+            <td class="">
+              <p class="text-center">{{ pedido.id>1000? pedido(pedido.id | slice:0:2) + "..." : pedido.id }}</p>
+            </td>
+            <td class="col-1">
+              <p class="px-1">{{ pedido.created_at | date }}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.loja.length>20? (pedido.loja | slice:0:20)  + "..."  : pedido.loja }}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.vendedor.length>15? (pedido.vendedor | slice:0:15) + "..." : pedido.vendedor}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.cliente.length>15? (pedido.cliente | slice:0:20) + "..." : pedido.cliente}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.total | currency:'BRL'}}</p>
+            </td>
+            <td class="col-1">
+              <p  class="px-1">{{ pedido.status }}</p>
+            </td>
+            <td class="col-2">
+              <p  class="px-1 text-center">{{ pedido.updated_at | date }}</p>
+            </td>
+            <td>
+              <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}"></i>
+              <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <div class="col-12 row mt-3 d-flex justify-content-around">
         <div class="col-3 row m-auto">

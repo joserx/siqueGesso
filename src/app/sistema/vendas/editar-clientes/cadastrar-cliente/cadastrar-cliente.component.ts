@@ -5,6 +5,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { getDate } from 'src/environments/global';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-cadastrar-cliente',
@@ -17,11 +18,12 @@ export class EditarCadastrarClienteComponent implements OnInit {
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
   clienteForm : FormGroup = new FormGroup({
+    'disabled': new FormControl(''),
     'name' : new FormControl(null, [Validators.required]),
     'surname' : new FormControl(null, [Validators.required]),
     'cpf' : new FormControl('', [Validators.required, ]),
     'cnpj' : new FormControl('', [BrazilValidator.isValidCpf()]),
-    'rg' : new FormControl('', [Validators.required, BrazilValidator.isValidRG()]),
+    'rg' : new FormControl('', [Validators.required]),
     'cellphone' : new FormControl(null, [Validators.required]),
     'companyCellPhone' : new FormControl(null),
     'telephone' : new FormControl(null, [Validators.required]),
@@ -60,6 +62,8 @@ export class EditarCadastrarClienteComponent implements OnInit {
       if(this.client.cnpj!=null){
         this.tipoPessoa = 'juridica'
       }
+      this.clienteForm.get('disabled')?.setValue(this.client.disabled)
+      this.desativadoCheckbox = this.clienteForm.get('disabled')?.value
       /* CPF */
       this.clienteForm.get('name')?.setValue(this.client.name)
       this.clienteForm.get('surname')?.setValue(this.client.surname)
@@ -67,14 +71,14 @@ export class EditarCadastrarClienteComponent implements OnInit {
       this.clienteForm.get('rg')?.setValue(this.client.rg)
       this.clienteForm.get('cellphone')?.setValue(this.client.cellphone)
       this.clienteForm.get('telephone')?.setValue(this.client.telephone)
-      this.clienteForm.get('birthDate')?.setValue(this.client.birthDate.substring(10, 0))
+      this.clienteForm.get('birthDate')?.setValue(this.client.birthDate!=null? this.client.birthDate.substring(10, 0) : null)
       this.clienteForm.get('email')?.setValue(this.client.email)
       /* CNPJ */
       this.clienteForm.get("cnpj")?.setValue(this.client.cnpj)
       this.clienteForm.get("subscription")?.setValue(this.client.subscription)
       this.clienteForm.get("socialReason")?.setValue(this.client.socialReason)
       this.clienteForm.get("fantasyName")?.setValue(this.client.fantasyName)
-      this.clienteForm.get("birthDateCompany")?.setValue(this.client.birthDateCompany.substring(10, 0))
+      this.clienteForm.get("birthDateCompany")?.setValue(this.client.birthDateCompany!= null? this.client.birthDateCompany.substring(10, 0) : null)
       this.clienteForm.get("companyEmail")?.setValue(this.client.companyEmail)
       this.clienteForm.get("companyCellPhone")?.setValue(this.client.companyCellPhone)
       this.clienteForm.get("companyTelephone")?.setValue(this.client.companyTelephone)
@@ -109,7 +113,13 @@ export class EditarCadastrarClienteComponent implements OnInit {
   }
 
   public toggleDesativadoCheckbox(): void {
-    this.desativadoCheckbox === true ? this.desativadoCheckbox = false : this.desativadoCheckbox = true;
+    if(this.desativadoCheckbox === true){
+      this.desativadoCheckbox = false
+      this.clienteForm.get('disabled')?.setValue(false)
+    }else{
+      this.desativadoCheckbox = true
+      this.clienteForm.get('disabled')?.setValue(true)
+    }
   }
 
   public toggleTipoPessoa(value: string): void {
@@ -195,15 +205,36 @@ export class EditarCadastrarClienteComponent implements OnInit {
   }
   submitClient(data : any) {
     if(this.clienteForm.valid) {
-      if (!this.desativadoCheckbox) {
-        data.disabled = true
-      } else {
-        data.disabled = false
-      }
       this.clientService.update(this.clientId, data).subscribe((dataReturn) => {
+        Swal.fire({ 
+          title: '<h4>Cliente atualizado!</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
+          timerProgressBar: true ,
+          width: '500px'
+        })
         this.router.navigate(['sistema', 'vendas', 'clientes', 'listar'])
       }, (err) => {
         console.log(err)
+      })
+    }else{
+      for(let item in this.clienteForm['controls']){
+        if(this.clienteForm['controls'][item].status=="INVALID"){
+          console.log(item)
+        }
+      }
+      Swal.fire({ 
+        title: '<h4>Complete os campos necessários!</h4>', 
+        icon: 'error', 
+        toast: true, 
+        position: 'top', 
+        showConfirmButton: false, 
+        timer: 2000, 
+        timerProgressBar: true ,
+        width: '500px'
       })
     }
   }

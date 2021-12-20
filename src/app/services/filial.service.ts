@@ -15,6 +15,10 @@ export class FilialService {
     return this.http.get(environment.apiUrl + 'filial/');
   }
 
+  findOne(id: number){
+    return this.http.get(environment.apiUrl + 'filial/' + id)
+  }
+
   create(data: any) {
     return this.http.post(environment.apiUrl + 'filial', data);
   }

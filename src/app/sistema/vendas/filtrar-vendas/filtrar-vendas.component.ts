@@ -17,9 +17,12 @@ export class FiltrarVendasComponent implements OnInit {
 
   ngOnInit(): void {
     this.pedidosService.find().subscribe((data:any)=>{
-      this.pedidos = data
-      this.pedidosOriginal = data
-      console.log(data)
+      for(let oneData of data){
+        if(oneData.tipoVenda == 0){
+          this.pedidos.push(oneData)
+          this.pedidosOriginal.push(oneData)
+        }
+      }
     })
   }
 
@@ -106,6 +109,7 @@ export class FiltrarVendasComponent implements OnInit {
   filterBeforeTotal = 0;
   filtrarTotal(event : any) {
     let str = Number((event.target.value.substring(3,event.target.value.length).replace(",", ".")).replace(".", ""));
+    str.toFixed(2)
     if(Number(str) != 0) {
       if(String(str).length > String(this.filterBeforeTotal).length) {
         this.pedidos = this.pedidosOriginal.filter((user : any) => `${user.total}`.toUpperCase().includes((String(str).toUpperCase())))

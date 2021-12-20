@@ -47,6 +47,20 @@ import { StatusNconformComponent } from './sistema/expedicao/status-nconform/sta
 import { BaixaEntregaComponent } from './sistema/expedicao/baixa-entrega/baixa-entrega.component';
 import { ListarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/listar-vendas-diretas/listar-vendas-diretas.component';
 import { CriarPedidoVendasDiretasComponent } from './sistema/vendas/vendas-diretas/criar-pedido-vendas-diretas/criar-pedido-vendas-diretas.component';
+import { EditarPedidoComponent } from './sistema/vendas/pedidos-vendas/editar-pedido/editar-pedido.component';
+import { VisualizarPedidoComponent } from './sistema/vendas/pedidos-vendas/visualizar-pedido/visualizar-pedido.component';
+import { ConfiguracoesComponent } from './sistema/config/configuracoes/configuracoes.component';
+import { CadastrarLojaComponent } from './sistema/config/cadastro-de-loja/cadastrar-loja/cadastrar-loja.component';
+import { ListarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/listar-cadastro-loja/listar-cadastro-loja.component';
+import { CadastroDeCategoriaComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-categoria/cadastro-de-categoria.component';
+import { CadastroDeProdutoComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto/cadastro-de-produto.component';
+import { CadastroDeProdutoListaComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto-lista/cadastro-de-produto-lista.component';
+import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
+import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-lista/destinacao-da-venda-lista.component';
+import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
+import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
+import { EditarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/editar-cadastro-loja/editar-cadastro-loja.component';
+import { VisualizarLojaCadastradaComponent } from './sistema/config/cadastro-de-loja/visualizar-loja-cadastrada/visualizar-loja-cadastrada.component';
 
 const routes: Routes = [
   {
@@ -151,6 +165,14 @@ const routes: Routes = [
               {
                 path: 'cadastro',
                 component: CriarPedidoVendasDiretasComponent
+              },
+              {
+                path: 'editar/:id',
+                component: EditarVendasDiretasComponent
+              },
+              {
+                path: 'visualizar/:id',
+                component: VisualizarVendasDiretasComponent
               }
             ]
           },
@@ -196,6 +218,14 @@ const routes: Routes = [
               {
                 path: 'criar',
                 component: CriarPedidoVendasComponent
+              }, 
+              {
+                path: 'editar/:id',
+                component: EditarPedidoComponent
+              },
+              {
+                path: 'visualizar/:id',
+                component: VisualizarPedidoComponent
               }
             ]
           }
@@ -323,6 +353,7 @@ const routes: Routes = [
               }
             ]
           },
+
           {
             path: 'status',
             component: StatusNconformComponent
@@ -348,7 +379,62 @@ const routes: Routes = [
             component: ConsultaStatusComponent
           }
         ]
-      }
+      },
+      {
+        path: 'configuracoes',
+        children: [
+          {
+            path: '',
+            component: ConfiguracoesComponent
+          },        
+          {
+            path: 'lojas-cadastradas',
+            children: [
+              {
+                path: 'lista',
+                component: ListarCadastroLojaComponent
+              },  
+              {
+                path: 'cadastrar',
+                component: CadastrarLojaComponent
+              }, 
+              {
+                path: 'editar/:id',
+                component: EditarCadastroLojaComponent
+              },
+              {
+                path: 'visualizar/:id',
+                component: VisualizarLojaCadastradaComponent
+              }
+            ]          
+          },
+          {
+            path: 'cadastro-de-categorias',
+            children: [
+              {
+                path: '',
+                component: CadastroDeCategoriaComponent
+              },  
+              {
+                path: 'categoria-de-produto',
+                component: CadastroDeProdutoListaComponent 
+              },  
+              {
+                path: 'categoria-de-produto/cadastrar',
+                component: CadastroDeProdutoComponent 
+              }, 
+              {
+                path: 'destinacao-de-venda',
+                component: DestinacaoDaVendaListaComponent  
+              },   
+              {
+                path: 'destinacao-de-venda/cadastrar',
+                component: DestinacaoDaVendaCadastroComponent  
+              },  
+            ]          
+          },
+        ]
+      },
     ]
   }
 ];

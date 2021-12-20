@@ -12,24 +12,32 @@ export class SidemenuComponent implements OnInit {
   public menuActive = '';
 
   public navItems = [
-    { nome: 'home', icon: 'bi-house-door', href: '/sistema/home', subMenus: [] },
-    { nome: 'configuracoes', icon: 'bi-gear', href: null, subMenus: [
-        { titulo: 'Usuário', descricao: 'Liste, crie, edite ou remova os usuários do sistema.', paginas: [
-            { nome: 'Usuários do sistema', href: '/sistema/usuarios-sistema' },
-            { nome: 'Permissões', href: '/sistema/usuarios-sistema/permissoes' },
-          ]
-        },
-        { titulo: 'Notificações', descricao: 'Configure as notificações do sistema.', paginas: [
-            { nome: 'Definir notificações', href: '/sistema/notificacoes' }
-          ]
-        },
-        { titulo: '', descricao: '', paginas: [
-          { nome: 'Configurações', href: '/sistema/config'},
-          { nome: 'Sair', href: '/logout'},
-        ]}
-      ]
-    },
-    { nome: 'info', icon: 'bi-info-circle', href: '/sistema/info', subMenus: [] }
+    { nome: 'Home', icon: 'bi-house-door', href: '/sistema/home', subMenus: [] },
+    { nome: "Vendas", icon: "bi-shop", href: "/sistema/vendas" },
+    { nome: "Compras", icon: "bi-cart4", href: "/sistema/compras" },
+    { nome: "Estoque", icon: "bi-box-seam", href: "/sistema/estoque" },
+    { nome: "Financeiro", icon: "bi-file-earmark-bar-graph", href: "/sistema/financeiro" },
+    { nome: "Expedição", icon: "bi-truck", href: "/sistema/expedicao" },
+    { nome: "RH", icon: "bi-person-lines-fill", href: "/sistema/rh" },
+    { nome: 'Configurações',  icon: 'bi-gear', href: '/sistema/configuracoes'},
+    // { nome: 'configuracoes', icon: 'bi-gear', href: null, subMenus: [
+    //     { titulo: 'Usuário', descricao: 'Liste, crie, edite ou remova os usuários do sistema.', paginas: [
+    //         { nome: 'Usuários do sistema', href: '/sistema/usuarios-sistema' },
+    //         { nome: 'Permissões', href: '/sistema/usuarios-sistema/permissoes' },
+    //       ]
+    //     },
+    //     { titulo: 'Notificações', descricao: 'Configure as notificações do sistema.', paginas: [
+    //         { nome: 'Definir notificações', href: '/sistema/notificacoes' }
+    //       ]
+    //     },
+    //     { titulo: '', descricao: '', paginas: [
+    //       { nome: 'Configurações', href: '/sistema/configuracoes'},
+    //       { nome: 'Sair', href: '/logout'},
+    //     ]}
+    //   ]
+    // },
+    // { nome: 'info', icon: 'bi-info-circle', href: '/sistema/info', subMenus: [] },
+    { nome: 'Sair', icon: 'bi-arrow-bar-left', href: '/logout'},
   ]
 
   constructor(
@@ -59,6 +67,14 @@ export class SidemenuComponent implements OnInit {
         this.router.navigateByUrl(href);
       }
     }
+  }
+
+  showMenu(){
+    this.menu = true
+  }
+
+  hideMenu(){
+    this.menu = false
   }
 
 }

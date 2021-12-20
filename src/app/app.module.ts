@@ -108,11 +108,29 @@ import { FiltrarVendasComponent } from './sistema/vendas/filtrar-vendas/filtrar-
 import { FiltrarClientesComponent } from './sistema/vendas/clientes/filtrar-clientes/filtrar-clientes.component';
 import { ViewSuprimentoComponent } from './sistema/estoque/suprimentos/view-suprimento/view-suprimento.component';
 import { EditSuprimentoComponent } from './sistema/estoque/suprimentos/edit-suprimento/edit-suprimento.component';
+
+import { ConfiguracoesComponent } from './sistema/config/configuracoes/configuracoes.component';
+import { ListarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/listar-cadastro-loja/listar-cadastro-loja.component';
+import { CadastrarLojaComponent } from './sistema/config/cadastro-de-loja/cadastrar-loja/cadastrar-loja.component';
+import { CadastroDeCategoriaComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-categoria/cadastro-de-categoria.component';
+import { CadastroDeProdutoListaComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto-lista/cadastro-de-produto-lista.component';
+import { CadastroDeProdutoComponent } from './sistema/config/cadastro-de-categoria/cadastro-de-produto/cadastro-de-produto.component';
+import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-lista/destinacao-da-venda-lista.component';
+import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
+import { NgChartjsModule } from 'ng-chartjs';
+import { FiltrarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/filtrar-vendas-diretas/filtrar-vendas-diretas.component';
+import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
+import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
+import { PesquisarColaboradorComponent } from './sistema/rh/listar-colaboradores/pesquisar-colaborador/pesquisar-colaborador.component';
+import { EditarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/editar-cadastro-loja/editar-cadastro-loja.component';
+import { VisualizarLojaCadastradaComponent } from './sistema/config/cadastro-de-loja/visualizar-loja-cadastrada/visualizar-loja-cadastrada.component';
+
 import { RelatorioProdutosViewComponent } from './sistema/estoque/estoque-produtos/relatorio-produtos-view/relatorio-produtos-view.component';
 import { FiltrarProdutosComponent } from './sistema/estoque/produtos/filtrar-produtos/filtrar-produtos.component';
 import { EditProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/edit-produto-estoque/edit-produto-estoque.component';
 import { AdicionarProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/adicionar-produto-estoque/adicionar-produto-estoque.component';
 import { ViewPedidoComponent } from './sistema/compras/pedidos-compras/view-pedido/view-pedido.component';
+
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -219,12 +237,29 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FiltrarClientesComponent,
     ViewSuprimentoComponent,
     EditSuprimentoComponent,
+
+    ConfiguracoesComponent,
+    ListarCadastroLojaComponent,
+    CadastrarLojaComponent,
+    CadastroDeCategoriaComponent,
+    CadastroDeProdutoListaComponent,
+    CadastroDeProdutoComponent,
+    DestinacaoDaVendaListaComponent,
+    DestinacaoDaVendaCadastroComponent,
+    FiltrarVendasDiretasComponent,
+    EditarVendasDiretasComponent,
+    VisualizarVendasDiretasComponent,
+    PesquisarColaboradorComponent,
+    EditarCadastroLojaComponent,
+    VisualizarLojaCadastradaComponent
+
     RelatorioProdutosViewComponent,
     FiltrarProdutosComponent,
     EditProdutoEstoqueComponent,
     AdicionarProdutoEstoqueComponent,
     ViewPedidoComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -237,6 +272,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false,
     }),
+    NgChartjsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

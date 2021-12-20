@@ -540,6 +540,28 @@
               >
             </div>
           </div>
+
+
+          <!-- Cadastro de tabelas -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4 align-items-center">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Cadastro de tabelas</h5>
+            </div>
+
+            <!-- tabela -->
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating" *ngFor="let tabela of tabelas">
+              <input class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Tabela" currencyMask value="R$0,00">
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela</label>
+            </div>
+
+            <div class="col-1 px-2 pt-4 p-0 m-0">
+              <a class="px-2 py-2" (click)="adicionarTabela()">
+                <i class="bi-plus-square-fill icon-view my-auto fs-4 p-2 m-0 fw-bold text-custom-dark"></i>
+              </a>
+            </div>
+          </div>
+
+
         </div>
 
         <!-- Modal footer -->

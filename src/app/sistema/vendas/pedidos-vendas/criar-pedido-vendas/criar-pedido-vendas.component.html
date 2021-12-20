@@ -11,9 +11,12 @@
         <form [formGroup]="passwordForm">
           <div class="col-12 modal-body px-5 d-flex justify-content-center">  
             <div class="d-flex justify-content-center"  id="content">
-              <div class="px-2 pt-4 p-0 m-0 form-floating">
+              <div class="px-2 pt-4 p-0 m-0 form-floating" *ngIf="this.changeDesconto(this.item.value)!=0 || this.pedidosForm.get('descontoGeral')?.value != 0">
                 <input class="col-12 form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="password" placeholder="Senha" formControlName="password">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Senha</label>
+              </div>
+              <div class="px-2 pt-4 p-0 m-0 form-floating"  >
+                <p class="h3 text-custom-dark fw-normal" *ngIf="this.changeDesconto(this.item.value)==0 && this.pedidosForm.get('descontoGeral')?.value == 0">Gostaria de gerar o pedido ?</p>
               </div>
             </div>
           </div>
@@ -141,7 +144,7 @@
 
 
 <!-- Modal -->
-<!-- Criar pdf -->
+<!-- Selecionar produtos -->
 <div class="modal fade" id="selecionarProdutos" tabindex="-1" aria-labelledby="selecionarProdutosLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <form>
@@ -263,37 +266,37 @@
 
           <!-- Data -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()" formControlName="data">
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()" id="data" formControlName="data">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label>
           </div>
 
           <!-- Loja -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Loja" formControlName="loja">
+            <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Loja" id="loja" formControlName="loja">
               <option value="" disabled selected>Selecione uma loja</option>
-              <option value="Loja 1">Loja 1</option>
-              <option value="Loja 2">Loja 2</option>
+              <option *ngFor="let loja of filial" value="{{loja.nome}}">{{loja.nome}}</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
           </div>
 
           <!-- Vendedor -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Vendedor" formControlName="vendedor">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Vendedor" id="vendedor" formControlName="vendedor">
               <option value="" disabled selected>Selecione um vendedor</option>
-              <option value="Vendedor 1">Vendedor 1</option>
-              <option value="Vendedor 2">Vendedor 2</option>
+              <option *ngFor="let vendedor of vendedores" value="{{vendedor.name}} {{vendedor.surname}}">{{vendedor.name}} {{vendedor.surname}}</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
           </div>
 
           <!-- Dados do cliente -->
-          <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Cliente" formControlName="cliente">
-              <option value="" disabled selected>Selecione um cliente</option>
-              <option *ngFor="let cliente of clientes;" [value]="cliente.nome">{{cliente.nome}}</option>
-            </select>
+          <div class="col-8 px-2 pt-4 p-0 m-0 form-floating" >
+            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cliente"  id="cliente" formControlName="cliente" (keyup)="filtrarCliente($event)" (keyup)="checkClient($event)" autocomplete="off">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dados do cliente</label>
+            <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
+              <ul class="drivers-list list-unstyled">
+                <li class="p-1 px-2 user-select-none" *ngFor="let cliente of clientes" (click)="selectThisCliente(cliente)">{{ cliente.name!=null && cliente.surname!=null? cliente.name + ' ' + cliente.surname : cliente.fantasyName }}</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Botão adicionar cliente -->
@@ -342,8 +345,9 @@
                 <th scope="col-1">Valor unitário</th>
                 <th scope="col-1">Desconto</th>
                 <th scope="col-1">Valor venda</th>
-                <th scope="col-1">Tipo de retirada</th>
+                <!-- <th scope="col-1">Tipo de retirada</th> -->
                 <th scope="col-1">Data prev. da retirada</th>
+                <th scope="col-1">Tipo de entrega</th>
                 <th scope="col-1">Endereço</th>
                 <th scope="col-1">Valor Frete</th>
               </tr>
@@ -353,34 +357,41 @@
                 <th scope="row">{{ oneItem.value.codigo }}</th>
                 <td>{{ oneItem.value.produto }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" formControlName="quantidade" (keyup)="totalQuanti(this.item.value)">
+                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" id="quantidade"  formControlName="quantidade" (keyup)="totalQuanti(this.item.value)" (keyup)="totalProduto(oneItem.value)">
                 </td>
                 <td>{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
                 <td>
-                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" formControlName="desconto" (keyup)="changeDesconto(this.item.value)">
+                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" id="desconto" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" (keyup)="cleanDesconto()" (keyup)="totalProduto(oneItem.value)" autocomplete="off">
                 </td>
                 <td>{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
-                <td>
-                  <select class="form-select form-select-sm" formControlName="tipoRetirada">
+                <!-- <td>
+                  <select class="form-select form-select-sm" id="tipoRetirada" formControlName="tipoRetirada">
                     <option value="" disabled selected>Selecionar...</option>
                     <option value="tipo1">tipo 1</option>
                     <option value="tipo2">tipo 2</option>
                     <option value="tipo3">tipo 3</option>
                   </select>
-                </td>
+                </td> -->
                 <td>
-                  <input class="form-control form-control-sm" type="date" formControlName="prevRetirada">
+                  <input class="form-control form-control-sm" type="date" id="prevRetirada" formControlName="prevRetirada">
                 </td>
-                <td>
-                  <select class="form-select form-select-sm" formControlName="endereco">
+                <!-- Tipo de entrega -->
+                <td class="row">
+                  <select #tipoEntrega class="col form-select form-select-sm" id="endereco" formControlName="tipoEntrega">
                     <option value="" disabled selected>Selecionar...</option>
-                    <option value="endereco1">Endereço 1</option>
-                    <option value="endereco2">Endereço 2</option>
-                    <option value="endereco3">Endereço 3</option>
+                    <option value="entrega">entrega</option>
+                    <option value="retirada">retirada</option>
                   </select>
                 </td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="valorFrete" (keyup)="changeFrete(this.item.value)">
+                  <input *ngIf="tipoEntrega.value=='retirada'" class="form-control form-control-sm" type="text" id="enderecoLoja" formControlName="enderecoLoja" placeholder="Endereco da loja">
+                  <select *ngIf="tipoEntrega.value=='entrega'" class="col form-select form-select-sm" id="endereco" formControlName="endereco">
+                    <option value="" disabled selected>Selecionar...</option>
+                    <option *ngFor="let endereco of enderecos" value="{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}">{{endereco.street}} {{endereco.number}} {{endereco.neighborhood}}, {{endereco.state}}</option>
+                  </select>
+                </td>
+                <td>
+                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" id="valorFrete" formControlName="valorFrete" (keyup)="setThisFrete(oneItem.value, $event)" (keyup)="totalProduto(oneItem.value)">
                 </td>
               </tr>
             </tbody>
@@ -395,7 +406,7 @@
 
           <!-- Desconto geral -->
           <div class="col-4 px-2 p-0 m-0 form-floating">
-            <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto geral" formControlName="descontoGeral">
+            <input currencyMask  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="R$" id="descontoGeral" formControlName="descontoGeral" (keyup)="descontoGeral(this.pedidosForm.value)" autocomplete="off">
             <label class="ms-2 mb-2 small text-truncate text-custom-dark">Desconto geral</label>
           </div>
         </div>
@@ -405,28 +416,27 @@
           <div class="col-12 pb-4 border-bottom">
             <h4 class="m-0 text-custom-dark">Dados de entrega</h4>
           </div>
-
-          <!-- Tipo de entrega -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tipo de entrega" formControlName="tipoEntrega">
-              <option value="" disabled selected>Selecione um tipo de entrega</option>
-              <option value="entrega">Entrega</option>
-              <option value="retirada">Retirada</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de entrega</label>
+        <div *ngFor="let oneItem of item['controls']">
+          <div class="row">
+            <!-- Produto -->
+            <div class="col px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço" [value]="oneItem.value.produto" readonly>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Produto</label>
+            </div>
+  
+            <!-- Endereço -->
+            <div class="col px-2 pt-4 p-0 m-0 form-floating">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço" [value]="oneItem.value.endereco" readonly>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
+            </div>
+  
+            <!-- Valor do frete -->
+            <div class="col px-2 pt-4 p-0 m-0 form-floating">
+              <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" [value]="oneItem.value.valorFrete | currency:'BRL'" readonly>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor do frete</label>
+            </div>
           </div>
-
-          <!-- Endereço -->
-          <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço" formControlName="enderecoEntrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
-          </div>
-
-          <!-- Valor do frete -->
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input currencyMask [value]="300 | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" formControlName="valorFreteEntrega">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor do frete</label>
-          </div>
+        </div>
 
           <!-- Dados de entrega -->
           <div class="col-12 mt-4 p-0 px-2 ms-1 bg-custom-dark rounded-25">
@@ -465,19 +475,19 @@
                 <p>{{ totalQuanti(item.value) }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ totalQuanti(item.value)*valUnit | currency:'BRL' }}</p>
+                <p>{{ valUnit | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ changeDesconto(item.value) | currency:'BRL' }}</p>
+                <p>{{ descontoG==null? (changeDesconto(item.value) | currency:'BRL' ): (descontoG | currency:'BRL') }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ (totalQuanti(item.value)*valUnit) - changeDesconto(item.value) | currency:'BRL' }}</p>
+                <p>{{ valVenda | currency:'BRL' }}</p>
               </div>
               <div class="col-2 text-center">
                 <p>{{ changeFrete(item.value) | currency:'BRL' }}</p>
               </div>
               <div class="col text-center">
-                <p>{{ (((totalQuanti(item.value)*valUnit) - changeDesconto(item.value)) + changeFrete(item.value)) | currency:'BRL' }}</p>
+                <p>{{ totalValue(item.value) | currency:'BRL' }}</p>
               </div>
             </div>
 
@@ -495,7 +505,7 @@
           <div class="col-6 p-0 m-0">
 
             <div class="pt-4 px-2 form-floating">
-              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" formControlName="condPagamento">
+              <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" id="condPagamento" formControlName="condPagamento">
                 <option value="" disabled selected>Selecione uma condição</option>
                 <option value="Loja 1">À vista</option>
                 <option value="Loja 2">Parcelado</option>
@@ -505,7 +515,7 @@
             </div>
 
             <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="pagPersonalizado">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" id="pagPersonalizado" formControlName="pagPersonalizado">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
             </div>
           </div>
@@ -513,7 +523,7 @@
           <!-- Tabela de preço -->
           <div class="col-6 p-0 m-0">
             <div class="pt-4 px-2 form-floating">
-              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas" formControlName="tabPreco">
+              <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas" id="tabPreco" formControlName="tabPreco">
                 <option value="" disabled selected>Selecione uma tabela</option>
                 <option value="Tabela A">Tabela A</option>
                 <option value="Tabela B">Tabela B</option>
@@ -526,7 +536,7 @@
             </div>
 
             <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" formControlName="tabPersonalizado">
+              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" id="tabPersonalizado" formControlName="tabPersonalizado">
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
             </div>
           </div>
@@ -534,7 +544,7 @@
 
           <!-- Meio de pagamento -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="meioPagamento">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" id="meioPagamento" formControlName="meioPagamento">
               <option value="" disabled selected>Selecione um meio de pagamento</option>
               <option value="boleto">Boleto</option>
               <option value="credito">Crédito</option>
@@ -545,40 +555,31 @@
 
           <!-- Dias -->
           <div class="col-1 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm" min="0" type="number" placeholder="Dias" formControlName="dias">
+            <input class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm" min="0" type="number" placeholder="Dias" id="dias" formControlName="dias">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dias</label>
           </div>
 
           <!-- Data de vencimento -->
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" formControlName="dataVencimento">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" id="dataVencimento" formControlName="dataVencimento">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de vencimento</label>
           </div>
 
-          <!-- Status -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" formControlName="status">
-              <option value="aguardando" selected disabled>Status</option>
-              <option *ngFor="let oneStatus of status" value="{{oneStatus.name}}">{{oneStatus.name}}</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
-          </div>
-
           <!-- Link do boleto -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto" formControlName="linkBoleto">
+          <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto" id="linkBoleto" formControlName="linkBoleto">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link do boleto</label>
           </div>
 
           <!-- Link da nota fiscal -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" formControlName="linkNf">
+          <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" id="linkNf" formControlName="linkNf">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link da nota fiscal</label>
           </div>
 
           <!-- Observações -->
           <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="obs"></textarea>
+            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" id="obs" formControlName="obs"></textarea>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
           </div>
 
