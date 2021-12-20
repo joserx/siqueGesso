@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div class="modal fade" id="adicionarProdutos" tabindex="-1" aria-labelledby="adicionarProdutosLabel" aria-hidden="true">
+<div class="modal fade" id="editProdutos" tabindex="-1" aria-labelledby="editProdutosLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <form [formGroup]="fornecedorForm">
+        <form [formGroup]="produtoEditForm">
             <!-- Modal content -->
             <div class="modal-content rounded-15 bg-custom-light">
                 <div class="modal-header px-4">
-                    <h5 class="modal-title text-custom-dark" id="adicionarProdutosLabel">
+                    <h5 class="modal-title text-custom-dark" id="viewProdutosLabel">
                         Adicionar produto
                     </h5>
                     <button type="button" class="btn-close" #close data-bs-dismiss="modal" aria-label="Close"></button>
@@ -82,142 +82,6 @@
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Nome do produto</label
               >
-            </div>
-          </div>
-          <!-- Precificação -->
-          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
-            <div class="col-12 px-2 m-0 p-0">
-              <h5 class="fw-bold text-custom-dark m-0 p-0">Precificação</h5>
-            </div>
-
-            <!-- Custo médio -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="text"
-                placeholder="Custo médio"
-                formControlName="custoMedio"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Custo médio</label
-              >
-            </div>
-
-            <!-- Preço médio de venda -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="text"
-                placeholder="Preço médio de venda"
-                formControlName="precoMedio"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Preço médio de venda</label
-              >
-            </div>
-
-            <!-- Margem de lucro -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="text"
-                placeholder="%"
-                formControlName="margemLucro"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Margem de lucro</label
-              >
-            </div>
-
-            <!-- Comissão -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="text"
-                placeholder="%"
-                formControlName="comissao"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Comissão</label
-              >
-            </div>
-
-            <!-- Fornecedores padrão -->
-            <div
-              *ngFor="
-                let fornecedor of fornecedorArray['controls'];
-                let i = index
-              "
-              formArrayName="fornecedores"
-            >
-              <div
-                [formGroupName]="i"
-                class="
-                  col-11
-                  px-2
-                  pt-4
-                  p-0
-                  m-0
-                  d-flex
-                  align-items-center
-                  form-floating
-                "
-              >
-                <select
-                  class="
-                    form-select
-                    h-limited-sm
-                    px-4
-                    py-1
-                    rounded-15
-                    shadow-sm
-                  "
-                  formControlName="id"
-                >
-                  <option selected disabled>Selecione um fornecedor</option>
-                  <option
-                    *ngFor="let fornecedor of fornecedores"
-                    value="{{ fornecedor.id }}"
-                  >
-                    {{ fornecedor.fantasy_name }}
-                  </option>
-                </select>
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                  >Fornecedores padrão</label
-                >
-                <div *ngIf="fornecedorArray.length > 1">
-                  <a class="px-2 py-2" (click)="removerFornecedorPadrao(i)">
-                    <i
-                      class="
-                        bi bi-x-square-fill
-                        icon-view
-                        my-auto
-                        fs-4
-                        p-2
-                        m-0
-                        fw-bold
-                        text-custom-dark
-                      "
-                    ></i>
-                  </a>
-                </div>
-              </div>
-              <div class="col-1 px-2 pt-4 p-0 m-0">
-                <a class="px-2 py-2" (click)="adicionarFornecedorPadrao()">
-                  <i
-                    class="
-                      bi-plus-square-fill
-                      icon-view
-                      my-auto
-                      fs-4
-                      p-2
-                      m-0
-                      fw-bold
-                      text-custom-dark
-                    "
-                  ></i>
-                </a>
-              </div>
             </div>
           </div>
 
@@ -382,6 +246,108 @@
             </div>
           </div>
 
+          <!-- Precificação -->
+          <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+            <div class="col-12 px-2 m-0 p-0">
+              <h5 class="fw-bold text-custom-dark m-0 p-0">Precificação</h5>
+            </div>
+
+            <!-- Custo médio -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Custo médio"
+                formControlName="custoMedio"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Custo médio</label
+              >
+            </div>
+
+            <!-- Preço médio de venda -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Preço médio de venda"
+                formControlName="precoMedio"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Preço médio de venda</label
+              >
+            </div>
+
+            <!-- Margem de lucro -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="%"
+                formControlName="margemLucro"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Margem de lucro</label
+              >
+            </div>
+
+            <!-- Comissão -->
+            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+              <input
+                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="%"
+                formControlName="comissao"
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Comissão</label
+              >
+            </div>
+
+            <!-- Fornecedores padrão -->
+            <!-- <div
+              *ngFor="
+                let fornecedor of fornecedorArray['controls'];
+                let i = index
+              "
+              formArrayName="fornecedores"
+            >
+              <div
+                [formGroupName]="i"
+                class="
+                  col-11
+                  px-2
+                  pt-4
+                  p-0
+                  m-0
+                  d-flex
+                  align-items-center
+                  form-floating
+                "
+              >
+                <select
+                  class="
+                    form-select
+                    h-limited-sm
+                    px-4
+                    py-1
+                    rounded-15
+                    shadow-sm
+                  "
+                  formControlName="id"
+                >
+                  <option selected disabled>Selecione um fornecedor</option>
+                  <option
+                    *ngFor="let fornecedor of fornecedores"
+                    value="{{ fornecedor.id }}"
+                  >
+                    {{ fornecedor.fantasy_name }}
+                  </option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+
           <!-- Tributação -->
           <div class="row pt-3 p-0 m-0 border-bottom pb-4">
             <div class="col-12 px-2 m-0 p-0">
@@ -540,28 +506,6 @@
               >
             </div>
           </div>
-
-
-          <!-- Cadastro de tabelas -->
-          <div class="row pt-3 p-0 m-0 border-bottom pb-4 align-items-center">
-            <div class="col-12 px-2 m-0 p-0">
-              <h5 class="fw-bold text-custom-dark m-0 p-0">Cadastro de tabelas</h5>
-            </div>
-
-            <!-- tabela -->
-            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating" *ngFor="let tabela of tabelas">
-              <input class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Tabela" currencyMask value="R$0,00">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela</label>
-            </div>
-
-            <div class="col-1 px-2 pt-4 p-0 m-0">
-              <a class="px-2 py-2" (click)="adicionarTabela()">
-                <i class="bi-plus-square-fill icon-view my-auto fs-4 p-2 m-0 fw-bold text-custom-dark"></i>
-              </a>
-            </div>
-          </div>
-
-
         </div>
 
         <!-- Modal footer -->
@@ -608,7 +552,7 @@
                 shadow-sm
                 text-start
               "
-              (click)="submit()"
+              (click)="save()"
             >
               <h5
                 class="
@@ -622,7 +566,6 @@
             </button>
           </div>
         </div>
-        <!-- /Modal footer -->
       </div>
       <!-- /Modal content -->
     </form>

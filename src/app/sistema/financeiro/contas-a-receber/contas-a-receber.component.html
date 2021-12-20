@@ -1,40 +1,56 @@
 <div class="row m-0 p-0">
+    <!-- Botão Adicionar -->
+    <div class="col-2 px-2 pt-4 p-0 m-0">
+        <a data-bs-toggle="modal" data-bs-target="#adicionarRecebimento" class="
+        rounded-15
+        py-1
+        px-4
+        bg-custom-success
+        h-limited-sm
+        d-flex
+        justify-content-between
+        shadow-sm
+      ">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                Adicionar
+            </h5>
+            <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+        </a>
+    </div>
 
-  <!-- Botão Adicionar -->
-  <div class="col-2 px-2 pt-4 p-0 m-0">
-    <a  data-bs-toggle="modal" data-bs-target="#adicionarRecebimento" class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
-      <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</h5>
-      <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
-    </a>
-  </div>
-
-  <!-- Data inicial -->
-  <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
-    <input class="form-control h-limited-sm py-3 rounded-15 shadow-sm" type="date" placeholder="Data inicial">
-    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data inicial</label>
+    <!-- Data inicial -->
+    <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+        <input class="form-control h-limited-sm py-3 rounded-15 shadow-sm" type="date" placeholder="Data inicial" />
+        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data inicial</label
+    >
   </div>
 
   <!-- Data final -->
   <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
-    <input class="form-control h-limited-sm py-3 rounded-15 shadow-sm" type="date" placeholder="Data final">
-    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data final</label>
-  </div>
-
-  <!-- Mais ações -->
-  <div class="col-2 px-2 pt-4 m-0 dropdown d-grid gap-2">
-    <button class="btn btn-light bg-white h-limited-sm dropdown-toggle text-custom-dark text-truncate fs-5 rounded-15 shadow-sm" type="button" id="mais_acoes" data-bs-toggle="dropdown" aria-expanded="false">
-      Mais ações
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="mais_acoes">
-      <li><a class="dropdown-item">Ação 1</a></li>
-      <li><a class="dropdown-item">Ação 2</a></li>
-      <li><a class="dropdown-item">Ação 3</a></li>
-    </ul>
+    <input
+      class="form-control h-limited-sm py-3 rounded-15 shadow-sm"
+      type="date"
+      placeholder="Data final"
+    />
+    <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+      >Data final</label
+    >
   </div>
 
   <!-- Botão Filtro -->
   <div class="col-2 px-2 pt-4 p-0 m-0">
-    <a class="rounded-15 py-2 px-4 bg-white h-limited-sm d-flex justify-content-between shadow-sm">
+    <a
+      class="
+        rounded-15
+        py-2
+        px-4
+        bg-white
+        h-limited-sm
+        d-flex
+        justify-content-between
+        shadow-sm
+      "
+    >
       <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtro</h5>
       <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark"></i>
     </a>
@@ -42,12 +58,34 @@
 
   <!-- Pesquisar -->
   <div class="col-2 px-2 pt-4 m-0 position-relative">
-    <input class="form-control form-control border-0 h-limited-sm py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
+    <input
+      class="
+        form-control form-control
+        border-0
+        h-limited-sm
+        py-2
+        ps-4
+        pe-5
+        rounded-15
+        shadow-sm
+      "
+      type="text"
+      placeholder="Pesquisar"
+    />
     <a>
-      <i class="bi-search fs-5 position-absolute translate-middle top-50 me-4 end-0"></i>
+      <i
+        class="
+          bi-search
+          fs-5
+          position-absolute
+          translate-middle
+          top-50
+          me-4
+          end-0
+        "
+      ></i>
     </a>
   </div>
-
 </div>
 
 <!-- Tabela de contas -->
@@ -73,7 +111,7 @@
         <td>{{ conta.cliente }}</td>
         <td>{{ conta.pagamento }}</td>
         <td>{{ conta.data }}</td>
-        <td>{{ conta.total | currency:'BRL'}}</td>
+        <td>{{ conta.total | currency: "BRL" }}</td>
         <td>{{ conta.situacao }}</td>
         <td>{{ conta.unidade }}</td>
         <td>
@@ -88,15 +126,26 @@
 <!-- /Tabela de contas -->
 
 <div class="row m-0 py-3 justify-content-between">
-
   <!-- Botão Exportar CSV -->
   <div class="col-3 px-2 p-0 m-0 d-grid">
-    <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+    <button
+      type="button"
+      class="
+        h-limited
+        btn
+        rounded-15
+        py-1
+        px-4
+        btn-outline-secondary
+        d-flex
+        justify-content-between
+        shadow-sm
+      "
+    >
       <h5 class="fw-normal my-auto text-truncate">Exportar CSV</h5>
       <i class="bi-file-earmark-spreadsheet my-auto fs-4 p-0 m-0 fw-bold"></i>
     </button>
   </div>
-
 </div>
 
 <app-adicionar-recebimento></app-adicionar-recebimento>

@@ -1,0 +1,105 @@
+<!-- Modal -->
+<div class="modal fade" id="adicionarProdutoEstoque" tabindex="-1" aria-labelledby="adicionarProdutoEstoqueLabel" aria-hidden="true" aria-label="Close">
+    <div class="modal-dialog modal-xl">
+        <form [formGroup]="produtoAddForm">
+            <!-- Modal content -->
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="filtrarPedidosLabel">
+                        Produtos no Estoque
+                    </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <table style="width: 100%; text-align: center">
+                        <tr>
+                            <th>Código</th>
+                            <th>Produto</th>
+                            <th>Custo</th>
+                            <th>Venda</th>
+                            <th>Total</th>
+                            <th>Estoque</th>
+                            <th style="width: 8rem"></th>
+                        </tr>
+                        <tr class="m-0 mt-0 border-bottom text-custom-dark" *ngFor="let produto of produtosFiltrados">
+                            <td>{{ produto?.id }}</td>
+                            <td>{{ produto?.nome }}</td>
+                            <td>{{ produto?.atual }}</td>
+                            <td>{{ produto?.custoMedio | currency: "BRL" }}</td>
+                            <td>{{ produto?.precoMedio | currency: "BRL" }}</td>
+                            <td>{{ produto?.margemLucro }}</td>
+                            <td>
+                                <div class="col px-2 pt-2 pb-2 p-0 m-0 form-floating">
+                                    <input style="max-width: 90%" class="
+                      form-control form-control-lg
+                      border-0
+                      h-5
+                      rounded-15
+                      shadow-sm
+                    " formControlName="atual" type="number" placeholder="Estoque" />
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Add +</label
+                  >
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="row m-0 py-3 modal-footer">
+          <!-- Cancelar -->
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button
+              data-bs-dismiss="modal"
+              type="reset"
+              class="
+                h-limited-sm
+                btn
+                rounded-15
+                py-1
+                px-4
+                bg-light
+                shadow-sm
+                text-start
+              "
+            >
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                Cancelar
+              </h5>
+            </button>
+          </div>
+          <div class="col-3 px-2 p-0 m-0 d-grid">
+            <button
+              type="submit"
+              class="
+                h-limited-sm
+                btn
+                rounded-15
+                py-1
+                px-4
+                bg-custom-success
+                shadow-sm
+                text-start
+              "
+              (click)="save()"
+            >
+              <h5
+                class="
+                  fw-normal
+                  my-auto
+                  text-truncate text-custom-dark text-center
+                "
+              >
+                Adicionar
+              </h5>
+            </button>
+          </div>
+        </div>
+        <!-- /Modal footer -->
+        <!-- /Modal content -->
+      </div>
+    </form>
+  </div>
+</div>

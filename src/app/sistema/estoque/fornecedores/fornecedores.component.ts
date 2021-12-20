@@ -11,6 +11,8 @@ import { ViewFornecedorComponent } from './view-fornecedor/view-fornecedor.compo
 })
 export class FornecedoresComponent implements OnInit {
   public fornecedores: any = [];
+  public fornecedoresFiltrados: any = [];
+  public search: string = '';
 
   @ViewChild(ViewFornecedorComponent)
   viewFornecedorCompenent: any;
@@ -23,11 +25,19 @@ export class FornecedoresComponent implements OnInit {
   ngOnInit(): void {
     this.getFornecedores();
   }
+  pesquisaFornecedores() {
+    if (this.search.length > 0)
+      this.fornecedoresFiltrados = this.fornecedores.filter((fornecedor: any) =>
+        fornecedor.fantasy_name.includes(this.search)
+      );
+    else this.fornecedoresFiltrados = this.fornecedores;
+  }
 
   getFornecedores() {
     this.fornecedorService.find().subscribe((res) => {
       this.fornecedorService.fornecedores = res;
       this.fornecedores = res;
+      this.fornecedoresFiltrados = this.fornecedores;
     });
   }
 

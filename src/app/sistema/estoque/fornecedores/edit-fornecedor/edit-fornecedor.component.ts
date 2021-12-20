@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
@@ -56,6 +62,7 @@ export class EditFornecedorComponent implements OnInit {
   });
 
   @ViewChild('close') closeBtn: any;
+  @Output() reload = new EventEmitter();
 
   constructor(private fornecedorService: FornecedorService) {}
 
@@ -198,6 +205,7 @@ export class EditFornecedorComponent implements OnInit {
       });
     this.fornecedorService.create(this.fornecedorForm.value).subscribe(() => {
       this.closeBtn.nativeElement.click();
+      this.reload.emit();
       return Swal.fire({
         title: 'Fornecedor salvo!',
         icon: 'success',
