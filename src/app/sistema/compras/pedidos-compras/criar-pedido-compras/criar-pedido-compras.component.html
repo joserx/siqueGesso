@@ -1,56 +1,109 @@
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col m-0 bg-custom-white">
-    <!-- Página home -->
-    <div class="container pb-5">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+        <!-- Página home -->
+        <div class="container pb-5">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/compras/pedidos/listar">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/compras/pedidos/listar">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-      </div>
+            <div class="row m-0 mt-4 py-3 border-bottom">
+                <div class="col-12 m-0 p-0 text-custom-dark">
+                    <h4>Criar pedido</h4>
+                </div>
+            </div>
 
-      <div class="row m-0 mt-4 py-3 border-bottom">
-        <div class="col-12 m-0 p-0 text-custom-dark">
-          <h4>Criar pedido</h4>
-        </div>
-      </div>
-
-      <form>
-
-        <!-- Criar pedido -->
-        <div class="row m-0 justify-content-center align-items-center">
-
-          <!-- Código -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
+            <form>
+                <!-- Criar pedido -->
+                <div class="row m-0 justify-content-center align-items-center">
+                    <!-- Código -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="
+                form-control form-control-lg
+                h-100
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+              " type="text" placeholder="Código" />
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label
+            >
           </div>
 
           <!-- Data da compra -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data da compra" [max]="getDate()">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da compra</label>
+            <input
+              class="
+                form-control form-control-lg
+                h-100
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+              "
+              type="date"
+              placeholder="Data da compra"
+              [max]="getDate()"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Data da compra</label
+            >
           </div>
 
           <!-- Fornecedor -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <select #fornecedor (change)="setFornecedorSelecionado(fornecedor.value)" class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Fornecedor">
-              <option value="" disabled selected>Selecione um Fornecedor</option>
-              <option *ngFor="let fornecedor of fornecedores;" [value]="fornecedor.id">{{fornecedor.razao_social}}</option>
+            <select
+              #fornecedor
+              (change)="setFornecedores(fornecedor.value)"
+              class="
+                form-select form-select-lg
+                h-100
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+                text-custom-dark
+              "
+              type="text"
+              placeholder="Fornecedor"
+            >
+              <option value="" disabled selected>
+                Selecione um Fornecedor
+              </option>
+              <option
+                *ngFor="let listaFornecedor of fornecedores"
+                [value]="listaFornecedor.fantasy_name"
+              >
+                {{ listaFornecedor.fantasy_name }}
+              </option>
             </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Fornecedor</label
+            >
           </div>
 
           <!-- Adicionar  -->
           <div class="col-1 px-2 pt-3 p-0 m-0 text-center">
             <a class="px-2 py-2" routerLink="/sistema/estoque">
-              <i class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"></i>
+              <i
+                class="
+                  bi-plus-square-fill
+                  icon-view
+                  my-auto
+                  fs-3
+                  p-2
+                  m-0
+                  fw-bold
+                  text-custom-dark
+                "
+              ></i>
             </a>
           </div>
         </div>
@@ -63,34 +116,82 @@
 
           <!-- Razão social -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input readonly class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" [value]="fornecedorSelecionado.razao_social" type="text">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão social</label>
+            <input
+              readonly
+              class="
+                form-control form-control-lg
+                h-100
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+              "
+              [value]="fornecedorSelecionado?.fantasy_name"
+              type="text"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Razão social</label
+            >
           </div>
 
           <!-- CNPJ -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input readonly class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" [value]="fornecedorSelecionado.cnpj" type="text">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+            <input
+              readonly
+              class="
+                form-control form-control-lg
+                h-100
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+              "
+              [value]="fornecedorSelecionado?.cnpj"
+              type="text"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >CNPJ</label
+            >
           </div>
 
           <!-- CEP -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input readonly class="form-control h-limited px-4 py-3 rounded-15 shadow-sm" [value]="fornecedorSelecionado.cep" type="text">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+            <input
+              readonly
+              class="form-control h-limited px-4 py-3 rounded-15 shadow-sm"
+              [value]="fornecedorSelecionado?.address?.cep"
+              type="text"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >CEP</label
+            >
           </div>
 
           <!-- Endereço -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input readonly class="form-control h-limited px-4 py-3 rounded-15 shadow-sm" [value]="fornecedorSelecionado.endereco" type="text">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
+            <input
+              readonly
+              class="form-control h-limited px-4 py-3 rounded-15 shadow-sm"
+              [value]="fornecedorSelecionado?.address?.street"
+              type="text"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Endereço</label
+            >
           </div>
 
           <!-- Complemento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input readonly class="form-control h-limited px-4 py-3 rounded-15 shadow-sm" [value]="fornecedorSelecionado.complemento" type="text">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+            <input
+              readonly
+              class="form-control h-limited px-4 py-3 rounded-15 shadow-sm"
+              [value]="fornecedorSelecionado?.address?.complement"
+              type="text"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Complemento</label
+            >
           </div>
-
         </div>
         <!-- /Dados do fornecedor -->
 
@@ -100,7 +201,13 @@
             <h4 class="m-0 text-custom-dark">Itens</h4>
           </div>
           <div class="col-6 py-4 border-bottom">
-            <button (click)="adicionarItemPedido()" type="button" class="float-end btn btn-outline-dark rounded-15">+ Adicionar linha</button>
+            <button
+              (click)="adicionarItemPedido()"
+              type="button"
+              class="float-end btn btn-outline-dark rounded-15"
+            >
+              + Adicionar linha
+            </button>
           </div>
         </div>
         <div class="table-responsive">
@@ -119,26 +226,45 @@
               <tr class="align-items-center" *ngFor="let item of itensPedido">
                 <th scope="row">{{ item.codigo }}</th>
                 <td>
-                  <select class="form-select form-select-sm" >
+                  <select class="form-select form-select-sm">
                     <option value="">Selecione um produto</option>
-                    <option *ngFor="let produto of produtos" [value]="produto.codigo" [selected]="item.codigo == produto.codigo">{{produto.nome}}</option>
+                    <option
+                      *ngFor="let produto of produtosFiltrados"
+                      [value]="produto.id"
+                      [selected]="item.codigo == produto.codigo"
+                    >
+                      {{ produto.nome }}
+                    </option>
                   </select>
                 </td>
-                <td> 
+                <td>
                   <input
-                  type="text" class="form-control form-control-sm" 
-                  [value]="item.valor_unitario | currency:'BRL'"
-                  (change)="insereValorNoObj($event , item.codigo)"
-                  > <!-- currencyMask [options]="{prefix: 'R$', thousands: '.', decimal: ','}" -->
+                    type="text"
+                    class="form-control form-control-sm"
+                    [value]="item.valor_unitario | currency: 'BRL'"
+                    (change)="insereValorNoObj($event, item.codigo)"
+                  />
+                  <!-- currencyMask [options]="{prefix: 'R$', thousands: '.', decimal: ','}" -->
                 </td>
                 <td>
-                  <input (change)="atualizarSubtotalProduto($event.target, item.codigo)" class="form-control form-control-sm" type="number" [value]="item.quantidade" placeholder="Quantidade">
+                  <input
+                    (change)="
+                      atualizarSubtotalProduto($event.target, item.codigo)
+                    "
+                    class="form-control form-control-sm"
+                    type="number"
+                    [value]="item.quantidade"
+                    placeholder="Quantidade"
+                  />
                 </td>
                 <td>
-                  {{ item.subtotal | currency:'BRL' }}
+                  {{ item.subtotal | currency: "BRL" }}
                 </td>
                 <td>
-                  <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+                  <i
+                    class="fs-5 bi-trash-fill icon-delete p-3"
+                    cursor="pointer"
+                  ></i>
                 </td>
               </tr>
             </tbody>
@@ -149,68 +275,182 @@
         <!-- Resumo do pedido -->
         <div class="row m-0 mt-4 border-bottom">
           <div class="col-4 m-0 p-0">
-            <p class="fw-bold fs-5">Subtotal <input readonly currencyMask class="form-control shadow-sm" type="text" [value]="pedido.subtotal | currency:'BRL'" placeholder="R$"></p>
+            <p class="fw-bold fs-5">
+              Subtotal
+              <input
+                readonly
+                currencyMask
+                class="form-control shadow-sm"
+                type="text"
+                [value]="pedido.subtotal | currency: 'BRL'"
+                placeholder="R$"
+              />
+            </p>
 
-            <p class="fw-bold fs-5">Desconto <input currencyMask class="form-control shadow-sm" type="text" [value]="pedido.desconto | currency:'BRL'" placeholder="R$"></p>
+            <p class="fw-bold fs-5">
+              Desconto
+              <input
+                currencyMask
+                class="form-control shadow-sm"
+                type="text"
+                [value]="pedido.desconto | currency: 'BRL'"
+                placeholder="R$"
+              />
+            </p>
 
-            <p class="fw-bold fs-5">Frete <input currencyMask class="form-control shadow-sm" type="text" [value]="pedido.frete | currency:'BRL'" placeholder="R$"></p>
+            <p class="fw-bold fs-5">
+              Frete
+              <input
+                currencyMask
+                class="form-control shadow-sm"
+                type="text"
+                [value]="pedido.frete | currency: 'BRL'"
+                placeholder="R$"
+              />
+            </p>
 
-            <p class="fw-bold fs-5">Encargos <input currencyMask class="form-control shadow-sm" type="text" [value]="pedido.encargos | currency:'BRL'" placeholder="R$"></p>
+            <p class="fw-bold fs-5">
+              Encargos
+              <input
+                currencyMask
+                class="form-control shadow-sm"
+                type="text"
+                [value]="pedido.encargos | currency: 'BRL'"
+                placeholder="R$"
+              />
+            </p>
           </div>
 
-          <div class="col-8 m-0 p-0 d-flex text-center justify-content-center align-items-center">
+          <div
+            class="
+              col-8
+              m-0
+              p-0
+              d-flex
+              text-center
+              justify-content-center
+              align-items-center
+            "
+          >
             <div>
               <p class="fs-5 m-0">Valor total da compra</p>
-              <p class="fs-2 fw-bold m-0">{{ pedido.total | currency:'BRL'}}</p>
+              <p class="fs-2 fw-bold m-0">
+                {{ pedido.total | currency: "BRL" }}
+              </p>
             </div>
           </div>
         </div>
         <!-- /Resumo do pedido -->
 
-        <div class="row m-0 p-0 ">
-
+        <div class="row m-0 p-0">
           <!-- Condição de pagamento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Necessidade especial">
+            <select
+              class="
+                form-select form-select-lg
+                h-limited
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+                text-custom-dark
+              "
+              type="text"
+              placeholder="Necessidade especial"
+            >
               <option value="" disabled selected>Condição de pagamento</option>
               <option value="7">7 Dias</option>
               <option value="30">30 Dias</option>
               <option value="90">90 Dias</option>
             </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição de pagamento</label>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Condição de pagamento</label
+            >
           </div>
 
           <!-- Data de vencimento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de vencimento</label>
+            <input
+              class="
+                form-control form-control-lg
+                h-limited
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+              "
+              type="date"
+              placeholder="Data de vencimento"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Data de vencimento</label
+            >
           </div>
 
           <!-- Meio de pagamento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento">
-              <option value="" disabled selected>Selecione um meio de pagamento</option>
+            <select
+              class="
+                form-select form-select-lg
+                h-limited
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+                text-custom-dark
+              "
+              type="text"
+              placeholder="Meio de pagamento"
+            >
+              <option value="" disabled selected>
+                Selecione um meio de pagamento
+              </option>
               <option value="boleto">Boleto</option>
               <option value="credito">Crédito</option>
               <option value="debito">Débito</option>
             </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Meio de pagamento</label>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Meio de pagamento</label
+            >
           </div>
 
           <!-- Observações -->
           <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+            <textarea
+              class="
+                form-control form-control-lg
+                px-4
+                py-3
+                rounded-15
+                shadow-sm
+              "
+              placeholder="Observações"
+              style="height: 150px"
+            ></textarea>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Observações</label
+            >
           </div>
         </div>
 
-
         <!-- Footer -->
         <div class="row mt-3 py-3 pb-5 justify-content-end">
-
           <!-- Botão Cancelar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+            <button
+              type="button"
+              class="
+                h-limited
+                btn
+                rounded-15
+                py-1
+                px-4
+                btn-outline-secondary
+                d-flex
+                justify-content-between
+                shadow-sm
+              "
+            >
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
             </button>
@@ -218,14 +458,30 @@
 
           <!-- Botão Salvar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-              <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
-              <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+            <button
+              type="button"
+              class="
+                h-limited
+                btn
+                rounded-15
+                py-1
+                px-4
+                bg-custom-success
+                d-flex
+                justify-content-between
+                shadow-sm
+              "
+            >
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                Salvar
+              </h5>
+              <i
+                class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"
+              ></i>
             </button>
           </div>
         </div>
         <!-- /Footer -->
-
       </form>
     </div>
   </div>

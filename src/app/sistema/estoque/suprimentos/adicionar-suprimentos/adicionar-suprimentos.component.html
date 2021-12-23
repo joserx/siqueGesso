@@ -6,7 +6,7 @@
 <!-- Modal -->
 <div class="modal fade" id="adicionarSuprimentos" tabindex="-1" aria-labelledby="adicionarSuprimentosLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <form [formGroup]="suprimentoForm" (ngSubmit)="submitSupForm(suprimentoForm.value)">
+        <form [formGroup]="suprimentoAddForm">
             <!-- Modal content -->
             <div class="modal-content rounded-15 bg-custom-light">
                 <div class="modal-header px-4">
@@ -73,7 +73,7 @@
                     "
                     type="text"
                     placeholder="Nome"
-                    formControlName="name"
+                    formControlName="nome"
                   />
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                     >Nome</label
@@ -92,7 +92,7 @@
                     "
                     type="text"
                     placeholder="Código"
-                    formControlName="code"
+                    formControlName="codigo"
                   />
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                     >Código</label
@@ -111,7 +111,7 @@
                     "
                     type="text"
                     placeholder="Categoria"
-                    formControlName="category"
+                    formControlName="categoria"
                   />
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                     >Categoria</label
@@ -146,7 +146,7 @@
                   py-3
                   rounded-15
                   shadow-sm
-                " placeholder="Descrição" style="height: 150px" formControlName="description"></textarea>
+                " placeholder="Descrição" style="height: 150px" formControlName="descricao"></textarea>
                             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label
               >
             </div>
@@ -159,7 +159,7 @@
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="Quantidade"
-                formControlName="quantity"
+                formControlName="quantidade"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Quantidade</label
@@ -172,7 +172,7 @@
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="Preço de custo"
-                formControlName="cust_price"
+                formControlName="precoCusto"
                 mask="separator,2"
                 prefix="R$"
                 thousandSeparator="."
@@ -189,7 +189,7 @@
                 type="number"
                 min="0"
                 placeholder="Estoque atual"
-                formControlName="current_storage"
+                formControlName="estoqueAtual"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Estoque atual</label
@@ -203,7 +203,7 @@
                 type="number"
                 min="0"
                 placeholder="Estoque mínimo"
-                formControlName="minimum_storage"
+                formControlName="estoqueMin"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Estoque mínimo</label
@@ -256,6 +256,7 @@
                 shadow-sm
                 text-start
               "
+              (click)="submit()"
             >
               <h5
                 class="

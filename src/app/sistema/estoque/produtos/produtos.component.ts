@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { ProdutoService } from 'src/app/services/produto.service';
+import { ViewProdutoComponent } from './view-produto/view-produto.component';
 
 @Component({
   selector: 'app-produtos',
@@ -8,6 +9,9 @@ import { ProdutoService } from 'src/app/services/produto.service';
   styleUrls: ['./produtos.component.scss'],
 })
 export class ProdutosComponent implements OnInit {
+  @ViewChild(ViewProdutoComponent)
+  viewProdutoComponent: any;
+
   public editSuprimentoComponent: any;
   public produtos: any;
   public produto: any;
@@ -20,10 +24,6 @@ export class ProdutosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.fornecedorService.fornecedores)
-      this.fornecedorService.find().subscribe((res) => {
-        this.fornecedorService.fornecedores = res;
-      });
     this.getProdutos();
   }
   pesquisaProdutos() {
@@ -36,15 +36,14 @@ export class ProdutosComponent implements OnInit {
 
   getProdutos() {
     this.produtoService.find().subscribe((res) => {
+      this.produtoService.produtos = res;
       this.produtos = res;
       this.produtosFiltrados = this.produtos;
+      console.log(res);
     });
   }
 
-  selectProduto(produto: any) {
-    this.produto = produto;
-  }
-  loadProdutoEdit(produto: any) {
-    this.editSuprimentoComponent.loadForm(produto);
+  loadProdutoView(produto: any) {
+    this.viewProdutoComponent.loadForm(produto);
   }
 }

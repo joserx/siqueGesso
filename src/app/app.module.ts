@@ -131,7 +131,6 @@ import { EditProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/
 import { AdicionarProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/adicionar-produto-estoque/adicionar-produto-estoque.component';
 import { ViewPedidoComponent } from './sistema/compras/pedidos-compras/view-pedido/view-pedido.component';
 
-
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
   allowNegative: true,
@@ -251,7 +250,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     VisualizarVendasDiretasComponent,
     PesquisarColaboradorComponent,
     EditarCadastroLojaComponent,
-    VisualizarLojaCadastradaComponent
+    VisualizarLojaCadastradaComponent,
 
     RelatorioProdutosViewComponent,
     FiltrarProdutosComponent,
@@ -272,7 +271,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false,
     }),
-    NgChartjsModule
+    NgChartjsModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

@@ -17,26 +17,31 @@ export class SuprimentosComponent implements OnInit {
   @ViewChild(EditSuprimentoComponent)
   editSuprimentoComponent: any;
 
-  public suprimentos: any = [
-    { codigo: 1, name: 'Papel higiênico', custo: 10, quantidade: 200 },
-    { codigo: 2, name: 'Papel higiênico', custo: 10, quantidade: 200 },
-    { codigo: 3, name: 'Papel higiênico', custo: 10, quantidade: 200 },
-    { codigo: 4, name: 'Papel higiênico', custo: 10, quantidade: 200 },
-    { codigo: 5, name: 'Papel higiênico', custo: 10, quantidade: 200 },
-  ];
+  public suprimentos: any;
+  public suprimentosFiltrados: any;
+  public search: string = '';
 
   constructor(private suprimentoService: SuprimentoService) {}
 
   ngOnInit(): void {
-    // this.getSuprimentos();
+    this.getSuprimentos();
   }
 
-  // getSuprimentos() {
-  //   this.suprimentoService.find().subscribe((res) => {
-  //     this.suprimentoService.suprimentos = res;
-  //     this.suprimentos = res;
-  //   });
-  // }
+  pesquisaProdutos() {
+    if (this.search.length > 0)
+      this.suprimentosFiltrados = this.suprimentos.filter((suprimentoF: any) =>
+        suprimentoF.nome.includes(this.search)
+      );
+    else this.suprimentosFiltrados = this.suprimentos;
+  }
+
+  getSuprimentos() {
+    this.suprimentoService.find().subscribe((res) => {
+      this.suprimentoService.suprimentos = res;
+      this.suprimentos = res;
+      this.suprimentosFiltrados = this.suprimentos;
+    });
+  }
 
   loadSuprimentoView(suprimento: any) {
     this.viewSuprimentoComponent.loadForm(suprimento);

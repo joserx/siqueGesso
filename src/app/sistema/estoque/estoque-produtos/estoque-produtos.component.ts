@@ -53,7 +53,7 @@ export class EstoqueProdutosComponent implements OnInit {
         this.produtoService.delete(produto.id).subscribe(() => {
           this.getProdutos();
           return Swal.fire({
-            title: 'Fornecedor deletado!',
+            title: 'Produto Deletado!',
             icon: 'success',
             toast: true,
             position: 'top',
