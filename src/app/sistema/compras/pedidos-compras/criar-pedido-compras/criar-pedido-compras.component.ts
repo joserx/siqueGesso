@@ -27,11 +27,11 @@ export class CriarPedidoComprasComponent implements OnInit {
   };
 
   public pedido: any = {
-    subtotal: 1500,
-    desconto: 100,
-    frete: 150,
-    encargos: 30,
-    total: 0,
+    subtotal: '',
+    desconto: '',
+    frete: '',
+    encargos: '',
+    total: '',
   };
   public itensPedido: any = [];
 
@@ -85,7 +85,7 @@ export class CriarPedidoComprasComponent implements OnInit {
   public atualizarTotalPedido(): void {
     this.pedido.total =
       this.pedido.subtotal -
-      this.pedido.desconto +
+      this.pedido.desconto -
       this.pedido.frete +
       this.pedido.encargos;
   }

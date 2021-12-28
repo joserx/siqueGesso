@@ -25,7 +25,7 @@ export class AdicionarSuprimentosComponent implements OnInit {
   suprimentoAddForm: FormGroup = new FormGroup({
     fornecedores: new FormArray([
       new FormGroup({
-        id: new FormControl(''),
+        id: new FormControl(null),
       }),
     ]),
     nome: new FormControl('', Validators.required),
@@ -35,7 +35,7 @@ export class AdicionarSuprimentosComponent implements OnInit {
     quantidade: new FormControl('', Validators.required),
     precoCusto: new FormControl('', Validators.required),
     estoqueAtual: new FormControl('', Validators.required),
-    estoqueMin: new FormControl(Validators.required),
+    estoqueMin: new FormControl('', Validators.required),
   });
   @ViewChild('close') closeBtn: any;
   @Output() reload = new EventEmitter();
@@ -85,7 +85,7 @@ export class AdicionarSuprimentosComponent implements OnInit {
       .create(this.suprimentoAddForm.value)
       .subscribe(() => {
         this.reload.emit();
-        this.closeBtn.nativeElement.click();
+        // this.closeBtn.nativeElement.click();
         this.suprimentoAddForm.reset();
         return Swal.fire({
           title: 'Produto salvo!',

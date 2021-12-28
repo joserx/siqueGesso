@@ -16,7 +16,6 @@ import { isJSDocThisTag } from 'typescript';
   styleUrls: ['./edit-produto-estoque.component.scss'],
 })
 export class EditProdutoEstoqueComponent implements OnInit {
-  fornecedores: any;
   produtoEditForm = new FormGroup({
     destinacao: new FormControl('', Validators.required),
     categoria: new FormControl('', Validators.required),
@@ -58,6 +57,8 @@ export class EditProdutoEstoqueComponent implements OnInit {
   @ViewChild('close') closeBtn: any;
   @Output() reload = new EventEmitter();
 
+  public fornecedoresUsuais: any = [{}];
+  public fornecedores: any = [];
   fornecedorArray: any;
   produtoId: number;
 
@@ -129,6 +130,8 @@ export class EditProdutoEstoqueComponent implements OnInit {
         timer: 3000,
         timerProgressBar: true,
       });
+    // console.log(this.produtoEditForm.value);
+
     this.produtoService
       .update(this.produtoId, this.produtoEditForm.value)
       .subscribe(() => {

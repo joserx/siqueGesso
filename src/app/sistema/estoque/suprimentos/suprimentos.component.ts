@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SuprimentoService } from 'src/app/services/suprimentos.service';
 import { EditSuprimentoComponent } from './edit-suprimento/edit-suprimento.component';
 import { ViewSuprimentoComponent } from './view-suprimento/view-suprimento.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-suprimentos',
@@ -9,16 +10,15 @@ import { ViewSuprimentoComponent } from './view-suprimento/view-suprimento.compo
   styleUrls: ['./suprimentos.component.scss'],
 })
 export class SuprimentosComponent implements OnInit {
-  // public suprimentos: any = [];
-
   @ViewChild(ViewSuprimentoComponent)
-  viewSuprimentoComponent: any;
+  viewSuprimentoComponent: ViewSuprimentoComponent;
 
   @ViewChild(EditSuprimentoComponent)
-  editSuprimentoComponent: any;
+  editSuprimentoComponent: EditSuprimentoComponent;
 
-  public suprimentos: any;
-  public suprimentosFiltrados: any;
+  public suprimentos: any = [];
+  public suprimento: any;
+  public suprimentosFiltrados: any = [];
   public search: string = '';
 
   constructor(private suprimentoService: SuprimentoService) {}
@@ -27,7 +27,7 @@ export class SuprimentosComponent implements OnInit {
     this.getSuprimentos();
   }
 
-  pesquisaProdutos() {
+  pesquisaSuprimentos() {
     if (this.search.length > 0)
       this.suprimentosFiltrados = this.suprimentos.filter((suprimentoF: any) =>
         suprimentoF.nome.includes(this.search)
@@ -48,5 +48,40 @@ export class SuprimentosComponent implements OnInit {
   }
   loadSuprimentoEdit(suprimento: any) {
     this.editSuprimentoComponent.loadForm(suprimento);
+  }
+
+  delete(suprimento: any) {
+    Swal.fire({
+      title: `Deseja deletar ${suprimento.nome}?`,
+      icon: 'question',
+      showConfirmButton: true,
+      confirmButtonText: 'Confirmar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then((res) => {
+      if (res.isConfirmed)
+        this.suprimentoService.delete(suprimento.id).subscribe(() => {
+          this.getSuprimentos();
+          return Swal.fire({
+            title: 'Produto Deletado!',
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+        });
+      else
+        Swal.fire({
+          title: 'Ação cancelada!',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+    });
   }
 }

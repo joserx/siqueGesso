@@ -11,16 +11,15 @@
             <div class="modal-content rounded-15 bg-custom-light">
                 <div class="modal-header px-4">
                     <h5 class="modal-title text-custom-dark" id="viewSuprimentoLabel">
-                        Suprimento X
+                        Editar Suprimento
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-4">
                     <div class="row p-0 m-0 border-bottom pb-4">
-                        <!-- Nome, código, categoria, adicionar -->
                         <div class="col-12 px-2 m-0 p-0">
                             <div class="row m-0 p-0">
-                                <!-- Nome -->
+                                <!-- Fornecedor -->
                                 <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
                                     <input class="
                       form-control
@@ -29,8 +28,26 @@
                       py-3
                       rounded-15
                       shadow-sm
-                    " type="text" placeholder="Nome" formControlName="name" />
-                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label
+                    " type="text" placeholder="Nome" formControlName="nome" />
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label
+                  >
+                </div>
+                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                  <input
+                    class="
+                      form-control
+                      h-limited-sm
+                      px-4
+                      py-3
+                      rounded-15
+                      shadow-sm
+                    "
+                    type="text"
+                    placeholder="Nome"
+                    formControlName="nome"
+                  />
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                    >Nome</label
                   >
                 </div>
                 <!-- Código -->
@@ -46,7 +63,7 @@
                     "
                     type="text"
                     placeholder="Código"
-                    formControlName="code"
+                    formControlName="codigo"
                   />
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                     >Código</label
@@ -65,7 +82,7 @@
                     "
                     type="text"
                     placeholder="Categoria"
-                    formControlName="category"
+                    formControlName="categoria"
                   />
                   <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                     >Categoria</label
@@ -100,33 +117,20 @@
                   py-3
                   rounded-15
                   shadow-sm
-                " placeholder="Descrição" style="height: 150px" formControlName="description"></textarea>
+                " placeholder="Descrição" style="height: 150px" formControlName="descricao"></textarea>
                                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição</label
               >
             </div>
           </div>
 
           <div class="row m-0 p-0">
-            <!-- Unidade de medida -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="number"
-                placeholder="Unidade de medida"
-                formControlName="unit_metrics"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Unidade de medida</label
-              >
-            </div>
-
             <!-- Quantidade -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="Quantidade"
-                formControlName="quantity"
+                formControlName="quantidade"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Quantidade</label
@@ -134,12 +138,12 @@
             </div>
 
             <!-- Preço de custo -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="Preço de custo"
-                formControlName="cust_price"
+                formControlName="precoCusto"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Preço de custo</label
@@ -152,8 +156,8 @@
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="number"
                 min="0"
-                placeholder="current_storage"
-                formControlName="current_storage"
+                placeholder="Estoque atual"
+                formControlName="estoqueAtual"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Estoque atual</label
@@ -166,23 +170,25 @@
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="number"
                 min="0"
-                placeholder="minimum_storage"
-                formControlName="minimum_storage"
+                placeholder="Estoque mínimo"
+                formControlName="estoqueMin"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Estoque mínimo</label
               >
             </div>
+          </div>
+        </div>
 
-            <!-- Fornecedor -->
-            <!-- <div *ngFor="let fornecedor of fornecedoresUsuais" class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+        <!-- Fornecedor -->
+        <!-- <div *ngFor="let fornecedor of fornecedoresUsuais" class="col-9 px-2 pt-4 p-0 m-0 form-floating">
               <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example">
                 <option selected disabled>Selecione um fornecedor</option>
                 <option ></option>
               </select> -->
-            <!-- *ngFor="let listaFornecedor of listaFornecedores" [value]="listaFornecedor.nome" -->
-            <!-- {{listaFornecedor.nome}} -->
-            <!-- <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
+        <!-- *ngFor="let listaFornecedor of listaFornecedores" [value]="listaFornecedor.nome" -->
+        <!-- {{listaFornecedor.nome}} -->
+        <!-- <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
                                 </div>
                                 -->
                                 <!-- Botão Adicionar -->
@@ -192,14 +198,12 @@
                 <i class="bi-plus my-auto fs-3 p-0 m-0 fw-bold text-custom-dark "></i>
               </a>
             </div> -->
-                            </div>
-                        </div>
 
-                        <!-- Modal footer -->
-                        <div class="row m-0 py-3 modal-footer">
-                            <!-- Cancelar -->
-                            <div class="col-3 px-2 p-0 m-0 d-grid">
-                                <button data-bs-dismiss="modal" type="reset" class="
+                                <!-- Modal footer -->
+                                <div class="row m-0 py-3 modal-footer">
+                                    <!-- Cancelar -->
+                                    <div class="col-3 px-2 p-0 m-0 d-grid">
+                                        <button data-bs-dismiss="modal" type="reset" class="
                 h-limited-sm
                 btn
                 rounded-15
@@ -219,11 +223,11 @@
                 Cancelar
               </h5>
             </button>
-                            </div>
+                                    </div>
 
-                            <!-- Salvar -->
-                            <div class="col-3 px-2 p-0 m-0 d-grid">
-                                <button type="submit" class="
+                                    <!-- Salvar -->
+                                    <div class="col-3 px-2 p-0 m-0 d-grid">
+                                        <button type="submit" class="
                 h-limited-sm
                 btn
                 rounded-15
@@ -243,11 +247,11 @@
                 Salvar
               </h5>
             </button>
+                                    </div>
+                                </div>
+                                <!-- /Modal footer -->
                             </div>
-                        </div>
-                        <!-- /Modal footer -->
-                    </div>
-                    <!-- /Modal content -->
+                            <!-- /Modal content -->
         </form>
         </div>
         </div>

@@ -23,6 +23,6 @@ export class SuprimentoService {
   }
 
   update(id: number, data: any) {
-    return this.http.patch(environment.apiUrl + '/suprimentos/' + id, data);
+    return this.http.patch(environment.apiUrl + 'suprimentos/' + id, data);
   }
 }

@@ -5,42 +5,48 @@ import { VtService } from 'src/app/services/vt.service';
 @Component({
   selector: 'app-relatorio-vt',
   templateUrl: './relatorio-vt.component.html',
-  styleUrls: ['./relatorio-vt.component.scss']
+  styleUrls: ['./relatorio-vt.component.scss'],
 })
 export class RelatorioVtComponent implements OnInit {
+  @ViewChild('content', { static: false }) el: ElementRef;
+  colabOriginal: any[] = [];
+  public colabAtivado: any[] = [];
+  public colab: any[] = [];
 
-  @ViewChild('content', {static: false})el: ElementRef
-  colabOriginal: any[] = []
-  public colabAtivado: any[] = []
-  public colab: any[] = []
-  
-  constructor(
-    private vtService: VtService,
-    private rhService: RhService
-  ) { }
+  constructor(private vtService: VtService, private rhService: RhService) {}
 
   ngOnInit(): void {
-    this.vtService.find().subscribe((data: any)=>{
-      for(let value in data){
-        if(data[value]['vt']=="Sim"){
-          this.colab.push(data[value])
-          this.colabOriginal.push(data[value])
+    this.vtService.find().subscribe((data: any) => {
+      for (let value in data) {
+        if (data[value]['vt'] == 'Sim') {
+          this.colab.push(data[value]);
+          this.colabOriginal.push(data[value]);
         }
       }
-    })
+      this.colabOriginal.sort((a: any, b: any) => {
+        a.name = a.name.trim();
+        b.name = b.name.trim();
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return -1;
+      });
+    });
   }
 
-  savePdf(){
+  savePdf() {
     // const doc = new jsPDF();
     // doc.text("Hello world!", 10, 10);
     // doc.save("relatorio-faltas.pdf");
 
-    let pdf = new jsPDF("p", "pt", "a4")
+    let pdf = new jsPDF('p', 'pt', 'a4');
     pdf.html(this.el.nativeElement, {
-      callback: (pdf)=>{
-        pdf.save("relatorio-faltas.pdf")
-      }
-    })
+      callback: (pdf) => {
+        pdf.save('relatorio-faltas.pdf');
+      },
+    });
   }
-
 }
