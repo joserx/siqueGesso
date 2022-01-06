@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,38 +7,36 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./view-suprimento.component.scss'],
 })
 export class ViewSuprimentoComponent implements OnInit {
-  suprimentoForm: FormGroup = new FormGroup({
-    name: new FormControl({ value: '', disabled: true }, Validators.required),
-    code: new FormControl({ value: '', disabled: true }, Validators.required),
-    category: new FormControl(
+  suprimentoForm = new FormGroup({
+    nome: new FormControl({ value: '', disabled: true }, Validators.required),
+    codigo: new FormControl({ value: '', disabled: true }, Validators.required),
+    categoria: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
-    description: new FormControl(
+    descricao: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
-    unit_metrics: new FormControl(
+    quantidade: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
-    quantity: new FormControl(
+    precoCusto: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
-    cust_price: new FormControl(
+    estoqueAtual: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
-    current_storage: new FormControl(
-      { value: '', disabled: true },
-      Validators.required
-    ),
-    minimum_storage: new FormControl(
+    estoqueMin: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
   });
+
+  @Input() suprimento: any;
 
   constructor() {}
 
@@ -46,40 +44,36 @@ export class ViewSuprimentoComponent implements OnInit {
 
   loadForm(suprimentoInput: any) {
     this.suprimentoForm = new FormGroup({
-      name: new FormControl(
-        { value: suprimentoInput.name, disabled: true },
+      nome: new FormControl(
+        { value: suprimentoInput.nome, disabled: true },
         Validators.required
       ),
-      code: new FormControl(
-        { value: suprimentoInput.code, disabled: true },
+      codigo: new FormControl(
+        { value: suprimentoInput.codigo, disabled: true },
         Validators.required
       ),
-      category: new FormControl(
-        { value: suprimentoInput.category, disabled: true },
+      categoria: new FormControl(
+        { value: suprimentoInput.categoria, disabled: true },
         Validators.required
       ),
-      description: new FormControl(
-        { value: suprimentoInput.description, disabled: true },
+      descricao: new FormControl(
+        { value: suprimentoInput.descricao, disabled: true },
         Validators.required
       ),
-      unit_metrics: new FormControl(
-        { value: suprimentoInput.unit_metrics, disabled: true },
+      quantidade: new FormControl(
+        { value: suprimentoInput.quantidade, disabled: true },
         Validators.required
       ),
-      quantity: new FormControl(
-        { value: suprimentoInput.quantity, disabled: true },
+      precoCusto: new FormControl(
+        { value: suprimentoInput.precoCusto, disabled: true },
         Validators.required
       ),
-      cust_price: new FormControl(
-        { value: suprimentoInput.cust_price, disabled: true },
+      estoqueAtual: new FormControl(
+        { value: suprimentoInput.estoqueAtual, disabled: true },
         Validators.required
       ),
-      current_storage: new FormControl(
-        { value: suprimentoInput.current_storage, disabled: true },
-        Validators.required
-      ),
-      minimum_storage: new FormControl(
-        { value: suprimentoInput.minimum_storage, disabled: true },
+      estoqueMin: new FormControl(
+        { value: suprimentoInput.estoqueMin, disabled: true },
         Validators.required
       ),
     });

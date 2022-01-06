@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SuprimentoService } from '../../../../services/suprimentos.service';
 import Swal, { SweetAlertResult } from 'sweetalert2';
@@ -11,48 +17,55 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 export class EditSuprimentoComponent implements OnInit {
   suprimentoForm: FormGroup = new FormGroup({
     id: new FormControl('', Validators.required),
-    name: new FormControl('', Validators.required),
-    code: new FormControl('', Validators.required),
-    category: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-    unit_metrics: new FormControl('', Validators.required),
-    quantity: new FormControl('', Validators.required),
-    cust_price: new FormControl('', Validators.required),
-    current_storage: new FormControl(Validators.required),
-    minimum_storage: new FormControl(Validators.required),
+    nome: new FormControl('', Validators.required),
+    codigo: new FormControl('', Validators.required),
+    categoria: new FormControl('', Validators.required),
+    descricao: new FormControl('', Validators.required),
+    quantidade: new FormControl('', Validators.required),
+    precoCusto: new FormControl('', Validators.required),
+    estoqueAtual: new FormControl('', Validators.required),
+    estoqueMin: new FormControl(Validators.required),
   });
 
   @ViewChild('close') closeBtn: any;
+  @Output() reload = new EventEmitter();
+
+  public fornecedoresUsuais: any = [{}];
+  public fornecedores: any = [];
+  fornecedorArray: any;
+  suprimentoId: number;
 
   constructor(private suprimentoService: SuprimentoService) {}
 
   ngOnInit(): void {}
 
   loadForm(suprimentoInput: any) {
+    this.suprimentoId = suprimentoInput.id;
     this.suprimentoForm = new FormGroup({
-      id: new FormControl(suprimentoInput.id, Validators.required),
-      name: new FormControl(suprimentoInput.name, Validators.required),
-      code: new FormControl(suprimentoInput.code, Validators.required),
-      category: new FormControl(suprimentoInput.category, Validators.required),
-      description: new FormControl(
-        suprimentoInput.description,
+      nome: new FormControl(suprimentoInput.nome, Validators.required),
+      codigo: new FormControl(suprimentoInput.codigo, Validators.required),
+      categoria: new FormControl(
+        suprimentoInput.categoria,
         Validators.required
       ),
-      unit_metrics: new FormControl(
-        suprimentoInput.unit_metrics,
+      descricao: new FormControl(
+        suprimentoInput.descricao,
         Validators.required
       ),
-      quantity: new FormControl(suprimentoInput.quantity, Validators.required),
-      cust_price: new FormControl(
-        suprimentoInput.cust_price,
+      quantidade: new FormControl(
+        suprimentoInput.quantidade,
         Validators.required
       ),
-      current_storage: new FormControl(
-        suprimentoInput.current_storage,
+      precoCusto: new FormControl(
+        suprimentoInput.precoCusto,
         Validators.required
       ),
-      minimum_storage: new FormControl(
-        suprimentoInput.minimum_storage,
+      estoqueAtual: new FormControl(
+        suprimentoInput.estoqueAtual,
+        Validators.required
+      ),
+      estoqueMin: new FormControl(
+        suprimentoInput.estoqueMin,
         Validators.required
       ),
     });
@@ -68,17 +81,19 @@ export class EditSuprimentoComponent implements OnInit {
         timer: 3000,
         timerProgressBar: true,
       });
-    this.suprimentoService.create(this.suprimentoForm.value).subscribe(() => {
-      this.closeBtn.nativeElement.click();
-      return Swal.fire({
-        title: 'suprimento salvo!',
-        icon: 'success',
-        toast: true,
-        position: 'top',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
+    this.suprimentoService
+      .update(this.suprimentoId, this.suprimentoForm.value)
+      .subscribe(() => {
+        // this.closeBtn.nativeElement.click();
+        return Swal.fire({
+          title: 'suprimento salvo!',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       });
-    });
   }
 }

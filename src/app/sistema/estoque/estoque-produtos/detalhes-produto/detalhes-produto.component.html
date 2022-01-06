@@ -57,16 +57,16 @@
                             <p>{{ dados.fornecedor }}</p>
                         </div>
                         <div class="col-2">
-                            <p>{{ dados.valor_unitario | currency: "BRL" }}</p>
+                            <p>{{ dados.custoMedio | currency: "BRL" }}</p>
                         </div>
                         <div class="col-1">
                             <p>{{ dados.quantidade }}</p>
                         </div>
                         <div class="col-2">
-                            <p>{{ dados.custo | currency: "BRL" }}</p>
+                            <p>{{ dados.precoMedio | currency: "BRL" }}</p>
                         </div>
                         <div class="col-1">
-                            <p>{{ dados.disponivel }}</p>
+                            <p>{{ dados.atual }}</p>
                         </div>
                     </div>
                 </div>

@@ -41,6 +41,12 @@ export class EstoqueProdutosComponent implements OnInit {
     this.editProdutoEstoqueComponent.loadForm(produto);
   }
   delete(produto: any) {
+    console.log(produto);
+
+    let produtoObj = {
+      id: produto.id,
+      deleted: true,
+    };
     Swal.fire({
       title: `Deseja deletar ${produto.nome}?`,
       icon: 'question',
@@ -50,10 +56,10 @@ export class EstoqueProdutosComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((res) => {
       if (res.isConfirmed)
-        this.produtoService.delete(produto.id).subscribe(() => {
+        this.produtoService.delete(produtoObj).subscribe(() => {
           this.getProdutos();
           return Swal.fire({
-            title: 'Fornecedor deletado!',
+            title: 'Produto Deletado!',
             icon: 'success',
             toast: true,
             position: 'top',

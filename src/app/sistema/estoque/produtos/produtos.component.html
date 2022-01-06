@@ -11,16 +11,16 @@
         rounded-15
         shadow-sm
       " type="text" placeholder="Pesquisar" />
-        <a>
-            <i class="
-          bi-search
-          fs-4
-          position-absolute
-          translate-middle
-          top-50
-          me-4
-          end-0
-        "></i>
+        <a class="
+        fs-4
+        position-absolute
+        translate-middle
+        top-50
+        me-4
+        end-0
+        text-custom-dark
+      ">
+            <i class="bi-search"></i>
         </a>
     </div>
 
@@ -104,7 +104,7 @@
         <p>{{ produto.margemLucro }}%</p>
     </div>
     <div class="col-2 text-end">
-        <i class="fs-5 bi-eye-fill icon-view p-3" (click)="selectProduto(produto)" data-bs-toggle="modal" data-bs-target="#viewProdutos" cursor="pointer"></i>
+        <i class="fs-5 bi-eye-fill icon-view p-3" (click)="loadProdutoView(produto)" data-bs-toggle="modal" data-bs-target="#viewProdutos" cursor="pointer"></i>
     </div>
 </div>
 

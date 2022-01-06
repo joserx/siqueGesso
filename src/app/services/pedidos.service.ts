@@ -30,13 +30,11 @@ export class PedidosService {
     return this.http.delete(environment.apiUrl + 'pedidos/' + id);
   }
 
-
-  findByPage(no: number) {
+  findByPage(no: any) {
     return this.http.get(environment.apiUrl + 'pedidos/page/' + no);
-
   }
 
-  findThis(id: number){
-    return this.http.get(environment.apiUrl + 'pedidos/find/' + id)
+  findThis(id: number) {
+    return this.http.get(environment.apiUrl + 'pedidos/find/' + id);
   }
 }

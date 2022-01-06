@@ -1,7 +1,7 @@
 <div class="row m-0 justify-content-center align-items-center">
     <!-- Pesquisar -->
     <div class="col-4 px-2 p-0 m-0 position-relative">
-        <input class="
+        <input [(ngModel)]="search" (input)="pesquisaSuprimentos()" class="
         form-control form-control-lg
         border-0
         h-limited
@@ -11,16 +11,16 @@
         rounded-15
         shadow-sm
       " type="text" placeholder="Pesquisar" />
-        <a>
-            <i class="
-          bi-search
-          fs-4
-          position-absolute
-          translate-middle
-          top-50
-          me-4
-          end-0
-        "></i>
+        <a class="
+        fs-4
+        position-absolute
+        translate-middle
+        top-50
+        me-4
+        end-0
+        text-custom-dark
+      ">
+            <i class="bi-search"></i>
         </a>
     </div>
 
@@ -61,15 +61,15 @@
 </div>
 
 <!-- Tabela -->
-<div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let suprimento of suprimentos">
+<div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let suprimento of suprimentosFiltrados">
     <div class="col-1">
-        <p>{{ suprimento.codigo }}</p>
+        <p>{{ suprimento.id }}</p>
     </div>
     <div class="col-3">
-        <p>{{ suprimento.name }}</p>
+        <p>{{ suprimento.nome }}</p>
     </div>
     <div class="col-3">
-        <p>{{ suprimento.custo | currency: "BRL" }}</p>
+        <p>{{ suprimento.precoCusto | currency: "BRL" }}</p>
     </div>
     <div class="col-3">
         <p>{{ suprimento.quantidade }} unidade(s)</p>
@@ -81,10 +81,16 @@
         <a data-bs-toggle="modal" data-bs-target="#editSuprimento" (click)="loadSuprimentoEdit(suprimento)">
             <i class="fs-5 bi-pen-fill icon-edit p-3" (click)="loadSuprimentoEdit(suprimento)" cursor="pointer"></i>
         </a>
+        <a><i
+        class="fs-5 bi-trash-fill icon-delete p-3"
+        cursor="pointer"
+        (click)="delete(suprimento)"
+      ></i
+    ></a>
     </div>
 </div>
 
-<app-adicionar-suprimentos></app-adicionar-suprimentos>
-<app-view-suprimento></app-view-suprimento>
+<app-adicionar-suprimentos (reload)="getSuprimentos()"></app-adicionar-suprimentos>
+<app-view-suprimento [suprimento]="suprimento"></app-view-suprimento>
 <app-edit-fornecedor></app-edit-fornecedor>
 <app-edit-suprimento></app-edit-suprimento>

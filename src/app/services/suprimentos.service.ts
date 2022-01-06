@@ -6,13 +6,23 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class SuprimentoService {
-  suprimentos: any;
+  suprimentos: any[];
+
   constructor(private readonly http: HttpClient) {}
 
   find() {
-    return this.http.get(environment.apiUrl + 'provider/');
+    return this.http.get<any>(environment.apiUrl + 'suprimentos');
   }
-  create(payload: any) {
-    return this.http.post(`${environment.apiUrl}provider/`, payload);
+
+  create(data: any) {
+    return this.http.post(environment.apiUrl + 'suprimentos', data);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}suprimentos/${id}`);
+  }
+
+  update(id: number, data: any) {
+    return this.http.patch(environment.apiUrl + 'suprimentos/' + id, data);
   }
 }

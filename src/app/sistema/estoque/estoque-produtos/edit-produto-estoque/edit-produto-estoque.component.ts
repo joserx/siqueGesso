@@ -16,12 +16,11 @@ import { isJSDocThisTag } from 'typescript';
   styleUrls: ['./edit-produto-estoque.component.scss'],
 })
 export class EditProdutoEstoqueComponent implements OnInit {
-  fornecedores: any;
   produtoEditForm = new FormGroup({
     destinacao: new FormControl('', Validators.required),
     categoria: new FormControl('', Validators.required),
     sku: new FormControl('', Validators.required),
-    ativo: new FormControl(true, Validators.required),
+    ativo: new FormControl(''),
     nome: new FormControl('', Validators.required),
     descricao: new FormControl('', Validators.required),
     unidade: new FormControl('', Validators.required),
@@ -58,6 +57,8 @@ export class EditProdutoEstoqueComponent implements OnInit {
   @ViewChild('close') closeBtn: any;
   @Output() reload = new EventEmitter();
 
+  public fornecedoresUsuais: any = [{}];
+  public fornecedores: any = [];
   fornecedorArray: any;
   produtoId: number;
 
@@ -71,7 +72,7 @@ export class EditProdutoEstoqueComponent implements OnInit {
       destinacao: new FormControl(produtoInput.destinacao, Validators.required),
       categoria: new FormControl(produtoInput.categoria, Validators.required),
       sku: new FormControl(produtoInput.sku, Validators.required),
-      ativo: new FormControl(produtoInput.ativo, Validators.required),
+      ativo: new FormControl(produtoInput.ativo),
       nome: new FormControl(produtoInput.nome, Validators.required),
       descricao: new FormControl(produtoInput.descricao, Validators.required),
       unidade: new FormControl(produtoInput.unidade, Validators.required),
@@ -129,6 +130,8 @@ export class EditProdutoEstoqueComponent implements OnInit {
         timer: 3000,
         timerProgressBar: true,
       });
+    // console.log(this.produtoEditForm.value);
+
     this.produtoService
       .update(this.produtoId, this.produtoEditForm.value)
       .subscribe(() => {
