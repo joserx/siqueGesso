@@ -20,19 +20,12 @@
                 </div>
             </div>
 
-            <form>
+            <form [formGroup]="pedidoCompraForm">
                 <!-- Criar pedido -->
                 <div class="row m-0 justify-content-center align-items-center">
                     <!-- Código -->
                     <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                        <input class="
-                form-control form-control-lg
-                h-100
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-              " type="text" placeholder="Código" />
+                        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código" formControlName="id" />
                         <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label
             >
           </div>
@@ -40,17 +33,11 @@
           <!-- Data da compra -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input
-              class="
-                form-control form-control-lg
-                h-100
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-              "
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
               type="date"
               placeholder="Data da compra"
               [max]="getDate()"
+              formControlName="data"
             />
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Data da compra</label
@@ -62,17 +49,10 @@
             <select
               #fornecedor
               (change)="setFornecedores(fornecedor.value)"
-              class="
-                form-select form-select-lg
-                h-100
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-                text-custom-dark
-              "
+              class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
               type="text"
               placeholder="Fornecedor"
+              formControlName="fornecedor"
             >
               <option value="" disabled selected>
                 Selecione um Fornecedor
@@ -93,16 +73,7 @@
           <div class="col-1 px-2 pt-3 p-0 m-0 text-center">
             <a class="px-2 py-2" routerLink="/sistema/estoque">
               <i
-                class="
-                  bi-plus-square-fill
-                  icon-view
-                  my-auto
-                  fs-3
-                  p-2
-                  m-0
-                  fw-bold
-                  text-custom-dark
-                "
+                class="bi-plus-square-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark"
               ></i>
             </a>
           </div>
@@ -118,16 +89,10 @@
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input
               readonly
-              class="
-                form-control form-control-lg
-                h-100
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-              "
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
               [value]="fornecedorSelecionado?.fantasy_name"
               type="text"
+              formControlName="razaoSocial"
             />
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Razão social</label
@@ -138,16 +103,10 @@
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input
               readonly
-              class="
-                form-control form-control-lg
-                h-100
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-              "
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
               [value]="fornecedorSelecionado?.cnpj"
               type="text"
+              formControlName="cnpj"
             />
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >CNPJ</label
@@ -161,6 +120,7 @@
               class="form-control h-limited px-4 py-3 rounded-15 shadow-sm"
               [value]="fornecedorSelecionado?.address?.cep"
               type="text"
+              formControlName="cep"
             />
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >CEP</label
@@ -174,6 +134,7 @@
               class="form-control h-limited px-4 py-3 rounded-15 shadow-sm"
               [value]="fornecedorSelecionado?.address?.street"
               type="text"
+              formControlName="endereco"
             />
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Endereço</label
@@ -187,6 +148,7 @@
               class="form-control h-limited px-4 py-3 rounded-15 shadow-sm"
               [value]="fornecedorSelecionado?.address?.complement"
               type="text"
+              formControlName="complemento"
             />
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Complemento</label
@@ -222,16 +184,22 @@
                 <th scope="col">Ação</th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="align-items-center" *ngFor="let item of itensPedido">
-                <th scope="row">{{ item.codigo }}</th>
+            <tbody
+              *ngFor="let item of itens['controls']; let i = index"
+              formArrayName="itensProduto"
+            >
+              <tr class="align-items-center" [formGroupName]="i">
+                <th scope="row">{{ item.value.codigo }}</th>
                 <td>
-                  <select class="form-select form-select-sm">
+                  <select
+                    class="form-select form-select-sm"
+                    formControlName="produto"
+                  >
                     <option value="">Selecione um produto</option>
                     <option
                       *ngFor="let produto of produtosFiltrados"
                       [value]="produto.id"
-                      [selected]="item.codigo == produto.codigo"
+                      [selected]="item.value.codigo == produto.codigo"
                     >
                       {{ produto.nome }}
                     </option>
@@ -241,29 +209,33 @@
                   <input
                     type="text"
                     class="form-control form-control-sm"
-                    [value]="item.valor_unitario | currency: 'BRL'"
-                    (change)="insereValorNoObj($event, item.codigo)"
+                    #valorUn
+                    [value]="valorUn.value"
+                    (change)="insereValorNoObj($event, item.value.codigo)"
+                    formControlName="valorUn"
                   />
                   <!-- currencyMask [options]="{prefix: 'R$', thousands: '.', decimal: ','}" -->
                 </td>
                 <td>
                   <input
                     (change)="
-                      atualizarSubtotalProduto($event.target, item.codigo)
+                      atualizarSubtotalProduto($event.target, item.value.codigo)
                     "
                     class="form-control form-control-sm"
                     type="number"
-                    [value]="item.quantidade"
+                    [value]="item.value.quantidade"
                     placeholder="Quantidade"
+                    formControlName="quantidade"
                   />
                 </td>
                 <td>
-                  {{ item.subtotal | currency: "BRL" }}
+                  {{ item.value.subtotal | currency: "BRL" }}
                 </td>
                 <td>
                   <i
                     class="fs-5 bi-trash-fill icon-delete p-3"
                     cursor="pointer"
+                    (click)="removerItemPedido(i)"
                   ></i>
                 </td>
               </tr>
@@ -279,63 +251,61 @@
               Subtotal
               <input
                 readonly
-                currencyMask
                 class="form-control shadow-sm"
                 type="text"
-                [value]="pedido.subtotal | currency: 'BRL'"
+                [value]="somaSub() | currency: 'BRL'"
                 placeholder="R$"
+                formControlName="subtotal"
               />
             </p>
 
             <p class="fw-bold fs-5">
               Desconto
               <input
-                currencyMask
+                (change)="aplicarDesconto(valorDesconto.value)"
+                #valorDesconto
                 class="form-control shadow-sm"
                 type="text"
                 [value]="pedido.desconto | currency: 'BRL'"
                 placeholder="R$"
+                formControlName="desconto"
               />
             </p>
 
             <p class="fw-bold fs-5">
               Frete
               <input
-                currencyMask
+                (change)="aplicarFrete(valorFrete.value)"
+                #valorFrete
                 class="form-control shadow-sm"
                 type="text"
                 [value]="pedido.frete | currency: 'BRL'"
                 placeholder="R$"
+                formControlName="frete"
               />
             </p>
 
             <p class="fw-bold fs-5">
               Encargos
               <input
-                currencyMask
+                (change)="aplicarEncargo(valorEncargo.value)"
+                #valorEncargo
                 class="form-control shadow-sm"
                 type="text"
                 [value]="pedido.encargos | currency: 'BRL'"
                 placeholder="R$"
+                formControlName="encargos"
               />
             </p>
           </div>
 
           <div
-            class="
-              col-8
-              m-0
-              p-0
-              d-flex
-              text-center
-              justify-content-center
-              align-items-center
-            "
+            class="col-8 m-0 p-0 d-flex text-center justify-content-center align-items-center"
           >
             <div>
               <p class="fs-5 m-0">Valor total da compra</p>
               <p class="fs-2 fw-bold m-0">
-                {{ pedido.total | currency: "BRL" }}
+                {{ pedidoCompraForm.value.valorTotal | currency: "BRL" }}
               </p>
             </div>
           </div>
@@ -346,17 +316,10 @@
           <!-- Condição de pagamento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <select
-              class="
-                form-select form-select-lg
-                h-limited
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-                text-custom-dark
-              "
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
               type="text"
               placeholder="Necessidade especial"
+              formControlName="condPagamento"
             >
               <option value="" disabled selected>Condição de pagamento</option>
               <option value="7">7 Dias</option>
@@ -371,16 +334,10 @@
           <!-- Data de vencimento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <input
-              class="
-                form-control form-control-lg
-                h-limited
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-              "
+              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
               type="date"
               placeholder="Data de vencimento"
+              formControlName="dataVenc"
             />
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Data de vencimento</label
@@ -390,17 +347,10 @@
           <!-- Meio de pagamento -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
             <select
-              class="
-                form-select form-select-lg
-                h-limited
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-                text-custom-dark
-              "
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
               type="text"
               placeholder="Meio de pagamento"
+              formControlName="meioPag"
             >
               <option value="" disabled selected>
                 Selecione um meio de pagamento
@@ -417,15 +367,10 @@
           <!-- Observações -->
           <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
             <textarea
-              class="
-                form-control form-control-lg
-                px-4
-                py-3
-                rounded-15
-                shadow-sm
-              "
+              class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm"
               placeholder="Observações"
               style="height: 150px"
+              formControlName="obs"
             ></textarea>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Observações</label
@@ -438,18 +383,8 @@
           <!-- Botão Cancelar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button
-              type="button"
-              class="
-                h-limited
-                btn
-                rounded-15
-                py-1
-                px-4
-                btn-outline-secondary
-                d-flex
-                justify-content-between
-                shadow-sm
-              "
+              type="reset"
+              class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm"
             >
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
@@ -459,18 +394,9 @@
           <!-- Botão Salvar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button
-              type="button"
-              class="
-                h-limited
-                btn
-                rounded-15
-                py-1
-                px-4
-                bg-custom-success
-                d-flex
-                justify-content-between
-                shadow-sm
-              "
+              type="submit"
+              class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm"
+              (click)="submit()"
             >
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">
                 Salvar
