@@ -134,15 +134,9 @@ export class CriarPedidoComprasComponent implements OnInit {
         Number(String(this.pedidoCompraForm.get('desconto')?.value)) +
         Number(String(this.pedidoCompraForm.get('frete')?.value)) +
         Number(String(this.pedidoCompraForm.get('encargos')?.value));
-      console.log(item.subtotal);
-      console.log(this.pedidoCompraForm.get('desconto')?.value);
-      console.log(this.pedidoCompraForm.get('frete')?.value);
-      console.log(this.pedidoCompraForm.get('encargos')?.value);
     }
 
     this.pedidoCompraForm.controls['valorTotal'].setValue(oneItem);
-    console.log(this.pedidoCompraForm.get('valorTotal')?.value);
-    console.log(oneItem);
   }
 
   aplicarDesconto(desconto: string) {
@@ -201,7 +195,8 @@ export class CriarPedidoComprasComponent implements OnInit {
   }
 
   submit(): any {
-    console.log(this.pedidoCompraForm);
+    console.log(this.pedidoCompraForm.value);
+
     if (this.pedidoCompraForm.invalid)
       return Swal.fire({
         title: 'Preencha todos os campos corretamente!',

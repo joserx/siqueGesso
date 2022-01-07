@@ -10,14 +10,14 @@ export class PedidoCompraService {
   constructor(private readonly http: HttpClient) {}
 
   find() {
-    return this.http.get<any>(environment.apiUrl + 'pedidos-compra/');
+    return this.http.get<any>(environment.apiUrl + 'pedido-compra/');
   }
 
   create(data: any) {
-    return this.http.post(environment.apiUrl + 'pedidos-compra', data);
+    return this.http.post(environment.apiUrl + 'pedido-compra', data);
   }
 
   delete(id: number) {
-    return this.http.delete(environment.apiUrl + 'pedidos-compra/' + id);
+    return this.http.delete(environment.apiUrl + 'pedido-compra/' + id);
   }
 }
