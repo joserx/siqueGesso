@@ -211,7 +211,7 @@ export class CriarPedidoComprasComponent implements OnInit {
       .create(this.pedidoCompraForm.value)
       .subscribe(() => {
         this.reload.emit();
-        this.closeBtn.nativeElement.click();
+        // this.closeBtn.nativeElement.click();
         this.pedidoCompraForm.reset();
         return Swal.fire({
           title: 'Pedido salvo!',
