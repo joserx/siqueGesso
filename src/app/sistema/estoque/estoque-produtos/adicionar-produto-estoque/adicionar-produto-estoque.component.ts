@@ -48,6 +48,8 @@ export class AdicionarProdutoEstoqueComponent implements OnInit {
   }
 
   save(): void | Promise<SweetAlertResult<any>> {
+    console.log(this.produtoAddForm.value);
+
     if (this.produtoAddForm.invalid)
       return Swal.fire({
         title: 'Preencha todos os campos obrigatórios!',
@@ -58,11 +60,15 @@ export class AdicionarProdutoEstoqueComponent implements OnInit {
         timer: 3000,
         timerProgressBar: true,
       });
+
+    const produtos = this.produtos.map(({ id, novoEstoque, atual }: any) => {
+      return { id, atual: Number(novoEstoque) + Number(atual) };
+    });
+
     this.produtoService
-      .update(this.produtoId, this.produtoAddForm.value)
+      .addEstoque(produtos)
+
       .subscribe(() => {
-        this.reload.emit();
-        this.closeBtn.nativeElement.click();
         return Swal.fire({
           title: 'Estoque Atualizado',
           icon: 'success',
@@ -71,6 +77,9 @@ export class AdicionarProdutoEstoqueComponent implements OnInit {
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
+        }).finally(() => {
+          this.reload.emit();
+          this.closeBtn.nativeElement.click();
         });
       });
   }

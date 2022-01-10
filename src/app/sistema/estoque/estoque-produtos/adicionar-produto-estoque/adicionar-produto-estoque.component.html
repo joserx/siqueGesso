@@ -26,19 +26,13 @@
                         <tr class="m-0 mt-0 border-bottom text-custom-dark" *ngFor="let produto of produtosFiltrados">
                             <td>{{ produto?.id }}</td>
                             <td>{{ produto?.nome }}</td>
-                            <td>{{ produto?.atual }}</td>
+                            <td>{{ produto?.margemLucro }}</td>
                             <td>{{ produto?.custoMedio | currency: "BRL" }}</td>
                             <td>{{ produto?.precoMedio | currency: "BRL" }}</td>
-                            <td>{{ produto?.margemLucro }}</td>
+                            <td>{{ produto?.atual }}</td>
                             <td>
                                 <div class="col px-2 pt-2 pb-2 p-0 m-0 form-floating">
-                                    <input style="max-width: 90%" class="
-                      form-control form-control-lg
-                      border-0
-                      h-5
-                      rounded-15
-                      shadow-sm
-                    " formControlName="atual" type="number" placeholder="Estoque" />
+                                    <input style="max-width: 90%" class="form-control form-control-lg border-0 h-5 rounded-15 shadow-sm" formControlName="atual" type="number" [(ngModel)]="produto.novoEstoque" placeholder="Estoque" />
                                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Add +</label
                   >
                 </div>
@@ -54,16 +48,7 @@
             <button
               data-bs-dismiss="modal"
               type="reset"
-              class="
-                h-limited-sm
-                btn
-                rounded-15
-                py-1
-                px-4
-                bg-light
-                shadow-sm
-                text-start
-              "
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start"
             >
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">
                 Cancelar
@@ -73,24 +58,11 @@
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button
               type="submit"
-              class="
-                h-limited-sm
-                btn
-                rounded-15
-                py-1
-                px-4
-                bg-custom-success
-                shadow-sm
-                text-start
-              "
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-custom-success shadow-sm text-start"
               (click)="save()"
             >
               <h5
-                class="
-                  fw-normal
-                  my-auto
-                  text-truncate text-custom-dark text-center
-                "
+                class="fw-normal my-auto text-truncate text-custom-dark text-center"
               >
                 Adicionar
               </h5>

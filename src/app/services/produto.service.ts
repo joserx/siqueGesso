@@ -25,4 +25,8 @@ export class ProdutoService {
   update(id: number, data: any) {
     return this.http.patch(environment.apiUrl + 'produtos/' + id, data);
   }
+
+  addEstoque(data: any) {
+    return this.http.put(environment.apiUrl + 'produtos/estoque', data);
+  }
 }
