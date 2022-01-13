@@ -18,6 +18,6 @@ export class PedidoCompraService {
   }
 
   delete(id: number) {
-    return this.http.delete(environment.apiUrl + 'pedido-compra/' + id);
+    return this.http.delete(`${environment.apiUrl}pedido-compra/${id}`);
   }
 }

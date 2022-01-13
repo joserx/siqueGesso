@@ -35,16 +35,16 @@
 
                 <!-- Botão Filtro -->
                 <div class="col-4 px-2 p-0 m-0">
-                    <a class="rounded-15 py-2 px-4 bg-white h-limited d-flex justify-content-between shadow-sm">
+                    <a data-bs-toggle="modal" data-bs-target="filtrarPedidos" class="rounded-15 py-2 px-4 bg-white h-limited d-flex justify-content-between shadow-sm">
                         <h5 class="fw-normal my-auto text-truncate text-custom-dark">
                             Filtro
                         </h5>
-                        <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark"></i>
+                        <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark" data-bs-toggle="modal" data-bs-target="filtrarPedidos"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Tabela de contas -->
+            <!-- Tabela de Pedidos -->
             <div class="table-responsive mt-5">
                 <table class="table text-custom-dark">
                     <thead>
@@ -53,26 +53,30 @@
                             <th scope="col">Data</th>
                             <th scope="col">Fornecedor</th>
                             <th scope="col">Total</th>
-                            <th scope="col">Ação</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="align-items-center" *ngFor="let pedidos of pedidosFiltrados">
-                            <th scope="row">{{ pedidos.codigo }}</th>
+                            <th scope="row">{{ pedidos?.id }}</th>
                             <td>{{ pedidos?.data }}</td>
                             <td>{{ pedidos?.fornecedor }}</td>
                             <td>{{ pedidos?.valorTotal | currency: "BRL" }}</td>
+                            <td>{{ pedidos?.status }}</td>
                             <td>
-                                <i class="fs-5 bi-eye-fill icon-view p-3" data-bs-toggle="modal" data-bs-target="#viewPedido" cursor="pointer"></i>
-                                <!-- <i class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i> -->
-                                <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+                                <a data-bs-toggle="modal" data-bs-target="#viewPedido" (click)="loadPedido(pedidos)">
+                                    <i class="fs-5 bi-eye-fill icon-view p-3" (click)="loadPedido(pedidos)" cursor="pointer"></i>
+                                </a>
+
+                                <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(pedidos)"></i>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- /Tabela de contas -->
+            <!-- /Tabela de Pedidos -->
         </div>
     </div>
 </div>
-<app-view-pedido></app-view-pedido>
+<app-view-pedido [pedido]="pedidos"></app-view-pedido>
+<app-filtrar-pedido [pedidos]="pedidos" [pedidosOriginal]="pedidos"></app-filtrar-pedido>

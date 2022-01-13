@@ -3,24 +3,21 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RhService {
+  constructor(private readonly http: HttpClient) {}
 
-  constructor(
-    private readonly http: HttpClient
-  ) { }
-
-  find() {
-    return this.http.get(environment.apiUrl + 'rh/');
+  find(disabled: any = false) {
+    return this.http.get(environment.apiUrl + 'rh/', { params: { disabled } });
   }
 
   findOne(id: number) {
     return this.http.get(environment.apiUrl + 'rh/' + id);
   }
 
-  findByPage(no: number){
-    return this.http.get(environment.apiUrl + 'rh/page/' + no)
+  findByPage(no: number) {
+    return this.http.get(environment.apiUrl + 'rh/page/' + no);
   }
 
   data() {
@@ -38,5 +35,4 @@ export class RhService {
   delete(id: number) {
     return this.http.delete(environment.apiUrl + 'rh/' + id);
   }
-
 }

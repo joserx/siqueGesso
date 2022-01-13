@@ -38,6 +38,7 @@ export class CriarPedidoComprasComponent implements OnInit {
     condPagamento: new FormControl(''),
     dataVenc: new FormControl(''),
     meioPag: new FormControl(''),
+    status: new FormControl(''),
     obs: new FormControl(''),
   });
   public get itens(): any {
