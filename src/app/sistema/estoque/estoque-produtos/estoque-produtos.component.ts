@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EditProdutoEstoqueComponent } from './edit-produto-estoque/edit-produto-estoque.component';
+import { ViewEstoqueProdutoComponent } from './view-estoque-produto/view-estoque-produto.component';
 import { ProdutoService } from '../../../services/produto.service';
 import Swal from 'sweetalert2';
 
@@ -12,9 +13,13 @@ export class EstoqueProdutosComponent implements OnInit {
   public produtos: any = [];
   public produtosFiltrados: any = [];
   public search: string = '';
+  public produto: any;
 
   @ViewChild(EditProdutoEstoqueComponent)
   editProdutoEstoqueComponent: EditProdutoEstoqueComponent;
+
+  @ViewChild(ViewEstoqueProdutoComponent)
+  viewEstoqueProdutoComponent: any;
 
   constructor(private produtoService: ProdutoService) {}
 
@@ -40,9 +45,11 @@ export class EstoqueProdutosComponent implements OnInit {
   loadProduto(produto: any) {
     this.editProdutoEstoqueComponent.loadForm(produto);
   }
-  delete(produto: any) {
-    console.log(produto);
+  loadViewProduto(produto: any) {
+    this.viewEstoqueProdutoComponent.loadForm(produto);
+  }
 
+  delete(produto: any) {
     let produtoObj = {
       id: produto.id,
       deleted: true,

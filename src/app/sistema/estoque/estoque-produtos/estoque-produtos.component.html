@@ -67,10 +67,11 @@
         <p>{{ produto?.margemLucro | currency: "BRL" }}</p>
     </div>
     <div class="col-2 text-end">
-        <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/estoque/detalhe/{{ produto.id }}"></i>
+        <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" (click)="loadViewProduto(produto)" data-bs-toggle="modal" data-bs-target="#viewEstoqueProdutos"></i>
         <i class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" (click)="loadProduto(produto)" data-bs-toggle="modal" data-bs-target="#editProdutos"></i>
         <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(produto)"></i>
     </div>
 </div>
 <app-edit-produto-estoque (reload)="getProdutos()"></app-edit-produto-estoque>
 <app-adicionar-produto-estoque (reload)="getProdutos()"></app-adicionar-produto-estoque>
+<app-view-estoque-produto [produto]="produto"></app-view-estoque-produto>

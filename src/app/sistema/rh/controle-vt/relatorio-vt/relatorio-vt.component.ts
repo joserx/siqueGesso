@@ -16,13 +16,14 @@ export class RelatorioVtComponent implements OnInit {
   constructor(private vtService: VtService, private rhService: RhService) {}
 
   ngOnInit(): void {
-    this.vtService.find().subscribe((data: any) => {
+    this.vtService.findAtivo().subscribe((data: any) => {
       for (let value in data) {
         if (data[value]['vt'] == 'Sim') {
-          this.colab.push(data[value]);
           this.colabOriginal.push(data[value]);
+          this.colab.push(data[value]);
         }
       }
+      console.log(this.colabOriginal, this.colab);
       this.colabOriginal.sort((a: any, b: any) => {
         a.name = a.name.trim();
         b.name = b.name.trim();
