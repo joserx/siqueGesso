@@ -33,6 +33,7 @@
     "intl": "^1.2.5",
     "jspdf": "^2.4.0",
     "lru-cache": "^6.0.0",
+    "moment": "^2.29.1",
     "ng-chartjs": "^0.2.2",
     "ng2-charts": "^2.4.3",
     "ng2-currency-mask": "^11.0.0",

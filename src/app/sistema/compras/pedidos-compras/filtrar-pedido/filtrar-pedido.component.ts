@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-filtrar-pedido',
@@ -7,14 +9,26 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class FiltrarPedidoComponent implements OnInit {
   @Input() pedidos: Array<any> = [];
+  public pedido: any;
+
   @Input() pedidosOriginal: Array<any> = [];
   @Output() pedidosFiltrados = new EventEmitter<any>();
 
   valorTotal: any = 0;
 
-  constructor() {}
+  constructor(private pedidoCompraService: PedidoCompraService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPedidos();
+  }
+
+  getPedidos() {
+    this.pedidoCompraService.find().subscribe((res) => {
+      this.pedidoCompraService.pedidos = res;
+      this.pedidos = res;
+      console.log(this.pedidos);
+    });
+  }
 
   filtrarData(event: any) {
     const data = event.target.value;
@@ -48,5 +62,42 @@ export class FiltrarPedidoComponent implements OnInit {
     } else {
       this.pedidos = this.pedidosOriginal;
     }
+  }
+
+  deletePedido(pedido: any) {
+    console.log(pedido);
+
+    Swal.fire({
+      title: `Deseja deletar ${pedido.id}?`,
+      icon: 'question',
+      showConfirmButton: true,
+      confirmButtonText: 'Confirmar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then((res) => {
+      if (res.isConfirmed)
+        this.pedidoCompraService.delete(pedido.id).subscribe(() => {
+          this.getPedidos();
+          return Swal.fire({
+            title: 'Produto Deletado!',
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+        });
+      else
+        Swal.fire({
+          title: 'Ação cancelada!',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+    });
   }
 }

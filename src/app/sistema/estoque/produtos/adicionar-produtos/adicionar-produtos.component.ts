@@ -23,7 +23,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./adicionar-produtos.component.scss'],
 })
 export class AdicionarProdutosComponent implements OnInit {
-  tabelas = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
+  tabelas = [{}, {}, {}, {}];
 
   fornecedores: any;
 

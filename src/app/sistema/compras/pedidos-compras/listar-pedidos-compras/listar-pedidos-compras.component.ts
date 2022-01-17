@@ -25,9 +25,10 @@ export class ListarPedidosComprasComponent implements OnInit {
 
   pesquisaPedidos() {
     if (this.search.length > 0)
-      this.pedidosFiltrados = this.pedidos.filter((pedidoF: any) => {
-        pedidoF.nome.inclues(this.search);
-      });
+      this.pedidosFiltrados = this.pedidos.filter((pedidoF: any) =>
+        pedidoF.fornecedor.includes(this.search)
+      );
+    else this.pedidosFiltrados = this.pedidos;
   }
 
   getPedidos() {

@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { ProdutoService } from '../../../../services/produto.service';
 import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
+
+import { Moment } from 'moment';
 import Swal from 'sweetalert2';
 
 @Component({

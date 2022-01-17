@@ -5,7 +5,7 @@
         <div class="modal-content rounded-15 bg-custom-light">
             <div class="modal-header px-4">
                 <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">
-                    Produtos Estoque
+                    Produtos no Estoque
                 </h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -19,125 +19,57 @@
                                 <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso" />
                             </div>
                             <div class="col">
-                                <h2 class="text-custom-dark text-center">Estoque</h2>
+                                <h2 class="text-custom-dark text-center">Produtos</h2>
                             </div>
                         </div>
                         <table class="bg-white tabela m-0 p-0">
                             <thead>
                                 <tr>
-                                    <td class="
-                      h6
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      text-center
-                      fw-bold
-                    ">
-                                        Data
+                                    <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                        Codigo
                                     </td>
-                                    <td class="
-                      h6
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      text-center
-                      fw-bold
-                    ">
-                                        Fornecedor
+                                    <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                        Produto
                                     </td>
-                                    <td class="
-                      h6
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      text-center
-                      fw-bold
-                    ">
-                                        Valor Unit
+                                    <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                        Unidade
                                     </td>
-                                    <td class="
-                      h6
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      text-center
-                      fw-bold
-                    ">
-                                        Qtd
-                                    </td>
-                                    <td class="
-                      h6
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      text-center
-                      fw-bold
-                    ">
+                                    <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">
                                         Custo
                                     </td>
-                                    <td class="
-                      h6
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      text-center
-                      fw-bold
-                    ">
-                                        Disponivel
+                                    <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                        Valor de Venda
+                                    </td>
+                                    <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                        Estoque
+                                    </td>
+                                    <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                        Total
                                     </td>
                                 </tr>
                             </thead>
                             <tbody *ngFor="let oneEstoq of estoque">
                                 <tr>
-                                    <td class="
-                      table-content
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      fw-normal
-                    ">
-                                        {{ estoque }}
+                                    <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                        {{ oneEstoq?.id }}
                                     </td>
-                                    <td class="
-                      table-content
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      fw-normal
-                    ">
-                                        {{ estoque }}
+                                    <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                        {{ oneEstoq?.nome }}
                                     </td>
-                                    <td class="
-                      table-content
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      fw-normal
-                    ">
-                                        {{ estoque }}
+                                    <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                        {{ oneEstoq?.unidade }}
                                     </td>
-                                    <td class="
-                      table-content
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      fw-normal
-                    ">
-                                        {{ estoque }}
+                                    <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                        {{ oneEstoq?.custoMedio }}
                                     </td>
-                                    <td class="
-                      table-content
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      fw-normal
-                    ">
-                                        {{ estoque }}
+                                    <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                        {{ oneEstoq?.precoMedio }}
                                     </td>
-                                    <td class="
-                      table-content
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      fw-normal
-                    ">
-                                        {{ estoque }}
+                                    <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                        {{ oneEstoq?.atual }}
                                     </td>
-                                    <td class="
-                      table-content
-                      text-custom-dark
-                      border border-custom-dark border-1
-                      fw-normal
-                    ">
-                                        {{ estoque }}
+                                    <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                        {{ oneEstoq?.margemLucro }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -149,16 +81,7 @@
             <!-- Modal footer -->
             <div class="row m-0 py-3 modal-footer">
                 <div class="col-3 px-2 p-0 m-0 d-grid">
-                    <button data-bs-dismiss="modal" type="reset" class="
-              h-limited-sm
-              btn
-              rounded-15
-              py-1
-              px-4
-              bg-success
-              shadow-sm
-              text-start
-            " (click)="savePdf()">
+                    <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start" (click)="savePdf()">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark">
               Donwload
             </h5>
@@ -166,16 +89,7 @@
                 </div>
                 <!-- Cancelar -->
                 <div class="col-3 px-2 p-0 m-0 d-grid">
-                    <button data-bs-dismiss="modal" type="reset" class="
-              h-limited-sm
-              btn
-              rounded-15
-              py-1
-              px-4
-              bg-danger
-              shadow-sm
-              text-start
-            ">
+                    <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-danger shadow-sm text-start">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark">
               Cancelar
             </h5>

@@ -72,6 +72,16 @@
         <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(produto)"></i>
     </div>
 </div>
+<!-- Exportar Produto -->
+<div class="col-2 row">
+    <button class="m-1 col px-0 m-0 pdf-button rounded text-white text-center border-0" for="add-falta" data-bs-toggle="modal" data-bs-target="#generateEstoquePdf">
+    <i
+      class="bi bi-file-earmark-pdf-fill icon-view my-auto fs-3 p-2 m-0 fw-bold text-custom-dark text-white"
+      cursor="pointer"
+    ></i>
+  </button>
+</div>
+
 <app-edit-produto-estoque (reload)="getProdutos()"></app-edit-produto-estoque>
 <app-adicionar-produto-estoque (reload)="getProdutos()"></app-adicionar-produto-estoque>
 <app-view-estoque-produto [produto]="produto"></app-view-estoque-produto>
