@@ -134,6 +134,7 @@ import { ViewPedidoComponent } from './sistema/compras/pedidos-compras/view-pedi
 import { FiltrarPedidoComponent } from './sistema/compras/pedidos-compras/filtrar-pedido/filtrar-pedido.component';
 import { ViewEstoqueProdutoComponent } from './sistema/estoque/estoque-produtos/view-estoque-produto/view-estoque-produto.component';
 import { FiltrarColaboradoresComponent } from './sistema/rh/listar-colaboradores/filtrar-colaboradores/filtrar-colaboradores.component';
+import { FiltrarUsuariosComponent } from './sistema/usuarios-sistema/filtrar-usuarios/filtrar-usuarios.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -264,6 +265,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FiltrarPedidoComponent,
     ViewEstoqueProdutoComponent,
     FiltrarColaboradoresComponent,
+    FiltrarUsuariosComponent,
   ],
 
   imports: [

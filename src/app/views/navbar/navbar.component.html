@@ -1,61 +1,72 @@
 <nav class="navbar navbar-light bg-white border-bottom border-light">
-  <div class="container">
-    <!-- Logotipo -->
-    <a class="navbar-brand" routerLink="/">
-      <img src="./assets/sique-gesso-logo.png" alt="Sique Gesso" height="50">
-    </a>
-    <!-- Informações -->
-    <div class="my-auto text-custom-dark">
-
-      <!-- Textos e perfil -->
-      <div class="d-flex flex-row justify-content-center align-items-center">
-              <!-- Dropdown Notificações -->
-      <div ngbDropdown class="btn-group dropdown" autoClose="outside" display="dynamic" placement="bottom-center">
-        <!-- Botão do dropdown de notificações -->
-        <!-- <button ngbDropdownToggle type="button" id="btnNotificacoes" class="btn btn-white px-2 py-1 rounded-15 mx-3 fs-4">
+    <div class="container">
+        <!-- Logotipo -->
+        <a class="navbar-brand" routerLink="/">
+            <img src="./assets/sique-gesso-logo.png" alt="Sique Gesso" height="50" />
+        </a>
+        <!-- Informações -->
+        <div class="my-auto text-custom-dark">
+            <!-- Textos e perfil -->
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <!-- Dropdown Notificações -->
+                <div ngbDropdown class="btn-group dropdown" autoClose="outside" display="dynamic" placement="bottom-center">
+                    <!-- Botão do dropdown de notificações -->
+                    <!-- <button ngbDropdownToggle type="button" id="btnNotificacoes" class="btn btn-white px-2 py-1 rounded-15 mx-3 fs-4">
           <i class="bi-bell"></i>
         </button>
          Badge da quantidade de notificações 
         <span *ngIf="notificacoes.length > 0" class="badge rounded-pill bg-primary position-absolute bottom-50 start-50">{{notificacoes.length}}</span> -->
 
-        <!-- DropdownMenu -->
-        <ul ngbDropdownMenu class="dropdown-menu rounded-15" aria-labelledby="btnNotificacoes">
-          <!-- Título Notificações -->
-          <li class="fw-bold px-3 pb-2 text-custom-dark d-flex justify-content-between">
-            <span>Notificações</span>
-            <i class="bi-gear" cursor="pointer" routerLink="/sistema/notificacoes"></i>
-          </li>
-          <li><hr class="dropdown-divider m-0"></li>
+                    <!-- DropdownMenu -->
+                    <ul ngbDropdownMenu class="dropdown-menu rounded-15" aria-labelledby="btnNotificacoes">
+                        <!-- Título Notificações -->
+                        <li class="fw-bold px-3 pb-2 text-custom-dark d-flex justify-content-between">
+                            <span>Notificações</span>
+                            <i class="bi-gear" cursor="pointer" routerLink="/sistema/notificacoes"></i>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider m-0" />
+                        </li>
 
-          <!-- Se não houver notificações -->
-          <li *ngIf="notificacoes.length === 0" class="li-350">
-            <p class="text-center mt-3 text-wrap text-custom-dark small">
-              Não há novas notificações.
-            </p>
-          </li>
+                        <!-- Se não houver notificações -->
+                        <li *ngIf="notificacoes.length === 0" class="li-350">
+                            <p class="text-center mt-3 text-wrap text-custom-dark small">
+                                Não há novas notificações.
+                            </p>
+                        </li>
 
-          <!-- Notificações -->
-          <li class="border-bottom d-flex li-350"  *ngFor="let notificacao of notificacoes;">
-            <a class="dropdown-item py-2 px-3 text-wrap small" href="#">
-              <!-- <p class="fw-bold m-0">Exemplo de título</p> -->
-              {{ notificacao.texto }}
-            </a>
-            <!-- Sub dropdown -->
-            <div class="btn-group dropdown" ngbDropdown autoClose="true" display="dynamic" placement="bottom-center">
-              <button ngbDropdownToggle type="button" id="btnNotificacao{{notificacao.id}}" class="btn btn-white bi-three-dots-vertical px-2 align-self-center"></button>
-              <ul ngbDropdownMenu class="dropdown-menu" attr.aria-labelledby="btnNotificacao{{notificacao.id}}">
-                <li class="dropdown-item text-wrap small" cursor="pointer">Marcar como lida <i class="bi-check2"></i> </li>
-              </ul>
-            </div>
-
-          </li>
-        </ul>
+                        <!-- Notificações -->
+                        <li class="border-bottom d-flex li-350" *ngFor="let notificacao of notificacoes">
+                            <a class="dropdown-item py-2 px-3 text-wrap small" href="#">
+                                <!-- <p class="fw-bold m-0">Exemplo de título</p> -->
+                                {{ notificacao.texto }}
+                            </a>
+                            <!-- Sub dropdown -->
+                            <div class="btn-group dropdown" ngbDropdown autoClose="true" display="dynamic" placement="bottom-center">
+                                <button ngbDropdownToggle type="button" id="btnNotificacao{{ notificacao.id }}" class="btn btn-white bi-three-dots-vertical px-2 align-self-center"></button>
+                                <ul ngbDropdownMenu class="dropdown-menu" attr.aria-labelledby="btnNotificacao{{ notificacao.id }}">
+                                    <li class="dropdown-item text-wrap small" cursor="pointer">
+                                        Marcar como lida <i class="bi-check2"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <span class="fw-bold">{{ user.name }} {{ user.surname }}</span
+        >, seja bem-vindo!
+        <!-- <div
+          class="rounded-circle ms-3 border border-primary"
+          style="height: 40px; width: 40px;
+          background-image: url('{{avatarImg}}');background-position: center; background-size: cover;"
+        ></div> -->
+        <img
+          class="rounded-circle ms-3 border border-primary"
+          height="40"
+          src="../../../assets/sem-foto.jpg"
+          alt="Perfil"
+        />
       </div>
-        <span class="fw-bold">{{user.name}} {{user.surname}}</span>, seja bem-vindo!
-        <div class="rounded-circle ms-3 border border-primary" style="height: 40px; width: 40px;background-image: url('{{avatarImg}}');background-position: center; background-size: cover;"></div>
-        <!-- <img class="rounded-circle ms-3 border border-primary" height="40" [src]="avatarImg" alt="Perfil"> -->
-      </div>
-
     </div>
   </div>
 </nav>

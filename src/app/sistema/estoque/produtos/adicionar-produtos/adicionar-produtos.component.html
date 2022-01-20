@@ -48,14 +48,7 @@
             <div class="col-2 px-2 mt-4 d-flex align-items-center p-0 m-0">
               <div class="form-check form-switch align-items-center d-flex">
                 <input
-                  class="
-                    form-check-input
-                    pt-4
-                    ps-5
-                    border
-                    bg-custom-light
-                    shadow-sm
-                  "
+                  class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm"
                   type="checkbox"
                   id="status"
                   formControlName="ativo"
@@ -152,26 +145,10 @@
             >
               <div
                 [formGroupName]="i"
-                class="
-                  col-11
-                  px-2
-                  pt-4
-                  p-0
-                  m-0
-                  d-flex
-                  align-items-center
-                  form-floating
-                "
+                class="col-11 px-2 pt-4 p-0 m-0 d-flex align-items-center form-floating"
               >
                 <select
-                  class="
-                    form-select
-                    h-limited-sm
-                    px-4
-                    py-1
-                    rounded-15
-                    shadow-sm
-                  "
+                  class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm"
                   formControlName="id"
                 >
                   <option selected disabled>Selecione um fornecedor</option>
@@ -188,16 +165,7 @@
                 <div *ngIf="fornecedorArray.length > 1">
                   <a class="px-2 py-2" (click)="removerFornecedorPadrao(i)">
                     <i
-                      class="
-                        bi bi-x-square-fill
-                        icon-view
-                        my-auto
-                        fs-4
-                        p-2
-                        m-0
-                        fw-bold
-                        text-custom-dark
-                      "
+                      class="bi bi-x-square-fill icon-view my-auto fs-4 p-2 m-0 fw-bold text-custom-dark"
                     ></i>
                   </a>
                 </div>
@@ -205,16 +173,7 @@
               <div class="col-1 px-2 pt-4 p-0 m-0">
                 <a class="px-2 py-2" (click)="adicionarFornecedorPadrao()">
                   <i
-                    class="
-                      bi-plus-square-fill
-                      icon-view
-                      my-auto
-                      fs-4
-                      p-2
-                      m-0
-                      fw-bold
-                      text-custom-dark
-                    "
+                    class="bi-plus-square-fill icon-view my-auto fs-4 p-2 m-0 fw-bold text-custom-dark"
                   ></i>
                 </a>
               </div>
@@ -548,13 +507,7 @@
             <!-- Informações adicionais -->
             <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
               <textarea
-                class="
-                  form-control form-control-lg
-                  px-4
-                  py-3
-                  rounded-15
-                  shadow-sm
-                "
+                class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm"
                 placeholder="Informações adicionais"
                 style="height: 150px"
                 formControlName="infoAdd"
@@ -579,35 +532,20 @@
               *ngFor="let tabela of tabelas"
             >
               <input
-                class="
-                  form-control form-control-lg
-                  px-4
-                  py-3
-                  rounded-15
-                  shadow-sm
-                "
+                class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm"
                 placeholder="Tabela"
                 currencyMask
                 value="R$0,00"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Tabela</label
+                >Tabela {{ tabela.nome }}</label
               >
             </div>
 
             <div class="col-1 px-2 pt-4 p-0 m-0">
               <a class="px-2 py-2" (click)="adicionarTabela()">
                 <i
-                  class="
-                    bi-plus-square-fill
-                    icon-view
-                    my-auto
-                    fs-4
-                    p-2
-                    m-0
-                    fw-bold
-                    text-custom-dark
-                  "
+                  class="bi-plus-square-fill icon-view my-auto fs-4 p-2 m-0 fw-bold text-custom-dark"
                 ></i>
               </a>
             </div>
@@ -621,23 +559,10 @@
             <button
               data-bs-dismiss="modal"
               type="reset"
-              class="
-                h-limited-sm
-                btn
-                rounded-15
-                py-1
-                px-4
-                bg-light
-                shadow-sm
-                text-start
-              "
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start"
             >
               <h5
-                class="
-                  fw-normal
-                  my-auto
-                  text-truncate text-custom-dark text-center
-                "
+                class="fw-normal my-auto text-truncate text-custom-dark text-center"
               >
                 Cancelar
               </h5>
@@ -648,24 +573,11 @@
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button
               type="submit"
-              class="
-                h-limited-sm
-                btn
-                rounded-15
-                py-1
-                px-4
-                bg-custom-success
-                shadow-sm
-                text-start
-              "
+              class="h-limited-sm btn rounded-15 py-1 px-4 bg-custom-success shadow-sm text-start"
               (click)="submit()"
             >
               <h5
-                class="
-                  fw-normal
-                  my-auto
-                  text-truncate text-custom-dark text-center
-                "
+                class="fw-normal my-auto text-truncate text-custom-dark text-center"
               >
                 Salvar
               </h5>

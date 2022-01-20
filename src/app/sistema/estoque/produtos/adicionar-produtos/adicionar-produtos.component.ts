@@ -23,7 +23,35 @@ import Swal from 'sweetalert2';
   styleUrls: ['./adicionar-produtos.component.scss'],
 })
 export class AdicionarProdutosComponent implements OnInit {
-  tabelas = [{}, {}, {}, {}];
+  tabelas = [{ nome: 'a' }, { nome: 'b' }, { nome: 'c' }, { nome: 'd' }];
+  // letras = [
+  //   'a',
+  //   'b',
+  //   'c',
+  //   'd',
+  //   'e',
+  //   'f',
+  //   'g',
+  //   'h',
+  //   'i',
+  //   'j',
+  //   'k',
+  //   'l',
+  //   'm',
+  //   'n',
+  //   'o',
+  //   'p',
+  //   'q',
+  //   'r',
+  //   's',
+  //   't',
+  //   'u',
+  //   'v',
+  //   'w',
+  //   'x',
+  //   'y',
+  //   'z',
+  // ];
 
   fornecedores: any;
 
@@ -131,6 +159,8 @@ export class AdicionarProdutosComponent implements OnInit {
   }
 
   adicionarTabela() {
-    this.tabelas.push({});
+    let proximaLetra = this.tabelas[this.tabelas.length - 1].nome;
+    proximaLetra = String.fromCharCode(proximaLetra.charCodeAt(0) + 1);
+    this.tabelas.push({ nome: proximaLetra });
   }
 }
