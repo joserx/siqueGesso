@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CategoriaProdutoService {
   constructor(private readonly http: HttpClient) {}
-  public categoria: any;
+  public categorias: any;
 
   find() {
     return this.http.get(environment.apiUrl + 'categoria-produto');
@@ -22,6 +22,9 @@ export class CategoriaProdutoService {
   }
 
   update(id: number, data: any) {
-    return this.http.put(environment.apiUrl + 'categoria-produto/' + id, data);
+    return this.http.patch(
+      environment.apiUrl + 'categoria-produto/' + id,
+      data
+    );
   }
 }

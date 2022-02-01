@@ -1,110 +1,73 @@
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col py-5 m-0 bg-custom-white">
-    <!-- Página -->
-    <div class="container">
-
-      <div class="row mt-4 m-0 pb-4 border-bottom">
-        <div class="col-12">
-          <h5 class="fw-bold text-custom-dark">Notificações</h5>
-        </div>
-      </div>
-
-      <div class="row mt-4 m-0">
-        <div class="col-12">
-
-          <!-- Accordions -->
-          <div class="accordion" id="notificacaoAccordion">
-
-            <!-- Accordion por email -->
-            <div class="accordion-item rounded-15">
-              <!-- Título por Email -->
-              <h2 class="accordion-header" id="porEmail">
-                <button class="accordion-button collapsed rounded-15" type="button" data-bs-toggle="collapse" data-bs-target="#porEmailCollapse" aria-expanded="false" aria-controls="porEmailCollapse">
-                  <p class="fw-bold text-custom-dark">Por e-mail</p>
-                </button>
-              </h2>
-
-              <!-- Collapse por email -->
-              <div id="porEmailCollapse" class="accordion-collapse collapse" aria-labelledby="porEmail">
-                <div class="accordion-body">
-
-                  <!-- Linha de notificação -->
-                  <div class="row py-3 m-0" *ngFor="let notificacao of notificacoesEmail; let i = index">
-                    <div class="col-3 px-2">
-                      {{notificacao.nome}}
-                    </div>
-                    <div class="col-6 px-2 text-center">
-                      <div class="form-check form-check-inline px-3" *ngFor="let tipo of notificacao.tipos; let i2 = index">
-                        <input class="form-check-input" type="checkbox" id="tipo{{notificacao.value}}-{{i}}-{{i2}}" value="tipo{{notificacao.value}}-{{i}}-{{i2}}">
-                        <label class="form-check-label" for="tipo{{notificacao.value}}-{{i}}-{{i2}}">{{tipo.nome}}</label>
-                      </div>
-                    </div>
-                    <div class="col-3 px-4 d-flex align-items-end justify-content-end">
-                      <div class="form-check form-switch">
-                        <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" [value]="notificacao.value">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Linha de notificação -->
-
-                </div>
-              </div>
-              <!-- /Collapse por email -->
-            </div>
-            <!-- /Accordion por email -->
-
-            <!-- Accordion Na Sique Gesso -->
-            <div class="accordion-item mt-4 rounded-15">
-
-              <!-- Título Na Sique Gesso -->
-              <h2 class="accordion-header" id="naSique">
-                <button class="accordion-button collapsed rounded-15" type="button" data-bs-toggle="collapse" data-bs-target="#naSiqueCollapse" aria-expanded="false" aria-controls="naSiqueCollapse">
-                  <p class="fw-bold text-custom-dark">Na Sique Gesso</p>
-                </button>
-              </h2>
-
-              <!-- Collapse Na Sique -->
-              <div id="naSiqueCollapse" class="accordion-collapse collapse" aria-labelledby="naSique">
-                <div class="accordion-body">
-
-                  <!-- Linha de notificação -->
-                  <div class="row py-3 m-0" *ngFor="let notificacao of notificacoesSique; let i = index">
-                    <div class="col-3 px-2">
-                      {{notificacao.nome}}
-                    </div>
-                    <div class="col-6 px-2 text-center">
-                      <div class="form-check form-check-inline px-3" *ngFor="let tipo of notificacao.tipos; let i2 = index">
-                        <input class="form-check-input" type="checkbox" id="tipo{{notificacao.value}}-{{i}}-{{i2}}" value="tipo{{notificacao.value}}-{{i}}-{{i2}}">
-                        <label class="form-check-label" for="tipo{{notificacao.value}}-{{i}}-{{i2}}">{{tipo.nome}}</label>
-                      </div>
-                    </div>
-                    <div class="col-3 px-4 d-flex align-items-end justify-content-end">
-                      <div class="form-check form-switch">
-                        <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" [value]="notificacao.value">
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Linha de notificação -->
-
-                </div>
-              </div>
-              <!-- /Collapse Na Sique -->
-
-            </div>
-            <!-- /Accordion Na Sique -->
-
-          </div>
-          <!-- / Accordion -->
-
-        </div>
-      </div>
-
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
     </div>
-    <!-- /Página -->
-  </div>
+    <div class="col py-5 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/configuracoes/">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
+
+            <div class="row mt-4 m-0 pb-4 border-bottom">
+                <div class="col-12">
+                    <h5 class="fw-bold text-custom-dark">Mensagens</h5>
+                </div>
+            </div>
+            <!-- Botão Adicionar -->
+            <div class="col-4 px-2 p-0 m-0">
+                <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#novaMensagem">
+                    <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                        Nova Mensagem
+                    </h5>
+                    <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+                </a>
+            </div>
+
+            <!-- Títulos da Tabela -->
+            <div class="d-flex row m-0 my-5 text-custom-dark justify-content-center">
+                <div class="col-2">
+                    <h5 class="fw-bold text-truncate">Título</h5>
+                </div>
+                <div class="col-2">
+                    <h5 class="fw-bold text-truncate">Mensagem</h5>
+                </div>
+                <div class="col-2">
+                    <h5 class="fw-bold text-truncate">Usuario</h5>
+                </div>
+                <div class="col-2">
+                    <h5 class="fw-bold text-truncate">Data</h5>
+                </div>
+                <div class="col-2">
+                    <h5 class="fw-bold text-truncate">Visualizar</h5>
+                </div>
+                <!-- Tabela -->
+                <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let mensagem of mensagens">
+                    <div class="col-2">
+                        <p>{{ mensagem.titulo }}</p>
+                    </div>
+                    <div class="col-2">
+                        <p>{{ mensagem.texto }}</p>
+                    </div>
+                    <div class="col-2">
+                        <p>{{ mensagem.usuario }}</p>
+                    </div>
+                    <div class="col-2">
+                        <p>{{ mensagem.data | date }}</p>
+                    </div>
+                    <div class="col-2 text-end">
+                        <i class="fs-5 bi-view-fill icon-edit p-3" cursor="pointer"></i>
+                        <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+                    </div>
+                </div>
+                <!-- /Página -->
+            </div>
+        </div>
+    </div>
 </div>
+<app-nova-msg></app-nova-msg>

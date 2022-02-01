@@ -135,6 +135,9 @@ import { FiltrarPedidoComponent } from './sistema/compras/pedidos-compras/filtra
 import { ViewEstoqueProdutoComponent } from './sistema/estoque/estoque-produtos/view-estoque-produto/view-estoque-produto.component';
 import { FiltrarColaboradoresComponent } from './sistema/rh/listar-colaboradores/filtrar-colaboradores/filtrar-colaboradores.component';
 import { FiltrarUsuariosComponent } from './sistema/usuarios-sistema/filtrar-usuarios/filtrar-usuarios.component';
+import { FiltroCategoriasComponent } from './sistema/config/cadastro-de-categoria/filtro-categorias/filtro-categorias.component';
+import { FiltroDestinacaoComponent } from './sistema/config/cadastro-de-categoria/filtro-destinacao/filtro-destinacao.component';
+import { NovaMsgComponent } from './sistema/config/nova-msg/nova-msg.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -266,6 +269,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ViewEstoqueProdutoComponent,
     FiltrarColaboradoresComponent,
     FiltrarUsuariosComponent,
+    FiltroCategoriasComponent,
+    FiltroDestinacaoComponent,
+    NovaMsgComponent,
   ],
 
   imports: [
