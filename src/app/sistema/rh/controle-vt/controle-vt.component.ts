@@ -55,7 +55,7 @@ export class ControleVtComponent implements OnInit {
           }
           return -1;
         });
-        console.log(this.colabVt, this.colab);
+        console.log(this.colabVt);
       },
       (err) => {
         console.log(err);

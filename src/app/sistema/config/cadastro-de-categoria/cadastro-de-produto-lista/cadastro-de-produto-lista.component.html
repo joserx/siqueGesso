@@ -1,75 +1,87 @@
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col m-0 bg-custom-white">
-    <!-- Lista de categorias cadastradas -->
-    <div class="container">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+        <!-- Lista de categorias cadastradas -->
+        <div class="container">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4 align-items-center">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/configuracoes/cadastro-de-categorias">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+                <div class="col-11">
+                    <h3 class="text-secondary text-center">Categoria de Produto</h3>
+                </div>
+            </div>
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4 align-items-center">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/configuracoes/cadastro-de-categorias">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-        <div class="col-11">
-            <h3 class="text-secondary text-center">Categoria de Produto</h3>
-        </div>
-      </div>
+            <!-- Adicionar, Pesquisar e Filtro -->
+            <div class="row m-0 mt-4 justify-content-center">
+                <!-- Botão Adicionar -->
+                <div class="col-4 px-2 p-0 m-0">
+                    <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/configuracoes/cadastro-de-categorias/categoria-de-produto/cadastrar">
+                        <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                            Adicionar
+                        </h5>
+                        <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+                    </a>
+                </div>
 
-      <!-- Adicionar, Pesquisar e Filtro -->
-      <div class="row m-0 mt-4 justify-content-center">
+                <!-- Pesquisar -->
+                <div class="col-4 px-2 p-0 m-0 position-relative">
+                    <input [(ngModel)]="search" (input)="pesquisaCategoria()" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar" />
+                    <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+                </div>
+                <div class="row m-0 mt-4 justify-content-center">
+                    <!-- Ativos -->
+                    <div class="col-4 px-2 p-0 m-0">
+                        <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-success" (click)="getCategorias(true)"></i>
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                                {{ data.status }}ativos
+                            </h5>
+                        </div>
+                    </div>
 
-        <!-- Botão Adicionar -->
-        <div class="col-4 px-2 p-0 m-0">
-          <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/configuracoes/cadastro-de-categorias/categoria-de-produto/cadastrar">
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark " >Adicionar</h5>
-            <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
-          </a>
-        </div>
+                    <!-- Inativos -->
+                    <div class="col-4 px-2 p-0 m-0">
+                        <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-danger" (click)="getCategorias(false)"></i>
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                                {{ data.enabled }}inativos
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Pesquisar -->
-        <div class="col-4 px-2 p-0 m-0 position-relative">
-          <input class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar">
-          <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
-        </div>
-        
-        <!-- Botão Filtro -->
-        <div class="col-4 px-2 p-0 m-0">
-          <a class="rounded-15 py-2 px-4 bg-white h-100 d-flex justify-content-between shadow-sm">
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtro</h5>
-            <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Títulos da Tabela -->
-      <div class="row m-0 my-5 text-custom-dark justify-content-center">
-        <!-- <div class="col-10">
+            <!-- Títulos da Tabela -->
+            <div class="row m-0 my-5 text-custom-dark justify-content-center">
+                <!-- <div class="col-10">
           <h5 class="fw-bold">Loja</h5>
         </div>
         <div class="col-2">
           <h5 class="fw-bold">Ações</h5>
         </div> -->
-      </div>
-
-      <!-- Tabela -->
-      <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let produto of produtos">
-        <div class="col-10">
-          <p>Lorem ipsum</p>
-        </div>
-
-        <div class="col-2 text-end d-flex align-items-center justify-content-end">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox">
             </div>
-            <i class="fs-5 bi-trash-fill icon-delete px-3" cursor="pointer" ></i>
+
+            <!-- Tabela -->
+            <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let categoria of categorias">
+                <div class="col-10">
+                    <p>{{ categoria?.nome }}</p>
+                </div>
+
+                <div class="col-2 text-end d-flex align-items-center justify-content-end">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" [checked]="categoria?.status" [(ngModel)]="categoria.status" (click)="mudarStatus(categoria)" />
+                    </div>
+                    <i class="fs-5 bi-trash-fill icon-delete px-3" cursor="pointer" (click)="deleteCategoria(categoria)"></i>
+                </div>
+            </div>
         </div>
-      </div>
-
+        <!-- /Lista de categorias cadastrardas -->
     </div>
-    <!-- /Lista de categorias cadastrardas -->
-  </div>
 </div>
-
+<app-filtro-categorias></app-filtro-categorias>

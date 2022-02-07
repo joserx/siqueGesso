@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ProdutoService } from '../../../../services/produto.service';
 import jsPDF from 'jspdf';
 
 @Component({
@@ -8,22 +9,28 @@ import jsPDF from 'jspdf';
 })
 export class RelatorioProdutosViewComponent implements OnInit {
   @ViewChild('content', { static: false }) el: ElementRef;
-  estoqueOriginal: any[] = [];
+  public estoqueOriginal: any[] = [];
   public estoqueAtivado: any[] = [];
   public estoque: any[] = [];
 
-  constructor() {}
+  constructor(private produtoService: ProdutoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.produtoService.find().subscribe((data: any) => {
+      for (let value of data) {
+        if (value['itens'] == '1') {
+          this.estoqueOriginal.push(value);
+          this.estoque.push(value);
+        }
+      }
+    });
+  }
+
   savePdf() {
-    // const doc = new jsPDF();
-    // doc.text("Hello world!", 10, 10);
-    // doc.save("relatorio-faltas.pdf");
-
     let pdf = new jsPDF('p', 'pt', 'a4');
     pdf.html(this.el.nativeElement, {
       callback: (pdf) => {
-        pdf.save('relatorio-faltas.pdf');
+        pdf.save('relatorio-produtos.pdf');
       },
     });
   }

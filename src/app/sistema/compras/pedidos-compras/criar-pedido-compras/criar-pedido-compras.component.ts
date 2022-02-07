@@ -12,8 +12,15 @@ import { Router } from '@angular/router';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { ProdutoService } from '../../../../services/produto.service';
 import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
-import Swal from 'sweetalert2';
 
+import { Moment } from 'moment';
+import Swal from 'sweetalert2';
+// import {
+//   ChartSelectEvent,
+//   GoogleChartInterface,
+//   GoogleChartsControlInterface,
+//   GoogleChartsDashboardInterface,
+// } from 'ng2-google-charts';
 @Component({
   selector: 'app-criar-pedido-compras',
   templateUrl: './criar-pedido-compras.component.html',
@@ -84,6 +91,26 @@ export class CriarPedidoComprasComponent implements OnInit {
     this.getFornecedores();
     this.getProdutos();
   }
+
+  initDataTable() {}
+
+  // public comprasChart: GoogleChartInterface = {
+  //   chartType: 'PieChart',
+  //   dataTable: [
+  //     ['produto', 'quantidade'],
+  //     ['pilha', 1],
+  //   ],
+  //   options: {
+  //     title: 'Compras nos ultimos 3 meses',
+  //     height: 300,
+  //     chartArea: {
+  //       left: 15,
+  //       top: 50,
+  //       right: 0,
+  //       bottom: 30,
+  //     },
+  //   },
+  // };
 
   setFornecedores(fornecedor: string) {
     const fornecedorSelecionado = this.fornecedores.find(

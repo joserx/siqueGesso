@@ -11,11 +11,11 @@ export class SuprimentoService {
   constructor(private readonly http: HttpClient) {}
 
   find() {
-    return this.http.get<any>(environment.apiUrl + 'suprimentos');
+    return this.http.get<any>(environment.apiUrl + 'suprimentos/');
   }
 
   create(data: any) {
-    return this.http.post(environment.apiUrl + 'suprimentos', data);
+    return this.http.post(environment.apiUrl + 'suprimentos/', data);
   }
 
   delete(id: number) {

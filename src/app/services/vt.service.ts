@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VtService {
-
-  constructor(
-    private readonly http: HttpClient
-  ) { }
+  constructor(private readonly http: HttpClient) {}
 
   find() {
     return this.http.get(environment.apiUrl + 'vt/');
+  }
+
+  findAtivo() {
+    return this.http.get(environment.apiUrl + 'vt/ativo');
   }
 
   findOne(id: number) {

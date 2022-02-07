@@ -118,6 +118,7 @@ import { CadastroDeProdutoComponent } from './sistema/config/cadastro-de-categor
 import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-lista/destinacao-da-venda-lista.component';
 import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
 import { NgChartjsModule } from 'ng-chartjs';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { FiltrarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/filtrar-vendas-diretas/filtrar-vendas-diretas.component';
 import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
 import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
@@ -130,6 +131,14 @@ import { FiltrarProdutosComponent } from './sistema/estoque/produtos/filtrar-pro
 import { EditProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/edit-produto-estoque/edit-produto-estoque.component';
 import { AdicionarProdutoEstoqueComponent } from './sistema/estoque/estoque-produtos/adicionar-produto-estoque/adicionar-produto-estoque.component';
 import { ViewPedidoComponent } from './sistema/compras/pedidos-compras/view-pedido/view-pedido.component';
+import { FiltrarPedidoComponent } from './sistema/compras/pedidos-compras/filtrar-pedido/filtrar-pedido.component';
+import { ViewEstoqueProdutoComponent } from './sistema/estoque/estoque-produtos/view-estoque-produto/view-estoque-produto.component';
+import { FiltrarColaboradoresComponent } from './sistema/rh/listar-colaboradores/filtrar-colaboradores/filtrar-colaboradores.component';
+import { FiltrarUsuariosComponent } from './sistema/usuarios-sistema/filtrar-usuarios/filtrar-usuarios.component';
+import { FiltroCategoriasComponent } from './sistema/config/cadastro-de-categoria/filtro-categorias/filtro-categorias.component';
+import { FiltroDestinacaoComponent } from './sistema/config/cadastro-de-categoria/filtro-destinacao/filtro-destinacao.component';
+import { NovaMsgComponent } from './sistema/config/nova-msg/nova-msg.component';
+import { ChartsModule } from 'ng2-charts';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -257,9 +266,18 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditProdutoEstoqueComponent,
     AdicionarProdutoEstoqueComponent,
     ViewPedidoComponent,
+    FiltrarPedidoComponent,
+    ViewEstoqueProdutoComponent,
+    FiltrarColaboradoresComponent,
+    FiltrarUsuariosComponent,
+    FiltroCategoriasComponent,
+    FiltroDestinacaoComponent,
+    NovaMsgComponent,
   ],
 
   imports: [
+    ChartsModule,
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -278,6 +296,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
+  exports: [NgxPaginationModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

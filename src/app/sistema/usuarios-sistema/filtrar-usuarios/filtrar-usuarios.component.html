@@ -1,0 +1,86 @@
+<!-- Modal -->
+<div class="modal fade" id="filtrarUsuarios" tabindex="-1" aria-labelledby="filtrarUsuariosLabel" aria-hidden="true" aria-label="Close">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content -->
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="filtrarColaboradoresLabel">
+                    Filtrar Pedidos
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4">
+                <div class="row">
+                    <div class="col px-2 pt-4 p-0 m-0 form-floating">
+                        <input (keyup)="filtrarPermissao($event)" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Loja" />
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Permissão</label
+            >
+          </div>
+        </div>
+
+        <!-- Lista de Usuarios -->
+        <!-- Títulos da Tabela -->
+        <div class="row m-0 my-5 text-custom-dark justify-content-center">
+          <div class="col-3">
+            <h5 class="fw-bold text-truncate">Usuario</h5>
+          </div>
+          <div class="col-5 col-lg-4">
+            <h5 class="fw-bold text-truncate">E-mail</h5>
+          </div>
+          <div class="col-2 col-lg-3">
+            <h5 class="fw-bold text-truncate">Permissão</h5>
+          </div>
+        </div>
+        <!-- Tabela -->
+        <div
+          class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center"
+          *ngFor="let usuario of usuarios"
+        >
+          <div class="col-3">
+            <p>{{ usuario?.name }}</p>
+          </div>
+          <div class="col-5 col-lg-4">
+            <p>{{ usuario?.email }}</p>
+          </div>
+          <div class="col-2 col-lg-3">
+            <p>{{ usuario?.permission }}</p>
+          </div>
+
+          <div class="col-2 text-end">
+            <i
+              class="fs-5 bi-eye-fill icon-view p-3"
+              cursor="pointer"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></i>
+            <i
+              class="fs-5 bi-trash-fill icon-delete p-3"
+              cursor="pointer"
+              (click)="deleteUsuario(usuario.id)"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></i>
+          </div>
+        </div>
+        <!-- Dados cadastrais -->
+      </div>
+      <!-- Modal footer -->
+      <div class="row m-0 py-3 modal-footer">
+        <!-- Cancelar -->
+        <div class="col-3 px-2 p-0 m-0 d-grid">
+          <button
+            data-bs-dismiss="modal"
+            type="reset"
+            class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start"
+          >
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+              Cancelar
+            </h5>
+          </button>
+        </div>
+      </div>
+      <!-- /Modal footer -->
+    </div>
+    <!-- /Modal content -->
+  </div>
+</div>
