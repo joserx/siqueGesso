@@ -9,36 +9,44 @@ import Swal from 'sweetalert2';
 })
 export class DestinacaoDaVendaListaComponent implements OnInit {
   public destinacao: any;
-  public destinacoes: any;
+  public destinacoes: any[] = [];
   public search: string = '';
-  public destinacoesFiltradas: any = [];
+  public destinacoesFiltradas: any[] = [];
+  data: any = {};
 
   constructor(private DestinacaoVendaService: DestinacaoVendaService) {}
 
   ngOnInit(): void {
-    this.getDestinacao();
+    this.getDestinacoes();
+  }
+
+  mudarStatus(destinacao: any) {
+    if (destinacao.status == true) destinacao.status = false;
+    else destinacao.status = true;
+    this.DestinacaoVendaService.update(destinacao.id, destinacao).subscribe();
   }
 
   pesquisaDestinacao() {
     if (this.search.length > 0)
-      this.destinacoesFiltradas = this.destinacoes.filter((categoriaF: any) =>
-        categoriaF.nome.includes(this.search)
+      this.destinacoesFiltradas = this.destinacoes.filter((destinacaoF: any) =>
+        destinacaoF.nome.includes(this.search)
       );
     else this.destinacoesFiltradas = this.destinacao;
   }
 
-  getDestinacao() {
-    this.DestinacaoVendaService.find().subscribe((res) => {
-      this.DestinacaoVendaService.destinacoes = res;
-      this.destinacoes = res;
-      this.destinacoesFiltradas = this.destinacoes;
-      console.log(res);
-    });
+  getDestinacoes(status?: boolean) {
+    this.DestinacaoVendaService.find(status).subscribe(
+      (res: any) => {
+        this.destinacoes = res;
+      },
+      (err) => {},
+      () => {}
+    );
   }
 
-  deleteDestinacao(categoria: any) {
+  deleteDestinacao(destinacao: any) {
     Swal.fire({
-      title: `Deseja deletar ${categoria.nome}?`,
+      title: `Deseja deletar ${destinacao.nome}?`,
       icon: 'question',
       showConfirmButton: true,
       confirmButtonText: 'Confirmar',
@@ -46,10 +54,10 @@ export class DestinacaoDaVendaListaComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((res) => {
       if (res.isConfirmed)
-        this.DestinacaoVendaService.delete(categoria.id).subscribe(() => {
-          this.getDestinacao();
+        this.DestinacaoVendaService.delete(destinacao.id).subscribe(() => {
+          this.getDestinacoes();
           return Swal.fire({
-            title: 'Categoria Deletada!',
+            title: 'Destinacao Deletada!',
             icon: 'success',
             toast: true,
             position: 'top',

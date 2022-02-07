@@ -10,16 +10,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body px-4">
-                <div class="row">
-                    <div class="col-12 pb-4 d-flex border-bottom align-items-end justify-content-end">
-                        <label class="form-check-label me-3 fs-5"></label>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado" />
+                <div class="row m-0 mt-4 justify-content-center">
+                    <!-- Ativos -->
+                    <div class="col-4 px-2 p-0 m-0">
+                        <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-success" (click)="getCategorias(false)"></i>
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                                {{ data.enabled }} ativos
+                            </h5>
+                        </div>
+                    </div>
+
+                    <!-- Inativos -->
+                    <div class="col-4 px-2 p-0 m-0">
+                        <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-danger" (click)="getCategorias(true)"></i>
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                                {{ data.disabled }} inativos
+                            </h5>
                         </div>
                     </div>
                 </div>
 
-                <!-- Lista de colaboradores -->
+                <!-- Status -->
                 <!-- Títulos da Tabela -->
                 <div class="row m-0 my-5 text-custom-dark justify-content-center">
                     <div class="col-2 text-end d-flex align-items-center justify-content-end">
@@ -38,7 +51,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Dados cadastrais -->
             </div>
             <!-- Modal footer -->
             <div class="row m-0 py-3 modal-footer">

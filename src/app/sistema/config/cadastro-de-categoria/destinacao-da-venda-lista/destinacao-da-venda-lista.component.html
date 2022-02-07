@@ -34,15 +34,26 @@
                     <input [(ngModel)]="search" (input)="pesquisaDestinacao()" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar" />
                     <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
                 </div>
+                <div class="row m-0 mt-4 justify-content-center">
+                    <!-- Ativos -->
+                    <div class="col-4 px-2 p-0 m-0">
+                        <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-success" (click)="getDestinacoes(true)"></i>
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                                {{ data.status }}ativos
+                            </h5>
+                        </div>
+                    </div>
 
-                <!-- Botão Filtro -->
-                <div class="col-4 px-2 p-0 m-0">
-                    <a data-bs-toggle="modal" data-bs-target="#filtrarDestinacao" class="rounded-15 py-2 px-4 bg-white h-100 d-flex justify-content-between shadow-sm">
-                        <h5 data-bs-toggle="modal" data-bs-target="#filtrarDestinacao" class="fw-normal my-auto text-truncate text-custom-dark">
-                            Filtro
-                        </h5>
-                        <i data-bs-toggle="modal" data-bs-target="#filtrarDestinacao" class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark"></i>
-                    </a>
+                    <!-- Inativos -->
+                    <div class="col-4 px-2 p-0 m-0">
+                        <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-danger" (click)="getDestinacoes(false)"></i>
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                                {{ data.enabled }}inativos
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -57,14 +68,14 @@
             </div>
 
             <!-- Tabela -->
-            <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let destinacao of destinacoesFiltradas">
+            <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let destinacao of destinacoes">
                 <div class="col-10">
                     <p>{{ destinacao?.nome }}</p>
                 </div>
 
                 <div class="col-2 text-end d-flex align-items-center justify-content-end">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" />
+                        <input class="form-check-input" type="checkbox" [checked]="destinacao?.status" [(ngModel)]="destinacao.status" (click)="mudarStatus(destinacao)" />
                     </div>
                     <i class="fs-5 bi-trash-fill icon-delete px-3" cursor="pointer" (click)="deleteDestinacao(destinacao)"></i>
                 </div>

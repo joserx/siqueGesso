@@ -7,21 +7,24 @@ import { CategoriaProdutoService } from 'src/app/services/categoria-produto.serv
   styleUrls: ['./filtro-categorias.component.scss'],
 })
 export class FiltroCategoriasComponent implements OnInit {
-  public categoria: any;
-  public categorias: any;
+  categoria: any[] = [];
+  categorias: any[] = [];
   categoriasFiltradas: any = [];
+  data: any = {};
+
   constructor(private CategoriaProdutoService: CategoriaProdutoService) {}
 
   ngOnInit(): void {
     this.getCategorias();
   }
 
-  getCategorias() {
-    this.CategoriaProdutoService.find().subscribe((res) => {
-      this.CategoriaProdutoService.categorias = res;
-      this.categorias = res;
-      this.categoriasFiltradas = this.categorias;
-      console.log(res);
-    });
+  getCategorias(status?: boolean) {
+    this.CategoriaProdutoService.find(status).subscribe(
+      (res: any) => {
+        this.categorias = res;
+      },
+      (err) => {},
+      () => {}
+    );
   }
 }

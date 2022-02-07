@@ -38,7 +38,7 @@ export class CadastroDeProdutoComponent implements OnInit {
       () => {
         this.categoriaForm.reset();
         return Swal.fire({
-          title: 'Produto salvo!',
+          title: 'Categoria salva!',
           icon: 'success',
           toast: true,
           position: 'top',

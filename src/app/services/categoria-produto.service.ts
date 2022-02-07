@@ -9,8 +9,10 @@ export class CategoriaProdutoService {
   constructor(private readonly http: HttpClient) {}
   public categorias: any;
 
-  find() {
-    return this.http.get(environment.apiUrl + 'categoria-produto');
+  find(status: any = false) {
+    return this.http.get(environment.apiUrl + 'categoria-produto', {
+      params: { status },
+    });
   }
 
   create(data: any) {

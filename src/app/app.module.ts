@@ -138,6 +138,7 @@ import { FiltrarUsuariosComponent } from './sistema/usuarios-sistema/filtrar-usu
 import { FiltroCategoriasComponent } from './sistema/config/cadastro-de-categoria/filtro-categorias/filtro-categorias.component';
 import { FiltroDestinacaoComponent } from './sistema/config/cadastro-de-categoria/filtro-destinacao/filtro-destinacao.component';
 import { NovaMsgComponent } from './sistema/config/nova-msg/nova-msg.component';
+import { ChartsModule } from 'ng2-charts';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -275,6 +276,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
 
   imports: [
+    ChartsModule,
     NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,

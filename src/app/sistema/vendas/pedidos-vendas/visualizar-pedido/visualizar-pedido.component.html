@@ -1,157 +1,246 @@
 <!-- Modal -->
-<div class="modal fade" id="pedidoPdf" tabindex="-1" aria-labelledby="pedidoPdfLabel"
-  aria-hidden="true" aria-label="Close">
-  <div class="modal-dialog modal-xl">
-      <!-- Modal content -->
-      <div class="modal-content rounded-15 bg-custom-light">
-        <div class="modal-header px-4">
-          <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Pesquisar Cliente</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="col-12 modal-body px-4 d-flex justify-content-center">
-          <div class="pdf-preview d-flex justify-content-center"  id="content" #content>
-              <div class="mt-4 bg-white col-12 p-2">
-                <div class="row">
-                    <div class="col-2">
-                        <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso">
-                    </div>
-                    <div class="col">
-                        <h2 class="text-custom-dark text-center">
-                            Pedidos de venda
-                        </h2>
+<div class="modal fade" id="pedidoPdf" tabindex="-1" aria-labelledby="pedidoPdfLabel" aria-hidden="true" aria-label="Close">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content -->
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">
+                    PDF
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="col-12 modal-body px-4 d-flex justify-content-center">
+                <div class="pdf-preview d-flex justify-content-center" id="content" #content>
+                    <div class="mt-4 bg-white col-12 p-2">
+                        <div class="row">
+                            <div class="col-2">
+                                <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso" />
+                            </div>
+                            <div class="col">
+                                <h2 class="text-custom-dark text-center">Pedidos de venda</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                Data de pedido: {{ pedidosForm.value.data | date }}
+                            </div>
+                            <div class="col-6">Loja: {{ pedidosForm.value.loja }}</div>
+                            <div class="col-6">Vendedor: {{ pedidosForm.value.cliente }}</div>
+                            <div class="col-12">
+                                <h3>Itens:</h3>
+                                <table class="bg-white tabela m-0 p-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Cód.
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Produto
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Quantidade
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Valor unitário
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Desconto
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Valor venda
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Tipo de retirada
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Data prev. da retirada
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Endereço
+                                            </th>
+                                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
+                                                Valor Frete
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let oneItem of item['controls']; let i = index">
+                                        <tr>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.codigo }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.produto }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.quantidade }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.valorUnitario | currency: "BRL" }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.desconto | currency: "BRL" }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.valorVenda | currency: "BRL" }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.tipoRetirada }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.prevRetirada }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.endereco }}
+                                            </td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">
+                                                {{ oneItem.value.valorFrete | currency: "BRL" }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-6">
+                                        Desconto geral: {{ pedidosForm.value.descontoGeral | currency: "BRL" }}
+                                    </div>
+                                    <div class="col-6">
+                                        Tipo de entrega: {{ pedidosForm.value.tipoEntrega }}
+                                    </div>
+                                    <div class="col-6">
+                                        Endereço de Entrega: {{ pedidosForm.value.enderecoEntrega }}
+                                    </div>
+                                    <div class="col-6">
+                                        Valor de entrega: {{ pedidosForm.value.valorFreteEntrega }}
+                                    </div>
+                                    <div class="col-6">
+                                        Meio de pagamento: {{ pedidosForm.value.meioPagamento }}
+                                    </div>
+                                    <div class="col-6">Dias: {{ pedidosForm.value.dias }}</div>
+                                    <div class="col-6">
+                                        Data de vencimento: {{ pedidosForm.value.dataVencimento | date }}
+                                    </div>
+                                    <div class="col-6">Dias: {{ pedidosForm.value.status }}</div>
+                                </div>
+                                <div class="col-6">
+                                    Link do boleto: {{ pedidosForm.value.linkBoleto }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                Link da nota fiscal: {{ pedidosForm.value.linkNf }}
+                            </div>
+                        </div>
+                        <div class="col-12">Observações: {{ pedidosForm.value.obs }}</div>
+
+                        <div class="col-6">
+                            Prazo para entrega e retiradas: 7 dias úteis.
+                        </div>
+                        <div class="col-6">
+                            Declaramos que a descarga é somente no terreo não subimos escadas e elevadores.
+                        </div>
+                        <div class="col-6">
+                            Não nos responsabilizamos por calculo de material.
+                        </div>
+                        <div class="w-50 h-50 d-flex align-items-end">
+                            <p>Assinatura:___________</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                  <div class="col-6">Data de pedido: {{pedidosForm.value.data | date}}</div>
-                  <div class="col-6">Loja: {{pedidosForm.value.loja}}</div>
-                  <div class="col-6">Vendedor: {{pedidosForm.value.cliente}}</div>
-                  <div class="col-12">
-                    <h3>Itens:</h3>
-                    <table class="bg-white tabela m-0 p-0">
-                      <thead>
-                          <tr>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cód.</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Produto</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Quantidade</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Valor unitário</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Desconto</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Valor venda</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Tipo de retirada</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data prev. da retirada</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Endereço</th>
-                            <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">Valor Frete</th>
-                          </tr>
-                      </thead>
-                      <tbody *ngFor="let oneItem of item['controls']; let i = index">
-                          <tr>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.codigo }}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.produto }}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.quantidade}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.desconto | currency:'BRL'}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.tipoRetirada }}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.prevRetirada }}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.endereco }}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{ oneItem.value.valorFrete | currency:'BRL'}}</td>
-                          </tr>
-                      </tbody>
-                  </table>
-                  <div class="row">
-                    <div class="col-6">Desconto geral: {{pedidosForm.value.descontoGeral | currency:'BRL'}}</div>
-                    <div class="col-6">Tipo de entrega: {{pedidosForm.value.tipoEntrega}}</div>
-                    <div class="col-6">Endereço: {{pedidosForm.value.enderecoEntrega}}</div>
-                    <div class="col-6">Valor de entrega: {{pedidosForm.value.valorFreteEntrega}}</div>
-                    <div class="col-6">Meio de pagamento: {{pedidosForm.value.meioPagamento}}</div>
-                    <div class="col-6">Dias: {{pedidosForm.value.dias}}</div>
-                    <div class="col-6">Data de vencimento: {{pedidosForm.value.dataVencimento | date}}</div>
-                    <div class="col-6">Dias: {{pedidosForm.value.status}}</div>
-                    </div>
-                    <div class="col-6">Link do boleto: {{pedidosForm.value.linkBoleto}}</div>
-                    </div>
-                    <div class="col-6">Link da nota fiscal: {{pedidosForm.value.linkNf}}</div>
-                  </div>
-                  <div class="col-12">Observações: {{pedidosForm.value.obs}}</div>
             </div>
-          </div>
+            <!-- Modal footer -->
+            <div class="row m-0 py-3 modal-footer">
+                <div class="col-3 px-2 p-0 m-0 d-grid">
+                    <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start" (click)="savePdf()">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+              Donwload
+            </h5>
+          </button>
+                </div>
+                <!-- Cancelar -->
+                <div class="col-3 px-2 p-0 m-0 d-grid">
+                    <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-danger shadow-sm text-start">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+              Cancelar
+            </h5>
+          </button>
+                </div>
+            </div>
+            <!-- /Modal footer -->
         </div>
-        <!-- Modal footer -->
-        <div class="row m-0 py-3 modal-footer">
-            <div class="col-3 px-2 p-0 m-0 d-grid">
-                <button data-bs-dismiss="modal" type="reset"
-                class="h-limited-sm btn rounded-15 py-1 px-4 bg-success shadow-sm text-start" (click)="savePdf()">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Donwload</h5>
-                </button>
-            </div>
-            <!-- Cancelar -->
-            <div class="col-3 px-2 p-0 m-0 d-grid">
-                <button data-bs-dismiss="modal" type="reset"
-                class="h-limited-sm btn rounded-15 py-1 px-4 bg-danger shadow-sm text-start">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Cancelar</h5>
-                </button>
-            </div>
-
-        </div>
-        <!-- /Modal footer -->
-
-      </div>
-      <!-- /Modal content -->
-
-  </div>
+        <!-- /Modal content -->
+    </div>
 </div>
 
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col m-0 bg-custom-white">
-    <!-- Página home -->
-    <div class="container pb-5">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+        <!-- Página home -->
+        <div class="container pb-5">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas/pedidos">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas/pedidos">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-      </div>
+            <div class="row m-0 mt-4 py-3 border-bottom">
+                <div class="col-12 m-0 p-0 text-custom-dark">
+                    <h4>Criar pedido</h4>
+                </div>
+            </div>
 
-      <div class="row m-0 mt-4 py-3 border-bottom">
-        <div class="col-12 m-0 p-0 text-custom-dark">
-          <h4>Criar pedido</h4>
-        </div>
-      </div>
-
-      <form [formGroup]="pedidosForm" (submit)="submitForm(pedidosForm, item)">
-
-        <!-- Criar pedido -->
-        <div class="row">
-
-          <!-- Data -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()" formControlName="data" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label>
+            <form [formGroup]="pedidosForm" (submit)="submitForm(pedidosForm, item)">
+                <!-- Criar pedido -->
+                <div class="row">
+                    <!-- Data -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de nascimento" [max]="getDate()" formControlName="data" readonly />
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label
+            >
           </div>
 
           <!-- Loja -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="loja" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Loja</label>
+            <input
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Condição personalizada"
+              formControlName="loja"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Loja</label
+            >
           </div>
 
           <!-- Vendedor -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="vendedor" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+            <input
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Condição personalizada"
+              formControlName="vendedor"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Vendedor</label
+            >
           </div>
 
           <!-- Dados do cliente -->
           <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-sm" type="text" formControlName="cliente" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dados do cliente</label>
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              formControlName="cliente"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Dados do cliente</label
+            >
           </div>
-
         </div>
 
         <!-- Itens -->
@@ -176,29 +265,69 @@
                 <th scope="col-1">Valor Frete</th>
               </tr>
             </thead>
-            <tbody *ngFor="let oneItem of item['controls']; let i = index" formArrayName="item">
-              <tr [formGroupName]="i" >
+            <tbody
+              *ngFor="let oneItem of item['controls']; let i = index"
+              formArrayName="item"
+            >
+              <tr [formGroupName]="i">
                 <th scope="row">{{ oneItem.value.codigo }}</th>
                 <td>{{ oneItem.value.produto }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" placeholder="quantidade" formControlName="quantidade" readonly>
+                  <input
+                    class="form-control form-control-sm"
+                    type="number"
+                    placeholder="quantidade"
+                    formControlName="quantidade"
+                    readonly
+                  />
                 </td>
-                <td>{{ oneItem.value.valorUnitario | currency:'BRL'}}</td>
+                <td>{{ oneItem.value.valorUnitario | currency: "BRL" }}</td>
                 <td>
-                  <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" formControlName="desconto" (keyup)="changeDesconto(this.item.value)" readonly>
+                  <input
+                    currencyMask
+                    placeholder="R$"
+                    class="form-control form-control-sm"
+                    type="text"
+                    formControlName="desconto"
+                    (keyup)="changeDesconto(this.item.value)"
+                    readonly
+                  />
                 </td>
-                <td>{{ oneItem.value.valorVenda | currency:'BRL' }}</td>
+                <td>{{ oneItem.value.valorVenda | currency: "BRL" }}</td>
                 <td>
-                  <input class="form-control form-control-sm" type="text" formControlName="tipoRetirada" readonly>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    formControlName="tipoRetirada"
+                    readonly
+                  />
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="date" formControlName="prevRetirada" readonly>
+                  <input
+                    class="form-control form-control-sm"
+                    type="date"
+                    formControlName="prevRetirada"
+                    readonly
+                  />
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="text" formControlName="endereco" readonly>
+                  <input
+                    class="form-control form-control-sm"
+                    type="text"
+                    formControlName="endereco"
+                    readonly
+                  />
                 </td>
                 <td>
-                  <input currencyMask class="form-control form-control-sm" type="text" placeholder="R$" formControlName="valorFrete" (keyup)="changeFrete(this.item.value)" readonly>
+                  <input
+                    currencyMask
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="R$"
+                    formControlName="valorFrete"
+                    (keyup)="changeFrete(this.item.value)"
+                    readonly
+                  />
                 </td>
               </tr>
             </tbody>
@@ -206,15 +335,29 @@
         </div>
 
         <!-- Aplicas desconto geral -->
-        <div class="row mt-4 pb-4 justify-content-end align-items-center border-bottom">
+        <div
+          class="row mt-4 pb-4 justify-content-end align-items-center border-bottom"
+        >
           <div class="col-3 text-center">
-            <h5 class="m-0"><a class="text-custom-dark fw-bold">Aplicar desconto geral</a></h5>
+            <h5 class="m-0">
+              <a class="text-custom-dark fw-bold">Aplicar desconto geral</a>
+            </h5>
           </div>
 
           <!-- Desconto geral -->
           <div class="col-4 px-2 p-0 m-0 form-floating">
-            <input currencyMask [value]="desconto | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Desconto geral" formControlName="descontoGeral" readonly>
-            <label class="ms-2 mb-2 small text-truncate text-custom-dark">Desconto geral</label>
+            <input
+              currencyMask
+              [value]="desconto | currency: 'BRL'"
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Desconto geral"
+              formControlName="descontoGeral"
+              readonly
+            />
+            <label class="ms-2 mb-2 small text-truncate text-custom-dark"
+              >Desconto geral</label
+            >
           </div>
         </div>
 
@@ -226,25 +369,52 @@
 
           <!-- Tipo de entrega -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input currencyMask placeholder="R$" class="form-control form-control-sm" type="text" formControlName="tipoEntrega" (keyup)="changeDesconto(this.item.value)" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tipo de entrega</label>
+            <input
+              currencyMask
+              placeholder="R$"
+              class="form-control form-control-sm"
+              type="text"
+              formControlName="tipoEntrega"
+              (keyup)="changeDesconto(this.item.value)"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Tipo de entrega</label
+            >
           </div>
 
           <!-- Endereço -->
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Endereço" formControlName="enderecoEntrega" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Endereço</label>
+            <input
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Endereço"
+              formControlName="enderecoEntrega"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Endereço</label
+            >
           </div>
 
           <!-- Valor do frete -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input currencyMask [value]="300 | currency: 'BRL'" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Valor do frete" formControlName="valorFreteEntrega" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor do frete</label>
+            <input
+              currencyMask
+              [value]="300 | currency: 'BRL'"
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Valor do frete"
+              formControlName="valorFreteEntrega"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Valor do frete</label
+            >
           </div>
 
           <!-- Dados de entrega -->
           <div class="col-12 mt-4 p-0 px-2 ms-1 bg-custom-dark rounded-25">
-
             <!-- Títulos da Tabela do resumo -->
             <div class="row m-0 my-3 text-light justify-content-center">
               <div class="col-1 text-center">
@@ -271,7 +441,10 @@
             </div>
 
             <!-- Tabela resumo -->
-            <div font="montserrat" class="row m-0 mt-2 border-bottom text-light justify-content-center align-items-center">
+            <div
+              font="montserrat"
+              class="row m-0 mt-2 border-bottom text-light justify-content-center align-items-center"
+            >
               <div class="col-1 text-center">
                 <p>{{ item.value.length }}</p>
               </div>
@@ -279,24 +452,33 @@
                 <p>{{ totalQuanti(item.value) }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ totalQuanti(item.value)*valUnit | currency:'BRL' }}</p>
+                <p>{{ totalQuanti(item.value) * valUnit | currency: "BRL" }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ changeDesconto(item.value) | currency:'BRL' }}</p>
+                <p>{{ changeDesconto(item.value) | currency: "BRL" }}</p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ (totalQuanti(item.value)*valUnit) - changeDesconto(item.value) | currency:'BRL' }}</p>
+                <p>
+                  {{
+                    totalQuanti(item.value) * valUnit -
+                      changeDesconto(item.value) | currency: "BRL"
+                  }}
+                </p>
               </div>
               <div class="col-2 text-center">
-                <p>{{ changeFrete(item.value) | currency:'BRL' }}</p>
+                <p>{{ changeFrete(item.value) | currency: "BRL" }}</p>
               </div>
               <div class="col text-center">
-                <p>{{ (((totalQuanti(item.value)*valUnit) - changeDesconto(item.value)) + changeFrete(item.value)) | currency:'BRL' }}</p>
+                <p>
+                  {{
+                    totalQuanti(item.value) * valUnit -
+                      changeDesconto(item.value) +
+                      changeFrete(item.value) | currency: "BRL"
+                  }}
+                </p>
               </div>
             </div>
-
           </div>
-
         </div>
 
         <!-- Condições de pagamento -->
@@ -307,91 +489,186 @@
 
           <!-- Condição de pagamento -->
           <div class="col-6 p-0 m-0">
-
             <div class="pt-4 px-2 form-floating">
-              
-              <input class="form-control form-control-sm" type="text" #condicao formControlName="condPagamento" (keyup)="changeDesconto(this.item.value)" readonly>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de pagamento</label>
+              <input
+                class="form-control form-control-sm"
+                type="text"
+                #condicao
+                formControlName="condPagamento"
+                (keyup)="changeDesconto(this.item.value)"
+                readonly
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Selecione a condição de pagamento</label
+              >
             </div>
 
-            <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="pagPersonalizado" readonly>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
+            <div
+              *ngIf="condicao.value === 'personalizado'"
+              class="pt-4 px-2 form-floating"
+            >
+              <input
+                class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Condição personalizada"
+                formControlName="pagPersonalizado"
+                readonly
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Condição personalizada</label
+              >
             </div>
           </div>
 
           <!-- Tabela de preço -->
           <div class="col-6 p-0 m-0">
             <div class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" #tabela placeholder="Condição personalizada" formControlName="tabPreco" readonly>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de preço aplicada</label>
+              <input
+                class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                #tabela
+                placeholder="Condição personalizada"
+                formControlName="tabPreco"
+                readonly
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Tabela de preço aplicada</label
+              >
             </div>
 
-            <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" formControlName="tabPersonalizado" readonly>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
+            <div
+              *ngIf="tabela.value === 'personalizado'"
+              class="pt-4 px-2 form-floating"
+            >
+              <input
+                class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                type="text"
+                placeholder="Tabela personalizada"
+                formControlName="tabPersonalizado"
+                readonly
+              />
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Tabela personalizada</label
+              >
             </div>
           </div>
 
-
           <!-- Meio de pagamento -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="meioPagamento" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Meio de pagamento</label>
+            <input
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Condição personalizada"
+              formControlName="meioPagamento"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Meio de pagamento</label
+            >
           </div>
 
           <!-- Dias -->
           <div class="col-1 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm" min="0" type="number" placeholder="Dias" formControlName="dias" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Dias</label>
+            <input
+              class="form-control form-control-lg text-center h-limited px-2 py-3 rounded-15 shadow-sm"
+              min="0"
+              type="number"
+              placeholder="Dias"
+              formControlName="dias"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Dias</label
+            >
           </div>
 
           <!-- Data de vencimento -->
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" formControlName="dataVencimento" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de vencimento</label>
+            <input
+              class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm"
+              type="date"
+              placeholder="Data de vencimento"
+              formControlName="dataVencimento"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Data de vencimento</label
+            >
           </div>
 
           <!-- Status -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" formControlName="status" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+            <input
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Condição personalizada"
+              formControlName="status"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Status</label
+            >
           </div>
 
           <!-- Link do boleto -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link do boleto" formControlName="linkBoleto" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link do boleto</label>
+            <input
+              class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Link do boleto"
+              formControlName="linkBoleto"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Link do boleto</label
+            >
           </div>
 
           <!-- Link da nota fiscal -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm" type="text" placeholder="Link da nota fiscal" formControlName="linkNf" readonly>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Link da nota fiscal</label>
+            <input
+              class="form-control form-control-lg h-limited px-4 py-4 rounded-15 shadow-sm"
+              type="text"
+              placeholder="Link da nota fiscal"
+              formControlName="linkNf"
+              readonly
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Link da nota fiscal</label
+            >
           </div>
 
           <!-- Observações -->
           <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="obs" readonly></textarea>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+            <textarea
+              class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm"
+              placeholder="Observações"
+              style="height: 150px"
+              formControlName="obs"
+              readonly
+            ></textarea>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Observações</label
+            >
           </div>
-
         </div>
 
         <!-- Footer -->
         <div class="row mt-3 py-3 pb-5">
-
           <!-- Botão Gerar PDF -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidoPdf">
+            <button
+              type="button"
+              class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#pedidoPdf"
+            >
               <h5 class="fw-normal my-auto text-truncate">Gerar PDF</h5>
               <i class="bi-file-earmark-pdf my-auto fs-4 p-0 m-0 fw-bold"></i>
             </button>
           </div>
         </div>
-
       </form>
-
     </div>
   </div>
 </div>

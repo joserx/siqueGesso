@@ -9,8 +9,10 @@ export class DestinacaoVendaService {
   constructor(private readonly http: HttpClient) {}
   public destinacoes: any;
 
-  find() {
-    return this.http.get(environment.apiUrl + 'destinacao-vendas');
+  find(status: any = false) {
+    return this.http.get(environment.apiUrl + 'destinacao-vendas', {
+      params: { status },
+    });
   }
 
   create(data: any) {
@@ -22,6 +24,9 @@ export class DestinacaoVendaService {
   }
 
   update(id: number, data: any) {
-    return this.http.put(environment.apiUrl + 'destinacao-vendas/' + id, data);
+    return this.http.patch(
+      environment.apiUrl + 'destinacao-vendas/' + id,
+      data
+    );
   }
 }

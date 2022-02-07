@@ -9,9 +9,10 @@ import Swal from 'sweetalert2';
 })
 export class CadastroDeProdutoListaComponent implements OnInit {
   public categoria: any;
-  public categorias: any;
+  public categorias: any[] = [];
   public search: string = '';
-  public categoriasFiltradas: any = [];
+  public categoriasFiltradas: any[] = [];
+  data: any = {};
 
   constructor(private CategoriaProdutoService: CategoriaProdutoService) {}
 
@@ -32,13 +33,14 @@ export class CadastroDeProdutoListaComponent implements OnInit {
     else this.categoriasFiltradas = this.categoria;
   }
 
-  getCategorias() {
-    this.CategoriaProdutoService.find().subscribe((res) => {
-      this.CategoriaProdutoService.categorias = res;
-      this.categorias = res;
-      this.categoriasFiltradas = this.categorias;
-      console.log(res);
-    });
+  getCategorias(status?: boolean) {
+    this.CategoriaProdutoService.find(status).subscribe(
+      (res: any) => {
+        this.categorias = res;
+      },
+      (err) => {},
+      () => {}
+    );
   }
 
   deleteCategoria(categoria: any) {

@@ -39,7 +39,7 @@ export class DestinacaoDaVendaCadastroComponent implements OnInit {
         // this.closeBtn.nativeElement.click();
         this.destinacaoForm.reset();
         return Swal.fire({
-          title: 'Produto salvo!',
+          title: 'Destinacao Salva!',
           icon: 'success',
           toast: true,
           position: 'top',
