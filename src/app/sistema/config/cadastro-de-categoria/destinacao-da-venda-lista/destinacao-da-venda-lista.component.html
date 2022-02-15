@@ -38,7 +38,7 @@
                     <!-- Ativos -->
                     <div class="col-4 px-2 p-0 m-0">
                         <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
-                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-success" (click)="getDestinacoes(true)"></i>
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-success" (click)="getDestinacoesF(true)"></i>
                             <h5 class="fw-normal my-auto text-truncate text-custom-dark">
                                 {{ data.status }}ativos
                             </h5>
@@ -48,7 +48,7 @@
                     <!-- Inativos -->
                     <div class="col-4 px-2 p-0 m-0">
                         <div class="rounded-15 py-2 px-4 bg-white h-100 d-flex shadow-sm">
-                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-danger" (click)="getDestinacoes(false)"></i>
+                            <i class="bi-circle-fill my-auto p-0 m-0 me-2 fw-bold text-danger" (click)="getDestinacoesF(false)"></i>
                             <h5 class="fw-normal my-auto text-truncate text-custom-dark">
                                 {{ data.enabled }}inativos
                             </h5>
@@ -84,4 +84,3 @@
         <!-- /Lista de categorias cadastrardas -->
     </div>
 </div>
-<app-filtro-destinacao></app-filtro-destinacao>

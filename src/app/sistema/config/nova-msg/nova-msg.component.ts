@@ -33,6 +33,7 @@ export class NovaMsgComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.MensagemService.listen('message').subscribe(() => {});
     this.usuarioSistemasService.find().subscribe((data: any) => {
       this.usuarios = data;
     });
@@ -47,5 +48,7 @@ export class NovaMsgComponent implements OnInit {
     if (this.paraTodos) {
       data.paraId = null;
     }
+
+    this.MensagemService.emit('message', data);
   }
 }

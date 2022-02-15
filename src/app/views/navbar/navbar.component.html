@@ -11,17 +11,16 @@
                 <!-- Dropdown Notificações -->
                 <div ngbDropdown class="btn-group dropdown" autoClose="outside" display="dynamic" placement="bottom-center">
                     <!-- Botão do dropdown de notificações -->
-                    <!-- <button ngbDropdownToggle type="button" id="btnNotificacoes" class="btn btn-white px-2 py-1 rounded-15 mx-3 fs-4">
-          <i class="bi-bell"></i>
+                    <button ngbDropdownToggle type="button" id="btnNotificacoes" class="btn btn-white px-2 py-1 rounded-15 mx-3 fs-4">
+          <i class="bi-envelope"></i>
         </button>
-         Badge da quantidade de notificações 
-        <span *ngIf="notificacoes.length > 0" class="badge rounded-pill bg-primary position-absolute bottom-50 start-50">{{notificacoes.length}}</span> -->
+                    <span *ngIf="notificacoes.length " class="badge rounded-pill bg-primary position-absolute bottom-50 start-50">{{notificacoes.length}}</span>
 
                     <!-- DropdownMenu -->
                     <ul ngbDropdownMenu class="dropdown-menu rounded-15" aria-labelledby="btnNotificacoes">
                         <!-- Título Notificações -->
                         <li class="fw-bold px-3 pb-2 text-custom-dark d-flex justify-content-between">
-                            <span>Notificações</span>
+                            <span>Mensagens</span>
                             <i class="bi-gear" cursor="pointer" routerLink="/sistema/notificacoes"></i>
                         </li>
                         <li>
@@ -31,7 +30,7 @@
                         <!-- Se não houver notificações -->
                         <li *ngIf="notificacoes.length === 0" class="li-350">
                             <p class="text-center mt-3 text-wrap text-custom-dark small">
-                                Não há novas notificações.
+                                Não há novas mensagens.
                             </p>
                         </li>
 

@@ -5,31 +5,32 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class DestinacaoVendaService {
+
+export class CategoriaFornecedorService {
   constructor(private readonly http: HttpClient) {}
-  public destinacoes: any;
+  public categorias: any;
 
   findAll() {
-    return this.http.get<any>(environment.apiUrl + 'destinacao-vendas');
+    return this.http.get<any>(environment.apiUrl + 'categoria-fornecedor');
   }
 
-  find(status: any = false) {
-    return this.http.get(environment.apiUrl + 'destinacao-vendas', {
+  find(status: any = true) {
+    return this.http.get(environment.apiUrl + 'categoria-fornecedor', {
       params: { status },
     });
   }
 
   create(data: any) {
-    return this.http.post(environment.apiUrl + 'destinacao-vendas/', data);
+    return this.http.post(environment.apiUrl + 'categoria-fornecedor/', data);
   }
 
   delete(id: number) {
-    return this.http.delete(environment.apiUrl + 'destinacao-vendas/' + id);
+    return this.http.delete(environment.apiUrl + 'categoria-fornecedor/' + id);
   }
 
   update(id: number, data: any) {
     return this.http.patch(
-      environment.apiUrl + 'destinacao-vendas/' + id,
+      environment.apiUrl + 'categoria-fornecedor/' + id,
       data
     );
   }

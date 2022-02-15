@@ -245,7 +245,7 @@
         <!-- /Tabela de itens -->
 
         <!-- Resumo do pedido -->
-        <div class="row m-0 mt-4 border-bottom">
+        <div class="m-0 mt-4 d-flex flex-row border-bottom">
           <div class="col-4 m-0 p-0">
             <p class="fw-bold fs-5">
               Subtotal
@@ -299,16 +299,25 @@
             </p>
           </div>
 
-          <div
-            class="col-8 m-0 p-0 d-flex text-center justify-content-center align-items-center"
-          >
-            <div>
+          <div class="flex-column col-8 m-0 p-0 d-flex align-items-center">
+            <div class="justify-content-center text-align-center">
               <p class="fs-5 m-0">Valor total da compra</p>
-              <p class="fs-2 fw-bold m-0">
+              <p class="fs-2 fw-bold m-0 ml-2">
                 {{ pedidoCompraForm.value.valorTotal | currency: "BRL" }}
               </p>
             </div>
-            <!-- <google-chart [data]="comprasChart"></google-chart> -->
+            <canvas
+              height="72px"
+              ngChartjs
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [inlinePlugins]="inlinePlugin"
+              class="mt-5"
+            >
+            </canvas>
           </div>
         </div>
         <!-- /Resumo do pedido -->
