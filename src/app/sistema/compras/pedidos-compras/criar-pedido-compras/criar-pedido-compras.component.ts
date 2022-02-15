@@ -15,12 +15,7 @@ import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
 
 import { Moment } from 'moment';
 import Swal from 'sweetalert2';
-// import {
-//   ChartSelectEvent,
-//   GoogleChartInterface,
-//   GoogleChartsControlInterface,
-//   GoogleChartsDashboardInterface,
-// } from 'ng2-google-charts';
+
 @Component({
   selector: 'app-criar-pedido-compras',
   templateUrl: './criar-pedido-compras.component.html',
