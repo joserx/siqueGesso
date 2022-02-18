@@ -18,8 +18,8 @@ contas : any =[]
   create(data: any) {
     return this.http.post(environment.apiUrl + 'contas-receber', data);
   }
-  delete(produto: any) {
-    return this.http.patch(`${environment.apiUrl}contas-receber/delete`, produto);
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}contas-receber/${id}`);
   }
 
   update(id: number, data: any) {

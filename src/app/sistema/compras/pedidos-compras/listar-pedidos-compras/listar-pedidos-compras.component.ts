@@ -59,7 +59,7 @@ export class ListarPedidosComprasComponent implements OnInit {
         this.pedidoCompraService.delete(pedido.id).subscribe(() => {
           this.getPedidos();
           return Swal.fire({
-            title: 'Produto Deletado!',
+            title: 'Pedido Deletado!',
             icon: 'success',
             toast: true,
             position: 'top',

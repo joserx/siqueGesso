@@ -139,6 +139,8 @@ import { NovaMsgComponent } from './sistema/config/nova-msg/nova-msg.component';
 import { ChartsModule } from 'ng2-charts';
 import { CategoriaFornecedorComponent } from './sistema/config/cadastro-de-categoria/categoria-fornecedor/categoria-fornecedor.component';
 import { CadastroCatFornecedorComponent } from './sistema/config/cadastro-de-categoria/cadastro-cat-fornecedor/cadastro-cat-fornecedor.component';
+import { EditContasPComponent } from './sistema/financeiro/contas-a-pagar/edit-contas-p/edit-contas-p.component';
+import { ViewContasPagarComponent } from './sistema/financeiro/contas-a-pagar/view-contas-pagar/view-contas-pagar.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -273,6 +275,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NovaMsgComponent,
     CategoriaFornecedorComponent,
     CadastroCatFornecedorComponent,
+    EditContasPComponent,
+    ViewContasPagarComponent,
   ],
 
   imports: [

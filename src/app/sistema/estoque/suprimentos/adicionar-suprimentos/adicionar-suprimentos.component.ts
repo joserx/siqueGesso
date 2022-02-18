@@ -65,7 +65,6 @@ export class AdicionarSuprimentosComponent implements OnInit {
     this.fornecedorService.find().subscribe((res) => {
       this.fornecedorService.fornecedores = res;
       this.fornecedores = res;
-      console.log(this.fornecedores);
     });
   }
 

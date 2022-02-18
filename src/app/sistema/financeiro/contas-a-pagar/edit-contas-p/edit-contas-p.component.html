@@ -1,0 +1,164 @@
+<!-- Modal -->
+<div class="modal fade" id="editarPagamentos" tabindex="-1" aria-labelledby="adicionarPagamentosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <form [formGroup]="editPagamentoForm">
+            <!-- Modal content -->
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="adicionarPagamentosLabel">Adicionar pagamento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+
+                    <!-- Lançamento financeiro -->
+                    <div class="row pt-3 p-0 m-0 border-bottom pb-4">
+                        <div class="col-12 px-2 m-0 p-0">
+                            <h5 class="fw-bold text-custom-dark m-0 p-0">Lançamento financeiro</h5>
+                        </div>
+
+                        <!-- Descrição do pagamento -->
+                        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                            <input required class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Descrição do pagamento" formControlName="descricao">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Descrição do pagamento</label>
+                        </div>
+
+                        <!-- Forma de pagamento -->
+                        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                            <select required class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" formControlName="formaPagamento">
+              <option selected disabled>Selecione uma forma</option>
+              <option value="vista">À Vista</option>
+              <option value="parcelado">Parcelado</option>
+              <option value="outro">Outro</option>
+            </select>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Forma de pagamento</label>
+                        </div>
+
+                        <!-- Plano de contas -->
+                        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                            <input required class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Plano de contas" formControlName="plano">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Plano de contas</label>
+                        </div>
+
+                        <!-- Vencimento -->
+                        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                            <input required class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Vencimento" formControlName="vencimento">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vencimento</label>
+                        </div>
+
+                        <!-- Valor bruto -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <input required currencyMask class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="R$" formControlName="valorBruto">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Valor bruto</label>
+                        </div>
+
+                        <!-- Juros -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <input currencyMask class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="R$" formControlName="juros">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Juros</label>
+                        </div>
+
+                        <!-- Desconto -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <input currencyMask class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="R$" formControlName="desconto">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto</label>
+                        </div>
+
+                        <!-- Compensado em: -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <input class="form-control h-limited-sm px-2 py-3 rounded-15 shadow-sm" type="date" formControlName="compensado">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Compensado em:</label>
+                        </div>
+
+                        <!-- Situação -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <select required class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" formControlName="situacao">
+              <option selected disabled>Selecione</option>
+              <option value="aberto">Em aberto</option>
+              <option value="concluida">Concluída</option>
+            </select>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Situação</label>
+                        </div>
+
+                        <!-- Unidade -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <select required class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" formControlName="unidades\rwsr">
+              <option value="matriz">Matriz</option>
+              <option value="loja2">Loja 2</option>
+            </select>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Unidade</label>
+                        </div>
+
+                        <div class="col-12 text-end px-2 pt-4 p-0 m-0">
+                            <h5 class="fw-bold text-custom-dark">Valor total: {{ editPagamentoForm.value.valorTotal | currency:'BRL'}}</h5>
+                        </div>
+                    </div>
+
+                    <!-- Outras informações -->
+                    <div class="row pt-3 p-0 m-0 pb-4">
+                        <div class="col-12 px-2 m-0 p-0">
+                            <h5 class="fw-bold text-custom-dark m-0 p-0">Outras informações</h5>
+                        </div>
+
+                        <!-- Fornecedor -->
+                        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                            <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm">
+              <option selected disabled>Selecione um fornecedor</option>
+              <option value="fornecedor1">fornecedor1</option>
+              <option value="fornecedor2">fornecedor2</option>
+              <option value="fornecedor3">fornecedor3</option>
+            </select>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label>
+                        </div>
+
+                        <!-- Centro de custo -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <input class="form-control h-limited-sm px-2 py-3 rounded-15 shadow-sm" type="text">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Centro de custo</label>
+                        </div>
+
+                        <!-- Data -->
+                        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+                            <input class="form-control h-limited-sm px-2 py-3 rounded-15 shadow-sm" type="date">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label>
+                        </div>
+
+                        <!-- Anexar -->
+                        <div class="col-4 px-2 pt-4 p-0 m-0 d-flex align-items-center">
+                            <input class="form-control" type="file">
+                        </div>
+
+                        <!-- Observações -->
+                        <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px"></textarea>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="row m-0 py-3 modal-footer">
+
+                    <!-- Cancelar -->
+                    <div class="col-3 px-2 p-0 m-0 d-grid">
+                        <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Cancelar</h5>
+          </button>
+                    </div>
+
+                    <!-- Salvar -->
+                    <div class="col-3 px-2 p-0 m-0 d-grid">
+                        <button type="submit" class="h-limited-sm btn rounded-15 py-1 px-4 bg-custom-success shadow-sm text-start" (click)="submit()">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Salvar</h5>
+          </button>
+                    </div>
+
+                </div>
+                <!-- /Modal footer -->
+
+            </div>
+            <!-- /Modal content -->
+        </form>
+
+    </div>
+</div>

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ContasPagarService} from 'src/app/services/contas-pagar.service'
+import {EditContasPComponent} from './edit-contas-p/edit-contas-p.component'
+import {ViewContasPagarComponent} from './view-contas-pagar/view-contas-pagar.component'
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,6 +11,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./contas-a-pagar.component.scss']
 })
 export class ContasAPagarComponent implements OnInit {
+
+  @ViewChild(EditContasPComponent)
+  editContasPComponent: EditContasPComponent;
+
+  @ViewChild(ViewContasPagarComponent)
+  viewContasPagarComponent: ViewContasPagarComponent;
+
+
   public contas: any = []
   public conta: any;
   public contasFiltradas: any = []
@@ -36,6 +47,14 @@ export class ContasAPagarComponent implements OnInit {
     });
   }
 
+  loadPagamento(contas:any){
+    this.editContasPComponent.loadForm(contas)
+  }
+
+  loadViewPagamento(contas:any){
+    this.viewContasPagarComponent.loadForm(contas)
+  }
+
   delete(conta: any) {
     console.log(conta);
 
@@ -51,7 +70,7 @@ export class ContasAPagarComponent implements OnInit {
         this.contasPagarService.delete(conta.id).subscribe(() => {
           this.getContas();
           return Swal.fire({
-            title: 'Produto Deletado!',
+            title: 'Pagamento Deletado!',
             icon: 'success',
             toast: true,
             position: 'top',

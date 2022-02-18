@@ -19,8 +19,8 @@ export class ContasPagarService{
   create(data: any) {
     return this.http.post(environment.apiUrl + 'contas-pagar', data);
   }
-  delete(produto: any) {
-    return this.http.patch(`${environment.apiUrl}contas-pagar/delete`, produto);
+  delete(id: number) {
+    return this.http.delete(`${environment.apiUrl}contas-pagar/${id}`);
   }
 
   update(id: number, data: any) {

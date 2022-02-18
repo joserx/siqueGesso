@@ -105,19 +105,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="align-items-center" *ngFor="let conta of contas">
-        <th scope="row">{{ conta.codigo }}</th>
-        <td>{{ conta.descricao }}</td>
-        <td>{{ conta.fornecedor }}</td>
-        <td>{{ conta.pagamento }}</td>
-        <td>{{ conta.data }}</td>
-        <td>{{ conta.total | currency: "BRL" }}</td>
-        <td>{{ conta.situacao }}</td>
-        <td>{{ conta.unidade }}</td>
+      <tr class="align-items-center" *ngFor="let contas of contasFiltradas">
+        <th scope="row">{{ contas?.id }}</th>
+        <td>{{ contas?.descricao }}</td>
+        <td>{{ contas?.fornecedor }}</td>
+        <td>{{ contas?.formaPagamento }}</td>
+        <td>{{ contas?.data }}</td>
+        <td>{{ contas?.valortotal | currency: "BRL" }}</td>
+        <td>{{ contas?.situacao }}</td>
+        <td>{{ contas?.unidade }}</td>
         <td>
-          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
-          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" (click)="loadViewPagamento(contas)" data-bs-toggle="modal" data-bs-target="#viewPagamentos"></i>
+          <i class="fs-5 bi-pen-fill icon-edit p-3" (click)="loadPagamento(contas)" cursor="pointer" data-bs-toggle="modal" data-bs-target="#editarPagamentos"></i>
+          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(contas)"></i>
         </td>
       </tr>
     </tbody>
@@ -149,3 +149,5 @@
 </div>
 
 <app-adicionar-pagamento></app-adicionar-pagamento>
+<app-edit-contas-p (reload)="getContas()"></app-edit-contas-p>
+<app-view-contas-pagar [contas]="contas"></app-view-contas-pagar>
