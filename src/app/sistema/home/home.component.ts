@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FilialService } from 'src/app/services/filial.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { environment } from 'src/environments/environment';
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
   banner: string = '';
-  valoresMensais: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+  valoresMensais: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   public cards = [
     { nome: "Vendas", icon: "bi-shop", href: "/sistema/vendas" },
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   //chart
   lineChartData: Chart.ChartDataSets[] = [
     {
-      label: 'Lorem Ipsum',
+      label: 'Quantidade de vendas',
       fill: true,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     responsive: true
   };
   lineChartLegend = true;
-  lineChartType: any = 'line';
+  lineChartType: any = 'bar';
   inlinePlugin: any;
   textPlugin: any;
 
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
     // Banner da filial
     const storage = JSON.parse(String(localStorage.getItem('currentUser')));
     this.filialService.findOne(Number(storage.result.lojaId)).subscribe((res: any) => {
-      if (res.banner != null) {
+      if (res != null && res.banner != null) {
         this.banner = environment.apiUrl + 'file/download/' + res.banner.fileName;
       } else {
         this.banner = './assets/banner.png';
@@ -73,12 +73,12 @@ export class HomeComponent implements OnInit {
     this.pedidosService.find().subscribe((res: any) => {
       res.map((item: any) => {
         const esteAno = new Date().getFullYear();
-        if(esteAno == new Date(item.created_at).getFullYear()){
+        if (esteAno == new Date(item.created_at).getFullYear()) {
           const data = new Date(item.created_at).getMonth();
           this.valoresMensais[data] += Number(item.total);
         }
+        this.lineChartType = 'line'
       })
-      console.log(this.valoresMensais)
     })
 
     //chart
@@ -99,9 +99,7 @@ export class HomeComponent implements OnInit {
         ctx.save();
       }
     }];
-
     this.inlinePlugin = this.textPlugin;
   }
-
 
 }
