@@ -32,7 +32,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.currentUser.subscribe((user) => {
-      console.log(user.result.avatar.fileName);
       this.user = user.result;
       if (this.user.avatar) {
         this.fotoPerfil =

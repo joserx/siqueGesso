@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FilialService } from 'src/app/services/filial.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  banner: string = '';
   public cards = [
     { nome: "Vendas", icon: "bi-shop", href: "/sistema/vendas" },
     { nome: "Compras", icon: "bi-cart4", href: "/sistema/compras" },
@@ -45,13 +47,25 @@ export class HomeComponent implements OnInit {
     responsive: true
   };
   lineChartLegend = true;
-  lineChartType:any = 'line';
+  lineChartType: any = 'line';
   inlinePlugin: any;
   textPlugin: any;
 
-  constructor() { }
+  constructor(
+    private filialService: FilialService,
+  ) { }
 
   ngOnInit(): void {
+    // Banner da filial
+    const storage = JSON.parse(String(localStorage.getItem('currentUser')));
+    this.filialService.findOne(Number(storage.result.lojaId)).subscribe((res: any) => {
+      if (res.banner != null) {
+        this.banner = environment.apiUrl + 'file/download/' + res.banner.fileName;
+      } else {
+        this.banner = './assets/banner.png';
+      }
+    })
+
     //chart
     this.textPlugin = [{
       id: 'textPlugin',
@@ -73,6 +87,6 @@ export class HomeComponent implements OnInit {
 
     this.inlinePlugin = this.textPlugin;
   }
-  
+
 
 }
