@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+
+  fotoPerfil: string = './assets/sem-foto.jpg';
   public notificacoes: any = [
     {
       id: 1,
@@ -30,10 +32,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.currentUser.subscribe((user) => {
+      console.log(user.result.avatar.fileName);
       this.user = user.result;
       if (this.user.avatar) {
-        this.avatarImg =
-          environment.apiUrl + 'file/download/' + this.user.avatar.fileName;
+        this.fotoPerfil =
+          environment.apiUrl + 'file/download/' + user.result.avatar.fileName;
       }
     });
   }
