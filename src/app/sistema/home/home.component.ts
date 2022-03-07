@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilialService } from 'src/app/services/filial.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -9,6 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
   banner: string = '';
+  valoresMensais: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+
   public cards = [
     { nome: "Vendas", icon: "bi-shop", href: "/sistema/vendas" },
     { nome: "Compras", icon: "bi-cart4", href: "/sistema/compras" },
@@ -39,10 +42,10 @@ export class HomeComponent implements OnInit {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: this.valoresMensais,
     },
   ];
-  lineChartLabels: Array<any> = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'];
+  lineChartLabels: Array<any> = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
   lineChartOptions: any = {
     responsive: true
   };
@@ -53,6 +56,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private filialService: FilialService,
+    private pedidosService: PedidosService
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +68,17 @@ export class HomeComponent implements OnInit {
       } else {
         this.banner = './assets/banner.png';
       }
+    });
+
+    this.pedidosService.find().subscribe((res: any) => {
+      res.map((item: any) => {
+        const esteAno = new Date().getFullYear();
+        if(esteAno == new Date(item.created_at).getFullYear()){
+          const data = new Date(item.created_at).getMonth();
+          this.valoresMensais[data] += Number(item.total);
+        }
+      })
+      console.log(this.valoresMensais)
     })
 
     //chart
