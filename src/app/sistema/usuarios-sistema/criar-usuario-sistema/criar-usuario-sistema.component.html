@@ -116,8 +116,8 @@
               placeholder="Permissão"
             >
               <option value="-1" disabled selected>Permissão</option>
-              <option value="Funcionario">Funcionário</option>
-              <option value="Administrador">Administrador</option>
+              <option value="0">Funcionário</option>
+              <option value="1">Administrador</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Permissão</label
@@ -127,7 +127,7 @@
         <!-- Filial -->
         <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
           <select
-            formControlName="filial"
+            formControlName="lojaId"
             [class.invalid]="
               permission?.invalid && (permission?.dirty || permission?.touched)
             "
@@ -138,7 +138,7 @@
             <option value="-1" disabled selected>Filial</option>
             <option
               *ngFor="let umaFilial of filiais"
-              value="{{ umaFilial.nome }}"
+              value="{{ umaFilial.id }}"
             >
               {{ umaFilial.nome }}
             </option>

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { FilialService } from 'src/app/services/filial.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+
+  banner: string = '';
+  valoresMensais: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+
   public cards = [
     { nome: 'Vendas', icon: 'bi-shop', href: '/sistema/vendas' },
     { nome: 'Compras', icon: 'bi-cart4', href: '/sistema/compras' },
@@ -22,7 +30,7 @@ export class HomeComponent implements OnInit {
   //chart
   lineChartData: Chart.ChartDataSets[] = [
     {
-      label: 'Lorem Ipsum',
+      label: 'Quantidade de vendas',
       fill: true,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -40,30 +48,51 @@ export class HomeComponent implements OnInit {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: this.valoresMensais,
     },
   ];
-  lineChartLabels: Array<any> = [
-    'Janeiro',
-    'Fevereiro',
-    'Março',
-    'Abril',
-    'Maio',
-    'Junho',
-    'Julho',
-  ];
+
+  lineChartLabels: Array<any> = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
   lineChartOptions: any = {
     responsive: true,
   };
   lineChartLegend = true;
-  lineChartType: any = 'line';
+
+  lineChartType: any = 'bar';
   inlinePlugin: any;
   textPlugin: any;
 
-  constructor() {}
+  constructor(
+    private filialService: FilialService,
+    private pedidosService: PedidosService
+  ) { }
+
 
   ngOnInit(): void {
+    // Banner da filial
+    const storage = JSON.parse(String(localStorage.getItem('currentUser')));
+    this.filialService.findOne(Number(storage.result.lojaId)).subscribe((res: any) => {
+      if (res != null && res.banner != null) {
+        this.banner = environment.apiUrl + 'file/download/' + res.banner.fileName;
+      } else {
+        this.banner = './assets/banner.png';
+      }
+    });
+
+    this.pedidosService.find().subscribe((res: any) => {
+      res.map((item: any) => {
+        const esteAno = new Date().getFullYear();
+        if (esteAno == new Date(item.created_at).getFullYear()) {
+          const data = new Date(item.created_at).getMonth();
+          this.valoresMensais[data] += Number(item.total);
+        }
+        this.lineChartType = 'line'
+      })
+    })
+
     //chart
+
     this.textPlugin = [
       {
         id: 'textPlugin',
@@ -86,4 +115,5 @@ export class HomeComponent implements OnInit {
 
     this.inlinePlugin = this.textPlugin;
   }
+
 }

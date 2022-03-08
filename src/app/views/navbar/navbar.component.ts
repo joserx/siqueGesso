@@ -1,3 +1,4 @@
+
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth.service';
@@ -34,3 +35,4 @@ export class NavbarComponent implements OnInit {
     });
   }
 }
+

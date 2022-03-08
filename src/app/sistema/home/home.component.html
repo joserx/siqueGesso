@@ -17,12 +17,12 @@
 
             <!-- banner -->
             <div class="row m-0 my-5 justify-content-center align-items-center rounded-25">
-                <img src="./assets/banner.png" alt="" class="banner" />
+                <img [src]="banner" alt="" class="banner" />
             </div>
 
             <div class="row mb-5">
                 <div class="col-12">
-                    <canvas height="60px" ngChartjs [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType" [inlinePlugins]="inlinePlugin">
+                    <canvas height="70px" ngChartjs [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType" [inlinePlugins]="inlinePlugin">
           </canvas>
                 </div>
             </div>

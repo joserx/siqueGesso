@@ -26,7 +26,7 @@ export class CriarUsuarioSistemaComponent implements OnInit {
       Validators.minLength(8),
     ]),
     permission: new FormControl('', [Validators.required, Validators.min(0)]),
-    filial: new FormControl('', [Validators.required]),
+    lojaId: new FormControl('', [Validators.required]),
   });
   avatarImg: any = 'assets/sem-foto.jpg';
   avatarFile: any = {};
@@ -98,9 +98,11 @@ export class CriarUsuarioSistemaComponent implements OnInit {
   updateFilial() {
     this.filialService.find().subscribe((res: any) => {
       this.filiais = res;
+      console.log(res);
     });
   }
   sendForm(data: any) {
+    console.log(data);
     if (this.userForm.valid) {
       let { passwordRetype, ...user } = data;
       if (this.avatarFile) {
