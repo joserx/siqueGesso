@@ -1,9 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import {ContasPagarService} from 'src/app/services/contas-pagar.service'
+import { ContasPagarService } from 'src/app/services/contas-pagar.service';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
-
 
 import Swal from 'sweetalert2';
 
@@ -15,11 +14,10 @@ import Swal from 'sweetalert2';
 export class AdicionarPagamentoComponent implements OnInit {
   public fornecedores: any = [];
 
-
   public pagamento: any = {
     valorBruto: '',
+    juros: '',
     desconto: '',
-    encargos: '',
     total: '',
   };
 
@@ -43,10 +41,11 @@ export class AdicionarPagamentoComponent implements OnInit {
 
   @Output() reload = new EventEmitter();
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private contasPagarService: ContasPagarService,
-    private fornecedorService: FornecedorService,
-    ) {}
+    private fornecedorService: FornecedorService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -60,25 +59,26 @@ export class AdicionarPagamentoComponent implements OnInit {
   aplicarValorBruto(valorBruto: string) {
     let valor = Number(valorBruto);
     this.pagamento.valorBruto = valor;
-    this.atualizarTotalPedido();
+    this.atualizarTotalPagamento();
   }
 
   aplicarJuros(juros: string) {
     let fees = Number(juros);
     this.pagamento.juros = fees;
-    this.atualizarTotalPedido();
+    this.atualizarTotalPagamento();
   }
 
   aplicarDesconto(desconto: string) {
     let discount = Number(desconto);
     this.pagamento.desconto = discount;
-    this.atualizarTotalPedido();
+    this.atualizarTotalPagamento();
   }
 
-  public atualizarTotalPedido(): void {
+  public atualizarTotalPagamento(): void {
     let oneItem = 0;
-    oneItem = Number(String(this.pagamentoForm.get('valorBruto')?.value));
-    -Number(String(this.pagamentoForm.get('desconto')?.value)) +
+    oneItem =
+      Number(String(this.pagamentoForm.get('valorBruto')?.value)) -
+      Number(String(this.pagamentoForm.get('desconto')?.value)) +
       Number(String(this.pagamentoForm.get('juros')?.value));
 
     this.pagamentoForm.controls['valorTotal'].setValue(oneItem);

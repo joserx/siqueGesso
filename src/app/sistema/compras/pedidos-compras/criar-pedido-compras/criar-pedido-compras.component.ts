@@ -11,6 +11,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { ProdutoService } from '../../../../services/produto.service';
 import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 
@@ -108,7 +109,8 @@ export class CriarPedidoComprasComponent implements OnInit {
   constructor(
     private fornecedorService: FornecedorService,
     private produtoService: ProdutoService,
-    private pedidoCompraService: PedidoCompraService
+    private pedidoCompraService: PedidoCompraService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -118,8 +120,6 @@ export class CriarPedidoComprasComponent implements OnInit {
   }
 
   initDataTable() {}
-
-
 
   setFornecedores(fornecedor: string) {
     const fornecedorSelecionado = this.fornecedores.find(
@@ -228,6 +228,42 @@ export class CriarPedidoComprasComponent implements OnInit {
     }
 
     return total;
+  }
+
+  cancelar() {
+    Swal.fire({
+      title: 'Confirma o cancelamento?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Sim',
+      denyButtonText: `Não`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(['sistema', 'compras', 'pedidos']);
+        Swal.fire({
+          title: '<h4>Pedido cancelado com sucesso!</h4>',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          width: '500px',
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: '<h4>Pedido não cancelado!</h4>',
+          icon: 'info',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          width: '500px',
+        });
+      }
+    });
   }
 
   submit(): any {

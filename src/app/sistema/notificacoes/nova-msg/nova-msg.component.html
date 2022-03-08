@@ -13,7 +13,7 @@
                 <div class="modal-body px-4">
                     <div class="row p-0 m-0 border-bottom pb-4">
                         <!-- Usuarios -->
-                        <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+                        <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
                             <select *ngIf="paraTodos" class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example" disabled>
                 <option selected>Será enviado para todos</option>
               </select>
@@ -29,8 +29,7 @@
             </div>
 
             <!-- Botão Enviar Para Todos -->
-            <div class="col -6 px-2 pt-4 p-0 m-0">
-              <div class="col-2 px-2 mt-6 flex align-items-center p-0 m-0">
+            <div class="col-4 px-2 pt-4 p-0 m-0 d-inline-flex">
                 <div class="form-check form-switch flex align-items-center">
                   <input
                     ngDefaultControl
@@ -39,11 +38,10 @@
                     class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm"
                     type="checkbox"
                   />
-                  <label class="form-check-label px-2" for="status"
+                  <label class="form-inline-label px-2 mt-1" for="status"
                     >Enviar para Todos</label
                   >
                 </div>
-              </div>
             </div>
             <!-- Nome, código, categoria, adicionar -->
             <div class="col-12 px-2 m-0 p-0">

@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
+import {EditRecebimentoComponent} from './edit-recebimento/edit-recebimento.component'
+import {ViewRecebimentoComponent} from './view-recebimento/view-recebimento.component'
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,39 +11,53 @@ import Swal from 'sweetalert2';
   styleUrls: ['./contas-a-receber.component.scss'],
 })
 export class ContasAReceberComponent implements OnInit {
-  public contas: any = [];
-  public conta: any;
-  public contasFiltradas: any = []
+
+  @ViewChild(EditRecebimentoComponent)
+  editRecebimentosComponent: EditRecebimentoComponent;
+
+  @ViewChild(ViewRecebimentoComponent)
+  viewRecebimentosComponent: ViewRecebimentoComponent;
+
+  public recebimentos: any = [];
+  public recebimento: any;
+  public recebimentosFiltrados: any = []
   public search: string = '';
 
   constructor(private contasReceberService: ContasReceberService) {}
 
   ngOnInit(): void {
-    this.getContas();
+    this.getRecebimentos();
   }
 
   pesquisaContas(){
     if (this.search.length > 0)
-      this.contasFiltradas = this.contas.filter((contasF: any) =>
+      this.recebimentosFiltrados = this.recebimentos.filter((contasF: any) =>
         contasF.id.includes(this.search)
       );
-    else this.contasFiltradas = this.contas;
+    else this.recebimentosFiltrados = this.recebimentos;
   }
 
-  getContas(){
+  getRecebimentos(){
     this.contasReceberService.find().subscribe((res) => {
       this.contasReceberService.contas = res;
-      this.contas = res;
-      this.contasFiltradas = this.contas;
-      console.log(this.contas);
+      this.recebimentos = res;
+      this.recebimentosFiltrados = this.recebimentos;
+      console.log(this.recebimentos);
     });
   }
 
-  delete(conta: any) {
-    console.log(conta);
+  loadRecebimento(recebimentos:any){
+    this.editRecebimentosComponent.loadForm(recebimentos)
+  }
+
+  loadViewRecebimento(recebimentos:any){
+    this.viewRecebimentosComponent.loadForm(recebimentos)
+  }
+
+  delete(recebimento: any) {
 
     Swal.fire({
-      title: `Deseja deletar ${conta.id}?`,
+      title: `Deseja deletar ${recebimento.id}?`,
       icon: 'question',
       showConfirmButton: true,
       confirmButtonText: 'Confirmar',
@@ -48,8 +65,8 @@ export class ContasAReceberComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((res) => {
       if (res.isConfirmed)
-        this.contasReceberService.delete(conta.id).subscribe(() => {
-          this.getContas();
+        this.contasReceberService.delete(recebimento.id).subscribe(() => {
+          this.getRecebimentos();
           return Swal.fire({
             title: 'Produto Deletado!',
             icon: 'success',
