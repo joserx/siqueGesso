@@ -11,6 +11,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+
+  fotoPerfil: string = './assets/sem-foto.jpg';
+
   public notificacoes: any = [];
 
   public user: any = {};

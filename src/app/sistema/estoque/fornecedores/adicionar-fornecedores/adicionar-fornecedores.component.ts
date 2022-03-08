@@ -7,7 +7,10 @@ import {
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
+import { CategoriaFornecedorService } from 'src/app/services/categoria-fornecedor.service';
+
 import Swal, { SweetAlertResult } from 'sweetalert2';
+
 import { BrazilValidator } from '../../../../_helpers/brasil';
 
 @Component({
@@ -16,6 +19,8 @@ import { BrazilValidator } from '../../../../_helpers/brasil';
   styleUrls: ['./adicionar-fornecedores.component.scss'],
 })
 export class AdicionarFornecedoresComponent implements OnInit {
+  public categorias: any = [];
+
   fornecedorForm: FormGroup = new FormGroup({
     category: new FormControl('', Validators.required),
     cnpj: new FormControl('', [
@@ -27,7 +32,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
     tribute_code: new FormControl('', Validators.required),
     contribuinte: new FormControl('', Validators.required),
     state_registration: new FormControl('', Validators.required),
-    is_exempt: new FormControl(false, ),
+    is_exempt: new FormControl(false),
     municipal_registration: new FormControl('', Validators.required),
     address: new FormGroup({
       cep: new FormControl(''),
@@ -61,9 +66,14 @@ export class AdicionarFornecedoresComponent implements OnInit {
   @ViewChild('close') closeBtn: any;
   @Output() reload = new EventEmitter();
 
-  constructor(private fornecedorService: FornecedorService) {}
+  constructor(
+    private fornecedorService: FornecedorService,
+    private categoriaFornecedorService: CategoriaFornecedorService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCategorias()
+  }
 
   public adicionarContato(): void {
     this.c.push(
@@ -89,6 +99,14 @@ export class AdicionarFornecedoresComponent implements OnInit {
   }
   get a() {
     return this.fornecedorForm.get('address') as FormGroup;
+  }
+
+  getCategorias() {
+    this.categoriaFornecedorService.find().subscribe((res) => {
+      this.categoriaFornecedorService.categorias = res;
+      this.categorias = res;
+
+    });
   }
 
   save(): void | Promise<SweetAlertResult<any>> {

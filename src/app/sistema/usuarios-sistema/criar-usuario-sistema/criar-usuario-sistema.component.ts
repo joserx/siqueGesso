@@ -98,9 +98,9 @@ export class CriarUsuarioSistemaComponent implements OnInit {
   updateFilial() {
     this.filialService.find().subscribe((res: any) => {
       this.filiais = res;
-      console.log(res);
     });
   }
+
   sendForm(data: any) {
     console.log(data);
     if (this.userForm.valid) {
