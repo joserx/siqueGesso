@@ -1,83 +1,84 @@
 <app-navbar></app-navbar>
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col pb-4 m-0 bg-custom-white">
-    <!-- Página -->
-    <div class="container">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col pb-4 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
 
-        <!-- Botão de voltar -->
-        <div class="row m-0 justify-content-start mt-4">
-            <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao">
-            <i class="bi-arrow-left fs-3 text-secondary"></i>
-            </a>
-        </div>
-
-        <div class="row m-0 mt-4 py-3 border-bottom">
-            <div class="col-12 m-0 p-0 text-custom-dark text-center">
-            <h2>Baixa de entrega</h2>
-            </div>
-        </div>
-
-        <form [formGroup]="baixaForm" (ngSubmit)="baixaEntrega(baixaForm)">
-          <div class="row mt-4 col-12">
-            <!-- Nº do embarque -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"  type="number" placeholder="Nº do embarque" (keydown.enter)="findEmbarque(baixaForm.value.numero)" (keydown.tab)="findEmbarque(baixaForm.value.numero)" (blur)="findEmbarque(baixaForm.value.numero)" formControlName="numero">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nº do embarque</label>
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
             </div>
 
-            <!-- Data entrega -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"  type="text" placeholder="Data entrega" type="date" formControlName="data">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data entrega</label>
+            <div class="row m-0 mt-4 py-3 border-bottom">
+                <div class="col-12 m-0 p-0 text-custom-dark text-center">
+                    <h2>Baixa de entrega</h2>
+                </div>
             </div>
 
-            <!-- Placa -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"  type="text" placeholder="Placa" formControlName="sign">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
-            </div>
+            <form [formGroup]="baixaForm" (ngSubmit)="baixaEntrega(baixaForm)">
+                <div class="row mt-4 col-12">
+                    <!-- Nº do embarque -->
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number" placeholder="Nº do embarque" (keydown.enter)="findEmbarque(baixaForm.value.numero)" (keydown.tab)="findEmbarque(baixaForm.value.numero)"
+                            (blur)="findEmbarque(baixaForm.value.numero)" formControlName="numero">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nº do embarque</label>
+                    </div>
 
-            <!-- Motorista -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"  type="text" placeholder="Motorista" formControlName="driver">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
-            </div>
-          </div>
-          <div class="row justify-content-end mx-3 mt-5">
-              <div class="col-1 mx-3 px-2 p-0 m-0 d-grid">
-                  <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+                    <!-- Data entrega -->
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Data entrega" type="date" formControlName="data">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data entrega</label>
+                    </div>
+
+                    <!-- Placa -->
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Placa" formControlName="sign">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
+                    </div>
+
+                    <!-- Motorista -->
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Motorista" formControlName="driver">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
+                    </div>
+                </div>
+                <div class="row justify-content-end mx-3 mt-5">
+                    <div class="col-1 mx-3 px-2 p-0 m-0 d-grid">
+                        <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Baixar</h5>
                   </button>
-              </div>
-          </div>
-        </form>
+                    </div>
+                </div>
+            </form>
 
 
-        <div class="row">
-            <table class="col-12 mt-4">
-                <thead class="header_table col-12">
-                  <tr>
-                    <td class="lead text-center fw-bold">Nº de embarque</td>
-                    <td class="lead text-center fw-bold">Data de Entrega</td>
-                    <td class="lead text-center fw-bold">Placa</td>
-                    <td class="lead text-center fw-bold">Motorista</td>
-                  </tr>
-                </thead>
-                <tbody class="body_table">
-                  <tr class="mt-2" *ngFor="let baixa of baixas">
-                    <td class="col lead rounded-start text-center fw-bold">{{baixa.numero}}</td>
-                    <td class="col lead rounded-start text-center fw-bold">{{baixa.data | date}}</td>
-                    <td class="col lead rounded-start text-center fw-bold">{{baixa.sign}}</td>
-                    <td class="col lead rounded-start text-center fw-bold">{{baixa.driver}}</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="row">
+                <table class="col-12 mt-4">
+                    <thead class="header_table col-12">
+                        <tr>
+                            <td class="lead text-center fw-bold">Nº de embarque</td>
+                            <td class="lead text-center fw-bold">Data de Entrega</td>
+                            <td class="lead text-center fw-bold">Placa</td>
+                            <td class="lead text-center fw-bold">Motorista</td>
+                        </tr>
+                    </thead>
+                    <tbody class="body_table">
+                        <tr class="mt-2" *ngFor="let baixa of baixas">
+                            <td class="col lead rounded-start text-center fw-bold">{{baixa.numero}}</td>
+                            <td class="col lead rounded-start text-center fw-bold">{{baixa.data | date}}</td>
+                            <td class="col lead rounded-start text-center fw-bold">{{baixa.sign}}</td>
+                            <td class="col lead rounded-start text-center fw-bold">{{baixa.driver}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-      
+        <!-- /Página -->
     </div>
-    <!-- /Página -->
-  </div>
 </div>

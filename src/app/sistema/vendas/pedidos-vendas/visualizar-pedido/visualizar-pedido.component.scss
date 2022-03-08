@@ -1,56 +1,148 @@
-input[type=number]::-webkit-inner-spin-button { 
+input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    
-  }
-  input[type=number] { 
-   -moz-appearance: textfield;
-   appearance: textfield;
-  
-  }
-
-.tabela{
-  min-height: 300px;
 }
 
-.pdf-button{
-  background: #ff6060;
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
-.pdf-button:hover{
-  background: #ff7e7e;
+.hr {
+    border: 1px solid #5D5B5D
 }
 
-.excel-button{
-  background: #51ff65;
+.titulo {
+    display: inline;
+    height: 32px;
+    left: 372px;
+    top: 25px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    /* identical to box height */
+    color: #5d5b5d;
 }
 
-.excel-button:hover{
-  background: #78fc87;
+.data {
+    height: 12px;
+    left: 372px;
+    top: 57px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 12px;
+    /* identical to box height */
+    color: #5d5b5d;
 }
 
-.pdf-preview{
-  min-height: 800px;
-  max-width: 600px;
+.loja {
+    height: 12px;
+    left: 41px;
+    top: 103px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 12px;
+    /* identical to box height */
+    color: #5d5b5d;
 }
 
-.tabela{
-  width: 580px;
-  min-height: 10px;
-  margin: 0;
+.tabela {
+    min-height: 300px;
 }
-  .tabela th {
+
+.pdf-button {
+    background: #ff6060;
+}
+
+.pdf-button:hover {
+    background: #ff7e7e;
+}
+
+.excel-button {
+    background: #51ff65;
+}
+
+.excel-button:hover {
+    background: #78fc87;
+}
+
+.pdf-preview {
+    min-height: 800px;
+    max-width: 600px;
+}
+
+.tabela {
+    width: 580px;
+    min-height: 10px;
+    margin: 0;
+}
+
+.tabela th {
     font-size: 10px;
     height: 10px;
-  }
-
-  .tabela td{
-    font-size: 10px;
-  }
-
-.table-content{
-  font-size: 10px;
 }
 
-div.pdf-preview{
-  font-size: 10px;
+.tabela td {
+    font-size: 10px;
+}
+
+.table-content {
+    font-size: 10px;
+}
+
+div.pdf-preview {
+    font-size: 10px;
+}
+
+.tabelaT {
+    margin: auto;
+    width: 535px;
+    height: 65px;
+    left: 30px;
+    top: 149px;
+    background: #eef0f7;
+    border-radius: 8px;
+}
+
+.marginInfo {
+    margin-left: 36px;
+    margin-top: 12px;
+}
+
+.assField {
+    border-top: 1px solid #5D5B5D;
+    margin-right: 24px;
+    margin-top: 60px;
+}
+
+.divAtendimento {
+    height: 20px;
+    left: 66px;
+    top: 748px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 20px;
+    /* identical to box height */
+    color: #5D5B5D;
+}
+
+.info {
+    margin-top: 24px;
+    height: 32px;
+    left: 44px;
+    top: 775px;
+    font-family: Segoe UI;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 200%;
+    /* or 16px */
+    color: #5D5B5D;
 }

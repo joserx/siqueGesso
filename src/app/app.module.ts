@@ -135,10 +135,14 @@ import { FiltrarPedidoComponent } from './sistema/compras/pedidos-compras/filtra
 import { ViewEstoqueProdutoComponent } from './sistema/estoque/estoque-produtos/view-estoque-produto/view-estoque-produto.component';
 import { FiltrarColaboradoresComponent } from './sistema/rh/listar-colaboradores/filtrar-colaboradores/filtrar-colaboradores.component';
 import { FiltrarUsuariosComponent } from './sistema/usuarios-sistema/filtrar-usuarios/filtrar-usuarios.component';
-import { FiltroCategoriasComponent } from './sistema/config/cadastro-de-categoria/filtro-categorias/filtro-categorias.component';
-import { FiltroDestinacaoComponent } from './sistema/config/cadastro-de-categoria/filtro-destinacao/filtro-destinacao.component';
-import { NovaMsgComponent } from './sistema/config/nova-msg/nova-msg.component';
+import { NovaMsgComponent } from './sistema/notificacoes/nova-msg/nova-msg.component';
 import { ChartsModule } from 'ng2-charts';
+import { CategoriaFornecedorComponent } from './sistema/config/cadastro-de-categoria/categoria-fornecedor/categoria-fornecedor.component';
+import { CadastroCatFornecedorComponent } from './sistema/config/cadastro-de-categoria/cadastro-cat-fornecedor/cadastro-cat-fornecedor.component';
+import { EditContasPComponent } from './sistema/financeiro/contas-a-pagar/edit-contas-p/edit-contas-p.component';
+import { ViewContasPagarComponent } from './sistema/financeiro/contas-a-pagar/view-contas-pagar/view-contas-pagar.component';
+import { EditRecebimentoComponent } from './sistema/financeiro/contas-a-receber/edit-recebimento/edit-recebimento.component';
+import { ViewRecebimentoComponent } from './sistema/financeiro/contas-a-receber/view-recebimento/view-recebimento.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -270,9 +274,13 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ViewEstoqueProdutoComponent,
     FiltrarColaboradoresComponent,
     FiltrarUsuariosComponent,
-    FiltroCategoriasComponent,
-    FiltroDestinacaoComponent,
     NovaMsgComponent,
+    CategoriaFornecedorComponent,
+    CadastroCatFornecedorComponent,
+    EditContasPComponent,
+    ViewContasPagarComponent,
+    EditRecebimentoComponent,
+    ViewRecebimentoComponent,
   ],
 
   imports: [

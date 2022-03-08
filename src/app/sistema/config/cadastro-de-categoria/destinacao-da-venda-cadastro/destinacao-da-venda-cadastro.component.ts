@@ -6,6 +6,8 @@ import {
   FormGroup,
   FormControlName,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 import Swal from 'sweetalert2';
 
@@ -22,7 +24,8 @@ export class DestinacaoDaVendaCadastroComponent implements OnInit {
   });
   public desativadoCheckbox: boolean = false;
 
-  constructor(private DestinacaoVendaService: DestinacaoVendaService) {}
+  constructor(private DestinacaoVendaService: DestinacaoVendaService,
+    private readonly router: Router,) {}
 
   ngOnInit(): void {}
 
@@ -30,6 +33,45 @@ export class DestinacaoDaVendaCadastroComponent implements OnInit {
     this.desativadoCheckbox === true
       ? (this.desativadoCheckbox = false)
       : (this.desativadoCheckbox = true);
+  }
+
+
+  cancelar(){
+
+    Swal.fire({
+      title: 'Confirma o cancelamento?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Sim',
+      denyButtonText: `Não`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(['sistema', 'configuracoes', 'cadastro-de-categorias', 'destinacao-de-venda'])
+        Swal.fire({
+          title: '<h4>Destinacao cancelada com sucesso!</h4>',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          width: '500px'
+        })
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: '<h4>Destinacao não cancelada!</h4>',
+          icon: 'info',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true ,
+          width: '500px'
+        })
+      }
+    })
+
   }
 
   submit(): any {

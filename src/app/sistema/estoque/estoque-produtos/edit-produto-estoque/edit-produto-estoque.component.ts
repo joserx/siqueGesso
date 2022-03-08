@@ -8,7 +8,6 @@ import {
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { ProdutoService } from '../../../../services/produto.service';
-import { isJSDocThisTag } from 'typescript';
 
 @Component({
   selector: 'app-edit-produto-estoque',

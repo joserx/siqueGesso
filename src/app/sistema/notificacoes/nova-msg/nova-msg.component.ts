@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -24,6 +24,8 @@ export class NovaMsgComponent implements OnInit {
     texto: new FormControl(''),
   });
 
+
+
   paraTodos: boolean = false;
   usuarios: any[] = [];
 
@@ -33,6 +35,7 @@ export class NovaMsgComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.MensagemService.listen('message').subscribe(() => {});
     this.usuarioSistemasService.find().subscribe((data: any) => {
       this.usuarios = data;
     });
@@ -47,5 +50,20 @@ export class NovaMsgComponent implements OnInit {
     if (this.paraTodos) {
       data.paraId = null;
     }
+
+    this.MensagemService.emit('message', data);
+
+    this.MensagemService.create(this.novaMsg.value).subscribe(() =>{
+      return Swal.fire({
+        title: 'Mensagem Enviada!',
+        icon: 'success',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+    })
+
   }
 }

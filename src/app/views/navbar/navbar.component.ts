@@ -1,5 +1,8 @@
+
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth.service';
+import { MensagemService } from 'src/app/services/mensagem.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,35 +11,28 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-
-  fotoPerfil: string = './assets/sem-foto.jpg';
-  public notificacoes: any = [
-    {
-      id: 1,
-      texto:
-        'Isso é um exemplo de notificação. Ela aparecerá assim como este texto na qual você está lendo.',
-      href: '',
-    },
-    {
-      id: 2,
-      texto:
-        'Isso é um outro exemplo de notificação. Ela aparecerá assim como este texto na qual você está lendo.',
-      href: '',
-    },
-  ];
+  public notificacoes: any = [];
 
   public user: any = {};
   avatarImg = 'assets/sique-gesso-favicon.png';
 
-  constructor(private readonly authService: AuthenticationService) {}
+  constructor(
+    private readonly authService: AuthenticationService,
+    private readonly MensagemService: MensagemService
+  ) {}
 
   ngOnInit(): void {
+    this.MensagemService.listen('message').subscribe((data: any) => {
+      this.notificacoes.push(data);
+    });
+
     this.authService.currentUser.subscribe((user) => {
       this.user = user.result;
       if (this.user.avatar) {
-        this.fotoPerfil =
-          environment.apiUrl + 'file/download/' + user.result.avatar.fileName;
+        this.avatarImg =
+          environment.apiUrl + 'file/download/' + this.user.avatar.fileName;
       }
     });
   }
 }
+
