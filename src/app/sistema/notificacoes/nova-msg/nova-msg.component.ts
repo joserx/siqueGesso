@@ -42,6 +42,8 @@ export class NovaMsgComponent implements OnInit {
   }
 
   submit(): any {
+    console.log(this.novaMsg.value);
+
     let data: any = {
       ...this.novaMsg.value,
       ...{ enviadoPor: this.enviadoPor },
