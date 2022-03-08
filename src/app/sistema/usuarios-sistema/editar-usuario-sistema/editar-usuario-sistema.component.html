@@ -125,6 +125,30 @@
           </div>
         </div>
 
+          <!-- Filial -->
+        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+          <select
+            formControlName="lojaId"
+            [class.invalid]="
+              permission?.invalid && (permission?.dirty || permission?.touched)
+            "
+            class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+            type="text"
+            placeholder="Permissão"
+          >
+            <option value="-1" disabled selected>Filial</option>
+            <option
+              *ngFor="let umaFilial of filiais"
+              value="{{ umaFilial.id }}"
+            >
+              {{ umaFilial.nome }}
+            </option>
+          </select>
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+            >Filial</label
+          >
+        </div>
+
         <div class="row m-0 mt-4 justify-content-end">
           <!-- Botão Salvar -->
           <div class="col-4 d-grid px-2 p-0 m-0">
