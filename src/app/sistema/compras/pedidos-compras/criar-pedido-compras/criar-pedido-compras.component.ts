@@ -8,19 +8,13 @@ import {
 } from '@angular/core';
 import { getDate } from '../../../../../environments/global';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { ProdutoService } from '../../../../services/produto.service';
 import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Moment } from 'moment';
 import Swal from 'sweetalert2';
-// import {
-//   ChartSelectEvent,
-//   GoogleChartInterface,
-//   GoogleChartsControlInterface,
-//   GoogleChartsDashboardInterface,
-// } from 'ng2-google-charts';
+
 @Component({
   selector: 'app-criar-pedido-compras',
   templateUrl: './criar-pedido-compras.component.html',
@@ -80,10 +74,43 @@ export class CriarPedidoComprasComponent implements OnInit {
 
   public produtos: any = [];
 
+  lineChartData: Chart.ChartDataSets[] = [
+    {
+      label: 'Lorem Ipsum',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'round',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [20],
+    },
+  ];
+  lineChartLabels: Array<any> = ['Compras nos ultimos 3 meses'];
+  lineChartOptions: any = {
+    responsive: true,
+  };
+  lineChartLegend = true;
+  lineChartType: any = 'pie';
+  inlinePlugin: any;
+  textPlugin: any;
+
   constructor(
     private fornecedorService: FornecedorService,
     private produtoService: ProdutoService,
-    private pedidoCompraService: PedidoCompraService
+    private pedidoCompraService: PedidoCompraService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -93,24 +120,6 @@ export class CriarPedidoComprasComponent implements OnInit {
   }
 
   initDataTable() {}
-
-  // public comprasChart: GoogleChartInterface = {
-  //   chartType: 'PieChart',
-  //   dataTable: [
-  //     ['produto', 'quantidade'],
-  //     ['pilha', 1],
-  //   ],
-  //   options: {
-  //     title: 'Compras nos ultimos 3 meses',
-  //     height: 300,
-  //     chartArea: {
-  //       left: 15,
-  //       top: 50,
-  //       right: 0,
-  //       bottom: 30,
-  //     },
-  //   },
-  // };
 
   setFornecedores(fornecedor: string) {
     const fornecedorSelecionado = this.fornecedores.find(
@@ -219,6 +228,42 @@ export class CriarPedidoComprasComponent implements OnInit {
     }
 
     return total;
+  }
+
+  cancelar() {
+    Swal.fire({
+      title: 'Confirma o cancelamento?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Sim',
+      denyButtonText: `Não`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(['sistema', 'compras', 'pedidos']);
+        Swal.fire({
+          title: '<h4>Pedido cancelado com sucesso!</h4>',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          width: '500px',
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: '<h4>Pedido não cancelado!</h4>',
+          icon: 'info',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          width: '500px',
+        });
+      }
+    });
   }
 
   submit(): any {

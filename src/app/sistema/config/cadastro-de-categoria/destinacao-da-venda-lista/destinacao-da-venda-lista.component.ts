@@ -34,7 +34,15 @@ export class DestinacaoDaVendaListaComponent implements OnInit {
     else this.destinacoesFiltradas = this.destinacao;
   }
 
-  getDestinacoes(status?: boolean) {
+  getDestinacoes(){
+    this.DestinacaoVendaService.findAll().subscribe((res)=>{
+      this.DestinacaoVendaService.destinacoes = res;
+      this.destinacoes = res;
+      this.destinacoesFiltradas = this.destinacoes;
+    })
+  }
+
+  getDestinacoesF(status?: boolean) {
     this.DestinacaoVendaService.find(status).subscribe(
       (res: any) => {
         this.destinacoes = res;

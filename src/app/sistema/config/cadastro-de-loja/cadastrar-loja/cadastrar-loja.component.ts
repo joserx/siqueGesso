@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
@@ -18,6 +23,7 @@ export class CadastrarLojaComponent implements OnInit {
   anexesRepo = environment.apiUrl + 'file/download/';
   public avatarImg: string = './assets/sem-foto.jpg';
   avatarFile: any = {};
+
   public filialForm: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     cnpj: new FormControl(''),
@@ -66,25 +72,20 @@ export class CadastrarLojaComponent implements OnInit {
   }
 
   cepInstitution(cep: string) {
-    cep = cep.replace('-', '');
-    cep = cep.trim();
-    if (cep.length == 8) {
+    let cepCerto = cep;
+    cepCerto = cepCerto.replace('-', '');
+
+    if (cepCerto.length == 8) {
       // this.loaderService.addLoader();
-      this.filialService
-        .cepAdress(cep)
-        .subscribe
-        // (res: any) => {
-        //   this.filialForm.patchValue({
-        //     cidade: res.localidade,
-        //     bairro: res.bairro,
-        //     logradouro: res.logradouro,
-        //   });
-        // }
-        // (err) => {},
-        // () => {
-        //   this.loaderService.removeLoader();
-        // }
-        ();
+      this.filialService.cepAdress(cepCerto).subscribe((res: any) => {
+        console.log(res);
+
+        this.filialForm.patchValue({
+          cidade: res?.localidade,
+          bairro: res?.bairro,
+          logradouro: res?.logradouro,
+        });
+      });
     }
   }
 

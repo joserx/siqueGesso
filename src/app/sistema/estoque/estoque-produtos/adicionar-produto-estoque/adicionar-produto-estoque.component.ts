@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProdutoService } from '../../../../services/produto.service';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { FornecedorService } from 'src/app/services/fornecedores.service';

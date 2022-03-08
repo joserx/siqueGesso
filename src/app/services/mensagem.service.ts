@@ -2,11 +2,34 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+import io from 'socket.io-client';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
 export class MensagemService {
-  constructor(private readonly http: HttpClient) {}
+  socket: any;
+  notifications: any = [];
+
+  constructor(private readonly http: HttpClient) {
+    this.socket = io('http://localhost:25565');
+    // https://api.sistemasiquegesso.com.br/
+  }
+
+  listen(eventName: string) {
+    return new Observable((subscriber) => {
+      this.socket.on(eventName, (data: any) => {
+        subscriber.next(data);
+      });
+    });
+  }
+
+  emit(eventName: string, data: any) {
+    this.notifications.push(data)
+    this.socket.emit(eventName, data);
+  }
+
 
   find() {
     return this.http.get<any>(environment.apiUrl + 'mensagens/');

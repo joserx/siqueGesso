@@ -19,24 +19,13 @@
                     <h5 class="fw-bold text-custom-dark">Mensagens</h5>
                 </div>
             </div>
-            <!-- Botão Adicionar -->
-            <div class="col-4 px-2 p-0 m-0">
-                <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#novaMensagem">
-                    <h5 class="fw-normal my-auto text-truncate text-custom-dark">
-                        Nova Mensagem
-                    </h5>
-                    <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-                </a>
-            </div>
 
             <!-- Títulos da Tabela -->
             <div class="d-flex row m-0 my-5 text-custom-dark justify-content-center">
                 <div class="col-2">
                     <h5 class="fw-bold text-truncate">Título</h5>
                 </div>
-                <div class="col-2">
-                    <h5 class="fw-bold text-truncate">Mensagem</h5>
-                </div>
+
                 <div class="col-2">
                     <h5 class="fw-bold text-truncate">Usuario</h5>
                 </div>
@@ -51,9 +40,7 @@
                     <div class="col-2">
                         <p>{{ mensagem.titulo }}</p>
                     </div>
-                    <div class="col-2">
-                        <p>{{ mensagem.texto }}</p>
-                    </div>
+
                     <div class="col-2">
                         <p>{{ mensagem.usuario }}</p>
                     </div>
@@ -66,6 +53,17 @@
                     </div>
                 </div>
                 <!-- /Página -->
+            </div>
+        </div>
+        <!-- Botão Adicionar -->
+        <div class="row d-flex justify-content-end mx-3 mt-5">
+            <div class="col-2 mx-3 px-2 p-0 m-0 d-grid" data-bs-toggle="modal" data-bs-target="#novaMensagem">
+                <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+          <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+            Escrever
+          </h5>
+          <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+        </button>
             </div>
         </div>
     </div>

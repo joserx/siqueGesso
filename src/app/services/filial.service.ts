@@ -28,7 +28,11 @@ export class FilialService {
     return this.http.delete(environment.apiUrl + 'filial/' + id);
   }
 
+  // cepAdress(cep: string) {
+  //   return this.http.get(`https://viacep.com.br/ws/${cep}/json/`);
+  // }
+
   cepAdress(cep: string) {
-    return this.http.get(environment.apiUrl + 'filial/' + cep);
+    return this.http.get(environment.apiUrl + 'filial/cep/' + cep);
   }
 }

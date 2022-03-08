@@ -9,6 +9,10 @@ export class DestinacaoVendaService {
   constructor(private readonly http: HttpClient) {}
   public destinacoes: any;
 
+  findAll() {
+    return this.http.get<any>(environment.apiUrl + 'destinacao-vendas');
+  }
+
   find(status: any = false) {
     return this.http.get(environment.apiUrl + 'destinacao-vendas', {
       params: { status },

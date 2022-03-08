@@ -1,21 +1,20 @@
 <!-- Modal -->
 <div class="modal fade" id="novaMensagem" tabindex="-1" aria-labelledby="novaMensagemLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <form [formGroup]="novaMsg">
-      <!-- Modal content -->
-      <div class="modal-content rounded-15 bg-custom-light">
-        <div class="modal-header px-4">
-          <h5 class="modal-title text-custom-dark" id="novaMsgLabel">
-            Nova Mensagem
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body px-4">
-          <div class="row p-0 border-bottom pb-4">
-            <!-- Usuarios -->
-            <div class="col-9 px-2 pt-4 p-0 m-0 form-floating" style="margin-left: 10px !important;">
-              <select *ngIf="paraTodos" class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm"
-                aria-label="Default select example" disabled>
+    <div class="modal-dialog modal-xl">
+        <form [formGroup]="novaMsg">
+            <!-- Modal content -->
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="novaMsgLabel">
+                        Nova Mensagem
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <div class="row p-0 m-0 border-bottom pb-4">
+                        <!-- Usuarios -->
+                        <div class="col-8 px-2 pt-4 p-0 m-0 form-floating" style="margin-left: 10px !important;">
+                            <select *ngIf="paraTodos" class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example" disabled>
                 <option selected>Será enviado para todos</option>
               </select>
               <select *ngIf="!paraTodos" class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm">
@@ -29,23 +28,34 @@
             </div>
 
             <!-- Botão Enviar Para Todos -->
-            <div class="col -6 px-2 pt-4 p-0 m-0">
-              <div class="col-2 px-2 mt-6 flex align-items-center p-0">
+            <div class="col-4 px-2 pt-4 p-0 m-0 d-inline-flex">
                 <div class="form-check form-switch flex align-items-center">
-                  <input ngDefaultControl [(ngModel)]="paraTodos" [ngModelOptions]="{ standalone: true }"
-                    class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm" type="checkbox" />
-                  <label class="form-check-label px-2" for="status">Enviar para Todos</label>
+                  <input
+                    ngDefaultControl
+                    [(ngModel)]="paraTodos"
+                    [ngModelOptions]="{ standalone: true }"
+                    class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm"
+                    type="checkbox"
+                  />
+                  <label class="form-inline-label px-2 mt-1" for="status"
+                    >Enviar para Todos</label
+                  >
                 </div>
-              </div>
             </div>
             <!-- Nome, código, categoria, adicionar -->
             <div class="col-12 px-2 m-0 p-0">
               <div class="row m-0 p-0">
                 <!-- Nome -->
                 <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome"
-                    formControlName="nome" />
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Titulo</label>
+                  <input
+                    class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
+                    type="text"
+                    placeholder="titulo"
+                    formControlName="titulo"
+                  />
+                  <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                    >Titulo</label
+                  >
                 </div>
               </div>
             </div>

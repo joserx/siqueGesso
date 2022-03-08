@@ -61,6 +61,8 @@ import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/ed
 import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
 import { EditarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/editar-cadastro-loja/editar-cadastro-loja.component';
 import { VisualizarLojaCadastradaComponent } from './sistema/config/cadastro-de-loja/visualizar-loja-cadastrada/visualizar-loja-cadastrada.component';
+import { CategoriaFornecedorComponent } from './sistema/config/cadastro-de-categoria/categoria-fornecedor/categoria-fornecedor.component';
+import { CadastroCatFornecedorComponent } from './sistema/config/cadastro-de-categoria/cadastro-cat-fornecedor/cadastro-cat-fornecedor.component';
 
 const routes: Routes = [
   {
@@ -218,7 +220,7 @@ const routes: Routes = [
               {
                 path: 'criar',
                 component: CriarPedidoVendasComponent
-              }, 
+              },
               {
                 path: 'editar/:id',
                 component: EditarPedidoComponent
@@ -386,18 +388,18 @@ const routes: Routes = [
           {
             path: '',
             component: ConfiguracoesComponent
-          },        
+          },
           {
             path: 'lojas-cadastradas',
             children: [
               {
                 path: 'lista',
                 component: ListarCadastroLojaComponent
-              },  
+              },
               {
                 path: 'cadastrar',
                 component: CadastrarLojaComponent
-              }, 
+              },
               {
                 path: 'editar/:id',
                 component: EditarCadastroLojaComponent
@@ -406,7 +408,7 @@ const routes: Routes = [
                 path: 'visualizar/:id',
                 component: VisualizarLojaCadastradaComponent
               }
-            ]          
+            ]
           },
           {
             path: 'cadastro-de-categorias',
@@ -414,24 +416,32 @@ const routes: Routes = [
               {
                 path: '',
                 component: CadastroDeCategoriaComponent
-              },  
+              },
               {
                 path: 'categoria-de-produto',
-                component: CadastroDeProdutoListaComponent 
-              },  
+                component: CadastroDeProdutoListaComponent
+              },
               {
                 path: 'categoria-de-produto/cadastrar',
-                component: CadastroDeProdutoComponent 
-              }, 
+                component: CadastroDeProdutoComponent
+              },
               {
                 path: 'destinacao-de-venda',
-                component: DestinacaoDaVendaListaComponent  
-              },   
+                component: DestinacaoDaVendaListaComponent
+              },
               {
                 path: 'destinacao-de-venda/cadastrar',
-                component: DestinacaoDaVendaCadastroComponent  
-              },  
-            ]          
+                component: DestinacaoDaVendaCadastroComponent
+              },
+              {
+                path: 'categoria-fornecedor',
+                component: CategoriaFornecedorComponent
+              },
+              {
+                path: 'categoria-fornecedor/cadastrar',
+                component: CadastroCatFornecedorComponent
+              },
+            ]
           },
         ]
       },

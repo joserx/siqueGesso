@@ -27,7 +27,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
     tribute_code: new FormControl('', Validators.required),
     contribuinte: new FormControl('', Validators.required),
     state_registration: new FormControl('', Validators.required),
-    is_exempt: new FormControl(false, Validators.required),
+    is_exempt: new FormControl(false, ),
     municipal_registration: new FormControl('', Validators.required),
     address: new FormGroup({
       cep: new FormControl(''),

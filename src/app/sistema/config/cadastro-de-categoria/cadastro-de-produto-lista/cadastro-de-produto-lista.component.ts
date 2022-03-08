@@ -33,7 +33,15 @@ export class CadastroDeProdutoListaComponent implements OnInit {
     else this.categoriasFiltradas = this.categoria;
   }
 
-  getCategorias(status?: boolean) {
+  getCategorias(){
+    this.CategoriaProdutoService.findAll().subscribe((res)=>{
+      this.CategoriaProdutoService.categorias = res;
+      this.categorias = res;
+      this.categoriasFiltradas = this.categorias;
+    })
+  }
+
+  getCategoriasF(status?: boolean) {
     this.CategoriaProdutoService.find(status).subscribe(
       (res: any) => {
         this.categorias = res;

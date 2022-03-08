@@ -45,6 +45,7 @@ export class EstoqueProdutosComponent implements OnInit {
   loadProduto(produto: any) {
     this.editProdutoEstoqueComponent.loadForm(produto);
   }
+
   loadViewProduto(produto: any) {
     this.viewEstoqueProdutoComponent.loadForm(produto);
   }

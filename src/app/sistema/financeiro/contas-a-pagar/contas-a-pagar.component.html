@@ -1,16 +1,7 @@
 <div class="row m-0 p-0">
     <!-- Botão Adicionar -->
     <div class="col-2 px-2 pt-4 p-0 m-0">
-        <a data-bs-toggle="modal" data-bs-target="#adicionarPagamentos" class="
-        rounded-15
-        py-1
-        px-4
-        bg-custom-success
-        h-limited-sm
-        d-flex
-        justify-content-between
-        shadow-sm
-      ">
+        <a data-bs-toggle="modal" data-bs-target="#adicionarPagamentos" class="rounded-15 py-1 px-4 bg-custom-success h-limited-sm d-flex justify-content-between shadow-sm">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark">
                 Adicionar
             </h5>
@@ -40,16 +31,7 @@
   <!-- Botão Filtro -->
   <div class="col-2 px-2 pt-4 p-0 m-0">
     <a
-      class="
-        rounded-15
-        py-2
-        px-4
-        bg-white
-        h-limited-sm
-        d-flex
-        justify-content-between
-        shadow-sm
-      "
+      class="rounded-15 py-2 px-4 bg-white h-limited-sm d-flex justify-content-between shadow-sm"
     >
       <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtro</h5>
       <i class="bi-funnel my-auto fs-4 p-0 m-0 fw-bold text-custom-dark"></i>
@@ -59,31 +41,14 @@
   <!-- Pesquisar -->
   <div class="col-2 px-2 pt-4 m-0 position-relative">
     <input
-      class="
-        form-control form-control
-        border-0
-        h-limited-sm
-        py-2
-        ps-4
-        pe-5
-        rounded-15
-        shadow-sm
-      "
+      class="form-control form-control border-0 h-limited-sm py-2 ps-4 pe-5 rounded-15 shadow-sm"
       type="text"
       placeholder="Pesquisar"
     />
-    <a>
-      <i
-        class="
-          bi-search
-          fs-5
-          position-absolute
-          translate-middle
-          top-50
-          me-4
-          end-0
-        "
-      ></i>
+    <a
+      class="fs-4 position-absolute translate-middle top-50 me-4 end-0 text-custom-dark"
+    >
+      <i class="bi-search"></i>
     </a>
   </div>
 </div>
@@ -105,19 +70,35 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="align-items-center" *ngFor="let conta of contas">
-        <th scope="row">{{ conta.codigo }}</th>
-        <td>{{ conta.descricao }}</td>
-        <td>{{ conta.fornecedor }}</td>
-        <td>{{ conta.pagamento }}</td>
-        <td>{{ conta.data }}</td>
-        <td>{{ conta.total | currency: "BRL" }}</td>
-        <td>{{ conta.situacao }}</td>
-        <td>{{ conta.unidade }}</td>
+      <tr class="align-items-center" *ngFor="let contas of contasFiltradas">
+        <th scope="row">{{ contas?.id }}</th>
+        <td>{{ contas?.descricao }}</td>
+        <td>{{ contas?.fornecedor }}</td>
+        <td>{{ contas?.formaPagamento }}</td>
+        <td>{{ contas?.data }}</td>
+        <td>{{ contas?.valortotal | currency: "BRL" }}</td>
+        <td>{{ contas?.situacao }}</td>
+        <td>{{ contas?.unidade }}</td>
         <td>
-          <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i>
-          <i class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
-          <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+          <i
+            class="fs-5 bi-eye-fill icon-view p-3"
+            cursor="pointer"
+            (click)="loadViewPagamento(contas)"
+            data-bs-toggle="modal"
+            data-bs-target="#viewPagamentos"
+          ></i>
+          <i
+            class="fs-5 bi-pen-fill icon-edit p-3"
+            (click)="loadPagamento(contas)"
+            cursor="pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#editarPagamentos"
+          ></i>
+          <i
+            class="fs-5 bi-trash-fill icon-delete p-3"
+            cursor="pointer"
+            (click)="delete(contas)"
+          ></i>
         </td>
       </tr>
     </tbody>
@@ -130,17 +111,7 @@
   <div class="col-3 px-2 p-0 m-0 d-grid">
     <button
       type="button"
-      class="
-        h-limited
-        btn
-        rounded-15
-        py-1
-        px-4
-        btn-outline-secondary
-        d-flex
-        justify-content-between
-        shadow-sm
-      "
+      class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm"
     >
       <h5 class="fw-normal my-auto text-truncate">Exportar CSV</h5>
       <i class="bi-file-earmark-spreadsheet my-auto fs-4 p-0 m-0 fw-bold"></i>
@@ -149,3 +120,5 @@
 </div>
 
 <app-adicionar-pagamento></app-adicionar-pagamento>
+<app-edit-contas-p (reload)="getContas()"></app-edit-contas-p>
+<app-view-contas-pagar [contas]="contas"></app-view-contas-pagar>

@@ -13,22 +13,26 @@
                 <div class="pdf-preview d-flex justify-content-center" id="content" #content>
                     <div class="mt-4 bg-white col-12 p-2">
                         <div class="row">
-                            <div class="col-2">
-                                <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso" />
+                            <div class="col-6">
+                                <img height="50" src="assets/sique-gesso-logo.png" alt="sique-gesso" />
                             </div>
-                            <div class="col">
-                                <h2 class="text-custom-dark text-center">Pedidos de venda</h2>
+                            <div class="titulo col-6">
+                                <h2 class="text-custom-dark">Pedidos de venda</h2>
+                                <div class="data col-9 ml-5 mt-1">
+                                    Data de pedido: {{ pedidosForm.value.data | date }}
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
-                                Data de pedido: {{ pedidosForm.value.data | date }}
+
+                            <hr class="hr mt-4" />
+                            <div class="loja col-8 ">
+                                Loja: {{ pedidosForm.value.loja }}
                             </div>
-                            <div class="col-6">Loja: {{ pedidosForm.value.loja }}</div>
-                            <div class="col-6">Vendedor: {{ pedidosForm.value.cliente }}</div>
+                            <div class="col-4">Vendedor: {{ pedidosForm.value.cliente }}</div>
+                            <hr class="hr mt-2" />
                             <div class="col-12">
-                                <h3>Itens:</h3>
-                                <table class="bg-white tabela m-0 p-0">
+                                <table class="tabelaT">
                                     <thead>
                                         <tr>
                                             <th class="text-custom-dark border border-custom-dark border-1 text-center fw-bold">
@@ -98,7 +102,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="row">
+                                <div class="marginInfo">
                                     <div class="col-6">
                                         Desconto geral: {{ pedidosForm.value.descontoGeral | currency: "BRL" }}
                                     </div>
@@ -119,28 +123,39 @@
                                         Data de vencimento: {{ pedidosForm.value.dataVencimento | date }}
                                     </div>
                                     <div class="col-6">Dias: {{ pedidosForm.value.status }}</div>
-                                </div>
-                                <div class="col-6">
-                                    Link do boleto: {{ pedidosForm.value.linkBoleto }}
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                Link da nota fiscal: {{ pedidosForm.value.linkNf }}
-                            </div>
-                        </div>
-                        <div class="col-12">Observações: {{ pedidosForm.value.obs }}</div>
+                                    <div class="col-6">
+                                        Link do boleto: {{ pedidosForm.value.linkBoleto }}
+                                    </div>
+                                    <div class="col-6">
+                                        Link da nota fiscal: {{ pedidosForm.value.linkNf }}
+                                    </div>
+                                    <div class="col-6">
+                                        Observações: {{ pedidosForm.value.obs }}
+                                    </div>
 
-                        <div class="col-6">
-                            Prazo para entrega e retiradas: 7 dias úteis.
-                        </div>
-                        <div class="col-6">
-                            Declaramos que a descarga é somente no terreo não subimos escadas e elevadores.
-                        </div>
-                        <div class="col-6">
-                            Não nos responsabilizamos por calculo de material.
-                        </div>
-                        <div class="w-50 h-50 d-flex align-items-end">
-                            <p>Assinatura:___________</p>
+                                    <div class="col-6">
+                                        Prazo para entrega e retiradas: 7 dias úteis.
+                                    </div>
+                                    <div class="col-6">
+                                        Declaramos que a descarga é somente no terreo não subimos escadas e elevadores.
+                                    </div>
+                                    <div class="col-6">
+                                        Não nos responsabilizamos por calculo de material.
+                                    </div>
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div class="assField col-5 text-center">Vendedor</div>
+                                        <div class="assField col-5 text-center">Cliente</div>
+                                        <!-- TTT -->
+                                    </div>
+                                    <div class="divAtendimento">
+                                        <hr class="hr">
+                                        <img height="15px" src="assets/WhatsApp.svg" alt=""> Atendimento
+                                    </div>
+                                    <div class="info">
+                                        Tudo para gesso - Atacado e Varejo. <br> Loja Fisica e Whatsapp / Orçamentos (11)3297-5332
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
