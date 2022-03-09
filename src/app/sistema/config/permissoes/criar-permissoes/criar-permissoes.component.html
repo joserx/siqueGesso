@@ -4,16 +4,18 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content  bg-custom-light">
             <div class="modal-header">
-                <h5 class="modal-title text-custom-dark" id="addFilialLabel">O que você deseja fazer ?</h5>
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar permissão</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="w-100 d-flex justify-content-center">
+                <div class="my-4 px-4 pt-0 p-0 m-0 form-floating">
+                    <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Filial" />
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button"
                     class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm"
                     data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal">Salvar</button>
-                <button type="button"
-                    class="h-limited btn rounded-15 py-1 px-4 bg-danger d-flex align-items-center justify-content-between shadow-sm"
-                    (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimir">Cancelar</button>
             </div>
         </div>
     </div>
