@@ -57,6 +57,8 @@ export class AdicionarPagamentoComponent implements OnInit {
   }
 
   aplicarValorBruto(valorBruto: string) {
+    console.log('teste');
+
     let valor = Number(valorBruto);
     this.pagamento.valorBruto = valor;
     this.atualizarTotalPagamento();

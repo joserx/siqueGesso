@@ -75,12 +75,12 @@
         class="align-items-center"
         *ngFor="let recebimentos of recebimentosFiltrados"
       >
-        <th scope="row">{{ recebimentos?.codigo }}</th>
+        <th scope="row">{{ recebimentos?.id }}</th>
         <td>{{ recebimentos?.descricao }}</td>
         <td>{{ recebimentos?.cliente }}</td>
         <td>{{ recebimentos?.pagamento }}</td>
         <td>{{ recebimentos?.data }}</td>
-        <td>{{ recebimentos?.total | currency: "BRL" }}</td>
+        <td>{{ recebimentos?.valorTotal | currency: "BRL" }}</td>
         <td>{{ recebimentos?.situacao }}</td>
         <td>{{ recebimentos?.unidade }}</td>
         <td>

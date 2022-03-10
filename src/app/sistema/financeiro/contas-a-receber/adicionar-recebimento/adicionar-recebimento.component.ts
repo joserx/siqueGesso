@@ -55,6 +55,8 @@ export class AdicionarRecebimentoComponent implements OnInit {
   }
 
   aplicarValorBruto(valorBruto: string) {
+    console.log('teste');
+
     let valor = Number(valorBruto);
     this.recebimento.valorBruto = valor;
     this.atualizarTotalRecebimento();

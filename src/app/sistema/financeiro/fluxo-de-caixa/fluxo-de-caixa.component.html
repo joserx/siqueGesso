@@ -1,69 +1,69 @@
 <div class="row m-0 p-0 border-bottom">
 
-  <div class="col-12 mt-4 text-custom-dark">
-    <h4 class="fw-bold p-0">Resumo</h4>
-    <h5 class="fw-bold">Pagamento X Recebimento</h5>
-    <h5 class="fw-normal mt-4">Total:
-      <span class="fw-bold float-end">{{ total | currency:'BRL' }}</span>
-    </h5>
-  </div>
+    <div class="col-12 mt-4 text-custom-dark">
+        <h4 class="fw-bold p-0">Resumo</h4>
+        <h5 class="fw-bold">Pagamento X Recebimento</h5>
+        <h5 class="fw-normal mt-4">Total:
+            <span class="fw-bold float-end">{{ valor | currency:'BRL' }}</span>
+        </h5>
+    </div>
 
 </div>
 
 <div class="row m-0 p-0 pb-5 border-bottom">
 
-  <!-- Tabela de recebimentos -->
-  <div class="col-6 mt-4">
-    <h4 class="fw-bold text-custom-dark ">Recebimentos</h4>
+    <!-- Tabela de recebimentos -->
+    <div class="col-6 mt-4">
+        <h4 class="fw-bold text-custom-dark ">Recebimentos</h4>
 
-    <div class="table-responsive mt-4">
-      <table class="table text-custom-dark">
-        <thead>
-          <tr>
-            <th scope="col">Data</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Total</th>
-            <th scope="col">Situação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="align-items-center" *ngFor="let recebimento of recebimentos">
-            <td>{{ recebimento.data }}</td>
-            <td>{{ recebimento.descricao }}</td>
-            <td>{{ recebimento.total | currency:'BRL'}}</td>
-            <td>{{ recebimento.situacao }}</td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="table-responsive mt-4">
+            <table class="table text-custom-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="align-items-center" *ngFor="let recebimento of recebimentos">
+                        <td>{{ recebimento?.data }}</td>
+                        <td>{{ recebimento?.descricao }}</td>
+                        <td>{{ recebimento?.valorTotal | currency:'BRL'}}</td>
+                        <td>{{ recebimento?.situacao }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
-  <!-- /Tabela de recebimentos -->
+    <!-- /Tabela de recebimentos -->
 
-  <!-- Tabela de pagamentos -->
-  <div class="col-6 mt-4">
-    <h4 class="fw-bold text-custom-dark ">Pagamentos</h4>
+    <!-- Tabela de pagamentos -->
+    <div class="col-6 mt-4">
+        <h4 class="fw-bold text-custom-dark ">Pagamentos</h4>
 
-    <div class="table-responsive mt-4">
-      <table class="table text-custom-dark">
-        <thead>
-          <tr>
-            <th scope="col">Data</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Total</th>
-            <th scope="col">Situação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="align-items-center" *ngFor="let pagamento of pagamentos">
-            <td>{{ pagamento.data }}</td>
-            <td>{{ pagamento.descricao }}</td>
-            <td>{{ pagamento.total | currency:'BRL'}}</td>
-            <td>{{ pagamento.situacao }}</td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="table-responsive mt-4">
+            <table class="table text-custom-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="align-items-center" *ngFor="let pagamento of contas">
+                        <td>{{ pagamento?.data }}</td>
+                        <td>{{ pagamento?.descricao }}</td>
+                        <td>{{ pagamento?.valorTotal | currency:'BRL'}}</td>
+                        <td>{{ pagamento?.situacao }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
-  <!-- /Tabela de pagamentos -->
+    <!-- /Tabela de pagamentos -->
 
 </div>
