@@ -28,10 +28,10 @@ export class ContasAPagarComponent implements OnInit {
     this.getContas();
   }
 
-  pesquisaContas() {
+  pesquisarConta() {
     if (this.search.length > 0)
       this.contasFiltradas = this.contas.filter((contasF: any) =>
-        contasF.id.includes(this.search)
+        contasF.fornecedor?.includes(this.search)
       );
     else this.contasFiltradas = this.contas;
   }
@@ -53,10 +53,8 @@ export class ContasAPagarComponent implements OnInit {
   }
 
   delete(conta: any) {
-    console.log(conta);
-
     Swal.fire({
-      title: `Deseja deletar ${conta.id}?`,
+      title: `Deseja deletar ${conta?.id}?`,
       icon: 'question',
       showConfirmButton: true,
       confirmButtonText: 'Confirmar',

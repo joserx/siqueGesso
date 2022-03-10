@@ -47,7 +47,9 @@ export class AdicionarPagamentoComponent implements OnInit {
     private fornecedorService: FornecedorService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getFornecedores()
+  }
 
   getFornecedores() {
     this.fornecedorService.find().subscribe((res) => {

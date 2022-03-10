@@ -45,7 +45,9 @@ export class AdicionarRecebimentoComponent implements OnInit {
     private contasReceberService: ContasReceberService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.getClientes()
+  }
 
   getClientes() {
     // this.clientesService.find().subscribe((res) => {

@@ -41,19 +41,19 @@
       <!-- Títulos da Tabela -->
       <div class="row m-0 my-5 text-custom-dark justify-content-center">
         <div class="col-2">
-          <h5 class="fw-bold text-truncate">Nome</h5>
+          <h5 class="fw-bold text-truncate">Cód</h5>
         </div>
         <div class="col-2">
-          <h5 class="fw-bold text-truncate">Cargo</h5>
+          <h5 class="fw-bold text-truncate">Descrição</h5>
         </div>
         <div class="col-2">
-          <h5 class="fw-bold text-truncate">Departamento</h5>
+          <h5 class="fw-bold text-truncate">Forma Pagamento</h5>
         </div>
         <div class="col-2">
-          <h5 class="fw-bold text-truncate">Admissão</h5>
+          <h5 class="fw-bold text-truncate">Unidade</h5>
         </div>
         <div class="col-2">
-          <h5 class="fw-bold text-truncate">Loja</h5>
+          <h5 class="fw-bold text-truncate">Total</h5>
         </div>
         <div class="col-2">
           <h5 class="fw-bold text-truncate d-none">Ações</h5>
@@ -62,32 +62,28 @@
       <!-- Tabela -->
       <div
         class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center"
-        *ngFor="let pagamento of pagamentos"
+        *ngFor="let conta of contas"
       >
         <div class="col-2">
-          <p>{{ pagamento.name }}</p>
+          <p>{{ conta?.id }}</p>
         </div>
         <div class="col-2">
-          <p>{{ pagamento.role }}</p>
+          <p>{{ conta?.descricao }}</p>
         </div>
         <div class="col-2">
-          <p>{{ pagamento.department }}</p>
+          <p>{{ conta?.formaPagamento }}</p>
         </div>
         <div class="col-2">
-          <p>{{ pagamento.admission | date }}</p>
+          <p>{{ conta?.unidade }}</p>
         </div>
         <div class="col-2">
-          <p>{{ pagamento.filial }}</p>
+          <p>{{ conta?.valorTotal }}</p>
         </div>
         <div class="col-2 text-end">
-          <i
-            class="fs-5 bi-circle-fill p-3"
-            [class]="pagamento.status == 1 ? 'text-success' : 'text-danger'"
-            cursor="pointer"
-          ></i>
+
           <i
             class="fs-5 bi-pen-fill icon-edit p-3"
-            routerLink="/sistema/pagamento/editar/{{ pagamento.id }}"
+            routerLink="/sistema/pagamento/editar/{{ conta.id }}"
             cursor="pointer"
             data-bs-dismiss="modal"
             aria-label="Close"
@@ -95,7 +91,7 @@
           <i
             class="fs-5 bi-trash-fill icon-delete p-3"
             cursor="pointer"
-            (click)="deletePagamento(pagamento.id)"
+            (click)="deletePagamento(conta.id)"
             data-bs-dismiss="modal"
             aria-label="Close"
           ></i>

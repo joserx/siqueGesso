@@ -1,20 +1,18 @@
 <div class="row m-0 p-0 border-bottom">
-
     <div class="col-12 mt-4 text-custom-dark">
         <h4 class="fw-bold p-0">Resumo</h4>
         <h5 class="fw-bold">Pagamento X Recebimento</h5>
-        <h5 class="fw-normal mt-4">Total:
-            <span class="fw-bold float-end">{{ valor | currency:'BRL' }}</span>
+        <h5 class="fw-normal mt-4">
+            Total:
+            <span class="fw-bold float-end">{{ valor | currency: "BRL" }}</span>
         </h5>
     </div>
-
 </div>
 
 <div class="row m-0 p-0 pb-5 border-bottom">
-
     <!-- Tabela de recebimentos -->
     <div class="col-6 mt-4">
-        <h4 class="fw-bold text-custom-dark ">Recebimentos</h4>
+        <h4 class="fw-bold text-custom-dark">Recebimentos</h4>
 
         <div class="table-responsive mt-4">
             <table class="table text-custom-dark">
@@ -30,7 +28,7 @@
                     <tr class="align-items-center" *ngFor="let recebimento of recebimentos">
                         <td>{{ recebimento?.data }}</td>
                         <td>{{ recebimento?.descricao }}</td>
-                        <td>{{ recebimento?.valorTotal | currency:'BRL'}}</td>
+                        <td>{{ recebimento?.valorTotal | currency: "BRL" }}</td>
                         <td>{{ recebimento?.situacao }}</td>
                     </tr>
                 </tbody>
@@ -41,7 +39,7 @@
 
     <!-- Tabela de pagamentos -->
     <div class="col-6 mt-4">
-        <h4 class="fw-bold text-custom-dark ">Pagamentos</h4>
+        <h4 class="fw-bold text-custom-dark">Pagamentos</h4>
 
         <div class="table-responsive mt-4">
             <table class="table text-custom-dark">
@@ -57,7 +55,7 @@
                     <tr class="align-items-center" *ngFor="let pagamento of contas">
                         <td>{{ pagamento?.data }}</td>
                         <td>{{ pagamento?.descricao }}</td>
-                        <td>{{ pagamento?.valorTotal | currency:'BRL'}}</td>
+                        <td>{{ pagamento?.valorTotal | currency: "BRL" }}</td>
                         <td>{{ pagamento?.situacao }}</td>
                     </tr>
                 </tbody>
@@ -65,5 +63,14 @@
         </div>
     </div>
     <!-- /Tabela de pagamentos -->
+</div>
 
+<div class="row m-0 py-3 justify-content-between">
+    <!-- Botão Exportar CSV -->
+    <div class="col-3 px-2 p-0 m-0 d-grid">
+        <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+      <h5 class="fw-normal my-auto text-truncate">Exportar CSV</h5>
+      <i class="bi-file-earmark-spreadsheet my-auto fs-4 p-0 m-0 fw-bold"></i>
+    </button>
+    </div>
 </div>

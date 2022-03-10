@@ -185,9 +185,7 @@
                 formControlName="cliente"
               >
                 <option selected disabled>Selecione um Cliente</option>
-                <option value="cliente1">Cliente1</option>
-                <option value="cliente2">Cliente2</option>
-                <option value="cliente3">Cliente3</option>
+                <option *ngFor="let cliente of clientes" [value]="cliente.nome">{{cliente.nome}}</option>
               </select>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Cliente</label

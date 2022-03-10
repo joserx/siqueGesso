@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,7 +27,6 @@ export class FiltrarPedidoComponent implements OnInit {
     this.pedidoCompraService.find().subscribe((res) => {
       this.pedidoCompraService.pedidos = res;
       this.pedidos = res;
-      console.log(this.pedidos);
     });
   }
 

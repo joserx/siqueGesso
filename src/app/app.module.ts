@@ -144,6 +144,7 @@ import { ViewContasPagarComponent } from './sistema/financeiro/contas-a-pagar/vi
 import { EditRecebimentoComponent } from './sistema/financeiro/contas-a-receber/edit-recebimento/edit-recebimento.component';
 import { ViewRecebimentoComponent } from './sistema/financeiro/contas-a-receber/view-recebimento/view-recebimento.component';
 import { FiltroPagarComponent } from './sistema/financeiro/contas-a-pagar/filtro-pagar/filtro-pagar.component';
+import { FiltroRecebimentosComponent } from './sistema/financeiro/contas-a-receber/filtro-recebimentos/filtro-recebimentos.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -283,6 +284,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     EditRecebimentoComponent,
     ViewRecebimentoComponent,
     FiltroPagarComponent,
+    FiltroRecebimentosComponent,
   ],
 
   imports: [
