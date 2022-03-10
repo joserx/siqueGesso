@@ -10,11 +10,11 @@ export class PermissoesComponent implements OnInit {
   permissions: any =[ 
     {
       id: 1,
-      name: 'Adimin'
+      name: 'Permissão 1'
     },
     {
       id: 2,
-      name: 'Usuário'
+      name: 'Permissão 2'
     }
   ]
   constructor() { }

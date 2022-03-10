@@ -8,7 +8,26 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class CriarPermissoesComponent implements OnInit {
 
   @ViewChild('opt') opt: ElementRef;
-
+  areas: any = [
+    {
+      name: 'VENDER'
+    },
+    {
+      name: 'COMPRAS'
+    },
+    {
+      name: 'ESTOQUE'
+    },
+    {
+      name:'FINANCEIRO'
+    },
+    {
+      name: 'EXPEDIÇÃO'
+    },
+    {
+      name: 'RH'
+    }
+  ]
   constructor() { }
 
   ngOnInit(): void {

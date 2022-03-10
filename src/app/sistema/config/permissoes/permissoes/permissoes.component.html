@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 <app-criar-permissoes></app-criar-permissoes>
 <app-editar-permissoes></app-editar-permissoes>
+<app-visualizar-categoria></app-visualizar-categoria>
 <div class="row p-0 m-0">
     <div class="col-auto m-0 p-0 bg-custom-light">
         <app-sidemenu></app-sidemenu>
@@ -46,18 +47,21 @@
 
             <!-- Títulos da Tabela -->
             <div class="row m-0 my-5 text-custom-dark justify-content-center">
-                <div class="col-12">
-                    <h5 class="fw-bold">Permissão</h5>
+                <div class="col-10">
+                    <h5 class="fw-bold">Permissão</h5>  
+                </div>
+                <div class="col-2">
+                    <h5 class="fw-bold text-center">Ações</h5>  
                 </div>
             </div>
 
             <!-- Tabela -->
             <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let item of permissions">
                 <div class="col-10">
-                    <p>{{ item.name }}</p>
+                    <p>{{item.name}}</p>
                 </div>
-                
                 <div class="col-2 text-end">
+                    <i class="fs-5 bi-eye-fill icon-view px-2 py-1" data-bs-toggle="modal" data-bs-target="#viewPermission" cursor="pointer"></i>
                     <i class="fs-5 bi-pen-fill icon-edit p-3" data-bs-toggle="modal" data-bs-target="#editPermission" cursor="pointer"></i>
                     <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="deleteUser(item.id)"></i>
                 </div>
