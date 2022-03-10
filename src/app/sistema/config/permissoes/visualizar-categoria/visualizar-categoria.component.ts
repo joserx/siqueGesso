@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-editar-permissoes',
-  templateUrl: './editar-permissoes.component.html',
-  styleUrls: ['./editar-permissoes.component.scss']
+  selector: 'app-visualizar-categoria',
+  templateUrl: './visualizar-categoria.component.html',
+  styleUrls: ['./visualizar-categoria.component.scss']
 })
-export class EditarPermissoesComponent implements OnInit {
+export class VisualizarCategoriaComponent implements OnInit {
 
   @ViewChild('opt') opt: ElementRef;
   

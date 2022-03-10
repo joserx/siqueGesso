@@ -146,6 +146,7 @@ import { ViewRecebimentoComponent } from './sistema/financeiro/contas-a-receber/
 import { PermissoesComponent } from './sistema/config/permissoes/permissoes/permissoes.component';
 import { CriarPermissoesComponent } from './sistema/config/permissoes/criar-permissoes/criar-permissoes.component';
 import { EditarPermissoesComponent } from './sistema/config/permissoes/editar-permissoes/editar-permissoes.component';
+import { VisualizarCategoriaComponent } from './sistema/config/permissoes/visualizar-categoria/visualizar-categoria.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -286,7 +287,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ViewRecebimentoComponent,
     PermissoesComponent,
     CriarPermissoesComponent,
-    EditarPermissoesComponent
+    EditarPermissoesComponent,
+    VisualizarCategoriaComponent
   ],
 
   imports: [
