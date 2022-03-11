@@ -20,7 +20,7 @@ export class CriarPermissoesComponent implements OnInit {
       name: 'COMPRAS',
       edit: PermissionsUsers.compras_editar,
       delete: PermissionsUsers.compras_excluir,
-      view: PermissionsUsers.vendas_ver,
+      view: PermissionsUsers.compras_ver,
     },
     {
       name: 'ESTOQUE',
@@ -69,5 +69,13 @@ export class CriarPermissoesComponent implements OnInit {
     console.log(this.permissions)
   }
 
+
+  submitForm(){
+    let total: number = 0
+    for(let item of this.permissions){
+      total+=item
+    }
+    console.log(total)
+  }
 
 }
