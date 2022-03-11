@@ -6,7 +6,12 @@ import {
   Output,
 } from '@angular/core';
 import { ContasPagarService } from 'src/app/services/contas-pagar.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 import Swal from 'sweetalert2';
 
@@ -50,7 +55,10 @@ export class EditContasPComponent implements OnInit {
     this.contasId = contasInput.id;
     this.editPagamentoForm = new FormGroup({
       descricao: new FormControl(contasInput.descricao, Validators.required),
-      formaPagamento: new FormControl(contasInput.formaPagamento, Validators.required),
+      formaPagamento: new FormControl(
+        contasInput.formaPagamento,
+        Validators.required
+      ),
       plano: new FormControl(contasInput.plano, Validators.required),
       vencimento: new FormControl(contasInput.vencimento, Validators.required),
       valorBruto: new FormControl(contasInput.valorBruto, Validators.required),
@@ -64,7 +72,7 @@ export class EditContasPComponent implements OnInit {
       centroCusto: new FormControl(contasInput.centroCusto),
       data: new FormControl(contasInput.data),
       obs: new FormControl(contasInput.obs),
-    })
+    });
   }
 
   submit(): any {
@@ -80,19 +88,21 @@ export class EditContasPComponent implements OnInit {
         timer: 3000,
         timerProgressBar: true,
       });
-    this.contasPagarService.update(this.contasId,this.editPagamentoForm.value).subscribe(() => {
-      this.reload.emit();
-      // this.closeBtn.nativeElement.click();
-      this.editPagamentoForm.reset();
-      return Swal.fire({
-        title: 'Pagamento salvo!',
-        icon: 'success',
-        toast: true,
-        position: 'top',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
+    this.contasPagarService
+      .update(this.contasId, this.editPagamentoForm.value)
+      .subscribe(() => {
+        this.reload.emit();
+        // this.closeBtn.nativeElement.click();
+        this.editPagamentoForm.reset();
+        return Swal.fire({
+          title: 'Pagamento salvo!',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       });
-    });
   }
 }

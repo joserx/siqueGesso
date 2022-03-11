@@ -45,7 +45,9 @@ export class AdicionarRecebimentoComponent implements OnInit {
     private contasReceberService: ContasReceberService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.getClientes()
+  }
 
   getClientes() {
     // this.clientesService.find().subscribe((res) => {
@@ -55,6 +57,8 @@ export class AdicionarRecebimentoComponent implements OnInit {
   }
 
   aplicarValorBruto(valorBruto: string) {
+    console.log('teste');
+
     let valor = Number(valorBruto);
     this.recebimento.valorBruto = valor;
     this.atualizarTotalRecebimento();

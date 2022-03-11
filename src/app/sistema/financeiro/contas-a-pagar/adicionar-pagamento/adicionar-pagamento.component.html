@@ -186,9 +186,7 @@
                 formControlName="fornecedor"
               >
                 <option selected disabled>Selecione um fornecedor</option>
-                <option value="fornecedor1">fornecedor1</option>
-                <option value="fornecedor2">fornecedor2</option>
-                <option value="fornecedor3">fornecedor3</option>
+                <option *ngFor="let fornecedor of fornecedores" [value]="fornecedor.fantasy_name">{{fornecedor.fantasy_name}}</option>
               </select>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Fornecedor</label

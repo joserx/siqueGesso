@@ -1,27 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {ContasPagarService} from 'src/app/services/contas-pagar.service'
-import {EditContasPComponent} from './edit-contas-p/edit-contas-p.component'
-import {ViewContasPagarComponent} from './view-contas-pagar/view-contas-pagar.component'
+import { ContasPagarService } from 'src/app/services/contas-pagar.service';
+import { EditContasPComponent } from './edit-contas-p/edit-contas-p.component';
+import { ViewContasPagarComponent } from './view-contas-pagar/view-contas-pagar.component';
 
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contas-a-pagar',
   templateUrl: './contas-a-pagar.component.html',
-  styleUrls: ['./contas-a-pagar.component.scss']
+  styleUrls: ['./contas-a-pagar.component.scss'],
 })
 export class ContasAPagarComponent implements OnInit {
-
   @ViewChild(EditContasPComponent)
   editContasPComponent: EditContasPComponent;
 
   @ViewChild(ViewContasPagarComponent)
   viewContasPagarComponent: ViewContasPagarComponent;
 
-
-  public contas: any = []
+  public contas: any = [];
   public conta: any;
-  public contasFiltradas: any = []
+  public contasFiltradas: any = [];
   public search: string = '';
 
   constructor(private contasPagarService: ContasPagarService) {}
@@ -30,36 +28,33 @@ export class ContasAPagarComponent implements OnInit {
     this.getContas();
   }
 
-  pesquisaContas(){
+  pesquisarConta() {
     if (this.search.length > 0)
       this.contasFiltradas = this.contas.filter((contasF: any) =>
-        contasF.id.includes(this.search)
+        contasF.fornecedor?.includes(this.search)
       );
     else this.contasFiltradas = this.contas;
   }
 
-  getContas(){
+  getContas() {
     this.contasPagarService.find().subscribe((res) => {
       this.contasPagarService.contas = res;
       this.contas = res;
       this.contasFiltradas = this.contas;
-      console.log(this.contas);
     });
   }
 
-  loadPagamento(contas:any){
-    this.editContasPComponent.loadForm(contas)
+  loadPagamento(contas: any) {
+    this.editContasPComponent.loadForm(contas);
   }
 
-  loadViewPagamento(contas:any){
-    this.viewContasPagarComponent.loadForm(contas)
+  loadViewPagamento(contas: any) {
+    this.viewContasPagarComponent.loadForm(contas);
   }
 
   delete(conta: any) {
-    console.log(conta);
-
     Swal.fire({
-      title: `Deseja deletar ${conta.id}?`,
+      title: `Deseja deletar ${conta?.id}?`,
       icon: 'question',
       showConfirmButton: true,
       confirmButtonText: 'Confirmar',
@@ -91,5 +86,4 @@ export class ContasAPagarComponent implements OnInit {
         });
     });
   }
-
 }
