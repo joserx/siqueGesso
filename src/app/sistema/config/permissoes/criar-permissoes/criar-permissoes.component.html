@@ -2,10 +2,22 @@
 <div class="modal fade" #opt id="addPermission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content  bg-custom-light">
+        <form [formGroup]="formPermission" class="modal-content  bg-custom-light" (ngSubmit)="submitForm(formPermission)">
             <div class="modal-header">
                 <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar permissão</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="w-100 row justify-content-center">
+                <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                    <input formControlName="name"
+                      class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                      type="text"
+                      placeholder="Nome"
+                    />
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                      >Nome</label
+                    >
+                  </div>
             </div>
             <!-- Títulos da Tabela -->
             <div class="row m-0 my-5 text-custom-dark justify-content-center">
@@ -29,20 +41,19 @@
                     <p>{{item.name}}</p>
                 </div>
                 <div class="col-3 text-center">
-                    <input type="checkbox" class="checkbox-permission">
+                    <input type="checkbox" class="checkbox-permission" (click)="addPermission(item.edit, $event)">
                 </div>
                 <div class="col-3 text-center">
-                    <input type="checkbox" class="checkbox-permission">
+                    <input type="checkbox" class="checkbox-permission" (click)="addPermission(item.delete, $event)">
                 </div>
                 <div class="col-3 text-center">
-                    <input type="checkbox" class="checkbox-permission">
+                    <input type="checkbox" class="checkbox-permission" (click)="addPermission(item.view, $event)">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button"
-                    class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm"
-                    data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal">Salvar</button>
+                <button type="submit"
+                    class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm">Salvar</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
