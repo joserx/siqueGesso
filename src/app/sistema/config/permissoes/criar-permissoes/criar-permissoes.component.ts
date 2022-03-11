@@ -1,5 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PermissionsService } from 'src/app/services/permissions.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-criar-permissoes',
   templateUrl: './criar-permissoes.component.html',
@@ -8,6 +11,7 @@ import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 export class CriarPermissoesComponent implements OnInit {
 
   @ViewChild('opt') opt: ElementRef;
+  @Output() eventEmitter = new EventEmitter<any>();
   permissions: any = []
   areas: any = [
     {
@@ -47,8 +51,14 @@ export class CriarPermissoesComponent implements OnInit {
       view: PermissionsUsers.rh_ver,
     }
   ]
+  formPermission: FormGroup = new FormGroup({
+    'name': new FormControl('', [Validators.required]),
+    'permission': new FormControl(null, [Validators.required])
+  })
 
-  constructor() {}
+  constructor(
+    private readonly permissionService: PermissionsService
+  ) {}
 
   ngOnInit(): void {
   }
@@ -66,16 +76,46 @@ export class CriarPermissoesComponent implements OnInit {
     }else{
       this.permissions.splice(this.permissions.indexOf(value), 1)
     }
-    console.log(this.permissions)
+  }
+
+  populatePermissions(date: any): void{
+    this.eventEmitter.emit(date)
   }
 
 
-  submitForm(){
+  submitForm(data: any){
     let total: number = 0
     for(let item of this.permissions){
       total+=item
     }
-    console.log(total)
+    this.formPermission.get('permission')?.setValue(total)
+    if(data.valid && data.value.permission!=0){
+      this.permissionService.create(data.value).subscribe((data:any)=>{
+        this.permissionService.find().subscribe((data:any)=>{
+          this.populatePermissions(data)
+          this.closeOpt()
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '<h4>Permissão adicionada</h4>',
+            showConfirmButton: false,
+            timer: 1500,
+            toast: true,
+            width: '500px'
+          })
+        })
+      })
+    }else{
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: '<h4>Preencha os campos primeiro</h4>',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
+        width: '500px'
+      })
+    }
   }
 
 }

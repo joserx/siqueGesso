@@ -2,14 +2,14 @@
 <div class="modal fade" #opt id="addPermission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
-        <form class="modal-content  bg-custom-light" (ngSubmit)="submitForm()">
+        <form [formGroup]="formPermission" class="modal-content  bg-custom-light" (ngSubmit)="submitForm(formPermission)">
             <div class="modal-header">
                 <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar permissão</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="w-100 row justify-content-center">
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                    <input
+                    <input formControlName="name"
                       class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
                       type="text"
                       placeholder="Nome"

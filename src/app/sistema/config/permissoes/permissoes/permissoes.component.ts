@@ -1,25 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { PermissionsService } from 'src/app/services/permissions.service';
 
 @Component({
   selector: 'app-permissoes',
   templateUrl: './permissoes.component.html',
   styleUrls: ['./permissoes.component.scss']
 })
-export class PermissoesComponent implements OnInit {
+export class PermissoesComponent implements OnInit, OnChanges {
 
-  permissions: any =[ 
-    {
-      id: 1,
-      name: 'Permissão 1'
-    },
-    {
-      id: 2,
-      name: 'Permissão 2'
-    }
-  ]
-  constructor() { }
+  permissions: any = []
+  constructor(
+    private readonly permissionService: PermissionsService
+  ) { }
 
   ngOnInit(): void {
+    this.permissionService.find().subscribe((data:any)=>{
+      this.permissions = data
+    })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void{
+    this.permissions = changes.permissions.currentValue
+    console.log(this.permissions)
   }
 
   filterBefore = "";
@@ -40,8 +42,12 @@ export class PermissoesComponent implements OnInit {
     // }
   }
 
-  deleteUser(id : number) {
-    alert(id)
+  delete(id:number){
+    this.permissionService.delete(id).subscribe(()=>{
+      this.permissionService.find().subscribe((data:any)=>{
+        this.permissions = data
+      })
+    })
   }
 
 }
