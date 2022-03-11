@@ -47,7 +47,9 @@ export class AdicionarPagamentoComponent implements OnInit {
     private fornecedorService: FornecedorService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getFornecedores()
+  }
 
   getFornecedores() {
     this.fornecedorService.find().subscribe((res) => {
@@ -57,6 +59,8 @@ export class AdicionarPagamentoComponent implements OnInit {
   }
 
   aplicarValorBruto(valorBruto: string) {
+    console.log('teste');
+
     let valor = Number(valorBruto);
     this.pagamento.valorBruto = valor;
     this.atualizarTotalPagamento();

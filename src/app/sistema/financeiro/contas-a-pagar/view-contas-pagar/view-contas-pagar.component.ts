@@ -79,10 +79,7 @@ export class ViewContasPagarComponent implements OnInit {
         value: contasInput.unidade,
         disabled: true,
       }),
-      valorTotal: new FormControl({
-        value: contasInput.valorTotal,
-        disabled: true,
-      }),
+      valorTotal: new FormControl(contasInput.valorTotal),
       fornecedor: new FormControl({
         value: contasInput.fornecedor,
         disabled: true,

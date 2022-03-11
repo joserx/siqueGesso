@@ -53,6 +53,8 @@ export class CriarPedidoComprasComponent implements OnInit {
   public fornecedoresFiltrados: any = [];
   public produtosFiltrados: any = [];
 
+  public comprasRealizadas: number = 15
+
   public fornecedorSelecionado: any = {
     id: null,
     fantasy_name: '',
@@ -94,7 +96,7 @@ export class CriarPedidoComprasComponent implements OnInit {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [20],
+      data: [this.comprasRealizadas],
     },
   ];
   lineChartLabels: Array<any> = ['Compras nos ultimos 3 meses'];
@@ -126,6 +128,8 @@ export class CriarPedidoComprasComponent implements OnInit {
       (f: any) => f.fantasy_name == fornecedor
     );
     this.fornecedorSelecionado = fornecedorSelecionado;
+
+
   }
 
   getFornecedores() {

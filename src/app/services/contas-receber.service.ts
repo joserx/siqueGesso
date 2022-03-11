@@ -5,14 +5,19 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-
-export class ContasReceberService{
-contas : any =[]
+export class ContasReceberService {
+  contas: any = [];
 
   constructor(private readonly http: HttpClient) {}
 
   find() {
     return this.http.get<any>(environment.apiUrl + 'contas-receber');
+  }
+
+  findPromise() {
+    return this.http
+      .get<any>(environment.apiUrl + 'contas-receber')
+      .toPromise();
   }
 
   create(data: any) {

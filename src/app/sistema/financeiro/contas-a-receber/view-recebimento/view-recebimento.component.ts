@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'app-view-recebimento',
   templateUrl: './view-recebimento.component.html',
-  styleUrls: ['./view-recebimento.component.scss']
+  styleUrls: ['./view-recebimento.component.scss'],
 })
 export class ViewRecebimentoComponent implements OnInit {
   viewRecebimentoForm: FormGroup = this.fb.group({
@@ -33,75 +33,69 @@ export class ViewRecebimentoComponent implements OnInit {
 
   @Input() recebimento: any;
 
+  constructor(private fb: FormBuilder) {}
 
-  constructor(private fb: FormBuilder) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  loadForm(contasInput: any) {
+  loadForm(recebimentoInput: any) {
     this.viewRecebimentoForm = new FormGroup({
       descricao: new FormControl({
-        value: contasInput.descricao,
+        value: recebimentoInput.descricao,
         disabled: true,
       }),
       formaPagamento: new FormControl(
-        contasInput.formaPagamento,
+        recebimentoInput.formaPagamento,
         Validators.required
       ),
       plano: new FormControl({
-        value: contasInput.plano,
+        value: recebimentoInput.plano,
         disabled: true,
       }),
       vencimento: new FormControl({
-        value: contasInput.vencimento,
+        value: recebimentoInput.vencimento,
         disabled: true,
       }),
       valorBruto: new FormControl({
-        value: contasInput.valorBruto,
+        value: recebimentoInput.valorBruto,
         disabled: true,
       }),
       juros: new FormControl({
-        value: contasInput.juros,
+        value: recebimentoInput.juros,
         disabled: true,
       }),
       desconto: new FormControl({
-        value: contasInput.desconto,
+        value: recebimentoInput.desconto,
         disabled: true,
       }),
       compensado: new FormControl({
-        value: contasInput.compensado,
+        value: recebimentoInput.compensado,
         disabled: true,
       }),
       situacao: new FormControl({
-        value: contasInput.situacao,
+        value: recebimentoInput.situacao,
         disabled: true,
       }),
       unidade: new FormControl({
-        value: contasInput.unidade,
+        value: recebimentoInput.unidade,
         disabled: true,
       }),
-      valorTotal: new FormControl({
-        value: contasInput.valorTotal,
-        disabled: true,
-      }),
+      valorTotal: new FormControl(recebimentoInput.valorTotal),
       cliente: new FormControl({
-        value: contasInput.cliente,
+        value: recebimentoInput.cliente,
         disabled: true,
       }),
       centroCusto: new FormControl({
-        value: contasInput.centroCusto,
+        value: recebimentoInput.centroCusto,
         disabled: true,
       }),
       data: new FormControl({
-        value: contasInput.data,
+        value: recebimentoInput.data,
         disabled: true,
       }),
       obs: new FormControl({
-        value: contasInput.obs,
+        value: recebimentoInput.obs,
         disabled: true,
       }),
     });
   }
-
 }

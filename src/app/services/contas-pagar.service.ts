@@ -5,15 +5,17 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-
-export class ContasPagarService{
-  contas: any =[]
-
+export class ContasPagarService {
+  contas: any = [];
 
   constructor(private readonly http: HttpClient) {}
 
   find() {
     return this.http.get<any>(environment.apiUrl + 'contas-pagar');
+  }
+
+  findPromise() {
+    return this.http.get<any>(environment.apiUrl + 'contas-pagar').toPromise();
   }
 
   create(data: any) {
