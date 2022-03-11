@@ -20,6 +20,10 @@ export class ContasReceberService {
       .toPromise();
   }
 
+  data() {
+    return this.http.get(environment.apiUrl + 'contas-pagar/data');
+  }
+
   create(data: any) {
     return this.http.post(environment.apiUrl + 'contas-receber', data);
   }

@@ -24,6 +24,7 @@ export class CriarPedidoComprasComponent implements OnInit {
   pedidoCompraForm = new FormGroup({
     id: new FormControl(''),
     data: new FormControl(''),
+    faturamentoMinimo: new FormControl(''),
     fornecedor: new FormControl(''),
     razaoSocial: new FormControl(''),
     cnpj: new FormControl(''),

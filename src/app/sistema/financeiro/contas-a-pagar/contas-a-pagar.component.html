@@ -119,7 +119,7 @@
   </div>
 </div>
 
-<app-adicionar-pagamento></app-adicionar-pagamento>
+<app-adicionar-pagamento (reload)="getContas()"></app-adicionar-pagamento>
 <app-edit-contas-p (reload)="getContas()"></app-edit-contas-p>
 <app-view-contas-pagar [contas]="contas"></app-view-contas-pagar>
 <app-filtro-pagar></app-filtro-pagar>

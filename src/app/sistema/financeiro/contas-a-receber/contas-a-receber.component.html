@@ -30,7 +30,7 @@
 
   <!-- Botão Filtro -->
   <div class="col-2 px-2 pt-4 p-0 m-0">
-    <a
+    <a data-bs-toggle="modal" data-bs-target="#filtrarRecebimentos"
       class="rounded-15 py-2 px-4 bg-white h-limited-sm d-flex justify-content-between shadow-sm"
     >
       <h5 class="fw-normal my-auto text-truncate text-custom-dark">Filtro</h5>
@@ -123,6 +123,7 @@
   </div>
 </div>
 
-<app-adicionar-recebimento></app-adicionar-recebimento>
+<app-adicionar-recebimento (reload)="getRecebimentos()"></app-adicionar-recebimento>
 <app-edit-recebimento (reload)="getRecebimentos()"></app-edit-recebimento>
 <app-view-recebimento [recebimento]="recebimento"></app-view-recebimento>
+<app-filtro-recebimentos></app-filtro-recebimentos>

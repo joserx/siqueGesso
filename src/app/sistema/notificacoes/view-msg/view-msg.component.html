@@ -1,0 +1,70 @@
+<!-- Modal -->
+<div class="modal fade" id="viewMsg" tabindex="-1" aria-labelledby="novaMensagemLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <form [formGroup]="viewMsg">
+            <!-- Modal content -->
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="novaMsgLabel">
+                        Visualizar Mensagem
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <div class="row p-0 m-0 border-bottom pb-4">
+                        <!--Titulo, Texto -->
+                        <div class="col-12 px-2 m-0 p-0">
+                            <div class="row m-0 p-0">
+                                <!-- Nome -->
+                                <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                                    <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="titulo" formControlName="titulo" />
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Titulo</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Mensagem -->
+            <div
+              class="col-12 px-2 pt-4 form-floating"
+              style="
+                margin-left: 7px !important;
+                padding-right: 22px !important;
+              "
+            >
+              <textarea
+                class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm"
+                placeholder="Descrição"
+                style="height: 150px"
+                formControlName="texto"
+              ></textarea>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+                >Mensagem</label
+              >
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="row m-0 py-3 modal-footer">
+            <!-- Cancelar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+              <button
+                data-bs-dismiss="modal"
+                type="reset"
+                class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start"
+              >
+                <h5
+                  class="fw-normal my-auto text-truncate text-custom-dark text-center"
+                >
+                  Cancelar
+                </h5>
+              </button>
+            </div>
+          </div>
+          <!-- /Modal footer -->
+        </div>
+        <!-- /Modal content -->
+      </div>
+    </form>
+  </div>
+</div>

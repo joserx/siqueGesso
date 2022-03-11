@@ -18,6 +18,10 @@ export class ContasPagarService {
     return this.http.get<any>(environment.apiUrl + 'contas-pagar').toPromise();
   }
 
+  data() {
+    return this.http.get(environment.apiUrl + 'contas-pagar/data');
+  }
+
   create(data: any) {
     return this.http.post(environment.apiUrl + 'contas-pagar', data);
   }

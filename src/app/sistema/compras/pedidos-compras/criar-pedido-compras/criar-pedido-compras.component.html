@@ -44,16 +44,10 @@
             >
           </div>
 
-          <!-- Fornecedor -->
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <select
-              #fornecedor
-              (change)="setFornecedores(fornecedor.value)"
-              class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-              type="text"
-              placeholder="Fornecedor"
-              formControlName="fornecedor"
-            >
+
+                    <!-- Fornecedor -->
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <select #fornecedor (change)="setFornecedores(fornecedor.value)" class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Fornecedor" formControlName="fornecedor">
               <option value="" disabled selected>
                 Selecione um Fornecedor
               </option>
@@ -64,8 +58,7 @@
                 {{ listaFornecedor.fantasy_name }}
               </option>
             </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Fornecedor</label
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label
             >
           </div>
 
@@ -79,23 +72,24 @@
           </div>
         </div>
 
-        <!-- Dados do fornecedor -->
-        <div class="row mt-4 m-0">
-          <div class="col-12 p-0 m-0">
-            <h6 class="fw-bold text-custom-dark">Dados do fornecedor</h6>
-          </div>
+        <!-- Faturamento Minimo -->
 
-          <!-- Razão social -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input
-              readonly
-              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-              [value]="fornecedorSelecionado?.fantasy_name"
-              type="text"
-              formControlName="razaoSocial"
-            />
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Razão social</label
+        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+          <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Faramento Minimo" formControlName="faturamentoMinimo" />
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark">Faturament minimo</label
+>
+                    </div>
+
+                    <!-- Dados do fornecedor -->
+                    <div class="row mt-4 m-0">
+                        <div class="col-12 p-0 m-0">
+                            <h6 class="fw-bold text-custom-dark">Dados do fornecedor</h6>
+                        </div>
+
+                        <!-- Razão social -->
+                        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                            <input readonly class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" [value]="fornecedorSelecionado?.fantasy_name" type="text" formControlName="razaoSocial" />
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão social</label
             >
           </div>
 
