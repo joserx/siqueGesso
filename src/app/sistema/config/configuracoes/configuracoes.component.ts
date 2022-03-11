@@ -12,7 +12,7 @@ export class ConfiguracoesComponent implements OnInit {
       icon: 'bi-people',
       href: '/sistema/usuarios-sistema/listar',
     },
-    { nome: 'Permissões', icon: 'bi-shield-check', href: '/sistema' },
+    { nome: 'Permissões', icon: 'bi-shield-check', href: '/sistema/configuracoes/permissoes' },
     { nome: 'Mensagens', icon: 'bi-envelope', href: '/sistema/notificacoes' },
     {
       nome: 'Cadastro de loja',

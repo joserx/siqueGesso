@@ -31,7 +31,7 @@ export class NovaMsgComponent implements OnInit {
 
   constructor(
     private readonly usuarioSistemasService: UsuarioSistemaService,
-    private readonly MensagemService: MensagemService
+    private readonly MensagemService: MensagemService,
   ) {}
 
   ngOnInit(): void {

@@ -1,4 +1,22 @@
 <app-navbar></app-navbar>
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row p-0 m-0">
     <div class="col-auto m-0 p-0 bg-custom-light">
@@ -26,9 +44,9 @@
                     <h5 class="fw-bold text-truncate">Título</h5>
                 </div>
 
-                <div class="col-2">
+                <!-- <div class="col-2">
                     <h5 class="fw-bold text-truncate">Usuario</h5>
-                </div>
+                </div> -->
                 <div class="col-2">
                     <h5 class="fw-bold text-truncate">Data</h5>
                 </div>
@@ -36,20 +54,23 @@
                     <h5 class="fw-bold text-truncate">Visualizar</h5>
                 </div>
                 <!-- Tabela -->
-                <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let mensagem of mensagens">
+                <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center"
+                    *ngFor="let mensagem of mensagens">
                     <div class="col-2">
                         <p>{{ mensagem.titulo }}</p>
                     </div>
 
-                    <div class="col-2">
+                    <!-- <div class="col-2">
                         <p>{{ mensagem.usuario }}</p>
+                    </div> -->
+                    <div class="col-2">
+                        <p>{{ mensagem.dataDeCriacao | date }}</p>
                     </div>
                     <div class="col-2">
-                        <p>{{ mensagem.data | date }}</p>
-                    </div>
-                    <div class="col-2 text-end">
-                        <i class="fs-5 bi-view-fill icon-edit p-3" cursor="pointer"></i>
-                        <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i>
+                        <i class="fs-5 bi bi-eye-fill icon-delete p-2" cursor="pointer"
+                            (click)="viewMessage(mensagem)" data-bs-toggle="modal" data-bs-target="#infoModal"></i>
+                        <i class="fs-5 bi-trash-fill icon-delete p-2" cursor="pointer"
+                            (click)="deleteMessage(mensagem)"></i>
                     </div>
                 </div>
                 <!-- /Página -->
@@ -58,12 +79,13 @@
         <!-- Botão Adicionar -->
         <div class="row d-flex justify-content-end mx-3 mt-5">
             <div class="col-2 mx-3 px-2 p-0 m-0 d-grid" data-bs-toggle="modal" data-bs-target="#novaMensagem">
-                <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
-          <h5 class="fw-normal my-auto text-truncate text-custom-dark">
-            Escrever
-          </h5>
-          <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
-        </button>
+                <button type="button"
+                    class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm">
+                    <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                        Escrever
+                    </h5>
+                    <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+                </button>
             </div>
         </div>
     </div>

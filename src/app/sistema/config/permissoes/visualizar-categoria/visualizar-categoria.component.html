@@ -1,0 +1,48 @@
+<!-- Modal -->
+<div class="modal fade" #opt id="viewPermission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content  bg-custom-light">
+            <div class="modal-header">
+                <h5 class="modal-title text-custom-dark" id="viewPermissionLabel">Editar permissão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Títulos da Tabela -->
+            <div class="row m-0 my-5 text-custom-dark justify-content-center">
+                <div class="col-3 text-center">
+                    <h5 class="fw-bold">Área</h5>  
+                </div>
+                <div class="col-3 text-center">
+                    <h5 class="fw-bold">Editar</h5>
+                </div>
+                <div class="col-3 text-center">
+                    <h5 class="fw-bold">Excluir</h5>
+                </div>
+                <div class="col-3 text-center">
+                    <h5 class="fw-bold">Visualizar</h5>
+                </div>
+            </div>
+
+            <!-- Tabela -->
+            <div class="row m-0 mt-3 border-bottom text-custom-dark justify-content-center" *ngFor="let item of areas">
+                <div class="col-3 text-center">
+                    <p>{{item.name}}</p>
+                </div>
+                <div class="col-3 text-center">
+                    <input type="checkbox" class="checkbox-permission">
+                </div>
+                <div class="col-3 text-center">
+                    <input type="checkbox" class="checkbox-permission">
+                </div>
+                <div class="col-3 text-center">
+                    <input type="checkbox" class="checkbox-permission">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                    class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm"
+                    data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -143,8 +143,15 @@ import { EditContasPComponent } from './sistema/financeiro/contas-a-pagar/edit-c
 import { ViewContasPagarComponent } from './sistema/financeiro/contas-a-pagar/view-contas-pagar/view-contas-pagar.component';
 import { EditRecebimentoComponent } from './sistema/financeiro/contas-a-receber/edit-recebimento/edit-recebimento.component';
 import { ViewRecebimentoComponent } from './sistema/financeiro/contas-a-receber/view-recebimento/view-recebimento.component';
+
+import { PermissoesComponent } from './sistema/config/permissoes/permissoes/permissoes.component';
+import { CriarPermissoesComponent } from './sistema/config/permissoes/criar-permissoes/criar-permissoes.component';
+import { EditarPermissoesComponent } from './sistema/config/permissoes/editar-permissoes/editar-permissoes.component';
+import { VisualizarCategoriaComponent } from './sistema/config/permissoes/visualizar-categoria/visualizar-categoria.component';
+
 import { FiltroPagarComponent } from './sistema/financeiro/contas-a-pagar/filtro-pagar/filtro-pagar.component';
 import { FiltroRecebimentosComponent } from './sistema/financeiro/contas-a-receber/filtro-recebimentos/filtro-recebimentos.component';
+
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -283,8 +290,15 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ViewContasPagarComponent,
     EditRecebimentoComponent,
     ViewRecebimentoComponent,
+
+    PermissoesComponent,
+    CriarPermissoesComponent,
+    EditarPermissoesComponent,
+    VisualizarCategoriaComponent
+
     FiltroPagarComponent,
     FiltroRecebimentosComponent,
+
   ],
 
   imports: [

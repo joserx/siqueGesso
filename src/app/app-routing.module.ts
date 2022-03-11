@@ -63,6 +63,7 @@ import { EditarCadastroLojaComponent } from './sistema/config/cadastro-de-loja/e
 import { VisualizarLojaCadastradaComponent } from './sistema/config/cadastro-de-loja/visualizar-loja-cadastrada/visualizar-loja-cadastrada.component';
 import { CategoriaFornecedorComponent } from './sistema/config/cadastro-de-categoria/categoria-fornecedor/categoria-fornecedor.component';
 import { CadastroCatFornecedorComponent } from './sistema/config/cadastro-de-categoria/cadastro-cat-fornecedor/cadastro-cat-fornecedor.component';
+import { PermissoesComponent } from './sistema/config/permissoes/permissoes/permissoes.component';
 
 const routes: Routes = [
   {
@@ -443,6 +444,10 @@ const routes: Routes = [
               },
             ]
           },
+          {
+            path: 'permissoes',
+            component: PermissoesComponent
+          }
         ]
       },
     ]
