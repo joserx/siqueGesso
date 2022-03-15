@@ -20,6 +20,7 @@ export class ListarUsuariosSistemaComponent implements OnInit {
     this.usuarioSistemasService.find().subscribe((data : any) => {
       this.usuarios = data
       this.usuariosOriginal = data
+
     })
   }
 

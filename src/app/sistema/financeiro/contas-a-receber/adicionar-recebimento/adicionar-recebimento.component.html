@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="adicionarRecebimentos" tabindex="-1" aria-labelledby="adicionarRecebimentoLabel" aria-hidden="true">
+<div class="modal fade" id="adicionarRecebimento" tabindex="-1" aria-labelledby="adicionarRecebimentoLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <form [formGroup]="recebimentoForm">
             <!-- Modal content -->
@@ -80,6 +80,7 @@
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 [value]="recebimento.valorBruto | currency: 'BRL'"
+                placeholder="R$"
                 formControlName="valorBruto"
               />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
@@ -184,9 +185,7 @@
                 formControlName="cliente"
               >
                 <option selected disabled>Selecione um Cliente</option>
-                <option value="cliente1">Cliente1</option>
-                <option value="cliente2">Cliente2</option>
-                <option value="cliente3">Cliente3</option>
+                <option *ngFor="let cliente of clientes" [value]="cliente.nome">{{cliente.nome}}</option>
               </select>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark"
                 >Cliente</label
