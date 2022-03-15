@@ -9,12 +9,14 @@ import { PermissionsService } from 'src/app/services/permissions.service';
 export class PermissoesComponent implements OnInit, OnChanges {
 
   permissions: any = []
+  permissionId: number
   constructor(
     private readonly permissionService: PermissionsService
   ) { }
 
   ngOnInit(): void {
     this.permissionService.find().subscribe((data:any)=>{
+      console.log(data)
       this.permissions = data
     })
   }
@@ -22,6 +24,10 @@ export class PermissoesComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void{
     this.permissions = changes.permissions.currentValue
     console.log(this.permissions)
+  }
+
+  changeId(value:number){
+    this.permissionId = value
   }
 
   filterBefore = "";

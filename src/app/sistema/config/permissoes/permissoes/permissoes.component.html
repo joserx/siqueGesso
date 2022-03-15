@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <app-criar-permissoes (eventEmitter)="permissions=$event"></app-criar-permissoes>
-<app-editar-permissoes></app-editar-permissoes>
-<app-visualizar-categoria></app-visualizar-categoria>
+<app-editar-permissoes [permissionId]="permissionId"></app-editar-permissoes>
+<app-visualizar-categoria [permissionId]="permissionId"></app-visualizar-categoria>
 <div class="row p-0 m-0">
     <div class="col-auto m-0 p-0 bg-custom-light">
         <app-sidemenu></app-sidemenu>
@@ -61,8 +61,8 @@
                     <p>{{item.name}}</p>
                 </div>
                 <div class="col-2 text-end">
-                    <i class="fs-5 bi-eye-fill icon-view px-2 py-1" data-bs-toggle="modal" data-bs-target="#viewPermission" cursor="pointer"></i>
-                    <i class="fs-5 bi-pen-fill icon-edit p-3" data-bs-toggle="modal" data-bs-target="#editPermission" cursor="pointer"></i>
+                    <i class="fs-5 bi-eye-fill icon-view px-2 py-1" data-bs-toggle="modal" data-bs-target="#viewPermission" cursor="pointer" (click)="changeId(item.id)"></i>
+                    <i class="fs-5 bi-pen-fill icon-edit p-3" data-bs-toggle="modal" data-bs-target="#editPermission" cursor="pointer" (click)="changeId(item.id)"></i>
                     <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(item.id)"></i>
                 </div>
             </div>
