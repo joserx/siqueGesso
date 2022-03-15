@@ -27,6 +27,7 @@ export class ControleVtComponent implements OnInit {
   public vtForm: FormGroup = new FormGroup({
     vt: new FormArray([]),
   });
+
   constructor(private rhService: RhService, private vtService: VtService) {}
 
   get vt() {
