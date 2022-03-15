@@ -21,4 +21,12 @@ export class PermissionsService {
     return this.http.delete(environment.apiUrl + 'permissions/' + id)
   }
 
+  findOne(id: number){
+    return this.http.get(environment.apiUrl + 'permissions/' + id)
+  }
+
+  update(id: number, data: any){
+    return this.http.patch(environment.apiUrl + 'permissions/' + id, data)
+  }
+
 }
