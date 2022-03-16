@@ -1,0 +1,41 @@
+<div class="row p-0 m-0">
+    <div class="col m-0 bg-custom-white">
+        <!-- Página home -->
+        <div class="container">
+
+            <div class="row mt-4 m-0 p-0">
+
+
+
+            </div>
+
+            <!-- Tabela de Pedidos -->
+            <div class="table-responsive mt-5">
+                <table class="table text-custom-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cód.</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Fornecedor</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="align-items-center" *ngFor="let pedidos of pedidosFiltrados">
+                            <th scope="row">{{ pedidos?.id }}</th>
+                            <td>{{ pedidos?.data | date: "dd/MM/yyyy" }}</td>
+                            <td>{{ pedidos?.fornecedor }}</td>
+                            <td>{{ pedidos?.valorTotal | currency: "BRL" }}</td>
+                            <td>{{ pedidos?.status }}</td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /Tabela de Pedidos -->
+        </div>
+    </div>
+</div>

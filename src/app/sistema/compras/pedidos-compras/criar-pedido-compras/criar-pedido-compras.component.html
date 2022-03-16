@@ -75,7 +75,7 @@
         <!-- Faturamento Minimo -->
 
         <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-          <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Faramento Minimo" formControlName="faturamentoMinimo" />
+          <input mask="separator,2" prefix="R$" thousandSeparator="." class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Faramento Minimo" formControlName="faturamentoMinimo" />
           <label class="ms-2 mt-3 small text-truncate text-custom-dark">Faturament minimo</label
 >
                     </div>
@@ -365,6 +365,26 @@
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Meio de pagamento</label
+            >
+          </div>
+
+          <!-- Status -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text"
+              placeholder="Status do pedido"
+              formControlName="status"
+            >
+              <option value="" disabled selected>
+                Selecione um status
+              </option>
+              <option value="Aprovado">Aprovado</option>
+              <option value="Reprovado">Reprovado</option>
+              <option value="Aguardando aprovação">Aguardando aprovação</option>
+            </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Status</label
             >
           </div>
 

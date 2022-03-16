@@ -33,7 +33,6 @@ export class AdicionarFornecedoresComponent implements OnInit {
     contribuinte: new FormControl('', ),
     state_registration: new FormControl('',),
     is_exempt: new FormControl(false),
-    municipal_registration: new FormControl('', ),
     minimum_billing: new FormControl('', ),
     address: new FormGroup({
       cep: new FormControl(''),

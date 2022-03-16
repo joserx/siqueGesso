@@ -152,6 +152,7 @@ import { VisualizarCategoriaComponent } from './sistema/config/permissoes/visual
 import { FiltroPagarComponent } from './sistema/financeiro/contas-a-pagar/filtro-pagar/filtro-pagar.component';
 import { FiltroRecebimentosComponent } from './sistema/financeiro/contas-a-receber/filtro-recebimentos/filtro-recebimentos.component';
 import { ViewMsgComponent } from './sistema/notificacoes/view-msg/view-msg.component';
+import { AceiteEmEsperaComponent } from 'src/app/sistema/financeiro/aceite-em-espera/aceite-em-espera.component';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -298,6 +299,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FiltroPagarComponent,
     FiltroRecebimentosComponent,
     ViewMsgComponent,
+    AceiteEmEsperaComponent,
 
   ],
 

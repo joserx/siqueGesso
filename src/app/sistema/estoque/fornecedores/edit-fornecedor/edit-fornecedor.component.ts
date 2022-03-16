@@ -29,7 +29,6 @@ export class EditFornecedorComponent implements OnInit {
     contribuinte: new FormControl('', Validators.required),
     state_registration: new FormControl('', Validators.required),
     is_exempt: new FormControl(false, Validators.required),
-    municipal_registration: new FormControl('', Validators.required),
     address: new FormGroup({
       id: new FormControl('', Validators.required),
       cep: new FormControl('', Validators.required),
@@ -101,10 +100,7 @@ export class EditFornecedorComponent implements OnInit {
         fornecedorInput.is_exempt,
         Validators.required
       ),
-      municipal_registration: new FormControl(
-        fornecedorInput.municipal_registration,
-        Validators.required
-      ),
+
       address: new FormGroup({
         id: new FormControl(fornecedorInput.address.id, Validators.required),
         cep: new FormControl(fornecedorInput.address.cep, Validators.required),
