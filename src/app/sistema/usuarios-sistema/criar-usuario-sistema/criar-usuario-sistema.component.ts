@@ -6,6 +6,7 @@ import { UsuarioSistemaService } from 'src/app/services/usuario-sistema.service'
 import { FilialService } from 'src/app/services/filial.service';
 
 import Swal from 'sweetalert2';
+import { PermissionsService } from 'src/app/services/permissions.service';
 
 @Component({
   selector: 'app-criar-usuario-sistema',
@@ -25,22 +26,25 @@ export class CriarUsuarioSistemaComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
     ]),
-    permission: new FormControl('', [Validators.required, Validators.min(0)]),
-    lojaId: new FormControl('', [Validators.required]),
+    permission: new FormControl(null, [Validators.required, Validators.min(0)]),
+    lojaId: new FormControl(null, [Validators.required]),
   });
   avatarImg: any = 'assets/sem-foto.jpg';
   avatarFile: any = {};
   filiais: any[] = [];
+  permissions: any[] = []
 
   constructor(
     private readonly router: Router,
     private readonly usuarioSistemaService: UsuarioSistemaService,
     private readonly fileService: FileService,
-    protected readonly filialService: FilialService
+    protected readonly filialService: FilialService,
+    private readonly permissionService: PermissionsService
   ) {}
 
   ngOnInit(): void {
     this.updateFilial();
+    this.populatePermission();
   }
 
   get name() {
@@ -75,6 +79,12 @@ export class CriarUsuarioSistemaComponent implements OnInit {
     }
   }
 
+  populatePermission(){
+    this.permissionService.find().subscribe((data:any)=>{
+      this.permissions = data
+    })
+  }
+
   uploadImage(event: any) {
     let files: File[] = event.target.files;
     var reader: any = new FileReader();
@@ -102,12 +112,13 @@ export class CriarUsuarioSistemaComponent implements OnInit {
   }
 
   sendForm(data: any) {
-    console.log(data);
     if (this.userForm.valid) {
       let { passwordRetype, ...user } = data;
       if (this.avatarFile) {
         user.avatar = this.avatarFile.id;
       }
+      user.permission = Number(user.permission)
+      user.lojaId = Number(user.lojaId)
       this.usuarioSistemaService.create(user).subscribe((res: any) => {
         if (res.id) {
           Swal.fire({

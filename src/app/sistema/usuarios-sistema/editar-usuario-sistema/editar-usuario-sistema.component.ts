@@ -7,6 +7,7 @@ import { FilialService } from 'src/app/services/filial.service';
 import { environment } from 'src/environments/environment';
 
 import Swal from 'sweetalert2';
+import { PermissionsService } from 'src/app/services/permissions.service';
 
 @Component({
   selector: 'app-editar-usuario-sistema',
@@ -29,22 +30,25 @@ export class EditarUsuarioSistemaComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
     ]),
-    permission: new FormControl('', [Validators.required, Validators.min(0)]),
-    lojaId: new FormControl('', [Validators.required]),
+    permission: new FormControl(null, [Validators.required, Validators.min(0)]),
+    lojaId: new FormControl(null, [Validators.required]),
   });
   avatarImg = 'assets/sem-foto.jpg';
   avatarFile: any = {};
+  permissions: any[] = []
 
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly usuarioSistemaService: UsuarioSistemaService,
     private readonly fileService: FileService,
-    protected readonly filialService: FilialService
+    protected readonly filialService: FilialService,
+    private readonly permissionService: PermissionsService
   ) {}
 
   ngOnInit(): void {
     this.updateFilial();
+    this.populatePermission();
 
     const routeParams = this.route.snapshot.paramMap;
     this.userId = Number(routeParams.get('id'));
@@ -57,6 +61,8 @@ export class EditarUsuarioSistemaComponent implements OnInit {
       this.userForm.get('name')?.setValue(data.name);
       this.userForm.get('surname')?.setValue(data.surname);
       this.userForm.get('email')?.setValue(data.email);
+      this.userForm.get('permission')?.setValue(data.permission.id)
+      this.userForm.get('lojaId')?.setValue(data.lojaId)
     });
   }
 
@@ -89,6 +95,13 @@ export class EditarUsuarioSistemaComponent implements OnInit {
       this.filiais = res;
     });
   }
+
+  populatePermission(){
+    this.permissionService.find().subscribe((data:any)=>{
+      this.permissions = data
+    })
+  }
+
 
   checkPasswords() {
     if (this.password?.value != this.passwordRetype?.value) {
@@ -124,6 +137,8 @@ export class EditarUsuarioSistemaComponent implements OnInit {
       if (this.avatarFile) {
         user.avatar = this.avatarFile.id;
       }
+      user.permission = Number(user.permission)
+      user.lojaId = Number(user.lojaId)
       this.usuarioSistemaService
         .update(this.userId, user)
         .subscribe((res: any) => {
