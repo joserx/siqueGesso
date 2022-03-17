@@ -62,7 +62,6 @@ export class VisualizarCategoriaComponent implements OnInit, OnChanges {
       this.permissionId = changes.permissionId.currentValue 
       this.permissionService.findOne(changes.permissionId.currentValue).subscribe((data:any)=>{
         this.permission = data
-        console.log(data)
       })
     }
   }

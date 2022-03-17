@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <app-criar-permissoes (eventEmitter)="permissions=$event"></app-criar-permissoes>
-<app-editar-permissoes [permissionId]="permissionId"></app-editar-permissoes>
+<app-editar-permissoes (eventEmitter)="permissions=$event" [permissionId]="permissionId"></app-editar-permissoes>
 <app-visualizar-categoria [permissionId]="permissionId"></app-visualizar-categoria>
 <div class="row p-0 m-0">
     <div class="col-auto m-0 p-0 bg-custom-light">
