@@ -558,7 +558,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     console.log(this.filialSelected);
   }
 
-  test(){
-    console.log("test");
+  updateAddresToWithdraw (oneItem: any){
+    oneItem.value.endereco =  this.filialSelected.logradouro  + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep;
   }
 }

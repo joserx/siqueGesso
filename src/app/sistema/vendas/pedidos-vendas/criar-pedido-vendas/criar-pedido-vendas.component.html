@@ -519,7 +519,8 @@
                                 <!-- Tipo de entrega -->
                                 <td class="row">
                                     <select #tipoEntrega class="col form-select form-select-sm" id="endereco"
-                                        formControlName="tipoEntrega" [attr.disabled]="!clientSelected ? '' : null">
+                                        formControlName="tipoEntrega" [attr.disabled]="!clientSelected ? '' : null"
+                                        (change)="tipoEntrega.value == 'retirada'? updateAddresToWithdraw(oneItem) : null">
                                         <option value="" disabled selected>Selecionar...</option>
                                         <option value="entrega">entrega</option>
                                         <option value="retirada">retirada</option>
