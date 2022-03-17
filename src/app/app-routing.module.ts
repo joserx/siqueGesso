@@ -64,6 +64,8 @@ import { VisualizarLojaCadastradaComponent } from './sistema/config/cadastro-de-
 import { CategoriaFornecedorComponent } from './sistema/config/cadastro-de-categoria/categoria-fornecedor/categoria-fornecedor.component';
 import { CadastroCatFornecedorComponent } from './sistema/config/cadastro-de-categoria/cadastro-cat-fornecedor/cadastro-cat-fornecedor.component';
 import { PermissoesComponent } from './sistema/config/permissoes/permissoes/permissoes.component';
+import { CondicoesPagamentoComponent } from './sistema/config/cadastro-de-categoria/condicoes-pagamento/condicoes-pagamento.component';
+import { CadastroCondicaoComponent } from './sistema/config/cadastro-de-categoria/cadastro-condicao/cadastro-condicao.component';
 
 const routes: Routes = [
   {
@@ -441,6 +443,14 @@ const routes: Routes = [
               {
                 path: 'categoria-fornecedor/cadastrar',
                 component: CadastroCatFornecedorComponent
+              },
+              {
+                path: 'condicoes-pagamento',
+                component: CondicoesPagamentoComponent
+              },
+              {
+                path: 'condicoes-pagamento/cadastrar',
+                component: CadastroCondicaoComponent
               },
             ]
           },

@@ -12,7 +12,7 @@ export class FornecedorService {
   constructor(private readonly http: HttpClient) {}
 
   find() {
-    return this.http.get(environment.apiUrl + 'provider/');
+    return this.http.get(environment.apiUrl + 'provider');
   }
 
   create(payload: any) {

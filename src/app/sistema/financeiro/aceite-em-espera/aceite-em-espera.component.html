@@ -29,6 +29,9 @@
                             <td>{{ pedidos?.valorTotal | currency: "BRL" }}</td>
                             <td>{{ pedidos?.status }}</td>
                             <td>
+                                <button (click)="confirmaPedido(pedidos)" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+                            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Aceitar</h5>
+                          </button>
 
                             </td>
                         </tr>

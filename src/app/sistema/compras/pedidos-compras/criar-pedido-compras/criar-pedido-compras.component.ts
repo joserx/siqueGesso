@@ -55,7 +55,7 @@ export class CriarPedidoComprasComponent implements OnInit {
   public fornecedoresFiltrados: any = [];
   public produtosFiltrados: any = [];
 
-  public comprasRealizadas: number = 15
+  public comprasRealizadas: number = 15;
 
   public fornecedorSelecionado: any = {
     id: null,
@@ -130,8 +130,13 @@ export class CriarPedidoComprasComponent implements OnInit {
       (f: any) => f.fantasy_name == fornecedor
     );
     this.fornecedorSelecionado = fornecedorSelecionado;
-
-
+    this.pedidoCompraForm.patchValue({
+      razaoSocial: fornecedorSelecionado.fantasy_name,
+      cnpj: fornecedorSelecionado?.cnpj,
+      cep: fornecedorSelecionado?.address?.cep,
+      endereco: fornecedorSelecionado?.address?.street,
+      complemento: fornecedorSelecionado?.address?.complement,
+    });
   }
 
   getFornecedores() {
@@ -273,7 +278,10 @@ export class CriarPedidoComprasComponent implements OnInit {
   }
 
   submit(): any {
-    console.log(this.pedidoCompraForm.value);
+    const { faturamentoMinimo } = this.pedidoCompraForm.value;
+    this.pedidoCompraForm.patchValue({
+      faturamentoMinimo: faturamentoMinimo.replace(/\D+/g, ''),
+    });
 
     if (this.pedidoCompraForm.invalid)
       return Swal.fire({

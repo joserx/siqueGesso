@@ -19,6 +19,9 @@
                 <div class="col-12">
                     <ul class="nav nav-tabs fs-5 fw-lighter">
                         <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="activeSection == 'aceite'" (click)="toggleActiveSection('aceite')">Compras</a>
+                        </li>
+                        <li class="nav-item px-1">
                             <a class="nav-link px-4" [class.active]="activeSection == 'pagar'" (click)="toggleActiveSection('pagar')">Contas a pagar</a>
                         </li>
                         <li class="nav-item px-1">
@@ -26,9 +29,6 @@
                         </li>
                         <li class="nav-item px-1">
                             <a class="nav-link px-4" [class.active]="activeSection == 'fluxo'" (click)="toggleActiveSection('fluxo')">Fluxo de caixa</a>
-                        </li>
-                        <li class="nav-item px-1">
-                            <a class="nav-link px-4" [class.active]="activeSection == 'aceite'" (click)="toggleActiveSection('aceite')">Compras</a>
                         </li>
                     </ul>
                 </div>
