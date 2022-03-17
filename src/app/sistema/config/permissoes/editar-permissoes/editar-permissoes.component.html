@@ -46,12 +46,12 @@
                     <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="!(permissionCheck(permission.permission, item.edit))" (click)="addPermission(item.edit, $event)">
                 </div>
                 <div class="col-3 text-center">
-                    <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="permissionCheck(permission.permission, item.delete)" checked (click)="addPermission(item.edit, $event)">
-                    <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="!(permissionCheck(permission.permission, item.delete))" (click)="addPermission(item.edit, $event)">
+                    <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="permissionCheck(permission.permission, item.delete)" checked (click)="addPermission(item.delete, $event)">
+                    <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="!(permissionCheck(permission.permission, item.delete))" (click)="addPermission(item.delete, $event)">
                 </div>
                 <div class="col-3 text-center">
                     <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="permissionCheck(permission.permission, item.view)" checked (click)="addPermission(item.view, $event)">
-                    <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="!(permissionCheck(permission.permission, item.view))" (click)="addPermission(item.edit, $event)">
+                    <input type="checkbox" id="checkbox" class="checkbox-permission" *ngIf="!(permissionCheck(permission.permission, item.view))" (click)="addPermission(item.view, $event)">
                 </div>
             </div>
             <div class="modal-footer">
