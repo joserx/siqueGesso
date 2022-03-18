@@ -481,8 +481,8 @@
                                 <th scope="col-1">Desconto</th>
                                 <th scope="col-1">Valor venda</th>
                                 <!-- <th scope="col-1">Tipo de retirada</th> -->
-                                <th scope="col-1">Data prev. da retirada</th>
                                 <th scope="col-1">Tipo de entrega</th>
+                                <th scope="col-1">Data prev. da Entrega</th>
                                 <th scope="col-1">Endereço</th>
                                 <th scope="col-1">Valor Frete</th>
                             </tr>
@@ -511,11 +511,7 @@
                     <option value="tipo2">tipo 2</option>
                     <option value="tipo3">tipo 3</option>
                   </select>
-                </td> -->
-                                <td>
-                                    <input class="form-control form-control-sm" type="date" id="prevRetirada"
-                                        formControlName="prevRetirada">
-                                </td>
+                </td> --> 
                                 <!-- Tipo de entrega -->
                                 <td class="row">
                                     <select #tipoEntrega class="col form-select form-select-sm" id="endereco"
@@ -526,6 +522,13 @@
                                         <option value="retirada">retirada</option>
                                     </select>
                                 </td>
+                                <td *ngIf="tipoEntrega.value == 'entrega'; else tipoEntregaEmpty">
+                                    <input class="form-control form-control-sm" type="date" id="prevRetirada"
+                                        formControlName="prevRetirada">
+                                </td>
+                                <ng-template #tipoEntregaEmpty>
+                                    <td></td>
+                                </ng-template>
                                 <td>
                                     <input *ngIf="tipoEntrega.value=='retirada'" class="form-control form-control-sm"
                                         type="text" id="enderecoLoja" [value]="

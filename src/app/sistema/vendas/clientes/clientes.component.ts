@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
@@ -30,7 +30,7 @@ export class ClientesComponent implements OnInit {
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
   clienteForm : FormGroup = new FormGroup({
-    'disabled': new FormControl(''),
+    'disabled': new FormControl(false),
     'name' : new FormControl(null, [Validators.required]),
     'surname' : new FormControl(null, [Validators.required]),
     'cpf' : new FormControl(null, [Validators.required, BrazilValidator.isValidCpf()]),
@@ -46,7 +46,7 @@ export class ClientesComponent implements OnInit {
     'socialReason' : new FormControl(null),
     'fantasyName' : new FormControl(null),
     'ramal' : new FormControl(null),
-    'email' : new FormControl(null, [Validators.required, Validators.email]),
+    'email' : new FormControl(null),
     'companyEmail' : new FormControl(null, [Validators.email]),
     'addresses' : new FormArray([]),
     'codigo': new FormControl(''),
@@ -247,6 +247,20 @@ export class ClientesComponent implements OnInit {
           ).indexOf(button.value), 1)
         }
       }
+    }
+  }
+
+  loadCep(cep: any, form: AbstractControl){
+    cep = cep.value;
+    if (cep.length == 9) {
+      this.clientService
+        .updateCep(cep.replace(/-/g, ''))
+        .subscribe((data: any) => {
+          form.get('street')!.setValue(data.logradouro);
+          form.get('state')!.setValue(data.uf);
+          form.get('city')!.setValue(data.localidade);
+          form.get('neighborhood')!.setValue(data.bairro);
+        });
     }
   }
 
