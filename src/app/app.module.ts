@@ -298,6 +298,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CriarPermissoesComponent,
     EditarPermissoesComponent,
     VisualizarCategoriaComponent,
+
     FiltroPagarComponent,
     FiltroRecebimentosComponent,
     ViewMsgComponent,

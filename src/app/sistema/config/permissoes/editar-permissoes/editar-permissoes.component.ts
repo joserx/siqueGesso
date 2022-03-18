@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PermissionsService } from 'src/app/services/permissions.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-permissoes',
@@ -11,6 +12,7 @@ import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 export class EditarPermissoesComponent implements OnInit, OnChanges {
 
   @ViewChild('opt') opt: ElementRef;
+  @Output() eventEmitter = new EventEmitter<any>();
   @Input() permissionId: number
   constructor(
     private permissionService: PermissionsService
@@ -64,12 +66,17 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
+    this.permissions = []
+    this.permission = {}
     if(changes.permissionId.currentValue){
       this.permissionId = changes.permissionId.currentValue 
-      this.permissionService.findOne(changes.permissionId.currentValue).subscribe((data:any)=>{
+      this.permissionService.findOne(this.permissionId).subscribe((data:any)=>{
         this.permissionForm.get('name')?.setValue(data.name)
         this.permission = data
         console.log(data)
+        for(let item of this.areas){
+          this.permissionCheck(data.permission, item, true)
+        }
       })
     }
   }
@@ -78,16 +85,22 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
     this.opt.nativeElement.click()
   }
 
-  permissionCheck(permission:any, permitted:any){
-    for(let item of this.areas){
-      if((permission & item.edit)==item.edit){
-        // console.log(item.edit)
+  permissionCheck(permission:any, permitted:any, add?:boolean ){
+    if(add==true){
+      if((permission & permitted.edit)==permitted.edit){
+        if(this.permissions.indexOf(permitted.edit)==-1){
+          this.permissions.push(permitted.edit)
+        }
       }
-      if((permission & item.delete)==item.delete){
-        // console.log(item.delete)
+      if((permission & permitted.delete)==permitted.delete){
+        if(this.permissions.indexOf(permitted.delete)==-1){
+          this.permissions.push(permitted.delete)
+        }
       }
-      if((permission & item.view)==item.view){
-        // console.log(item.view)
+      if((permission & permitted.view)==permitted.view){
+        if(this.permissions.indexOf(permitted.view)==-1){
+          this.permissions.push(permitted.view)
+        }
       }
     }
     return (permission & permitted)==permitted
@@ -99,10 +112,24 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
       for(let item of this.permissions){
         total+=item
       }
-      console.log(total)
-      // this.permissionService.update(this.permissionId, data.value).subscribe((data: any)=>{
-        
-      // })
+      data.value.permission=total
+      this.permissionService.update(this.permissionId, data.value).subscribe((data: any)=>{
+        this.permissionService.find().subscribe((data:any)=>{
+          this.populatePermissions(data)
+          this.closeOpt()
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '<h4>Permissão editada</h4>',
+            showConfirmButton: false,
+            timer: 1500,
+            toast: true,
+            width: '500px'
+          })
+          this.permission = {}
+          this.permissions = []
+        })
+      })
     }
   }
   
@@ -116,6 +143,10 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
     }else{
       this.permissions.splice(this.permissions.indexOf(value), 1)
     }
+  }
+
+  populatePermissions(date: any): void{
+    this.eventEmitter.emit(date)
   }
 
 }
