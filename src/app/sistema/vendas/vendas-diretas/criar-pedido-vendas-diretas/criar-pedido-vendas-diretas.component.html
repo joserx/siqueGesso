@@ -1,4 +1,5 @@
-<div class="modal fade" id="selecionarProdutos" tabindex="-1" aria-labelledby="selecionarProdutosLabel" aria-hidden="true">
+<div class="modal fade" id="selecionarProdutos" tabindex="-1" aria-labelledby="selecionarProdutosLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <form>
       <!-- Modal content -->
@@ -12,7 +13,8 @@
           <div class="row m-0 justify-content-start align-items-center">
             <!-- Pesquisar -->
             <div class="col-3 px-2 p-0 m-0 position-relative">
-              <input class="form-control form-control-lg border-0 h-limited py-2 ps-4 pe-5 rounded-15 shadow-sm" type="text" placeholder="Pesquisar" (keyup)="filtrar($event)">
+              <input class="form-control form-control-lg border-0 h-limited py-2 ps-4 pe-5 rounded-15 shadow-sm"
+                type="text" placeholder="Pesquisar" (keyup)="filtrar($event)">
               <a>
                 <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
               </a>
@@ -44,13 +46,16 @@
           </div>
 
           <!-- Tabela -->
-          <label *ngFor="let produto of allProdutos" class="row m-0 mt-3 border-bottom text-custom-dark justify-content-between" [for]="produto.id">
+          <label *ngFor="let produto of allProdutos"
+            class="row m-0 mt-3 border-bottom text-custom-dark justify-content-between" [for]="produto.id">
             <div class="col-1">
               <div class="form-check" *ngIf="check(produto.id)">
-                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id" (click)="checkIfChecked($event)" checked>
+                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id"
+                  (click)="checkIfChecked($event)" checked>
               </div>
               <div class="form-check" *ngIf="!check(produto.id)">
-                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id" (click)="checkIfChecked($event)">
+                <input class="form-check-input" type="checkbox" [value]="produto.id" [id]="produto.id"
+                  (click)="checkIfChecked($event)">
               </div>
             </div>
             <div class="col-1">
@@ -125,9 +130,8 @@
 
           <!-- Loja -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <select #loja
-              class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Loja" id="loja" formControlName="loja">
+            <select #loja class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text" placeholder="Loja" id="loja" formControlName="loja">
               <option value="" disabled selected>Selecione uma Loja</option>
               <option *ngFor="let loja of filial;" [value]="loja.nome">{{loja.nome}}
               </option>
@@ -137,11 +141,11 @@
 
           <!-- Vendedor -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select #vendedor
-              class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-              placeholder="Vendedor" id="vendedor" formControlName="vendedor">
+            <select #vendedor class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text" placeholder="Vendedor" id="vendedor" formControlName="vendedor">
               <option value="" disabled selected>Selecione um Vendedor</option>
-              <option *ngFor="let vendedor of vendedores;" value="{{vendedor.name}} {{vendedor.surname}}">{{vendedor.name}} {{vendedor.surname}}
+              <option *ngFor="let vendedor of vendedores;" value="{{vendedor.name}} {{vendedor.surname}}">
+                {{vendedor.name}} {{vendedor.surname}}
               </option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
@@ -161,9 +165,20 @@
 
           <!-- CNPJ -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="00.000.000/0000-00" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-              placeholder="CNPJ" id="cnpj" formControlName="cnpj">
+            <input mask="00.000.000/0000-00" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text" placeholder="CNPJ" id="cnpj" formControlName="cnpj" autocomplete="off"
+              (keyup)="filtrarCNPJ($event)">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+            <div *ngIf="showCNPJ===true"
+              class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
+              <ul class="drivers-list list-unstyled">
+                <div *ngFor="let cliente of clientes2">
+                  <li *ngIf="cliente.cnpj != null" class="p-1 px-2 user-select-none" (click)="selectThisCNPJ(cliente)">
+                    {{ cliente.cnpj }}
+                  </li>
+                </div>
+              </ul>
+            </div>
           </div>
           <!-- Nome do Cliente -->
           <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
@@ -171,9 +186,12 @@
               placeholder="Nome do Cliente" id="cliente" formControlName="cliente" autocomplete="off"
               (keyup)="filtrarCliente($event)" (keyup)="checkClient($event)">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Cliente</label>
-            <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
+            <div *ngIf="showSign===true"
+              class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
               <ul class="drivers-list list-unstyled">
-                <li class="p-1 px-2 user-select-none" *ngFor="let cliente of clientes" (click)="selectThisCliente(cliente)">{{ cliente.name!=null && cliente.surname!=null? cliente.name + ' ' + cliente.surname : cliente.fantasyName }}</li>
+                <li class="p-1 px-2 user-select-none" *ngFor="let cliente of clientes"
+                  (click)="selectThisCliente(cliente)">{{ cliente.name!=null && cliente.surname!=null? cliente.name + '
+                  ' + cliente.surname : cliente.fantasyName }}</li>
               </ul>
             </div>
           </div>
@@ -255,15 +273,15 @@
               </tr>
             </thead>
             <tbody *ngFor="let oneItem of item['controls']; let i = index" formArrayName="item">
-              <tr class="align-items-center" [formGroupName]="i" >
+              <tr class="align-items-center" [formGroupName]="i">
                 <th scope="row">{{ oneItem.value.codigo }}</th>
                 <td>
                   {{ oneItem.value.produto }}
                 </td>
                 <td>
-                  <input 
-                    class="form-control form-control-sm" type="number" 
-                    placeholder="Quantidade" id="quantidade" formControlName="quantidade" (keyup)="totalProduto(oneItem.value)" (keyup)="calcEstoque(oneItem, $event)">
+                  <input class="form-control form-control-sm" type="number" placeholder="Quantidade" id="quantidade"
+                    formControlName="quantidade" (keyup)="totalProduto(oneItem.value)"
+                    (keyup)="calcEstoque(oneItem, $event)">
                 </td>
                 <td>
                   {{ oneItem.value.valorUnitario | currency:'BRL'}}
@@ -291,8 +309,8 @@
         </div>
         <div class="row">
           <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
-            <input mask="00000-000" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" (blur)="changeAddress($event)"
-              placeholder="CEP" id="cep" formControlName="cep">
+            <input mask="00000-000" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              type="text" (blur)="changeAddress($event)" placeholder="CEP" id="cep" formControlName="cep">
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
           </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 ms-5 form-floating">
@@ -328,13 +346,13 @@
 
         <div class="row m-0 mt-3  py-2 d-flex justify-content-between  border-bottom border-top">
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <select #motorista
-                class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                placeholder="Motorista" id="motorista" formControlName="motorista">
-                <option value="" disabled selected>Selecione um Motorista</option>
-                <option *ngFor="let motorista of motoristas;" value="{{motorista.name}} {{motorista.surname}}">{{motorista.name}} {{motorista.surname}}
-                </option>
-              </select>
+            <select #motorista class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text" placeholder="Motorista" id="motorista" formControlName="motorista">
+              <option value="" disabled selected>Selecione um Motorista</option>
+              <option *ngFor="let motorista of motoristas;" value="{{motorista.name}} {{motorista.surname}}">
+                {{motorista.name}} {{motorista.surname}}
+              </option>
+            </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Motorista</label>
           </div>
           <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
@@ -402,7 +420,8 @@
           </div>
           <div class="col-4 px-2 pt-4 p-0 m-0 me-2 form-floating">
             <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-              type="text" placeholder="Meio de Pagamento" id="aguradandoPagamento" formControlName="aguradandoPagamento">
+              type="text" placeholder="Meio de Pagamento" id="aguradandoPagamento"
+              formControlName="aguradandoPagamento">
               <option value="" disabled selected>Status do pagamento</option>
               <option value="7">7 Dias</option>
               <option value="30">30 Dias</option>
@@ -441,7 +460,8 @@
           <!-- Botão Cancelar -->
           <div class="col-3 px-2 p-0 m-0 d-grid">
             <button type="button"
-              class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" (click)="cancelPedido()">
+              class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm"
+              (click)="cancelPedido()">
               <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
               <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
             </button>

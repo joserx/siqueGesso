@@ -50,6 +50,7 @@
           <thead>
             <tr>
               <th scope="col">Cód.</th>
+              <th scope="col">CNPJ</th>
               <th scope="col">Criado em</th>
               <th scope="col">Loja</th>
               <th scope="col">Vendedor</th>
@@ -62,6 +63,7 @@
           <tbody>
             <tr class="align-items-center" *ngFor="let pedidos of atualPage">
               <th scope="row justify-content-center">{{ pedidos.id }}</th>
+              <td> {{pedidos.cnpj}}</td>
               <td>{{ pedidos.created_at | date }}</td>
               <td>{{ pedidos.loja }}</td>
               <td>{{ pedidos.vendedor }}</td>
