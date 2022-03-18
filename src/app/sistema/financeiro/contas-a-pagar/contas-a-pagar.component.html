@@ -94,7 +94,7 @@
             data-bs-toggle="modal"
             data-bs-target="#editarPagamentos"
           ></i>
-          <i
+          <i *ngIf = "!contas.pedidoCompra"
             class="fs-5 bi-trash-fill icon-delete p-3"
             cursor="pointer"
             (click)="delete(contas)"
@@ -110,6 +110,7 @@
   <!-- Botão Exportar CSV -->
   <div class="col-3 px-2 p-0 m-0 d-grid">
     <button
+    (click)="exportexcel()"
       type="button"
       class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm"
     >
@@ -119,7 +120,7 @@
   </div>
 </div>
 
-<app-adicionar-pagamento></app-adicionar-pagamento>
+<app-adicionar-pagamento (reload)="getContas()"></app-adicionar-pagamento>
 <app-edit-contas-p (reload)="getContas()"></app-edit-contas-p>
 <app-view-contas-pagar [contas]="contas"></app-view-contas-pagar>
 <app-filtro-pagar></app-filtro-pagar>

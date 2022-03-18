@@ -19,6 +19,9 @@
                 <div class="col-12">
                     <ul class="nav nav-tabs fs-5 fw-lighter">
                         <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="activeSection == 'aceite'" (click)="toggleActiveSection('aceite')">Compras</a>
+                        </li>
+                        <li class="nav-item px-1">
                             <a class="nav-link px-4" [class.active]="activeSection == 'pagar'" (click)="toggleActiveSection('pagar')">Contas a pagar</a>
                         </li>
                         <li class="nav-item px-1">
@@ -43,6 +46,9 @@
 
             <div *ngIf="activeSection == 'fluxo'">
                 <app-fluxo-de-caixa></app-fluxo-de-caixa>
+            </div>
+            <div *ngIf="activeSection == 'aceite'">
+                <app-aceite-em-espera></app-aceite-em-espera>
             </div>
 
         </div>

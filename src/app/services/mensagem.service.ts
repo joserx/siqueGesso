@@ -13,8 +13,9 @@ export class MensagemService {
   notifications: any = [];
 
   constructor(private readonly http: HttpClient) {
-    this.socket = io('http://localhost:25565');
-    // https://api.sistemasiquegesso.com.br/
+    this.socket = io('https://api.sistemasiquegesso.com.br/');
+
+    // http://localhost:25565
   }
 
   listen(eventName: string) {

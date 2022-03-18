@@ -22,6 +22,11 @@ export class CadastroDeCategoriaComponent implements OnInit {
       icon: 'bi-building',
       href: '/sistema/configuracoes/cadastro-de-categorias/categoria-fornecedor',
     },
+    {
+      nome: 'Condições de Pagamento',
+      icon: 'bi-list-check',
+      href: '/sistema/configuracoes/cadastro-de-categorias/condicoes-pagamento',
+    },
   ];
 
   constructor() {}

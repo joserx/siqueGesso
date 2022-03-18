@@ -33,7 +33,7 @@ export class ListarCadastroLojaComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.filialService.delete(id).subscribe((data: any)=>{   
+        this.filialService.delete(id).subscribe((data: any)=>{
           Swal.fire({
             position: 'top',
             icon: 'success',
@@ -51,7 +51,7 @@ export class ListarCadastroLojaComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'info',
-          title: '<h4>Turno não deletada !</h4>',
+          title: '<h4>Filial não deletada !</h4>',
           showConfirmButton: false,
           timer: 1500,
           toast: true,

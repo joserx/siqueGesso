@@ -69,6 +69,9 @@
                                 </a>
 
                                 <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(pedidos)"></i>
+                                <a (click)="loadPedido(pedidos)">
+                                    <i class="fs-5 bi-pen-fill icon-view p-3" (click)="confirmaPedido(pedidos)" cursor="pointer"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

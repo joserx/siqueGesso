@@ -6,8 +6,7 @@ import {
   FormGroup,
   FormControlName,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
 
@@ -25,8 +24,10 @@ export class CadastroDeProdutoComponent implements OnInit {
   });
   public desativadoCheckbox: boolean = false;
 
-  constructor(private CategoriaProdutoService: CategoriaProdutoService,
-    private readonly router: Router,) {}
+  constructor(
+    private CategoriaProdutoService: CategoriaProdutoService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -36,8 +37,7 @@ export class CadastroDeProdutoComponent implements OnInit {
       : (this.desativadoCheckbox = true);
   }
 
-  cancelar(){
-
+  cancelar() {
     Swal.fire({
       title: 'Confirma o cancelamento?',
       icon: 'warning',
@@ -47,7 +47,12 @@ export class CadastroDeProdutoComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.router.navigate(['sistema', 'configuracoes', 'cadastro-de-categorias', 'categoria-de-produto'])
+        this.router.navigate([
+          'sistema',
+          'configuracoes',
+          'cadastro-de-categorias',
+          'categoria-de-produto',
+        ]);
         Swal.fire({
           title: '<h4>Categoria cancelada com sucesso!</h4>',
           icon: 'success',
@@ -56,8 +61,8 @@ export class CadastroDeProdutoComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000,
           timerProgressBar: true,
-          width: '500px'
-        })
+          width: '500px',
+        });
       } else if (result.isDenied) {
         Swal.fire({
           title: '<h4>Categoria não cancelada!</h4>',
@@ -66,12 +71,11 @@ export class CadastroDeProdutoComponent implements OnInit {
           position: 'top',
           showConfirmButton: false,
           timer: 2000,
-          timerProgressBar: true ,
-          width: '500px'
-        })
+          timerProgressBar: true,
+          width: '500px',
+        });
       }
-    })
-
+    });
   }
 
   submit(): any {

@@ -29,11 +29,11 @@ export class AdicionarFornecedoresComponent implements OnInit {
     ]),
     fantasy_name: new FormControl('', Validators.required),
     social_reason: new FormControl('', Validators.required),
-    tribute_code: new FormControl('', Validators.required),
-    contribuinte: new FormControl('', Validators.required),
-    state_registration: new FormControl('', Validators.required),
+    tribute_code: new FormControl('',),
+    contribuinte: new FormControl('', ),
+    state_registration: new FormControl('',),
     is_exempt: new FormControl(false),
-    municipal_registration: new FormControl('', Validators.required),
+    minimum_billing: new FormControl('', ),
     address: new FormGroup({
       cep: new FormControl(''),
       street: new FormControl(''),
@@ -130,7 +130,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
       this.reload.emit();
       this.closeBtn.nativeElement.click();
       return Swal.fire({
-        title: 'Forncedor salvo!',
+        title: 'Fornecedor salvo!',
         icon: 'success',
         toast: true,
         position: 'top',

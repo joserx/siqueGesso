@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+
+<div class="row p-0 m-0">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+        <div class="container pb-5">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/configuracoes/cadastro-de-categorias/condicoes-pagamento/">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
+
+            <div class="row m-0 mt-4 py-3 border-bottom">
+                <div class="col-12 m-0 p-0 text-custom-dark">
+                    <h4>Cadastro de Condicão de pagamento</h4>
+                </div>
+            </div>
+
+            <form [formGroup]="condicaoForm">
+                <!-- Criar Categoria -->
+                <div class="row">
+                    <!-- Nome -->
+                    <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome" formControlName="nome" />
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label
+            >
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="row mt-5 py-3 pb-5 justify-content-end">
+            <!-- Botão Cancelar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+                <button type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm" (click)="cancelar()">
+              <h5 class="fw-normal my-auto text-truncate">Cancelar</h5>
+              <i class="bi-x my-auto fs-2 p-0 m-0 fw-bold"></i>
+            </button>
+            </div>
+
+            <!-- Botão Salvar -->
+            <div class="col-3 px-2 p-0 m-0 d-grid">
+                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="submit()">
+              <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                Salvar
+              </h5>
+              <i
+                class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"
+              ></i>
+            </button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>

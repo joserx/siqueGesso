@@ -17,6 +17,14 @@ export class PedidoCompraService {
     return this.http.post(environment.apiUrl + 'pedido-compra', data);
   }
 
+  update(data: any) {
+    console.log(data);
+    return this.http.patch(
+      `${environment.apiUrl}pedido-compra/${data.id}`,
+      data
+    );
+  }
+
   delete(id: number) {
     return this.http.delete(`${environment.apiUrl}pedido-compra/${id}`);
   }

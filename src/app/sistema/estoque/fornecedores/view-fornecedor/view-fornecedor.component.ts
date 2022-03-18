@@ -18,7 +18,6 @@ export class ViewFornecedorComponent implements OnInit {
     contribuinte: new FormControl({ value: '', disabled: true }, Validators.required),
     state_registration: new FormControl({ value: '', disabled: true }, Validators.required),
     is_exempt: new FormControl({value: false, disabled: true}, Validators.required),
-    municipal_registration: new FormControl({ value: '', disabled: true }, Validators.required),
     address: new FormGroup({
       cep: new FormControl({ value: '', disabled: true }, Validators.required),
       street: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -61,7 +60,6 @@ export class ViewFornecedorComponent implements OnInit {
       contribuinte: new FormControl({ value: fornecedorInput.contribuinte, disabled: true }, Validators.required),
       state_registration: new FormControl({ value: fornecedorInput.state_registration, disabled: true }, Validators.required),
       is_exempt: new FormControl({ value: fornecedorInput.is_exempt, disabled: true }, Validators.required),
-      municipal_registration: new FormControl({ value: fornecedorInput.municipal_registration, disabled: true }, Validators.required),
       address: new FormGroup({
         cep: new FormControl({ value: fornecedorInput.address.cep, disabled: true }, Validators.required),
         street: new FormControl({ value: fornecedorInput.address.street, disabled: true }, Validators.required),

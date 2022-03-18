@@ -151,6 +151,10 @@ import { VisualizarCategoriaComponent } from './sistema/config/permissoes/visual
 
 import { FiltroPagarComponent } from './sistema/financeiro/contas-a-pagar/filtro-pagar/filtro-pagar.component';
 import { FiltroRecebimentosComponent } from './sistema/financeiro/contas-a-receber/filtro-recebimentos/filtro-recebimentos.component';
+import { ViewMsgComponent } from './sistema/notificacoes/view-msg/view-msg.component';
+import { AceiteEmEsperaComponent } from 'src/app/sistema/financeiro/aceite-em-espera/aceite-em-espera.component';
+import { CondicoesPagamentoComponent } from './sistema/config/cadastro-de-categoria/condicoes-pagamento/condicoes-pagamento.component';
+import { CadastroCondicaoComponent } from './sistema/config/cadastro-de-categoria/cadastro-condicao/cadastro-condicao.component';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -290,7 +294,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ViewContasPagarComponent,
     EditRecebimentoComponent,
     ViewRecebimentoComponent,
-
     PermissoesComponent,
     CriarPermissoesComponent,
     EditarPermissoesComponent,
@@ -298,6 +301,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 
     FiltroPagarComponent,
     FiltroRecebimentosComponent,
+    ViewMsgComponent,
+    AceiteEmEsperaComponent,
+    CondicoesPagamentoComponent,
+    CadastroCondicaoComponent,
 
   ],
 

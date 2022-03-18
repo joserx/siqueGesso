@@ -24,6 +24,7 @@ export class CriarPedidoComprasComponent implements OnInit {
   pedidoCompraForm = new FormGroup({
     id: new FormControl(''),
     data: new FormControl(''),
+    faturamentoMinimo: new FormControl(''),
     fornecedor: new FormControl(''),
     razaoSocial: new FormControl(''),
     cnpj: new FormControl(''),
@@ -39,6 +40,7 @@ export class CriarPedidoComprasComponent implements OnInit {
     condPagamento: new FormControl(''),
     dataVenc: new FormControl(''),
     meioPag: new FormControl(''),
+    status: new FormControl(''),
     obs: new FormControl(''),
   });
   public get itens(): any {
@@ -53,7 +55,7 @@ export class CriarPedidoComprasComponent implements OnInit {
   public fornecedoresFiltrados: any = [];
   public produtosFiltrados: any = [];
 
-  public comprasRealizadas: number = 15
+  public comprasRealizadas: number = 15;
 
   public fornecedorSelecionado: any = {
     id: null,
@@ -128,8 +130,13 @@ export class CriarPedidoComprasComponent implements OnInit {
       (f: any) => f.fantasy_name == fornecedor
     );
     this.fornecedorSelecionado = fornecedorSelecionado;
-
-
+    this.pedidoCompraForm.patchValue({
+      razaoSocial: fornecedorSelecionado.fantasy_name,
+      cnpj: fornecedorSelecionado?.cnpj,
+      cep: fornecedorSelecionado?.address?.cep,
+      endereco: fornecedorSelecionado?.address?.street,
+      complemento: fornecedorSelecionado?.address?.complement,
+    });
   }
 
   getFornecedores() {
@@ -271,7 +278,10 @@ export class CriarPedidoComprasComponent implements OnInit {
   }
 
   submit(): any {
-    console.log(this.pedidoCompraForm.value);
+    const { faturamentoMinimo } = this.pedidoCompraForm.value;
+    this.pedidoCompraForm.patchValue({
+      faturamentoMinimo: faturamentoMinimo.replace(/\D+/g, ''),
+    });
 
     if (this.pedidoCompraForm.invalid)
       return Swal.fire({
