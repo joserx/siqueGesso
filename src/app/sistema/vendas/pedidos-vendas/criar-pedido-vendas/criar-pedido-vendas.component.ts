@@ -555,7 +555,6 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   setFilialSelected(filial: number) {
     this.filialSelected = this.filial[filial];
-    console.log(this.filialSelected);
   }
 
   updateAddresToWithdraw (oneItem: any){

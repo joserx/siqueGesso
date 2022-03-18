@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
+import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { getDate } from 'src/environments/global';
 import Swal from 'sweetalert2';
@@ -25,30 +27,30 @@ export class ClientesComponent implements OnInit {
     { id: 5, value: "boleto-ddl", nome: "Boleto DDL", status: "readonly" },
   ]
   public tipoUsuario = 1;
-
+  public vendedores: any[] = [];
   public getDate: any = getDate;
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
-  clienteForm : FormGroup = new FormGroup({
-    'disabled': new FormControl(''),
-    'name' : new FormControl(null, [Validators.required]),
-    'surname' : new FormControl(null, [Validators.required]),
-    'cpf' : new FormControl(null, [Validators.required, BrazilValidator.isValidCpf()]),
-    'cnpj' : new FormControl(null, [BrazilValidator.isValidCpf()]),
-    'rg' : new FormControl(null, [Validators.required]),
-    'cellphone' : new FormControl(null, [Validators.required]),
-    'companyCellPhone' : new FormControl(null),
-    'telephone' : new FormControl(null, [Validators.required]),
-    'companyTelephone' : new FormControl(null),
-    'birthDate' : new FormControl(null, [Validators.required]),
-    'birthDateCompany' : new FormControl(null),
-    'subscription' : new FormControl(null),
-    'socialReason' : new FormControl(null),
-    'fantasyName' : new FormControl(null),
-    'ramal' : new FormControl(null),
-    'email' : new FormControl(null, [ Validators.email]),
-    'companyEmail' : new FormControl(null, [Validators.email]),
-    'addresses' : new FormArray([]),
+  clienteForm: FormGroup = new FormGroup({
+    'disabled': new FormControl(false),
+    'name': new FormControl(null, [Validators.required]),
+    'surname': new FormControl(null, [Validators.required]),
+    'cpf': new FormControl(null, [Validators.required, BrazilValidator.isValidCpf()]),
+    'cnpj': new FormControl(null, [BrazilValidator.isValidCpf()]),
+    'rg': new FormControl(null, [Validators.required]),
+    'cellphone': new FormControl(null, [Validators.required]),
+    'companyCellPhone': new FormControl(null),
+    'telephone': new FormControl(null, [Validators.required]),
+    'companyTelephone': new FormControl(null),
+    'birthDate': new FormControl(null, [Validators.required]),
+    'birthDateCompany': new FormControl(null),
+    'subscription': new FormControl(null),
+    'socialReason': new FormControl(null),
+    'fantasyName': new FormControl(null),
+    'ramal': new FormControl(null),
+    'email': new FormControl(null, [Validators.email]),
+    'companyEmail': new FormControl(null, [Validators.email]),
+    'addresses': new FormArray([]),
     'codigo': new FormControl(''),
     'nomeVendedor': new FormControl(''),
     'tabela': new FormArray([]), // ver de onde eu tirei essa tabela
@@ -70,12 +72,22 @@ export class ClientesComponent implements OnInit {
   public enderecos: any = [{}];
 
   constructor(
-    private readonly clientService : ClientService,
-    private readonly correiosService : CorreiosService,
-    private readonly router : Router
+    private readonly clientService: ClientService,
+    private readonly correiosService: CorreiosService,
+    private readonly router: Router,
+    private readonly rhService: RhService
   ) { }
 
   ngOnInit(): void {
+
+    this.rhService.find().subscribe((data: any) => {
+      for (let oneData of data) {
+        if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
+          this.vendedores.push(oneData)
+        }
+      }
+    })
+
   }
 
   public toggleClienteSection(value: string): void {
@@ -86,35 +98,35 @@ export class ClientesComponent implements OnInit {
     return this.clienteForm.get('addresses') as FormArray;
   }
 
-  get tabela(){
+  get tabela() {
     return this.clienteForm.get('tabela') as FormArray;
   }
 
   public adicionarEndereco(): void {
     this.addresses.push(
       new FormGroup({
-        'cep' : new FormControl(null, [BrazilValidator.isValidCEP()]),
-        'address' : new FormControl(null),
-        'number' : new FormControl(null),
-        'complement' : new FormControl(null),
-        'neighborhood' : new FormControl(null),
-        'city' : new FormControl(null),
-        'state' : new FormControl(null),
-        'country' : new FormControl(null),
+        'cep': new FormControl(null, [BrazilValidator.isValidCEP()]),
+        'address': new FormControl(null),
+        'number': new FormControl(null),
+        'complement': new FormControl(null),
+        'neighborhood': new FormControl(null),
+        'city': new FormControl(null),
+        'state': new FormControl(null),
+        'country': new FormControl(null),
       })
     )
   }
 
   public removerEndereco(id: number): void {
     this.addresses.removeAt(id)
-    console.log(this.addresses);
+    // console.log(this.addresses);
   }
 
   public toggleDesativadoCheckbox(): void {
-    if(this.desativadoCheckbox === true){
+    if (this.desativadoCheckbox === true) {
       this.desativadoCheckbox = false
       this.clienteForm.get('disabled')?.setValue(false)
-    }else{
+    } else {
       this.desativadoCheckbox = true
       this.clienteForm.get('disabled')?.setValue(true)
     }
@@ -122,7 +134,7 @@ export class ClientesComponent implements OnInit {
 
   public toggleTipoPessoa(value: string): void {
     this.tipoPessoa = value;
-    if(value == 'fisica') {
+    if (value == 'fisica') {
       // Person validators
       this.clienteForm.controls.name.setValidators([Validators.required])
       this.clienteForm.controls.surname.setValidators([Validators.required])
@@ -131,7 +143,7 @@ export class ClientesComponent implements OnInit {
       this.clienteForm.controls.cellphone.setValidators([Validators.required])
       this.clienteForm.controls.telephone.setValidators([Validators.required])
       this.clienteForm.controls.birthDate.setValidators([Validators.required])
-      this.clienteForm.controls.email.setValidators([ Validators.email])
+      this.clienteForm.controls.email.setValidators([Validators.required, Validators.email])
       // Clear company validators
       this.clienteForm.controls.fantasyName.clearValidators()
       this.clienteForm.controls.fantasyName.updateValueAndValidity()
@@ -151,7 +163,7 @@ export class ClientesComponent implements OnInit {
       this.clienteForm.controls.ramal.updateValueAndValidity()
       this.clienteForm.controls.companyEmail.clearValidators()
       this.clienteForm.controls.companyEmail.updateValueAndValidity()
-    } else if(value == 'juridica') {
+    } else if (value == 'juridica') {
       // Company validators
       this.clienteForm.controls.fantasyName.setValidators([Validators.required])
       this.clienteForm.controls.socialReason.setValidators([Validators.required])
@@ -182,7 +194,7 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-  changeAddress(event : any, i : number) {
+  changeAddress(event: any, i: number) {
     let cep: string = event.target.value;
     cep = cep.replace('-', '');
 
@@ -196,8 +208,8 @@ export class ClientesComponent implements OnInit {
     })
   }
 
-  submitClient(data : any) {
-    if(this.clienteForm.valid) {
+  submitClient(data: any) {
+    if (this.clienteForm.valid) {
       this.clientService.create(data).subscribe((dataReturn) => {
         Swal.fire({
           title: '<h4>Cliente adicionado !</h4>',
@@ -206,7 +218,7 @@ export class ClientesComponent implements OnInit {
           position: 'top',
           showConfirmButton: false,
           timer: 2000,
-          timerProgressBar: true ,
+          timerProgressBar: true,
           width: '500px'
         })
         this.router.navigate(['sistema', 'vendas', 'clientes', 'listar'])
@@ -216,32 +228,32 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-  solicitar(){
-    if(this.solicitado==false){
-      this.solicitado=true
+  solicitar() {
+    if (this.solicitado == false) {
+      this.solicitado = true
       this.clienteForm.get('boletoDdl')?.setValue('Solicitado')
-    }else{
-      this.solicitado=false
+    } else {
+      this.solicitado = false
       this.clienteForm.get('boletoDdl')?.setValue('Não Solicitado')
     }
   }
 
-  check(event: any){
+  check(event: any) {
     let button = event.target
-    if(button.checked){
+    if (button.checked) {
       this.tabela.push(new FormGroup({
         'nome': new FormControl(button.value)
       }))
-    }else{
-      for(let control of this.tabela.value){
-        if(control.nome == button.value){
+    } else {
+      for (let control of this.tabela.value) {
+        if (control.nome == button.value) {
           this.tabela.controls.splice(this.tabela.controls.map(
-            function(e: any){
+            function (e: any) {
               return e.nome
             }
           ).indexOf(button.value), 1)
           this.tabela.value.splice(this.tabela.value.map(
-            function(e: any){
+            function (e: any) {
               return e.nome
             }
           ).indexOf(button.value), 1)
@@ -250,4 +262,17 @@ export class ClientesComponent implements OnInit {
     }
   }
 
+  loadCep(cep: any, form: AbstractControl) {
+    cep = cep.value;
+    if (cep.length == 9) {
+      this.clientService
+        .updateCep(cep.replace(/-/g, ''))
+        .subscribe((data: any) => {
+          form.get('street')!.setValue(data.logradouro);
+          form.get('state')!.setValue(data.uf);
+          form.get('city')!.setValue(data.localidade);
+          form.get('neighborhood')!.setValue(data.bairro);
+        });
+    }
+  }
 }
