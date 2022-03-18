@@ -224,7 +224,7 @@
               <!-- Celular -->
               <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
                 <input mask="(00) 0000-000||(00) 00000-0000"
-                  [class.invalid]="clienteForm.controls.companyCellphone.invalid && (clienteForm.controls.companyCellphone.dirty || clienteForm.controls.companyCellphone.touched)"
+                  [class.invalid]="clienteForm.controls.companyCellphone?.invalid && (clienteForm.controls.companyCellphone?.dirty || clienteForm.controls.companyCellphone?.touched)"
                   formControlName="companyCellphone"
                   class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
                   placeholder="Celular">
@@ -368,10 +368,13 @@
 
             <!-- Nome do vendedor -->
             <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
-              <input formControlName="nomeVendedor"
+              <select formControlName="nomeVendedor"
                 class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
                 placeholder="Nome do vendedor" formControlName="vendedor">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do vendedor</label>
+                <option *ngFor="let vendedor of vendedores" value="{{vendedor.name}} {{vendedor.surname}}">
+                  {{vendedor.name}} {{vendedor.surname}}</option>
+                </select>
+              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
             </div>
 
           </div>

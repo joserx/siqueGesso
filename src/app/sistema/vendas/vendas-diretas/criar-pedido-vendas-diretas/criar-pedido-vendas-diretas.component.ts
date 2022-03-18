@@ -87,6 +87,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     this.clienteService.find().subscribe((data:any)=>{
       this.clientes = data
       this.originalClientes = data
+      console.log("Clientes:", this.clientes);
     })
     this.rhService.find().subscribe((data:any)=>{
       for(let oneData of data){

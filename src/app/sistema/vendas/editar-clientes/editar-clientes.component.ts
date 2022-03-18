@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { getDate } from 'src/environments/global';
 import Swal from 'sweetalert2';
@@ -15,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class EditarClientesComponent implements OnInit {
 
+  public vendedores: any[] = [];
   public pedidos: any[] = []
   public clienteSection: string = 'cadastro';
   public solicitado: boolean = false
@@ -38,7 +40,7 @@ export class EditarClientesComponent implements OnInit {
     'socialReason' : new FormControl(null),
     'fantasyName' : new FormControl(null),
     'ramal' : new FormControl(null),
-    'email' : new FormControl(null, [Validators.required, Validators.email]),
+    'email' : new FormControl(null),
     'companyEmail' : new FormControl(null, [Validators.email]),
     'addresses' : new FormArray([]),
     'codigo': new FormControl(''),
@@ -69,12 +71,20 @@ export class EditarClientesComponent implements OnInit {
     private readonly correiosService : CorreiosService,
     private readonly router : Router,
     private readonly route : ActivatedRoute,
-    private readonly pedidosService: PedidosService
+    private readonly pedidosService: PedidosService,
+    private readonly rhService: RhService
   ) { 
 
   }
 
   ngOnInit(): void {    
+    this.rhService.find().subscribe((data: any) => {
+      for (let oneData of data) {
+        if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
+          this.vendedores.push(oneData)
+        }
+      }
+    })
     const routeParams = this.route.snapshot.paramMap;
     this.clientId = Number(routeParams.get('id'));
     this.clientService.findOne(this.clientId).subscribe((data : any) => {
@@ -215,7 +225,7 @@ export class EditarClientesComponent implements OnInit {
       this.clienteForm.controls.cellphone.setValidators([Validators.required])      
       this.clienteForm.controls.telephone.setValidators([Validators.required])      
       this.clienteForm.controls.birthDate.setValidators([Validators.required])      
-      this.clienteForm.controls.email.setValidators([Validators.required, Validators.email])      
+      this.clienteForm.controls.email.setValidators([Validators.email])      
       // Clear company validators
       this.clienteForm.controls.fantasyName.clearValidators()
       this.clienteForm.controls.fantasyName.updateValueAndValidity()
