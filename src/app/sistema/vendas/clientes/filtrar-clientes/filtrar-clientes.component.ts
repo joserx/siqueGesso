@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-filtrar-clientes',
@@ -10,8 +12,12 @@ export class FiltrarClientesComponent implements OnInit {
 
   public clientes : any[] = []
   public clienteOriginal: any;
+  create: boolean = false
 
-  constructor(private readonly clientService : ClientService) { 
+  constructor(
+    private readonly clientService : ClientService,
+    private router: Router
+  ) { 
     this.clientService.find().subscribe((data : any) => {
       this.clientes = data
       this.clienteOriginal = data
@@ -19,6 +25,12 @@ export class FiltrarClientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar){
+      this.create = true
+    }
   }
   typeClient(value: any): string{
     console.log(value)

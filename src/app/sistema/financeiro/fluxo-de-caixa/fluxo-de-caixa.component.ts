@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { promise } from 'protractor';
 import { ContasPagarService } from 'src/app/services/contas-pagar.service';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
@@ -37,10 +39,14 @@ export class FluxoDeCaixaComponent implements OnInit {
 
   constructor(
     private contasPagarService: ContasPagarService,
-    private contasReceberService: ContasReceberService
+    private contasReceberService: ContasReceberService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.financeiro_ver) == PermissionsUsers.financeiro_ver)){
+      this.router.navigate(['sistema'])
+    }
     this.totalFluxo();
   }
 

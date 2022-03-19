@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { timingSafeEqual } from 'crypto';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { SolicitacaoService } from 'src/app/services/solicitacao.service';
 import Swal from 'sweetalert2';
 
@@ -20,6 +22,7 @@ export class SolicitacaoPedidoComponent implements OnInit {
   public solicitacoes: any = []
   public solId: number 
   public atualSol: any = []
+  create: boolean = false
 
   solicitacaoForm: FormGroup = new FormGroup({
     'numero': new FormControl('', [Validators.required]),
@@ -31,10 +34,17 @@ export class SolicitacaoPedidoComponent implements OnInit {
   })
 
   constructor(
-    private readonly solicitacaoService: SolicitacaoService
+    private readonly solicitacaoService: SolicitacaoService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar){
+      this.create = true
+    }
     this.solicitacaoService.find().subscribe((data:any)=>{
       this.solicitacoes = data
       console.log(this.solicitacoes)

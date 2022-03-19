@@ -8,6 +8,7 @@ import { CargoService } from 'src/app/services/cargo.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { RhService } from 'src/app/services/rh.service';
 import { VtService } from 'src/app/services/vt.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
@@ -160,6 +161,9 @@ export class CadastrarColaboradorComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_ver) == PermissionsUsers.rh_ver)){
+      this.router.navigate(['sistema'])
+    }
     this.turnoService.find().subscribe((data:any)=>{
       this.selectTurno = data
     })

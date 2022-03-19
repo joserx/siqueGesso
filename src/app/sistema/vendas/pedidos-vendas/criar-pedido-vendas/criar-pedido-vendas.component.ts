@@ -7,6 +7,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RhService } from 'src/app/services/rh.service';
 import { StatusService } from 'src/app/services/status.service';
@@ -103,21 +104,26 @@ export class CriarPedidoVendasComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
     private readonly filialServices: FilialService
-  ) { }
+    ) { }
+    
+    ngOnInit(): void {
+      if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
+        this.router.navigate(['sistema'])
+      }
+      this.filialServices.find().subscribe((data:any)=>{
+        this.filial = data
+      })
+      this.clienteService.find().subscribe((data:any)=>{
+        this.clientes = data
+        this.originalClientes = data
+        console.log('clintes', this.clientes)
+      })
+      this.rhService.find().subscribe((data: any)=>{
+        for(let oneData of data){
+          if(oneData.role.toLowerCase().substring(0,8)=='vendedor'){
+            this.vendedores.push(oneData)
+          }
 
-  ngOnInit(): void {
-    this.filialServices.find().subscribe((data: any) => {
-      this.filial = data
-    })
-    this.clienteService.find().subscribe((data: any) => {
-      this.clientes = data
-      this.originalClientes = data
-      // console.log('clintes', this.clientes)
-    })
-    this.rhService.find().subscribe((data: any) => {
-      for (let oneData of data) {
-        if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
-          this.vendedores.push(oneData)
         }
       }
     })

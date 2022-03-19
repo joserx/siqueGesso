@@ -51,6 +51,12 @@ export class VisualizarCategoriaComponent implements OnInit, OnChanges {
       edit: PermissionsUsers.rh_editar,
       delete: PermissionsUsers.rh_excluir,
       view: PermissionsUsers.rh_ver,
+    },
+    {
+      name: 'CONFIGURAÇÕES',
+      edit: PermissionsUsers.config_editar,
+      delete: PermissionsUsers.config_excluir,
+      view: PermissionsUsers.config_ver,
     }
   ]
   permission: any = {}

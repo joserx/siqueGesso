@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-expedicao-home',
@@ -16,9 +18,14 @@ export class ExpedicaoHomeComponent implements OnInit {
     { nome: "Baixa de entrega", icon: "bi-box-seam", href:"//sistema/expedicao/baixa" }
   ]
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
   }
 
 }

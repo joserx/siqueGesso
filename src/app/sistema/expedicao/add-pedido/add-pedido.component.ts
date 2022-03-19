@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-add-pedido',
@@ -34,9 +36,14 @@ export class AddPedidoComponent implements OnInit {
   :::::::::::::::::::::::::::::
   */
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar)){
+      this.router.navigate(['sistema'])
+    }
   }
 
   filterBefore = "";

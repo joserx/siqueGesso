@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ExpedicaoService } from 'src/app/services/expedicao.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-expedicao',
@@ -29,7 +31,8 @@ export class ExpedicaoComponent implements OnInit {
 
 
   constructor(
-    private readonly expedicaoService: ExpedicaoService
+    private readonly expedicaoService: ExpedicaoService,
+    private router: Router
   ) { }
 
 
@@ -41,6 +44,9 @@ export class ExpedicaoComponent implements OnInit {
   */
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
     this.expedicaoService.find().subscribe((data:any)=>{
       this.ordens = data
     }, (err)=>{

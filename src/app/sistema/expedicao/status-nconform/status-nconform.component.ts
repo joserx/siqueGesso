@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NconfromService } from 'src/app/services/nconfrom.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { StatusService } from 'src/app/services/status.service';
 import Swal from 'sweetalert2';
 
@@ -28,13 +30,25 @@ export class StatusNconformComponent implements OnInit {
   public thisStatusName: string
   public atualId: number
   public status: any[] = []
+  create: boolean = false
+  delete: boolean = false
 
   constructor(
     private readonly nConformService: NconfromService,
-    private readonly statusService: StatusService
+    private readonly statusService: StatusService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar){
+      this.create = true
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_excluir) == PermissionsUsers.expedicao_excluir){
+      this.delete = true
+    }
     this.nConformService.find().subscribe((data: any)=>{
       this.nConform = data
     })

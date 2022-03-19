@@ -6,6 +6,8 @@ import { ViewRecebimentoComponent } from './view-recebimento/view-recebimento.co
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import Swal from 'sweetalert2';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contas-a-receber',
@@ -39,10 +41,24 @@ export class ContasAReceberComponent implements OnInit {
   public recebimento: any;
   public recebimentosFiltrados: any = [];
   public search: string = '';
+  create: boolean = false
+  del: boolean = false
 
-  constructor(private contasReceberService: ContasReceberService) {}
+  constructor(
+    private contasReceberService: ContasReceberService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.financeiro_ver) == PermissionsUsers.financeiro_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.financeiro_editar) == PermissionsUsers.financeiro_editar){
+      this.create = true
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.financeiro_excluir) == PermissionsUsers.financeiro_excluir){
+      this.del = true
+    }
     this.getRecebimentos();
   }
 

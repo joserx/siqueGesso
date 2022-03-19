@@ -91,6 +91,7 @@
               cursor="pointer"
               data-bs-dismiss="modal"
               aria-label="Close"
+              *ngIf="edit"
             ></i>
             <i
               class="fs-5 bi-trash-fill icon-delete p-3"
@@ -98,6 +99,7 @@
               (click)="deleteRh(rh.id)"
               data-bs-dismiss="modal"
               aria-label="Close"
+              *ngIf="delete"
             ></i>
           </div>
         </div>

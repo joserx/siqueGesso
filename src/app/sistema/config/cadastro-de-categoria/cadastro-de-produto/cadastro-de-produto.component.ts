@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { CategoriaProdutoService } from 'src/app/services/categoria-produto.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-cadastro-de-produto',
@@ -29,7 +30,11 @@ export class CadastroDeProdutoComponent implements OnInit {
     private readonly router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
+  }
 
   public status(): void {
     this.desativadoCheckbox === true

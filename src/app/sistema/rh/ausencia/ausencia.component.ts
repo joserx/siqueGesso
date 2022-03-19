@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AusenciaService } from 'src/app/services/ausencia.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { RhService } from 'src/app/services/rh.service';
 import Swal from 'sweetalert2';
 
@@ -25,10 +27,14 @@ export class AusenciaComponent implements OnInit {
   })
   constructor(
     private ausenciaService: AusenciaService,
-    private rhService: RhService
+    private rhService: RhService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar)){
+      this.router.navigate(['sistema', 'rh'])
+    }
     this.ausenciaService.find().subscribe((data: any)=>{
       this.colab = data
       this.colabOriginal = data
@@ -50,15 +56,32 @@ export class AusenciaComponent implements OnInit {
   }
 
   submitForm(data: any){
-    if(this.ausenciaForm.valid){
-      this.ausenciaService.create(data).subscribe(()=>{
-        this.ausenciaForm.get('colaborador')?.setValue('')
-        this.ausenciaForm.get('cargo')?.setValue('')
-        this.ausenciaForm.get('data')?.setValue(null)
-        this.ausenciaForm.get('tipo')?.setValue('')
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar){
+      if(this.ausenciaForm.valid){
+        this.ausenciaService.create(data).subscribe(()=>{
+          this.ausenciaForm.get('colaborador')?.setValue('')
+          this.ausenciaForm.get('cargo')?.setValue('')
+          this.ausenciaForm.get('data')?.setValue(null)
+          this.ausenciaForm.get('tipo')?.setValue('')
+          Swal.fire({ 
+            title: '<h4>Ausência adicionada !</h4>', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px',
+          })
+          this.ausenciaService.find().subscribe((data: any)=>{
+            this.colab = data
+            console.log(this.colab)
+          })
+        })
+      }else{
         Swal.fire({ 
-          title: '<h4>Ausência adicionada !</h4>', 
-          icon: 'success', 
+          title: '<h4>Preencha os campos necessários !</h4>', 
+          icon: 'error', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
@@ -66,22 +89,17 @@ export class AusenciaComponent implements OnInit {
           timerProgressBar: true,
           width: '500px',
         })
-        this.ausenciaService.find().subscribe((data: any)=>{
-          this.colab = data
-          console.log(this.colab)
-        })
-      })
+      }
     }else{
-      Swal.fire({ 
-        title: '<h4>Preencha os campos necessários !</h4>', 
-        icon: 'error', 
-        toast: true, 
-        position: 'top', 
-        showConfirmButton: false, 
-        timer: 2000, 
-        timerProgressBar: true,
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: '<h4>Você não possui permissão para isso !</h4>',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
         width: '500px',
-      })
+      });
     }
   }
 

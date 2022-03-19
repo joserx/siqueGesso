@@ -18,7 +18,7 @@
       <div class="row mt-4 m-0 p-0">
 
         <!-- Botão Adicionar -->
-        <div class="col-3 px-2 p-0 m-0">
+        <div *ngIf="create" class="col-3 px-2 p-0 m-0">
           <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/vendas/vendas-diretas/cadastro">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</h5>
             <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
@@ -72,7 +72,7 @@
               <td>{{ pedidos.updated_at | date }}</td>
               <td>
                 <i class="fs-5 bi-eye-fill icon-view px-2 py-1" cursor="pointer" routerLink="/sistema/vendas/vendas-diretas/visualizar/{{pedidos.id}}"></i>
-                <i class="fs-5 bi-pen-fill icon-edit px-2 py-1 ms-2" cursor="pointer" routerLink="/sistema/vendas/vendas-diretas/editar/{{pedidos.id}}"></i>
+                <i class="fs-5 bi-pen-fill icon-edit px-2 py-1 ms-2" cursor="pointer" routerLink="/sistema/vendas/vendas-diretas/editar/{{pedidos.id}}" *ngIf="create"></i>
               </td>
             </tr>
           </tbody>

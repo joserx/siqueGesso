@@ -1,5 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FilialService } from 'src/app/services/filial.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,10 +16,14 @@ export class ListarCadastroLojaComponent implements OnInit {
   lojasOriginais: any[] = []
 
   constructor(
-    private readonly filialService: FilialService
+    private readonly filialService: FilialService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
     this.filialService.find().subscribe((data: any)=>{
       this.lojas = data
       this.lojasOriginais = data
@@ -33,7 +40,7 @@ export class ListarCadastroLojaComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.filialService.delete(id).subscribe((data: any)=>{
+        this.filialService.delete(id).subscribe((data: any)=>{   
           Swal.fire({
             position: 'top',
             icon: 'success',
@@ -51,7 +58,7 @@ export class ListarCadastroLojaComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'info',
-          title: '<h4>Filial não deletada !</h4>',
+          title: '<h4>Turno não deletada !</h4>',
           showConfirmButton: false,
           timer: 1500,
           toast: true,

@@ -33,7 +33,7 @@
                 </div>
                 <div class="col text-end">
                   <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
-                  <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" data-bs-dismiss="modal"></i>
+                  <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" data-bs-dismiss="modal" *ngIf="create"></i>
                   <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
                 </div>
               </div>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col text-end">
                   <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
-                  <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" data-bs-dismiss="modal"></i>
+                  <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" data-bs-dismiss="modal" *ngIf="create"></i>
                   <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
                 </div>
               </div>

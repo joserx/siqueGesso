@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 import Swal from 'sweetalert2';
 
@@ -37,6 +38,9 @@ export class CadastrarVeiculoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar)){
+      this.router.navigate(['sistema'])
+    }
   }
 
   sendForm(data: any){

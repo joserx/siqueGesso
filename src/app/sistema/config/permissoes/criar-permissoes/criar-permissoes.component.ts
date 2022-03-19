@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PermissionsService } from 'src/app/services/permissions.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
@@ -49,6 +50,12 @@ export class CriarPermissoesComponent implements OnInit {
       edit: PermissionsUsers.rh_editar,
       delete: PermissionsUsers.rh_excluir,
       view: PermissionsUsers.rh_ver,
+    },
+    {
+      name: 'CONFIGURAÇÕES',
+      edit: PermissionsUsers.config_editar,
+      delete: PermissionsUsers.config_excluir,
+      view: PermissionsUsers.config_ver,
     }
   ]
   formPermission: FormGroup = new FormGroup({
@@ -57,7 +64,8 @@ export class CriarPermissoesComponent implements OnInit {
   })
 
   constructor(
-    private readonly permissionService: PermissionsService
+    private readonly permissionService: PermissionsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +102,11 @@ export class CriarPermissoesComponent implements OnInit {
         this.permissionService.find().subscribe((data:any)=>{
           this.populatePermissions(data)
           this.closeOpt()
+          let currentUrl = this.router.url
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([currentUrl]);
+            console.log(currentUrl);
+          });
           Swal.fire({
             position: 'top',
             icon: 'success',
