@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { SolicitacaoService } from 'src/app/services/solicitacao.service';
 
 @Component({
@@ -12,10 +14,14 @@ export class ConsultaStatusComponent implements OnInit {
   public solicitacoesOriginal: any[] = []
 
   constructor(
-    private readonly solicitacaoService: SolicitacaoService
+    private readonly solicitacaoService: SolicitacaoService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
     this.solicitacaoService.find().subscribe((data:any)=>{
       this.solicitacoes = data
       this.solicitacoesOriginal = data

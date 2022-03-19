@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { getDate } from 'src/environments/global';
 import Swal from 'sweetalert2';
@@ -74,7 +75,10 @@ export class EditarClientesComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {  
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
+      this.router.navigate(['sistema'])
+    }  
     const routeParams = this.route.snapshot.paramMap;
     this.clientId = Number(routeParams.get('id'));
     this.clientService.findOne(this.clientId).subscribe((data : any) => {

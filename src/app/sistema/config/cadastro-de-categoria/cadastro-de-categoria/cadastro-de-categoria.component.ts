@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-cadastro-de-categoria',
@@ -24,7 +26,13 @@ export class CadastroDeCategoriaComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
+  }
 }

@@ -79,7 +79,7 @@
               </div>
               <div class="col text-end">
               <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}" data-bs-dismiss="modal" aria-label="Close"></i>
-              <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer" data-bs-dismiss="modal" aria-label="Close"></i>
+              <i *ngIf="create" class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer" data-bs-dismiss="modal" aria-label="Close"></i>
               </div>
           </div>
         <!-- Dados cadastrais -->

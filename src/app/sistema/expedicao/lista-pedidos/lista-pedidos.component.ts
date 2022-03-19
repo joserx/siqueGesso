@@ -6,6 +6,8 @@ import { SolicitacaoService } from 'src/app/services/solicitacao.service';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -55,12 +57,14 @@ export class ListaPedidosComponent implements OnInit {
     'data': new FormControl(null),
     'rh': new FormControl(null)
   })
+  create: boolean = false
 
   constructor(
     private readonly solicitacaoService: SolicitacaoService,
     private readonly embarqueService: EmbarqueService,
     private readonly rhService: RhService,
-    private readonly veiculosService: VeiculosService
+    private readonly veiculosService: VeiculosService,
+    private router: Router
   ) { }
 
   
@@ -69,6 +73,12 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver){
+      this.create = true
+    }
     this.veiculosService.find().subscribe((data:any)=>{
       this.veiculos = data
       this.veiculosOriginal = data

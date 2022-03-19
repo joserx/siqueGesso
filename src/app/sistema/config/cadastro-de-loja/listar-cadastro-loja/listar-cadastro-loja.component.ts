@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FilialService } from 'src/app/services/filial.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,7 +15,8 @@ export class ListarCadastroLojaComponent implements OnInit {
   lojasOriginais: any[] = []
 
   constructor(
-    private readonly filialService: FilialService
+    private readonly filialService: FilialService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -21,6 +24,9 @@ export class ListarCadastroLojaComponent implements OnInit {
       this.lojas = data
       this.lojasOriginais = data
     })
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
   }
 
   delete(id: number){

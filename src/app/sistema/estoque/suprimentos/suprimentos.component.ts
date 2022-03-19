@@ -3,6 +3,7 @@ import { SuprimentoService } from 'src/app/services/suprimentos.service';
 import { EditSuprimentoComponent } from './edit-suprimento/edit-suprimento.component';
 import { ViewSuprimentoComponent } from './view-suprimento/view-suprimento.component';
 import Swal from 'sweetalert2';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-suprimentos',
@@ -20,11 +21,19 @@ export class SuprimentosComponent implements OnInit {
   public suprimento: any;
   public suprimentosFiltrados: any = [];
   public search: string = '';
+  create: boolean = false
+  del: boolean = false
 
   constructor(private suprimentoService: SuprimentoService) {}
 
   ngOnInit(): void {
     this.getSuprimentos();
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.estoque_excluir) == PermissionsUsers.estoque_excluir){
+      this.del = true
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.estoque_editar) == PermissionsUsers.estoque_editar){
+      this.create = true
+    }
   }
 
   pesquisaSuprimentos() {

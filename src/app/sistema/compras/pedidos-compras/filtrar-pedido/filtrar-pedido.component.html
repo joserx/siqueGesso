@@ -86,7 +86,7 @@
               data-bs-dismiss="modal"
               aria-label="Close"
             ></i>
-            <i
+            <i *ngIf="del"
               class="fs-5 bi-trash-fill icon-delete p-3"
               cursor="pointer"
               (click)="deletePedido(pedido.id)"

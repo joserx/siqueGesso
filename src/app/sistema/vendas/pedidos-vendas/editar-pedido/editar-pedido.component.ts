@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RhService } from 'src/app/services/rh.service';
 import { StatusService } from 'src/app/services/status.service';
@@ -100,6 +101,9 @@ export class EditarPedidoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
+      this.router.navigate(['sistema'])
+    }
     for (let item of this.item.value) {
       this.totalProduto(item);
     }

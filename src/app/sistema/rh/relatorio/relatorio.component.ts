@@ -5,6 +5,8 @@ import { RhService } from 'src/app/services/rh.service';
 import { jsPDF } from 'jspdf'
 import { Workbook, TableStyleProperties } from 'exceljs';
 import * as fs from 'file-saver';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-relatorio',
@@ -35,10 +37,14 @@ export class RelatorioComponent implements OnInit {
 
   constructor(
     private faltaService: FaltasService,
-    private rhService: RhService
+    private rhService: RhService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_ver) == PermissionsUsers.rh_ver)){
+      this.router.navigate(['sistema', 'rh'])
+    }
     this.faltaService.find().subscribe((data: any)=>{
       this.colab = data
       this.colabOriginal = data

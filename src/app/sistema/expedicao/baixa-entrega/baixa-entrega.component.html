@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <form [formGroup]="baixaForm" (ngSubmit)="baixaEntrega(baixaForm)">
+            <form *ngIf="create" [formGroup]="baixaForm" (ngSubmit)="baixaEntrega(baixaForm)">
                 <div class="row mt-4 col-12">
                     <!-- Nº do embarque -->
                     <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">

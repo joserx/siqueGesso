@@ -25,7 +25,7 @@
     </div>
 
     <!-- Adicionar produtos -->
-    <div class="col-1 px-2 p-0 m-0 text-center">
+    <div class="col-1 px-2 p-0 m-0 text-center" *ngIf="create">
         <a class="px-2 py-2" data-bs-toggle="modal" data-bs-target="#adicionarSuprimentos">
             <i class="
           bi-plus-square-fill
@@ -79,12 +79,13 @@
             <i class="fs-5 bi-eye-fill icon-view p-3" (click)="loadSuprimentoView(suprimento)" cursor="pointer"></i>
         </a>
         <a data-bs-toggle="modal" data-bs-target="#editSuprimento" (click)="loadSuprimentoEdit(suprimento)">
-            <i class="fs-5 bi-pen-fill icon-edit p-3" (click)="loadSuprimentoEdit(suprimento)" cursor="pointer"></i>
+            <i class="fs-5 bi-pen-fill icon-edit p-3" (click)="loadSuprimentoEdit(suprimento)" cursor="pointer" *ngIf="create"></i>
         </a>
         <a><i
         class="fs-5 bi-trash-fill icon-delete p-3"
         cursor="pointer"
         (click)="delete(suprimento)"
+        *ngIf="del"
       ></i
     ></a>
     </div>

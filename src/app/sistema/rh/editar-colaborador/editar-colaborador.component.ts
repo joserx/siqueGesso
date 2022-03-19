@@ -13,6 +13,7 @@ import { ExamesService } from 'src/app/services/exames.service';
 import { FaltasService } from 'src/app/services/faltas.service';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { RhService } from 'src/app/services/rh.service';
 import { VtService } from 'src/app/services/vt.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
@@ -169,6 +170,9 @@ export class EditarColaboradorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {  
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar)){
+      this.router.navigate(['sistema', 'rh', 'listar'])
+    }
     this.turnoService.find().subscribe((data:any)=>{
       this.selectTurno = data
     })

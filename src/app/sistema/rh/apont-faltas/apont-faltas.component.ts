@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FaltasService } from 'src/app/services/faltas.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { RhService } from 'src/app/services/rh.service';
 import Swal from 'sweetalert2';
 
@@ -27,10 +29,14 @@ export class ApontFaltasComponent implements OnInit {
   })
   constructor(
     private faltaService: FaltasService,
-    private rhService: RhService
+    private rhService: RhService,
+    private router: Router
   ) {}
   
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar)){
+      this.router.navigate(['sistema', 'rh'])
+    }
     this.faltaService.find().subscribe((data: any)=>{
       this.colab = data
       this.colabOriginal = data
@@ -51,19 +57,36 @@ export class ApontFaltasComponent implements OnInit {
   }
 
   submitForm(data: any){
-    if(this.apontForm.valid){
-      this.faltaService.create(data).subscribe(()=>{
-        this.apontForm.get('colaborador')?.setValue('')
-        this.apontForm.get('cargo')?.setValue('')
-        this.apontForm.get('data')?.setValue(null)
-        this.apontForm.get('tipo')?.setValue('')
-        this.apontForm.get('periodo')?.setValue('')
-        this.apontForm.get('tempo')?.setValue(null)
-        this.apontForm.get('diasAtestado')?.setValue('')
-        this.apontForm.get('atestado')?.setValue('')
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar){
+      if(this.apontForm.valid){
+        this.faltaService.create(data).subscribe(()=>{
+          this.apontForm.get('colaborador')?.setValue('')
+          this.apontForm.get('cargo')?.setValue('')
+          this.apontForm.get('data')?.setValue(null)
+          this.apontForm.get('tipo')?.setValue('')
+          this.apontForm.get('periodo')?.setValue('')
+          this.apontForm.get('tempo')?.setValue(null)
+          this.apontForm.get('diasAtestado')?.setValue('')
+          this.apontForm.get('atestado')?.setValue('')
+          Swal.fire({ 
+            title: '<h4>Falta adicionada !</h4>', 
+            icon: 'success', 
+            toast: true, 
+            position: 'top', 
+            showConfirmButton: false, 
+            timer: 2000, 
+            timerProgressBar: true,
+            width: '500px',
+          })
+          this.faltaService.find().subscribe((data: any)=>{
+            this.colab = data
+            console.log(this.colab)
+          })
+        })
+      }else{
         Swal.fire({ 
-          title: '<h4>Falta adicionada !</h4>', 
-          icon: 'success', 
+          title: '<h4>Preencha os campos necessários !</h4>', 
+          icon: 'error', 
           toast: true, 
           position: 'top', 
           showConfirmButton: false, 
@@ -71,22 +94,7 @@ export class ApontFaltasComponent implements OnInit {
           timerProgressBar: true,
           width: '500px',
         })
-        this.faltaService.find().subscribe((data: any)=>{
-          this.colab = data
-          console.log(this.colab)
-        })
-      })
-    }else{
-      Swal.fire({ 
-        title: '<h4>Preencha os campos necessários !</h4>', 
-        icon: 'error', 
-        toast: true, 
-        position: 'top', 
-        showConfirmButton: false, 
-        timer: 2000, 
-        timerProgressBar: true,
-        width: '500px',
-      })
+      }
     }
   }
 

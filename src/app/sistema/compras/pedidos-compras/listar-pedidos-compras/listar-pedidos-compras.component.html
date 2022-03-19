@@ -16,7 +16,7 @@
 
             <div class="row mt-4 m-0 p-0">
                 <!-- Botão Adicionar -->
-                <div class="col-4 px-2 p-0 m-0">
+                <div class="col-4 px-2 p-0 m-0" *ngIf="create">
                     <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/compras/pedidos/criar">
                         <h5 class="fw-normal my-auto text-truncate text-custom-dark">
                             Adicionar
@@ -68,7 +68,7 @@
                                     <i class="fs-5 bi-eye-fill icon-view p-3" (click)="loadPedido(pedidos)" cursor="pointer"></i>
                                 </a>
 
-                                <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(pedidos)"></i>
+                                <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer" (click)="delete(pedidos)" *ngIf="del"></i>
                             </td>
                         </tr>
                     </tbody>

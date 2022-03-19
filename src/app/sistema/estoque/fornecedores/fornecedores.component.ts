@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
 import { EditFornecedorComponent } from './edit-fornecedor/edit-fornecedor.component';
 import { ViewFornecedorComponent } from './view-fornecedor/view-fornecedor.component';
@@ -13,6 +14,8 @@ export class FornecedoresComponent implements OnInit {
   public fornecedores: any = [];
   public fornecedoresFiltrados: any = [];
   public search: string = '';
+  create: boolean = false
+  del: boolean = false
 
   @ViewChild(ViewFornecedorComponent)
   viewFornecedorCompenent: any;
@@ -23,6 +26,12 @@ export class FornecedoresComponent implements OnInit {
   constructor(private fornecedorService: FornecedorService) {}
 
   ngOnInit(): void {
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.estoque_excluir) == PermissionsUsers.estoque_excluir){
+      this.del = true
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.estoque_editar) == PermissionsUsers.estoque_editar){
+      this.create = true
+    }
     this.getFornecedores();
   }
   pesquisaFornecedores() {

@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { FileService } from 'src/app/services/file.service';
 import { FilialService } from 'src/app/services/filial.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
@@ -48,6 +49,9 @@ export class CadastrarLojaComponent implements OnInit {
           document.getElementById(control)?.classList.remove('invalid');
         }
       });
+    }
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
     }
   }
 

@@ -6,6 +6,8 @@ import { FaltasService } from 'src/app/services/faltas.service';
 import { RhService } from 'src/app/services/rh.service';
 import { Workbook, TableStyleProperties } from 'exceljs';
 import * as fs from 'file-saver';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-relatorio-ausencia',
@@ -29,7 +31,8 @@ export class RelatorioAusenciaComponent implements OnInit {
   })
   constructor(
     private ausenciaService: AusenciaService,
-    private rhService: RhService
+    private rhService: RhService, 
+    private router: Router
   ) { }
 
   // Excel
@@ -42,6 +45,9 @@ export class RelatorioAusenciaComponent implements OnInit {
   fname="relatorio-ausencias"
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_ver) == PermissionsUsers.rh_ver)){
+      this.router.navigate(['sistema'])
+    }
     this.ausenciaService.find().subscribe((data:any)=>{
       this.ausencia = data
       this.ausenciaOriginal = data

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DestinacaoVendaService } from 'src/app/services/destinacao-venda.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,10 +16,16 @@ export class DestinacaoDaVendaListaComponent implements OnInit {
   public destinacoesFiltradas: any[] = [];
   data: any = {};
 
-  constructor(private DestinacaoVendaService: DestinacaoVendaService) {}
+  constructor(
+    private DestinacaoVendaService: DestinacaoVendaService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getDestinacoes();
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
   }
 
   mudarStatus(destinacao: any) {

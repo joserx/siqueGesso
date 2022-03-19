@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExpedicaoService } from 'src/app/services/expedicao.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-visualizar-expedicao',
@@ -64,10 +65,14 @@ export class VisualizarExpedicaoComponent implements OnInit {
 
   constructor(
     private readonly expedicaoService: ExpedicaoService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
     const routeParams = this.route.snapshot.paramMap
     this.exId = Number(routeParams.get('id'))
     this.expedicaoService.findOne(this.exId).subscribe((data:any)=>{

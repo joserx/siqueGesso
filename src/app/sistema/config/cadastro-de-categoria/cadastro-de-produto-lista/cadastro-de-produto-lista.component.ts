@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoriaProdutoService } from 'src/app/services/categoria-produto.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,10 +16,16 @@ export class CadastroDeProdutoListaComponent implements OnInit {
   public categoriasFiltradas: any[] = [];
   data: any = {};
 
-  constructor(private CategoriaProdutoService: CategoriaProdutoService) {}
+  constructor(
+    private CategoriaProdutoService: CategoriaProdutoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getCategorias();
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
   }
   mudarStatus(categoria: any) {
     if (categoria.status == true) categoria.status = false;

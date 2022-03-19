@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PedidoCompraService } from '../../../../services/pedido-compra.service';
 import { ViewPedidoComponent } from '../view-pedido/view-pedido.component';
 import Swal from 'sweetalert2';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-pedidos-compras',
@@ -16,10 +18,24 @@ export class ListarPedidosComprasComponent implements OnInit {
   public pedido: any;
   public pedidosFiltrados: any = [];
   public search: string = '';
+  del: boolean = false
+  create: boolean = false
 
-  constructor(private pedidoCompraService: PedidoCompraService) {}
+  constructor(
+    private pedidoCompraService: PedidoCompraService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.compras_ver) == PermissionsUsers.compras_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.compras_excluir) == PermissionsUsers.config_excluir){
+      this.del = true
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.compras_editar) == PermissionsUsers.compras_editar){
+      this.create = true
+    }
     this.getPedidos();
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-perquisar-venda',
@@ -14,8 +15,12 @@ export class PerquisarVendaComponent implements OnInit {
 
   public pedidos: any[] = []
   public pedidosOriginal: any[] = []
+  create: boolean = false
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
+      this.create = false
+    }
     this.pedidosService.find().subscribe((data:any)=>{
       for(let oneData of data){
         if(oneData.tipoVenda == 0){

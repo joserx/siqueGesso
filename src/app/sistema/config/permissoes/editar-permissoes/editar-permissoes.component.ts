@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PermissionsService } from 'src/app/services/permissions.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
@@ -15,7 +16,8 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
   @Output() eventEmitter = new EventEmitter<any>();
   @Input() permissionId: number
   constructor(
-    private permissionService: PermissionsService
+    private permissionService: PermissionsService,
+    private router: Router
   ) { }
   permissions: any = []
   areas: any = [
@@ -24,36 +26,63 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
       edit: PermissionsUsers.vendas_editar,
       delete: PermissionsUsers.vendas_excluir,
       view: PermissionsUsers.vendas_ver,
+      editFormControl: 'edit1',
+      deleteFormControl: 'delete1',
+      viewFormControl: 'view1'
     },
     {
       name: 'COMPRAS',
       edit: PermissionsUsers.compras_editar,
       delete: PermissionsUsers.compras_excluir,
       view: PermissionsUsers.compras_ver,
+      editFormControl: 'edit2',
+      deleteFormControl: 'delete2',
+      viewFormControl: 'view2'
     },
     {
       name: 'ESTOQUE',
       edit: PermissionsUsers.estoque_editar,
       delete: PermissionsUsers.estoque_excluir,
       view: PermissionsUsers.estoque_ver,
+      editFormControl: 'edit3',
+      deleteFormControl: 'delete3',
+      viewFormControl: 'view3'
     },
     {
       name:'FINANCEIRO',
       edit: PermissionsUsers.financeiro_editar,
       delete: PermissionsUsers.financeiro_excluir,
       view: PermissionsUsers.financeiro_ver,
+      editFormControl: 'edit4',
+      deleteFormControl: 'delete4',
+      viewFormControl: 'view4'
     },
     {
       name: 'EXPEDIÇÃO',
       edit: PermissionsUsers.expedicao_editar,
       delete: PermissionsUsers.expedicao_excluir,
       view: PermissionsUsers.expedicao_ver,
+      editFormControl: 'edit5',
+      deleteFormControl: 'delete5',
+      viewFormControl: 'view5'
     },
     {
       name: 'RH',
       edit: PermissionsUsers.rh_editar,
       delete: PermissionsUsers.rh_excluir,
       view: PermissionsUsers.rh_ver,
+      editFormControl: 'edit6',
+      deleteFormControl: 'delete6',
+      viewFormControl: 'view6'
+    },
+    {
+      name: 'CONFIGURAÇÕES',
+      edit: PermissionsUsers.config_editar,
+      delete: PermissionsUsers.config_excluir,
+      view: PermissionsUsers.config_ver,
+      editFormControl: 'edit7',
+      deleteFormControl: 'delete7',
+      viewFormControl: 'view7'
     }
   ]
   permission: any = {}
@@ -65,6 +94,10 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
   
+  teste(){
+    alert('teste')
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.permissions = []
     this.permission = {}
@@ -73,7 +106,6 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
       this.permissionService.findOne(this.permissionId).subscribe((data:any)=>{
         this.permissionForm.get('name')?.setValue(data.name)
         this.permission = data
-        console.log(data)
         for(let item of this.areas){
           this.permissionCheck(data.permission, item, true)
         }
@@ -115,8 +147,15 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
       data.value.permission=total
       this.permissionService.update(this.permissionId, data.value).subscribe((data: any)=>{
         this.permissionService.find().subscribe((data:any)=>{
-          this.populatePermissions(data)
+          this.permission = {}
+          this.permissions = []
+          this.permissionForm.reset()
           this.closeOpt()
+          let currentUrl = this.router.url
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([currentUrl]);
+            console.log(currentUrl);
+          });
           Swal.fire({
             position: 'top',
             icon: 'success',
@@ -126,8 +165,6 @@ export class EditarPermissoesComponent implements OnInit, OnChanges {
             toast: true,
             width: '500px'
           })
-          this.permission = {}
-          this.permissions = []
         })
       })
     }

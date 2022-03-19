@@ -35,7 +35,7 @@
                     <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Cliente</label>
                 </div>
             </div>
-            <div class="row d-flex justify-content-end mt-5">
+            <div class="row d-flex justify-content-end mt-5" *ngIf="create">
                 <div class="col-3 px-2 p-0 m-0 d-grid">
                     <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="submitForm(solicitacaoForm)">
                       <h5 class="fw-normal my-auto text-truncate text-custom-dark">Incluir</h5>

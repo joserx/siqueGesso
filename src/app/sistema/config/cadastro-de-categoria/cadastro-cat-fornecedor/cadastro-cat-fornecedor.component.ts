@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import {CategoriaFornecedorService} from 'src/app/services/categoria-fornecedor.service'
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-cadastro-cat-fornecedor',
@@ -26,11 +27,16 @@ export class CadastroCatFornecedorComponent implements OnInit {
   public desativadoCheckbox: boolean = false;
 
 
-  constructor(private CategoriaFornecedorService: CategoriaFornecedorService,
+  constructor(
+    private CategoriaFornecedorService: CategoriaFornecedorService,
     private readonly router: Router,
-    ) { }
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
+  }
 
   public status(): void {
     this.desativadoCheckbox === true

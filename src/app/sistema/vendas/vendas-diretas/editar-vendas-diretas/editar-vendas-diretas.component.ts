@@ -10,6 +10,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-editar-vendas-diretas',
@@ -71,6 +72,7 @@ export class EditarVendasDiretasComponent implements OnInit {
     "total": new FormControl(0),
     "clienteId": new FormControl(null)
   })
+  create: boolean = false
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -83,6 +85,12 @@ export class EditarVendasDiretasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar){
+      this.create = true
+    }
     const routerParams = this.route.snapshot.paramMap
     this.id = Number(routerParams.get('id'))
     this.filialService.find().subscribe((data:any)=>{

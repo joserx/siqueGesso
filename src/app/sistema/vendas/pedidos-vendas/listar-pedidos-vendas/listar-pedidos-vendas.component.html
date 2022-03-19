@@ -20,7 +20,7 @@
       <div class="row m-0 mt-4 justify-content-center">
 
         <!-- Botão Adicionar -->
-        <div class="col-4 px-2 p-0 m-0">
+        <div class="col-4 px-2 p-0 m-0" *ngIf="create">
           <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/vendas/pedidos/criar">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</h5>
             <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
@@ -103,7 +103,7 @@
             </td>
             <td>
               <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}"></i>
-              <i class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
+              <i *ngIf="create" class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
             </td>
           </tr>
         </tbody>

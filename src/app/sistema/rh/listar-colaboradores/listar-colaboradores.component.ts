@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { RhService } from 'src/app/services/rh.service';
 import Swal from 'sweetalert2';
 
@@ -17,11 +19,25 @@ export class ListarColaboradoresComponent implements OnInit {
   public pagesNumber: number;
   public atualPageNumber: number = 0;
   public atualPage: any[] = [];
+  edit: any = false
+  delete: any = false
 
-  constructor(public rhService: RhService) {}
+  constructor(
+    public rhService: RhService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getPerfis();
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar){
+      this.edit = true
+    }
+    if(((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_excluir) == PermissionsUsers.rh_excluir)){
+      this.delete = true
+    }
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_ver) == PermissionsUsers.rh_ver)){
+      this.router.navigate(['sistema'])
+    }
   }
 
   getPerfis(disabled?: boolean) {

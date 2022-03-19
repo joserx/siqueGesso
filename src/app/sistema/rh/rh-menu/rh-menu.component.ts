@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-rh-menu',
@@ -13,9 +15,14 @@ export class RhMenuComponent implements OnInit {
     { nome: "Controle VT", icon: "fas fa-bus", href: "/sistema/rh/controle" }
   ]
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_ver) == PermissionsUsers.rh_ver)){
+      this.router.navigate(['sistema'])
+    }
   }
 
 }
