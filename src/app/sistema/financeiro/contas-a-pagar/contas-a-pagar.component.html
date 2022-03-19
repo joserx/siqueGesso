@@ -95,7 +95,7 @@
             data-bs-target="#editarPagamentos"
           ></i>
 
-          <i *ngIf="del" *ngIf = "!contas.pedidoCompra"
+          <i *ngIf="del || !contas.pedidoCompra"
             class="fs-5 bi-trash-fill icon-delete p-3"
             cursor="pointer"
             (click)="delete(contas)"

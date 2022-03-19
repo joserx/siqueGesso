@@ -125,8 +125,8 @@ export class CriarPedidoVendasComponent implements OnInit {
           }
 
         }
-      }
-    })
+      
+      })
     this.authService.currentUser.subscribe((user) => {
       this.user = user.result
       // console.log(typeof(user.result))  
