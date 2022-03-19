@@ -1,10 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { getDate } from 'src/environments/global';
 import Swal from 'sweetalert2';
@@ -27,7 +28,7 @@ export class ClientesComponent implements OnInit {
     { id: 5, value: "boleto-ddl", nome: "Boleto DDL", status: "readonly" },
   ]
   public tipoUsuario = 1;
-
+  public vendedores: any[] = [];
   public getDate: any = getDate;
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
@@ -74,13 +75,21 @@ export class ClientesComponent implements OnInit {
   constructor(
     private readonly clientService : ClientService,
     private readonly correiosService : CorreiosService,
-    private readonly router : Router
+    private readonly router : Router,
+    private readonly rhService: RhService
   ) { }
 
   ngOnInit(): void {
     if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
       this.router.navigate(['sistema'])
     }
+    this.rhService.find().subscribe((data: any) => {
+      for (let oneData of data) {
+        if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
+          this.vendedores.push(oneData)
+        }
+      }
+    })
   }
 
   public toggleClienteSection(value: string): void {
@@ -252,6 +261,20 @@ export class ClientesComponent implements OnInit {
           ).indexOf(button.value), 1)
         }
       }
+    }
+  }
+
+  loadCep(cep: any, form: AbstractControl) {
+    cep = cep.value;
+    if (cep.length == 9) {
+      this.clientService
+        .updateCep(cep.replace(/-/g, ''))
+        .subscribe((data: any) => {
+          form.get('street')!.setValue(data.logradouro);
+          form.get('state')!.setValue(data.uf);
+          form.get('city')!.setValue(data.localidade);
+          form.get('neighborhood')!.setValue(data.bairro);
+        });
     }
   }
 
