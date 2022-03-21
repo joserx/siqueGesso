@@ -11,6 +11,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 
 @Component({
   selector: 'app-editar-vendas-diretas',
@@ -33,6 +34,7 @@ export class EditarVendasDiretasComponent implements OnInit {
   public id: number
   public getDate: any = getDate;
   public filial: any [] = []
+  public condPagamento: any [] = []
   public vendedores: any[] = []
   public allProdutosOriginal: any[] = []
   public allProdutos: any[] = []
@@ -81,10 +83,12 @@ export class EditarVendasDiretasComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly produtosService: ProdutoService,
     private readonly clienteService: ClientService,
-    private readonly correiosService: CorreiosService
+    private readonly correiosService: CorreiosService,
+    private readonly condicaoPagamentoService: CondicoesPagamentoService
   ) { }
 
   ngOnInit(): void {
+    this.findCondPagamento()
     if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
       this.router.navigate(['sistema'])
     }
@@ -96,6 +100,7 @@ export class EditarVendasDiretasComponent implements OnInit {
     this.filialService.find().subscribe((data:any)=>{
       this.filial = data
     })
+    
     this.rhService.find().subscribe((data:any)=>{
       for(let oneData of data){
         if(oneData.role.toLowerCase().substring(0,8)=="vendedor"){
@@ -454,6 +459,14 @@ export class EditarVendasDiretasComponent implements OnInit {
         }
       })
     }
+  }
+
+  findCondPagamento() {
+
+    this.condicaoPagamentoService.findAll().subscribe((resp) => {
+      this.condPagamento = resp
+    })
+    console.log("this.condPagamento", this.condPagamento );
   }
 
 }

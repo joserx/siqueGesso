@@ -13,7 +13,7 @@ export class CondicoesPagamentoService {
     return this.http.get<any>(environment.apiUrl + 'condicoes-pagamento');
   }
 
-  find(status: any = true) {
+  find() {
     return this.http.get(environment.apiUrl + 'condicoes-pagamento', {
       params: { status },
     });

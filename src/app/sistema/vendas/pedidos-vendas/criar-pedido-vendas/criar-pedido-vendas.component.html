@@ -548,8 +548,8 @@
                                 <td>
                                     <input currencyMask class="form-control form-control-sm" type="text"
                                         placeholder="R$" id="valorFrete" formControlName="valorFrete"
-                                        (keyup)="setThisFrete(oneItem.value, $event)"
                                         (keyup)="totalProduto(oneItem.value)">
+                                        <!-- (keyup)="setThisFrete(oneItem.value, $event)" -->
                                 </td>
                             </tr>
                         </tbody>
@@ -678,9 +678,7 @@
                                 type="text" placeholder="Condição de pagamento" id="condPagamento"
                                 formControlName="condPagamento">
                                 <option value="" disabled selected>Selecione uma condição</option>
-                                <option value="Loja 1">À vista</option>
-                                <option value="Loja 2">Parcelado</option>
-                                <option value="personalizado">Personalizado</option>
+                                <option *ngFor="let pagamento of condPagamento" value="{{pagamento.nome}}"> {{pagamento.nome}} </option>
                             </select>
                             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de
                                 pagamento</label>
