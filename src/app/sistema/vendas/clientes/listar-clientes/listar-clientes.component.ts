@@ -1,7 +1,9 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClientService } from 'src/app/services/client.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-listar-clientes',
@@ -16,13 +18,21 @@ export class ListarClientesComponent implements OnInit {
   public pagesNumber: number
   public atualPageNumber: number = 0
   public atualPage: any[] = []
+  create: boolean = false
 
   constructor(
     private readonly clientService : ClientService,
-    private modalService: NgbModal
+    private modalService: NgbModal, 
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar){
+      this.create = false
+    }
     this.clientService.find().subscribe((data : any) => {
       this.clientes = data
     }, (err)=>{

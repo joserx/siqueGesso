@@ -1,8 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { RhService } from 'src/app/services/rh.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { getDate } from 'src/environments/global';
 import Swal from 'sweetalert2';
@@ -25,7 +28,7 @@ export class ClientesComponent implements OnInit {
     { id: 5, value: "boleto-ddl", nome: "Boleto DDL", status: "readonly" },
   ]
   public tipoUsuario = 1;
-
+  public vendedores: any[] = [];
   public getDate: any = getDate;
   public desativadoCheckbox: boolean = false;
   public tipoPessoa: string = 'fisica';
@@ -46,7 +49,7 @@ export class ClientesComponent implements OnInit {
     'socialReason' : new FormControl(null),
     'fantasyName' : new FormControl(null),
     'ramal' : new FormControl(null),
-    'email' : new FormControl(null, [ Validators.email]),
+    'email' : new FormControl(null, [Validators.required, Validators.email]),
     'companyEmail' : new FormControl(null, [Validators.email]),
     'addresses' : new FormArray([]),
     'codigo': new FormControl(''),
@@ -72,10 +75,21 @@ export class ClientesComponent implements OnInit {
   constructor(
     private readonly clientService : ClientService,
     private readonly correiosService : CorreiosService,
-    private readonly router : Router
+    private readonly router : Router,
+    private readonly rhService: RhService
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
+      this.router.navigate(['sistema'])
+    }
+    this.rhService.find().subscribe((data: any) => {
+      for (let oneData of data) {
+        if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
+          this.vendedores.push(oneData)
+        }
+      }
+    })
   }
 
   public toggleClienteSection(value: string): void {
@@ -124,14 +138,14 @@ export class ClientesComponent implements OnInit {
     this.tipoPessoa = value;
     if(value == 'fisica') {
       // Person validators
-      this.clienteForm.controls.name.setValidators([Validators.required])
-      this.clienteForm.controls.surname.setValidators([Validators.required])
-      this.clienteForm.controls.cpf.setValidators([Validators.required, BrazilValidator.isValidCpf()])
-      this.clienteForm.controls.rg.setValidators([Validators.required, BrazilValidator.isValidRG()])
-      this.clienteForm.controls.cellphone.setValidators([Validators.required])
-      this.clienteForm.controls.telephone.setValidators([Validators.required])
-      this.clienteForm.controls.birthDate.setValidators([Validators.required])
-      this.clienteForm.controls.email.setValidators([ Validators.email])
+      this.clienteForm.controls.name.setValidators([Validators.required])      
+      this.clienteForm.controls.surname.setValidators([Validators.required])      
+      this.clienteForm.controls.cpf.setValidators([Validators.required, BrazilValidator.isValidCpf()])      
+      this.clienteForm.controls.rg.setValidators([Validators.required, BrazilValidator.isValidRG()])      
+      this.clienteForm.controls.cellphone.setValidators([Validators.required])      
+      this.clienteForm.controls.telephone.setValidators([Validators.required])      
+      this.clienteForm.controls.birthDate.setValidators([Validators.required])      
+      this.clienteForm.controls.email.setValidators([Validators.required, Validators.email])      
       // Clear company validators
       this.clienteForm.controls.fantasyName.clearValidators()
       this.clienteForm.controls.fantasyName.updateValueAndValidity()
@@ -153,18 +167,18 @@ export class ClientesComponent implements OnInit {
       this.clienteForm.controls.companyEmail.updateValueAndValidity()
     } else if(value == 'juridica') {
       // Company validators
-      this.clienteForm.controls.fantasyName.setValidators([Validators.required])
-      this.clienteForm.controls.socialReason.setValidators([Validators.required])
-      this.clienteForm.controls.subscription.setValidators([Validators.required])
-      this.clienteForm.controls.cnpj.setValidators([Validators.required, BrazilValidator.isValidCpf()])
-      this.clienteForm.controls.companyCellphone.setValidators([Validators.required])
-      this.clienteForm.controls.companyTelephone.setValidators([Validators.required])
-      this.clienteForm.controls.birthDateCompany.setValidators([Validators.required])
-      this.clienteForm.controls.ramal.setValidators([Validators.required])
+      this.clienteForm.controls.fantasyName.setValidators([Validators.required])      
+      this.clienteForm.controls.socialReason.setValidators([Validators.required])      
+      this.clienteForm.controls.subscription.setValidators([Validators.required])      
+      this.clienteForm.controls.cnpj.setValidators([Validators.required, BrazilValidator.isValidCpf()])      
+      this.clienteForm.controls.companyCellphone.setValidators([Validators.required])      
+      this.clienteForm.controls.companyTelephone.setValidators([Validators.required])      
+      this.clienteForm.controls.birthDateCompany.setValidators([Validators.required])      
+      this.clienteForm.controls.ramal.setValidators([Validators.required])      
       this.clienteForm.controls.companyEmail.setValidators([Validators.required, Validators.email])
       //Clear client validators
-      this.clienteForm.controls.name.clearValidators()
-      this.clienteForm.controls.name.updateValueAndValidity()
+      this.clienteForm.controls.name.clearValidators()      
+      this.clienteForm.controls.name.updateValueAndValidity()      
       this.clienteForm.controls.surname.clearValidators()
       this.clienteForm.controls.surname.updateValueAndValidity()
       this.clienteForm.controls.cpf.clearValidators()
@@ -199,13 +213,13 @@ export class ClientesComponent implements OnInit {
   submitClient(data : any) {
     if(this.clienteForm.valid) {
       this.clientService.create(data).subscribe((dataReturn) => {
-        Swal.fire({
-          title: '<h4>Cliente adicionado !</h4>',
-          icon: 'success',
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 2000,
+        Swal.fire({ 
+          title: '<h4>Cliente adicionado !</h4>', 
+          icon: 'success', 
+          toast: true, 
+          position: 'top', 
+          showConfirmButton: false, 
+          timer: 2000, 
           timerProgressBar: true ,
           width: '500px'
         })
@@ -227,7 +241,7 @@ export class ClientesComponent implements OnInit {
   }
 
   check(event: any){
-    let button = event.target
+    let button = event.target 
     if(button.checked){
       this.tabela.push(new FormGroup({
         'nome': new FormControl(button.value)
@@ -247,6 +261,20 @@ export class ClientesComponent implements OnInit {
           ).indexOf(button.value), 1)
         }
       }
+    }
+  }
+
+  loadCep(cep: any, form: AbstractControl) {
+    cep = cep.value;
+    if (cep.length == 9) {
+      this.clientService
+        .updateCep(cep.replace(/-/g, ''))
+        .subscribe((data: any) => {
+          form.get('street')!.setValue(data.logradouro);
+          form.get('state')!.setValue(data.uf);
+          form.get('city')!.setValue(data.localidade);
+          form.get('neighborhood')!.setValue(data.bairro);
+        });
     }
   }
 

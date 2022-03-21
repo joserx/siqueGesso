@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-pesquisar-cliente',
@@ -10,6 +11,7 @@ export class PesquisarClienteComponent implements OnInit {
 
   public clientes : any[] = []
   public clienteOriginal: any;
+  create: boolean = false
 
   constructor(private readonly clientService : ClientService) { 
     this.clientService.find().subscribe((data : any) => {
@@ -19,6 +21,9 @@ export class PesquisarClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
+      this.create = true
+    }
   }
   typeClient(value: any): string{
     console.log(value)

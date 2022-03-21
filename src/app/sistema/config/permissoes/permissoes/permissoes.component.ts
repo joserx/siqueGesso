@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { PermissionsService } from 'src/app/services/permissions.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-permissoes',
@@ -49,11 +50,47 @@ export class PermissoesComponent implements OnInit, OnChanges {
   }
 
   delete(id:number){
-    this.permissionService.delete(id).subscribe(()=>{
-      this.permissionService.find().subscribe((data:any)=>{
-        this.permissions = data
-      })
-    })
+
+    Swal.fire({
+      title: 'Você gostaria de deletar essa permissão ?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Deletar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.permissionService.delete(id).subscribe(()=>{
+          this.permissionService.find().subscribe((data:any)=>{
+            this.permissions = data
+          })
+        })
+        Swal.fire({
+          title: '<h4>Permissão Deletada!</h4>',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          width: '500px',
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: '<h4>A permissão não foi deletada!</h4>',
+          icon: 'info',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          width: '500px',
+        });
+      }
+    });
+
+
+    
   }
 
 }

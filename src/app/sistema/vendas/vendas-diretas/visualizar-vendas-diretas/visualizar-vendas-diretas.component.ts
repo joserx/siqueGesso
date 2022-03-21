@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RhService } from 'src/app/services/rh.service';
 import { getDate } from 'src/environments/global';
@@ -69,6 +70,9 @@ export class VisualizarVendasDiretasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
+      this.router.navigate(['sistema'])
+    }
     const routerParams = this.route.snapshot.paramMap
     this.id = Number(routerParams.get('id'))
     this.filialService.find().subscribe((data:any)=>{

@@ -17,7 +17,7 @@
 
 
       <!-- Adicionar -->
-      <div class="row m-0 mt-4 justify-content-start">
+      <div class="row m-0 mt-4 justify-content-start" *ngIf="create">
 
         <!-- Botão Adicionar -->
         <div class="col-4 px-2 p-0 m-0">
@@ -68,7 +68,7 @@
           </div>
           <div class="col text-end">
             <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
-            <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
+            <i *ngIf="create" routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
             <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
           </div>
         </div>
@@ -87,7 +87,7 @@
           </div>
           <div class="col text-end">
             <!-- <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer"></i> -->
-            <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer"></i>
+            <i routerLink="../editar/{{cliente.id}}/cadastro" class="fs-5 bi-pen-fill icon-edit p-3" cursor="pointer" *ngIf="create"></i>
             <!-- <i class="fs-5 bi-trash-fill icon-delete p-3" cursor="pointer"></i> -->
           </div>
       </div>

@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { DestinacaoVendaService } from 'src/app/services/destinacao-venda.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 @Component({
   selector: 'app-destinacao-da-venda-cadastro',
   templateUrl: './destinacao-da-venda-cadastro.component.html',
@@ -24,10 +25,16 @@ export class DestinacaoDaVendaCadastroComponent implements OnInit {
   });
   public desativadoCheckbox: boolean = false;
 
-  constructor(private DestinacaoVendaService: DestinacaoVendaService,
-    private readonly router: Router,) {}
+  constructor(
+    private DestinacaoVendaService: DestinacaoVendaService,
+    private readonly router: Router,
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.config_ver) == PermissionsUsers.config_ver)){
+      this.router.navigate(['sistema'])
+    }
+  }
 
   public status(): void {
     this.desativadoCheckbox === true

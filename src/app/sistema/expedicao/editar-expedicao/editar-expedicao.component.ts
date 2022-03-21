@@ -5,6 +5,7 @@ import { ExpedicaoService } from 'src/app/services/expedicao.service';
 import { Workbook, TableStyleProperties } from 'exceljs';
 import * as fs from 'file-saver';
 import Swal from 'sweetalert2';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-editar-expedicao',
@@ -88,6 +89,9 @@ export class EditarExpedicaoComponent implements OnInit {
   */
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar)){
+      this.router.navigate(['sistema'])
+    }
     const routeParams = this.route.snapshot.paramMap
     this.exId = Number(routeParams.get('id'))
     this.expedicaoService.findOne(this.exId).subscribe((data:any)=>{

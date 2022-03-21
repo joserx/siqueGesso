@@ -8,6 +8,8 @@ import { ViewContasPagarComponent } from './view-contas-pagar/view-contas-pagar.
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-contas-a-pagar',
@@ -41,18 +43,32 @@ export class ContasAPagarComponent implements OnInit {
   public conta: any;
   public contasFiltradas: any = [];
   public search: string = '';
+  create: boolean = false
+  del: boolean = false
 
   public contasPagarForm: FormGroup = new FormGroup({
     contasPagar: new FormArray([]),
   });
 
-  constructor(private contasPagarService: ContasPagarService) {}
+  constructor(
+    private contasPagarService: ContasPagarService,
+    private router: Router
+  ) {}
 
   get contasPagar() {
     return this.contasPagarForm.get('vt') as FormArray;
   }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.financeiro_ver) == PermissionsUsers.financeiro_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.financeiro_editar) == PermissionsUsers.financeiro_editar){
+      this.create = true
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.financeiro_excluir) == PermissionsUsers.financeiro_excluir){
+      this.del = true
+    }
     this.getContas();
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 import Swal from 'sweetalert2';
 
@@ -16,11 +17,15 @@ export class FiltrarPedidoComponent implements OnInit {
   @Output() pedidosFiltrados = new EventEmitter<any>();
 
   valorTotal: any = 0;
+  del: boolean = false
 
   constructor(private pedidoCompraService: PedidoCompraService) {}
 
   ngOnInit(): void {
     this.getPedidos();
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.compras_excluir) == PermissionsUsers.compras_ver){
+      this.del = true
+    }
   }
 
   getPedidos() {

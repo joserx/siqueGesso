@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { VeiculosService } from 'src/app/services/veiculos.service';
 import Swal from 'sweetalert2';
 
@@ -40,6 +41,9 @@ export class EditarVeiculoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar)){
+      this.router.navigate(['sistema'])
+    }
     const routeParams = this.route.snapshot.paramMap
     this.id = Number(routeParams.get('id'))
     this.veiculosService.findOne(this.id).subscribe((data:any)=>{

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EmbarqueService } from 'src/app/services/embarque.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { RhService } from 'src/app/services/rh.service';
 
 @Component({
@@ -15,10 +17,14 @@ export class CadastroMotoristaComponent implements OnInit {
 
   constructor(
     private readonly rhService: RhService,
-    private readonly embarqueService: EmbarqueService
+    private readonly embarqueService: EmbarqueService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar)){
+      this.router.navigate(['sistema'])
+    }
     this.embarqueService.find().subscribe((data:any)=>{
       this.embarques = data
     })

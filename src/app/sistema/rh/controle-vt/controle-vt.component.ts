@@ -1,3 +1,4 @@
+
 import { AbstractType, Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { RhService } from 'src/app/services/rh.service';
@@ -5,6 +6,8 @@ import { VtService } from 'src/app/services/vt.service';
 import Swal from 'sweetalert2';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-controle-vt',
@@ -27,14 +30,19 @@ export class ControleVtComponent implements OnInit {
   public vtForm: FormGroup = new FormGroup({
     vt: new FormArray([]),
   });
-
-  constructor(private rhService: RhService, private vtService: VtService) {}
+  constructor(
+    private rhService: RhService, private vtService: VtService,
+    private router: Router
+  ) {}
 
   get vt() {
     return this.vtForm.get('vt') as FormArray;
   }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar)){
+      this.router.navigate(['sistema', 'rh'])
+    }
     this.vtService.find().subscribe(
       (thisvt: any) => {
         for (let value in thisvt) {
@@ -94,32 +102,44 @@ export class ControleVtComponent implements OnInit {
   }
 
   salvar(data: any) {
-    for (let value in this.colabVt) {
-      this.vt['value'][value].total =
-        Number(this.colabVt[value].originalTotal) *
-        Number(this.vt['controls'][value].get('workDays')?.value);
-
-      this.vt['controls'][value]
-        .get('total')
-        ?.setValue(this.vt['value'][value].total);
-    }
-
-    for (let value in data.vt) {
-      if (data.vt[value]) {
-        if (data.vt[value].name != null) {
-          this.vtService.update(data.vt[value]).subscribe((data: any) => {});
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.rh_editar) == PermissionsUsers.rh_editar){ 
+      for (let value in this.colabVt) {
+        this.vt['value'][value].total =
+          Number(this.colabVt[value].originalTotal) *
+          Number(this.vt['controls'][value].get('workDays')?.value);
+  
+        this.vt['controls'][value]
+          .get('total')
+          ?.setValue(this.vt['value'][value].total);
+      }
+  
+      for (let value in data.vt) {
+        if (data.vt[value]) {
+          if (data.vt[value].name != null) {
+            this.vtService.update(data.vt[value]).subscribe((data: any) => {});
+          }
         }
       }
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: '<h4>Vale transporte atualizado !</h4>',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
+        width: '500px',
+      });
+    }else{
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: '<h4>Você não possui permissão para isso !</h4>',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
+        width: '500px',
+      });
     }
-    Swal.fire({
-      position: 'top',
-      icon: 'success',
-      title: '<h4>Vale transporte atualizado !</h4>',
-      showConfirmButton: false,
-      timer: 1500,
-      toast: true,
-      width: '500px',
-    });
   }
 
   // Excel

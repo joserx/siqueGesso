@@ -65,7 +65,8 @@ export class ViewPedidoComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   loadForm(pedidoInput: any) {
     this.pedidoCompraForm = new FormGroup({

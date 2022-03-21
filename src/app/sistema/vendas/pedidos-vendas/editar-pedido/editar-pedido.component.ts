@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { ProdutoService } from 'src/app/services/produto.service';
 import { RhService } from 'src/app/services/rh.service';
 import { StatusService } from 'src/app/services/status.service';
@@ -37,6 +38,7 @@ export class EditarPedidoComponent implements OnInit {
   public pedidoId: number;
   public getDate: any = getDate;
   public desconto: number = 10;
+  public filialSelected: any = {};
   public passwordForm: FormGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('', [Validators.required]),
@@ -97,28 +99,18 @@ export class EditarPedidoComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
     private readonly filialService: FilialService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
+      this.router.navigate(['sistema'])
+    }
     for (let item of this.item.value) {
       this.totalProduto(item);
     }
 
     let teste = this.item['controls'];
-    console.log(teste);
-    this.filialService.find().subscribe((data: any) => {
-      this.filial = data;
-      console.log(data);
-    });
-    this.clienteService.find().subscribe((data: any) => {
-      for (let cliente of data) {
-        if (cliente.id == this.pedidosForm.get('clienteId')?.value) {
-          this.enderecos = cliente.addresses;
-        }
-      }
-      this.clientes = data;
-      this.originalClientes = data;
-    });
+    // console.log(teste);
     this.rhService.find().subscribe((data: any) => {
       for (let oneData of data) {
         if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
@@ -128,71 +120,104 @@ export class EditarPedidoComponent implements OnInit {
     });
     this.authService.currentUser.subscribe((user) => {
       this.user = user.result;
-      console.log(typeof user.result);
+      // console.log(typeof user.result);
       this.passwordForm.get('email')?.setValue(user.result.email);
     });
     const routerParams = this.route.snapshot.paramMap;
     this.id = Number(routerParams.get('id'));
-    this.pedidoService.findOne(this.id).subscribe((data: any) => {
-      this.pedido = data;
-      this.pedidosForm.get('data')?.setValue(data.data.substring(10, 0));
-      this.pedidosForm.get('loja')?.setValue(data.loja);
-      this.pedidosForm.get('vendedor')?.setValue(data.vendedor);
-      this.pedidosForm.get('cliente')?.setValue(data.cliente);
-      this.pedidosForm.get('condPagamento')?.setValue(data.condPagamento);
-      this.pedidosForm.get('pagPersonalizado')?.setValue(data.pagPersonalizado);
-      this.pedidosForm.get('tabPreco')?.setValue(data.tabPreco);
-      this.pedidosForm.get('tabPersonalizado')?.setValue(data.tabPersonalizado);
-      this.pedidosForm.get('descontoGeral')?.setValue(data.descontoGeral);
-      this.pedidosForm.get('enderecoEntrega')?.setValue(data.enderecoEntrega);
-      this.pedidosForm
-        .get('valorFreteEntrega')
-        ?.setValue(data.valorFreteEntrega);
-      this.pedidosForm.get('meioPagamento')?.setValue(data.meioPagamento);
-      this.pedidosForm.get('dias')?.setValue(data.dias);
-      this.pedidosForm
-        .get('dataVencimento')
-        ?.setValue(data.dataVencimento.substring(10, 0));
-      this.pedidosForm.get('status')?.setValue(data.status);
-      this.pedidosForm.get('linkBoleto')?.setValue(data.linkBoleto);
-      this.pedidosForm.get('linkNf')?.setValue(data.linkNf);
-      this.pedidosForm.get('obs')?.setValue(data.obs);
-      this.pedidosForm.get('total')?.setValue(data.total);
-      this.pedidosForm.get('clienteId')?.setValue(data.clienteId);
-      console.log(data);
-      for (let item in data.item) {
-        this.changeTipoEntrega(data.item[item].prevRetirada);
-        this.item.push(
-          new FormGroup({
-            pedidoId: new FormControl(data.item[item].id),
-            codigo: new FormControl(data.item[item].codigo),
-            produto: new FormControl(data.item[item].produto),
-            quantidade: new FormControl(data.item[item].quantidade, [
-              Validators.required,
-            ]),
-            valorUnitario: new FormControl(
-              Number(data.item[item].valorUnitario)
-            ),
-            desconto: new FormControl(Number(data.item[item].desconto)),
-            tipoRetirada: new FormControl(data.item[item].tipoRetirada),
-            prevRetirada: new FormControl(
-              data.item[item].prevRetirada == !null
-                ? data.item[item].prevRetirada.substring(10, 0)
-                : null
-            ),
-            valorFrete: new FormControl(Number(data.item[item].valorFrete)),
-            valorVenda: new FormControl(Number(data.item[item].valorVenda)),
-            endereco: new FormControl(data.item[item].endereco),
-            enderecoLoja: new FormControl(data.item[item].enderecoLoja),
-            tipoEntrega: new FormControl(data.item[item].tipoEntrega, [
-              Validators.required,
-            ]),
-            total: new FormControl(data.item[item].total),
-          })
-        );
-        this.valUnit += data.item[item].valorUnitario;
-        this.valVenda += data.item[item].valorVenda;
-      }
+
+    this.filialService.find().subscribe((data: any) => {
+      this.filial = data;
+      // console.log(data);
+    }, (err) => { }, () => {
+
+      this.pedidoService.findOne(this.id).subscribe((data: any) => {
+        this.pedido = data;
+        this.pedidosForm.get('data')?.setValue(data.data.substring(10, 0));
+        for (let [index, item] of this.filial.entries()) {
+          if (item.nome == data.loja) {
+            this.pedidosForm.get('loja')?.setValue(index);
+            this.filialSelected = this.filial[index];
+            console.log(this.filialSelected);
+          }
+        }
+        // console.log(data.loja)
+        // this.pedidosForm.get('loja')?.setValue(data.loja);
+        this.pedidosForm.get('vendedor')?.setValue(data.vendedor);
+        this.pedidosForm.get('cliente')?.setValue(data.cliente);
+        this.pedidosForm.get('condPagamento')?.setValue(data.condPagamento);
+        this.pedidosForm.get('pagPersonalizado')?.setValue(data.pagPersonalizado);
+        this.pedidosForm.get('tabPreco')?.setValue(data.tabPreco);
+        this.pedidosForm.get('tabPersonalizado')?.setValue(data.tabPersonalizado);
+        this.pedidosForm.get('descontoGeral')?.setValue(data.descontoGeral);
+        this.pedidosForm.get('enderecoEntrega')?.setValue(data.enderecoEntrega);
+        this.pedidosForm
+          .get('valorFreteEntrega')
+          ?.setValue(data.valorFreteEntrega);
+        this.pedidosForm.get('meioPagamento')?.setValue(data.meioPagamento);
+        this.pedidosForm.get('dias')?.setValue(data.dias);
+        this.pedidosForm
+          .get('dataVencimento')
+          ?.setValue(data.dataVencimento.substring(10, 0));
+        this.pedidosForm.get('status')?.setValue(data.status);
+        this.pedidosForm.get('linkBoleto')?.setValue(data.linkBoleto);
+        this.pedidosForm.get('linkNf')?.setValue(data.linkNf);
+        this.pedidosForm.get('obs')?.setValue(data.obs);
+        this.pedidosForm.get('total')?.setValue(data.total);
+        this.pedidosForm.get('clienteId')?.setValue(data.clienteId);
+        // console.log(data);
+        for (let item in data.item) {
+          // this.changeTipoEntrega(data.item[item].prevRetirada);
+          if(data.item[item].tipoEntrega == 'entrega'){
+            this.changeTipoEntrega('entrega');
+          }
+          this.item.push(
+            new FormGroup({
+              pedidoId: new FormControl(data.item[item].id),
+              codigo: new FormControl(data.item[item].codigo),
+              produto: new FormControl(data.item[item].produto),
+              quantidade: new FormControl(data.item[item].quantidade, [
+                Validators.required,
+              ]),
+              valorUnitario: new FormControl(
+                Number(data.item[item].valorUnitario)
+              ),
+              desconto: new FormControl(Number(data.item[item].desconto)),
+              tipoRetirada: new FormControl(data.item[item].tipoRetirada),
+              prevRetirada: new FormControl(
+                data.item[item].prevRetirada == !null
+                  ? data.item[item].prevRetirada.substring(10, 0)
+                  : null
+              ),
+              valorFrete: new FormControl(Number(data.item[item].valorFrete)),
+              valorVenda: new FormControl(Number(data.item[item].valorVenda)),
+              endereco: new FormControl(
+                data.item[item].tipoEntrega == 'entrega' ?
+                  data.item[item].endereco :
+                  this.filialSelected.logradouro + ' ' +
+                  this.filialSelected.numero + ' - ' +
+                  this.filialSelected.cidade + ', ' +
+                  this.filialSelected.cep),
+              enderecoLoja: new FormControl(data.item[item].enderecoLoja),
+              tipoEntrega: new FormControl(data.item[item].tipoEntrega, [
+                Validators.required,
+              ]),
+              total: new FormControl(data.item[item].total),
+            })
+          );
+          this.valUnit += data.item[item].valorUnitario;
+          this.valVenda += data.item[item].valorVenda;
+        }
+        this.clienteService.find().subscribe((data: any) => {
+          for (let cliente of data) {
+            if (cliente.id == this.pedidosForm.get('clienteId')?.value) {
+              this.enderecos = cliente.addresses;
+            }
+          }
+          this.clientes = data;
+          this.originalClientes = data;
+        });
+      });
     });
     this.produtoService.find().subscribe((data: any) => {
       this.allProdutos = data;
@@ -214,12 +239,14 @@ export class EditarPedidoComponent implements OnInit {
     data.value.data = new Date(data.value.data);
     let timezone = data.value.data.getTimezoneOffset() * 60000;
     data.value.data = new Date(data.value.data + timezone).toISOString();
-    console.log(data);
+    // console.log(data);
+    data.enderecoLoja = this.filialSelected.logradouro + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep
     if (data.valid) {
       this.totalValue(this.item.value);
       if (data.value.status != 'Gerado') {
         data.value.status = 'Aguardando aprovação';
       }
+      data.value.loja = this.filialSelected.nome;
       this.pedidoService.update(this.id, data.value).subscribe((dt: any) => {
         this.router.navigate(['sistema', 'vendas', 'pedidos']);
         Swal.fire({
@@ -353,7 +380,7 @@ export class EditarPedidoComponent implements OnInit {
     for (let item of value) {
       total += item.total;
     }
-    console.log(value);
+    // console.log(value);
     if (this.descontoG == 0 || this.descontoG == null) {
       this.pedidosForm.get('total')?.setValue(total);
       return total;
@@ -639,7 +666,7 @@ export class EditarPedidoComponent implements OnInit {
   selectThisCliente(value: any) {
     let addresses = [];
     addresses = value.addresses;
-    console.log(addresses);
+    // console.log(addresses);
     if (value.name != null && value.surname != null) {
       this.pedidosForm
         .get('cliente')
@@ -652,7 +679,7 @@ export class EditarPedidoComponent implements OnInit {
       this.showSign = false;
     }
     this.enderecos = value.addresses;
-    console.log(this.enderecos);
+    // console.log(this.enderecos);
   }
 
   descontoGeral(event: any) {
@@ -695,7 +722,16 @@ export class EditarPedidoComponent implements OnInit {
     }
   }
 
-  changeTipoEntrega(value: string) {
-    this.tipoEntregaVar = value;
+  changeTipoEntrega(value: string, oneItem?: any) {
+    if (value == 'retirada' && oneItem != null) {
+      oneItem.value.endereco = this.filialSelected.logradouro + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep;
+    } else {
+      this.tipoEntregaVar = value;
+    }
+  }
+
+  setFilialSelected(filial: number) {
+    this.filialSelected = this.filial[filial];
+    console.log(this.filialSelected);
   }
 }

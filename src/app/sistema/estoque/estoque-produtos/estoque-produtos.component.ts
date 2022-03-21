@@ -3,6 +3,7 @@ import { EditProdutoEstoqueComponent } from './edit-produto-estoque/edit-produto
 import { ViewEstoqueProdutoComponent } from './view-estoque-produto/view-estoque-produto.component';
 import { ProdutoService } from '../../../services/produto.service';
 import Swal from 'sweetalert2';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-estoque-produtos',
@@ -14,6 +15,8 @@ export class EstoqueProdutosComponent implements OnInit {
   public produtosFiltrados: any = [];
   public search: string = '';
   public produto: any;
+  create: boolean = false
+  del: boolean = false
 
   @ViewChild(EditProdutoEstoqueComponent)
   editProdutoEstoqueComponent: EditProdutoEstoqueComponent;
@@ -24,6 +27,12 @@ export class EstoqueProdutosComponent implements OnInit {
   constructor(private produtoService: ProdutoService) {}
 
   ngOnInit(): void {
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.estoque_excluir) == PermissionsUsers.estoque_excluir){
+      this.del = true
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.estoque_editar) == PermissionsUsers.estoque_editar){
+      this.create = true
+    }
     this.getProdutos();
   }
   pesquisaProdutos() {

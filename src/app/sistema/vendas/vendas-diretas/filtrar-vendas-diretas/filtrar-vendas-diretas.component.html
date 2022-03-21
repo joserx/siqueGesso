@@ -51,7 +51,7 @@
                 <td>{{ pedidos.updated_at | date }}</td>
                 <td>
                   <i class="fs-5 bi-eye-fill icon-view px-2 py-1" cursor="pointer"></i>
-                  <i class="fs-5 bi-pen-fill icon-edit px-2 py-1 ms-2" cursor="pointer"></i>
+                  <i *ngIf="create" class="fs-5 bi-pen-fill icon-edit px-2 py-1 ms-2" cursor="pointer"></i>
                 </td>
               </tr>
             </tbody>

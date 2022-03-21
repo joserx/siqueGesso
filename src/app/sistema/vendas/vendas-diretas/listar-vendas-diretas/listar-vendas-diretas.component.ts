@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-listar-vendas-diretas',
@@ -14,12 +16,20 @@ export class ListarVendasDiretasComponent implements OnInit {
   public pagesNumber: number
   public atualPageNumber: number = 0
   public atualPage: any[] = []
+  create: boolean = false
 
   constructor(
-    private readonly pedidosService: PedidosService
+    private readonly pedidosService: PedidosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_ver) == PermissionsUsers.vendas_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar){
+      this.create = true
+    }
     this.pedidosService.find().subscribe((data: any)=>{
       for(let oneData of data){
         if(oneData.tipoVenda == 1){

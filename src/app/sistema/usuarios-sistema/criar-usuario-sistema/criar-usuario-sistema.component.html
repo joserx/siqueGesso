@@ -116,8 +116,7 @@
               placeholder="Permissão"
             >
               <option value="-1" disabled selected>Permissão</option>
-              <option value="0">Funcionário</option>
-              <option value="1">Administrador</option>
+              <option *ngFor="let item of permissions" value="{{item.id}}">{{item.name}}</option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
               >Permissão</label

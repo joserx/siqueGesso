@@ -1,39 +1,43 @@
 <div class="row m-0">
   <!-- Sidemenu estático -->
   <div class="col d-flex flex-column align-items-center px-4 pt-2 min-vh-100 bg-custom-light" style="z-index: 2;">
-    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center text-center justify-content-start" id="menu" (mouseenter)="showMenu()">
-      <li class="nav-item" *ngFor="let navItem of navItems">
-        <a class="nav-link align-middle px-0 text-dark">
-          <i class="fs-4 px-1 {{navItem.icon}} {{(navItem.nome == menuActive) ? 'bg-white rounded' : ''}}" (click)="toggleMenu(navItem.nome, navItem.href)"></i>
-        </a>
-      </li>
-    </ul>
+    <div class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center text-center justify-content-start" id="menu" (mouseenter)="showMenu()">
+      <div *ngFor="let navItem of navItems">
+        <div *ngIf="navItem.condition" class="nav-item">
+          <a class="nav-link align-middle px-0 text-dark">
+            <i class="fs-4 px-1 {{navItem.icon}} {{(navItem.nome == menuActive) ? 'bg-white rounded' : ''}}" (click)="toggleMenu(navItem.nome, navItem.href)"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- /Sidemenu estático  -->
 
   <!-- Sidemenu dinâmico -->
   <nav class="col bg-custom-light pt-2" id="sidebar" [class.hide]="menu == true" style="z-index: 1;" (mouseleave)="hideMenu()">
     <!-- Lista de menus -->
-    <div *ngFor="let navItem of navItems;" class="nav-title" routerLink="{{navItem.href}}">
-      {{navItem.nome}}
-       <!--<div *ngIf="navItem.nome == menuActive">
-        //Submenus 
-        <div *ngFor="let subMenu of navItem.subMenus;">
-          <p class="fw-bold text-custom-dark">{{subMenu.titulo}}</p>
-          <p class="text-custom-dark">{{subMenu.descricao}}</p>
-
-          //Páginas do Submenu
-          <div *ngFor="let pagina of subMenu.paginas;">
-            <a [routerLink]="pagina.href" class="nav-link px-0 align-middle text-custom-dark">
-              <span class="fw-bold">{{pagina.nome}}</span>
-            </a>
-          </div>
-           //Páginas do Submenu 
-          <hr>
-        </div> 
-         /Submenus
-
-      </div>-->
+    <div *ngFor="let navItem of navItems;">
+      <div class="nav-title" *ngIf="navItem.condition" routerLink="{{navItem.href}}">
+        {{navItem.nome}}
+         <!--<div *ngIf="navItem.nome == menuActive">
+          //Submenus 
+          <div *ngFor="let subMenu of navItem.subMenus;">
+            <p class="fw-bold text-custom-dark">{{subMenu.titulo}}</p>
+            <p class="text-custom-dark">{{subMenu.descricao}}</p>
+  
+            //Páginas do Submenu
+            <div *ngFor="let pagina of subMenu.paginas;">
+              <a [routerLink]="pagina.href" class="nav-link px-0 align-middle text-custom-dark">
+                <span class="fw-bold">{{pagina.nome}}</span>
+              </a>
+            </div>
+             //Páginas do Submenu 
+            <hr>
+          </div> 
+           /Submenus
+  
+        </div>-->
+      </div>
     </div>
     <!-- /Lista de menus -->
   </nav>

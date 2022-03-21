@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BaixaService } from 'src/app/services/baixa.service';
 import { EmbarqueService } from 'src/app/services/embarque.service';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,13 +20,21 @@ export class BaixaEntregaComponent implements OnInit {
     'driver': new FormControl('', [Validators.required])
   })
   public baixas: any[] = []
+  create: boolean = false
 
   constructor(
     private readonly embarqueService: EmbarqueService,
-    private readonly baixaService: BaixaService
+    private readonly baixaService: BaixaService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_ver) == PermissionsUsers.expedicao_ver)){
+      this.router.navigate(['sistema'])
+    }
+    if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.expedicao_editar) == PermissionsUsers.expedicao_editar){
+      this.create = true
+    }
     this.baixaService.find().subscribe((data:any)=>{
       this.baixas = data
     })

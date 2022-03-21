@@ -14,6 +14,7 @@ import { PedidoCompraService } from 'src/app/services/pedido-compra.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
+import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
 @Component({
   selector: 'app-criar-pedido-compras',
@@ -118,6 +119,9 @@ export class CriarPedidoComprasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.compras_editar) == PermissionsUsers.compras_editar)){
+      this.router.navigate(['sistema'])
+    }
     this.atualizarTotalPedido();
     this.getFornecedores();
     this.getProdutos();

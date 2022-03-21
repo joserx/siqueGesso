@@ -20,6 +20,7 @@ export class UsuarioSistemaService {
   }
 
   create(data : any) {
+    console.log(data)
     return this.http.post(environment.apiUrl + 'user/', data);
   }
 
