@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
@@ -20,6 +21,7 @@ import { getDate } from '../../../../../environments/global';
 })
 export class CriarPedidoVendasDiretasComponent implements OnInit {
   public motoristas: any[] = []
+  public condPagamento: any[] = []
   public frete: number = 0
   public pedidoId: number = 0
   public valVenda: number = 0
@@ -83,10 +85,12 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
     private readonly router: Router,
-    private readonly correiosService: CorreiosService
+    private readonly correiosService: CorreiosService,
+    private readonly condicaoPagamentoService: CondicoesPagamentoService
   ) { }
 
   ngOnInit(): void {
+    this.findCondPagamento()
     if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
       this.router.navigate(['sistema'])
     }
@@ -449,5 +453,13 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
         }
       })
     }
+  }
+
+  findCondPagamento() {
+
+    this.condicaoPagamentoService.findAll().subscribe((resp) => {
+      this.condPagamento = resp
+      console.log("this.condPagamento", this.condPagamento );
+    })
   }
 }
