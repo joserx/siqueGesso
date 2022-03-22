@@ -56,8 +56,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "bairro": new FormControl('', [Validators.required]),
     "cidade": new FormControl('', [Validators.required]),
     "complemento": new FormControl(''),
-    "motorista": new FormControl('', [Validators.required]),
-    "placa": new FormControl('', [Validators.required]),
     "previsaoEntrega": new FormControl(null, Validators.required),
     "meioPagamento": new FormControl('', [Validators.required]),
     "dataVencimento": new FormControl(null, [Validators.required]),
@@ -254,11 +252,11 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     let str = event.target.value;
     if (str != '') {
       if (str.length > this.filterBefore.length) {
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.allProdutos = this.allProdutosOriginal;
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {
@@ -313,7 +311,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
             'quantidade': new FormControl(null, [Validators.required]),
-            'valorUnitario': new FormControl(produto.custoMedio),
             'desconto': new FormControl(null),
             'tipoRetirada': new FormControl(''),
             'prevRetirada': new FormControl(null),
@@ -326,7 +323,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'estoque': new FormControl(produto.atual)
           }))
           this.valVenda += produto.precoMedio
-          this.valUnit += produto.custoMedio
         }
       }
       console.log(this.item)
@@ -354,7 +350,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             }).indexOf(codigo), 1
           )
           this.valVenda -= produto.precoMedio
-          this.valUnit -= produto.custoMedio
         }
       }
     }

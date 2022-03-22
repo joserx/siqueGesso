@@ -312,7 +312,6 @@ export class EditarPedidoComponent implements OnInit {
               codigo: new FormControl(produto.id),
               produto: new FormControl(produto.nome),
               quantidade: new FormControl(null, [Validators.required]),
-              valorUnitario: new FormControl(produto.custoMedio),
               desconto: new FormControl(0),
               tipoRetirada: new FormControl(''),
               prevRetirada: new FormControl(null),
@@ -413,7 +412,7 @@ export class EditarPedidoComponent implements OnInit {
     if (str != '') {
       if (str.length > this.filterBefore.length) {
         this.allProdutos = this.allProdutosOriginal.filter((user: any) =>
-          `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`
+          `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `
             .toUpperCase()
             .includes(str.toUpperCase())
         );
@@ -421,7 +420,7 @@ export class EditarPedidoComponent implements OnInit {
       } else {
         this.allProdutos = this.allProdutosOriginal;
         this.allProdutos = this.allProdutosOriginal.filter((user: any) =>
-          `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`
+          `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `
             .toUpperCase()
             .includes(str.toUpperCase())
         );
@@ -741,7 +740,7 @@ export class EditarPedidoComponent implements OnInit {
   findCondPagamento() {
     this.condPagamentoService.findAll().subscribe((resp) => {
       this.condPagamentos = resp
-      console.log("this.condPagamento", this.condPagamentos );      
+      console.log("this.condPagamento", this.condPagamentos );
     })
   }
 }

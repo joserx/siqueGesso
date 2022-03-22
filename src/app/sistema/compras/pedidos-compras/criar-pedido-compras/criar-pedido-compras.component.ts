@@ -149,8 +149,9 @@ export class CriarPedidoComprasComponent implements OnInit {
       complemento: fornecedorSelecionado?.address?.complement,
     });
     this.condicoesPagamento = fornecedorSelecionado?.payment_condition;
-    console.log('nossa lista', this.condicoesPagamento);
-    console.log('fornecedor', this.fornecedorSelecionado);
+    this.pedidoCompraForm.controls['condicoesPagamento'].setValue(
+      fornecedorSelecionado?.payment_condition
+    );
   }
 
   getFornecedores() {
