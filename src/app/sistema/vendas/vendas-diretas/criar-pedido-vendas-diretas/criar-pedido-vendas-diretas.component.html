@@ -237,26 +237,30 @@
               </ul>
             </div>
           </div>
-        </div>
 
-        <!-- Dados da Venda -->
+          <!-- Status Pedido -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="status" id="status" formControlName="statusPedido">
+              <option value="" disabled selected>Selecione um status</option>
+              <option value="Proposta">Proposta</option>
+              <option value="Pedido efetuado">Pedido efetuado</option>
+          </select>
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status Pedido</label>
+                    </div>
+                </div>
 
-        <div class="row m-0 mt-2 py-3 border-bottom">
-          <div class="col-12 m-0 p-0 text-custom-dark">
-            <h4>Dados da Venda</h4>
-          </div>
-        </div>
+                <!-- Dados da Venda -->
 
-        <div class="row">
-          <!-- Condição de pagamento -->
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-              type="text"
-              placeholder="Condição de pagamento"
-              id="condPagamento"
-              formControlName="condPagamento"
-            >
+                <div class="row m-0 mt-2 py-3 border-bottom">
+                    <div class="col-12 m-0 p-0 text-custom-dark">
+                        <h4>Dados da Venda</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Condição de pagamento -->
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" id="condPagamento" formControlName="condPagamento">
               <option value="" disabled selected>Condição de pagamento</option>
               <option
                 *ngFor="let pagamento of condPagamento"
@@ -265,8 +269,7 @@
                 {{ pagamento.nome }}
               </option>
             </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Condição de pagamento</label
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição de pagamento</label
             >
           </div>
 

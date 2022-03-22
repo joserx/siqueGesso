@@ -48,6 +48,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     'loja': new FormControl('', [Validators.required]),
     'vendedor': new FormControl('', [Validators.required]),
     'cliente': new FormControl('', [Validators.required]),
+    'statusPedido': new FormControl('', [Validators.required]),
     'condPagamento': new FormControl('', [Validators.required]),
     'pagPersonalizado': new FormControl(''),
     'tabPreco': new FormControl(''),

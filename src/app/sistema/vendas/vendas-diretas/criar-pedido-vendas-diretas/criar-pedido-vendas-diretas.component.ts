@@ -45,6 +45,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "vendedor": new FormControl('', [Validators.required]),
     "cnpj": new FormControl('', [Validators.required]),
     "cliente": new FormControl('', [Validators.required]),
+    "statusPedido": new FormControl('', [Validators.required]),
     "condPagamento": new FormControl('', [Validators.required]),
     "tabPreco": new FormControl(''),
     "valorFreteEntrega": new FormControl(null),
