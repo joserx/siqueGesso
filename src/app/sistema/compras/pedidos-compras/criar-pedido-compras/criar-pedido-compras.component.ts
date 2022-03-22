@@ -38,9 +38,8 @@ export class CriarPedidoComprasComponent implements OnInit {
     frete: new FormControl(''),
     encargos: new FormControl(''),
     valorTotal: new FormControl(''),
-    condPagamento: new FormControl(''),
+    condicoesPagamento: new FormControl(''),
     dataVenc: new FormControl(''),
-    meioPag: new FormControl(''),
     status: new FormControl(''),
     obs: new FormControl(''),
   });
@@ -51,6 +50,7 @@ export class CriarPedidoComprasComponent implements OnInit {
   @Output() reload = new EventEmitter();
   @ViewChild('close') closeBtn: any;
 
+  public condicoesPagamento: any = [];
   public getDate: any = getDate;
   public fornecedores: any = [];
   public fornecedoresFiltrados: any = [];
@@ -119,8 +119,15 @@ export class CriarPedidoComprasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.compras_editar) == PermissionsUsers.compras_editar)){
-      this.router.navigate(['sistema'])
+    if (
+      !(
+        (JSON.parse(localStorage.getItem('currentUser') as any).result
+          .permission.permission &
+          PermissionsUsers.compras_editar) ==
+        PermissionsUsers.compras_editar
+      )
+    ) {
+      this.router.navigate(['sistema']);
     }
     this.atualizarTotalPedido();
     this.getFornecedores();
@@ -141,6 +148,10 @@ export class CriarPedidoComprasComponent implements OnInit {
       endereco: fornecedorSelecionado?.address?.street,
       complemento: fornecedorSelecionado?.address?.complement,
     });
+    this.condicoesPagamento = fornecedorSelecionado?.payment_condition;
+    this.pedidoCompraForm.controls['condicoesPagamento'].setValue(
+      fornecedorSelecionado?.payment_condition
+    );
   }
 
   getFornecedores() {

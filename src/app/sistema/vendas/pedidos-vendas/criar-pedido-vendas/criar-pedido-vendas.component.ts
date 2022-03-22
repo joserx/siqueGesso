@@ -48,6 +48,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     'loja': new FormControl('', [Validators.required]),
     'vendedor': new FormControl('', [Validators.required]),
     'cliente': new FormControl('', [Validators.required]),
+    'statusPedido': new FormControl('', [Validators.required]),
     'condPagamento': new FormControl('', [Validators.required]),
     'pagPersonalizado': new FormControl(''),
     'tabPreco': new FormControl(''),
@@ -67,8 +68,8 @@ export class CriarPedidoVendasComponent implements OnInit {
     'clienteId': new FormControl(null)
   })
 
-  /* 
-  
+  /*
+
   adicionar o reconhecimento x
   mexer na coluna de total x
   mexer no total do listar (a fazer)
@@ -108,7 +109,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     private readonly filialServices: FilialService,
     private readonly condPagamentoService: CondicoesPagamentoService
     ) { }
-    
+
     ngOnInit(): void {
       this.findCondPagamento()
       if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
@@ -129,11 +130,11 @@ export class CriarPedidoVendasComponent implements OnInit {
           }
 
         }
-      
+
       })
     this.authService.currentUser.subscribe((user) => {
       this.user = user.result
-      // console.log(typeof(user.result))  
+      // console.log(typeof(user.result))
       this.passwordForm.get('email')?.setValue(user.result.email)
     })
     this.produtoService.find().subscribe((data: any) => {
@@ -307,11 +308,11 @@ export class CriarPedidoVendasComponent implements OnInit {
     let str = event.target.value;
     if (str != '') {
       if (str.length > this.filterBefore.length) {
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.allProdutos = this.allProdutosOriginal;
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {
@@ -553,10 +554,10 @@ export class CriarPedidoVendasComponent implements OnInit {
   //   let thisCliente: any[] = []
   //   for(let cliente of this.clientes){
   //     if(cliente.name!=null && cliente.surname!=null){
-  //       thisCliente = cliente 
+  //       thisCliente = cliente
   //       this.showSign = false
   //     }else{
-  //       thisCliente = cliente 
+  //       thisCliente = cliente
   //       this.showSign = false
   //     }
   //     this.enderecos = cliente.addresses

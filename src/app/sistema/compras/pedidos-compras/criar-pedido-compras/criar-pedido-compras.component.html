@@ -44,10 +44,16 @@
             >
           </div>
 
-
-                    <!-- Fornecedor -->
-                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                        <select #fornecedor (change)="setFornecedores(fornecedor.value)" class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Fornecedor" formControlName="fornecedor">
+          <!-- Fornecedor -->
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+            <select
+              #fornecedor
+              (change)="setFornecedores(fornecedor.value)"
+              class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text"
+              placeholder="Fornecedor"
+              formControlName="fornecedor"
+            >
               <option value="" disabled selected>
                 Selecione um Fornecedor
               </option>
@@ -58,7 +64,8 @@
                 {{ listaFornecedor.fantasy_name }}
               </option>
             </select>
-                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Fornecedor</label
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Fornecedor</label
             >
           </div>
 
@@ -75,21 +82,37 @@
         <!-- Faturamento Minimo -->
 
         <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-          <input mask="separator,2" prefix="R$" thousandSeparator="." class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Faramento Minimo" formControlName="faturamentoMinimo" />
-          <label class="ms-2 mt-3 small text-truncate text-custom-dark">Faturament minimo</label
->
-                    </div>
+          <input
+            mask="separator,2"
+            prefix="R$"
+            thousandSeparator="."
+            class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+            type="text"
+            placeholder="Faramento Minimo"
+            formControlName="faturamentoMinimo"
+          />
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+            >Faturament minimo</label
+          >
+        </div>
 
-                    <!-- Dados do fornecedor -->
-                    <div class="row mt-4 m-0">
-                        <div class="col-12 p-0 m-0">
-                            <h6 class="fw-bold text-custom-dark">Dados do fornecedor</h6>
-                        </div>
+        <!-- Dados do fornecedor -->
+        <div class="row mt-4 m-0">
+          <div class="col-12 p-0 m-0">
+            <h6 class="fw-bold text-custom-dark">Dados do fornecedor</h6>
+          </div>
 
-                        <!-- Razão social -->
-                        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                            <input readonly class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" [value]="fornecedorSelecionado?.fantasy_name" type="text" formControlName="razaoSocial" />
-                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão social</label
+          <!-- Razão social -->
+          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+            <input
+              readonly
+              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+              [value]="fornecedorSelecionado?.fantasy_name"
+              type="text"
+              formControlName="razaoSocial"
+            />
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Razão social</label
             >
           </div>
 
@@ -317,54 +340,27 @@
         <!-- /Resumo do pedido -->
 
         <div class="row m-0 p-0">
-          <!-- Condição de pagamento -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-              type="text"
-              placeholder="Necessidade especial"
-              formControlName="condPagamento"
-            >
-              <option value="" disabled selected>Condição de pagamento</option>
-              <option value="7">7 Dias</option>
-              <option value="30">30 Dias</option>
-              <option value="90">90 Dias</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Condição de pagamento</label
-            >
-          </div>
+          <h4 class="m-0 text-custom-dark">Condições de pagamento</h4>
+          <ng-container *ngFor="let condicao of condicoesPagamento">
+            <div class="col-12 mt-2 form-check form-check-inline px-4">
+              <input
+                class="form-check-input shadow-sm"
+                type="checkbox"
+                checked
+                disabled
+              />
+              <label class="form-check-label" >{{
+                condicao?.nome
+              }}</label>
+                    </div>
+                    </ng-container>
+                </div>
 
-          <!-- Data de vencimento -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <input
-              class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-              type="date"
-              placeholder="Data de vencimento"
-              formControlName="dataVenc"
-            />
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Data de vencimento</label
-            >
-          </div>
-
-          <!-- Meio de pagamento -->
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-              type="text"
-              placeholder="Meio de pagamento"
-              formControlName="meioPag"
-            >
-              <option value="" disabled selected>
-                Selecione um meio de pagamento
-              </option>
-              <option value="boleto">Boleto</option>
-              <option value="credito">Crédito</option>
-              <option value="debito">Débito</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Meio de pagamento</label
+                <div class="row m-0 p-0">
+                    <!-- Data de vencimento -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de vencimento" formControlName="dataVenc" />
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de vencimento</label
             >
           </div>
 
@@ -376,9 +372,7 @@
               placeholder="Status do pedido"
               formControlName="status"
             >
-              <option value="" disabled selected>
-                Selecione um status
-              </option>
+              <option value="" disabled selected>Selecione um status</option>
               <option value="Aprovado">Aprovado</option>
               <option value="Reprovado">Reprovado</option>
               <option value="Aguardando aprovação">Aguardando aprovação</option>
