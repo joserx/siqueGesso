@@ -194,9 +194,10 @@
               <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
                 type="text" placeholder="Condição de pagamento" id="condPagamento" formControlName="condPagamento">
                 <option value="" disabled selected>Condição de pagamento</option>
-                <option value="7">7 Dias</option>
+                <option *ngFor="let pagamento of condPagamento;" value="{{pagamento.nome}}"> {{pagamento.nome}} </option>
+                <!-- <option value="7">7 Dias</option>
                 <option value="30">30 Dias</option>
-                <option value="90">90 Dias</option>
+                <option value="90">90 Dias</option> -->
               </select>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição de pagamento</label>
             </div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
@@ -88,6 +89,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     return this.pedidosForm.get('produto') as FormArray
   }
 
+  public condPagamento: any[] = []
   public status: any[] = []
   public allProdutos: any[] = []
   public allProdutosOriginal: any[] = []
@@ -103,10 +105,12 @@ export class CriarPedidoVendasComponent implements OnInit {
     private readonly authService: AuthenticationService,
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
-    private readonly filialServices: FilialService
+    private readonly filialServices: FilialService,
+    private readonly condPagamentoService: CondicoesPagamentoService
     ) { }
     
     ngOnInit(): void {
+      this.findCondPagamento()
       if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
         this.router.navigate(['sistema'])
       }
@@ -565,5 +569,11 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   updateAddresToWithdraw (oneItem: any){
     oneItem.value.endereco =  this.filialSelected.logradouro  + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep;
+  }
+
+  findCondPagamento() {
+    this.condPagamentoService.findAll().subscribe((resp) => {
+      this.condPagamento = resp
+    })
   }
 }
