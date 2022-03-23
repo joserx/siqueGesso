@@ -32,6 +32,7 @@ export class CriarPedidoVendasComponent implements OnInit {
   public originalClientes: any[] = []
   public vendedores: any[] = []
   public user: any
+  public usuario: any
   public valVenda: number = 0
   public valUnit: number = 0
   public dataId: number = 0
@@ -82,7 +83,6 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   get item() {
     const item = this.pedidosForm.get('item') as FormArray;
-    console.log(item)
     return item;
   }
 
@@ -121,6 +121,7 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.clienteService.find().subscribe((data:any)=>{
         this.clientes = data
         this.originalClientes = data
+
         console.log('clientes', this.clientes)
       })
       this.rhService.find().subscribe((data: any)=>{
@@ -134,7 +135,6 @@ export class CriarPedidoVendasComponent implements OnInit {
       })
     this.authService.currentUser.subscribe((user) => {
       this.user = user.result
-      // console.log(typeof(user.result))
       this.passwordForm.get('email')?.setValue(user.result.email)
     })
     this.produtoService.find().subscribe((data: any) => {
@@ -156,7 +156,6 @@ export class CriarPedidoVendasComponent implements OnInit {
   submitForm(data: any, data2: any) {
     this.filialSelected.nome
     data.value.data = new Date(data.value.data)
-    console.log(data.value);
     let timezone = data.value.data.getTimezoneOffset() * 60000
     data.value.data = new Date(data.value.data + timezone).toISOString()
     data.enderecoLoja = this.filialSelected.logradouro  + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep
@@ -206,7 +205,6 @@ export class CriarPedidoVendasComponent implements OnInit {
 
 
   checkIfChecked(event: any) {
-    // console.log(this.allProdutos)
     let input = event.target
     let codigo = Number(event.target.value)
     if (input.checked) {
@@ -216,6 +214,7 @@ export class CriarPedidoVendasComponent implements OnInit {
           //   'id': new FormControl(codigo)
           // }))
           this.item.push(new FormGroup({
+            'tabela': new FormControl(''),
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
             'quantidade': new FormControl(null, [Validators.required]),
@@ -234,7 +233,6 @@ export class CriarPedidoVendasComponent implements OnInit {
           this.valVenda += produto.precoMedio
         }
       }
-      // console.log(this.item)
     } else {
       for (let produto of this.allProdutos) {
         if (produto.id == codigo) {
@@ -273,12 +271,10 @@ export class CriarPedidoVendasComponent implements OnInit {
     }
   }
   totalValue(value: any) {
-    // console.log(value)
     let total: number = 0
     for (let item of value) {
       total += item.total
     }
-    // console.log(total)
     this.item.value.total = total
     if (this.descontoG == 0 || this.descontoG == null) {
       this.pedidosForm.get('total')?.setValue(total)
@@ -287,6 +283,10 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.pedidosForm.get('total')?.setValue(total - this.descontoG)
       return total - this.descontoG
     }
+  }
+
+  total() {
+
   }
 
   checkProdutos(event: any) {
@@ -329,7 +329,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     }
   }
 
-  totalQuanti(data: any): any {
+  totalQuanti(data: any): any {    
     let total = 0
     for (let item of data) {
       total += item.quantidade
@@ -346,6 +346,7 @@ export class CriarPedidoVendasComponent implements OnInit {
   }
 
   setThisFrete(data: any, data2: any) {
+    
     data.valorFrete = Number(String(data2.target.value).substring(3, String(data2.target.value).length).replace(',', '.'))
   }
 
@@ -501,7 +502,7 @@ export class CriarPedidoVendasComponent implements OnInit {
   checkClient(event: any) {
     let input = event.target.value
     for (let cliente of this.clientes) {
-      if (input == `${cliente.name} ${cliente.surname}`) {
+      if (input == `${cliente.name} ${cliente.surname}`) {        
         this.selectThisCliente(cliente)
       } else if (input == `${cliente.fantasyName}`) {
         this.selectThisCliente(cliente)
@@ -509,11 +510,11 @@ export class CriarPedidoVendasComponent implements OnInit {
     }
   }
 
-  selectThisCliente(value: any) {
+  selectThisCliente(value: any) {    
+    let id = value.id    
     this.clientSelected = true;
     let addresses = []
     addresses = value.addresses
-    // console.log(addresses)
     if (value.name != null && value.surname != null) {
       this.pedidosForm.get('cliente')?.setValue(`${value.name} ${value.surname}`)
       this.pedidosForm.get('clienteId')?.setValue(value.id)
@@ -524,7 +525,7 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.showSign = false
     }
     this.enderecos = value.addresses
-    // console.log(this.enderecos)
+    this.findClientById(id)
   }
 
   descontoGeral(event: any) {
@@ -575,6 +576,12 @@ export class CriarPedidoVendasComponent implements OnInit {
   findCondPagamento() {
     this.condPagamentoService.findAll().subscribe((resp) => {
       this.condPagamento = resp
+    })
+  }
+
+  findClientById(id: any) {
+    this.clienteService.findOne(id).subscribe((resp) => {
+    this.usuario = resp    
     })
   }
 }

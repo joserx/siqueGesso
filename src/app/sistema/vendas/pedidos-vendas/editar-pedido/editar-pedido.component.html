@@ -427,6 +427,7 @@
           <table class="table text-custom-dark">
             <thead>
               <tr>
+                <th scope="col-1">Tablea</th>
                 <th scope="col-1">Cód.</th>
                 <th scope="col-1">Produto</th>
                 <th scope="col-1">Quantidade</th>
@@ -444,6 +445,16 @@
             </thead>
             <tbody *ngFor="let oneItem of item['controls']; let i = index" formArrayName="item">
               <tr [formGroupName]="i">
+
+
+                <td class="row">
+                  <select #tabPreco class="col form-select form-select-sm" id="tabela" formControlName="tabPreco">
+                    <option value="" disabled selected>Selecionar...</option>
+                    <option *ngFor="let user of usuario.tabela" value="{{user.nome}}">{{user.nome}}</option>
+                  </select>
+                </td>
+
+
                 <th scope="row">{{ oneItem.value.codigo }}</th>
                 <td>{{ oneItem.value.produto }}</td>
                 <td>
@@ -647,7 +658,7 @@
           </div>
 
           <!-- Tabela de preço -->
-          <div class="col-6 p-0 m-0">
+          <!-- <div class="col-6 p-0 m-0">
             <div class="pt-4 px-2 form-floating">
               <select #tabela (change)="log(tabela)"
                 class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
@@ -668,7 +679,7 @@
                 placeholder="Tabela personalizada" id="tabPersonalizado" formControlName="tabPersonalizado" />
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
             </div>
-          </div>
+          </div> -->
 
           <!-- Meio de pagamento -->
           <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">

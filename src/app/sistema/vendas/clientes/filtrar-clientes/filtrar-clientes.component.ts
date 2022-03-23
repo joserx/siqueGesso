@@ -33,7 +33,6 @@ export class FiltrarClientesComponent implements OnInit {
     }
   }
   typeClient(value: any): string{
-    console.log(value)
     if(value.name==null){
       return 'juridica'
     }else{
