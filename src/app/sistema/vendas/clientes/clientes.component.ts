@@ -277,4 +277,13 @@ export class ClientesComponent implements OnInit {
     }
   }
 
+  checkThis(data: string): any{
+    let pos = this.tabela.value.map(
+      (e: any)=>{return e.nome}
+    )
+    if(pos.indexOf(data)!=-1){
+      return true
+    }
+  }
+
 }

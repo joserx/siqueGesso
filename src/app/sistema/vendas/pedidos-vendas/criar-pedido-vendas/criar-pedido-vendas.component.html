@@ -446,8 +446,7 @@
                                 <td class="row">
                                     <select #tabela class="col form-select form-select-sm margin-r" id="tabela" formControlName="tabela">
                                         <option value="" disabled selected>Selecionar...</option>
-                                        <option value="entrega">entrega</option>
-                                        <option value="retirada">retirada</option>
+                                        <option *ngFor="let tabela of usuario.tabela" value="{{tabela.nome}}"> {{tabela.nome}} </option>
                                     </select>
                                 </td>
                                 <th scope="row">{{ oneItem.value.codigo }}</th>

@@ -558,19 +558,17 @@
                 </div>
                 <label class="form-check-label" for="tabela_e">Tabela E</label>
               </div>
-            </div>
-
-            <!-- Checando se as check box checadas -->
-            <div class="col-3 mt-3 text-custom-dark">
+              
+              <!-- Checando se as check box checadas -->
               <!-- Tabela F -->
               <div class="form-check mt-2">
                 <div *ngIf="checkThis('tabela_f')">
                   <input class="form-check-input" type="checkbox" value="tabela_f" id="tabela_f" (click)="check($event)"
-                    checked>
+                  checked>
                 </div>
                 <div *ngIf="!checkThis('tabela_f')">
                   <input class="form-check-input" type="checkbox" value="tabela_f" id="tabela_f"
-                    (click)="check($event)">
+                  (click)="check($event)">
                 </div>
                 <label class="form-check-label" for="tabela_f">Tabela F</label>
               </div>
@@ -578,23 +576,26 @@
               <div class="form-check mt-2">
                 <div *ngIf="checkThis('tabela_g')">
                   <input class="form-check-input" type="checkbox" value="tabela_g" id="tabela_g" (click)="check($event)"
-                    checked>
+                  checked>
                 </div>
                 <div *ngIf="!checkThis('tabela_g')">
                   <input class="form-check-input" type="checkbox" value="tabela_g" id="tabela_g"
-                    (click)="check($event)">
+                  (click)="check($event)">
                 </div>
                 <label class="form-check-label" for="tabela_g">Tabela G</label>
               </div>
+            </div>
+      
+            <div class="col-3 mt-3 text-custom-dark">
               <!-- Tabela H -->
               <div class="form-check mt-2">
                 <div *ngIf="checkThis('tabela_h')">
                   <input class="form-check-input" type="checkbox" value="tabela_h" id="tabela_h" (click)="check($event)"
-                    checked>
+                  checked>
                 </div>
                 <div *ngIf="!checkThis('tabela_h')">
                   <input class="form-check-input" type="checkbox" value="tabela_h" id="tabela_h"
-                    (click)="check($event)">
+                  (click)="check($event)">
                 </div>
                 <label class="form-check-label" for="tabela_h">Tabela H</label>
               </div>
@@ -612,15 +613,214 @@
               </div>
               <!-- Tabela J -->
               <div class="form-check mt-2">
-                <div *ngIf="checkThis('tabela_i')">
+                <div *ngIf="checkThis('tabela_j')">
                   <input class="form-check-input" type="checkbox" value="tabela_j" id="tabela_j" (click)="check($event)"
                     checked>
                 </div>
-                <div *ngIf="!checkThis('tabela_i')">
+                <div *ngIf="!checkThis('tabela_j')">
                   <input class="form-check-input" type="checkbox" value="tabela_j" id="tabela_j"
                     (click)="check($event)">
                 </div>
                 <label class="form-check-label" for="tabela_j">Tabela J</label>
+              </div>
+              
+              <!-- Tabela k -->
+              <div class="form-check mt-2">
+                  <div *ngIf="checkThis('tabela_k')">
+                    <input class="form-check-input" type="checkbox" value="tabela_k" id="tabela_k" (click)="check($event)"
+                    checked>
+                  </div>
+                  <div *ngIf="!checkThis('tabela_k')">
+                    <input class="form-check-input" type="checkbox" value="tabela_k" id="tabela_k"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_k">Tabela K</label>
+              </div>
+              <!-- Tabela L -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_l')">
+                  <input class="form-check-input" type="checkbox" value="tabela_l" id="tabela_l" (click)="check($event)"
+                  checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_l')">
+                  <input class="form-check-input" type="checkbox" value="tabela_l" id="tabela_l"
+                    (click)="check($event)">
+                  </div>
+                  <label class="form-check-label" for="tabela_l">Tabela L</label>
+                </div>
+                <!-- Tabela M -->
+                <div class="form-check mt-2">
+                  <div *ngIf="checkThis('tabela_m')">
+                    <input class="form-check-input" type="checkbox" value="tabela_m" id="tabela_m" (click)="check($event)"
+                    checked>
+                  </div>
+                  <div *ngIf="!checkThis('tabela_m')">
+                    <input class="form-check-input" type="checkbox" value="tabela_m" id="tabela_m"
+                    (click)="check($event)">
+                  </div>
+                  <label class="form-check-label" for="tabela_m">Tabela M</label>
+                </div>
+                <!-- Tabela N -->
+                <div class="form-check mt-2">
+                  <div *ngIf="checkThis('tabela_n')">
+                    <input class="form-check-input" type="checkbox" value="tabela_n" id="tabela_n" (click)="check($event)"
+                    checked>
+                  </div>
+                  <div *ngIf="!checkThis('tabela_n')">
+                    <input class="form-check-input" type="checkbox" value="tabela_n" id="tabela_n"
+                    (click)="check($event)">
+                  </div>
+                  <label class="form-check-label" for="tabela_n">Tabela N</label>
+                </div>
+              </div>
+
+              <div class="col-3 mt-3 text-custom-dark">
+                <!-- Tabela O -->
+                <div class="form-check mt-2">
+                  <div *ngIf="checkThis('tabela_o')">
+                    <input class="form-check-input" type="checkbox" value="tabela_o" id="tabela_o" (click)="check($event)"
+                    checked>
+                  </div>
+                  <div *ngIf="!checkThis('tabela_o')">
+                    <input class="form-check-input" type="checkbox" value="tabela_o" id="tabela_o"
+                    (click)="check($event)">
+                  </div>
+                  <label class="form-check-label" for="tabela_o">Tabela O</label>
+                </div>
+              <!-- Tabela P -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_p')">
+                  <input class="form-check-input" type="checkbox" value="tabela_p" id="tabela_p" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_p')">
+                  <input class="form-check-input" type="checkbox" value="tabela_p" id="tabela_p"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_p">Tabela P</label>
+              </div>
+              <!-- Tabela Q -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_q')">
+                  <input class="form-check-input" type="checkbox" value="tabela_q" id="tabela_q" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_q')">
+                  <input class="form-check-input" type="checkbox" value="tabela_q" id="tabela_q"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_q">Tabela Q</label>
+              </div>
+              <!-- Tabela R -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_r')">
+                  <input class="form-check-input" type="checkbox" value="tabela_r" id="tabela_r" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_r')">
+                  <input class="form-check-input" type="checkbox" value="tabela_r" id="tabela_r"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_r">Tabela R</label>
+              </div>
+              <!-- Tabela S -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_s')">
+                  <input class="form-check-input" type="checkbox" value="tabela_s" id="tabela_s" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_s')">
+                  <input class="form-check-input" type="checkbox" value="tabela_s" id="tabela_s"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_s">Tabela S</label>
+              </div>
+              <!-- Tabela T -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_t')">
+                  <input class="form-check-input" type="checkbox" value="tabela_t" id="tabela_t" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_t')">
+                  <input class="form-check-input" type="checkbox" value="tabela_t" id="tabela_t"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_t">Tabela T</label>
+              </div>
+            </div>
+
+            <div class="col-3 mt-3 text-custom-dark">
+              <!-- Tabela U -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_u')">
+                  <input class="form-check-input" type="checkbox" value="tabela_u" id="tabela_u" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_u')">
+                  <input class="form-check-input" type="checkbox" value="tabela_u" id="tabela_u"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_u">Tabela U</label>
+              </div>
+              <!-- Tabela V -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_v')">
+                  <input class="form-check-input" type="checkbox" value="tabela_v" id="tabela_v" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_v')">
+                  <input class="form-check-input" type="checkbox" value="tabela_v" id="tabela_v"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_v">Tabela V</label>
+              </div>
+              <!-- Tabela w -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_w')">
+                  <input class="form-check-input" type="checkbox" value="tabela_w" id="tabela_w" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_w')">
+                  <input class="form-check-input" type="checkbox" value="tabela_w" id="tabela_w"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_w">Tabela W</label>
+              </div>
+              <!-- Tabela x -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_x')">
+                  <input class="form-check-input" type="checkbox" value="tabela_x" id="tabela_x" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_x')">
+                  <input class="form-check-input" type="checkbox" value="tabela_x" id="tabela_x"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_x">Tabela X</label>
+              </div>
+              <!-- Tabela Y -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_y')">
+                  <input class="form-check-input" type="checkbox" value="tabela_y" id="tabela_y" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_y')">
+                  <input class="form-check-input" type="checkbox" value="tabela_y" id="tabela_y"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_y">Tabela Y</label>
+              </div>
+              <!-- Tabela Z -->
+              <div class="form-check mt-2">
+                <div *ngIf="checkThis('tabela_z')">
+                  <input class="form-check-input" type="checkbox" value="tabela_z" id="tabela_z" (click)="check($event)"
+                    checked>
+                </div>
+                <div *ngIf="!checkThis('tabela_z')">
+                  <input class="form-check-input" type="checkbox" value="tabela_z" id="tabela_z"
+                    (click)="check($event)">
+                </div>
+                <label class="form-check-label" for="tabela_z">Tabela Z</label>
               </div>
             </div>
           </div>
