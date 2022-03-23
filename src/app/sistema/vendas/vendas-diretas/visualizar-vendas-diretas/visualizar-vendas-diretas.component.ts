@@ -47,10 +47,8 @@ export class VisualizarVendasDiretasComponent implements OnInit {
     "bairro": new FormControl('', [Validators.required]),
     "cidade": new FormControl('', [Validators.required]),
     "complemento": new FormControl(''),
-    "motorista": new FormControl('', [Validators.required]),
-    "placa": new FormControl('', [Validators.required]),
-    "previsaoEntrega": new FormControl(''), 
-    "meioPagamento": new FormControl('', [Validators.required]), 
+    "previsaoEntrega": new FormControl(''),
+    "meioPagamento": new FormControl('', [Validators.required]),
     "dataVencimento": new FormControl(null),
     "aguradandoPagamento": new FormControl(''),
     "linkBoleto": new FormControl(''),
@@ -124,7 +122,7 @@ export class VisualizarVendasDiretasComponent implements OnInit {
           'pedidoId': new FormControl(data.item[item].id),
           'codigo': new FormControl(data.item[item].codigo),
           'produto': new FormControl(data.item[item].produto),
-          'quantidade': new FormControl(data.item[item].quantidade, [Validators.required]),  
+          'quantidade': new FormControl(data.item[item].quantidade, [Validators.required]),
           'valorUnitario': new FormControl(Number(data.item[item].valorUnitario)),
           'desconto': new FormControl(Number(data.item[item].desconto)),
           'tipoRetirada': new FormControl(data.item[item].tipoRetirada),
@@ -167,13 +165,13 @@ export class VisualizarVendasDiretasComponent implements OnInit {
             this.item['value'][OnItem].pedidoId = this.pedidoId
           }
           this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
-          Swal.fire({ 
-            title: '<h4>Pedido adicionado !<h4>', 
-            icon: 'success', 
-            toast: true, 
-            position: 'top', 
-            showConfirmButton: false, 
-            timer: 2000, 
+          Swal.fire({
+            title: '<h4>Pedido adicionado !<h4>',
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
             timerProgressBar: true,
             width: '500px'
           })
@@ -185,13 +183,13 @@ export class VisualizarVendasDiretasComponent implements OnInit {
           document.getElementById(control)?.classList.add("invalid")
         }
       }
-      Swal.fire({ 
-        title: '<h4>Preencha os campos necessários!</h4>', 
-        icon: 'error', 
-        toast: true, 
-        position: 'top', 
-        showConfirmButton: false, 
-        timer: 2000, 
+      Swal.fire({
+        title: '<h4>Preencha os campos necessários!</h4>',
+        icon: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 2000,
         timerProgressBar: true,
         width: '500px'
       })
@@ -212,11 +210,11 @@ export class VisualizarVendasDiretasComponent implements OnInit {
     let str = event.target.value;
     if(str != '') {
       if(str.length > this.filterBefore.length) {
-        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.precoMedio}`.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.allProdutos = this.allProdutosOriginal;
-        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {
@@ -291,8 +289,7 @@ export class VisualizarVendasDiretasComponent implements OnInit {
           this.item.push(new FormGroup({
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
-            'quantidade': new FormControl(null, [Validators.required]),  
-            'valorUnitario': new FormControl(produto.custoMedio),
+            'quantidade': new FormControl(null, [Validators.required]),
             'desconto': new FormControl(null),
             'tipoRetirada': new FormControl(''),
             'prevRetirada': new FormControl(null),
@@ -304,7 +301,6 @@ export class VisualizarVendasDiretasComponent implements OnInit {
             'total': new FormControl(0)
           }))
           this.valVenda += produto.precoMedio
-          this.valUnit += produto.custoMedio
         }
       }
       console.log(this.item)
@@ -326,13 +322,12 @@ export class VisualizarVendasDiretasComponent implements OnInit {
               return e.value.codigo
             }).indexOf(codigo), 1
           )
-          this.item.value.splice( 
+          this.item.value.splice(
             this.item.value.map(function(e: any) {
               return e.codigo
             }).indexOf(codigo), 1
           )
           this.valVenda -= produto.precoMedio
-          this.valUnit -= produto.custoMedio
         }
       }
     }

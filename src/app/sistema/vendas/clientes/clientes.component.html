@@ -602,8 +602,8 @@
 
               <!-- Limite de compra -->
               <div class="col-6 px-2 p-0 pt-4 m-0 form-floating">
-                <input font="montserrat" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                  type="number" min="0" value="999" placeholder="Limite de compra" formControlName="limiteCompra">
+                <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                  type="text" value="{{ '999' | currency: 'BRL'}}" placeholder="Limite de compra" formControlName="limiteCompra">
                 <label class="ms-2 mt-3 small text-truncate text-custom-dark">Limite de compra</label>
               </div>
 

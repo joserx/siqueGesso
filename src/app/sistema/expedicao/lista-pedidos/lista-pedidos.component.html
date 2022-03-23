@@ -3,267 +3,265 @@
 
 <!-- Modal -->
 <!-- Imprimir -->
-<div class="modal fade" id="imprimir" tabindex="-1" aria-labelledby="imrpimirLabel"
-  aria-hidden="true" aria-label="Close">
-  <div class="modal-dialog modal-xl">
-      <!-- Modal content -->
-      <div class="modal-content rounded-15 bg-custom-light">
-        <div class="modal-header px-4">
-          <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Imprimir</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="col-12 modal-body px-4 d-flex justify-content-center">
-          <div class="pdf-preview d-flex justify-content-center"  id="content" #content>
-            <div class="mt-4 bg-white col-12 p-2">
-              <div class="row">
-                  <div class="col-2">
-                      <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso">
-                  </div>
-                  <div class="col">
-                      <h2 class="text-custom-dark text-center">
-                          Embarques
-                      </h2>
-                  </div>
-              </div>
-              <div class="row">
-                <div class="col-4">Placa: {{emabrqueForm.value.sign}}</div>
-                <div class="col-4">Nome: {{emabrqueForm.value.driver}}</div>
-                <div class="col-12">
-                  <table class="bg-white tabela m-0 p-0">
-                    <thead>
-                        <tr>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nº Pedido</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cliente</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Vendedor</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
-                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Status</td>
-                        </tr>
-                    </thead>
-                    <tbody *ngFor="let solicitacao of emabrqueForm.value.solicitacao">
-                        <tr>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.numero}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.cliente}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.vendedor}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.data | date}}</td>
-                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.status}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+<div class="modal fade" id="imprimir" tabindex="-1" aria-labelledby="imrpimirLabel" aria-hidden="true" aria-label="Close">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content -->
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Imprimir</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="col-12 modal-body px-4 d-flex justify-content-center">
+                <div class="pdf-preview d-flex justify-content-center" id="content" #content>
+                    <div class="mt-4 bg-white col-12 p-2">
+                        <div class="row">
+                            <div class="col-2">
+                                <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso">
+                            </div>
+                            <div class="col">
+                                <h2 class="text-custom-dark text-center">
+                                    Embarques
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Placa: {{emabrqueForm.value.sign}}</div>
+                            <div class="col-4">Nome: {{emabrqueForm.value.driver}}</div>
+                            <div class="col-12">
+                                <table class="bg-white tabela m-0 p-0">
+                                    <thead>
+                                        <tr>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nº Pedido</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cliente</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Vendedor</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let solicitacao of emabrqueForm.value.solicitacao">
+                                        <tr>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.numero}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.cliente}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.vendedor}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.data | date}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.status}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-          </div>
-        </div>
 
-        </div>
-        <!-- Modal footer -->
-        <div class="row mx-4 py-3 modal-footer">
-          <div class="col-1 mx-3 px-2 p-0 m-0">
-            <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="savePdf()">
+            </div>
+            <!-- Modal footer -->
+            <div class="row mx-4 py-3 modal-footer">
+                <div class="col-1 mx-3 px-2 p-0 m-0">
+                    <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="savePdf()">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">Imprimir</h5>
             </button>
-          </div>
+                </div>
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-        <!-- /Modal footer -->
+        <!-- /Modal content -->
 
-      </div>
-      <!-- /Modal content -->
-
-  </div>
+    </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" #opt id="options" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content  bg-custom-light">
-      <div class="modal-header">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">O que você deseja fazer ?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="addEmbarque(emabrqueForm)">Salvar</button>
-        <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex align-items-center justify-content-between shadow-sm" (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimir">Imprimir</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content  bg-custom-light">
+            <div class="modal-header">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">O que você deseja fazer ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="addEmbarque(emabrqueForm)">Salvar</button>
+                <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex align-items-center justify-content-between shadow-sm" (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimir">Imprimir</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Modal -->
 <!-- Criar embarque -->
 <div class="modal fade" #embarque tabindex="-1" id="criarEmbarque">
-  <!-- Modal -->
-  <!-- Exibir Solicitacao -->
-  <div class="modal fade m-0" id="exibirSolicitacao">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content rounded-15 bg-custom-light">
-        <div class="modal-header px-4">
-          <h5 class="modal-title text-custom-dark" id="addFilialLabel">Pedido no embarque</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-          <div class="row">
-            <div class="row m-2 py-2">
-              <div class="row justify-content-start">
+    <!-- Modal -->
+    <!-- Exibir Solicitacao -->
+    <div class="modal fade m-0" id="exibirSolicitacao">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="addFilialLabel">Pedido no embarque</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="row">
-                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.numero}}" readonly>
-                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nº do Pedido</label>
-                  </div>
-                </div>
-                <div class="row justify-content-between">
-                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.cliente}}" readonly>
-                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cliente</label>
-                  </div>
-                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.vendedor}}" readonly>
-                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
-                  </div>
-                  <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.data | date}}">
-                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Entrega</label>
-                  </div>
-                </div>
-              </div>
-              <div class="row tabela-row my-5">
-                  <table class="col mt-4">
-                    <thead class="header_table col-12">
-                      <tr>
-                        <td class="lead text-center fw-bold">Nº Pedido</td>
-                        <td class="lead text-center fw-bold">Produto</td>
-                        <td class="lead text-center fw-bold">Vendedor</td>
-                        <td class="lead text-center fw-bold">Status</td>
-                      </tr>
-                    </thead>
-                    <tbody class="body_table">
-                      <tr class="mt-2" *ngFor="let produto of produtos">
-                        <td class="col lead rounded-start text-center fw-bold">{{umPedido.numero}}</td>
-                        <td class="col lead rounded-start text-center fw-bold">{{produto.nome}}</td>
-                        <td class="col lead rounded-start text-center fw-bold">{{umPedido.vendedor}}</td>
-                        <td class="col-2 lead rounded-start text-center fw-bold">
-                          <div class="px-2 pt-4 p-0 m-0 form-floating">
-                            <select
-                            class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text"
-                            placeholder="Necessidade especial">
+                    <div class="row m-2 py-2">
+                        <div class="row justify-content-start">
+                            <div class="row">
+                                <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.numero}}" readonly>
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nº do Pedido</label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.cliente}}" readonly>
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cliente</label>
+                                </div>
+                                <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.vendedor}}" readonly>
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+                                </div>
+                                <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" value="{{umPedido.data | date}}">
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Entrega</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row tabela-row my-5">
+                            <table class="col mt-4">
+                                <thead class="header_table col-12">
+                                    <tr>
+                                        <td class="lead text-center fw-bold">Nº Pedido</td>
+                                        <td class="lead text-center fw-bold">Produto</td>
+                                        <td class="lead text-center fw-bold">Vendedor</td>
+                                        <td class="lead text-center fw-bold">Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="body_table">
+                                    <tr class="mt-2" *ngFor="let produto of produtos">
+                                        <td class="col lead rounded-start text-center fw-bold">{{umPedido.numero}}</td>
+                                        <td class="col lead rounded-start text-center fw-bold">{{produto.nome}}</td>
+                                        <td class="col lead rounded-start text-center fw-bold">{{umPedido.vendedor}}</td>
+                                        <td class="col-2 lead rounded-start text-center fw-bold">
+                                            <div class="px-2 pt-4 p-0 m-0 form-floating">
+                                                <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Necessidade especial">
                             <option value="Não tem">Não tem</option>
                             <option value="Separado">Separado</option>
                             <option value="Não Coube">Ensino superior</option>
                             </select>
-                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+                                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-              <div class="col-12 d-flex justify-content-end mx-5">
-                <div class="col-2 p-0 m-0">
-                  <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+                        <div class="col-12 d-flex justify-content-end mx-5">
+                            <div class="col-2 p-0 m-0">
+                                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
                   </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="row m-0 py-3 modal-footer">
+                </div>
+                <!-- /Modal footer -->
+
             </div>
-          </div>
-        <div class="row m-0 py-3 modal-footer">
+            <!-- /Modal content -->
+
         </div>
-        <!-- /Modal footer -->
-
-      </div>
-      <!-- /Modal content -->
-
     </div>
-  </div>
 
-  <!-- Modal -->
-  <!-- Modal de criar embarque -->
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content rounded-15 bg-custom-light">
-      <div class="modal-header px-4">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Criar Embarque</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form [formGroup]="emabrqueForm" (ngSubmit)="addEmbarque(emabrqueForm)">
-        <div class="d-flex m-2 py-2">
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Placa" autocomplete="off" formControlName="sign" id="sign" (keyup)="filtrarVeiculo($event)" (click)="show=false">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
-            <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
-              <ul class="drivers-list list-unstyled">
-                <li class="p-1 px-2 user-select-none" *ngFor="let veiculo of veiculos" (click)="selectThisVeiculo(veiculo.placa)">{{ veiculo.placa }}</li>
-              </ul>
+    <!-- Modal -->
+    <!-- Modal de criar embarque -->
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Criar Embarque</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>
-        </div>
-        <div class="row m-2 py-2">
-          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-            <input class="w-100 form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do Motorista" autocomplete="off" formControlName="driver" id="driver" (keyup)="filtrarMotorista($event)" (click)="showSign=false">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Motorista</label>
-            <div *ngIf="show===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
-              <ul class="drivers-list list-unstyled">
-                <li class="p-1 px-2 user-select-none" *ngFor="let motorista of motoristas" (click)="selectThis(motorista.name, motorista.surname)">{{motorista.name}} {{motorista.surname}}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="row m-2 py-2">
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="numero" (click)="showSign=false" (click)="show=false">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
-            </div>
-            <div class="col-1 px-2 pt-4 m-0 text-center d-flex align-items-center">
-              <button type="button" cursor="pointer" class="submit-buton h-100 w-100 border border-0 bg-trasnparente" (click)="findThis(emabrqueForm.value)">
+            <form [formGroup]="emabrqueForm" (ngSubmit)="addEmbarque(emabrqueForm)">
+                <div class="d-flex m-2 py-2">
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Placa" autocomplete="off" formControlName="sign" id="sign" (keyup)="filtrarVeiculo($event)" (click)="show=false">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Placa</label>
+                        <div *ngIf="showSign===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
+                            <ul class="drivers-list list-unstyled">
+                                <li class="p-1 px-2 user-select-none" *ngFor="let veiculo of veiculos" (click)="selectThisVeiculo(veiculo.placa)">{{ veiculo.placa }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-2 py-2">
+                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="w-100 form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do Motorista" autocomplete="off" formControlName="driver" id="driver" (keyup)="filtrarMotorista($event)" (click)="showSign=false">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome do Motorista</label>
+                        <div *ngIf="show===true" class="search-sugestion mx-1 rounded-15 shadow-sm col-11 form-flaoting position-absolute ">
+                            <ul class="drivers-list list-unstyled">
+                                <li class="p-1 px-2 user-select-none" *ngFor="let motorista of motoristas" (click)="selectThis(motorista.name, motorista.surname)">{{motorista.name}} {{motorista.surname}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row m-2 py-2">
+                        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" formControlName="numero" (click)="showSign=false" (click)="show=false">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+                        </div>
+                        <div class="col-1 px-2 pt-4 m-0 text-center d-flex align-items-center">
+                            <button type="button" cursor="pointer" class="submit-buton h-100 w-100 border border-0 bg-trasnparente" (click)="findThis(emabrqueForm.value)">
                 <i class="submit-buton button-modal bi bi-plus-circle-fill icon-view my-auto fs-3 d-flex align-items-center justify-content-center h-100 w-100 p-0 m-0 fw-bold color-dark"></i>
               </button>
-            </div>
-          </div>
-        </div>
-        <div class="row m-2 py-2">
-          <table class="col-12 mt-4">
-            <thead class="header_table col-12">
-              <tr>
-                <td class="lead text-center fw-bold">Nº Pedido</td>
-                <td class="lead text-center fw-bold">Cliente</td>
-                <td class="lead text-center fw-bold">Vendedor</td>
-                <td class="lead text-center fw-bold">Data Entrega</td>
-                <td class="lead text-center fw-bold">Status</td>
-                <td class="lead text-center fw-bold"> <td>
-                <td class="lead text-center fw-bold"> </td>
-              </tr>
-            </thead>
-            <tbody class="body_table">
-              <tr class="mt-2" *ngFor="let solicitacao of embarqueSol">
-                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
-                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
-                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
-                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
-                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
-                <td class="col-1 lead rounded-start text-center fw-bold">
-                  <button type="button" class="w-100 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="findSolicitation(solicitacao.id)" data-bs-toggle="modal" data-bs-target="#exibirSolicitacao">
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-2 py-2">
+                    <table class="col-12 mt-4">
+                        <thead class="header_table col-12">
+                            <tr>
+                                <td class="lead text-center fw-bold">Nº Pedido</td>
+                                <td class="lead text-center fw-bold">Cliente</td>
+                                <td class="lead text-center fw-bold">Vendedor</td>
+                                <td class="lead text-center fw-bold">Data Entrega</td>
+                                <td class="lead text-center fw-bold">Status</td>
+                                <td class="lead text-center fw-bold">
+                                    <td>
+                                        <td class="lead text-center fw-bold"> </td>
+                            </tr>
+                        </thead>
+                        <tbody class="body_table">
+                            <tr class="mt-2" *ngFor="let solicitacao of embarqueSol">
+                                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
+                                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
+                                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
+                                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
+                                <td class="col lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
+                                <td class="col-1 lead rounded-start text-center fw-bold">
+                                    <button type="button" class="w-100 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="findSolicitation(solicitacao.id)" data-bs-toggle="modal" data-bs-target="#exibirSolicitacao">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Exibir</h5>
                   </button>
-                </td>
-                <td class="col-1 lead rounded-start text-center fw-bold"><i (click)="delete(solicitacao)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="row mx-5 d-flex justify-content-end mb-2">
-          <div class="col-2 mx-3 px-2 p-0 m-0 d-grid">
-            <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="closeEmbarque()" data-bs-toggle="modal" data-bs-target="#options">
+                                </td>
+                                <td class="col-1 lead rounded-start text-center fw-bold"><i (click)="delete(solicitacao)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row mx-5 d-flex justify-content-end mb-2">
+                    <div class="col-2 mx-3 px-2 p-0 m-0 d-grid">
+                        <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" (click)="closeEmbarque()" data-bs-toggle="modal" data-bs-target="#options">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">Finalizar embarque</h5>
             </button>
-          </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row m-0 py-3 modal-footer">
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-      </form>
-      
-      <div class="row m-0 py-3 modal-footer">
-      </div>
-      <!-- /Modal footer -->
+        <!-- /Modal content -->
 
     </div>
-    <!-- /Modal content -->
-
-  </div>
 </div>
 
 
@@ -271,206 +269,205 @@
 <!-- Modal -->
 <!-- Vizualizar Pedidos -->
 <div class="modal fade" id="pedidosEmbarque">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content rounded-15 bg-custom-light">
-      <div class="modal-header px-4">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Pedidos no embarque</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      
-        <div class="row">
-          <div class="row m-2 py-2">
-            <div class="row justify-content-start">
-              <table class="col-12 mt-4">
-                <thead class="header_table col-12">
-                    <tr>
-                      <td class="lead text-center fw-bold">Nº Pedido</td>
-                      <td class="lead text-center fw-bold">Cliente</td>
-                      <td class="lead text-center fw-bold">Vendedor</td>
-                      <td class="lead text-center fw-bold">Data Entrega</td>
-                      <td class="lead text-center fw-bold">Status</td>
-                    </tr>
-                </thead>
-                <tbody class="body_table">
-                    <tr class="mt-2" *ngFor="let pedido of embarquePedidos">
-                      <td class="lead rounded-start text-center fw-bold">{{pedido.numero}}</td>
-                      <td class="lead rounded-start text-center fw-bold">{{pedido.cliente}}</td>
-                      <td class="lead rounded-start text-center fw-bold">{{pedido.vendedor}}</td>
-                      <td class="lead rounded-start text-center fw-bold">{{pedido.data | date}}</td>
-                      <td class="lead rounded-start text-center fw-bold">{{pedido.status}}</td>
-                    </tr>
-                </tbody>
-              </table>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Pedidos no embarque</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>
+
+            <div class="row">
+                <div class="row m-2 py-2">
+                    <div class="row justify-content-start">
+                        <table class="col-12 mt-4">
+                            <thead class="header_table col-12">
+                                <tr>
+                                    <td class="lead text-center fw-bold">Nº Pedido</td>
+                                    <td class="lead text-center fw-bold">Cliente</td>
+                                    <td class="lead text-center fw-bold">Vendedor</td>
+                                    <td class="lead text-center fw-bold">Data Entrega</td>
+                                    <td class="lead text-center fw-bold">Status</td>
+                                </tr>
+                            </thead>
+                            <tbody class="body_table">
+                                <tr class="mt-2" *ngFor="let pedido of embarquePedidos">
+                                    <td class="lead rounded-start text-center fw-bold">{{pedido.numero}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{pedido.cliente}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{pedido.vendedor}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{pedido.data | date}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{pedido.status}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0 py-3 modal-footer">
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-      <div class="row m-0 py-3 modal-footer">
-      </div>
-      <!-- /Modal footer -->
+        <!-- /Modal content -->
 
     </div>
-    <!-- /Modal content -->
-
-  </div>
 </div>
 
 
 
 <!-- Modal -->
-<div class="modal fade" id="filtrarPedido" tabindex="-1" aria-labelledby="filtrarPedidoLabel"
-  aria-hidden="true" aria-label="Close">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content rounded-15 bg-custom-light">
-      <div class="modal-header px-4">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Filtrar Pedido</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="row">
-        <div class="row m-0 py-2">
-          <div class="col px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="" (change)="filtrarDate($event)">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label>
-          </div>
-          <div class="col px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="" (change)="filtrarStatus($event)">
+<div class="modal fade" id="filtrarPedido" tabindex="-1" aria-labelledby="filtrarPedidoLabel" aria-hidden="true" aria-label="Close">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Filtrar Pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="row m-0 py-2">
+                    <div class="col px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="" (change)="filtrarDate($event)">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label>
+                    </div>
+                    <div class="col px-2 pt-4 p-0 m-0 form-floating">
+                        <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="" (change)="filtrarStatus($event)">
               <option value="" disabled >Status</option>
               <option value="Entrega Parcial" selected>Entrega Parcial</option>
               <option value="Separado" selected>Separado</option>
               <option value="Pendente de envio" selected>Pendente de envio</option>
               <option value="Enviado" selected>Enviado</option>
             </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
-          </div>
-          <div class="col px-2 pt-4 p-0 m-0 form-floating">
-            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" (keyup)="filtrarVendedor($event)">
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
-          </div>
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+                    </div>
+                    <div class="col px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="" (keyup)="filtrarVendedor($event)">
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-2 m-0 d-flex justify-content-center">
+                <div class="row mt-4 mb-4">
+                    <div class="col-12 row m-0 p-0">
+                        <table class="col-12 mt-4">
+                            <thead class="header_table col-12">
+                                <tr>
+                                    <td class="lead text-center fw-bold">Nº Pedido</td>
+                                    <td class="lead text-center fw-bold">Cliente</td>
+                                    <td class="lead text-center fw-bold">Vendedor</td>
+                                    <td class="lead text-center fw-bold">Data Entrega</td>
+                                    <td class="lead text-center fw-bold">Status</td>
+                                </tr>
+                            </thead>
+                            <tbody class="body_table">
+                                <tr class="mt-2" *ngFor="let solicitacao of filter">
+                                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
+                                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0 py-3 modal-footer">
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-      </div>
-      <div class="row py-2 m-0 d-flex justify-content-center">
-        <div class="row mt-4 mb-4">
-          <div class="col-12 row m-0 p-0">
-            <table class="col-12 mt-4">
-              <thead class="header_table col-12">
-                  <tr>
-                    <td class="lead text-center fw-bold">Nº Pedido</td>
-                    <td class="lead text-center fw-bold">Cliente</td>
-                    <td class="lead text-center fw-bold">Vendedor</td>
-                    <td class="lead text-center fw-bold">Data Entrega</td>
-                    <td class="lead text-center fw-bold">Status</td>
-                  </tr>
-              </thead>
-              <tbody class="body_table">
-                  <tr class="mt-2" *ngFor="let solicitacao of filter">
-                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
-                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
-                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
-                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
-                    <td class="lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
-                  </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="row m-0 py-3 modal-footer">
-      </div>
-      <!-- /Modal footer -->
+        <!-- /Modal content -->
 
     </div>
-    <!-- /Modal content -->
-
-  </div>
 </div>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col pb-4 m-0 bg-custom-white">
-    <!-- Página -->
-    <div class="container">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col pb-4 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-      </div>
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
 
-      <div class="row m-0 mt-4 py-3 border-bottom">
-        <div class="col-12 m-0 p-0 text-custom-dark text-center">
-          <h2>Lista e embarque</h2>
-        </div>
-      </div>
+            <div class="row m-0 mt-4 py-3 border-bottom">
+                <div class="col-12 m-0 p-0 text-custom-dark text-center">
+                    <h2>Lista e embarque</h2>
+                </div>
+            </div>
 
-      <div class="row m-0 my-4">
-        <div class="col-12">
-          <ul class="nav nav-tabs fs-5 fw-lighter">
-            <li class="nav-item px-1">
-              <a class="nav-link px-4" [class.active]="estoqueSection == 'pedidos'" (click)="toggleEstoqueSection('pedidos')">Pedidos</a>
-            </li>
-            <li class="nav-item px-1">
-              <a class="nav-link px-4" [class.active]="estoqueSection == 'embarque'" (click)="toggleEstoqueSection('embarque')">Embarque</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+            <div class="row m-0 my-4">
+                <div class="col-12">
+                    <ul class="nav nav-tabs fs-5 fw-lighter">
+                        <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="estoqueSection == 'pedidos'" (click)="toggleEstoqueSection('pedidos')">Pedidos</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="estoqueSection == 'embarque'" (click)="toggleEstoqueSection('embarque')">Embarque</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-      <div *ngIf="estoqueSection == 'pedidos'">
-        <div class="row m-0 mt-4 py-3">
-          <div class="col-12 m-0 p-0 text-custom-dark text-center">
-            <h3>Lista de pedidos</h3>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-6 px-2 p-0 m-0 position-relative">
-            <input type="text" placeholder="Pesquisar" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" (keyup)="filtrar($event)">
-            <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
-          </div>
-          <div class="col d-flex justify-content-end">
-            <i cursor="pointer" class="fs-5 bi-funnel icon-filter px-4 py-3 bg-white shadow-sm rounded-5" data-bs-toggle="modal" data-bs-target="#filtrarPedido">
+            <div *ngIf="estoqueSection == 'pedidos'">
+                <div class="row m-0 mt-4 py-3">
+                    <div class="col-12 m-0 p-0 text-custom-dark text-center">
+                        <h3>Lista de pedidos</h3>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6 px-2 p-0 m-0 position-relative">
+                        <input type="text" placeholder="Pesquisar" class="form-control form-control-lg border-0 h-100 py-2 ps-4 pe-5 rounded-15 shadow-sm" (keyup)="filtrar($event)">
+                        <i class="bi-search fs-4 position-absolute translate-middle top-50 me-4 end-0"></i>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <i cursor="pointer" class="fs-5 bi-funnel icon-filter px-4 py-3 bg-white shadow-sm rounded-5" data-bs-toggle="modal" data-bs-target="#filtrarPedido">
             </i>
-          </div>
-        </div>
-        <div class="row mt-4 mb-4">
-          <table class="col-12 mt-4">
-            <thead class="header_table col-12">
-                <tr>
-                  <td class="lead text-center fw-bold">Nº Pedido</td>
-                  <td class="lead text-center fw-bold">Cliente</td>
-                  <td class="lead text-center fw-bold">Vendedor</td>
-                  <td class="lead text-center fw-bold">Data Entrega</td>
-                  <td class="lead text-center fw-bold">Status</td>
-                </tr>
-            </thead>
-            <tbody class="body_table">
-                <tr class="mt-2" *ngFor="let solicitacao of atualPage">
-                  <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
-                </tr>
-            </tbody>
-          </table>
-          <div class="col-12 row mt-3 d-flex justify-content-around">
-        <div class="col-3 row m-auto">
-          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0" (click)="anterior()" [class.noActiveButton]="this.atualPageNumber == 0">
+                    </div>
+                </div>
+                <div class="row mt-4 mb-4">
+                    <table class="col-12 mt-4">
+                        <thead class="header_table col-12">
+                            <tr>
+                                <td class="lead text-center fw-bold">Nº Pedido</td>
+                                <td class="lead text-center fw-bold">Cliente</td>
+                                <td class="lead text-center fw-bold">Vendedor</td>
+                                <td class="lead text-center fw-bold">Data Entrega</td>
+                                <td class="lead text-center fw-bold">Status</td>
+                            </tr>
+                        </thead>
+                        <tbody class="body_table">
+                            <tr class="mt-2" *ngFor="let solicitacao of atualPage">
+                                <td class="lead rounded-start text-center fw-bold">{{solicitacao.numero}}</td>
+                                <td class="lead rounded-start text-center fw-bold">{{solicitacao.cliente}}</td>
+                                <td class="lead rounded-start text-center fw-bold">{{solicitacao.vendedor}}</td>
+                                <td class="lead rounded-start text-center fw-bold">{{solicitacao.data | date}}</td>
+                                <td class="lead rounded-start text-center fw-bold">{{solicitacao.status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-12 row mt-3 d-flex justify-content-around">
+                        <div class="col-3 row m-auto">
+                            <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0" (click)="anterior()" [class.noActiveButton]="this.atualPageNumber == 0">
             <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
           </button>
-        </div>
-        <div class="col-1 d-flex justify-content-end">
-          <p class="h3 fw-normal text-custom-dark">{{atualPageNumber + 1}}/{{pagesNumber}}</p>
-        </div>
-        <div class="col-3 row m-auto">
-          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0" (click)="proximo()" [class.noActiveButton]="this.atualPageNumber == (pagesNumber - 1)">
+                        </div>
+                        <div class="col-1 d-flex justify-content-end">
+                            <p class="h3 fw-normal text-custom-dark">{{atualPageNumber + 1}}/{{pagesNumber}}</p>
+                        </div>
+                        <div class="col-3 row m-auto">
+                            <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0" (click)="proximo()" [class.noActiveButton]="this.atualPageNumber == (pagesNumber - 1)">
             <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Proximo</h5>
           </button>
-        </div>
-      </div>  
-        </div>
-      </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
       <div *ngIf="estoqueSection == 'embarque'">
         <div class="row m-0 mt-4 py-3">
@@ -478,41 +475,41 @@
             <h3>Embarque</h3>
           </div>
         </div>
-        <div class="row col-12 justify-content-end d-grid px-2 p-0 m-0" *ngIf="create">
-          <button type="button"
+        <div class="row col-12 justify-content-end d-grid px-2 p-0 m-0">
+          <button type="button" *ngIf="create"
             class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm"
             data-bs-toggle="modal" data-bs-target="#criarEmbarque" data-backdrop="static" data-keyboard="false">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Criar Embarque</h5>
           </button>
-        </div>
-        <div class="row">
-          <table class="col-12 mt-4">
-            <thead class="header_table col-12">
-                <tr>
-                  <td class="lead text-center fw-bold">Nº de Embarque</td>
-                  <td class="lead text-center fw-bold">Placa</td>
-                  <td class="lead text-center fw-bold">Motorista</td>
-                  <td class="lead text-center fw-bold">Pedidos</td>
-                  <td class="lead text-center fw-bold"> </td>
-                </tr>
-            </thead>
-            <tbody class="body_table">
-                <tr class="mt-2" *ngFor="let embarque of embarques">
-                  <td class="lead rounded-start text-center fw-bold">{{embarque.id}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{embarque.sign}}</td>
-                  <td class="lead rounded-start text-center fw-bold">{{embarque.driver}}</td>
-                  <td class="lead rounded-start text-center fw-bold row text-truncate justify-content-center">
-                    <button class="col-6 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
+                </div>
+                <div class="row">
+                    <table class="col-12 mt-4">
+                        <thead class="header_table col-12">
+                            <tr>
+                                <td class="lead text-center fw-bold">Nº de Embarque</td>
+                                <td class="lead text-center fw-bold">Placa</td>
+                                <td class="lead text-center fw-bold">Motorista</td>
+                                <td class="lead text-center fw-bold">Pedidos</td>
+                                <td class="lead text-center fw-bold"> </td>
+                            </tr>
+                        </thead>
+                        <tbody class="body_table">
+                            <tr class="mt-2" *ngFor="let embarque of embarques">
+                                <td class="lead rounded-start text-center fw-bold">{{embarque.id}}</td>
+                                <td class="lead rounded-start text-center fw-bold">{{embarque.sign}}</td>
+                                <td class="lead rounded-start text-center fw-bold">{{embarque.driver}}</td>
+                                <td class="lead rounded-start text-center fw-bold row text-truncate justify-content-center">
+                                    <button class="col-6 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
                       <h5 class="fw-normal my-auto text-truncate text-custom-dark">Vizualizar</h5>
                     </button>
-                  </td>
-                  <td class="col-1 lead rounded-start text-center fw-bold"><i (click)="deleteEmbarque(embarque.id)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
-                </tr>
-            </tbody>
-          </table>
+                                </td>
+                                <td class="col-1 lead rounded-start text-center fw-bold"><i (click)="deleteEmbarque(embarque.id)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>   
+        <!-- /Página -->
     </div>
-    <!-- /Página -->
-  </div>
 </div>

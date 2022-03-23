@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
+
 
 @Component({
   selector: 'app-view-fornecedor',
@@ -8,6 +10,7 @@ import { BrazilValidator } from 'src/app/_helpers/brasil';
   styleUrls: ['./view-fornecedor.component.scss']
 })
 export class ViewFornecedorComponent implements OnInit {
+  public condicoesPagamento: any = []
 
   fornecedorForm: FormGroup = new FormGroup({
     category: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -45,9 +48,18 @@ export class ViewFornecedorComponent implements OnInit {
     notes: new FormControl({ value: '', disabled: true }, Validators.required)
   })
 
-  constructor() { }
+  constructor(
+    private condicoesPagamentoService: CondicoesPagamentoService
+
+  ) {}
 
   ngOnInit(): void {
+  }
+
+  getCondicoes() {
+    this.condicoesPagamentoService.findAll().subscribe((res) => {
+      this.condicoesPagamento = res;
+    });
   }
 
   loadForm(fornecedorInput: any){
@@ -70,7 +82,7 @@ export class ViewFornecedorComponent implements OnInit {
         state: new FormControl({ value: fornecedorInput.address.state, disabled: true }, Validators.required)
       }),
       contacts: new FormArray([]),
-      payment_condition: new FormControl(),
+      payment_condition: new FormControl({value: fornecedorInput.payment_condition, disabled:true}),
       first_payment: new FormControl({ value: fornecedorInput.first_payment, disabled: true }, Validators.required),
       last_payment: new FormControl({ value: fornecedorInput.last_payment, disabled: true }, Validators.required),
       notes: new FormControl({ value: fornecedorInput.notes, disabled: true }, Validators.required)

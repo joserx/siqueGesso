@@ -1,46 +1,26 @@
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="editarFornecedor"
-  tabindex="-1"
-  aria-labelledby="editarFornecedorLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl">
-    <form [formGroup]="fornecedorForm">
-      <!-- Modal content -->
-      <div class="modal-content rounded-15 bg-custom-light">
-        <div class="modal-header px-4">
-          <h5
-            class="modal-title text-custom-dark"
-            id="adicionarFornecedorLabel"
-          >
-            Editar fornecedor
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            #close
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body px-4">
-          <!-- Categoria do fornecedor -->
-          <div class="row py-3 p-0 m-0">
-            <div class="col-12 px-2 m-0 p-0">
-              <h5 class="fw-bold text-custom-dark m-0 p-0">
-                Categoria do fornecedor
-              </h5>
-            </div>
+<div class="modal fade" id="editarFornecedor" tabindex="-1" aria-labelledby="editarFornecedorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <form [formGroup]="fornecedorForm">
+            <!-- Modal content -->
+            <div class="modal-content rounded-15 bg-custom-light">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title text-custom-dark" id="adicionarFornecedorLabel">
+                        Editar fornecedor
+                    </h5>
+                    <button type="button" class="btn-close" #close data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <!-- Categoria do fornecedor -->
+                    <div class="row py-3 p-0 m-0">
+                        <div class="col-12 px-2 m-0 p-0">
+                            <h5 class="fw-bold text-custom-dark m-0 p-0">
+                                Categoria do fornecedor
+                            </h5>
+                        </div>
 
-            <div class="col-12 d-grid px-2 pt-4 p-0 m-0 form-floating">
-              <select
-                class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm text-custom-dark"
-                type="text"
-                placeholder="Categoria"
-                formControlName="category"
-              >
+                        <div class="col-12 d-grid px-2 pt-4 p-0 m-0 form-floating">
+                            <select class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Categoria" formControlName="category">
                 <option value="" disabled selected>
                   Selecione uma Categoria
                 </option>
@@ -48,8 +28,7 @@
                 <option value="categoria2">Categoria 2</option>
                 <option value="categoria3">Categoria 3</option>
               </select>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Categoria</label
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Categoria</label
               >
             </div>
           </div>
@@ -172,28 +151,21 @@
                   formControlName="is_exempt"
                 />
                 <label class="form-check-label" for="insento">Insento</label>
-              </div>
-            </div>
-          </div>
+                        </div>
+                    </div>
+                </div>
 
-          <!-- Endereço -->
-          <div class="row py-3 p-0 m-0" [formGroup]="a">
-            <!-- Título -->
-            <div class="col-12 px-2 m-0 p-0">
-              <h5 class="fw-bold text-custom-dark m-0 p-0">Endereço</h5>
-            </div>
+                <!-- Endereço -->
+                <div class="row py-3 p-0 m-0" [formGroup]="a">
+                    <!-- Título -->
+                    <div class="col-12 px-2 m-0 p-0">
+                        <h5 class="fw-bold text-custom-dark m-0 p-0">Endereço</h5>
+                    </div>
 
-            <!-- CEP -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="text"
-                placeholder="CEP"
-                formControlName="cep"
-                mask="00000-000"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >CEP</label
+                    <!-- CEP -->
+                    <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                        <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="CEP" formControlName="cep" mask="00000-000" />
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label
               >
             </div>
 
@@ -457,73 +429,36 @@
           <div class="row pt-3 m-0">
             <div class="col-12 px-2 m-0 p-0">
               <h5 class="fw-bold text-custom-dark m-0 p-0">
-                Informações adicionais
+                Condições de pagamento
               </h5>
             </div>
 
             <div class="col-12 px-2 p-0 m-0">
               <p>Selecione as condições de pagamento disponíveis</p>
-              <div class="form-check form-check-inline px-4">
-                <input
-                  class="form-check-input shadow-sm"
-                  type="checkbox"
-                  id="vista"
-                  value="vista"
-                />
-                <label class="form-check-label" for="vista">À vista</label>
-              </div>
-              <div class="form-check form-check-inline px-4">
-                <input
-                  class="form-check-input shadow-sm"
-                  type="checkbox"
-                  id="ddl10"
-                  value="ddl10"
-                />
-                <label class="form-check-label" for="ddl10">DDL 10</label>
-              </div>
-              <div class="form-check form-check-inline px-4">
-                <input
-                  class="form-check-input shadow-sm"
-                  type="checkbox"
-                  id="ddl30"
-                  value="ddl30"
-                />
-                <label class="form-check-label" for="ddl30">DDL 30</label>
-              </div>
-              <div class="form-check form-check-inline px-4">
-                <input
-                  class="form-check-input shadow-sm"
-                  type="checkbox"
-                  id="ddl304560"
-                  value="ddl304560"
-                />
-                <label class="form-check-label" for="ddl304560"
-                  >DDL 30, 45, 60</label
-                >
-              </div>
-              <div class="form-check form-check-inline px-4">
-                <input
-                  class="form-check-input shadow-sm"
-                  type="checkbox"
-                  id="ddl306090"
-                  value="ddl306090"
-                />
-                <label class="form-check-label" for="ddl306090"
-                  >DDL 30, 60, 90</label
-                >
-              </div>
+              <ng-container *ngFor="let condicao of paymentCondition">
+                <div class="form-check form-check-inline px-4">
+                  <input
+                    (click)="checkPayment(condicao.id)"
+                    class="form-check-input shadow-sm"
+                    type="checkbox"
+                  />
+                  <label class="form-check-label">{{ condicao?.nome }}</label>
+                    </div>
+                    </ng-container>
+                </div>
             </div>
 
-            <!-- Data da primeira compra -->
-            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-              <input
-                class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="date"
-                placeholder="Data da primeira compra"
-                formControlName="first_payment"
-              />
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-                >Data da primeira compra</label
+            <div class="row pt-3 m-0">
+                <div class="col-12 px-2 m-0 p-0">
+                    <h5 class="fw-bold text-custom-dark m-0 p-0">
+                        Informações adicionais
+                    </h5>
+                </div>
+
+                <!-- Data da primeira compra -->
+                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                    <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data da primeira compra" formControlName="first_payment" />
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data da primeira compra</label
               >
             </div>
 

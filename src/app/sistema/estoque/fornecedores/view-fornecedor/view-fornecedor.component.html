@@ -254,31 +254,25 @@
 
                     <div class="row pt-3 m-0">
                         <div class="col-12 px-2 m-0 p-0">
-                            <h5 class="fw-bold text-custom-dark m-0 p-0">Informações adicionais</h5>
+                            <h5 class="fw-bold text-custom-dark m-0 p-0">
+                                Condições de pagamento
+                            </h5>
                         </div>
 
                         <div class="col-12 px-2 p-0 m-0">
-                            <p>Selecione as condições de pagamento disponíveis</p>
-                            <div class="form-check form-check-inline px-4">
-                                <input class="form-check-input shadow-sm" type="checkbox" id="vista" value="vista">
-                                <label class="form-check-label" for="vista">À vista</label>
-                            </div>
-                            <div class="form-check form-check-inline px-4">
-                                <input class="form-check-input shadow-sm" type="checkbox" id="ddl10" value="ddl10">
-                                <label class="form-check-label" for="ddl10">DDL 10</label>
-                            </div>
-                            <div class="form-check form-check-inline px-4">
-                                <input class="form-check-input shadow-sm" type="checkbox" id="ddl30" value="ddl30">
-                                <label class="form-check-label" for="ddl30">DDL 30</label>
-                            </div>
-                            <div class="form-check form-check-inline px-4">
-                                <input class="form-check-input shadow-sm" type="checkbox" id="ddl304560" value="ddl304560">
-                                <label class="form-check-label" for="ddl304560">DDL 30, 45, 60</label>
-                            </div>
-                            <div class="form-check form-check-inline px-4">
-                                <input class="form-check-input shadow-sm" type="checkbox" id="ddl306090" value="ddl306090">
-                                <label class="form-check-label" for="ddl306090">DDL 30, 60, 90</label>
-                            </div>
+
+                            <ng-container *ngFor="let condicao of condicoesPagamento">
+                                <div class="form-check form-check-inline px-4">
+                                    <input check disabled class="form-check-input shadow-sm" type="checkbox" />
+                                    <label class="form-check-label">{{ condicao?.nome }}</label>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="row pt-3 m-0">
+                        <div class="col-12 px-2 m-0 p-0">
+                            <h5 class="fw-bold text-custom-dark m-0 p-0">Informações adicionais</h5>
                         </div>
 
                         <!-- Data da primeira compra -->

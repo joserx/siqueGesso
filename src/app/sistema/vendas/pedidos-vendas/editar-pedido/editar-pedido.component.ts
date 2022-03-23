@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
@@ -78,6 +79,7 @@ export class EditarPedidoComponent implements OnInit {
   public status: any[] = [];
   public allProdutos: any[] = [];
   public allProdutosOriginal: any[] = [];
+  public condPagamentos: any[] = []
 
   public resumo: any = {
     produtos: 2,
@@ -98,10 +100,12 @@ export class EditarPedidoComponent implements OnInit {
     private readonly authService: AuthenticationService,
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
-    private readonly filialService: FilialService
+    private readonly filialService: FilialService,
+    private readonly condPagamentoService: CondicoesPagamentoService
   ) { }
 
   ngOnInit(): void {
+    this.findCondPagamento()
     if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
       this.router.navigate(['sistema'])
     }
@@ -308,7 +312,6 @@ export class EditarPedidoComponent implements OnInit {
               codigo: new FormControl(produto.id),
               produto: new FormControl(produto.nome),
               quantidade: new FormControl(null, [Validators.required]),
-              valorUnitario: new FormControl(produto.custoMedio),
               desconto: new FormControl(0),
               tipoRetirada: new FormControl(''),
               prevRetirada: new FormControl(null),
@@ -368,8 +371,7 @@ export class EditarPedidoComponent implements OnInit {
 
   totalProduto(value: any) {
     if (this.descontoG == 0 || this.descontoG === null) {
-      value.total =
-        value.valorVenda * value.quantidade + value.valorFrete - value.desconto;
+      value.total =  value.valorVenda * value.quantidade + value.valorFrete - value.desconto;
     } else {
       value.total = value.valorVenda * value.quantidade + value.valorFrete;
     }
@@ -410,7 +412,7 @@ export class EditarPedidoComponent implements OnInit {
     if (str != '') {
       if (str.length > this.filterBefore.length) {
         this.allProdutos = this.allProdutosOriginal.filter((user: any) =>
-          `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`
+          `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `
             .toUpperCase()
             .includes(str.toUpperCase())
         );
@@ -418,7 +420,7 @@ export class EditarPedidoComponent implements OnInit {
       } else {
         this.allProdutos = this.allProdutosOriginal;
         this.allProdutos = this.allProdutosOriginal.filter((user: any) =>
-          `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`
+          `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `
             .toUpperCase()
             .includes(str.toUpperCase())
         );
@@ -733,5 +735,12 @@ export class EditarPedidoComponent implements OnInit {
   setFilialSelected(filial: number) {
     this.filialSelected = this.filial[filial];
     console.log(this.filialSelected);
+  }
+
+  findCondPagamento() {
+    this.condPagamentoService.findAll().subscribe((resp) => {
+      this.condPagamentos = resp
+      console.log("this.condPagamento", this.condPagamentos );
+    })
   }
 }

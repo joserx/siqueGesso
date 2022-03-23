@@ -16,6 +16,8 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
   styleUrls: ['./edit-fornecedor.component.scss'],
 })
 export class EditFornecedorComponent implements OnInit {
+  public paymentCondition: any = [];
+
   fornecedorForm: FormGroup = new FormGroup({
     id: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
@@ -66,6 +68,14 @@ export class EditFornecedorComponent implements OnInit {
   constructor(private fornecedorService: FornecedorService) {}
 
   ngOnInit(): void {}
+
+  checkPayment(id: any) {
+    this.paymentCondition.forEach((item: any) => {
+      if (item.id === id) {
+        item.check = true;
+      }
+    });
+  }
 
   loadForm(fornecedorInput: any) {
     console.log(fornecedorInput);
@@ -127,7 +137,7 @@ export class EditFornecedorComponent implements OnInit {
         ),
       }),
       contacts: new FormArray([]),
-      payment_condition: new FormControl(),
+      payment_condition: new FormControl(fornecedorInput.payment_condition),
       first_payment: new FormControl(
         fornecedorInput.first_payment,
         Validators.required

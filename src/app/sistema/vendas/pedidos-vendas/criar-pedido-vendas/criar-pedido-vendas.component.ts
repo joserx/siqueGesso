@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
@@ -47,6 +48,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     'loja': new FormControl('', [Validators.required]),
     'vendedor': new FormControl('', [Validators.required]),
     'cliente': new FormControl('', [Validators.required]),
+    'statusPedido': new FormControl('', [Validators.required]),
     'condPagamento': new FormControl('', [Validators.required]),
     'pagPersonalizado': new FormControl(''),
     'tabPreco': new FormControl(''),
@@ -66,8 +68,8 @@ export class CriarPedidoVendasComponent implements OnInit {
     'clienteId': new FormControl(null)
   })
 
-  /* 
-  
+  /*
+
   adicionar o reconhecimento x
   mexer na coluna de total x
   mexer no total do listar (a fazer)
@@ -88,6 +90,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     return this.pedidosForm.get('produto') as FormArray
   }
 
+  public condPagamento: any[] = []
   public status: any[] = []
   public allProdutos: any[] = []
   public allProdutosOriginal: any[] = []
@@ -103,10 +106,12 @@ export class CriarPedidoVendasComponent implements OnInit {
     private readonly authService: AuthenticationService,
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
-    private readonly filialServices: FilialService
+    private readonly filialServices: FilialService,
+    private readonly condPagamentoService: CondicoesPagamentoService
     ) { }
-    
+
     ngOnInit(): void {
+      this.findCondPagamento()
       if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
         this.router.navigate(['sistema'])
       }
@@ -125,11 +130,11 @@ export class CriarPedidoVendasComponent implements OnInit {
           }
 
         }
-      
+
       })
     this.authService.currentUser.subscribe((user) => {
       this.user = user.result
-      // console.log(typeof(user.result))  
+      // console.log(typeof(user.result))
       this.passwordForm.get('email')?.setValue(user.result.email)
     })
     this.produtoService.find().subscribe((data: any) => {
@@ -303,11 +308,11 @@ export class CriarPedidoVendasComponent implements OnInit {
     let str = event.target.value;
     if (str != '') {
       if (str.length > this.filterBefore.length) {
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.allProdutos = this.allProdutosOriginal;
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {
@@ -549,10 +554,10 @@ export class CriarPedidoVendasComponent implements OnInit {
   //   let thisCliente: any[] = []
   //   for(let cliente of this.clientes){
   //     if(cliente.name!=null && cliente.surname!=null){
-  //       thisCliente = cliente 
+  //       thisCliente = cliente
   //       this.showSign = false
   //     }else{
-  //       thisCliente = cliente 
+  //       thisCliente = cliente
   //       this.showSign = false
   //     }
   //     this.enderecos = cliente.addresses
@@ -565,5 +570,11 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   updateAddresToWithdraw (oneItem: any){
     oneItem.value.endereco =  this.filialSelected.logradouro  + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep;
+  }
+
+  findCondPagamento() {
+    this.condPagamentoService.findAll().subscribe((resp) => {
+      this.condPagamento = resp
+    })
   }
 }

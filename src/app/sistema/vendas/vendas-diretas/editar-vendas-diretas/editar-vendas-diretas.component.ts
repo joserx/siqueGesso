@@ -11,6 +11,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 
 @Component({
   selector: 'app-editar-vendas-diretas',
@@ -20,11 +21,11 @@ import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 export class EditarVendasDiretasComponent implements OnInit {
 
 
-  /* 
-  
+  /*
+
   ver o bug de checar a quantidade de produto no estoque feito
   ver o esquema de subtrair o estoque
-  
+
   */
 
   public dados: any[] = []
@@ -33,6 +34,7 @@ export class EditarVendasDiretasComponent implements OnInit {
   public id: number
   public getDate: any = getDate;
   public filial: any [] = []
+  public condPagamento: any [] = []
   public vendedores: any[] = []
   public allProdutosOriginal: any[] = []
   public allProdutos: any[] = []
@@ -59,11 +61,9 @@ export class EditarVendasDiretasComponent implements OnInit {
     "bairro": new FormControl('', [Validators.required]),
     "cidade": new FormControl('', [Validators.required]),
     "complemento": new FormControl(''),
-    "motorista": new FormControl('', [Validators.required]),
-    "placa": new FormControl('', [Validators.required]),
-    "previsaoEntrega": new FormControl(null, Validators.required),  
-    "meioPagamento": new FormControl('', [Validators.required]), 
-    "dataVencimento": new FormControl(null, [Validators.required]), 
+    "previsaoEntrega": new FormControl(null, Validators.required),
+    "meioPagamento": new FormControl('', [Validators.required]),
+    "dataVencimento": new FormControl(null, [Validators.required]),
     "aguradandoPagamento": new FormControl(''),
     "linkBoleto": new FormControl(''),
     "linkNf": new FormControl(''),
@@ -81,10 +81,12 @@ export class EditarVendasDiretasComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly produtosService: ProdutoService,
     private readonly clienteService: ClientService,
-    private readonly correiosService: CorreiosService
+    private readonly correiosService: CorreiosService,
+    private readonly condicaoPagamentoService: CondicoesPagamentoService
   ) { }
 
   ngOnInit(): void {
+    this.findCondPagamento()
     if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
       this.router.navigate(['sistema'])
     }
@@ -96,14 +98,13 @@ export class EditarVendasDiretasComponent implements OnInit {
     this.filialService.find().subscribe((data:any)=>{
       this.filial = data
     })
+
     this.rhService.find().subscribe((data:any)=>{
       for(let oneData of data){
         if(oneData.role.toLowerCase().substring(0,8)=="vendedor"){
           this.vendedores.push(oneData)
         }
-        if(oneData.role.toLowerCase(0,9)=="motorista"){
-          this.motoristas.push(oneData)
-        }
+
       }
     })
     this.produtosService.find().subscribe((data:any)=>{
@@ -131,8 +132,6 @@ export class EditarVendasDiretasComponent implements OnInit {
       this.vendasDiretasForm.get("bairro")?.setValue(data.bairro)
       this.vendasDiretasForm.get("cidade")?.setValue(data.cidade)
       this.vendasDiretasForm.get("complemento")?.setValue(data.complemento)
-      this.vendasDiretasForm.get("motorista")?.setValue(data.motorista)
-      this.vendasDiretasForm.get("placa")?.setValue(data.placa)
       this.vendasDiretasForm.get("previsaoEntrega")?.setValue(data.previsaoEntrega==null? null:data.previsaoEntrega.substring(0,10))
       this.vendasDiretasForm.get("meioPagamento")?.setValue(data.meioPagamento)
       this.vendasDiretasForm.get("dataVencimento")?.setValue(data.dataVencimento==null? null:data.dataVencimento.substring(0,10))
@@ -147,7 +146,7 @@ export class EditarVendasDiretasComponent implements OnInit {
           'id': new FormControl(item.id),
           'codigo': new FormControl(item.codigo),
           'produto': new FormControl(item.produto),
-          'quantidade': new FormControl(item.quantidade, [Validators.required]),  
+          'quantidade': new FormControl(item.quantidade, [Validators.required]),
           'valorUnitario': new FormControl(Number(item.valorUnitario)),
           'desconto': new FormControl(Number(item.desconto)),
           'tipoRetirada': new FormControl(item.tipoRetirada),
@@ -188,13 +187,13 @@ export class EditarVendasDiretasComponent implements OnInit {
         this.totalValue(this.item.value)
         this.pedidosService.update(this.id ,data.value).subscribe((data:any)=>{
             this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
-            Swal.fire({ 
-              title: '<h4>Pedido adicionado !<h4>', 
-              icon: 'success', 
-              toast: true, 
-              position: 'top', 
-              showConfirmButton: false, 
-              timer: 2000, 
+            Swal.fire({
+              title: '<h4>Pedido adicionado !<h4>',
+              icon: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
               timerProgressBar: true,
               width: '500px'
             })
@@ -206,13 +205,13 @@ export class EditarVendasDiretasComponent implements OnInit {
           document.getElementById(control)?.classList.add("invalid")
         }
       }
-      Swal.fire({ 
-        title: '<h4>Preencha os campos necessários!</h4>', 
-        icon: 'error', 
-        toast: true, 
-        position: 'top', 
-        showConfirmButton: false, 
-        timer: 2000, 
+      Swal.fire({
+        title: '<h4>Preencha os campos necessários!</h4>',
+        icon: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 2000,
         timerProgressBar: true,
         width: '500px'
       })
@@ -233,11 +232,11 @@ export class EditarVendasDiretasComponent implements OnInit {
     let str = event.target.value;
     if(str != '') {
       if(str.length > this.filterBefore.length) {
-        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.allProdutos = this.allProdutosOriginal;
-        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {
@@ -314,7 +313,7 @@ export class EditarVendasDiretasComponent implements OnInit {
           this.item.push(new FormGroup({
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
-            'quantidade': new FormControl(null, [Validators.required]),  
+            'quantidade': new FormControl(null, [Validators.required]),
             'valorUnitario': new FormControl(produto.custoMedio),
             'desconto': new FormControl(null),
             'tipoRetirada': new FormControl(''),
@@ -351,7 +350,7 @@ export class EditarVendasDiretasComponent implements OnInit {
               return e.value.codigo
             }).indexOf(codigo), 1
           )
-          this.item.value.splice( 
+          this.item.value.splice(
             this.item.value.map(function(e: any) {
               return e.codigo
             }).indexOf(codigo), 1
@@ -386,31 +385,31 @@ export class EditarVendasDiretasComponent implements OnInit {
       if (result.isConfirmed) {
         this.pedidosService.delete(this.id).subscribe((data:any)=>{
           this.router.navigate(['sistema', 'vendas', 'vendas-diretas', 'listar'])
-          Swal.fire({ 
-            title: '<h4>Pedido cancelado com sucesso!</h4>', 
-            icon: 'success', 
-            toast: true, 
-            position: 'top', 
-            showConfirmButton: false, 
-            timer: 2000, 
+          Swal.fire({
+            title: '<h4>Pedido cancelado com sucesso!</h4>',
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
             timerProgressBar: true,
             width: '500px'
           })
         })
       } else if (result.isDenied) {
-        Swal.fire({ 
-          title: '<h4>O pedido não foi cancelado!</h4>', 
-          icon: 'info', 
-          toast: true, 
-          position: 'top', 
-          showConfirmButton: false, 
-          timer: 2000, 
+        Swal.fire({
+          title: '<h4>O pedido não foi cancelado!</h4>',
+          icon: 'info',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
           timerProgressBar: true ,
           width: '500px'
         })
       }
     })
-    
+
   }
 
   changeAddress(event: any) {
@@ -442,11 +441,11 @@ export class EditarVendasDiretasComponent implements OnInit {
     let input = Number(event.target.value)
     if(Number(data.value.estoque)<input){
       data.controls.quantidade.setValue(null)
-      Swal.fire({ 
-        title: '<h4>Estoque insuficiente</h4>', 
+      Swal.fire({
+        title: '<h4>Estoque insuficiente</h4>',
         text: `A quantidade digitada passou da quantidade de estoque !`,
-        icon: 'error',  
-        showConfirmButton: true, 
+        icon: 'error',
+        showConfirmButton: true,
         confirmButtonText: 'Comprar mais',
       }).then((result: any)=>{
         if(result.isConfirmed){
@@ -454,6 +453,14 @@ export class EditarVendasDiretasComponent implements OnInit {
         }
       })
     }
+  }
+
+  findCondPagamento() {
+
+    this.condicaoPagamentoService.findAll().subscribe((resp) => {
+      this.condPagamento = resp
+    })
+    console.log("this.condPagamento", this.condPagamento );
   }
 
 }

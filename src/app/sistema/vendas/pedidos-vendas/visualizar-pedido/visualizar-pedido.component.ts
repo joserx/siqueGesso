@@ -61,7 +61,7 @@ export class VisualizarPedidoComponent implements OnInit {
   public status: any[] = []
   public allProdutos: any[] = []
   public allProdutosOriginal: any[] = []
-  
+
   public clientes: any = [
     { nome: "Ricardo Botega" },
     { nome: "Douglas Brito" },
@@ -70,9 +70,9 @@ export class VisualizarPedidoComponent implements OnInit {
     { nome: "Michael B. Jordan" },
     { nome: "Finger Digital" },
   ]
-  
+
   public resumo: any = { produtos: 2, unidades: 600, subtotal: 6000, descontos: 100, venda: 5900, frete: 300, total: 6200 };
-  
+
   constructor(
     private readonly pedidoService: PedidosService,
     private readonly itensPedidoService: ItensPedidosService,
@@ -81,7 +81,7 @@ export class VisualizarPedidoComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute
     ) { }
-    
+
     ngOnInit(): void {
       const routerParams = this.route.snapshot.paramMap
       this.id = Number(routerParams.get('id'))
@@ -113,7 +113,7 @@ export class VisualizarPedidoComponent implements OnInit {
             'pedidoId': new FormControl(data.item[item].id),
             'codigo': new FormControl(data.item[item].codigo),
             'produto': new FormControl(data.item[item].produto),
-            'quantidade': new FormControl(data.item[item].quantidade, [Validators.required]),  
+            'quantidade': new FormControl(data.item[item].quantidade, [Validators.required]),
             'valorUnitario': new FormControl(Number(data.item[item].valorUnitario)),
             'desconto': new FormControl(Number(data.item[item].desconto)),
             'tipoRetirada': new FormControl(data.item[item].tipoRetirada, [Validators.required]),
@@ -135,7 +135,7 @@ export class VisualizarPedidoComponent implements OnInit {
         this.status = data
       })
     }
-    
+
     submitForm(data:any, data2: any){
       if(data.valid){
         data.value.total = (((this.totalQuanti(this.item.value)*this.valUnit) - this.changeDesconto(this.item.value)) + this.changeFrete(this.item.value))
@@ -148,40 +148,40 @@ export class VisualizarPedidoComponent implements OnInit {
           }
           this.itensPedidoService.create(data2.value).subscribe((data:any)=>{})
           this.router.navigate(['sistema', 'vendas', 'pedidos'])
-          Swal.fire({ 
-            title: '<h4>Pedido adicionado !<h4>', 
-            icon: 'success', 
-            toast: true, 
-            position: 'top', 
-            showConfirmButton: false, 
-            timer: 2000, 
+          Swal.fire({
+            title: '<h4>Pedido adicionado !<h4>',
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
             timerProgressBar: true,
             width: '500px'
           })
         })
       }else{
-        Swal.fire({ 
-          title: '<h4>Preencha os campos necessários!</h4>', 
-          icon: 'error', 
-          toast: true, 
-          position: 'top', 
-          showConfirmButton: false, 
-          timer: 2000, 
+        Swal.fire({
+          title: '<h4>Preencha os campos necessários!</h4>',
+          icon: 'error',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
           timerProgressBar: true,
           width: '500px'
         })
       }
     }
-    
+
     public log(x: any): void {
       console.log(x);
     }
-    
+
     control(){
       this.dataId++
     }
-  
-  /* 
+
+  /*
   { codigo: 1, produto: 'Drywall', quantidade: 50, valor_unitario: 25.90, desconto_tab: 5, desconto_ad: 0, valor_venda: 20.90 },
        { codigo: 2, produto: 'Gesso', quantidade: 4, valor_unitario: 16.90, desconto_tab: 0, desconto_ad: 0, valor_venda: 16.90 },
   */
@@ -198,7 +198,7 @@ export class VisualizarPedidoComponent implements OnInit {
             'pedidoId': new FormControl(null),
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
-            'quantidade': new FormControl(null, [Validators.required]),  
+            'quantidade': new FormControl(null, [Validators.required]),
             'valorUnitario': new FormControl(produto.atual),
             'desconto': new FormControl(null),
             'tipoRetirada': new FormControl('', [Validators.required]),
@@ -227,7 +227,7 @@ export class VisualizarPedidoComponent implements OnInit {
               return e.value.codigo
             }).indexOf(codigo), 1
           )
-          this.item.value.splice( 
+          this.item.value.splice(
             this.item.value.map(function(e: any) {
               return e.codigo
             }).indexOf(codigo), 1
@@ -240,13 +240,13 @@ export class VisualizarPedidoComponent implements OnInit {
 
   checkProdutos(event: any){
     if(this.produto.length==0){
-      Swal.fire({ 
-        title: 'Adicione produtos !', 
-        icon: 'error', 
-        toast: true, 
-        position: 'top', 
-        showConfirmButton: false, 
-        timer: 2000, 
+      Swal.fire({
+        title: 'Adicione produtos !',
+        icon: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 2000,
         timerProgressBar: true
       })
     }
@@ -257,11 +257,11 @@ export class VisualizarPedidoComponent implements OnInit {
     let str = event.target.value;
     if(str != '') {
       if(str.length > this.filterBefore.length) {
-        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.allProdutos = this.allProdutosOriginal;
-        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user : any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {

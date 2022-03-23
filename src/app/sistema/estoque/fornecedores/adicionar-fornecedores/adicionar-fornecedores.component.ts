@@ -8,6 +8,7 @@ import {
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { CategoriaFornecedorService } from 'src/app/services/categoria-fornecedor.service';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
@@ -19,6 +20,8 @@ import { BrazilValidator } from '../../../../_helpers/brasil';
   styleUrls: ['./adicionar-fornecedores.component.scss'],
 })
 export class AdicionarFornecedoresComponent implements OnInit {
+  public paymentCondition: any = [];
+  public condicoesPagamento: any = [];
   public categorias: any = [];
 
   fornecedorForm: FormGroup = new FormGroup({
@@ -29,11 +32,11 @@ export class AdicionarFornecedoresComponent implements OnInit {
     ]),
     fantasy_name: new FormControl('', Validators.required),
     social_reason: new FormControl('', Validators.required),
-    tribute_code: new FormControl('',),
-    contribuinte: new FormControl('', ),
-    state_registration: new FormControl('',),
+    tribute_code: new FormControl(''),
+    contribuinte: new FormControl(''),
+    state_registration: new FormControl(''),
     is_exempt: new FormControl(false),
-    minimum_billing: new FormControl('', ),
+    minimum_billing: new FormControl(''),
     address: new FormGroup({
       cep: new FormControl(''),
       street: new FormControl(''),
@@ -57,7 +60,7 @@ export class AdicionarFornecedoresComponent implements OnInit {
         site: new FormControl(''),
       }),
     ]),
-    payment_condition: new FormControl(),
+    payment_condition: new FormControl(''),
     first_payment: new FormControl('', Validators.required),
     last_payment: new FormControl('', Validators.required),
     notes: new FormControl('', Validators.required),
@@ -68,11 +71,21 @@ export class AdicionarFornecedoresComponent implements OnInit {
 
   constructor(
     private fornecedorService: FornecedorService,
-    private categoriaFornecedorService: CategoriaFornecedorService
+    private categoriaFornecedorService: CategoriaFornecedorService,
+    private condicoesPagamentoService: CondicoesPagamentoService
   ) {}
 
   ngOnInit(): void {
-    this.getCategorias()
+    this.getCategorias();
+    this.getCondicoes();
+  }
+
+  checkPayment(id: any) {
+    this.paymentCondition.forEach((item: any) => {
+      if (item.id === id) {
+        item.check = true;
+      }
+    });
   }
 
   public adicionarContato(): void {
@@ -105,7 +118,12 @@ export class AdicionarFornecedoresComponent implements OnInit {
     this.categoriaFornecedorService.find().subscribe((res) => {
       this.categoriaFornecedorService.categorias = res;
       this.categorias = res;
+    });
+  }
 
+  getCondicoes() {
+    this.condicoesPagamentoService.findAll().subscribe((res) => {
+      this.paymentCondition = res;
     });
   }
 
@@ -126,6 +144,21 @@ export class AdicionarFornecedoresComponent implements OnInit {
         timerProgressBar: true,
       });
     }
+    const methodsChecked = this.paymentCondition
+      .map((item: any) => {
+        if (item.check) {
+          return item.id;
+        }
+      })
+      .filter((item: any) => item);
+    let condicoesSelecionadas: any[] = [];
+    methodsChecked.forEach((id: any) => {
+      condicoesSelecionadas.push({ id: id });
+    });
+    this.fornecedorForm.controls['payment_condition'].setValue(
+      condicoesSelecionadas
+    );
+
     this.fornecedorService.create(this.fornecedorForm.value).subscribe(() => {
       this.reload.emit();
       this.closeBtn.nativeElement.click();

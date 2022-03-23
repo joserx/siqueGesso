@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { FilialService } from 'src/app/services/filial.service';
 import { ItensPedidosService } from 'src/app/services/itens-pedidos.service';
@@ -20,6 +21,7 @@ import { getDate } from '../../../../../environments/global';
 })
 export class CriarPedidoVendasDiretasComponent implements OnInit {
   public motoristas: any[] = []
+  public condPagamento: any[] = []
   public frete: number = 0
   public pedidoId: number = 0
   public valVenda: number = 0
@@ -43,6 +45,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "vendedor": new FormControl('', [Validators.required]),
     "cnpj": new FormControl('', [Validators.required]),
     "cliente": new FormControl('', [Validators.required]),
+    "statusPedido": new FormControl('', [Validators.required]),
     "condPagamento": new FormControl('', [Validators.required]),
     "tabPreco": new FormControl(''),
     "valorFreteEntrega": new FormControl(null),
@@ -54,8 +57,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "bairro": new FormControl('', [Validators.required]),
     "cidade": new FormControl('', [Validators.required]),
     "complemento": new FormControl(''),
-    "motorista": new FormControl('', [Validators.required]),
-    "placa": new FormControl('', [Validators.required]),
     "previsaoEntrega": new FormControl(null, Validators.required),
     "meioPagamento": new FormControl('', [Validators.required]),
     "dataVencimento": new FormControl(null, [Validators.required]),
@@ -83,10 +84,12 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     private readonly rhService: RhService,
     private readonly clienteService: ClientService,
     private readonly router: Router,
-    private readonly correiosService: CorreiosService
+    private readonly correiosService: CorreiosService,
+    private readonly condicaoPagamentoService: CondicoesPagamentoService
   ) { }
 
   ngOnInit(): void {
+    this.findCondPagamento()
     if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
       this.router.navigate(['sistema'])
     }
@@ -250,11 +253,11 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     let str = event.target.value;
     if (str != '') {
       if (str.length > this.filterBefore.length) {
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       } else {
         this.allProdutos = this.allProdutosOriginal;
-        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual} ${user.custoMedio} ${user.precoMedio} ${user.margemLucro}`.toUpperCase().includes(str.toUpperCase()))
+        this.allProdutos = this.allProdutosOriginal.filter((user: any) => `${user.id} ${user.nome} ${user.atual}  ${user.precoMedio} `.toUpperCase().includes(str.toUpperCase()))
         this.filterBefore = str
       }
     } else {
@@ -309,7 +312,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
             'quantidade': new FormControl(null, [Validators.required]),
-            'valorUnitario': new FormControl(produto.custoMedio),
             'desconto': new FormControl(null),
             'tipoRetirada': new FormControl(''),
             'prevRetirada': new FormControl(null),
@@ -322,7 +324,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             'estoque': new FormControl(produto.atual)
           }))
           this.valVenda += produto.precoMedio
-          this.valUnit += produto.custoMedio
         }
       }
       console.log(this.item)
@@ -350,7 +351,6 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
             }).indexOf(codigo), 1
           )
           this.valVenda -= produto.precoMedio
-          this.valUnit -= produto.custoMedio
         }
       }
     }
@@ -449,5 +449,13 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
         }
       })
     }
+  }
+
+  findCondPagamento() {
+
+    this.condicaoPagamentoService.findAll().subscribe((resp) => {
+      this.condPagamento = resp
+      console.log("this.condPagamento", this.condPagamento );
+    })
   }
 }
