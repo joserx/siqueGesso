@@ -45,21 +45,15 @@ export class EditarClientesComponent implements OnInit {
     'companyEmail' : new FormControl(null, [Validators.email]),
     'addresses' : new FormArray([]),
     'codigo': new FormControl(''),
-    'nomeVendedor': new FormControl(''),
+    'vendedor': new FormControl(''),
     'tabela': new FormArray([]),
-    'debito': new FormControl(''), 
-    'creditoAvista': new FormControl(''), 
-    'creditoAprazo': new FormControl(''), 
-    'boletoAvista': new FormControl(''), 
-    'boletoDdl': new FormControl('Não Solicitado'), 
-    "obs": new FormControl(''), 
-    "restricao": new FormControl(''), 
-    "validade": new FormControl(''), 
-    "limiteCompra": new FormControl(null), 
-    "descontoMax": new FormControl(null), 
-    "obsCredito": new FormControl(''), 
+    "obs": new FormControl(''),
+    "restricao": new FormControl(''),
+    "validade": new FormControl(''),
+    "limiteCompra": new FormControl(null),
+    "descontoMax": new FormControl(null),
+    "obsCredito": new FormControl(''),
     "codigoVendedor": new FormControl(null),
-    "vendedor": new FormControl('') 
   })
   public anos: any = [ 2015, 2016, 2017, 2018, 2019, 2020, 2021 ]
   client : any = {};
@@ -74,14 +68,14 @@ export class EditarClientesComponent implements OnInit {
     private readonly route : ActivatedRoute,
     private readonly pedidosService: PedidosService,
     private readonly rhService: RhService
-  ) { 
+  ) {
 
   }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     if(!((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar)){
       this.router.navigate(['sistema'])
-    }  
+    }
     this.rhService.find().subscribe((data: any) => {
       for (let oneData of data) {
         if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
@@ -222,14 +216,14 @@ export class EditarClientesComponent implements OnInit {
     this.tipoPessoa = value;
     if(value == 'fisica') {
       // Person validators
-      this.clienteForm.controls.name.setValidators([Validators.required])     
-      this.clienteForm.controls.surname.setValidators([Validators.required])      
-      this.clienteForm.controls.cpf.setValidators([Validators.required])      
-      this.clienteForm.controls.rg.setValidators([Validators.required])      
-      this.clienteForm.controls.cellphone.setValidators([Validators.required])      
-      this.clienteForm.controls.telephone.setValidators([Validators.required])      
-      this.clienteForm.controls.birthDate.setValidators([Validators.required])      
-      this.clienteForm.controls.email.setValidators([Validators.email])      
+      this.clienteForm.controls.name.setValidators([Validators.required])
+      this.clienteForm.controls.surname.setValidators([Validators.required])
+      this.clienteForm.controls.cpf.setValidators([Validators.required])
+      this.clienteForm.controls.rg.setValidators([Validators.required])
+      this.clienteForm.controls.cellphone.setValidators([Validators.required])
+      this.clienteForm.controls.telephone.setValidators([Validators.required])
+      this.clienteForm.controls.birthDate.setValidators([Validators.required])
+      this.clienteForm.controls.email.setValidators([Validators.email])
       // Clear company validators
       this.clienteForm.controls.fantasyName.clearValidators()
       this.clienteForm.controls.fantasyName.updateValueAndValidity()
@@ -251,18 +245,18 @@ export class EditarClientesComponent implements OnInit {
       this.clienteForm.controls.companyEmail.updateValueAndValidity()
     } else if(value == 'juridica') {
       // Company validators
-      this.clienteForm.controls.fantasyName.setValidators([Validators.required])      
-      this.clienteForm.controls.socialReason.setValidators([Validators.required])      
-      this.clienteForm.controls.subscription.setValidators([Validators.required])      
-      this.clienteForm.controls.cnpj.setValidators([Validators.required])      
-      this.clienteForm.controls.companyCellphone.setValidators([Validators.required])      
-      this.clienteForm.controls.companyTelephone.setValidators([Validators.required])      
-      this.clienteForm.controls.birthDateCompany.setValidators([Validators.required])      
-      this.clienteForm.controls.ramal.setValidators([Validators.required])      
+      this.clienteForm.controls.fantasyName.setValidators([Validators.required])
+      this.clienteForm.controls.socialReason.setValidators([Validators.required])
+      this.clienteForm.controls.subscription.setValidators([Validators.required])
+      this.clienteForm.controls.cnpj.setValidators([Validators.required])
+      this.clienteForm.controls.companyCellphone.setValidators([Validators.required])
+      this.clienteForm.controls.companyTelephone.setValidators([Validators.required])
+      this.clienteForm.controls.birthDateCompany.setValidators([Validators.required])
+      this.clienteForm.controls.ramal.setValidators([Validators.required])
       this.clienteForm.controls.companyEmail.setValidators([Validators.required, Validators.email])
       //Clear client validators
-      this.clienteForm.controls.name.clearValidators()      
-      this.clienteForm.controls.name.updateValueAndValidity()      
+      this.clienteForm.controls.name.clearValidators()
+      this.clienteForm.controls.name.updateValueAndValidity()
       this.clienteForm.controls.surname.clearValidators()
       this.clienteForm.controls.surname.updateValueAndValidity()
       this.clienteForm.controls.cpf.clearValidators()
@@ -302,13 +296,13 @@ export class EditarClientesComponent implements OnInit {
   submitClient(data : any) {
     if(this.clienteForm.valid) {
       this.clientService.update(this.clientId, data).subscribe((dataReturn) => {
-        Swal.fire({ 
-          title: '<h4>Cliente atualizado!</h4>', 
-          icon: 'success', 
-          toast: true, 
-          position: 'top', 
-          showConfirmButton: false, 
-          timer: 2000, 
+        Swal.fire({
+          title: '<h4>Cliente atualizado!</h4>',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
           timerProgressBar: true ,
           width: '500px'
         })
@@ -322,13 +316,13 @@ export class EditarClientesComponent implements OnInit {
           console.log(item)
         }
       }
-      Swal.fire({ 
-        title: '<h4>Complete os campos necessários!</h4>', 
-        icon: 'error', 
-        toast: true, 
-        position: 'top', 
-        showConfirmButton: false, 
-        timer: 2000, 
+      Swal.fire({
+        title: '<h4>Complete os campos necessários!</h4>',
+        icon: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 2000,
         timerProgressBar: true ,
         width: '500px'
       })
@@ -350,7 +344,7 @@ export class EditarClientesComponent implements OnInit {
   }
 
   check(event: any){
-    let button = event.target 
+    let button = event.target
     if(button.checked){
       this.tabela.push(new FormGroup({
         'nome': new FormControl(button.value)

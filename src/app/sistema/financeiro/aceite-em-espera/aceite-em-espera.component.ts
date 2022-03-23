@@ -39,6 +39,7 @@ export class AceiteEmEsperaComponent implements OnInit {
     }).then((res) => {
       if (res.isConfirmed) {
         pedido.aceite = true;
+        pedido.status = "Aprovado";
         this.pedidoCompraService.update(pedido).subscribe(() => {
           this.pedidosFiltrados = this.pedidosFiltrados.filter((item: any) => item.id != pedido.id)
           return Swal.fire({

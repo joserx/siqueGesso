@@ -302,7 +302,7 @@
 
                         <!-- Nome do vendedor -->
                         <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
-                            <select formControlName="nomeVendedor" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor" formControlName="vendedor">
+                            <select formControlName="nomeVendedor" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor">
                 <option *ngFor="let vendedor of vendedores" value="{{vendedor.name}} {{vendedor.surname}}">
                   {{vendedor.name}} {{vendedor.surname}}</option>
                 </select>
@@ -312,111 +312,21 @@
                     </div>
 
                     <!-- Condições de pagamento -->
-                    <!-- Títulos da Tabela -->
-                    <div class="row m-0 my-4 text-custom-dark justify-content-between">
-                        <div class="col-3">
-                            <h5 class="fw-bold text-truncate">Condição</h5>
+                    <div class="row pt-3 m-0">
+                        <div class="col-12 pt-3 text-custom-dark">
+                            <h5 class="m-0">
+                                Condições de pagamento
+                            </h5>
                         </div>
-                        <div class="col-3">
-                            <h5 class="fw-bold text-truncate">Status</h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="fw-bold text-truncate">Ação</h5>
-                        </div>
-                    </div>
 
-                    <!-- Tabela Condições de pagamento -->
-
-
-                    <div class="row m-0 border-bottom align-items-center justify-content-between">
-                        <div class="col-3 py-2">
-                            <p class="my-1 m-0">Débito</p>
-                        </div>
-                        <div class="col-3">
-                            <div>
-                                <select class="form-select w-100" formControlName="debito">
-                  <option value="liberado">Liberado</option>
-                  <option value="não liberado">Não Liberado</option>
-                  <option value="aguardando">Aguardando liberação</option>
-                </select>
-                            </div>
-                        </div>
-                        <div class="col-2 py-2 d-grid gap-2">
-
-                        </div>
-                    </div>
-
-                    <div class="row m-0 border-bottom align-items-center justify-content-between">
-                        <div class="col-3 py-2">
-                            <p class="my-1 m-0">Crédito à vista</p>
-                        </div>
-                        <div class="col-3">
-                            <div>
-                                <select class="form-select w-100" formControlName="creditoAvista">
-                  <option value="liberado">Liberado</option>
-                  <option value="não liberado">Não Liberado</option>
-                  <option value="aguardando">Aguardando liberação</option>
-                </select>
-                            </div>
-                        </div>
-                        <div class="col-2 py-2 d-grid gap-2">
-
-                        </div>
-                    </div>
-
-                    <div class="row m-0 border-bottom align-items-center justify-content-between">
-                        <div class="col-3 py-2">
-                            <p class="my-1 m-0">Crédito a prazo</p>
-                        </div>
-                        <div class="col-3">
-                            <div>
-                                <select class="form-select w-100" formControlName="creditoAprazo">
-                  <option value="liberado">Liberado</option>
-                  <option value="não liberado">Não Liberado</option>
-                  <option value="aguardando">Aguardando liberação</option>
-                </select>
-                            </div>
-                        </div>
-                        <div class="col-2 py-2 d-grid gap-2">
-
-                        </div>
-                    </div>
-
-                    <div class="row m-0 border-bottom align-items-center justify-content-between">
-                        <div class="col-3 py-2">
-                            <p class="my-1 m-0">Boleto à vista</p>
-                        </div>
-                        <div class="col-3">
-                            <div>
-                                <select class="form-select w-100" formControlName="boletoAvista">
-                  <option value="liberado">Liberado</option>
-                  <option value="não liberado">Não Liberado</option>
-                  <option value="aguardando">Aguardando liberação</option>
-                </select>
-                            </div>
-                        </div>
-                        <div class="col-2 py-2 d-grid gap-2">
-
-                        </div>
-                    </div>
-
-                    <div class="row m-0 border-bottom align-items-center justify-content-between">
-                        <div class="col-3 py-2">
-                            <p class="my-1 m-0">Boleto DDL</p>
-                        </div>
-                        <div class="col-3">
-                            <div>
-                                <input class="form-control form-control-sm h-100 w-100 px-4 py-3 rounded-15 shadow-sm" type="text" formControlName="boletoDdl" readonly>
-                            </div>
-                        </div>
-                        <div class="col-2 py-2 d-grid gap-2">
-                            <!-- Botão de solicitar -->
-                            <button *ngIf="solicitado==false" type="button" class="btn rounded-15 px-4 bg-warning shadow-sm" (click)="solicitar()">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitar</h5>
-              </button>
-                            <button *ngIf="solicitado==true" type="button" class="btn rounded-15 px-4 bg-success shadow-sm" (click)="solicitar()">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitado</h5>
-              </button>
+                        <div class="col-12 px-2 p-0 m-0">
+                            <p>Selecione as condições de pagamento disponíveis</p>
+                            <ng-container *ngFor="let condicao of paymentCondition">
+                                <div class="form-check form-check-inline px-4">
+                                    <input (click)="checkPayment(condicao.id)" class="form-check-input shadow-sm" type="checkbox" />
+                                    <label class="form-check-label">{{ condicao?.nome }}</label>
+                                </div>
+                            </ng-container>
                         </div>
                     </div>
 

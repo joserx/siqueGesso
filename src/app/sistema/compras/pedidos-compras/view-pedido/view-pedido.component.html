@@ -19,7 +19,7 @@
 
                         <!-- Data -->
                         <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-                            <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="data" formControlName="data" />
+                            <input class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="data" formControlName="data" />
                             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data</label
               >
             </div>
@@ -37,7 +37,7 @@
               >
             </div>
 
-            <!-- CEST -->
+            <!-- Razao Social -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
@@ -50,7 +50,7 @@
               >
             </div>
 
-            <!-- Tributos -->
+            <!-- CNPJ -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
@@ -63,7 +63,7 @@
               >
             </div>
 
-            <!-- Valor base ICMS ST para retenção -->
+            <!-- cep -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
@@ -76,7 +76,7 @@
               >
             </div>
 
-            <!-- Valor ICMS ST para retenção -->
+            <!-- endereco -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
@@ -89,7 +89,7 @@
               >
             </div>
 
-            <!-- Valor ICMS próprio do substituto -->
+            <!--complemento -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
@@ -102,7 +102,7 @@
               >
             </div>
 
-            <!-- Código de exceção da TIPI -->
+            <!-- Condicao de pagamento -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
@@ -115,7 +115,7 @@
               >
             </div>
 
-            <!-- Valor PIS fixo -->
+            <!--Meio de Pagamento -->
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
@@ -144,7 +144,7 @@
             <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
               <input
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
-                type="text"
+                type="date"
                 placeholder="data vencimento"
                 formControlName="dataVenc"
               />
@@ -154,7 +154,7 @@
             </div>
           </div>
 
-          <!-- Características -->
+          <!-- Valores -->
           <div class="row pt-3 p-0 m-0 border-bottom pb-4">
             <div class="col-12 px-2 m-0 p-0">
               <h5 class="fw-bold text-custom-dark m-0 p-0">Valores</h5>
@@ -163,6 +163,9 @@
             <!-- Descrição -->
             <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
               <input
+                mask="separator,2"
+                prefix="R$"
+                thousandSeparator="."
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="subtotal"
@@ -173,9 +176,12 @@
               >
             </div>
 
-            <!-- Largura -->
+            <!-- Desconto -->
             <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
               <input
+                mask="separator,2"
+                prefix="R$"
+                thousandSeparator="."
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="desconto"
@@ -186,9 +192,12 @@
               >
             </div>
 
-            <!-- Altura -->
+            <!-- Frete -->
             <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
               <input
+                mask="separator,2"
+                prefix="R$"
+                thousandSeparator="."
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="frete"
@@ -199,9 +208,12 @@
               >
             </div>
 
-            <!-- Peso -->
+            <!-- Encargos -->
             <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
               <input
+                mask="separator,2"
+                prefix="R$"
+                thousandSeparator="."
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="encargos"
@@ -212,9 +224,12 @@
               >
             </div>
 
-            <!-- Itens por caixa -->
+            <!-- Total da Compra -->
             <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
               <input
+                mask="separator,2"
+                prefix="R$"
+                thousandSeparator="."
                 class="form-control h-limited-sm px-4 py-3 rounded-15 shadow-sm"
                 type="text"
                 placeholder="valorTotal"
