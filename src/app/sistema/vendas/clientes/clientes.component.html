@@ -1,664 +1,676 @@
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col pb-4 m-0 bg-custom-white">
-    <!-- Página -->
-    <div class="container">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col pb-4 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas/clientes">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-      </div>
-
-      <div class="row m-0 mt-4">
-        <div class="col-12">
-          <ul class="nav nav-tabs fs-5 fw-lighter">
-            <li class="nav-item px-1">
-              <a class="nav-link px-4" [class.active]="clienteSection == 'cadastro'"
-                (click)="toggleClienteSection('cadastro')">Dados pessoais</a>
-            </li>
-            <li class="nav-item px-1">
-              <a class="nav-link px-4" [class.active]="clienteSection == 'venda'"
-                (click)="toggleClienteSection('venda')">Dados para venda</a>
-            </li>
-            <li class="nav-item px-1">
-              <a class="nav-link px-4" [class.active]="clienteSection == 'avaliacao'"
-                (click)="toggleClienteSection('avaliacao')">Avaliação de crédito</a>
-            </li>
-            <li class="nav-item px-1">
-              <a class="nav-link px-4" [class.active]="clienteSection == 'pedidos'"
-                (click)="toggleClienteSection('pedidos')">Pedidos realizados</a>
-            </li>
-            <li class="nav-item px-1">
-              <a class="nav-link px-4" [class.active]="clienteSection == 'resumo'"
-                (click)="toggleClienteSection('resumo')">Resumo financeiro</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <form [formGroup]="clienteForm" (ngSubmit)="submitClient(clienteForm.value)">
-        <div *ngIf="clienteSection == 'cadastro'">
-
-          <!-- Pessoa Física, Jurídica -->
-          <div class="row m-0 mt-4 justify-content-center">
-
-            <!-- Botão Pessoa Física -->
-            <div class="col-4 px-2 p-0 m-0">
-              <a [class.bg-custom-success]="tipoPessoa == 'fisica'"
-                class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm"
-                (click)="toggleTipoPessoa('fisica')">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Física</h5>
-              </a>
-            </div>
-
-            <!-- Botão Pessoa Física -->
-            <div class="col-4 px-2 p-0 m-0">
-              <a [class.bg-custom-success]="tipoPessoa == 'juridica'"
-                class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm"
-                (click)="toggleTipoPessoa('juridica')">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Jurídica</h5>
-              </a>
-            </div>
-
-            <div class="col-4"></div>
-
-
-            <div class="col-12 py-3 d-flex border-bottom align-items-end justify-content-end">
-              <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' :
-                'Desativado' }}</label>
-              <div class="form-check form-switch">
-                <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado"
-                  (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
-              </div>
-            </div>
-
-          </div>
-
-          <div *ngIf="tipoPessoa === 'fisica'">
-
-            <!-- Dados do cliente -->
-            <div class="row m-0 pb-4 border-bottom justify-content-center">
-
-              <!-- Nome -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="name"
-                  [class.invalid]="clienteForm.controls.name.invalid && (clienteForm.controls.name.dirty || clienteForm.controls.name.touched)"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Nome">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
-              </div>
-
-              <!-- Sobrenome -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="surname"
-                  [class.invalid]="clienteForm.controls.surname.invalid && (clienteForm.controls.surname.dirty || clienteForm.controls.surname.touched)"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Sobrenome">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Sobrenome</label>
-              </div>
-
-              <!-- CPF -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="000.000.000-00"
-                  [class.invalid]="clienteForm.controls.cpf.invalid && (clienteForm.controls.cpf.dirty || clienteForm.controls.cpf.touched)"
-                  formControlName="cpf" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-                  type="text" placeholder="CPF">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF</label>
-              </div>
-
-              <!-- RG -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="00.000.000-0||0.000.000-0"
-                  [class.invalid]="clienteForm.controls.rg.invalid && (clienteForm.controls.rg.dirty || clienteForm.controls.rg.touched)"
-                  formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-                  type="text" placeholder="RG">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
-              </div>
-
-              <!-- Celular -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="(00) 0000-000||(00) 00000-0000"
-                  [class.invalid]="clienteForm.controls.cellphone.invalid && (clienteForm.controls.cellphone.dirty || clienteForm.controls.cellphone.touched)"
-                  formControlName="cellphone"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Celular">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
-              </div>
-
-              <!-- Telefone -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="(00) 0000-000||(00) 00000-0000"
-                  [class.invalid]="clienteForm.controls.telephone.invalid && (clienteForm.controls.telephone.dirty || clienteForm.controls.telephone.touched)"
-                  formControlName="telephone"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Telefone">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
-              </div>
-
-              <!-- Data de nascimento -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="birthDate"
-                  [class.invalid]="clienteForm.controls.birthDate.invalid && (clienteForm.controls.birthDate.dirty || clienteForm.controls.birthDate.touched)"
-                  class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="date"
-                  placeholder="Data de nascimento" [max]="getDate()">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
-              </div>
-
-              <!-- Email -->
-              <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-                <input
-                  [class.invalid]="clienteForm.controls.email.invalid && (clienteForm.controls.email.dirty || clienteForm.controls.email.touched)"
-                  formControlName="email" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
-                  type="email" placeholder="Email">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
-              </div>
-
-
-            </div>
-          </div>
-          <div *ngIf="tipoPessoa === 'juridica'">
-
-            <!-- Dados do cliente -->
-            <div class="row m-0 pb-4 border-bottom justify-content-center">
-
-              <!-- CNPJ -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="CPF_CNPJ"
-                  [class.invalid]="clienteForm.controls.cnpj.invalid && (clienteForm.controls.cnpj.dirty || clienteForm.controls.cnpj.touched)"
-                  formControlName="cnpj" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                  type="text" placeholder="CNPJ">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
-              </div>
-
-              <!-- Inscrição Estadual -->
-              <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="subscription"
-                  [class.invalid]="clienteForm.controls.subscription.invalid && (clienteForm.controls.subscription.dirty || clienteForm.controls.subscription.touched)"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Inscrição Estadual">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição Estadual</label>
-              </div>
-
-              <!-- Razão Social -->
-              <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="socialReason"
-                  [class.invalid]="clienteForm.controls.socialReason.invalid && (clienteForm.controls.socialReason.dirty || clienteForm.controls.socialReason.touched)"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Razão Social">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão Social</label>
-              </div>
-
-              <!-- Nome fantasia -->
-              <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="fantasyName"
-                  [class.invalid]="clienteForm.controls.fantasyName.invalid && (clienteForm.controls.fantasyName.dirty || clienteForm.controls.fantasyName.touched)"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Nome fantasia">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome fantasia</label>
-              </div>
-
-              <!-- Data de nascimento -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="birthDateCompany"
-                  [class.invalid]="clienteForm.controls.birthDateCompany.invalid && (clienteForm.controls.birthDateCompany.dirty || clienteForm.controls.birthDateCompany.touched)"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
-                  placeholder="Data de nascimento" [max]="getDate()">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
-              </div>
-
-              <!-- Email -->
-              <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="companyEmail"
-                  [class.invalid]="clienteForm.controls.companyEmail.invalid && (clienteForm.controls.companyEmail.dirty || clienteForm.controls.companyEmail.touched)"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="email"
-                  placeholder="Email">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
-              </div>
-
-              <!-- Celular -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="(00) 0000-000||(00) 00000-0000"
-                  [class.invalid]="clienteForm.controls.companyCellphone?.invalid && (clienteForm.controls.companyCellphone?.dirty || clienteForm.controls.companyCellphone?.touched)"
-                  formControlName="companyCellphone"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Celular">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
-              </div>
-
-              <!-- Telefone -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="(00) 0000-000||(00) 00000-0000" formControlName="companyTelephone"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Telefone">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
-              </div>
-
-              <!-- Ramal -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input mask="0000" formControlName="ramal"
-                  [class.invalid]="clienteForm.controls.ramal.invalid && (clienteForm.controls.ramal.dirty || clienteForm.controls.ramal.touched)"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Ramal">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ramal</label>
-              </div>
-
-            </div>
-
-          </div>
-
-          <!-- Endereços -->
-          <div formArrayName="addresses" class="pb-4 m-0 border-bottom"
-            *ngFor="let endereco of addresses['controls']; let i = index">
-
-            <div [formGroupName]="i" class="row">
-
-              <!-- CEP -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input (input)="loadCep($event.target, endereco)" (blur)="changeAddress($event, i)" mask="00000-000"
-                  [class.invalid]="endereco?.get('cep')?.invalid && (endereco?.get('cep')?.dirty || endereco?.get('cep')?.touched)"
-                  formControlName="cep" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                  type="text" placeholder="CEP">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
-              </div>
-
-              <!-- Logradouro -->
-              <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="street"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Logradouro">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
-              </div>
-
-              <!-- Número -->
-              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="number"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Número">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
-              </div>
-
-              <!-- Complemento -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="complement"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Complemento">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
-              </div>
-
-              <!-- Bairro -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="neighborhood"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="Bairro">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
-              </div>
-
-              <!-- Cidade -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="city" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                  type="text" placeholder="Cidade">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
-              </div>
-
-              <!-- UF -->
-              <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="state" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                  type="text" placeholder="UF">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">UF</label>
-              </div>
-
-              <!-- País -->
-              <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                <input formControlName="country"
-                  class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  placeholder="País">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">País</label>
-              </div>
-
-              <!-- Botão Remover endereço -->
-              <div class="col-5 px-2 pt-4 p-0 m-0">
-                <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm"
-                  (click)="removerEndereco(i)">
-                  <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Remover endereço</h5>
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas/clientes">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
                 </a>
-              </div>
-
             </div>
 
-          </div>
-
-
-          <!-- Final -->
-          <div class="row m-0 pb-4 mt-4 justify-content-end">
-
-            <!-- Botão Cadastrar outro endereço -->
-            <div class="col-5 px-2 p-0 m-0">
-              <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm"
-                (click)="adicionarEndereco()">
-                <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Cadastrar outro endereço</h5>
-              </a>
+            <div class="row m-0 mt-4">
+                <div class="col-12">
+                    <ul class="nav nav-tabs fs-5 fw-lighter">
+                        <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="clienteSection == 'cadastro'" (click)="toggleClienteSection('cadastro')">Dados pessoais</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="clienteSection == 'venda'" (click)="toggleClienteSection('venda')">Dados para venda</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="clienteSection == 'avaliacao'" (click)="toggleClienteSection('avaliacao')">Avaliação de crédito</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="clienteSection == 'pedidos'" (click)="toggleClienteSection('pedidos')">Pedidos realizados</a>
+                        </li>
+                        <li class="nav-item px-1">
+                            <a class="nav-link px-4" [class.active]="clienteSection == 'resumo'" (click)="toggleClienteSection('resumo')">Resumo financeiro</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-          </div>
+            <form [formGroup]="clienteForm" (ngSubmit)="submitClient(clienteForm.value)">
+                <div *ngIf="clienteSection == 'cadastro'">
+
+                    <!-- Pessoa Física, Jurídica -->
+                    <div class="row m-0 mt-4 justify-content-center">
+
+                        <!-- Botão Pessoa Física -->
+                        <div class="col-4 px-2 p-0 m-0">
+                            <a [class.bg-custom-success]="tipoPessoa == 'fisica'" class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm" (click)="toggleTipoPessoa('fisica')">
+                                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Física</h5>
+                            </a>
+                        </div>
+
+                        <!-- Botão Pessoa Física -->
+                        <div class="col-4 px-2 p-0 m-0">
+                            <a [class.bg-custom-success]="tipoPessoa == 'juridica'" class="rounded-15 py-1 px-4 h-limited d-flex justify-content-between shadow-sm" (click)="toggleTipoPessoa('juridica')">
+                                <h5 class="fw-normal my-auto text-truncate text-custom-dark">Pessoa Jurídica</h5>
+                            </a>
+                        </div>
+
+                        <div class="col-4"></div>
 
 
-        </div>
+                        <div class="col-12 py-3 d-flex border-bottom align-items-end justify-content-end">
+                            <label class="form-check-label me-3 fs-5" for="desativado">{{ (desativadoCheckbox === true) ? 'Ativo' :
+                'Desativado' }}</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input pt-4 ps-5 border-light bg-custom-light" type="checkbox" id="desativado" (click)="toggleDesativadoCheckbox()" [checked]="desativadoCheckbox === true">
+                            </div>
+                        </div>
 
-        <div *ngIf="clienteSection == 'venda'">
+                    </div>
 
-          <!-- Vendedor -->
-          <div class="row m-0">
+                    <div *ngIf="tipoPessoa === 'fisica'">
 
-            <div class="col-12 pt-3 text-custom-dark">
-              <h5 class="m-0">Vendedor</h5>
-            </div>
+                        <!-- Dados do cliente -->
+                        <div class="row m-0 pb-4 border-bottom justify-content-center">
 
-            <!-- Código -->
-            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-              <input formControlName="codigo" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                type="text" placeholder="Código" formControlName="codigoVendedor">
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
-            </div>
+                            <!-- Nome -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="name" [class.invalid]="clienteForm.controls.name.invalid && (clienteForm.controls.name.dirty || clienteForm.controls.name.touched)" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome</label>
+                            </div>
 
-            <!-- Nome do vendedor -->
-            <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
-              <select formControlName="nomeVendedor"
-                class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                placeholder="Nome do vendedor" formControlName="vendedor">
+                            <!-- Sobrenome -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="surname" [class.invalid]="clienteForm.controls.surname.invalid && (clienteForm.controls.surname.dirty || clienteForm.controls.surname.touched)" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text"
+                                    placeholder="Sobrenome">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Sobrenome</label>
+                            </div>
+
+                            <!-- CPF -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="000.000.000-00" [class.invalid]="clienteForm.controls.cpf.invalid && (clienteForm.controls.cpf.dirty || clienteForm.controls.cpf.touched)" formControlName="cpf" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="CPF">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">CPF</label>
+                            </div>
+
+                            <!-- RG -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="00.000.000-0||0.000.000-0" [class.invalid]="clienteForm.controls.rg.invalid && (clienteForm.controls.rg.dirty || clienteForm.controls.rg.touched)" formControlName="rg" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="RG">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">RG</label>
+                            </div>
+
+                            <!-- Celular -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.cellphone.invalid && (clienteForm.controls.cellphone.dirty || clienteForm.controls.cellphone.touched)" formControlName="cellphone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="Celular">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+                            </div>
+
+                            <!-- Telefone -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.telephone.invalid && (clienteForm.controls.telephone.dirty || clienteForm.controls.telephone.touched)" formControlName="telephone" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="Telefone">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+                            </div>
+
+                            <!-- Data de nascimento -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="birthDate" [class.invalid]="clienteForm.controls.birthDate.invalid && (clienteForm.controls.birthDate.dirty || clienteForm.controls.birthDate.touched)" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+                                    type="date" placeholder="Data de nascimento" [max]="getDate()">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+                                <input [class.invalid]="clienteForm.controls.email.invalid && (clienteForm.controls.email.dirty || clienteForm.controls.email.touched)" formControlName="email" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="email"
+                                    placeholder="Email">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div *ngIf="tipoPessoa === 'juridica'">
+
+                        <!-- Dados do cliente -->
+                        <div class="row m-0 pb-4 border-bottom justify-content-center">
+
+                            <!-- CNPJ -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="CPF_CNPJ" [class.invalid]="clienteForm.controls.cnpj.invalid && (clienteForm.controls.cnpj.dirty || clienteForm.controls.cnpj.touched)" formControlName="cnpj" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                                    placeholder="CNPJ">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">CNPJ</label>
+                            </div>
+
+                            <!-- Inscrição Estadual -->
+                            <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="subscription" [class.invalid]="clienteForm.controls.subscription.invalid && (clienteForm.controls.subscription.dirty || clienteForm.controls.subscription.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="Inscrição Estadual">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Inscrição Estadual</label>
+                            </div>
+
+                            <!-- Razão Social -->
+                            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="socialReason" [class.invalid]="clienteForm.controls.socialReason.invalid && (clienteForm.controls.socialReason.dirty || clienteForm.controls.socialReason.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="Razão Social">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Razão Social</label>
+                            </div>
+
+                            <!-- Nome fantasia -->
+                            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="fantasyName" [class.invalid]="clienteForm.controls.fantasyName.invalid && (clienteForm.controls.fantasyName.dirty || clienteForm.controls.fantasyName.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="Nome fantasia">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nome fantasia</label>
+                            </div>
+
+                            <!-- Data de nascimento -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="birthDateCompany" [class.invalid]="clienteForm.controls.birthDateCompany.invalid && (clienteForm.controls.birthDateCompany.dirty || clienteForm.controls.birthDateCompany.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                                    type="date" placeholder="Data de nascimento" [max]="getDate()">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de nascimento</label>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-8 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="companyEmail" [class.invalid]="clienteForm.controls.companyEmail.invalid && (clienteForm.controls.companyEmail.dirty || clienteForm.controls.companyEmail.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                                    type="email" placeholder="Email">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Email</label>
+                            </div>
+
+                            <!-- Celular -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="(00) 0000-000||(00) 00000-0000" [class.invalid]="clienteForm.controls.companyCellphone?.invalid && (clienteForm.controls.companyCellphone?.dirty || clienteForm.controls.companyCellphone?.touched)" formControlName="companyCellphone" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="Celular">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Celular</label>
+                            </div>
+
+                            <!-- Telefone -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="(00) 0000-000||(00) 00000-0000" formControlName="companyTelephone" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Telefone">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Telefone</label>
+                            </div>
+
+                            <!-- Ramal -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input mask="0000" formControlName="ramal" [class.invalid]="clienteForm.controls.ramal.invalid && (clienteForm.controls.ramal.dirty || clienteForm.controls.ramal.touched)" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text"
+                                    placeholder="Ramal">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Ramal</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Endereços -->
+                    <div formArrayName="addresses" class="pb-4 m-0 border-bottom" *ngFor="let endereco of addresses['controls']; let i = index">
+
+                        <div [formGroupName]="i" class="row">
+
+                            <!-- CEP -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input (input)="loadCep($event.target, endereco)" (blur)="changeAddress($event, i)" mask="00000-000" [class.invalid]="endereco?.get('cep')?.invalid && (endereco?.get('cep')?.dirty || endereco?.get('cep')?.touched)" formControlName="cep" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
+                                    type="text" placeholder="CEP">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">CEP</label>
+                            </div>
+
+                            <!-- Logradouro -->
+                            <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="street" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Logradouro">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Logradouro</label>
+                            </div>
+
+                            <!-- Número -->
+                            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="number" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Número">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
+                            </div>
+
+                            <!-- Complemento -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="complement" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Complemento">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Complemento</label>
+                            </div>
+
+                            <!-- Bairro -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="neighborhood" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Bairro">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Bairro</label>
+                            </div>
+
+                            <!-- Cidade -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="city" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Cidade">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Cidade</label>
+                            </div>
+
+                            <!-- UF -->
+                            <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="state" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="UF">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">UF</label>
+                            </div>
+
+                            <!-- País -->
+                            <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+                                <input formControlName="country" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="País">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">País</label>
+                            </div>
+
+                            <!-- Botão Remover endereço -->
+                            <div class="col-5 px-2 pt-4 p-0 m-0">
+                                <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm" (click)="removerEndereco(i)">
+                                    <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Remover endereço</h5>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Final -->
+                    <div class="row m-0 pb-4 mt-4 justify-content-end">
+
+                        <!-- Botão Cadastrar outro endereço -->
+                        <div class="col-5 px-2 p-0 m-0">
+                            <a class="rounded-15 py-1 px-4 bg-white h-limited d-flex justify-content-between shadow-sm" (click)="adicionarEndereco()">
+                                <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Cadastrar outro endereço</h5>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div *ngIf="clienteSection == 'venda'">
+
+                    <!-- Vendedor -->
+                    <div class="row m-0">
+
+                        <div class="col-12 pt-3 text-custom-dark">
+                            <h5 class="m-0">Vendedor</h5>
+                        </div>
+
+                        <!-- Código -->
+                        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                            <input formControlName="codigo" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Código" formControlName="codigoVendedor">
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Código</label>
+                        </div>
+
+                        <!-- Nome do vendedor -->
+                        <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
+                            <select formControlName="nomeVendedor" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor" formControlName="vendedor">
                 <option *ngFor="let vendedor of vendedores" value="{{vendedor.name}} {{vendedor.surname}}">
                   {{vendedor.name}} {{vendedor.surname}}</option>
                 </select>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
-            </div>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Vendedor</label>
+                        </div>
 
-          </div>
+                    </div>
 
-          <!-- Condições de pagamento -->
-          <!-- Títulos da Tabela -->
-          <div class="row m-0 my-4 text-custom-dark justify-content-between">
-            <div class="col-3">
-              <h5 class="fw-bold text-truncate">Condição</h5>
-            </div>
-            <div class="col-3">
-              <h5 class="fw-bold text-truncate">Status</h5>
-            </div>
-            <div class="col-2">
-              <h5 class="fw-bold text-truncate">Ação</h5>
-            </div>
-          </div>
+                    <!-- Condições de pagamento -->
+                    <!-- Títulos da Tabela -->
+                    <div class="row m-0 my-4 text-custom-dark justify-content-between">
+                        <div class="col-3">
+                            <h5 class="fw-bold text-truncate">Condição</h5>
+                        </div>
+                        <div class="col-3">
+                            <h5 class="fw-bold text-truncate">Status</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="fw-bold text-truncate">Ação</h5>
+                        </div>
+                    </div>
 
-          <!-- Tabela Condições de pagamento -->
+                    <!-- Tabela Condições de pagamento -->
 
 
-          <div class="row m-0 border-bottom align-items-center justify-content-between">
-            <div class="col-3 py-2">
-              <p class="my-1 m-0">Débito</p>
-            </div>
-            <div class="col-3">
-              <div>
-                <select class="form-select w-100" formControlName="debito">
+                    <div class="row m-0 border-bottom align-items-center justify-content-between">
+                        <div class="col-3 py-2">
+                            <p class="my-1 m-0">Débito</p>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <select class="form-select w-100" formControlName="debito">
                   <option value="liberado">Liberado</option>
                   <option value="não liberado">Não Liberado</option>
                   <option value="aguardando">Aguardando liberação</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-2 py-2 d-grid gap-2">
+                            </div>
+                        </div>
+                        <div class="col-2 py-2 d-grid gap-2">
 
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div class="row m-0 border-bottom align-items-center justify-content-between">
-            <div class="col-3 py-2">
-              <p class="my-1 m-0">Crédito à vista</p>
-            </div>
-            <div class="col-3">
-              <div>
-                <select class="form-select w-100" formControlName="creditoAvista">
+                    <div class="row m-0 border-bottom align-items-center justify-content-between">
+                        <div class="col-3 py-2">
+                            <p class="my-1 m-0">Crédito à vista</p>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <select class="form-select w-100" formControlName="creditoAvista">
                   <option value="liberado">Liberado</option>
                   <option value="não liberado">Não Liberado</option>
                   <option value="aguardando">Aguardando liberação</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-2 py-2 d-grid gap-2">
+                            </div>
+                        </div>
+                        <div class="col-2 py-2 d-grid gap-2">
 
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div class="row m-0 border-bottom align-items-center justify-content-between">
-            <div class="col-3 py-2">
-              <p class="my-1 m-0">Crédito a prazo</p>
-            </div>
-            <div class="col-3">
-              <div>
-                <select class="form-select w-100" formControlName="creditoAprazo">
+                    <div class="row m-0 border-bottom align-items-center justify-content-between">
+                        <div class="col-3 py-2">
+                            <p class="my-1 m-0">Crédito a prazo</p>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <select class="form-select w-100" formControlName="creditoAprazo">
                   <option value="liberado">Liberado</option>
                   <option value="não liberado">Não Liberado</option>
                   <option value="aguardando">Aguardando liberação</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-2 py-2 d-grid gap-2">
+                            </div>
+                        </div>
+                        <div class="col-2 py-2 d-grid gap-2">
 
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div class="row m-0 border-bottom align-items-center justify-content-between">
-            <div class="col-3 py-2">
-              <p class="my-1 m-0">Boleto à vista</p>
-            </div>
-            <div class="col-3">
-              <div>
-                <select class="form-select w-100" formControlName="boletoAvista">
+                    <div class="row m-0 border-bottom align-items-center justify-content-between">
+                        <div class="col-3 py-2">
+                            <p class="my-1 m-0">Boleto à vista</p>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <select class="form-select w-100" formControlName="boletoAvista">
                   <option value="liberado">Liberado</option>
                   <option value="não liberado">Não Liberado</option>
                   <option value="aguardando">Aguardando liberação</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-2 py-2 d-grid gap-2">
+                            </div>
+                        </div>
+                        <div class="col-2 py-2 d-grid gap-2">
 
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div class="row m-0 border-bottom align-items-center justify-content-between">
-            <div class="col-3 py-2">
-              <p class="my-1 m-0">Boleto DDL</p>
-            </div>
-            <div class="col-3">
-              <div>
-                <input class="form-control form-control-sm h-100 w-100 px-4 py-3 rounded-15 shadow-sm" type="text"
-                  formControlName="boletoDdl" readonly>
-              </div>
-            </div>
-            <div class="col-2 py-2 d-grid gap-2">
-              <!-- Botão de solicitar -->
-              <button *ngIf="solicitado==false" type="button" class="btn rounded-15 px-4 bg-warning shadow-sm"
-                (click)="solicitar()">
+                    <div class="row m-0 border-bottom align-items-center justify-content-between">
+                        <div class="col-3 py-2">
+                            <p class="my-1 m-0">Boleto DDL</p>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <input class="form-control form-control-sm h-100 w-100 px-4 py-3 rounded-15 shadow-sm" type="text" formControlName="boletoDdl" readonly>
+                            </div>
+                        </div>
+                        <div class="col-2 py-2 d-grid gap-2">
+                            <!-- Botão de solicitar -->
+                            <button *ngIf="solicitado==false" type="button" class="btn rounded-15 px-4 bg-warning shadow-sm" (click)="solicitar()">
                 <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitar</h5>
               </button>
-              <button *ngIf="solicitado==true" type="button" class="btn rounded-15 px-4 bg-success shadow-sm"
-                (click)="solicitar()">
+                            <button *ngIf="solicitado==true" type="button" class="btn rounded-15 px-4 bg-success shadow-sm" (click)="solicitar()">
                 <h5 class="fw-normal my-auto text-truncate text-custom-dark">Solicitado</h5>
               </button>
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div class="row m-0">
-            <div class="col-12 pt-3 text-custom-dark">
-              <h5 class="m-0">Tabelas de venda</h5>
-            </div>
-            <div class="col-3 mt-3 text-custom-dark">
-              <!-- Tabela A -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_a" id="tabela_a" (click)="check($event)">
-                <label class="form-check-label" for="tabela_a">Tabela A</label>
-              </div>
-              <!-- Tabela B -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_b" id="tabela_b" (click)="check($event)">
-                <label class="form-check-label" for="tabela_b">Tabela B</label>
-              </div>
-              <!-- Tabela C -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_c" id="tabela_a" (click)="check($event)">
-                <label class="form-check-label" for="tabela_c">Tabela C</label>
-              </div>
-              <!-- Tabela D -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_d" id="tabela_d" (click)="check($event)">
-                <label class="form-check-label" for="tabela_d">Tabela D</label>
-              </div>
-              <!-- Tabela E -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_e" id="tabela_e" (click)="check($event)">
-                <label class="form-check-label" for="tabela_e">Tabela E</label>
-              </div>
-            </div>
-
-
-            <div class="col-3 mt-3 text-custom-dark">
-              <!-- Tabela F -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_f" id="tabela_f" (click)="check($event)">
-                <label class="form-check-label" for="tabela_f">Tabela F</label>
-              </div>
-              <!-- Tabela G -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_g" id="tabela_g" (click)="check($event)">
-                <label class="form-check-label" for="tabela_g">Tabela G</label>
-              </div>
-              <!-- Tabela H -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_h" id="tabela_h" (click)="check($event)">
-                <label class="form-check-label" for="tabela_h">Tabela H</label>
-              </div>
-              <!-- Tabela I -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_i" id="tabela_i" (click)="check($event)">
-                <label class="form-check-label" for="tabela_i">Tabela I</label>
-              </div>
-              <!-- Tabela J -->
-              <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" value="tabela_j" id="tabela_j" (click)="check($event)">
-                <label class="form-check-label" for="tabela_j">Tabela J</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row m-0">
-            <!-- Observações -->
-            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-              <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações"
-                style="height: 150px" formControlName="obs"></textarea>
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
-            </div>
-
-          </div>
+                    <div class="row m-0">
+                        <div class="col-12 pt-3 text-custom-dark">
+                            <h5 class="m-0">Tabelas de venda</h5>
+                        </div>
+                        <div class="col-3 mt-3 text-custom-dark">
+                            <!-- Tabela A -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_a" id="tabela_a" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_a">Tabela A</label>
+                            </div>
+                            <!-- Tabela B -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_b" id="tabela_b" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_b">Tabela B</label>
+                            </div>
+                            <!-- Tabela C -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_c" id="tabela_a" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_c">Tabela C</label>
+                            </div>
+                            <!-- Tabela D -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_d" id="tabela_d" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_d">Tabela D</label>
+                            </div>
+                            <!-- Tabela E -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_e" id="tabela_e" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_e">Tabela E</label>
+                            </div>
+                        </div>
 
 
-          <!-- Final -->
-          <div class="row m-0 pb-4 mt-4 justify-content-end">
+                        <div class="col-3 mt-3 text-custom-dark">
+                            <!-- Tabela F -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_f" id="tabela_f" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_f">Tabela F</label>
+                            </div>
+                            <!-- Tabela G -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_g" id="tabela_g" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_g">Tabela G</label>
+                            </div>
+                            <!-- Tabela H -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_h" id="tabela_h" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_h">Tabela H</label>
+                            </div>
+                            <!-- Tabela I -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_i" id="tabela_i" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_i">Tabela I</label>
+                            </div>
+                            <!-- Tabela J -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_j" id="tabela_j" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_j">Tabela J</label>
+                            </div>
+                        </div>
 
-          </div>
 
-        </div>
+                        <div class="col-3 mt-3 text-custom-dark">
+                            <!-- Tabela F -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_k" id="tabela_k" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_k">Tabela K</label>
+                            </div>
+                            <!-- Tabela G -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_l" id="tabela_l" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_l">Tabela L</label>
+                            </div>
+                            <!-- Tabela H -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_m" id="tabela_m" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_m">Tabela M</label>
+                            </div>
+                            <!-- Tabela I -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_n" id="tabela_n" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_n">Tabela N</label>
+                            </div>
+                            <!-- Tabela J -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_o" id="tabela_o" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_o">Tabela O</label>
+                            </div>
+                        </div>
 
-        <div *ngIf="clienteSection == 'avaliacao'">
+
+                        <div class="col-3 mt-3 text-custom-dark">
+                            <!-- Tabela F -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_p" id="tabela_p" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_p">Tabela P</label>
+                            </div>
+                            <!-- Tabela G -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_q" id="tabela_q" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_q">Tabela Q</label>
+                            </div>
+                            <!-- Tabela H -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_r" id="tabela_r" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_r">Tabela R</label>
+                            </div>
+                            <!-- Tabela I -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_s" id="tabela_s" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_s">Tabela S</label>
+                            </div>
+                            <!-- Tabela J -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_t" id="tabela_t" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_t">Tabela T</label>
+                            </div>
+                        </div>
+
+                        <div class="col-3 mt-3 text-custom-dark">
+                            <!-- Tabela F -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_u" id="tabela_u" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_u">Tabela U</label>
+                            </div>
+                            <!-- Tabela G -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_v" id="tabela_v" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_v">Tabela V</label>
+                            </div>
+                            <!-- Tabela H -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_w" id="tabela_w" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_w">Tabela W</label>
+                            </div>
+                            <!-- Tabela I -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_x" id="tabela_x" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_x">Tabela X</label>
+                            </div>
+                            <!-- Tabela J -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_y" id="tabela_y" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_y">Tabela Y</label>
+                            </div>
+                            <!-- Tabela J -->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="tabela_z" id="tabela_z" (click)="check($event)">
+                                <label class="form-check-label" for="tabela_z">Tabela Z</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-0">
+                        <!-- Observações -->
+                        <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                            <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 150px" formControlName="obs"></textarea>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+                        </div>
+
+                    </div>
 
 
-          <div class="row m-0">
-            <div class="col-12 m-0 p-0">
+                    <!-- Final -->
+                    <div class="row m-0 pb-4 mt-4 justify-content-end">
 
-              <div class="row m-0 p-0">
-                <!-- Restrição 1 -->
-                <div class="col-6 px-2 pt-4 p-0 m-0">
-                  <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-                    type="text" placeholder="Restrição" formControlName="restricao">
+                    </div>
+
+                </div>
+
+                <div *ngIf="clienteSection == 'avaliacao'">
+
+
+                    <div class="row m-0">
+                        <div class="col-12 m-0 p-0">
+
+                            <div class="row m-0 p-0">
+                                <!-- Restrição 1 -->
+                                <div class="col-6 px-2 pt-4 p-0 m-0">
+                                    <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição" formControlName="restricao">
                     <option value="" disabled selected>Restrição</option>
                     <option value="Restrição 1">Restrição 1</option>
                     <option value="Restrição 2">Restrição 2</option>
                   </select>
+                                </div>
+
+                                <!-- Data de validade 1 -->
+                                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                                    <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" [max]="getDate()" placeholder="Data de validade" formControlName="validade">
+                                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de validade</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-12 row m-0 p-0 justify-content-end">
+
+                            <!-- Limite de compra -->
+                            <div class="col-6 px-2 p-0 pt-4 m-0 form-floating">
+                                <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" value="{{ '999' | currency: 'BRL'}}" placeholder="Limite de compra" formControlName="limiteCompra">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Limite de compra</label>
+                            </div>
+
+                            <!-- Desconto máx. -->
+                            <div class="col-6 px-2 p-0 pt-4 m-0 form-floating">
+                                <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" value="{{ '999' | currency: 'BRL'}}" placeholder="Desconto máx." formControlName="descontoMax">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máx.</label>
+                            </div>
+
+                        </div>
+                        <div class="col-12 m-0 p-0">
+
+                            <!-- Observações -->
+                            <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
+                                <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações" style="height: 240px" formControlName="obsCredito"></textarea>
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Final -->
+                    <div class="row m-0 pb-4 mt-4 justify-content-end">
+
+                    </div>
+
+
                 </div>
 
-                <!-- Data de validade 1 -->
-                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date"
-                    [max]="getDate()" placeholder="Data de validade" formControlName="validade">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de validade</label>
+                <div *ngIf="clienteSection == 'pedidos'">
+                    <app-pedidos-realizados></app-pedidos-realizados>
                 </div>
 
-              </div>
+                <div *ngIf="clienteSection == 'resumo'">
+                    <app-resumo-financeiro></app-resumo-financeiro>
+                </div>
 
-            </div>
-            <div class="col-12 row m-0 p-0 justify-content-end">
-
-              <!-- Limite de compra -->
-              <div class="col-6 px-2 p-0 pt-4 m-0 form-floating">
-                <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                  type="text" value="{{ '999' | currency: 'BRL'}}" placeholder="Limite de compra" formControlName="limiteCompra">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Limite de compra</label>
-              </div>
-
-              <!-- Desconto máx. -->
-              <div class="col-6 px-2 p-0 pt-4 m-0 form-floating">
-                <input currencyMask class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-                  type="text" value="{{ '999' | currency: 'BRL'}}" placeholder="Desconto máx."
-                  formControlName="descontoMax">
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Desconto máx.</label>
-              </div>
-
-            </div>
-            <div class="col-12 m-0 p-0">
-
-              <!-- Observações -->
-              <div class="col-12 px-2 pt-4 p-0 m-0 form-floating">
-                <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Observações"
-                  style="height: 240px" formControlName="obsCredito"></textarea>
-                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Observações</label>
-              </div>
-
-            </div>
-          </div>
-
-
-          <!-- Final -->
-          <div class="row m-0 pb-4 mt-4 justify-content-end">
-
-          </div>
-
-
-        </div>
-
-        <div *ngIf="clienteSection == 'pedidos'">
-          <app-pedidos-realizados></app-pedidos-realizados>
-        </div>
-
-        <div *ngIf="clienteSection == 'resumo'">
-          <app-resumo-financeiro></app-resumo-financeiro>
-        </div>
-
-        <!-- Botão Salvar -->
-        <div class="col-12 row justify-content-end">
-          <div class="col-2 d-grid px-2 p-0 m-0">
-            <button type="submit"
-              class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
+                <!-- Botão Salvar -->
+                <div class="col-12 row justify-content-end">
+                    <div class="col-2 d-grid px-2 p-0 m-0">
+                        <button type="submit" class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
             </button>
-          </div>
+                    </div>
+                </div>
+
+            </form>
+
+
         </div>
-
-      </form>
-
-
+        <!-- /Página -->
     </div>
-    <!-- /Página -->
-  </div>
 </div>

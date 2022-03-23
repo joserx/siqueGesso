@@ -1,42 +1,108 @@
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col m-0 bg-custom-white">
-    <!-- Página home -->
-    <div class="container">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+        <!-- Página home -->
+        <div class="container">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/vendas">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-      </div>
+            <!-- Adicionar, Pedidos gerados e em digitação -->
+            <div class="row m-0 mt-4 justify-content-center">
+                <!-- Botão Adicionar -->
+                <div class="col-4 px-2 p-0 m-0" *ngIf="create">
+                    <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/vendas/pedidos/criar">
+                        <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+                            Adicionar
+                        </h5>
+                        <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark"></i>
+                    </a>
+                </div>
 
-
-      <!-- Adicionar, Pedidos gerados e em digitação -->
-      <div class="row m-0 mt-4 justify-content-center">
-
-        <!-- Botão Adicionar -->
-        <div class="col-4 px-2 p-0 m-0" *ngIf="create">
-          <a class="rounded-15 py-1 px-4 bg-custom-success h-100 d-flex justify-content-between shadow-sm" routerLink="/sistema/vendas/pedidos/criar">
-            <h5 class="fw-normal my-auto text-truncate text-custom-dark ">Adicionar</h5>
-            <i class="bi-plus my-auto fs-2 p-0 m-0 fw-bold text-custom-dark "></i>
-          </a>
-        </div>
-
-        <!-- Pedidos gerados -->
-        <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="totalPedidos(pedidosGerados) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
-          <label class="ms-2 small text-truncate" for="gerados">{{ pedidosGerados.length }} pedidos gerados</label>
+                <!-- Pedidos gerados -->
+                <div class="col-4 px-2 p-0 m-0 form-floating">
+                    <input [value]="totalPedidos(pedidosGerados) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text" />
+                    <label class="ms-2 small text-truncate" for="gerados">{{ pedidosGerados.length }} pedidos gerados</label
+          >
         </div>
 
         <!-- Pedidos em digitação -->
         <div class="col-4 px-2 p-0 m-0 form-floating">
-          <input [value]="totalPedidos(pedidosAguardando) | currency: 'BRL'" font="montserrat" class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark" id="gerados" readonly type="text">
-          <label class="ms-2 small text-truncate" for="gerados">{{ pedidosAguardando.length }} pedidos em digitação</label>
+          <input
+            [value]="totalPedidos(pedidosAguardando) | currency: 'BRL'"
+            font="montserrat"
+            class="form-control form-control-lg border-0 h-100 pb-2 pt-3 ps-4 pe-5 rounded-15 shadow-sm text-center bg-white text-custom-dark"
+            id="gerados"
+            readonly
+            type="text"
+          />
+          <label class="ms-2 small text-truncate" for="gerados"
+            >{{ pedidosAguardando.length }} pedidos em digitação</label
+          >
+        </div>
+      </div>
+
+      <div class="row mt-4 m-0 p-0">
+        <!-- Data inicial -->
+        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+          <input
+            [(ngModel)]="dataInicio"
+            class="form-control h-limited-sm py-3 rounded-15 shadow-sm"
+            type="date"
+            placeholder="Data inicial"
+          />
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+            >Data inicial</label
+          >
+        </div>
+
+        <!-- Data final -->
+        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+          <input
+            [(ngModel)]="dataFinal"
+            class="form-control h-limited-sm py-3 rounded-15 shadow-sm"
+            type="date"
+            placeholder="Data final"
+          />
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+            >Data final</label
+          >
+        </div>
+
+        <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+          <select
+            [(ngModel)]="selectValue"
+            class="form-select h-limited-sm ps-4 py-2 pe-5 rounded-15 shadow-sm text-custom-dark"
+            type="text"
+          >
+            <option disabled>Selecione um Filtro</option>
+            <option selected value="vendedor">Vendedor</option>
+            <option value="cliente">Cliente</option>
+          </select>
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+            >Filtro</label
+          >
+        </div>
+
+        <div class="col-3 px-2 pt-4 m-0 position-relative">
+          <input
+            [(ngModel)]="pesquisa"
+            class="form-control form-control border-0 h-limited-sm py-2 ps-4 pe-5 rounded-15 shadow-sm"
+            type="text"
+            placeholder="Pesquisar"
+          />
+          <a
+            class="fs-4 position-absolute translate-middle top-50 me-4 end-0 text-custom-dark" style="margin-top: 10px;"
+          >
+            <i (click)="pesquisar()" class="bi-search"></i>
+          </a>
         </div>
       </div>
 
@@ -44,10 +110,10 @@
       <table class="w-100 justify-content-center">
         <thead class="w-100 row m-0 my-5 text-custom-dark">
           <tr class="d-flex justify-content-between">
-            <td class="">
+            <td class="col-1">
               <h5 class="fw-bold text-truncate text-center">ID</h5>
             </td>
-            <td class="col-1">
+            <td class="col-2">
               <h5 class="fw-bold text-truncate text-center">Criado em</h5>
             </td>
             <td class="col-1">
@@ -65,45 +131,76 @@
             <td class="col-1">
               <h5 class="fw-bold text-truncate text-center">Status</h5>
             </td>
-            <td class="col-2">
-              <h5 class="fw-bold text-truncate text-center">Atualizado em</h5>
-            </td>
-            <td>
+
+            <td class="col-1">
               <h5 class="fw-bold text-truncate d-none">Ações</h5>
-              <i class="fs-5 bi-search icon-search px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#pesquisarPedidos"></i>
-              <i class="fs-5 bi-funnel icon-filter px-2 py-1 mx-2 bg-white shadow-sm rounded-5" cursor="pointer" data-bs-toggle="modal" data-bs-target="#filtrarPedidos"></i>
             </td>
           </tr>
         </thead>
-        <tbody class="w-100 row m-0 mt-3 text-custom-dark justify-content-center align-items-center">
-          <tr class="d-flex justify-content-between border-bottom" *ngFor="let pedido of atualPage">
-            <td class="">
-              <p class="text-center">{{ pedido.id>1000? pedido(pedido.id | slice:0:2) + "..." : pedido.id }}</p>
-            </td>
+        <tbody
+          class="w-100 row m-0 mt-3 text-custom-dark justify-content-center align-items-center"
+        >
+          <tr
+            class="d-flex justify-content-between border-bottom"
+            *ngFor="let pedido of atualPage"
+          >
             <td class="col-1">
-              <p class="px-1">{{ pedido.created_at | date }}</p>
-            </td>
-            <td class="col-1">
-              <p  class="px-1">{{ pedido.loja.length>20? (pedido.loja | slice:0:20)  + "..."  : pedido.loja }}</p>
-            </td>
-            <td class="col-1">
-              <p  class="px-1">{{ pedido.vendedor.length>15? (pedido.vendedor | slice:0:15) + "..." : pedido.vendedor}}</p>
-            </td>
-            <td class="col-1">
-              <p  class="px-1">{{ pedido.cliente.length>15? (pedido.cliente | slice:0:20) + "..." : pedido.cliente}}</p>
-            </td>
-            <td class="col-1">
-              <p  class="px-1">{{ pedido.total | currency:'BRL'}}</p>
-            </td>
-            <td class="col-1">
-              <p  class="px-1">{{ pedido.status }}</p>
+              <p class="px-1">
+                {{
+                  pedido.id > 1000
+                    ? pedido(pedido.id | slice: 0:2) + "..."
+                    : pedido.id
+                }}
+              </p>
             </td>
             <td class="col-2">
-              <p  class="px-1 text-center">{{ pedido.updated_at | date }}</p>
+              <p class="px-2">{{ pedido.created_at | date }}</p>
             </td>
-            <td>
-              <i class="fs-5 bi-eye-fill icon-view p-3" cursor="pointer" routerLink="/sistema/vendas/pedidos/visualizar/{{pedido.id}}"></i>
-              <i *ngIf="create" class="fs-5 bi-pen-fill icon-edit p-3" routerLink="/sistema/vendas/pedidos/editar/{{pedido.id}}" cursor="pointer"></i>
+            <td class="col-1">
+              <p class="px-1">
+                {{
+                  pedido.loja.length > 20
+                    ? (pedido.loja | slice: 0:20) + "..."
+                    : pedido.loja
+                }}
+              </p>
+            </td>
+            <td class="col-1">
+              <p class="px-1">
+                {{
+                  pedido.vendedor.length > 15
+                    ? (pedido.vendedor | slice: 0:15) + "..."
+                    : pedido.vendedor
+                }}
+              </p>
+            </td>
+            <td class="col-1">
+              <p class="px-1">
+                {{
+                  pedido.cliente.length > 15
+                    ? (pedido.cliente | slice: 0:20) + "..."
+                    : pedido.cliente
+                }}
+              </p>
+            </td>
+            <td class="col-1">
+              <p class="px-1">{{ pedido.total | currency: "BRL" }}</p>
+            </td>
+            <td class="col-1">
+              <p class="px-1">{{ pedido.status }}</p>
+            </td>
+            <td class="col-1">
+              <i
+                class="fs-5 bi-eye-fill icon-view p-3"
+                cursor="pointer"
+                routerLink="/sistema/vendas/pedidos/visualizar/{{ pedido.id }}"
+              ></i>
+              <i
+                *ngIf="create"
+                class="fs-5 bi-pen-fill icon-edit p-3"
+                routerLink="/sistema/vendas/pedidos/editar/{{ pedido.id }}"
+                cursor="pointer"
+              ></i>
             </td>
           </tr>
         </tbody>
@@ -111,22 +208,37 @@
 
       <div class="col-12 row mt-3 d-flex justify-content-around">
         <div class="col-3 row m-auto">
-          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0" (click)="anterior()" [class.noActiveButton]="this.atualPageNumber == 0">
-            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Anterior</h5>
+          <button
+            class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-sm border-0"
+            (click)="anterior()"
+            [class.noActiveButton]="this.atualPageNumber == 0"
+          >
+            <h5
+              class="w-100 fw-normal my-auto text-truncate text-white text-center"
+            >
+              Anterior
+            </h5>
           </button>
         </div>
         <div class="col-1 d-flex justify-content-end">
-          <p class="h3 fw-normal text-custom-dark">{{atualPageNumber + 1}}/{{pagesNumber}}</p>
+          <p class="h3 fw-normal text-custom-dark">
+            {{ atualPageNumber + 1 }}/{{ pagesNumber }}
+          </p>
         </div>
         <div class="col-3 row m-auto">
-          <button class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0" (click)="proximo()" [class.noActiveButton]="this.atualPageNumber == (pagesNumber - 1)">
-            <h5 class="w-100 fw-normal my-auto text-truncate text-white text-center">Proximo</h5>
+          <button
+            class="rounded-15 py-1 px-4 bg-custom-dark h-100 d-flex justify-content-between shadow-s border-0"
+            (click)="proximo()"
+            [class.noActiveButton]="this.atualPageNumber == pagesNumber - 1"
+          >
+            <h5
+              class="w-100 fw-normal my-auto text-truncate text-white text-center"
+            >
+              Proximo
+            </h5>
           </button>
         </div>
-      </div> 
-
+      </div>
     </div>
   </div>
 </div>
-<app-perquisar-venda></app-perquisar-venda>
-<app-filtrar-vendas></app-filtrar-vendas>
