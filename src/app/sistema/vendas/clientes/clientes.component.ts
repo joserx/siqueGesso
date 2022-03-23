@@ -121,7 +121,6 @@ export class ClientesComponent implements OnInit {
 
   public removerEndereco(id: number): void {
     this.addresses.removeAt(id)
-    console.log(this.addresses);
   }
 
   public toggleDesativadoCheckbox(): void {

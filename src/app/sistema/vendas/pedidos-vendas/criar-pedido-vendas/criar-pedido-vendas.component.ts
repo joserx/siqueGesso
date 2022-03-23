@@ -82,7 +82,6 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   get item() {
     const item = this.pedidosForm.get('item') as FormArray;
-    console.log(item)
     return item;
   }
 
@@ -121,7 +120,6 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.clienteService.find().subscribe((data:any)=>{
         this.clientes = data
         this.originalClientes = data
-        console.log('clintes', this.clientes)
       })
       this.rhService.find().subscribe((data: any)=>{
         for(let oneData of data){
@@ -156,7 +154,6 @@ export class CriarPedidoVendasComponent implements OnInit {
   submitForm(data: any, data2: any) {
     this.filialSelected.nome
     data.value.data = new Date(data.value.data)
-    console.log(data.value);
     let timezone = data.value.data.getTimezoneOffset() * 60000
     data.value.data = new Date(data.value.data + timezone).toISOString()
     data.enderecoLoja = this.filialSelected.logradouro  + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep
@@ -216,6 +213,7 @@ export class CriarPedidoVendasComponent implements OnInit {
           //   'id': new FormControl(codigo)
           // }))
           this.item.push(new FormGroup({
+            'tabela': new FormControl(''),
             'codigo': new FormControl(produto.id),
             'produto': new FormControl(produto.nome),
             'quantidade': new FormControl(null, [Validators.required]),
@@ -278,7 +276,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     for (let item of value) {
       total += item.total
     }
-    // console.log(total)
+    console.log("total:", total)
     this.item.value.total = total
     if (this.descontoG == 0 || this.descontoG == null) {
       this.pedidosForm.get('total')?.setValue(total)
@@ -287,6 +285,10 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.pedidosForm.get('total')?.setValue(total - this.descontoG)
       return total - this.descontoG
     }
+  }
+
+  total() {
+
   }
 
   checkProdutos(event: any) {
@@ -329,7 +331,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     }
   }
 
-  totalQuanti(data: any): any {
+  totalQuanti(data: any): any {    
     let total = 0
     for (let item of data) {
       total += item.quantidade
@@ -346,6 +348,7 @@ export class CriarPedidoVendasComponent implements OnInit {
   }
 
   setThisFrete(data: any, data2: any) {
+    
     data.valorFrete = Number(String(data2.target.value).substring(3, String(data2.target.value).length).replace(',', '.'))
   }
 

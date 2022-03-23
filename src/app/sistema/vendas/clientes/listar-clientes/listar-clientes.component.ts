@@ -55,7 +55,6 @@ export class ListarClientesComponent implements OnInit {
     })
   }
   typeClient(value: any): string{
-    console.log(value)
     if(value.name==null){
       return 'juridica'
     }else{
@@ -72,7 +71,6 @@ export class ListarClientesComponent implements OnInit {
     }
   }
   anterior(){
-    console.log(Object.keys(this.pages).length - 1)
     if(this.atualPageNumber <= (Object.keys(this.pages).length - 1) && this.atualPageNumber > 0){
       this.atualPageNumber--
       this.clientService.findByPage(this.atualPageNumber).subscribe((data:any)=>{

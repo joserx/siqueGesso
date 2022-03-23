@@ -144,6 +144,7 @@ export class EditarClientesComponent implements OnInit {
       this.clienteForm.get('limiteCompra')?.setValue(this.client.limiteCompra)
       this.clienteForm.get('descontoMax')?.setValue(this.client.descontoMax)
       this.clienteForm.get('obsCredito')?.setValue(this.client.obsCredito)
+     
       for(let item of this.client.tabela){
         this.tabela.push(
           new FormGroup({
@@ -151,6 +152,7 @@ export class EditarClientesComponent implements OnInit {
           })
         )
       }
+      
       for(let address of this.client.addresses){
         console.log(address)
         this.addresses.push(
