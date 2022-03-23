@@ -121,7 +121,7 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.clienteService.find().subscribe((data:any)=>{
         this.clientes = data
         this.originalClientes = data
-        console.log('clintes', this.clientes)
+        console.log('clientes', this.clientes)
       })
       this.rhService.find().subscribe((data: any)=>{
         for(let oneData of data){

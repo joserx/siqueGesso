@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 import { CorreiosService } from 'src/app/services/correios.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { RhService } from 'src/app/services/rh.service';
@@ -16,17 +17,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./clientes.component.scss']
 })
 export class ClientesComponent implements OnInit {
-
+  public paymentCondition: any = [];
+  public condicoesPagamento: any = [];
   public solicitado: boolean = false
-
   public clienteSection: string = 'cadastro';
-  public condicoes: any = [
-    { id: 1, value: "debito", nome: "Débito", status: "none" },
-    { id: 2, value: "credito-vista", nome: "Crédito à vista", status: "none" },
-    { id: 3, value: "credito-prazo", nome: "Crédito a prazo", status: "none" },
-    { id: 4, value: "boleto-vista", nome: "Boleto à vista", status: "none" },
-    { id: 5, value: "boleto-ddl", nome: "Boleto DDL", status: "readonly" },
-  ]
   public tipoUsuario = 1;
   public vendedores: any[] = [];
   public getDate: any = getDate;
@@ -52,14 +46,9 @@ export class ClientesComponent implements OnInit {
     'email' : new FormControl(null, [Validators.required, Validators.email]),
     'companyEmail' : new FormControl(null, [Validators.email]),
     'addresses' : new FormArray([]),
-    'codigo': new FormControl(''),
-    'nomeVendedor': new FormControl(''),
+    'vendedor': new FormControl(''),
     'tabela': new FormArray([]), // ver de onde eu tirei essa tabela
-    'debito': new FormControl(''),
-    'creditoAvista': new FormControl(''),
-    'creditoAprazo': new FormControl(''),
-    'boletoAvista': new FormControl(''),
-    'boletoDdl': new FormControl('Não Solicitado'),
+    'condicoesPagamento': new FormControl(''),
     "obs": new FormControl(''),
     "restricao": new FormControl(''),
     "validade": new FormControl(''),
@@ -67,7 +56,6 @@ export class ClientesComponent implements OnInit {
     "descontoMax": new FormControl(null),
     "obsCredito": new FormControl(''),
     "codigoVendedor": new FormControl(''),
-    "vendedor": new FormControl('')
   })
 
   public enderecos: any = [{}];
@@ -76,7 +64,8 @@ export class ClientesComponent implements OnInit {
     private readonly clientService : ClientService,
     private readonly correiosService : CorreiosService,
     private readonly router : Router,
-    private readonly rhService: RhService
+    private readonly rhService: RhService,
+    private condicoesPagamentoService: CondicoesPagamentoService
   ) { }
 
   ngOnInit(): void {
@@ -90,6 +79,21 @@ export class ClientesComponent implements OnInit {
         }
       }
     })
+    this.getCondicoes();
+  }
+
+  getCondicoes() {
+    this.condicoesPagamentoService.findAll().subscribe((res) => {
+      this.paymentCondition = res;
+    });
+  }
+
+  checkPayment(id: any) {
+    this.paymentCondition.forEach((item: any) => {
+      if (item.id === id) {
+        item.check = true;
+      }
+    });
   }
 
   public toggleClienteSection(value: string): void {
@@ -212,6 +216,24 @@ export class ClientesComponent implements OnInit {
 
   submitClient(data : any) {
     if(this.clienteForm.valid) {
+
+      const methodsChecked = this.paymentCondition
+      .map((item: any) => {
+        if (item.check) {
+          return item.id;
+        }
+      })
+      .filter((item: any) => item);
+    let condicoesSelecionadas: any[] = [];
+    methodsChecked.forEach((id: any) => {
+      condicoesSelecionadas.push({ id: id });
+    });
+    this.clienteForm.controls['condicoesPagamento'].setValue(
+      condicoesSelecionadas
+    );
+
+
+
       this.clientService.create(data).subscribe((dataReturn) => {
         Swal.fire({
           title: '<h4>Cliente adicionado !</h4>',
@@ -227,16 +249,6 @@ export class ClientesComponent implements OnInit {
       }, (err) => {
         console.log(err)
       })
-    }
-  }
-
-  solicitar(){
-    if(this.solicitado==false){
-      this.solicitado=true
-      this.clienteForm.get('boletoDdl')?.setValue('Solicitado')
-    }else{
-      this.solicitado=false
-      this.clienteForm.get('boletoDdl')?.setValue('Não Solicitado')
     }
   }
 

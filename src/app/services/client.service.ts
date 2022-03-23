@@ -7,13 +7,15 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ClientService {
+  clientes: any;
+
 
   constructor(
     private readonly http: HttpClient
   ) { }
 
   find() {
-    return this.http.get(environment.apiUrl + 'client/');
+    return this.http.get(environment.apiUrl + 'client');
   }
 
   findOne(id: number) {
@@ -29,7 +31,7 @@ export class ClientService {
   }
 
   update(id: number, data: any) {
-    return this.http.put(environment.apiUrl + 'client/' + id, data);
+    return this.http.patch(environment.apiUrl + 'client/' + id, data);
   }
 
   delete(id: number) {

@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
+import { ClientService } from 'src/app/services/client.service';
+
 
 import Swal from 'sweetalert2';
 
@@ -42,18 +44,19 @@ export class AdicionarRecebimentoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private contasReceberService: ContasReceberService
+    private contasReceberService: ContasReceberService,
+    private clientService : ClientService,
   ) {}
 
   ngOnInit(): void {
-    // this.getClientes()
+    this.getClientes()
   }
 
   getClientes() {
-    // this.clientesService.find().subscribe((res) => {
-    //   this.clientesService.clientes = res;
-    //   this.clientes = res;
-    // });
+    this.clientService.find().subscribe((res) => {
+      this.clientService.clientes = res;
+      this.clientes = res;
+    });
   }
 
   aplicarValorBruto(valorBruto: string) {

@@ -30,8 +30,8 @@ export class PedidosService {
     return this.http.delete(environment.apiUrl + 'pedidos/' + id);
   }
 
-  findByPage(no: any) {
-    return this.http.get(environment.apiUrl + 'pedidos/page/' + no);
+  findByPage(no: any, data: any ) {
+    return this.http.post(environment.apiUrl + 'pedidos/page/' + no, data);
   }
 
   findThis(id: number) {

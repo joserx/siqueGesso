@@ -16,7 +16,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
   styleUrls: ['./edit-fornecedor.component.scss'],
 })
 export class EditFornecedorComponent implements OnInit {
-  public paymentCondition: any = [];
+  public condicoesPagamento: any = [];
 
   fornecedorForm: FormGroup = new FormGroup({
     id: new FormControl('', Validators.required),
@@ -70,7 +70,7 @@ export class EditFornecedorComponent implements OnInit {
   ngOnInit(): void {}
 
   checkPayment(id: any) {
-    this.paymentCondition.forEach((item: any) => {
+    this.condicoesPagamento.forEach((item: any) => {
       if (item.id === id) {
         item.check = true;
       }
@@ -137,7 +137,7 @@ export class EditFornecedorComponent implements OnInit {
         ),
       }),
       contacts: new FormArray([]),
-      payment_condition: new FormControl(fornecedorInput.payment_condition),
+      payment_condition: new FormArray([]),
       first_payment: new FormControl(
         fornecedorInput.first_payment,
         Validators.required
@@ -170,6 +170,10 @@ export class EditFornecedorComponent implements OnInit {
         })
       );
     }
+
+    this.fornecedorForm.controls['payment_condition'].setValue(
+      fornecedorInput?.payment_condition
+    );
   }
 
   public adicionarContato(): void {

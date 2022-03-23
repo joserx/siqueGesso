@@ -103,8 +103,6 @@ import { EditarPedidoComponent } from './sistema/vendas/pedidos-vendas/editar-pe
 import { VisualizarPedidoComponent } from './sistema/vendas/pedidos-vendas/visualizar-pedido/visualizar-pedido.component';
 import { ListarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/listar-vendas-diretas/listar-vendas-diretas.component';
 import { CriarPedidoVendasDiretasComponent } from './sistema/vendas/vendas-diretas/criar-pedido-vendas-diretas/criar-pedido-vendas-diretas.component';
-import { PerquisarVendaComponent } from './sistema/vendas/perquisar-venda/perquisar-venda.component';
-import { FiltrarVendasComponent } from './sistema/vendas/filtrar-vendas/filtrar-vendas.component';
 import { FiltrarClientesComponent } from './sistema/vendas/clientes/filtrar-clientes/filtrar-clientes.component';
 import { ViewSuprimentoComponent } from './sistema/estoque/suprimentos/view-suprimento/view-suprimento.component';
 import { EditSuprimentoComponent } from './sistema/estoque/suprimentos/edit-suprimento/edit-suprimento.component';
@@ -119,7 +117,6 @@ import { DestinacaoDaVendaListaComponent } from './sistema/config/cadastro-de-ca
 import { DestinacaoDaVendaCadastroComponent } from './sistema/config/cadastro-de-categoria/destinacao-da-venda-cadastro/destinacao-da-venda-cadastro.component';
 import { NgChartjsModule } from 'ng-chartjs';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FiltrarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/filtrar-vendas-diretas/filtrar-vendas-diretas.component';
 import { EditarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/editar-vendas-diretas/editar-vendas-diretas.component';
 import { VisualizarVendasDiretasComponent } from './sistema/vendas/vendas-diretas/visualizar-vendas-diretas/visualizar-vendas-diretas.component';
 import { PesquisarColaboradorComponent } from './sistema/rh/listar-colaboradores/pesquisar-colaborador/pesquisar-colaborador.component';
@@ -257,8 +254,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     VisualizarPedidoComponent,
     ListarVendasDiretasComponent,
     CriarPedidoVendasDiretasComponent,
-    PerquisarVendaComponent,
-    FiltrarVendasComponent,
     FiltrarClientesComponent,
     ViewSuprimentoComponent,
     EditSuprimentoComponent,
@@ -271,7 +266,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CadastroDeProdutoComponent,
     DestinacaoDaVendaListaComponent,
     DestinacaoDaVendaCadastroComponent,
-    FiltrarVendasDiretasComponent,
     EditarVendasDiretasComponent,
     VisualizarVendasDiretasComponent,
     PesquisarColaboradorComponent,

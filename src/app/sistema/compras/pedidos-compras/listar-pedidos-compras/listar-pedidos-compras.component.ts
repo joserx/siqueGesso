@@ -60,13 +60,6 @@ export class ListarPedidosComprasComponent implements OnInit {
     this.viewPedidoComponent.loadForm(pedido);
   }
 
-  confirmaPedido(pedido: any) {
-    if (confirm('deseja mesmo liberar esse pedido?')) {
-      pedido.aceite = true;
-      this.pedidoCompraService.update(pedido).subscribe();
-    }
-  }
-
   delete(pedido: any) {
     console.log(pedido);
 
