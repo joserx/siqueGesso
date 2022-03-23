@@ -31,7 +31,7 @@ export class ListarClientesComponent implements OnInit {
       this.router.navigate(['sistema'])
     }
     if((JSON.parse(localStorage.getItem('currentUser') as any).result.permission.permission & PermissionsUsers.vendas_editar) == PermissionsUsers.vendas_editar){
-      this.create = false
+      this.create = true
     }
     this.clientService.find().subscribe((data : any) => {
       this.clientes = data
