@@ -146,8 +146,10 @@ export class ClientesComponent implements OnInit {
   }
 
   public removerEndereco(id: number): void {
+
     this.addresses.removeAt(id);
     console.log(this.addresses);
+
   }
 
   public toggleDesativadoCheckbox(): void {
@@ -357,4 +359,16 @@ export class ClientesComponent implements OnInit {
         });
     }
   }
+
+
+  checkThis(data: string): any{
+    let pos = this.tabela.value.map(
+      (e: any)=>{return e.nome}
+    )
+    if(pos.indexOf(data)!=-1){
+      return true
+    }
+  }
+
+
 }

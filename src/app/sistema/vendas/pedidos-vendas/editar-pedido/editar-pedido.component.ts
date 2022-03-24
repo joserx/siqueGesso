@@ -80,6 +80,7 @@ export class EditarPedidoComponent implements OnInit {
   public allProdutos: any[] = [];
   public allProdutosOriginal: any[] = [];
   public condPagamentos: any[] = []
+  public usuario: any
 
   public resumo: any = {
     produtos: 2,
@@ -114,7 +115,6 @@ export class EditarPedidoComponent implements OnInit {
     }
 
     let teste = this.item['controls'];
-    // console.log(teste);
     this.rhService.find().subscribe((data: any) => {
       for (let oneData of data) {
         if (oneData.role.toLowerCase().substring(0, 8) == 'vendedor') {
@@ -124,7 +124,6 @@ export class EditarPedidoComponent implements OnInit {
     });
     this.authService.currentUser.subscribe((user) => {
       this.user = user.result;
-      // console.log(typeof user.result);
       this.passwordForm.get('email')?.setValue(user.result.email);
     });
     const routerParams = this.route.snapshot.paramMap;
@@ -132,7 +131,6 @@ export class EditarPedidoComponent implements OnInit {
 
     this.filialService.find().subscribe((data: any) => {
       this.filial = data;
-      // console.log(data);
     }, (err) => { }, () => {
 
       this.pedidoService.findOne(this.id).subscribe((data: any) => {
@@ -145,13 +143,12 @@ export class EditarPedidoComponent implements OnInit {
             console.log(this.filialSelected);
           }
         }
-        // console.log(data.loja)
         // this.pedidosForm.get('loja')?.setValue(data.loja);
         this.pedidosForm.get('vendedor')?.setValue(data.vendedor);
         this.pedidosForm.get('cliente')?.setValue(data.cliente);
         this.pedidosForm.get('condPagamento')?.setValue(data.condPagamento);
         this.pedidosForm.get('pagPersonalizado')?.setValue(data.pagPersonalizado);
-        this.pedidosForm.get('tabPreco')?.setValue(data.tabPreco);
+        this.pedidosForm.get('tabPreco')?.setValue(data.tabPreco);        
         this.pedidosForm.get('tabPersonalizado')?.setValue(data.tabPersonalizado);
         this.pedidosForm.get('descontoGeral')?.setValue(data.descontoGeral);
         this.pedidosForm.get('enderecoEntrega')?.setValue(data.enderecoEntrega);
@@ -169,7 +166,7 @@ export class EditarPedidoComponent implements OnInit {
         this.pedidosForm.get('obs')?.setValue(data.obs);
         this.pedidosForm.get('total')?.setValue(data.total);
         this.pedidosForm.get('clienteId')?.setValue(data.clienteId);
-        // console.log(data);
+        this.findClientById(data.clienteId)
         for (let item in data.item) {
           // this.changeTipoEntrega(data.item[item].prevRetirada);
           if(data.item[item].tipoEntrega == 'entrega'){
@@ -212,7 +209,7 @@ export class EditarPedidoComponent implements OnInit {
           this.valUnit += data.item[item].valorUnitario;
           this.valVenda += data.item[item].valorVenda;
         }
-        this.clienteService.find().subscribe((data: any) => {
+        this.clienteService.find().subscribe((data: any) => {          
           for (let cliente of data) {
             if (cliente.id == this.pedidosForm.get('clienteId')?.value) {
               this.enderecos = cliente.addresses;
@@ -243,7 +240,6 @@ export class EditarPedidoComponent implements OnInit {
     data.value.data = new Date(data.value.data);
     let timezone = data.value.data.getTimezoneOffset() * 60000;
     data.value.data = new Date(data.value.data + timezone).toISOString();
-    // console.log(data);
     data.enderecoLoja = this.filialSelected.logradouro + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep
     if (data.valid) {
       this.totalValue(this.item.value);
@@ -284,7 +280,7 @@ export class EditarPedidoComponent implements OnInit {
   }
 
   public log(x: any): void {
-    console.log(x);
+    // console.log(x);
   }
 
   control() {
@@ -377,12 +373,10 @@ export class EditarPedidoComponent implements OnInit {
     }
   }
   totalValue(value: any) {
-    // console.log(value)
     let total: number = 0;
     for (let item of value) {
       total += item.total;
     }
-    // console.log(value);
     if (this.descontoG == 0 || this.descontoG == null) {
       this.pedidosForm.get('total')?.setValue(total);
       return total;
@@ -489,7 +483,6 @@ export class EditarPedidoComponent implements OnInit {
   }
 
   gerarPedido(data: any, allForm: any) {
-    // console.log(data.value.password)
     if (this.user.permission == 1) {
       if (
         this.changeDesconto(this.item.value) == 0 &&
@@ -668,7 +661,6 @@ export class EditarPedidoComponent implements OnInit {
   selectThisCliente(value: any) {
     let addresses = [];
     addresses = value.addresses;
-    // console.log(addresses);
     if (value.name != null && value.surname != null) {
       this.pedidosForm
         .get('cliente')
@@ -681,7 +673,6 @@ export class EditarPedidoComponent implements OnInit {
       this.showSign = false;
     }
     this.enderecos = value.addresses;
-    // console.log(this.enderecos);
   }
 
   descontoGeral(event: any) {
@@ -734,13 +725,18 @@ export class EditarPedidoComponent implements OnInit {
 
   setFilialSelected(filial: number) {
     this.filialSelected = this.filial[filial];
-    console.log(this.filialSelected);
+    // console.log(this.filialSelected);
   }
 
   findCondPagamento() {
     this.condPagamentoService.findAll().subscribe((resp) => {
       this.condPagamentos = resp
-      console.log("this.condPagamento", this.condPagamentos );
+    })
+  }
+
+  findClientById(id: any) {
+    this.clienteService.findOne(id).subscribe((resp) => {
+    this.usuario = resp
     })
   }
 }

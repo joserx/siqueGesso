@@ -106,7 +106,7 @@ export class VisualizarPedidoComponent implements OnInit {
         this.pedidosForm.get('linkNf')?.setValue(data.linkNf)
         this.pedidosForm.get('obs')?.setValue(data.obs)
         this.pedidosForm.get('total')?.setValue(data.total)
-        console.log(data)
+        console.log(data.data)
         for(let item in data.item){
           this.item.push(new FormGroup({
             'pedidoId': new FormControl(data.item[item].id),
