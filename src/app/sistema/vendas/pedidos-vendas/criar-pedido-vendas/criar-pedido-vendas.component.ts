@@ -39,6 +39,8 @@ export class CriarPedidoVendasComponent implements OnInit {
   public pedidoId: number
   public getDate: any = getDate;
   public desconto: number = 10;
+  public condicoesPagamento: any = [];
+
   public passwordForm: FormGroup = new FormGroup({
     'email': new FormControl(''),
     'password': new FormControl('', [Validators.required])
@@ -49,14 +51,13 @@ export class CriarPedidoVendasComponent implements OnInit {
     'vendedor': new FormControl('', [Validators.required]),
     'cliente': new FormControl('', [Validators.required]),
     'statusPedido': new FormControl('', [Validators.required]),
-    'condPagamento': new FormControl('', [Validators.required]),
+    'condicoesPagamento': new FormControl('', [Validators.required]),
     'pagPersonalizado': new FormControl(''),
     'tabPreco': new FormControl(''),
     'tabPersonalizado': new FormControl(''),
     'produto': new FormArray([]),
     'item': new FormArray([], [Validators.required]),
     'descontoGeral': new FormControl(0),
-    'meioPagamento': new FormControl('', [Validators.required]),
     'dias': new FormControl(''),
     'dataVencimento': new FormControl(null),
     'status': new FormControl(''),
@@ -82,7 +83,6 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   get item() {
     const item = this.pedidosForm.get('item') as FormArray;
-    console.log(item)
     return item;
   }
 
@@ -121,7 +121,6 @@ export class CriarPedidoVendasComponent implements OnInit {
       this.clienteService.find().subscribe((data:any)=>{
         this.clientes = data
         this.originalClientes = data
-        console.log('clientes', this.clientes)
       })
       this.rhService.find().subscribe((data: any)=>{
         for(let oneData of data){
@@ -156,7 +155,6 @@ export class CriarPedidoVendasComponent implements OnInit {
   submitForm(data: any, data2: any) {
     this.filialSelected.nome
     data.value.data = new Date(data.value.data)
-    console.log(data.value);
     let timezone = data.value.data.getTimezoneOffset() * 60000
     data.value.data = new Date(data.value.data + timezone).toISOString()
     data.enderecoLoja = this.filialSelected.logradouro  + ' ' + this.filialSelected.numero + ' - ' + this.filialSelected.cidade + ', ' + this.filialSelected.cep
@@ -510,6 +508,10 @@ export class CriarPedidoVendasComponent implements OnInit {
   }
 
   selectThisCliente(value: any) {
+    this.condicoesPagamento = value?.condicoesPagamento
+    this.pedidosForm.controls['condicoesPagamento'].setValue(
+      value?.condicoesPagamento
+    )
     this.clientSelected = true;
     let addresses = []
     addresses = value.addresses
@@ -517,10 +519,13 @@ export class CriarPedidoVendasComponent implements OnInit {
     if (value.name != null && value.surname != null) {
       this.pedidosForm.get('cliente')?.setValue(`${value.name} ${value.surname}`)
       this.pedidosForm.get('clienteId')?.setValue(value.id)
+      this.pedidosForm.get('condicoesPagamento')?.setValue(value.condicoesPagamento)
+
       this.showSign = false
     } else {
       this.pedidosForm.get('cliente')?.setValue(`${value.fantasyName}`)
       this.pedidosForm.get('clienteId')?.setValue(value.id)
+      this.pedidosForm.get('condicoesPagamento')?.setValue(value.condicoesPagamento)
       this.showSign = false
     }
     this.enderecos = value.addresses

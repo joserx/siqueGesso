@@ -1,28 +1,70 @@
 <app-navbar></app-navbar>
 
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col m-0 bg-custom-white">
-    <!-- Página home -->
-    <div class="container">
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
+    </div>
+    <div class="col m-0 bg-custom-white">
+        <!-- Página home -->
+        <div class="container">
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start col-12">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+                <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
+                    <input maxlength="11" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="number" placeholder="Nº do Pedido" />
+                    <label class="ms-2 mt-3 small text-truncate text-custom-dark">Nº do pedido</label
+          >
+        </div>
 
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
+        <!-- Proposta -->
+        <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
+          <select
+            class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm"
+            type="text"
+            placeholder="Proposta"
+          >
+            <option value="" selected disabled>Tipo de proposta</option>
+            <option value="Proposta aprovada">Proposta aprovada</option>
+            <option value="Proposta recusada">Proposta recusada</option>
+            <option value="Proposta cancelada">Proposta cancelada</option>
+          </select>
+          <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+            >Proposta</label
+          >
+        </div>
+
+        <div class="col-2 px-2 pt-4 p-0 m-0 form-floating">
+          <button
+            type="submit"
+            class="h-limited btn rounded-15 py-3 px-4 shadow-sm bg-custom-success"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">
+              Confirmar
+            </h5>
+          </button>
+        </div>
       </div>
 
       <!-- Cards -->
       <div class="row m-0 my-5 p-0 justify-content-center align-items-center">
-        <a class="col-3 mx-3 my-3 p-4 text-center rounded-15 bg-white shadow-sm" *ngFor="let card of cards;" routerLink="{{card.href}}">
-          <i class="{{card.icon}} text-custom-dark" style="font-size: 4rem;"></i>
-          <h4 class="text-custom-dark fw-normal text-truncate">{{card.nome}}</h4>
+        <a
+          class="col-3 mx-3 my-3 p-4 text-center rounded-15 bg-white shadow-sm"
+          *ngFor="let card of cards"
+          routerLink="{{ card.href }}"
+        >
+          <i
+            class="{{ card.icon }} text-custom-dark"
+            style="font-size: 4rem"
+          ></i>
+          <h4 class="text-custom-dark fw-normal text-truncate">
+            {{ card.nome }}
+          </h4>
         </a>
       </div>
-
     </div>
   </div>
 </div>

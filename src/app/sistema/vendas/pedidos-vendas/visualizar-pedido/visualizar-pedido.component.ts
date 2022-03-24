@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 export class VisualizarPedidoComponent implements OnInit {
 
   @ViewChild('content', {static: false})el: ElementRef
+  public condicoesPagamento: any[] = []
   public id: number
   public pedido: any[] = []
   public valUnit: number = 0
@@ -30,8 +31,7 @@ export class VisualizarPedidoComponent implements OnInit {
     'loja': new FormControl('', [Validators.required]),
     'vendedor': new FormControl('', [Validators.required]),
     'cliente': new FormControl('', [Validators.required]),
-    'condPagamento': new FormControl('', [Validators.required]),
-    'pagPersonalizado': new FormControl(''),
+    'condicoesPagamento': new FormControl('', [Validators.required]),
     'tabPreco': new FormControl(''),
     'tabPersonalizado': new FormControl(''),
     'produto': new FormArray([]),
@@ -40,7 +40,6 @@ export class VisualizarPedidoComponent implements OnInit {
     'tipoEntrega': new FormControl('', [Validators.required]),
     'enderecoEntrega': new FormControl('', [Validators.required]),
     'valorFreteEntrega': new FormControl(''),
-    'meioPagamento': new FormControl('', [Validators.required]),
     'dias': new FormControl(''),
     'dataVencimento': new FormControl(null),
     'status': new FormControl('', [Validators.required]),
@@ -87,11 +86,12 @@ export class VisualizarPedidoComponent implements OnInit {
       this.id = Number(routerParams.get('id'))
       this.pedidoService.findOne(this.id).subscribe((data: any)=>{
         this.pedido = data
+        this.condicoesPagamento = data.condicoesPagamento
         this.pedidosForm.get('data')?.setValue(data.data.substring(10,0))
         this.pedidosForm.get('loja')?.setValue(data.loja)
         this.pedidosForm.get('vendedor')?.setValue(data.vendedor)
         this.pedidosForm.get('cliente')?.setValue(data.cliente)
-        this.pedidosForm.get('condPagamento')?.setValue(data.condPagamento)
+        this.pedidosForm.get('condicoesPagamento')?.setValue(data.condicoesPagamento)
         this.pedidosForm.get('pagPersonalizado')?.setValue(data.pagPersonalizado)
         this.pedidosForm.get('tabPreco')?.setValue(data.tabPreco)
         this.pedidosForm.get('tabPersonalizado')?.setValue(data.tabPersonalizado)
@@ -99,7 +99,6 @@ export class VisualizarPedidoComponent implements OnInit {
         this.pedidosForm.get('tipoEntrega')?.setValue(data.tipoEntrega)
         this.pedidosForm.get('enderecoEntrega')?.setValue(data.enderecoEntrega)
         this.pedidosForm.get('valorFreteEntrega')?.setValue(data.valorFreteEntrega)
-        this.pedidosForm.get('meioPagamento')?.setValue(data.meioPagamento)
         this.pedidosForm.get('dias')?.setValue(data.dias)
         this.pedidosForm.get('dataVencimento')?.setValue(data.dataVencimento.substring(10,0))
         this.pedidosForm.get('status')?.setValue(data.status)
@@ -117,7 +116,7 @@ export class VisualizarPedidoComponent implements OnInit {
             'valorUnitario': new FormControl(Number(data.item[item].valorUnitario)),
             'desconto': new FormControl(Number(data.item[item].desconto)),
             'tipoRetirada': new FormControl(data.item[item].tipoRetirada, [Validators.required]),
-            'prevRetirada': new FormControl(data.item[item].prevRetirada.substring(10,0), [Validators.required]),
+            'prevRetirada': new FormControl(data.item[item].prevRetirada?.substring(10,0), [Validators.required]),
             'valorFrete': new FormControl(Number(data.item[item].valorFrete)),
             'valorVenda': new FormControl(Number(data.item[item].valorVenda)),
             'endereco': new FormControl(data.item[item].endereco, [Validators.required]),
