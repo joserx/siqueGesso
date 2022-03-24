@@ -100,6 +100,8 @@ export class ViewFornecedorComponent implements OnInit {
         site: new FormControl({ value: fornecedor.site, disabled: true }, Validators.required),
       }))
     }
+
+    this.condicoesPagamento = fornecedorInput.payment_condition
   }
 
   get c(){ return this.fornecedorForm.get('contacts') as FormArray }

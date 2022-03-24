@@ -604,60 +604,38 @@
 
                 <!-- Condições de pagamento -->
                 <div class="row mt-4">
-                    <div class="col-12 mt-4 pb-4 border-bottom">
+                    <div class="row m-0 p-0">
                         <h4 class="m-0 text-custom-dark">Condições de pagamento</h4>
-                    </div>
-
-                    <!-- Condição de pagamento -->
-                    <div class="col-6 p-0 m-0">
-
-                        <div class="pt-4 px-2 form-floating">
-                            <select #condicao (change)="log(condicao)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" id="condPagamento" formControlName="condPagamento">
-                                <option value="" disabled selected>Selecione uma condição</option>
-                                <option *ngFor="let pagamento of condPagamento" value="{{pagamento.nome}}"> {{pagamento.nome}} </option>
-                            </select>
-                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Selecione a condição de
-                                pagamento</label>
-                        </div>
-
-                        <div *ngIf="condicao.value === 'personalizado'" class="pt-4 px-2 form-floating">
-                            <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Condição personalizada" id="pagPersonalizado" formControlName="pagPersonalizado">
-                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição personalizada</label>
-                        </div>
+                        <ng-container *ngFor="let condicao of condicoesPagamento">
+                            <div class="col-12 mt-2 form-check form-check-inline px-4">
+                                <input class="form-check-input shadow-sm" type="checkbox" checked disabled />
+                                <label class="form-check-label">{{
+                            condicao?.nome
+                          }}</label>
+                            </div>
+                        </ng-container>
                     </div>
 
                     <!-- Tabela de preço -->
                     <div class="col-6 p-0 m-0">
                         <div class="pt-4 px-2 form-floating">
                             <select #tabela (change)="log(tabela)" class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Tabelas" id="tabPreco" formControlName="tabPreco">
-                                <option value="" disabled selected>Selecione uma tabela</option>
-                                <option value="Tabela A">Tabela A</option>
-                                <option value="Tabela B">Tabela B</option>
-                                <option value="Tabela C">Tabela C</option>
-                                <option value="Tabela D">Tabela D</option>
-                                <option value="Tabela E">Tabela E</option>
-                                <option value="personalizado">Personalizado</option>
-                            </select>
+                              <option value="" disabled selected>Selecione uma tabela</option>
+                              <option value="Tabela A">Tabela A</option>
+                              <option value="Tabela B">Tabela B</option>
+                              <option value="Tabela C">Tabela C</option>
+                              <option value="Tabela D">Tabela D</option>
+                              <option value="Tabela E">Tabela E</option>
+                              <option value="personalizado">Personalizado</option>
+                          </select>
                             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela de preço
-                                aplicada</label>
+                              aplicada</label>
                         </div>
 
                         <div *ngIf="tabela.value === 'personalizado'" class="pt-4 px-2 form-floating">
                             <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Tabela personalizada" id="tabPersonalizado" formControlName="tabPersonalizado">
                             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Tabela personalizada</label>
                         </div>
-                    </div>
-
-
-                    <!-- Meio de pagamento -->
-                    <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                        <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Meio de pagamento" id="meioPagamento" formControlName="meioPagamento">
-                            <option value="" disabled selected>Selecione um meio de pagamento</option>
-                            <option value="boleto">Boleto</option>
-                            <option value="credito">Crédito</option>
-                            <option value="debito">Débito</option>
-                        </select>
-                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Meio de pagamento</label>
                     </div>
 
                     <!-- Dias -->

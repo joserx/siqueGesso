@@ -302,7 +302,7 @@
 
                         <!-- Nome do vendedor -->
                         <div class="col-9 px-2 pt-4 p-0 m-0 form-floating">
-                            <select formControlName="nomeVendedor" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor">
+                            <select formControlName="vendedor" class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Nome do vendedor">
                 <option *ngFor="let vendedor of vendedores" value="{{vendedor.name}} {{vendedor.surname}}">
                   {{vendedor.name}} {{vendedor.surname}}</option>
                 </select>
@@ -323,7 +323,7 @@
                             <p>Selecione as condições de pagamento disponíveis</p>
                             <ng-container *ngFor="let condicao of paymentCondition">
                                 <div class="form-check form-check-inline px-4">
-                                    <input (click)="checkPayment(condicao.id)" class="form-check-input shadow-sm" type="checkbox" />
+                                    <input (click)="checkPayment(condicao.id)" [checked]="condicao.check" class="form-check-input shadow-sm" type="checkbox" />
                                     <label class="form-check-label">{{ condicao?.nome }}</label>
                                 </div>
                             </ng-container>

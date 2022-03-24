@@ -240,39 +240,32 @@
 
           <!-- Status Pedido -->
           <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="status" id="status" formControlName="statusPedido">
+            <select
+              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
+              type="text"
+              placeholder="status"
+              id="status"
+              formControlName="statusPedido"
+            >
               <option value="" disabled selected>Selecione um status</option>
               <option value="Proposta">Proposta</option>
               <option value="Pedido efetuado">Pedido efetuado</option>
-          </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status Pedido</label>
-                    </div>
-                </div>
-
-                <!-- Dados da Venda -->
-
-                <div class="row m-0 mt-2 py-3 border-bottom">
-                    <div class="col-12 m-0 p-0 text-custom-dark">
-                        <h4>Dados da Venda</h4>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- Condição de pagamento -->
-                    <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
-                        <select class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Condição de pagamento" id="condPagamento" formControlName="condPagamento">
-              <option value="" disabled selected>Condição de pagamento</option>
-              <option
-                *ngFor="let pagamento of condPagamento"
-                value="{{ pagamento.nome }}"
-              >
-                {{ pagamento.nome }}
-              </option>
             </select>
-                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Condição de pagamento</label
+            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
+              >Status Pedido</label
             >
           </div>
+        </div>
 
+        <!-- Dados da Venda -->
+
+        <div class="row m-0 mt-2 py-3 border-bottom">
+          <div class="col-12 m-0 p-0 text-custom-dark">
+            <h4>Dados da Venda</h4>
+          </div>
+        </div>
+
+        <div class="row">
           <!-- Tabela de Preço Aplicada -->
           <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
             <select
@@ -519,61 +512,26 @@
           <div class="col-12 m-0 p-0 text-custom-dark">
             <h4>Condições de Pagamento</h4>
           </div>
-        </div>
+          <ng-container *ngFor="let condicao of condicoesPagamento">
+            <div class="col-12 mt-2 form-check form-check-inline px-4">
+              <input
+                class="form-check-input shadow-sm"
+                type="checkbox"
+                checked
+                disabled
+              />
+              <label class="form-check-label">{{ condicao?.nome }}</label>
+                    </div>
+                    </ng-container>
+                </div>
 
-        <div class="row ps-5 pe-5 d-flex justify-content-between">
-          <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-            <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-              type="text"
-              placeholder="Meio de Pagamento"
-              id="meioPagamento"
-              formControlName="meioPagamento"
-            >
-              <option value="" disabled selected>
-                Selecione um meio de pagamento
-              </option>
-              <option value="7">7 Dias</option>
-              <option value="30">30 Dias</option>
-              <option value="90">90 Dias</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Meio de Pagamento</label
+                <div class="row m-0">
+                    <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
+                        <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="date" placeholder="Data de Vencimento" id="dataVencimento" formControlName="dataVencimento" />
+                        <label class="ms-2 mt-3 small text-truncate text-custom-dark">Data de Vencimento</label
             >
           </div>
-          <div class="col-3 px-2 pt-4 p-0 m-0 ms-2 form-floating">
-            <input
-              class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
-              type="date"
-              placeholder="Data de Vencimento"
-              id="dataVencimento"
-              formControlName="dataVencimento"
-            />
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Data de Vencimento</label
-            >
-          </div>
-          <div class="col-4 px-2 pt-4 p-0 m-0 me-2 form-floating">
-            <select
-              class="form-select form-select-lg h-limited px-4 py-3 rounded-15 shadow-sm text-custom-dark"
-              type="text"
-              placeholder="Meio de Pagamento"
-              id="aguradandoPagamento"
-              formControlName="aguradandoPagamento"
-            >
-              <option value="" disabled selected>Status do pagamento</option>
-              <option value="7">7 Dias</option>
-              <option value="30">30 Dias</option>
-              <option value="90">90 Dias</option>
-            </select>
-            <label class="ms-2 mt-3 small text-truncate text-custom-dark"
-              >Status do Pagamento</label
-            >
-          </div>
-        </div>
-
-        <div class="row ps-5 pe-5 d-flex justify-content-between">
-          <div class="col-5 px-2 pt-4 p-0 m-0 form-floating">
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
             <input
               class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
               type="text"
@@ -585,7 +543,7 @@
               >Link do Boleto</label
             >
           </div>
-          <div class="col-5 px-2 pt-4 p-0 m-0 me-5 form-floating">
+          <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
             <input
               class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm"
               type="text"

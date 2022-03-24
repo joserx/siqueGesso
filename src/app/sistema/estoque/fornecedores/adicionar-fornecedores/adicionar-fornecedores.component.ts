@@ -81,11 +81,18 @@ export class AdicionarFornecedoresComponent implements OnInit {
   }
 
   checkPayment(id: any) {
+
+
     this.paymentCondition.forEach((item: any) => {
-      if (item.id === id) {
-        item.check = true;
+      if (item.check && item.id == id) {
+        delete item.check;
+      } else {
+        if (item.id === id) {
+          item.check = true;
+        }
       }
     });
+
   }
 
   public adicionarContato(): void {

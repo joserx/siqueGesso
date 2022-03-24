@@ -20,6 +20,7 @@ import { getDate } from '../../../../../environments/global';
   styleUrls: ['./criar-pedido-vendas-diretas.component.scss'],
 })
 export class CriarPedidoVendasDiretasComponent implements OnInit {
+  public condicoesPagamento: any[] =[];
   public motoristas: any[] = []
   public condPagamento: any[] = []
   public frete: number = 0
@@ -46,7 +47,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "cnpj": new FormControl('', [Validators.required]),
     "cliente": new FormControl('', [Validators.required]),
     "statusPedido": new FormControl('', [Validators.required]),
-    "condPagamento": new FormControl('', [Validators.required]),
+    "condicoesPagamento": new FormControl('', [Validators.required]),
     "tabPreco": new FormControl(''),
     "valorFreteEntrega": new FormControl(null),
     "item": new FormArray([], [Validators.required]),
@@ -58,9 +59,7 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
     "cidade": new FormControl('', [Validators.required]),
     "complemento": new FormControl(''),
     "previsaoEntrega": new FormControl(null, Validators.required),
-    "meioPagamento": new FormControl('', [Validators.required]),
     "dataVencimento": new FormControl(null, [Validators.required]),
-    "aguradandoPagamento": new FormControl(''),
     "linkBoleto": new FormControl(''),
     "linkNf": new FormControl(''),
     "obs": new FormControl(''),
@@ -173,6 +172,10 @@ export class CriarPedidoVendasDiretasComponent implements OnInit {
   }
 
   selectThisCliente(value: any) {
+    this.condicoesPagamento = value?.condicoesPagamento
+    this.vendasDiretasForm.controls['condicoesPagamento'].setValue(
+      value?.condicoesPagamento
+    )
     if (value.name != null && value.surname != null) {
       this.vendasDiretasForm.get('cliente')?.setValue(`${value.name} ${value.surname}`)
       this.vendasDiretasForm.get('clienteId')?.setValue(value.id)
