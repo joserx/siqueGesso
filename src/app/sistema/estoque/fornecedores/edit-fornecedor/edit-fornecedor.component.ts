@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CondicoesPagamentoService } from 'src/app/services/condicoes-pagamento.service';
 import { FornecedorService } from 'src/app/services/fornecedores.service';
 import { BrazilValidator } from 'src/app/_helpers/brasil';
 import Swal, { SweetAlertResult } from 'sweetalert2';
@@ -17,6 +18,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 })
 export class EditFornecedorComponent implements OnInit {
   public condicoesPagamento: any = [];
+  public paymentCondition: any = [];
 
   fornecedorForm: FormGroup = new FormGroup({
     id: new FormControl('', Validators.required),
@@ -65,14 +67,29 @@ export class EditFornecedorComponent implements OnInit {
   @ViewChild('close') closeBtn: any;
   @Output() reload = new EventEmitter();
 
-  constructor(private fornecedorService: FornecedorService) {}
+  constructor(
+    private fornecedorService: FornecedorService,
+    private condicoesPagamentoService: CondicoesPagamentoService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCondicoes();
+  }
+
+  getCondicoes() {
+    this.condicoesPagamentoService.findAll().subscribe((res: any) => {
+      this.paymentCondition = res;
+    });
+  }
 
   checkPayment(id: any) {
-    this.condicoesPagamento.forEach((item: any) => {
-      if (item.id === id) {
-        item.check = true;
+    this.paymentCondition.forEach((item: any) => {
+      if (item.check && item.id == id) {
+        delete item.check;
+      } else {
+        if (item.id === id) {
+          item.check = true;
+        }
       }
     });
   }
@@ -137,7 +154,7 @@ export class EditFornecedorComponent implements OnInit {
         ),
       }),
       contacts: new FormArray([]),
-      payment_condition: new FormArray([]),
+      payment_condition: new FormControl(fornecedorInput.payment_condition),
       first_payment: new FormControl(
         fornecedorInput.first_payment,
         Validators.required
@@ -169,6 +186,7 @@ export class EditFornecedorComponent implements OnInit {
           site: new FormControl(fornecedor.site, Validators.required),
         })
       );
+      this.condicoesPagamento = fornecedorInput.payment_condition;
     }
 
     this.fornecedorForm.controls['payment_condition'].setValue(
@@ -213,6 +231,22 @@ export class EditFornecedorComponent implements OnInit {
         timer: 3000,
         timerProgressBar: true,
       });
+
+    const methodsChecked = this.paymentCondition
+      .map((item: any) => {
+        if (item.check) {
+          return item.id;
+        }
+      })
+      .filter((item: any) => item);
+    let condicoesSelecionadas: any[] = [];
+    methodsChecked.forEach((id: any) => {
+      condicoesSelecionadas.push({ id: id });
+    });
+    this.fornecedorForm.controls['payment_condition'].setValue(
+      condicoesSelecionadas
+    );
+
     this.fornecedorService.create(this.fornecedorForm.value).subscribe(() => {
       this.closeBtn.nativeElement.click();
       this.reload.emit();

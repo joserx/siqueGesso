@@ -17,28 +17,21 @@
                             <select *ngIf="paraTodos" class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" aria-label="Default select example" disabled>
                 <option selected>Será enviado para todos</option>
               </select>
-              <select *ngIf="!paraTodos" class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" formControlName="usuario">
+                            <select *ngIf="!paraTodos" class="form-select h-limited-sm px-4 py-1 rounded-15 shadow-sm" formControlName="usuario">
                 <option selected disabled>Selecione um Usuario</option>1
                 <option *ngFor="let usuario of usuarios" [value]="usuario.id">
                   {{ usuario.name }}
                 </option>
               </select>
 
-              <label class="ms-2 mt-3 small text-truncate text-custom-dark">Usuarios</label>
-            </div>
+                            <label class="ms-2 mt-3 small text-truncate text-custom-dark">Usuarios</label>
+                        </div>
 
-            <!-- Botão Enviar Para Todos -->
-            <div class="col-4 px-2 pt-4 p-0 m-0 d-inline-flex">
-                <div class="form-check form-switch flex align-items-center">
-                  <input
-                    ngDefaultControl
-                    [(ngModel)]="paraTodos"
-                    [ngModelOptions]="{ standalone: true }"
-                    class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm"
-                    type="checkbox"
-                  />
-                  <label class="form-inline-label px-2 mt-1" for="status"
-                    >Enviar para Todos</label
+                        <!-- Botão Enviar Para Todos -->
+                        <div class="col-4 px-2 pt-4 p-0 m-0 d-inline-flex">
+                            <div class="form-check form-switch flex align-items-center">
+                                <input ngDefaultControl [(ngModel)]="paraTodos" [ngModelOptions]="{ standalone: true }" class="form-check-input pt-4 ps-5 border bg-custom-light shadow-sm" type="checkbox" />
+                                <label class="form-inline-label px-2 mt-1" for="status">Enviar para Todos</label
                   >
                 </div>
             </div>
@@ -65,35 +58,33 @@
               <textarea class="form-control form-control-lg px-4 py-3 rounded-15 shadow-sm" placeholder="Descrição"
                 style="height: 150px" formControlName="texto"></textarea>
               <label class="ms-2 mt-3 small text-truncate text-custom-dark">Mensagem</label>
-            </div>
-          </div>
+                            </div>
+                        </div>
 
-          <!-- Modal footer -->
-          <div class="row m-0 py-3 modal-footer">
-            <!-- Cancelar -->
-            <div class="col-3 px-2 p-0 m-0 d-grid">
-              <button data-bs-dismiss="modal" type="reset"
-                class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
+                        <!-- Modal footer -->
+                        <div class="row m-0 py-3 modal-footer">
+                            <!-- Cancelar -->
+                            <div class="col-3 px-2 p-0 m-0 d-grid">
+                                <button data-bs-dismiss="modal" type="reset" class="h-limited-sm btn rounded-15 py-1 px-4 bg-light shadow-sm text-start">
                 <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">
                   Cancelar
                 </h5>
               </button>
-            </div>
+                            </div>
 
-            <!-- Salvar -->
-            <div class="col-3 px-2 p-0 m-0 d-grid">
-              <button type="submit" class="h-limited-sm btn rounded-15 py-1 px-4 bg-custom-success shadow-sm text-start"
-                (click)="submit()">
+                            <!-- Salvar -->
+                            <div class="col-3 px-2 p-0 m-0 d-grid">
+                                <button type="submit" class="h-limited-sm btn rounded-15 py-1 px-4 bg-custom-success shadow-sm text-start" (click)="submit()">
                 <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">
                   Enviar
                 </h5>
               </button>
-            </div>
-          </div>
-          <!-- /Modal footer -->
+                            </div>
+                        </div>
+                        <!-- /Modal footer -->
+                    </div>
+                    <!-- /Modal content -->
+                </div>
+        </form>
         </div>
-        <!-- /Modal content -->
-      </div>
-    </form>
-  </div>
-</div>
+    </div>

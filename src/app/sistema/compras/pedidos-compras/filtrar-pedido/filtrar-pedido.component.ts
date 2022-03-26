@@ -10,11 +10,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./filtrar-pedido.component.scss'],
 })
 export class FiltrarPedidoComponent implements OnInit {
-  @Input() pedidos: Array<any> = [];
-  public pedido: any;
+  public pedidos: any[] =[];
+  public pedidosOriginal: any[] = [];
+  public data: any= {}
 
-  @Input() pedidosOriginal: Array<any> = [];
-  @Output() pedidosFiltrados = new EventEmitter<any>();
 
   valorTotal: any = 0;
   del: boolean = false
@@ -32,6 +31,7 @@ export class FiltrarPedidoComponent implements OnInit {
     this.pedidoCompraService.find().subscribe((res) => {
       this.pedidoCompraService.pedidos = res;
       this.pedidos = res;
+      this.pedidosOriginal = res
     });
   }
 
@@ -39,7 +39,7 @@ export class FiltrarPedidoComponent implements OnInit {
     const data = event.target.value;
     if (data) {
       this.pedidos = this.pedidosOriginal.filter(
-        (pedido) => pedido.data == data
+        (pedido) => pedido?.data?.includes(data)
       );
     } else {
       this.pedidos = this.pedidosOriginal;
@@ -51,18 +51,18 @@ export class FiltrarPedidoComponent implements OnInit {
     this.valorTotal = valor;
     if (valor) {
       this.pedidos = this.pedidosOriginal.filter(
-        (pedido) => pedido.valorTotal == valor
-      );
-    } else {
-      this.pedidos = this.pedidosOriginal;
+        (pedido) => pedido?.valorTotal?.includes(valor)
+        );
+      } else {
+        this.pedidos = this.pedidosOriginal;
+      }
     }
-  }
 
-  filtrarStatus(event: any) {
-    const status = event.target.value;
+    filtrarStatus(event: any) {
+      const status = event.target.value;
     if (status) {
       this.pedidos = this.pedidosOriginal.filter(
-        (pedido) => pedido.status == status
+        (pedido) => pedido?.status?.includes(status)
       );
     } else {
       this.pedidos = this.pedidosOriginal;

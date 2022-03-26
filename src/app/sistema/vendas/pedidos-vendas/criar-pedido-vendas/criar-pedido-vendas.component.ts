@@ -332,7 +332,7 @@ export class CriarPedidoVendasComponent implements OnInit {
     }
   }
 
-  totalQuanti(data: any): any {    
+  totalQuanti(data: any): any {
     let total = 0
     for (let item of data) {
       total += item.quantidade
@@ -349,7 +349,7 @@ export class CriarPedidoVendasComponent implements OnInit {
   }
 
   setThisFrete(data: any, data2: any) {
-    
+
     data.valorFrete = Number(String(data2.target.value).substring(3, String(data2.target.value).length).replace(',', '.'))
   }
 
@@ -505,7 +505,7 @@ export class CriarPedidoVendasComponent implements OnInit {
   checkClient(event: any) {
     let input = event.target.value
     for (let cliente of this.clientes) {
-      if (input == `${cliente.name} ${cliente.surname}`) {        
+      if (input == `${cliente.name} ${cliente.surname}`) {
         this.selectThisCliente(cliente)
       } else if (input == `${cliente.fantasyName}`) {
         this.selectThisCliente(cliente)
@@ -515,7 +515,7 @@ export class CriarPedidoVendasComponent implements OnInit {
 
 
   selectThisCliente(value: any) {
-    let id = value.id  
+    let id = value.id
     this.condicoesPagamento = value?.condicoesPagamento
     this.pedidosForm.controls['condicoesPagamento'].setValue(
       value?.condicoesPagamento
@@ -592,7 +592,7 @@ export class CriarPedidoVendasComponent implements OnInit {
 
   findClientById(id: any) {
     this.clienteService.findOne(id).subscribe((resp) => {
-    this.usuario = resp    
+    this.usuario = resp
     })
   }
 }

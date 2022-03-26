@@ -434,13 +434,13 @@
             </div>
 
             <div class="col-12 px-2 p-0 m-0">
-              <ng-container *ngFor="let condicao of condicoesPagamento">
+              <ng-container *ngFor="let condicao of paymentCondition">
                 <div class="form-check form-check-inline px-4">
                   <input
                     (click)="checkPayment(condicao.id)"
                     class="form-check-input shadow-sm"
                     type="checkbox"
-                    checked
+
                   />
                   <label class="form-check-label">{{ condicao?.nome }}</label>
                     </div>
