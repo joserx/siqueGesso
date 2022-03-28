@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 import { Router } from '@angular/router';
+import {ImprimirPedidoComponent} from './imprimir-pedido/imprimir-pedido.component'
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -15,10 +16,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
+  @ViewChild(ImprimirPedidoComponent)
+  imprimirPedidoComponent: any;
+
   @ViewChild('embarque') embarque: ElementRef;
   @ViewChild('opt') opt: ElementRef;
   @ViewChild('content', {static: false})el: ElementRef
-  public show: boolean 
+  public show: boolean
   public showSign: boolean
   public allVeiculos: any = []
   public veiculos: any[] = []
@@ -49,11 +53,11 @@ export class ListaPedidosComponent implements OnInit {
   public filterOriginal: any = []
   public embarqueSol: any = []
   public solCodes: any = []
-  public emabrqueForm: FormGroup = new FormGroup({
+  public embarqueForm: FormGroup = new FormGroup({
     'numero': new FormControl(null),
     'sign': new FormControl('', [Validators.required]),
     'driver': new FormControl('', [Validators.required]),
-    'solicitacao': new FormArray([], [Validators.required]),
+    'solicitacao': new FormArray([], ),
     'data': new FormControl(null),
     'rh': new FormControl(null)
   })
@@ -67,9 +71,9 @@ export class ListaPedidosComponent implements OnInit {
     private router: Router
   ) { }
 
-  
+
   get solicitacaoArray(){
-    return this.emabrqueForm.get('solicitacao') as FormArray
+    return this.embarqueForm.get('solicitacao') as FormArray
   }
 
   ngOnInit(): void {
@@ -128,6 +132,10 @@ export class ListaPedidosComponent implements OnInit {
     this.solicitacaoService.findByPage(0).subscribe((data:any)=>{
       this.atualPage = data
     })
+  }
+
+  loadImprimir(embarque: any) {
+    this.imprimirPedidoComponent.loadForm(embarque);
   }
 
   proximo(){
@@ -214,7 +222,7 @@ export class ListaPedidosComponent implements OnInit {
       this.filter = this.filterOriginal;
     }
   }
-  
+
   filterBeforeVendedor = "";
   filtrarVendedor(event : any) {
     let str = event.target.value;
@@ -249,9 +257,9 @@ export class ListaPedidosComponent implements OnInit {
         for(let sol of this.solicitacoes){
           if(data.numero == sol['numero'] && sol['embarque']==null){
             this.embarqueSol.push(sol)
-            this.emabrqueForm.get('numero')?.setValue('')
+            this.embarqueForm.get('numero')?.setValue('')
               this.solicitacaoArray.push(new FormGroup({
-                'id': new FormControl(sol.id),  
+                'id': new FormControl(sol.id),
                 'numero': new FormControl(sol.numero),
                 'data': new FormControl(sol.data),
                 'cliente': new FormControl(sol.cliente),
@@ -259,38 +267,38 @@ export class ListaPedidosComponent implements OnInit {
                 'status': new FormControl(sol.status),
                 'vendedor': new FormControl(sol.vendedor)
               }))
-            Swal.fire({ 
-              title: '<h4>Pedido encontrado!</h4>', 
-              icon: 'success', 
-              toast: true, 
-              position: 'top', 
-              showConfirmButton: false, 
-              timer: 2000, 
+            Swal.fire({
+              title: '<h4>Pedido encontrado!</h4>',
+              icon: 'success',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
               timerProgressBar: true,
               width: '500px',
             })
           }
           if(this.embarqueSol.length == 0){
-            Swal.fire({ 
-              title: '<h4>Esse pedido já está em um embarque!</h4>', 
-              icon: 'error', 
-              toast: true, 
-              position: 'top', 
-              showConfirmButton: false, 
-              timer: 2000, 
+            Swal.fire({
+              title: '<h4>Esse pedido já está em um embarque!</h4>',
+              icon: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
               timerProgressBar: true,
               width: '500px',
             })
           }
         }
       }else{
-        Swal.fire({ 
-          title: '<h4>Pedido não encontrado!</h4>', 
-          icon: 'error', 
-          toast: true, 
-          position: 'top', 
-          showConfirmButton: false, 
-          timer: 2000, 
+        Swal.fire({
+          title: '<h4>Pedido não encontrado!</h4>',
+          icon: 'error',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
           timerProgressBar: true,
           width: '500px',
         })
@@ -317,58 +325,58 @@ export class ListaPedidosComponent implements OnInit {
             data.value.rh = one.id
             this.embarqueService.create(data.value).subscribe((dt: any)=>{
               this.rhService.update(dt.rh, {'ultimoEmbarque': dt.data}).subscribe((data: any)=>{
-                
+
               })
               console.log(dt.solicitacao)
-              Swal.fire({ 
-                title: '<h4>Embarque criado!</h4>', 
-                icon: 'success', 
-                toast: true, 
-                position: 'top', 
-                showConfirmButton: false, 
-                timer: 2000, 
+              Swal.fire({
+                title: '<h4>Embarque criado!</h4>',
+                icon: 'success',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 2000,
                 timerProgressBar: true,
                 width: '500px',
               })
-              this.emabrqueForm.get('sign')?.setValue('')
-              this.emabrqueForm.get('driver')?.setValue('')
+              this.embarqueForm.get('sign')?.setValue('')
+              this.embarqueForm.get('driver')?.setValue('')
               this.embarqueSol = []
               this.initializer()
             })
           }
           if(foundDriver.length == 0){
-            Swal.fire({ 
-              title: '<h4>Motorista não existe!</h4>', 
-              icon: 'error', 
-              toast: true, 
-              position: 'top', 
-              showConfirmButton: false, 
-              timer: 2000, 
+            Swal.fire({
+              title: '<h4>Motorista não existe!</h4>',
+              icon: 'error',
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 2000,
               timerProgressBar: true,
               width: '500px',
             })
           }
         }
       }else{
-        Swal.fire({ 
-          title: '<h4>Veículo não existe!</h4>', 
-          icon: 'error', 
-          toast: true, 
-          position: 'top', 
-          showConfirmButton: false, 
-          timer: 2000, 
+        Swal.fire({
+          title: '<h4>Veículo não existe!</h4>',
+          icon: 'error',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
           timerProgressBar: true,
-          width: '500px', 
+          width: '500px',
         })
       }
     }else{
-      Swal.fire({ 
-        title: '<h4>Preencha todos os campos!</h4>', 
-        icon: 'error', 
-        toast: true, 
-        position: 'top', 
-        showConfirmButton: false, 
-        timer: 2000, 
+      Swal.fire({
+        title: '<h4>Preencha todos os campos!</h4>',
+        icon: 'error',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 2000,
         timerProgressBar: true,
         width: '500px',
       })
@@ -391,13 +399,13 @@ export class ListaPedidosComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire({ 
-          title: '<h4>Embarque deletado !</h4>', 
-          icon: 'success', 
-          toast: true, 
-          position: 'top', 
-          showConfirmButton: false, 
-          timer: 2000, 
+        Swal.fire({
+          title: '<h4>Embarque deletado !</h4>',
+          icon: 'success',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
           timerProgressBar: true,
           width: '500px',
         })
@@ -407,19 +415,19 @@ export class ListaPedidosComponent implements OnInit {
           })
         }
       } else if (result.isDenied) {
-        Swal.fire({ 
-          title: '<h4>Embarque não deletado !</h4>', 
-          icon: 'info', 
-          toast: true, 
-          position: 'top', 
-          showConfirmButton: false, 
-          timer: 2000, 
+        Swal.fire({
+          title: '<h4>Embarque não deletado !</h4>',
+          icon: 'info',
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 2000,
           timerProgressBar: true,
-          width: '500px', 
+          width: '500px',
         })
       }
     })
-    
+
   }
 
   filterBeforeMotorista = "";
@@ -479,12 +487,12 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   selectThis(name: string, surname: string){
-    this.emabrqueForm.get('driver')?.setValue(`${name} ${surname}`)
+    this.embarqueForm.get('driver')?.setValue(`${name} ${surname}`)
     this.show = false
   }
 
   selectThisVeiculo(sign: string){
-    this.emabrqueForm.get('sign')?.setValue(sign)
+    this.embarqueForm.get('sign')?.setValue(sign)
     this.showSign = false
   }
 

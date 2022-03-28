@@ -18,7 +18,7 @@ export class RelatorioProdutosViewComponent implements OnInit {
   ngOnInit(): void {
     this.produtoService.find().subscribe((data: any) => {
       for (let value of data) {
-        if (value['itens'] == '1') {
+        if (value['itens'] >= '1') {
           this.estoqueOriginal.push(value);
           this.estoque.push(value);
         }

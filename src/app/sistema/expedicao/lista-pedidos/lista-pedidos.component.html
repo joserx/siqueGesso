@@ -25,8 +25,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">Placa: {{emabrqueForm.value.sign}}</div>
-                            <div class="col-4">Nome: {{emabrqueForm.value.driver}}</div>
+                            <div class="col-4">Placa: {{embarqueForm.value.sign}}</div>
+                            <div class="col-4">Nome: {{embarqueForm.value.driver}}</div>
                             <div class="col-12">
                                 <table class="bg-white tabela m-0 p-0">
                                     <thead>
@@ -38,7 +38,7 @@
                                             <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Status</td>
                                         </tr>
                                     </thead>
-                                    <tbody *ngFor="let solicitacao of emabrqueForm.value.solicitacao">
+                                    <tbody *ngFor="let solicitacao of embarqueForm.value.solicitacao">
                                         <tr>
                                             <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.numero}}</td>
                                             <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.cliente}}</td>
@@ -57,7 +57,7 @@
             <!-- Modal footer -->
             <div class="row mx-4 py-3 modal-footer">
                 <div class="col-1 mx-3 px-2 p-0 m-0">
-                    <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="savePdf()">
+                    <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="loadImprimir(embarque)">
               <h5 class="fw-normal my-auto text-truncate text-custom-dark">Imprimir</h5>
             </button>
                 </div>
@@ -79,7 +79,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="addEmbarque(emabrqueForm)">Salvar</button>
+                <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center align-items-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="addEmbarque(embarqueForm)">Salvar</button>
                 <button type="button" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex align-items-center justify-content-between shadow-sm" (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimir">Imprimir</button>
             </div>
         </div>
@@ -178,7 +178,7 @@
                 <h5 class="modal-title text-custom-dark" id="addFilialLabel">Criar Embarque</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form [formGroup]="emabrqueForm" (ngSubmit)="addEmbarque(emabrqueForm)">
+            <form [formGroup]="embarqueForm" (ngSubmit)="addEmbarque(embarqueForm)">
                 <div class="d-flex m-2 py-2">
                     <div class="col-3 px-2 pt-4 p-0 m-0 form-floating">
                         <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Placa" autocomplete="off" formControlName="sign" id="sign" (keyup)="filtrarVeiculo($event)" (click)="show=false">
@@ -208,7 +208,7 @@
                             <label class="ms-2 mt-3 small text-truncate text-custom-dark">Número</label>
                         </div>
                         <div class="col-1 px-2 pt-4 m-0 text-center d-flex align-items-center">
-                            <button type="button" cursor="pointer" class="submit-buton h-100 w-100 border border-0 bg-trasnparente" (click)="findThis(emabrqueForm.value)">
+                            <button type="button" cursor="pointer" class="submit-buton h-100 w-100 border border-0 bg-trasnparente" (click)="findThis(embarqueForm.value)">
                 <i class="submit-buton button-modal bi bi-plus-circle-fill icon-view my-auto fs-3 d-flex align-items-center justify-content-center h-100 w-100 p-0 m-0 fw-bold color-dark"></i>
               </button>
                         </div>
@@ -469,16 +469,14 @@
                 </div>
             </div>
 
-      <div *ngIf="estoqueSection == 'embarque'">
-        <div class="row m-0 mt-4 py-3">
-          <div class="col-12 m-0 p-0 text-custom-dark text-center">
-            <h3>Embarque</h3>
-          </div>
-        </div>
-        <div class="row col-12 justify-content-end d-grid px-2 p-0 m-0">
-          <button type="button" *ngIf="create"
-            class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm"
-            data-bs-toggle="modal" data-bs-target="#criarEmbarque" data-backdrop="static" data-keyboard="false">
+            <div *ngIf="estoqueSection == 'embarque'">
+                <div class="row m-0 mt-4 py-3">
+                    <div class="col-12 m-0 p-0 text-custom-dark text-center">
+                        <h3>Embarque</h3>
+                    </div>
+                </div>
+                <div class="row col-12 justify-content-end d-grid px-2 p-0 m-0">
+                    <button type="button" *ngIf="create" class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm" data-bs-toggle="modal" data-bs-target="#criarEmbarque" data-backdrop="static" data-keyboard="false">
             <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Criar Embarque</h5>
           </button>
                 </div>
@@ -486,24 +484,30 @@
                     <table class="col-12 mt-4">
                         <thead class="header_table col-12">
                             <tr>
-                                <td class="lead text-center fw-bold">Nº de Embarque</td>
-                                <td class="lead text-center fw-bold">Placa</td>
-                                <td class="lead text-center fw-bold">Motorista</td>
-                                <td class="lead text-center fw-bold">Pedidos</td>
-                                <td class="lead text-center fw-bold"> </td>
+                                <td class="col-2 lead text-center fw-bold">Nº de Embarque</td>
+                                <td class="col-2 lead text-center fw-bold">Placa</td>
+                                <td class="col-2 lead text-center fw-bold">Motorista</td>
+                                <td class="col-2 lead text-center fw-bold">Pedidos</td>
+                                <td class="col-2 lead text-center fw-bold"> </td>
+                                <td class="col-2 lead text-center fw-bold"> </td>
                             </tr>
                         </thead>
                         <tbody class="body_table">
                             <tr class="mt-2" *ngFor="let embarque of embarques">
-                                <td class="lead rounded-start text-center fw-bold">{{embarque.id}}</td>
-                                <td class="lead rounded-start text-center fw-bold">{{embarque.sign}}</td>
-                                <td class="lead rounded-start text-center fw-bold">{{embarque.driver}}</td>
-                                <td class="lead rounded-start text-center fw-bold row text-truncate justify-content-center">
-                                    <button class="col-6 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
-                      <h5 class="fw-normal my-auto text-truncate text-custom-dark">Vizualizar</h5>
-                    </button>
+                                <td class="col-2 lead rounded-start text-center fw-bold">{{embarque.id}}</td>
+                                <td class="col-2 lead rounded-start text-center fw-bold">{{embarque.sign}}</td>
+                                <td class="col-2 lead rounded-start text-center fw-bold">{{embarque.driver}}</td>
+                                <td class="col-2">
+                                    <button class="btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
+                                    <h5 class="fw-normal my-auto text-truncate text-custom-dark">Vizualizar</h5>
+                                    </button>
                                 </td>
-                                <td class="col-1 lead rounded-start text-center fw-bold"><i (click)="deleteEmbarque(embarque.id)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
+                                <td class="col-2 lead rounded-start text-center fw-bold"><i (click)="deleteEmbarque(embarque.id)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
+                                <td class="col-2">
+                                    <button class=" btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimirP">
+                                    <h5 class="fw-normal my-auto text-truncate text-custom-dark">Imprimir</h5>
+                                  </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -513,3 +517,4 @@
         <!-- /Página -->
     </div>
 </div>
+<app-imprimir-pedido></app-imprimir-pedido>

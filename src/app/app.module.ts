@@ -152,6 +152,7 @@ import { ViewMsgComponent } from './sistema/notificacoes/view-msg/view-msg.compo
 import { AceiteEmEsperaComponent } from 'src/app/sistema/financeiro/aceite-em-espera/aceite-em-espera.component';
 import { CondicoesPagamentoComponent } from './sistema/config/cadastro-de-categoria/condicoes-pagamento/condicoes-pagamento.component';
 import { CadastroCondicaoComponent } from './sistema/config/cadastro-de-categoria/cadastro-condicao/cadastro-condicao.component';
+import { ImprimirPedidoComponent } from './sistema/expedicao/lista-pedidos/imprimir-pedido/imprimir-pedido.component';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -299,6 +300,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AceiteEmEsperaComponent,
     CondicoesPagamentoComponent,
     CadastroCondicaoComponent,
+    ImprimirPedidoComponent,
 
   ],
 

@@ -18,7 +18,7 @@ export class FornecedoresComponent implements OnInit {
   del: boolean = false
 
   @ViewChild(ViewFornecedorComponent)
-  viewFornecedorCompenent: any;
+  viewFornecedorComponent: any;
 
   @ViewChild(EditFornecedorComponent)
   editFornecedorComponent: any;
@@ -51,7 +51,7 @@ export class FornecedoresComponent implements OnInit {
   }
 
   loadFornecedorView(fornecedor: any) {
-    this.viewFornecedorCompenent.loadForm(fornecedor);
+    this.viewFornecedorComponent.loadForm(fornecedor);
   }
   loadFornecedorEdit(fornecedor: any) {
     this.editFornecedorComponent.loadForm(fornecedor);

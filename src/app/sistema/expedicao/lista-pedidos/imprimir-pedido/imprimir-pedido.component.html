@@ -1,0 +1,68 @@
+<!-- Modal -->
+<!-- Imprimir -->
+<div class="modal fade" id="imprimirP" tabindex="-1" aria-labelledby="imprimirLabel" aria-hidden="true" aria-label="Close">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content -->
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h2 class="modal-title text-custom-dark" id="pesquisarClienteLabel">Imprimir</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="col-12 modal-body px-4 d-flex justify-content-center">
+                <div class="pdf-preview d-flex justify-content-center" id="content" #content>
+                    <div class="mt-4 bg-white col-12 p-2">
+                        <div class="row">
+                            <div class="col-2">
+                                <img height="30" src="assets/sique-gesso-logo.png" alt="sique-gesso">
+                            </div>
+                            <div class="col">
+                                <h2 class="text-custom-dark text-center">
+                                    Embarques
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Placa: {{embarqueForm.value.sign}}</div>
+                            <div class="col-4">Nome: {{embarqueForm.value.driver}}</div>
+                            <div class="col-12">
+                                <table class="bg-white tabela m-0 p-0">
+                                    <thead>
+                                        <tr>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Nº Pedido</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Cliente</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Vendedor</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Data</td>
+                                            <td class="h6 text-custom-dark border border-custom-dark border-1 text-center fw-bold">Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let solicitacao of embarqueForm.value.solicitacao">
+                                        <tr>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.numero}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.cliente}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.vendedor}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.data | date}}</td>
+                                            <td class="table-content text-custom-dark border border-custom-dark border-1 fw-normal">{{solicitacao.status}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Modal footer -->
+            <div class="row mx-4 py-3 modal-footer">
+                <div class="col-1 mx-3 px-2 p-0 m-0">
+                    <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" (click)="savePdf()">
+            <h5 class="fw-normal my-auto text-truncate text-custom-dark">Imprimir</h5>
+          </button>
+                </div>
+            </div>
+            <!-- /Modal footer -->
+
+        </div>
+        <!-- /Modal content -->
+
+    </div>
+</div>
