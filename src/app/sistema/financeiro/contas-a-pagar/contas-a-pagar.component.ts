@@ -17,6 +17,7 @@ import { PermissionsUsers } from 'src/app/services/permissions/permissions';
   styleUrls: ['./contas-a-pagar.component.scss'],
 })
 export class ContasAPagarComponent implements OnInit {
+
   vts: any = [];
   workbook = new Workbook();
   worksheet = this.workbook.addWorksheet('Employee Data');
@@ -32,6 +33,8 @@ export class ContasAPagarComponent implements OnInit {
   ];
   headerRow = this.worksheet.addRow(this.header);
   fname = 'contas-a-pagar';
+
+
 
   @ViewChild(EditContasPComponent)
   editContasPComponent: EditContasPComponent;

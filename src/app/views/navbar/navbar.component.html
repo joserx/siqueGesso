@@ -36,7 +36,7 @@
 
                         <!-- Notificações -->
                         <li class="border-bottom d-flex li-350" *ngFor="let notificacao of notificacoes">
-                            <a class="dropdown-item py-2 px-3 text-wrap small" href="#">
+                            <a class="dropdown-item py-2 px-3 text-wrap small" (click)="loadViewMessages(notificacao)" data-bs-toggle="modal" data-bs-target="#viewMsg">
                                 <!-- <p class="fw-bold m-0">Exemplo de título</p> -->
                                 {{ notificacao.texto }}
                             </a>
@@ -63,3 +63,4 @@
         </div>
     </div>
 </nav>
+<app-view-msg [msg]="mensagens"></app-view-msg>

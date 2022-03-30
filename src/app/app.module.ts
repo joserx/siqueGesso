@@ -154,6 +154,8 @@ import { CondicoesPagamentoComponent } from './sistema/config/cadastro-de-catego
 import { CadastroCondicaoComponent } from './sistema/config/cadastro-de-categoria/cadastro-condicao/cadastro-condicao.component';
 import { ImprimirPedidoComponent } from './sistema/expedicao/lista-pedidos/imprimir-pedido/imprimir-pedido.component';
 
+import { Angular2CsvModule } from 'angular2-csv';
+
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: '',
@@ -319,6 +321,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
       dropSpecialCharacters: false,
     }),
     NgChartjsModule,
+    Angular2CsvModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

@@ -9,7 +9,7 @@ import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 })
 export class FinanceiroComponent implements OnInit {
 
-  public activeSection: string = 'pagar';
+  public activeSection: string = 'aceite';
 
   constructor(
     private router: Router
@@ -20,7 +20,7 @@ export class FinanceiroComponent implements OnInit {
       this.router.navigate(['sistema'])
     }
   }
-  
+
   public toggleActiveSection(value: string): void {
     this.activeSection = value;
   }

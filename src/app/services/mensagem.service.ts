@@ -16,6 +16,7 @@ export class MensagemService {
     this.socket = io('https://api.sistemasiquegesso.com.br/');
 
     // http://localhost:25565
+
   }
 
   listen(eventName: string) {

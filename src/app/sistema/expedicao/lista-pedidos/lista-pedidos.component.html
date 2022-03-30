@@ -487,9 +487,9 @@
                                 <td class="col-2 lead text-center fw-bold">Nº de Embarque</td>
                                 <td class="col-2 lead text-center fw-bold">Placa</td>
                                 <td class="col-2 lead text-center fw-bold">Motorista</td>
-                                <td class="col-2 lead text-center fw-bold">Pedidos</td>
-                                <td class="col-2 lead text-center fw-bold"> </td>
-                                <td class="col-2 lead text-center fw-bold"> </td>
+                                <td class="col-3 lead text-center fw-bold">Pedidos</td>
+                                <td class="col-2 lead text-center fw-bold">PDF</td>
+                                <td class="col-1 lead text-center fw-bold"> </td>
                             </tr>
                         </thead>
                         <tbody class="body_table">
@@ -497,17 +497,17 @@
                                 <td class="col-2 lead rounded-start text-center fw-bold">{{embarque.id}}</td>
                                 <td class="col-2 lead rounded-start text-center fw-bold">{{embarque.sign}}</td>
                                 <td class="col-2 lead rounded-start text-center fw-bold">{{embarque.driver}}</td>
-                                <td class="col-2">
-                                    <button class="btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
+                                <td class="col-3">
+                                    <button style="margin-left: 58px" class="btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#pedidosEmbarque" (click)="findPedidos(embarque.id)">
                                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Vizualizar</h5>
                                     </button>
                                 </td>
-                                <td class="col-2 lead rounded-start text-center fw-bold"><i (click)="deleteEmbarque(embarque.id)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
                                 <td class="col-2">
-                                    <button class=" btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimirP">
+                                    <button style="margin-left: 17px" class=" btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" (click)="closeOpt()" data-bs-toggle="modal" data-bs-target="#imprimirP">
                                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Imprimir</h5>
                                   </button>
                                 </td>
+                                <td class="col-1 lead rounded-start text-center fw-bold"><i (click)="deleteEmbarque(embarque.id)" cursor="pointer" class="fs-5 bi-trash-fill icon-delete p-3"></i></td>
                             </tr>
                         </tbody>
                     </table>

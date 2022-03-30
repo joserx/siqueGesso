@@ -23,7 +23,6 @@ export class NotificacoesComponent implements OnInit {
   getMessages() {
     this.mensagemService.find().subscribe((res) => {
       this.mensagemService.notifications = res;
-      console.log(res);
       this.mensagens = res;
     });
   }

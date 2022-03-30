@@ -27,8 +27,7 @@
 
                 <!-- Proposta -->
                 <div class="col-4 px-2 pt-4 p-0 m-0 form-floating">
-                    <select (change)="selectProposta()" [(ngModel)]="obs" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Proposta">
-  <option value="" selected disabled>Tipo de proposta</option>
+                    <select (change)="selectProposta()" [(ngModel)]="obs" [(ngModel)]="status" class="form-control form-control-lg h-limited px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Proposta">
   <option  value="Proposta aprovada">Proposta aprovada</option>
   <option  value="Proposta recusada">Proposta recusada</option>
   <option  value="Proposta cancelada">Proposta cancelada</option>

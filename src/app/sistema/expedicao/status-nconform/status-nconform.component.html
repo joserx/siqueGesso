@@ -1,78 +1,78 @@
 <!-- Modal -->
 <!-- Criar status -->
 <div class="modal fade m-0" id="addStatus">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content rounded-15 bg-custom-light">
-      <div class="modal-header px-4">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar Status</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-        <div class="row">
-          <div class="row m-2 py-2">
-            <form [formGroup]="statusForm" (ngSubmit)="addStatus(statusForm)">
-              <div class="row justify-content-center">
-                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Status" formControlName="name">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
-                </div>
-              </div>
-              <div class="col-12 d-flex justify-content-end mx-5">
-                <div class="col-2 mx-5 p-0 m-0">
-                  <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="row m-2 py-2">
+                    <form [formGroup]="statusForm" (ngSubmit)="addStatus(statusForm)">
+                        <div class="row justify-content-center">
+                            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Status" formControlName="name">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end mx-5">
+                            <div class="col-2 mx-5 p-0 m-0">
+                                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
                   </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="row m-0 py-3 modal-footer">
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-      <div class="row m-0 py-3 modal-footer">
-      </div>
-      <!-- /Modal footer -->
+        <!-- /Modal content -->
 
-     </div>
-    <!-- /Modal content -->
-
-   </div>
+    </div>
 </div>
 
 
 <!-- Modal -->
 <!-- Atualizar status -->
 <div class="modal fade m-0" id="attStatus">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content rounded-15 bg-custom-light">
-      <div class="modal-header px-4">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Atualizar Status</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-        <div class="row">
-          <div class="row m-2 py-2">
-            <form [formGroup]="attstatusForm" (ngSubmit)="attNStatus(atualId, attstatusForm)">
-              <div class="row justify-content-center">
-                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Status" formControlName="name">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
-                </div>
-              </div>
-              <div class="col-12 d-flex justify-content-end mx-5">
-                <div class="col-2 mx-5 p-0 m-0">
-                  <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Atualizar Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="row m-2 py-2">
+                    <form [formGroup]="attstatusForm" (ngSubmit)="attNStatus(atualId, attstatusForm)">
+                        <div class="row justify-content-center">
+                            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Status" formControlName="name">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Status</label>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end mx-5">
+                            <div class="col-2 mx-5 p-0 m-0">
+                                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
                   </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="row m-0 py-3 modal-footer">
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-      <div class="row m-0 py-3 modal-footer">
-      </div>
-      <!-- /Modal footer -->
+        <!-- /Modal content -->
 
-     </div>
-    <!-- /Modal content -->
-
-   </div>
+    </div>
 </div>
 
 
@@ -80,142 +80,142 @@
 <!-- Modal -->
 <!-- Criar não conformidades -->
 <div class="modal fade m-0" id="addNConform">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content rounded-15 bg-custom-light">
-      <div class="modal-header px-4">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar Não conformidade</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-        <div class="row">
-          <div class="row m-2 py-2">
-            <form [formGroup]="nconformForm" (ngSubmit)="addNConform(nconformForm)">
-              <div class="row justify-content-center">
-                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Não comformidade" formControlName="name">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Não Comformidade</label>
-                </div>
-              </div>
-              <div class="col-12 d-flex justify-content-end mx-5">
-                <div class="col-2 mx-5 p-0 m-0">
-                  <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Adicionar Não conformidade</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="row m-2 py-2">
+                    <form [formGroup]="nconformForm" (ngSubmit)="addNConform(nconformForm)">
+                        <div class="row justify-content-center">
+                            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Não comformidade" formControlName="name">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Não Comformidade</label>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end mx-5">
+                            <div class="col-2 mx-5 p-0 m-0">
+                                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
                   </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="row m-0 py-3 modal-footer">
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-      <div class="row m-0 py-3 modal-footer">
-      </div>
-      <!-- /Modal footer -->
+        <!-- /Modal content -->
 
-     </div>
-    <!-- /Modal content -->
-
-   </div>
+    </div>
 </div>
 
 
 <!-- Modal -->
 <!-- Atualizar não conformidades -->
 <div class="modal fade m-0" id="attNConform">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content rounded-15 bg-custom-light">
-      <div class="modal-header px-4">
-        <h5 class="modal-title text-custom-dark" id="addFilialLabel">Atualizar Não conformidade</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-        <div class="row">
-          <div class="row m-2 py-2">
-            <form [formGroup]="attnconformForm" (ngSubmit)="attNConform(atualId, attnconformForm)">
-              <div class="row justify-content-center">
-                <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
-                  <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Não comformidade" formControlName="name">
-                  <label class="ms-2 mt-3 small text-truncate text-custom-dark">Não Comformidade</label>
-                </div>
-              </div>
-              <div class="col-12 d-flex justify-content-end mx-5">
-                <div class="col-2 mx-5 p-0 m-0">
-                  <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-15 bg-custom-light">
+            <div class="modal-header px-4">
+                <h5 class="modal-title text-custom-dark" id="addFilialLabel">Atualizar Não conformidade</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="row m-2 py-2">
+                    <form [formGroup]="attnconformForm" (ngSubmit)="attNConform(atualId, attnconformForm)">
+                        <div class="row justify-content-center">
+                            <div class="col-6 px-2 pt-4 p-0 m-0 form-floating">
+                                <input class="form-control form-control-lg h-100 px-4 py-3 rounded-15 shadow-sm" type="text" placeholder="Não comformidade" formControlName="name">
+                                <label class="ms-2 mt-3 small text-truncate text-custom-dark">Não Comformidade</label>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end mx-5">
+                            <div class="col-2 mx-5 p-0 m-0">
+                                <button type="submit" class="h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-between shadow-sm" data-bs-dismiss="modal" aria-label="Close">
                     <h5 class="fw-normal my-auto text-truncate text-custom-dark">Salvar</h5>
                   </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="row m-0 py-3 modal-footer">
+            </div>
+            <!-- /Modal footer -->
+
         </div>
-      <div class="row m-0 py-3 modal-footer">
-      </div>
-      <!-- /Modal footer -->
+        <!-- /Modal content -->
 
-     </div>
-    <!-- /Modal content -->
-
-   </div>
+    </div>
 </div>
 
 
 
 <app-navbar></app-navbar>
 <div class="row p-0 m-0">
-  <div class="col-auto m-0 p-0 bg-custom-light">
-    <app-sidemenu></app-sidemenu>
-  </div>
-  <div class="col pb-4 m-0 bg-custom-white">
-    <!-- Página -->
-    <div class="container">
-
-      <!-- Botão de voltar -->
-      <div class="row m-0 justify-content-start mt-4">
-        <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao">
-          <i class="bi-arrow-left fs-3 text-secondary"></i>
-        </a>
-      </div>
-
-      <div class="row m-0 mt-4 py-3 border-bottom">
-        <div class="col-12 m-0 p-0 text-custom-dark text-center">
-          <h2>Status e não conformidades</h2>
-        </div>
-      </div>
-
-      <div class="row mt-4">
-          <div class="col-6 nao-conformidades">
-            <div class="col-12 m-0 p-0 text-custom-dark text-center">
-                <h2>Não conformidades</h2>
-            </div>
-            <div *ngIf="create" class="row justify-content-center mt-5 col-12 px-2 p-0 m-0">
-                <button type="submit" class="col-3 h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#addNConform">
-                  <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Adicionar</h5>
-                </button>
-            </div>
-            <div class="row col-12 justify-content-center mt-4" *ngFor="let oneConform of nConform">
-                <div class="row align-items-center border col-9">
-                    <p class="col h3 fw-normal">{{ oneConform.name }}</p>
-                    <i *ngIf="create" cursor="pointer" class="col-1 fs-5 bi-pen-fill icon-edit p-3" (click)="findConform(oneConform.id)" data-bs-toggle="modal" data-bs-target="#attNConform"></i>
-                    <i *ngIf="delete" cursor="pointer" class="col-1 fs-5 bi-trash-fill icon-delete p-3" (click)="deleteConform(oneConform.id)"></i>
-                </div>
-            </div>
-          </div>
-          <div class="col-6 status">
-            <div class="col-12 m-0 p-0 text-custom-dark text-center">
-                <h2>Status</h2>
-            </div>
-            <div *ngIf="create" class="row justify-content-center mt-5 col-12 px-2 p-0 m-0">
-                <button type="submit" class="col-3 h-limited btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#addStatus">
-                  <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Adicionar</h5>
-                </button>
-            </div>
-            <div class="row justify-content-center col-12 mt-4" *ngFor="let oneStatus of status">
-                <div class="row align-items-center border col-9">
-                    <p class="col h3 fw-normal">{{oneStatus.name}}</p>
-                    <i *ngIf="create" cursor="pointer" class="col-1 fs-5 bi-pen-fill icon-edit p-3" tabindex="0" router-link="/sistema/rh/editar/16" (click)="findStatus(oneStatus.id)" data-bs-toggle="modal" data-bs-target="#attStatus"></i>
-                    <i *ngIf="delete" cursor="pointer" class="col-1 fs-5 bi-trash-fill icon-delete p-3" (click)="deleteStatus(oneStatus.id)"></i>
-                </div>
-            </div>
-          </div>
-      </div>
-
+    <div class="col-auto m-0 p-0 bg-custom-light">
+        <app-sidemenu></app-sidemenu>
     </div>
-    <!-- /Página -->
-  </div>
+    <div class="col pb-4 m-0 bg-custom-white">
+        <!-- Página -->
+        <div class="container">
+
+            <!-- Botão de voltar -->
+            <div class="row m-0 justify-content-start mt-4">
+                <a class="col-1 p-1 bg-white rounded-15 text-center my-auto" routerLink="/sistema/expedicao">
+                    <i class="bi-arrow-left fs-3 text-secondary"></i>
+                </a>
+            </div>
+
+            <div class="row m-0 mt-4 py-3 border-bottom">
+                <div class="col-12 m-0 p-0 text-custom-dark text-center">
+                    <h2>Status e não conformidades</h2>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-6 nao-conformidades">
+                    <div class="col-12 m-0 p-0 text-custom-dark text-center">
+                        <h2>Não conformidades</h2>
+                    </div>
+                    <div *ngIf="create" class="row justify-content-center mt-5 col-12 px-2 p-0 m-0">
+                        <button class="add" type="submit" class="col-6 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#addNConform">
+                  <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Adicionar</h5>
+                </button>
+                    </div>
+                    <div class="row col-12 justify-content-center mt-4" *ngFor="let oneConform of nConform">
+                        <div class="row align-items-center border col-9">
+                            <p class="col h3 fw-normal">{{ oneConform.name }}</p>
+                            <i *ngIf="create" cursor="pointer" class="col-1 fs-5 bi-pen-fill icon-edit p-3" (click)="findConform(oneConform.id)" data-bs-toggle="modal" data-bs-target="#attNConform"></i>
+                            <i *ngIf="delete" cursor="pointer" class="col-1 fs-5 bi-trash-fill icon-delete p-3" (click)="deleteConform(oneConform.id)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 status">
+                    <div class="col-12 m-0 p-0 text-custom-dark text-center">
+                        <h2>Status</h2>
+                    </div>
+                    <div *ngIf="create" class="row justify-content-center mt-5 col-12 px-2 p-0 m-0">
+                        <button class="add" type="submit" class="col-6 btn rounded-15 py-1 px-4 bg-custom-success d-flex justify-content-center shadow-sm" data-bs-toggle="modal" data-bs-target="#addStatus">
+                  <h5 class="fw-normal my-auto text-truncate text-custom-dark text-center">Adicionar</h5>
+                </button>
+                    </div>
+                    <div class="row justify-content-center col-12 mt-4" *ngFor="let oneStatus of status">
+                        <div class="row align-items-center border col-9">
+                            <p class="col h3 fw-normal">{{oneStatus.name}}</p>
+                            <i *ngIf="create" cursor="pointer" class="col-1 fs-5 bi-pen-fill icon-edit p-3" tabindex="0" router-link="/sistema/rh/editar/16" (click)="findStatus(oneStatus.id)" data-bs-toggle="modal" data-bs-target="#attStatus"></i>
+                            <i *ngIf="delete" cursor="pointer" class="col-1 fs-5 bi-trash-fill icon-delete p-3" (click)="deleteStatus(oneStatus.id)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Página -->
+    </div>
 </div>

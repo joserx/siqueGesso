@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 
+import Swal, { SweetAlertResult } from 'sweetalert2';
+
+
 @Component({
   selector: 'app-vendas',
   templateUrl: './vendas.component.html',
@@ -16,6 +19,7 @@ export class VendasComponent implements OnInit {
   public showSign: boolean;
   public pedido: any;
   public motivacao: string;
+  public status: string;
   public pedidoId: string
 
   pedidoSelected: boolean = false;
@@ -51,6 +55,7 @@ export class VendasComponent implements OnInit {
       this.router.navigate(['sistema']);
     }
     this.getPedidos();
+
   }
 
   getPedidos() {
@@ -58,6 +63,8 @@ export class VendasComponent implements OnInit {
       this.pedidosService.pedidos = res;
       this.pedidos = res;
       this.originalPedidos = res;
+      console.log(res);
+
     });
   }
 
@@ -103,9 +110,18 @@ export class VendasComponent implements OnInit {
   }
 
   submit() {
-    const pedido = { ...this.pedido, obs: this.motivacao };
+    const pedido = { ...this.pedido, obs: this.motivacao, status: this.status };
     this.pedidosService.update(pedido.id, pedido).subscribe((res) => {
       console.log(res);
+      return Swal.fire({
+        title: 'Proposta atualizada!',
+        icon: 'success',
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
     });
   }
 }
