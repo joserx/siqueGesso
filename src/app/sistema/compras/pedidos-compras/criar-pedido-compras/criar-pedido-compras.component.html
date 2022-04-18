@@ -58,10 +58,10 @@
                 Selecione um Fornecedor
               </option>
               <option
-                *ngFor="let listaFornecedor of fornecedores"
-                [value]="listaFornecedor.fantasy_name"
+              *ngFor="let fornecedor of fornecedores"
+                [value]="fornecedor.fantasy_name"
               >
-                {{ listaFornecedor.fantasy_name }}
+                {{ fornecedor.fantasy_name }}
               </option>
             </select>
             <label class="ms-2 mt-3 small text-truncate text-custom-dark"
@@ -349,9 +349,7 @@
                 checked
                 disabled
               />
-              <label class="form-check-label" >{{
-                condicao?.nome
-              }}</label>
+              <label class="form-check-label">{{ condicao?.nome }}</label>
                     </div>
                     </ng-container>
                 </div>

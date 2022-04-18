@@ -1,66 +1,65 @@
 <div class="row m-0 justify-content-end">
 
-  <!-- Selecionar mês -->
-  <div class="col-2 px-2 pt-4 p-0 m-0">
-    <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição">
+    <!-- Selecionar mês -->
+    <div class="col-2 px-2 pt-4 p-0 m-0">
+        <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição">
       <option value="vencido">Vencido</option>
       <option value="pendente">Pendente</option>
       <option value="pago">Pago</option>
     </select>
-  </div>
+    </div>
 
-  <div class="col-2 d-grid px-2 pt-4 p-0 m-0">
-    <button type="button"
-      class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
+    <div class="col-2 d-grid px-2 pt-4 p-0 m-0">
+        <button type="button" class="btn rounded-15 py-3 px-4 bg-custom-success h-limited d-flex justify-content-between shadow-sm">
       <h5 class="fw-normal my-auto text-truncate text-custom-dark">Gerar relatório</h5>
     </button>
-  </div>
+    </div>
 
 </div>
 
 
 <!-- Títulos da Tabela -->
 <div class="row m-0 my-5 text-custom-dark">
-  <div class="col-2">
-    <h5 class="fw-bold text-truncate">Código</h5>
-  </div>
-  <div class="col-5">
-    <h5 class="fw-bold text-truncate">Descrição</h5>
-  </div>
-  <div class="col-1">
-    <h5 class="fw-bold text-truncate">Data</h5>
-  </div>
-  <div class="col-1">
-    <h5 class="fw-bold text-truncate">Valor</h5>
-  </div>
-  <div class="col-1">
-    <h5 class="fw-bold text-truncate">Status</h5>
-  </div>
+    <div class="col-2">
+        <h5 class="fw-bold text-truncate">Código</h5>
+    </div>
+    <div class="col-5">
+        <h5 class="fw-bold text-truncate">Descrição</h5>
+    </div>
+    <div class="col-1">
+        <h5 class="fw-bold text-truncate">Data</h5>
+    </div>
+    <div class="col-1">
+        <h5 class="fw-bold text-truncate">Valor</h5>
+    </div>
+    <div class="col-1">
+        <h5 class="fw-bold text-truncate">Status</h5>
+    </div>
 </div>
 
 <!-- Tabela -->
-<div class="row m-0 mt-3 border-bottom text-custom-dark align-items-center" *ngFor="let item of resumo">
-  <div class="col-2">
-    <p>{{ item.id }}</p>
-  </div>
-  <div class="col-5 text-truncate">
-    <p>{{ item.descricao }}</p>
-  </div>
-  <div class="col-1">
-    <p>{{ item.data }}</p>
-  </div>
-  <div class="col-1">
-    <p>{{ item.valor | currency:'BRL' }}</p>
-  </div>
-  <div class="col-1">
-    <p>{{ item.status }}</p>
-  </div>
-  <div class="col d-flex justify-content-end">
-    <i class="fs-5 bi-eye-fill icon-view px-2 py-1" cursor="pointer"></i>
-    <i class="fs-5 bi-file-pdf-fill icon-delete px-2 py-1 ms-2" cursor="pointer"></i>
-  </div>
+<div class="row m-0 mt-3 border-bottom text-custom-dark align-items-center" *ngFor="let item of pedidos">
+    <div class="col-2">
+        <p>{{ item.id }}</p>
+    </div>
+    <div class="col-5 text-truncate">
+        <p>{{ item.obs }}</p>
+    </div>
+    <div class="col-1">
+        <p>{{ item.data | date}}</p>
+    </div>
+    <div class="col-1">
+        <p>{{ item.total | currency:'BRL' }}</p>
+    </div>
+    <div class="col-1">
+        <p>{{ item.status }}</p>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <i class="fs-5 bi-eye-fill icon-view px-2 py-1" cursor="pointer"></i>
+        <i class="fs-5 bi-file-pdf-fill icon-delete px-2 py-1 ms-2" cursor="pointer"></i>
+    </div>
 </div>
 
 <div class="row m-0 pb-4 mt-4 justify-content-end">
-          
+
 </div>

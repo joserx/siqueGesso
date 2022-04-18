@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-resumo-financeiro',
@@ -6,18 +10,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resumo-financeiro.component.scss']
 })
 export class ResumoFinanceiroComponent implements OnInit {
+  public pedidos: any[] = [];
+  public id: number;
 
-  public resumo: any = [
-    { id: 1234, data: "21/04/2021", descricao: "alguma descrição do pedido aqui", valor: 990, status: 'pago' },
-    { id: 2345, data: "27/04/2021", descricao: "alguma descrição do pedido aqui", valor: 1250.50, status: 'vencido' },
-    { id: 3456, data: "18/05/2021", descricao: "alguma descrição do pedido aqui", valor: 990, status: 'pago' },
-    { id: 4567, data: "19/05/2021", descricao: "alguma descrição do pedido aqui", valor: 15000, status: 'pago' },
-    { id: 5678, data: "20/05/2021", descricao: "alguma descrição do pedido aqui", valor: 990, status: 'pago' },
-  ]
-  
-  constructor() { }
+
+
+  constructor(
+    private readonly pedidosService: PedidosService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    const routeParams = this.route.snapshot.paramMap;
+    this.id = Number(routeParams.get('id'));
+    this.pedidosService.findResumo(this.id).subscribe((res: any) => {
+      console.log(res);
+      this.pedidos = res;
+    });
   }
 
 }

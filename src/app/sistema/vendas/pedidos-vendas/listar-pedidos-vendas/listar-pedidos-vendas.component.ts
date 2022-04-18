@@ -13,7 +13,7 @@ import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 })
 export class ListarPedidosVendasComponent implements OnInit {
   public pedidosGerados: any[] = [];
-  public pedidosAguardando: any[] = [];
+  public pedidosAprovados: any[] = [];
   public pedidos: any[] = [];
   public pedidosBck: any[];
   public dataFinal: Date = new Date(Date.now());
@@ -61,17 +61,21 @@ export class ListarPedidosVendasComponent implements OnInit {
     return new Promise((res, rej) => {
       this.pedidosService.find().subscribe(
         (data: any) => {
+          console.log(data);
 
           this.pedidos = data;
           this.pedidosBck = data;
           for (let oneData of data) {
-            if (oneData.status == 'Gerado' && oneData.tipoVenda == 0) {
-              this.pedidosGerados.push(oneData);
-            } else if (
+            if (
               oneData.status == 'Aguardando aprovação' &&
               oneData.tipoVenda == 0
             ) {
-              this.pedidosAguardando.push(oneData);
+              this.pedidosGerados.push(oneData);
+            } else if (
+              oneData.status == 'Proposta aprovada' &&
+              oneData.tipoVenda == 0
+            ) {
+              this.pedidosAprovados.push(oneData);
             }
           }
         },
@@ -120,20 +124,22 @@ export class ListarPedidosVendasComponent implements OnInit {
   }
 
   async pesquisar() {
-    this.filtrarData();
-    await this.getPedidos();
-    await this.getPedidosPage();
+    if (this.pesquisa) {
+      this.filtrarData();
+      await this.getPedidos();
+      await this.getPedidosPage();
 
-    if (this.pesquisa && this.pesquisa.length) {
-      const result = this.pedidosBck.filter((pedido) =>
-        pedido[this.selectValue].includes(this.pesquisa)
-      );
-      this.atualPage = result;
+      if (this.pesquisa && this.pesquisa.length) {
+        const result = this.pedidosBck.filter((pedido) =>
+          pedido[this.selectValue].includes(this.pesquisa)
+        );
+        this.atualPage = result;
+      }
     }
   }
 
   filterBeforeDate = '';
-  filtrarData(){
+  filtrarData() {
     this.dataInicio = new Date(this.dataInicio);
     this.dataFinal = new Date(this.dataFinal);
     this.dataInicio.setDate(this.dataInicio.getDate() - 1);

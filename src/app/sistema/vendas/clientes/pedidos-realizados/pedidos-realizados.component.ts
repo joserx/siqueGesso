@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-pedidos-realizados',
@@ -6,20 +10,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pedidos-realizados.component.scss']
 })
 export class PedidosRealizadosComponent implements OnInit {
-
-  public pedidos: any = [
-    { id: 1234, data: "21/04/2021", referencia: "???", descricao: "alguma descrição do pedido aqui", quantidade: 451, preco: 970.50, valor: 990, total: 1234 },
-    { id: 2345, data: "27/04/2021", referencia: "???", descricao: "alguma descrição do pedido aqui", quantidade: 451, preco: 970.50, valor: 990, total: 1234 },
-    { id: 3456, data: "18/05/2021", referencia: "???", descricao: "alguma descrição do pedido aqui", quantidade: 451, preco: 970.50, valor: 990, total: 1234 },
-    { id: 4567, data: "19/05/2021", referencia: "???", descricao: "alguma descrição do pedido aqui", quantidade: 451, preco: 970.50, valor: 990, total: 1234 },
-    { id: 5678, data: "20/05/2021", referencia: "???", descricao: "alguma descrição do pedido aqui", quantidade: 451, preco: 970.50, valor: 990, total: 1234 },
-  ]
-
+  public pedidos: any[] = [];
+  public id: number;
   public anos: any = [ 2015, 2016, 2017, 2018, 2019, 2020, 2021 ]
 
-  constructor() { }
+  constructor(
+    private readonly pedidosService: PedidosService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    const routeParams = this.route.snapshot.paramMap;
+    this.id = Number(routeParams.get('id'));
+    this.pedidosService.findResumo(this.id).subscribe((res: any) => {
+      console.log(res);
+      this.pedidos = res;
+    });
   }
 
 }

@@ -1,51 +1,51 @@
 <div class="row m-0 justify-content-end">
 
-  <!-- Selecionar mês -->
-  <div class="col-2 px-2 pt-4 p-0 m-0">
-    <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição">
+    <!-- Selecionar mês -->
+    <div class="col-2 px-2 pt-4 p-0 m-0">
+        <select class="form-select form-select-lg h-100 px-4 py-3 rounded-15 shadow-sm text-custom-dark" type="text" placeholder="Restrição">
       <option value="vencido">Vencido</option>
       <option value="pendente">Pendente</option>
       <option value="pago">Pago</option>
     </select>
-  </div>
+    </div>
 
 </div>
 
 
 <!-- Títulos da Tabela -->
 <div class="row m-0 my-5 text-custom-dark">
-  <div class="col-2">
-    <h5 class="fw-bold text-truncate">Código</h5>
-  </div>
-  <div class="col-6">
-    <h5 class="fw-bold text-truncate">Descrição</h5>
-  </div>
-  <div class="col-1">
-    <h5 class="fw-bold text-truncate">Data</h5>
-  </div>
-  <div class="col">
-    <h5 class="fw-bold text-truncate">Valor</h5>
-  </div>
-  <div class="col-1">
-    <h5 class="fw-bold text-truncate">Status</h5>
-  </div>
+    <div class="col-2">
+        <h5 class="fw-bold text-truncate">Código</h5>
+    </div>
+    <div class="col-6">
+        <h5 class="fw-bold text-truncate">Descrição</h5>
+    </div>
+    <div class="col-1">
+        <h5 class="fw-bold text-truncate">Data</h5>
+    </div>
+    <div class="col">
+        <h5 class="fw-bold text-truncate">Valor</h5>
+    </div>
+    <div class="col-1">
+        <h5 class="fw-bold text-truncate">Status</h5>
+    </div>
 </div>
 
 <!-- Tabela -->
-<div class="row m-0 mt-3 border-bottom text-custom-dark align-items-center" *ngFor="let item of resumo">
-  <div class="col-2">
-    <p>{{ item.id }}</p>
-  </div>
-  <div class="col-6">
-    <p>{{ item.descricao }}</p>
-  </div>
-  <div class="col-1">
-    <p>{{ item.data }}</p>
-  </div>
-  <div class="col">
-    <p>{{ item.valor | currency:'BRL' }}</p>
-  </div>
-  <div class="col-1">
-    <p>{{ item.status }}</p>
-  </div>
+<div class="row m-0 mt-3 border-bottom text-custom-dark align-items-center" *ngFor="let item of pedidos">
+    <div class="col-2">
+        <p>{{ item.id }}</p>
+    </div>
+    <div class="col-6">
+        <p>{{ item.descricao }}</p>
+    </div>
+    <div class="col-1">
+        <p>{{ item.data }}</p>
+    </div>
+    <div class="col">
+        <p>{{ item.valor | currency:'BRL' }}</p>
+    </div>
+    <div class="col-1">
+        <p>{{ item.status }}</p>
+    </div>
 </div>

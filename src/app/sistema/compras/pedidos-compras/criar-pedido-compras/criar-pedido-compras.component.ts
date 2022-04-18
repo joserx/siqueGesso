@@ -52,11 +52,11 @@ export class CriarPedidoComprasComponent implements OnInit {
 
   public condicoesPagamento: any = [];
   public getDate: any = getDate;
-  public fornecedores: any = [];
+  public fornecedores: any[] = [];
   public fornecedoresFiltrados: any = [];
   public produtosFiltrados: any = [];
 
-  public comprasRealizadas: number = 15;
+  public comprasRealizadas: number = 0;
 
   public fornecedorSelecionado: any = {
     id: null,
@@ -136,29 +136,33 @@ export class CriarPedidoComprasComponent implements OnInit {
 
   initDataTable() {}
 
-  setFornecedores(fornecedor: string) {
+  setFornecedores(fornecedor: any) {
     const fornecedorSelecionado = this.fornecedores.find(
       (f: any) => f.fantasy_name == fornecedor
     );
     this.fornecedorSelecionado = fornecedorSelecionado;
     this.pedidoCompraForm.patchValue({
-      razaoSocial: fornecedorSelecionado.fantasy_name,
-      cnpj: fornecedorSelecionado?.cnpj,
-      cep: fornecedorSelecionado?.address?.cep,
-      endereco: fornecedorSelecionado?.address?.street,
-      complemento: fornecedorSelecionado?.address?.complement,
+      fornecedor: this.fornecedorSelecionado?.id,
+      razaoSocial: this.fornecedorSelecionado.fantasy_name,
+      cnpj: this.fornecedorSelecionado?.cnpj,
+      cep: this.fornecedorSelecionado?.address?.cep,
+      endereco: this.fornecedorSelecionado?.address?.street,
+      complemento: this.fornecedorSelecionado?.address?.complement,
     });
-    this.condicoesPagamento = fornecedorSelecionado?.payment_condition;
+    this.condicoesPagamento = this.fornecedorSelecionado?.payment_condition;
     this.pedidoCompraForm.controls['condicoesPagamento'].setValue(
-      fornecedorSelecionado?.payment_condition
+      this.fornecedorSelecionado?.payment_condition
     );
+    this.comprasRealizadas = this.fornecedorSelecionado?.compras?.length;
+
   }
 
   getFornecedores() {
-    this.fornecedorService.find().subscribe((res) => {
+    this.fornecedorService.find().subscribe((res : any) => {
       this.fornecedorService.fornecedores = res;
       this.fornecedores = res;
       this.fornecedoresFiltrados = this.fornecedores;
+
     });
   }
 

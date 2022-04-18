@@ -14,6 +14,10 @@ export class PedidosService {
     return this.http.get<any>(environment.apiUrl + 'pedidos/');
   }
 
+  findResumo(id: number){
+    return this.http.get(environment.apiUrl + 'pedidos/resumo/' + id)
+  }
+
   create(data: any) {
     return this.http.post(environment.apiUrl + 'pedidos', data);
   }

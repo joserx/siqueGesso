@@ -15,7 +15,7 @@
         <h4 class="fw-bold text-custom-dark">Recebimentos</h4>
 
         <div class="table-responsive mt-4">
-            <table class="table text-custom-dark">
+            <table id="excel-table1" class="table text-custom-dark">
                 <thead>
                     <tr>
                         <th scope="col">Data</th>
@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     <tr class="align-items-center" *ngFor="let recebimento of recebimentos">
-                        <td>{{ recebimento?.data }}</td>
+                        <td>{{ recebimento?.data | date }}</td>
                         <td>{{ recebimento?.descricao }}</td>
                         <td>{{ recebimento?.valorTotal | currency: "BRL" }}</td>
                         <td>{{ recebimento?.situacao }}</td>
@@ -42,7 +42,7 @@
         <h4 class="fw-bold text-custom-dark">Pagamentos</h4>
 
         <div class="table-responsive mt-4">
-            <table class="table text-custom-dark">
+            <table id="excel-table2" class="table text-custom-dark">
                 <thead>
                     <tr>
                         <th scope="col">Data</th>
@@ -53,7 +53,7 @@
                 </thead>
                 <tbody>
                     <tr class="align-items-center" *ngFor="let pagamento of contas">
-                        <td>{{ pagamento?.data }}</td>
+                        <td>{{ pagamento?.data | date }}</td>
                         <td>{{ pagamento?.descricao }}</td>
                         <td>{{ pagamento?.valorTotal | currency: "BRL" }}</td>
                         <td>{{ pagamento?.situacao }}</td>
@@ -68,7 +68,7 @@
 <div class="row m-0 py-3 justify-content-between">
     <!-- Botão Exportar CSV -->
     <div class="col-3 px-2 p-0 m-0 d-grid">
-        <button (click)="exportexcel()" type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
+        <button (click)="exportExcel()" type="button" class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm">
       <h5 class="fw-normal my-auto text-truncate">Exportar CSV</h5>
       <i class="bi-file-earmark-spreadsheet my-auto fs-4 p-0 m-0 fw-bold"></i>
     </button>

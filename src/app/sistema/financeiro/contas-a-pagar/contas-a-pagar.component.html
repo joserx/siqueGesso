@@ -55,7 +55,7 @@
 
 <!-- Tabela de contas -->
 <div class="table-responsive mt-5">
-  <table class="table text-custom-dark">
+  <table id="excel-table" class="table text-custom-dark">
     <thead>
       <tr>
         <th scope="col">Cód.</th>
@@ -75,7 +75,7 @@
         <td>{{ contas?.descricao }}</td>
         <td>{{ contas?.fornecedor }}</td>
         <td>{{ contas?.formaPagamento }}</td>
-        <td>{{ contas?.data }}</td>
+        <td>{{ contas?.data | date }}</td>
         <td>{{ contas?.valorTotal | currency: "BRL" }}</td>
         <td>{{ contas?.situacao }}</td>
         <td>{{ contas?.unidade }}</td>
@@ -111,7 +111,7 @@
   <!-- Botão Exportar CSV -->
   <div class="col-3 px-2 p-0 m-0 d-grid">
     <button
-    (click)="exportexcel()"
+    (click)="exportExcel()"
       type="button"
       class="h-limited btn rounded-15 py-1 px-4 btn-outline-secondary d-flex justify-content-between shadow-sm"
     >

@@ -5,8 +5,8 @@ import { ContasPagarService } from 'src/app/services/contas-pagar.service';
 import { EditContasPComponent } from './edit-contas-p/edit-contas-p.component';
 import { ViewContasPagarComponent } from './view-contas-pagar/view-contas-pagar.component';
 
-import { Workbook } from 'exceljs';
-import * as fs from 'file-saver';
+import * as XLSX from 'xlsx'
+
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { PermissionsUsers } from 'src/app/services/permissions/permissions';
@@ -18,21 +18,7 @@ import { PermissionsUsers } from 'src/app/services/permissions/permissions';
 })
 export class ContasAPagarComponent implements OnInit {
 
-  vts: any = [];
-  workbook = new Workbook();
-  worksheet = this.workbook.addWorksheet('Employee Data');
-  header = [
-    'Cod',
-    'Descrição',
-    'Fornecedor',
-    'Pagamento',
-    'Data',
-    'Total',
-    'Situação',
-    'Unidade',
-  ];
-  headerRow = this.worksheet.addRow(this.header);
-  fname = 'contas-a-pagar';
+  fname = 'contas-a-pagar.xlsx';
 
 
 
@@ -75,6 +61,16 @@ export class ContasAPagarComponent implements OnInit {
     this.getContas();
   }
 
+  exportExcel(): void{
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    XLSX.writeFile(wb, this.fname);
+  }
+
   pesquisarConta() {
     if (this.search.length > 0)
       this.contasFiltradas = this.contas.filter((contasF: any) =>
@@ -99,71 +95,7 @@ export class ContasAPagarComponent implements OnInit {
     this.viewContasPagarComponent.loadForm(contas);
   }
 
-  // Excel
-  exportexcel(): void {
-    this.worksheet.getRow(1).font = {
-      size: 20,
-      bold: true,
-      color: { argb: 'FFFFFF' },
-    };
-    this.worksheet.getCell('A1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getCell('B1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getCell('C1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getCell('D1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getCell('E1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getCell('F1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getCell('G1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getCell('H1').fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FF6060' },
-    };
-    this.worksheet.getColumn('A').width = 50;
-    for (let x1 of this.vts) {
-      let x2: any = Object.keys(x1);
-      var temp: any = [];
-      console.log(temp);
-      for (let y of x2) {
-        temp.push(x1[y]);
-      }
-      this.worksheet.addRow(temp);
-    }
-    this.vts = [];
-    this.workbook.xlsx.writeBuffer().then((data) => {
-      let blob = new Blob([data], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      });
-      fs.saveAs(blob, this.fname + '-' + new Date().valueOf() + '.csv');
-    });
-  }
+
 
   delete(conta: any) {
     Swal.fire({
